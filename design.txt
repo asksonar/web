@@ -195,19 +195,21 @@ database data
 	Users table - added to when researcher submits email list
 		user id
 		email
-	Tests table - added to when researcher creates a test
+	Scenarios table - added to when researcher creates a test
 		test id 
 		company id
-	TestSteps table - added to when researcher creates a test
+		title
+		description
+	ScenarioSteps table - added to when researcher creates a test
 		testStep id
 		test id
 		step description
-	UserTests table - added to when research submits email list
+	UserScenarios table - added to when research submits email list
 		userTest id
 		user id
 		test id
 		status enum - pending, inprogress, completed
-	UserTestSteps table - added to when user takes the test
+	UserScenarioSteps table - added to when user takes the test
 		userTestStep id
 		user id
 		test id
@@ -215,7 +217,7 @@ database data
 		start time
 		end time
 		fractional seconds into the step till completion
-	UserTestFeelings table - added to when user takes the test
+	UserScenarioFeelings table - added to when user takes the test
 		userTestFeeling id
 		user id
 		test id
@@ -229,8 +231,8 @@ need to split up tables because we need to query
 	for a specific test step, what is the average time and what are the feelings?
 
 naming convention
-	Giver - gives tests
-	Taker - takes tests
-	Test
-	Test Step
-	Test Feeling
+	User - gives tests
+	Researcher - takes tests
+	Scenario
+	Scenario Step
+	Scenario Feeling
