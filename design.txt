@@ -1,0 +1,236 @@
+Product Cero
+
+Business user
+	business has a question and has a bunch of users
+	business logs in
+	business provides a list of users
+	business describes the question, instructions, time period
+
+Tester hired by the business
+	tester gets email with login information
+	links gets them logged into the website - email is your username, and then make up a password
+	tester has list of tasks
+	tester selects the first task
+	tester has to download plugin if he hasn't already
+	tester starts the task
+		triggers screen share recording
+	tester runs through the business's tasks
+		record the whole thing
+		record how long it takes
+		user clicks Delighted / Frustrated buttons at the side when they are
+	tester has run through all the tasks
+
+Business user
+	logs in and looks at list of questions
+	shows users and their progress in those questions
+	show aggregate results
+		can also drill in and see individual results
+	users need to have obfuscated names
+
+For now...
+	make it iframed to get us up and running
+	no logins, just enter in your email
+
+Here to give a test?  Take a test?
+
+framework bootstrap 3
+
+sass
+coffee
+npm, bower, grunt
+rails gem
+	https://github.com/twbs/bootstrap-sass#a-ruby-on-rails
+
+starting page
+	I want to give a test
+	I want to take a test
+
+business user
+	click "I want to give a test"
+		type in your email and submit
+	click add button
+		big button if no tests exist
+		name the test
+		has short description
+		add steps
+			each step has short description
+		add users to the test
+			copy paste big list of emails into textbox
+		review the test and choose to start or not
+	view an existing test - pending state
+		you can go and edit stuff
+	view an existing test - started state
+		cannot edit stuff
+		view the details of the test
+		view list of users
+			individual progress
+				logged in
+				currently running the test
+				gave up part of the way through (or timed out?)
+				started the test and finished it
+			responses
+		view summary data
+			average completion time
+
+tester user
+	click "I want to take a test"
+		type in your email and submit
+	click one of the tests available to you
+		show title and short description
+		click the start button
+	started test
+		left side iframe of the site
+		right side is test title at the top
+		had collapsed details underneath
+		Step 1 - some description
+		Next button
+		Give up button
+		Delighted button
+		Frustrated button
+	click the next button
+		backend stopwatch stops for this task and starts on the next one
+
+simpler prototype
+
+business user
+	click "I want to give a test"
+		type in your email and submit
+	click add button
+		name the test
+		has short description
+		add steps
+			each step has short description
+		add users to the test
+			copy paste big list of emails into textbox
+	view an existing test - started state
+		cannot edit stuff
+		view the details of the test
+		view list of users
+			user email
+			user completed the test or not
+			time to complete each task
+			delighted and frustrated button presses
+		view summary data
+			average completion time per task
+			average delighted and frustrated button presses
+
+tester user
+	click "I want to take a test"
+		type in your email and submit
+	click one of the tests available to you
+		show title and short description
+		click the start button
+	started test
+		left side iframe of the site
+		right side is test title at the top
+		had collapsed details underneath
+		Step 1 - some description
+		Next button
+		Delighted button
+		Frustrated button
+	click the next button
+		backend stopwatch stops for this task and starts on the next one
+
+pages to build
+	index
+		"I'm a research!", "I'm a tester!"
+		type in your email
+		goes to list of test for the corresponding user type
+	list of tests for researcher
+		button to add new test
+		list of tests that he has created
+			select from Tests
+			test name
+			number of emails completed / number of emails total
+				select from UserTests
+		expandable via show()
+			list of steps
+				average completion time
+					select from UserTestSteps
+				delighted clicks
+					select from UserTestFeelings
+				frustrated clicks
+					select from UserTestFeelings
+	new test page for researcher
+		text box for title
+		text box for starting url
+		text box for detailed description
+		1st step with detailed description (limited length)
+		+ button to add more steps with append()
+		Save button
+			insert into Tests
+			insert into TestSteps
+			insert into UserTests
+	list of tests for tester
+		list of tests that the research created for this email and are not yet completed
+			select from UserTests
+		shows summary and detailed description
+		has a Start button to click
+			update UserTests
+	testing page
+		iframe on the left side with the site
+		right side shows
+			test name
+				select from UserTests
+			test detail - expandable via show()
+			current step # / total steps
+				select from UserTestSteps
+			current step details
+			Done! button
+				insert into UserTestSteps
+
+			delighted button
+				insert into UserTestFeelings
+			frustrated button
+				insert into UserTestFeelings
+
+database data
+	Companies table - hardcoded by me
+		company id
+		name
+	Researchers table - hardcoded by me
+		researcher id
+		company id
+		email
+	Users table - added to when researcher submits email list
+		user id
+		email
+	Tests table - added to when researcher creates a test
+		test id 
+		company id
+	TestSteps table - added to when researcher creates a test
+		testStep id
+		test id
+		step description
+	UserTests table - added to when research submits email list
+		userTest id
+		user id
+		test id
+		status enum - pending, inprogress, completed
+	UserTestSteps table - added to when user takes the test
+		userTestStep id
+		user id
+		test id
+		step id
+		start time
+		end time
+		fractional seconds into the step till completion
+	UserTestFeelings table - added to when user takes the test
+		userTestFeeling id
+		user id
+		test id
+		step id
+		feeling enum
+		fractional seconds into the step till button press
+
+auto-update column for each table
+
+need to split up tables because we need to query
+	for a specific test step, what is the average time and what are the feelings?
+
+naming convention
+	Giver - gives tests
+	Taker - takes tests
+	Test
+	Test Step
+	Test Feeling
