@@ -9,8 +9,15 @@ class ScenariosController < ApplicationController
 	def create
 		#render plain: params[:scenario].inspect
 		@scenario = Scenario.new(scenario_params)
-
 		@scenario.save
+
+		params['steps'].each do |stepDescription|
+			debugger
+		
+			scenarioStep = ScenarioStep.new(description: stepDescription, scenario:@scenario)
+			scenarioStep.save
+		end
+
 		redirect_to @scenario
 	end
 
