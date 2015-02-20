@@ -1,0 +1,31 @@
+<h1>Sessions#login</h1>
+<p>Find me in app/views/sessions/login.html.erb</p>
+
+<% if flash[:error] %>
+  Error: <%=flash[:error]%>
+<% end %>
+
+<div class='divLogin'>
+<%= bootstrap_form_for :login, url: new_login_path do |f| %>
+  <input type='hidden' id=''></input>
+
+  <p>
+    <%= f.select :type, [
+      ["I'm a Researcher!", "researcher"],
+      ["I'm a Tester!", "tester"]
+    ] %>
+  </p>
+
+  <p>
+    <%= f.email_field :email %>
+  </p>
+
+  <%= f.submit "Login" %>
+<% end %>
+</div>
+
+<div>
+  <%= link_to 'Home', root_path %>
+</div>
+
+<%= link_to 'View all Scenarios', controller: 'scenarios' %>
