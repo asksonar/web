@@ -4,6 +4,14 @@ class SessionsController < ApplicationController
 #    render :text => 'hello'
 #  end
 
+  def index
+    if session[:researcher_id]
+      redirect_to scenarios_path
+    elsif session[:user_id]
+      redirect_to user_scenarios_path
+    end
+  end
+
   def create
     email = params[:login][:email]
     type = params[:login][:type]

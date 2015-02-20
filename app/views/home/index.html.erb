@@ -1,29 +1,11 @@
 <h1>Home#index</h1>
 <p>Find me in app/views/home/index.html.erb</p>
 
-<% if session[:user_id] %>
-  <div>You are logged in as user <%= session[:user_id] %></div>
-  <div><%= link_to 'Scenarios', user_scenarios_path %></div>
-<% end %>
-
-<% if session[:researcher_id] %>
-  <div>You are logged in as researcher <%= session[:researcher_id] %></div>
-  <div><%= link_to 'Scenarios', scenarios_path %></div>
-<% end %>
-
-<div>
-<% if !session[:user_id] && !session[:research_id] %>
-  <%= link_to 'Login', login_path %>
-<% else %>
-  <%= link_to 'Logout', logout_path %>
-<% end %>
-</div>
-
 <%# link_to 'Login', controller: 'sessions' %>
 
 
 <%# can also do
 scenarios_path
-instead of 
+instead of
 controller: 'scenarios'
 %>
