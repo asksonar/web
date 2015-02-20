@@ -1,0 +1,27 @@
+<h1>This is the User Scenarios list</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Show</th>
+    </tr>
+  </thead>
+  <tbody> 
+  <% @user_scenarios.each do |scenario| %>
+    <tr>
+      <td><%= scenario.title %></td>
+      <td><%= scenario.description %></td>
+      <td><%= link_to 'Show', scenario_path(scenario) %></td>
+    </tr>
+  <% end %>
+  <% if @user_scenarios.blank? %>
+    <tr>
+      <td colspan="3">
+        No scenarios assigned to you yet
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
