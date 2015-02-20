@@ -1,5 +1,10 @@
 <%= navbar do %>
-  <%= navbar_header brand: 'Purple Cow', brand_link: '/' %>
+  <%= navbar_header do %>
+    <a class='navbar-brand' href='/'>
+      <img src='<%=image_path 'purple_cow_by_vonBorowsky.jpg'%>' alt='Purple Cow' height='40px'> Purple Cow
+    </a>
+  <% end %>
+
   <%= navbar_collapse do %>
     <%= navbar_group class: 'foo', id: 'menu' do %>
       <%= navbar_item "Home", '/' %>
@@ -11,7 +16,7 @@
     <% end %>
     <%= navbar_group align: 'right' do %>
       <% if current_user %>
-        <%= navbar_item current_user.display %>
+        <%= navbar_item current_user.display, '/account' %>
         <%= navbar_item 'Logout', logout_path %>
       <% else %>
         <%= navbar_item 'Login', login_path %>
