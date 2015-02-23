@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   #get 'sessions#login'
   #get 'sessions/login', to: 'sessions#login'
-  get '/login', to: 'sessions#index', as: :login
+  get  '/login', to: 'sessions#index', as: :login
   post '/login/new', to: 'sessions#create', as: :new_login
-  get '/logout', to: 'sessions#destroy', as: :logout
+  get  '/logout', to: 'sessions#destroy', as: :logout
+  get  '/account', to: 'account#index'
 
   #get 'home/index'
 
@@ -24,7 +25,7 @@ Rails.application.routes.draw do
   #   resources :products
   resources :scenarios
   resources :user_scenarios
-  
+
   # Example resource route with options:
   #   resources :products do
   #     member do

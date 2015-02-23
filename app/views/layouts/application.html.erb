@@ -8,11 +8,13 @@
 </head>
 <body>
 
-<%= render partial: 'nav/nav' %>
+<%= render partial: 'nav/header' %>
 
-<div class='container'>
+<div class='container <%=params[:controller]%>'>
   <%= yield %>
 </div>
+
+<%= render partial: 'nav/footer' %>
 
 </body>
 </html>

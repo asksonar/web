@@ -1,6 +1,6 @@
 $(document).ready(function(){
-	
-	var templateNewStep = "<li><input type='text' name='steps[]'></input>&nbsp;<button type='button' class='btnCancelNewStep'>X</button></li>";
+
+	var templateNewStep = $('#divNewSteps').html();
 
 	$('#btnAddNewStep').click(function(event){
 		$('#divNewSteps').append(templateNewStep);

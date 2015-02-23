@@ -196,7 +196,7 @@ database data
 		user id
 		email
 	Scenarios table - added to when researcher creates a test
-		test id 
+		test id
 		company id
 		title
 		description
@@ -236,5 +236,4 @@ naming convention
 	Scenario
 	Scenario Step
 	Scenario Feeling
-
 

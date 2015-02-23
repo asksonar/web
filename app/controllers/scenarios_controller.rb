@@ -1,7 +1,4 @@
 class ScenariosController < ApplicationController
-	def new
-	end
-
 	def index
 		@scenarios = Scenario.all
 	end
@@ -13,7 +10,7 @@ class ScenariosController < ApplicationController
 
 		params['steps'].each do |stepDescription|
 			debugger
-		
+
 			scenarioStep = ScenarioStep.new(description: stepDescription, scenario:@scenario)
 			scenarioStep.save
 		end
@@ -24,6 +21,13 @@ class ScenariosController < ApplicationController
 	def show
 		@scenario = Scenario.find(params[:id])
 	end
+
+  def destroy
+    @scenario = Scenario.find(params[:id])
+    @scenario.destroy
+    flash[:scenario_message] = %q|Deleted scenario "| + @scenario.title + %q|"|
+    redirect_to scenarios_path
+  end
 
 	private
 		def scenario_params

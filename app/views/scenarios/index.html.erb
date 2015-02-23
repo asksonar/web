@@ -1,8 +1,19 @@
-<h1>This is the scenarios index</h1>
+<h1>
+  Scenarios
+  <a href='<%=new_scenario_path%>' class='btn btn-default btnNewScenario'>
+  <i class='glyphicon glyphicon-plus-sign'></i> New Scenario</a>
+</h1>
 
-<%= link_to 'Create a New Scenario', new_scenario_path %>
+<% if flash[:scenario_message] %>
 
-<table>
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <%=flash[:scenario_message]%>
+</div>
+
+<% end %>
+
+<table class='table'>
 	<thead>
 		<tr>
 			<th>Title</th>
@@ -10,7 +21,7 @@
 			<th>Show</th>
 		</tr>
 	</thead>
-	<tbody>	
+	<tbody>
 	<% @scenarios.each do |scenario| %>
 		<tr>
 			<td><%= scenario.title %></td>

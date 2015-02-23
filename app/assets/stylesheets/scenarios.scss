@@ -1,3 +1,34 @@
 // Place all the styles related to the scenarios controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.scenarios {
+
+  .btnCancelNewStep {
+    float: none;
+  }
+
+  #btnAddNewStep {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  #btnAddNewStep, #divNewSteps {
+  }
+
+  #divNewSteps {
+  }
+
+  #divNewSteps li {
+    margin-bottom: 10px;
+  }
+
+  #divNewSteps input, #btnAddNewStep {
+    width: 400px;
+  }
+
+  .divButtons {
+    margin-top: 20px;
+  }
+
+}

@@ -1,11 +1,18 @@
-<p>
-	<h3>Title:</h3>
-	<%= @scenario.title %>
-</p>
+<h3>Title:</h3>
+<p><%= @scenario.title %></p>
 
-<p>
-	<h3>Description:</h3>
-	<%= @scenario.description %>
-</p>
+<h3>Description:</h3>
+<p><%= @scenario.description %></p>
+
+<h3>Steps:</h3>
+<ol>
+<% @scenario.scenarioSteps.each do |step| %>
+  <li><%= step.description %></li>
+<% end %>
+</ol>
+
+<%= bootstrap_form_for @scenario, method: :delete do |f| %>
+  <% f.submit "Delete this scenario" %>
+<% end %>
 
 <%= link_to 'Back', scenarios_path %>
