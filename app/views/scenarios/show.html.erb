@@ -1,15 +1,27 @@
-<h3>Title:</h3>
-<p><%= @scenario.title %></p>
+<div class='row'>
+  <div class='col-md-7'>
+    <h3>Title:</h3>
+    <p><%= @scenario.title %></p>
 
-<h3>Description:</h3>
-<p><%= @scenario.description %></p>
+    <h3>Description:</h3>
+    <p><%= @scenario.description %></p>
 
-<h3>Steps:</h3>
-<ol>
-<% @scenario.scenarioSteps.each do |step| %>
-  <li><%= step.description %></li>
-<% end %>
-</ol>
+    <h3>Steps:</h3>
+    <ol>
+    <% @scenario.scenarioSteps.each do |step| %>
+      <li><%= step.description %></li>
+    <% end %>
+    </ol>
+  </div>
+  <div class='col-md-5'>
+    <h3>Users:</h3>
+    <ol>
+    <% @scenario.userScenarios.each do |userScenario| %>
+      <li><%= userScenario.user.email %> (<%=userScenario.status%>)</li>
+    <% end %>
+    </ol>
+  </div>
+</div>
 
 <%= bootstrap_form_for @scenario, method: :delete do |f| %>
   <% f.submit "Delete this scenario" %>

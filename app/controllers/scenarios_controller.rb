@@ -1,19 +1,27 @@
 class ScenariosController < ApplicationController
+  include EmailUtils
+
 	def index
 		@scenarios = Scenario.all
 	end
 
 	def create
 		#render plain: params[:scenario].inspect
-		@scenario = Scenario.new(scenario_params)
-		@scenario.save
+    ActiveRecord::Base.transaction do
+      debugger
 
-		params['steps'].each do |stepDescription|
-			debugger
+  		@scenario = Scenario.create(scenario_params)
 
-			scenarioStep = ScenarioStep.new(description: stepDescription, scenario:@scenario)
-			scenarioStep.save
-		end
+      emails = parse_emails(params[:scenario][:emails])
+      users = User.bulk_create(emails)
+
+      UserScenario.bulk_create(users, @scenario)
+
+  		params[:steps].each do |stepDescription|
+  			ScenarioStep.create(description: stepDescription, scenario:@scenario)
+        #??? scenarioStep = @scenario.scenarioSteps.create(description: stepDescription)
+  		end
+    end
 
 		redirect_to @scenario
 	end

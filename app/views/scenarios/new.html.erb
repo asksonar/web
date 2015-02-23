@@ -1,31 +1,38 @@
 <h1>Create a New Scenario</h1>
 
 <%= bootstrap_form_for :scenario, url: scenarios_path do |f| %>
-	<p>
-		<%= f.text_field :title, placeholder: 'Give it a summary' %>
-	</p>
+	 <div class='row'>
+    <div class='col-md-7'>
+      <p>
+    		<%= f.text_field :title, placeholder: 'Give it a summary' %>
+    	</p>
 
-	<p>
-		<%= f.text_area :description, rows: 4, placeholder: 'Add some detail' %>
-	</p>
+    	<p>
+    		<%= f.text_area :description, rows: 4, placeholder: 'Add some detail' %>
+    	</p>
 
-  <p>
-    <%= f.url_field :url, label: 'URL', placeholder: 'Start your users here' %>
-  </p>
+      <p>
+        <%= f.url_field :url, label: 'URL', placeholder: 'Start your users here' %>
+      </p>
 
-  <%= f.label 'Scenario steps' %>
+      <%= f.label 'Scenario steps' %>
 
-  <div>
-  	<ol id='divNewSteps' class='form-inline'>
-      <li>
-        <input class='form-control' type='text' name='steps[]'></input>&nbsp;
-        <button type='button' class='close btnCancelNewStep' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-      </li>
-    </ol>
-    <button type="button" class='btn btn-default' id='btnAddNewStep'>
-      <i class='glyphicon glyphicon-plus'></i>
-      Add New Step
-    </button>
+      <div>
+      	<ol id='divNewSteps' class='form-inline'>
+          <li>
+            <input class='form-control' type='text' name='steps[]'></input>&nbsp;
+            <button type='button' class='close btnCancelNewStep' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+          </li>
+        </ol>
+        <button type="button" class='btn btn-default' id='btnAddNewStep'>
+          <i class='glyphicon glyphicon-plus'></i>
+          Add New Step
+        </button>
+      </div>
+    </div>
+    <div class='col-md-5'>
+      <%= f.text_area :emails, rows: 12, placeholder: 'List your user emails' %>
+    </div>
   </div>
 
 	<div class='divButtons'>
