@@ -2,7 +2,7 @@ class UserScenario < ActiveRecord::Base
   belongs_to :scenario
   belongs_to :user
 
-  enum status: %w(pending inprogress completed)
+  enum status: [:pending, :inprogress, :completed]
 
   def self.bulk_create(users, scenario)
     user_scenarios = []
@@ -12,5 +12,9 @@ class UserScenario < ActiveRecord::Base
         .find_or_create_by(user: user,scenario: scenario)
     end
     return user_scenarios
+  end
+
+  def email
+    return user.email
   end
 end

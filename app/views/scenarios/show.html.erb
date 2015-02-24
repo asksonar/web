@@ -17,7 +17,7 @@
     <h3>Users:</h3>
     <ol>
     <% @scenario.userScenarios.each do |userScenario| %>
-      <li><%= userScenario.user.email %> (<%=userScenario.status%>)</li>
+      <li><%= userScenario.email %> (<%=userScenario.status%>)</li>
     <% end %>
     </ol>
   </div>

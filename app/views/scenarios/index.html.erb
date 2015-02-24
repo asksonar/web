@@ -18,6 +18,7 @@
 		<tr>
 			<th>Title</th>
 			<th>Description</th>
+      <th>Completed</th>
 			<th>Show</th>
 		</tr>
 	</thead>
@@ -26,6 +27,7 @@
 		<tr>
 			<td><%= scenario.title %></td>
 			<td><%= scenario.description %></td>
+      <td><%= scenario.user_completed_count %> / <%= scenario.user_count %></td>
 			<td><%= link_to 'Show', scenario_path(scenario) %></td>
 		</tr>
 	<% end %>
