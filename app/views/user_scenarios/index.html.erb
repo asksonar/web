@@ -1,19 +1,21 @@
 <h1>This is the User Scenarios list</h1>
 
-<table>
+<table class='table'>
   <thead>
     <tr>
+      <th>Status</th>
       <th>Title</th>
       <th>Description</th>
-      <th>Show</th>
+      <th>Start</th>
     </tr>
   </thead>
-  <tbody> 
-  <% @user_scenarios.each do |scenario| %>
+  <tbody>
+  <% @user_scenarios.each do |user_scenario| %>
     <tr>
-      <td><%= scenario.title %></td>
-      <td><%= scenario.description %></td>
-      <td><%= link_to 'Show', scenario_path(scenario) %></td>
+      <td><%= user_scenario.status %></td>
+      <td><%= user_scenario.title %></td>
+      <td><%= user_scenario.description %></td>
+      <td><%= link_to 'Start', scenario_path(user_scenario.scenario) %></td>
     </tr>
   <% end %>
   <% if @user_scenarios.blank? %>

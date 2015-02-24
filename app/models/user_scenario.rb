@@ -17,4 +17,13 @@ class UserScenario < ActiveRecord::Base
   def email
     return user.email
   end
+
+  def title
+    return scenario.title
+  end
+
+  def description
+    return scenario.description
+  end
+
 end
