@@ -26,4 +26,8 @@ class UserScenario < ActiveRecord::Base
     return scenario.description
   end
 
+  def company_name
+    return scenario.company.name
+  end
+
 end

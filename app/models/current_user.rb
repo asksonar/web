@@ -16,4 +16,16 @@ class CurrentUser
     defined? @user_or_researcher.is_researcher? and @user_or_researcher.is_researcher?
   end
 
+  def user
+    @user_or_researcher if is_user?
+  end
+
+  def researcher
+    @user_or_researcher if is_researcher?
+  end
+
+  def company
+    @user_or_researcher.company if is_researcher?
+  end
+
 end

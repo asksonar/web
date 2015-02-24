@@ -2,13 +2,13 @@ class ScenariosController < ApplicationController
   include EmailUtils
 
 	def index
-		@scenarios = Scenario.all
+		@scenarios = Scenario.where(company: current_user.company)
 	end
 
 	def create
 		#render plain: params[:scenario].inspect
     ActiveRecord::Base.transaction do
-  		@scenario = Scenario.create(scenario_params)
+  		@scenario = Scenario.create(scenario_params, current_user.researcher)
 
       emails = parse_emails(params[:scenario][:emails])
       users = User.bulk_create(emails)

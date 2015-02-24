@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Status</th>
+      <th>Company</th>
       <th>Title</th>
       <th>Description</th>
       <th>Start</th>
@@ -13,6 +14,7 @@
   <% @user_scenarios.each do |user_scenario| %>
     <tr>
       <td><%= user_scenario.status %></td>
+      <td><%= user_scenario.company_name %></td>
       <td><%= user_scenario.title %></td>
       <td><%= user_scenario.description %></td>
       <td><%= link_to 'Start', scenario_path(user_scenario.scenario) %></td>

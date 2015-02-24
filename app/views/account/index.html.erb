@@ -1,1 +1,8 @@
+<p>
 You are logged in as <%= current_user.display %>
+</p>
+<% if current_user.company %>
+<p>
+Your company is <%= current_user.company.name %>
+</p>
+<% end %>

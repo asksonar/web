@@ -23,6 +23,8 @@
   </div>
 </div>
 
+Created by <%= @scenario.created_by.email %> at <%= @scenario.created_at %>
+
 <%= bootstrap_form_for @scenario, method: :delete do |f| %>
   <% f.submit "Delete this scenario" %>
 <% end %>
