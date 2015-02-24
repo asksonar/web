@@ -8,7 +8,7 @@
 
     <h3>Steps:</h3>
     <ol>
-    <% @scenario.scenarioSteps.each do |step| %>
+    <% @scenario.scenario_steps.each do |step| %>
       <li><%= step.description %></li>
     <% end %>
     </ol>
@@ -16,8 +16,8 @@
   <div class='col-md-5'>
     <h3>Users:</h3>
     <ol>
-    <% @scenario.userScenarios.each do |userScenario| %>
-      <li><%= userScenario.email %> (<%=userScenario.status%>)</li>
+    <% @scenario.user_scenarios.each do |user_scenario| %>
+      <li><%= user_scenario.email %> (<%=user_scenario.status%>)</li>
     <% end %>
     </ol>
   </div>

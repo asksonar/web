@@ -8,9 +8,9 @@
   <%= navbar_collapse do %>
     <%= navbar_group class: 'foo', id: 'menu' do %>
       <%= navbar_item "Home", '/' %>
-      <% if current_user and current_user.isResearcher? %>
+      <% if current_user and current_user.is_researcher? %>
         <%= navbar_item "Scenarios", '/scenarios' %>
-      <% elsif current_user and current_user.isUser? %>
+      <% elsif current_user and current_user.is_user? %>
         <%= navbar_item "User Scenarios", '/user_scenarios' %>
       <% end %>
     <% end %>

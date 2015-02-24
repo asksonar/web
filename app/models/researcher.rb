@@ -1,5 +1,5 @@
 class Researcher < ActiveRecord::Base
-  def isResearcher?
+  def is_researcher?
     true
   end
 end

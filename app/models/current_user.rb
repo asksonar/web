@@ -8,12 +8,12 @@ class CurrentUser
     @user_or_researcher.class.name + ' ' + @user_or_researcher.id.to_s
   end
 
-  def isUser?
-    defined? @user_or_researcher.isUser? and @user_or_researcher.isUser?
+  def is_user?
+    defined? @user_or_researcher.is_user? and @user_or_researcher.is_user?
   end
 
-  def isResearcher?
-    defined? @user_or_researcher.isResearcher? and @user_or_researcher.isResearcher?
+  def is_researcher?
+    defined? @user_or_researcher.is_researcher? and @user_or_researcher.is_researcher?
   end
 
 end

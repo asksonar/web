@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-  has_many :userScenarios, inverse_of: :scenario, dependent: :destroy
+  has_many :user_scenarios, inverse_of: :scenario, dependent: :destroy
 
-  def isUser?
+  def is_user?
     true
   end
 

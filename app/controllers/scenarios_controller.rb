@@ -8,8 +8,6 @@ class ScenariosController < ApplicationController
 	def create
 		#render plain: params[:scenario].inspect
     ActiveRecord::Base.transaction do
-      debugger
-
   		@scenario = Scenario.create(scenario_params)
 
       emails = parse_emails(params[:scenario][:emails])
@@ -17,8 +15,8 @@ class ScenariosController < ApplicationController
 
       UserScenario.bulk_create(users, @scenario)
 
-  		params[:steps].each do |stepDescription|
-  			ScenarioStep.create(description: stepDescription, scenario:@scenario)
+  		params[:steps].each do |step_description|
+  			ScenarioStep.create(description: step_description, scenario:@scenario)
         #??? scenarioStep = @scenario.scenarioSteps.create(description: stepDescription)
   		end
     end
