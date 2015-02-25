@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224004415) do
+ActiveRecord::Schema.define(version: 20150225225301) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -26,11 +26,45 @@ ActiveRecord::Schema.define(version: 20150224004415) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "scenario_results", force: :cascade do |t|
+    t.integer  "scenario_id"
+    t.integer  "user_count"
+    t.integer  "user_completed_count"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "scenario_step_feelings", force: :cascade do |t|
+    t.integer  "scenario_id"
+    t.integer  "scenario_step_id"
+    t.integer  "feeling"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "scenario_step_results", force: :cascade do |t|
+    t.integer  "scenario_id"
+    t.integer  "scenario_step_id"
+    t.datetime "started_at"
+    t.datetime "completed_at"
+    t.integer  "completed_seconds"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "scenario_step_videos", force: :cascade do |t|
+    t.integer  "scenario_step_id"
+    t.text     "transcription_json"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
   create_table "scenario_steps", force: :cascade do |t|
     t.integer  "scenario_id"
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "step_order"
   end
 
   create_table "scenarios", force: :cascade do |t|

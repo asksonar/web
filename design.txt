@@ -209,7 +209,7 @@ database data
 		user id
 		test id
 		status enum - pending, inprogress, completed
-	UserScenarioSteps table - added to when user takes the test
+  ScenarioStepResults table - added to when user takes the test
 		userTestStep id
 		user id
 		test id
@@ -217,13 +217,20 @@ database data
 		start time
 		end time
 		fractional seconds into the step till completion
-	UserScenarioFeelings table - added to when user takes the test
+	ScenarioStepFeelings table - added to when user takes the test
 		userTestFeeling id
 		user id
 		test id
 		step id
 		feeling enum
 		fractional seconds into the step till button press
+  ScenarioStepVideos - added to when user takes the test
+    video id
+    user id
+    test id
+    step id
+    video uuid
+    video transcription json
 
 auto-update column for each table
 
@@ -236,4 +243,37 @@ naming convention
 	Scenario
 	Scenario Step
 	Scenario Feeling
+
+
+Chrome App
+  hit the Start link
+  triggers event that App is listening on
+    pass in scenario id
+  App respond to event so that website knows to switch into working mode
+  App opens up new window that covers up the whole screen
+    left side is a webview - starts off empty
+      has back, forward, url buttons
+    right side is our control panel
+      Purple Cow
+  asks you to start screenshare
+    shows outline of the window to see what is being captured
+  asks you to start webcam
+    webcam shows up in uppper right corner to show you it's working
+  ready to start?
+    populates the controls and directions
+      instructions
+      Next button
+      happy / unhappy button
+      give up button
+    populates the webview
+  when we complete a step, send back to server in the background
+    how long it took
+    logs of happy/unhappy
+    video of that section
+  completing the entire test is just another step completion
+    close the window
+    send event back to the tab that fired up the app
+      if they closed it in the meantime, then just open up a new tab
+    link back to say you completed the test and that there are others?
+
 

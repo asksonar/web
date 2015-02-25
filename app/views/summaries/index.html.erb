@@ -1,0 +1,20 @@
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Completed</th>
+      <th>Show</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @summaries.each do |summary| %>
+    <tr>
+      <td><%= summary.title %></td>
+      <td><%= summary.description %></td>
+      <td><%= summary.user_completed_count %> / <%= summary.user_count %></td>
+      <td><%= link_to 'Details', summary_path(summary) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

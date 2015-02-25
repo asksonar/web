@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   #   resources :products
   resources :scenarios
   resources :user_scenarios
+  resources :summaries
 
   # Example resource route with options:
   #   resources :products do
