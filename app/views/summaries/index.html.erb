@@ -1,3 +1,5 @@
+<h1>Summaries</h1>
+
 <table class='table'>
   <thead>
     <tr>
@@ -8,12 +10,12 @@
     </tr>
   </thead>
   <tbody>
-  <% @summaries.each do |summary| %>
+  <% @scenarios.each do |scenario| %>
     <tr>
-      <td><%= summary.title %></td>
-      <td><%= summary.description %></td>
-      <td><%= summary.user_completed_count %> / <%= summary.user_count %></td>
-      <td><%= link_to 'Details', summary_path(summary) %></td>
+      <td><%= scenario.title %></td>
+      <td><%= scenario.description %></td>
+      <td><%= scenario.user_completed_count %> / <%= scenario.user_count %></td>
+      <td><%= link_to 'Details', summary_path(scenario) %></td>
     </tr>
   <% end %>
   </tbody>

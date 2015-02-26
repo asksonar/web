@@ -3,11 +3,11 @@ class ScenarioStepFeeling < ActiveRecord::Base
   belongs_to :scenario
   belongs_to :scenario_step
 
-  def self.total_delighted(scenario)
-    ScenarioStepFeeling.where(scenario: scenario, feeling: :delighted).count
+  def self.where_scenario_step_delighted(scenario_step)
+    ScenarioStepFeeling.where(scenario_step: scenario_step, feeling: feelings[:delighted])
   end
 
-  def self.total_confused(scenario)
-    ScenarioStepFeeling.where(scenario: scenario, feeling: :confused).count
+  def self.where_scenario_step_confused(scenario_step)
+    ScenarioStepFeeling.where(scenario_step: scenario_step, feeling: feelings[:confused])
   end
 end

@@ -27,7 +27,7 @@
 		<tr>
 			<td><%= scenario.title %></td>
 			<td><%= scenario.description %></td>
-      <td><%= scenario.user_completed_count %> / <%= scenario.user_count %></td>
+      <td><%= scenario.user_completed_count || 0 %> / <%= scenario.user_count || 0 %></td>
 			<td><%= link_to 'Show', scenario_path(scenario) %></td>
 		</tr>
 	<% end %>

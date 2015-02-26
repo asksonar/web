@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150225225301) do
+ActiveRecord::Schema.define(version: 20150226204049) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -26,20 +26,14 @@ ActiveRecord::Schema.define(version: 20150225225301) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "scenario_results", force: :cascade do |t|
-    t.integer  "scenario_id"
-    t.integer  "user_count"
-    t.integer  "user_completed_count"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
   create_table "scenario_step_feelings", force: :cascade do |t|
     t.integer  "scenario_id"
     t.integer  "scenario_step_id"
     t.integer  "feeling"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.float    "feeling_at_seconds"
+    t.text     "context_transcription"
   end
 
   create_table "scenario_step_results", force: :cascade do |t|
@@ -50,6 +44,7 @@ ActiveRecord::Schema.define(version: 20150225225301) do
     t.integer  "completed_seconds"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "user_id"
   end
 
   create_table "scenario_step_videos", force: :cascade do |t|
@@ -70,10 +65,12 @@ ActiveRecord::Schema.define(version: 20150225225301) do
   create_table "scenarios", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.integer  "company_id"
     t.integer  "created_by"
+    t.integer  "user_count"
+    t.integer  "user_completed_count"
   end
 
   create_table "user_scenarios", force: :cascade do |t|

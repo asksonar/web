@@ -28,6 +28,8 @@ gem 'bootstrap-sass', '~> 3.3'
 gem 'bootstrap_form', '~> 2.3.0'
 gem 'rails_bootstrap_navbar'
 
+gem 'font-awesome-sass', '~> 4.3.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -1,48 +1,57 @@
 <div class='summary'>
-
-<p>
-Title: <%= @summary.title %>
-</p>
-<p>
-Description: <%= @summary.description %>
-</p>
-
-<p>
-Users: <%= @summary.user_completed_count %> completed / <%= @summary.user_count %> total
-
-<p>
-<%= @summary.total_delighted %> total delighted
-</p>
-<p>
-<%= @summary.total_confused %> total confused
-</p>
-
+  <div class='row'>
+    <div class='col-md-8'>
+      <h3>
+        <a href='<%=summaries_path%>'><i class='fa fa-arrow-circle-left'></i></a>
+        <%= @summary.title %>
+      </h3>
+      <p><%= @summary.description %></p>
+    </div>
+    <div class='col-md-4'>
+      <h4><%= @summary.user_completed_count %> users <small>completed</small></h4>
+      <h5><%= @summary.user_count %> users <small>total</small></h5>
+      <span class='total_feeling text-success'><i class='fa fa-smile-o'></i> <%= @summary.total_delighted %></span>
+      <span class='total_feeling text-danger'><i class='fa fa-frown-o'></i>  <%= @summary.total_confused %></span>
+    </div>
+  </div>
 </div>
 <div class='summary_step_container'>
-<%= @summary.summary_steps.each do |summary_step| %>
+<% @summary.summary_steps.each do |summary_step| %>
   <div class='summary_step'>
-  <%= summary_step.order %>) <%= summary_step.title %>
-
-  <%= summary_step.average_completion_time %>
-
-  <#= convert javascript converts this into nice graph %>
-  <script type='application/json'>
-    <%= summary_step.completion_time_json %>
-  </script>
-
-  <#= make ajax call to pull up the full video and transcript %>
-  <%= summary_step.delighted_events.each do |delighted_event| %>
-    <a class='feelingEvent'
-      data-video-id='<%=delighted_event.video_id%>'
-      data-video-timestamp='<%=delighted_event.video_timestamp%>'
-      >...<%= delighted_event.text %>...</a>
-  <% end %>
-  <%= summary_step.frustrated_events.each do |frustrated_event| %>
-    <a class='feelingEvent'
-      data-video-id='<%=frustrated_event.video_id%>'
-      data-video-timestamp='<%=frustrated_event.video_timestamp%>'
-      >...<%= frustrated_event.text %>...</a>
-  <% end %>
+    <div class='row'>
+      <div class='col-md-8'>
+        <h4><%= summary_step.step_order + 1 %>. <%= summary_step.description %></h4>
+        <h6>Average time: <%= summary_step.average_completed_seconds || '?' %> seconds</h6>
+        <%# convert javascript converts this into nice graph %>
+        <%# also links to the video for that user %>
+        <script type='application/json'>
+          <%= summary_step.completed_time_and_video_json %>
+        </script>
+      </div>
+      <div class='col-md-4'>
+      <%# make ajax call to pull up the full video and transcript %>
+      <% summary_step.delighted_feelings.each do |feeling| %>
+        <p>
+          <!-- delighted -->
+          <a href='#' class='feeling'
+            data-scenario-step-id='<%=feeling.scenario_step_id%>'
+            data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
+            ><span class='text-success'><i class='fa fa-smile-o'></i></span>
+            ...<%= feeling.context_transcription %>...</a>
+        </p>
+      <% end %>
+      <% summary_step.frustrated_feelings.each do |feeling| %>
+        <p>
+          <!-- frustrated -->
+          <a href='#' class='feeling'
+            data-scenario-step-id='<%=feeling.scenario_step_id%>'
+            data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
+            ><span class='text-danger'><i class='fa fa-frown-o'></i></span>
+            ...<%= feeling.context_transcription %>...</a>
+        </p>
+      <% end %>
+      </div>
+    </div>
   </div>
 <% end %>
 </div>

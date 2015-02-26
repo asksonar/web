@@ -1,7 +1,6 @@
 class Summary
-  def initialize(scenario, scenario_result)
+  def initialize(scenario)
     @scenario = scenario
-    @scenario_result = scenario_result
   end
 
   def title
@@ -13,23 +12,23 @@ class Summary
   end
 
   def user_count
-    @scenario_result.user_count
+    @scenario.user_count
   end
 
   def user_completed_count
-    @scenario_result.user_completed_count
+    @scenario.user_completed_count
   end
 
   def total_delighted
-    ScenarioStepFeeling.total_delighted(@scenario)
+    @scenario.where_feeling_delighted.count
   end
 
   def total_confused
-    ScenarioStepFeeling.total_confused(@scenario)
+    @scenario.where_feeling_confused.count
   end
 
   def summary_steps
-    @scenario.scenario_step_results
+    @scenario.scenario_steps.map { |step| SummaryStep.new(step) }
   end
 
 end

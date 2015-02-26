@@ -1,3 +1,23 @@
 // Place all the styles related to the Summaries controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.summaries {
+
+  .total_feeling {
+    margin-right: 9px;
+  }
+
+  .summary {
+    margin-bottom: 20px;
+  }
+
+  .summary_step {
+    margin-bottom: 5px;
+    background-color: #f8f8f8;
+    padding: 20px;
+  }
+
+
+
+}
