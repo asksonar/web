@@ -15,8 +15,8 @@ class ScenariosController < ApplicationController
 
       UserScenario.bulk_create(users, @scenario)
 
-  		params[:steps].each do |step_description|
-  			ScenarioStep.create(description: step_description, scenario:@scenario)
+  		params[:steps].each_with_index do |step_description, index|
+  			ScenarioStep.create(description: step_description, scenario: @scenario, step_order: index)
         #??? scenarioStep = @scenario.scenarioSteps.create(description: stepDescription)
   		end
     end

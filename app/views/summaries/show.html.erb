@@ -1,0 +1,48 @@
+<div class='summary'>
+
+<p>
+Title: <%= @summary.title %>
+</p>
+<p>
+Description: <%= @summary.description %>
+</p>
+
+<p>
+Users: <%= @summary.user_completed_count %> completed / <%= @summary.user_count %> total
+
+<p>
+<%= @summary.total_delighted %> total delighted
+</p>
+<p>
+<%= @summary.total_confused %> total confused
+</p>
+
+</div>
+<div class='summary_step_container'>
+<%= @summary.summary_steps.each do |summary_step| %>
+  <div class='summary_step'>
+  <%= summary_step.order %>) <%= summary_step.title %>
+
+  <%= summary_step.average_completion_time %>
+
+  <#= convert javascript converts this into nice graph %>
+  <script type='application/json'>
+    <%= summary_step.completion_time_json %>
+  </script>
+
+  <#= make ajax call to pull up the full video and transcript %>
+  <%= summary_step.delighted_events.each do |delighted_event| %>
+    <a class='feelingEvent'
+      data-video-id='<%=delighted_event.video_id%>'
+      data-video-timestamp='<%=delighted_event.video_timestamp%>'
+      >...<%= delighted_event.text %>...</a>
+  <% end %>
+  <%= summary_step.frustrated_events.each do |frustrated_event| %>
+    <a class='feelingEvent'
+      data-video-id='<%=frustrated_event.video_id%>'
+      data-video-timestamp='<%=frustrated_event.video_timestamp%>'
+      >...<%= frustrated_event.text %>...</a>
+  <% end %>
+  </div>
+<% end %>
+</div>
