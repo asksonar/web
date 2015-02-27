@@ -16,8 +16,10 @@ class SummaryStep
     @scenario_step.scenario_step_results.average(:completed_seconds)
   end
 
-  def completed_time_and_video_json
-    @scenario_step.scenario_step_results.map { |step| step.completed_seconds }.to_json
+  def result_time_hash
+    @scenario_step.scenario_step_results.map { |result|
+      { id: result.id, time: result.completed_seconds }
+    }
   end
 
   def delighted_feelings

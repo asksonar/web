@@ -30,6 +30,11 @@ gem 'rails_bootstrap_navbar'
 
 gem 'font-awesome-sass', '~> 4.3.0'
 
+gem 'amcharts.rb', '~> 3.11.2.14'
+
+# fix for turbolinks and jquery bindings
+gem 'jquery-turbolinks'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

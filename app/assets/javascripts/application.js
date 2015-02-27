@@ -11,7 +11,11 @@
 // about supported directives.
 //
 //= require jquery
-//= require bootstrap-sprockets
+//= require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
+//= require bootstrap-sprockets
+//= require amcharts/all
+//= require amcharts/themes/light
 //= require_tree .
+//= require turbolinks
+
