@@ -16,6 +16,7 @@
 //= require bootstrap-sprockets
 //= require amcharts/all
 //= require amcharts/themes/light
+//= require video
 //= require_tree .
 //= require turbolinks
 

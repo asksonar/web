@@ -1,7 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  email: MyString
-
-two:
-  email: MyString
+<% 20.times do |n| %>
+user_227507_<%= n %>:
+  email: test227507pm_<%= n %>@example.com
+<% end %>

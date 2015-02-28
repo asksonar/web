@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+company_one:
+  name: 'Test Company'
 
-two:
-  name: MyString
+company_two:
+  name: 'Test Company #2, Inc.'

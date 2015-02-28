@@ -1,15 +1,30 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  scenario_id: 1
-  scenario_step_id: 1
-  started_at: 2015-02-25 14:30:32
-  completed_at: 2015-02-25 14:30:32
-  completed_seconds: 1
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+<% 14..19.times do |n| %>
+user_scenario_227507_0_<%= n %>:
+  scenario_step: scenario_step_227507_0
+  user: user_227507_<%= n %>
+  completed_seconds: <%= rand(0..240) %>
+<% end %>
 
-two:
-  scenario_id: 1
-  scenario_step_id: 1
-  started_at: 2015-02-25 14:30:32
-  completed_at: 2015-02-25 14:30:32
-  completed_seconds: 1
+<% 14..19.times do |n| %>
+user_scenario_227507_1_<%= n %>:
+  scenario_step: scenario_step_227507_1
+  user: user_227507_<%= n %>
+  completed_seconds: <%= rand(0..240) %>
+<% end %>
+
+<% 14..19.times do |n| %>
+user_scenario_227507_2_<%= n %>:
+  scenario_step: scenario_step_227507_2
+  user: user_227507_<%= n %>
+  completed_seconds: <%= rand(0..240) %>
+<% end %>
+
+<% 14..19.times do |n| %>
+user_scenario_227507_3_<%= n %>:
+  scenario_step: scenario_step_227507_3
+  user: user_227507_<%= n %>
+  completed_seconds: <%= rand(0..240) %>
+<% end %>

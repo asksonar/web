@@ -1,9 +1,20 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+scenario_step_227507_0:
+  scenario: scenario_227507
+  description: 'Culpa cow ground round, irure voluptate eu jowl ut beef ribs. Venison adipisicing ground round, ut flank sausage chuck pastrami fugiat magna irure quis eiusmod.'
+  step_order: 0
 
-one:
-  test_id: 1
-  description: MyString
+scenario_step_227507_1:
+  scenario: scenario_227507
+  description: 'Enim consectetur tongue, tempor cupim laborum voluptate magna proident ut bacon chicken eiusmod. Magna lorem ham hock et hamburger brisket, sunt pork chop cow fatback quis rump. Drumstick pancetta quis reprehenderit.'
+  step_order: 1
 
-two:
-  test_id: 1
-  description: MyString
+scenario_step_227507_2:
+  scenario: scenario_227507
+  description: 'Alcatra in anim drumstick t-bone tempor consectetur magna exercitation rump est sirloin sed in pig. Landjaeger ut drumstick et minim, pancetta turkey do velit.'
+  step_order: 2
+
+scenario_step_227507_3:
+  scenario: scenario_227507
+  description: 'Et tail ut prosciutto voluptate ham in excepteur porchetta ball tip frankfurter alcatra dolor duis. Elit quis pastrami, velit labore pig spare ribs.'
+  step_order: 3

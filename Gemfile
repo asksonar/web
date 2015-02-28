@@ -35,6 +35,8 @@ gem 'amcharts.rb', '~> 3.11.2.14'
 # fix for turbolinks and jquery bindings
 gem 'jquery-turbolinks'
 
+gem 'videojs_rails', '~> 4.6.1'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

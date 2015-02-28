@@ -1,9 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  title: MyString
-  description: MyText
-
-two:
-  title: MyString
-  description: MyText
+scenario_227507:
+  title: Video Test 2/27 5:05 PM
+  description: 'Bacon ipsum dolor amet in incididunt esse chuck fugiat ea. Sirloin cupim porchetta venison, pork ipsum leberkas ground round ball tip turducken bresaola. Consequat eiusmod beef doner, short ribs elit pariatur brisket enim pork ut ad pork chop beef ribs. Pork belly occaecat sunt beef tri-tip aliqua, frankfurter cupim swine quis adipisicing boudin exercitation ut commodo.'
+  user_count: 20
+  user_completed_count: 6
+  company: company_one
+  created_by: researcher_one

@@ -1,11 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  user_id: 1
-  test_id: 1
-  status: 1
-
-two:
-  user_id: 1
-  test_id: 1
-  status: 1
+<% 20.times do |n| %>
+user_scenario_227507_<%= n %>:
+  scenario: scenario_227507
+  user: user_227507_<%= n %>
+  status: <%= n >= 14 ? 2 : 0 %>
+<% end %>
