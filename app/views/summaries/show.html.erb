@@ -29,7 +29,7 @@
           <%# also links to the video for that user %>
           <div class='summary_time_graph'>
             <script type='application/json'>
-              <%= raw summary_step.result_time_hash.to_json %>
+              <%= raw summary_step.result_time_bucket_hash.values.to_json %>
             </script>
             <div id='graph<%= summary_step.step_order%>' class='graph' style="width: 100%; height: 150px; background-color: #FFFFFF;" ></div>
           </div>
