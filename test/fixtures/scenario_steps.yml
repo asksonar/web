@@ -18,3 +18,8 @@ scenario_step_227507_3:
   scenario: scenario_227507
   description: 'Et tail ut prosciutto voluptate ham in excepteur porchetta ball tip frankfurter alcatra dolor duis. Elit quis pastrami, velit labore pig spare ribs.'
   step_order: 3
+
+scenario_step_227507_4:
+  scenario: scenario_227507
+  description: 'Cow nulla sed eiusmod reprehenderit bacon qui et. Leberkas tempor do ham short ribs ball tip andouille pancetta brisket mollit turkey.'
+  step_order: 4

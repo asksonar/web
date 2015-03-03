@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post '/login/new', to: 'sessions#create', as: :new_login
   get  '/logout', to: 'sessions#destroy', as: :logout
   get  '/account', to: 'account#index'
+  get  '/videos.json', to: 'videos#show'
 
   #get 'home/index'
 

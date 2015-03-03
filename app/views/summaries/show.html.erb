@@ -33,25 +33,30 @@
             </script>
             <div id='graph<%= summary_step.step_order%>' class='graph' style="width: 100%; height: 150px; background-color: #FFFFFF;" ></div>
           </div>
-          <div class='average_time small'>Average time: <%= summary_step.average_completed_seconds || '?' %> seconds</div>
+          <div class='average_time small'>Average time: <%= format('%.0f', (summary_step.average_completed_seconds || 0)) %> seconds</div>
         </div>
-        <div class='col-md-4'>
+        <div class='col-md-4 feelingDivContainer'>
           <%# make ajax call to pull up the full video and transcript %>
-          <% summary_step.delighted_feelings.each do |feeling| %>
-            <div><a href='#' class='feeling'
+          <% summary_step.delighted_feelings.each_with_index do |feeling, index| %>
+            <div class='feelingDiv <%= 'feelingOverflow' if index > 3 %>'><a class='feeling'
               data-scenario-step-id='<%=feeling.scenario_step_id%>'
-              data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'>
+              data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
+              data-user-id='<%=feeling.user_id%>'>
                 <span class='text-success step_feeling'><i class='fa fa-smile-o'></i></span><!--
                 -->...<%= feeling.context_transcription %>...
             </a></div>
           <% end %>
-          <% summary_step.frustrated_feelings.each do |feeling| %>
-            <div><a href='#' class='feeling'
+          <% summary_step.frustrated_feelings.each_with_index do |feeling, index| %>
+            <div class='feelingDiv <%= 'feelingOverflow' if index > 3 %>'><a class='feeling'
               data-scenario-step-id='<%=feeling.scenario_step_id%>'
-              data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'>
+              data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
+              data-user-id='<%=feeling.user_id%>'>
                 <span class='text-danger step_feeling'><i class='fa fa-frown-o'></i></span><!--
                 -->...<%= feeling.context_transcription %>...</a>
             </div>
+          <% end %>
+          <% if summary_step.delighted_feelings.count > 4 || summary_step.frustrated_feelings.count > 4 %>
+            <div><a class='linkFeelingOverflow'>show more...</a></div>
           <% end %>
         </div>
       </div>
@@ -75,15 +80,7 @@
 
             </video>
           </div>
-          <div class='col-md-6'>
-Bacon ipsum dolor amet in incididunt esse chuck fugiat ea. Sirloin cupim porchetta venison, pork ipsum leberkas ground round ball tip turducken bresaola. Consequat eiusmod beef doner, short ribs elit pariatur brisket enim pork ut ad pork chop beef ribs. Pork belly occaecat sunt beef tri-tip aliqua, frankfurter cupim swine quis adipisicing boudin exercitation ut commodo. T-bone bacon occaecat, short ribs alcatra enim tri-tip eu duis proident et veniam. Meatloaf hamburger ut, kevin qui pork loin sint reprehenderit ham ullamco. Pork ut boudin voluptate.
-
-Culpa cow ground round, irure voluptate eu jowl ut beef ribs. Venison adipisicing ground round, ut flank sausage chuck pastrami fugiat magna irure quis eiusmod. Enim consectetur tongue, tempor cupim laborum voluptate magna proident ut bacon chicken eiusmod. Magna lorem ham hock et hamburger brisket, sunt pork chop cow fatback quis rump. Drumstick pancetta quis reprehenderit. Alcatra in anim drumstick t-bone tempor consectetur magna exercitation rump est sirloin sed in pig. Landjaeger ut drumstick et minim, pancetta turkey do velit.
-
-Minim magna sunt do shankle leberkas meatloaf commodo short loin shank alcatra. Nostrud tail bacon pork belly nisi incididunt mollit beef ribs venison chicken laborum labore. Et tail ut prosciutto voluptate ham in excepteur porchetta ball tip frankfurter alcatra dolor duis. Elit quis pastrami, velit labore pig spare ribs.
-
-Frankfurter exercitation duis brisket. Meatball cupidatat bresaola, brisket magna labore excepteur ut ball tip. Tri-tip ribeye irure nulla incididunt flank laborum. Deserunt ribeye hamburger, labore lorem pastrami capicola reprehenderit chicken cow consequat tri-tip exercitation pork belly turkey. Ut est jerky sirloin exercitation tenderloin aute nisi deserunt cupidatat. Flank filet mignon irure id cillum spare ribs duis, beef ribs sirloin. Beef turkey laboris cillum labore cupidatat irure flank kevin.
-          </div>
+          <div class='col-md-6' id='videoText'></div>
         </div>
       </div>
     </div><!-- /.modal-content -->

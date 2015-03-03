@@ -1,1 +1,44 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+<% 14..19.times do |n| %>
+<% if rand(0..1) > 0 %>
+scenario_feeling_227507_0_<%= n %>:
+  scenario_step: scenario_step_227507_0
+  user: user_227507_<%= n %>
+  feeling_at_seconds: <%= rand(0..300) %>
+  feeling: <%= rand(0..1) %>
+  context_transcription: 'Dolore in qui biltong short loin.'
+<% end %>
+<% end %>
+
+<% 14..19.times do |n| %>
+<% if rand(0..1) > 0 %>
+user_scenario_227507_1_<%= n %>:
+  scenario_step: scenario_step_227507_1
+  user: user_227507_<%= n %>
+  feeling_at_seconds: <%= rand(0..300) %>
+  feeling: <%= rand(0..1) %>
+  context_transcription: 'Leberkas tempor do ham short ribs ball tip andouille'
+<% end %>
+<% end %>
+
+<% 14..19.times do |n| %>
+<% if rand(0..1) > 0 %>
+user_scenario_227507_2_<%= n %>:
+  scenario_step: scenario_step_227507_2
+  user: user_227507_<%= n %>
+  feeling_at_seconds: <%= rand(0..300) %>
+  feeling: <%= rand(0..1) %>
+  context_transcription: 'Filet mignon shankle short loin'
+<% end %>
+<% end %>
+
+<% 14..19.times do |n| %>
+<% if rand(0..1) > 0 %>
+user_scenario_227507_3_<%= n %>:
+  scenario_step: scenario_step_227507_3
+  user: user_227507_<%= n %>
+  feeling_at_seconds: <%= rand(0..300) %>
+  feeling: <%= rand(0..1) %>
+  context_transcription: 'Pancetta qui shoulder short loin'
+<% end %>
+<% end %>

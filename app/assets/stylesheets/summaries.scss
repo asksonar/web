@@ -32,5 +32,18 @@
     cursor: pointer;
   }
 
+  .feelingOverflow {
+    display: none;
+  }
+
+  .feelingDiv {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .activeVideoTextLink {
+    font-weight: bold;
+  }
 
 }

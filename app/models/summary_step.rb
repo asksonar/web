@@ -27,10 +27,8 @@ class SummaryStep
   def result_time_bucket_hash
     buckets = {}
     (0..MAX_TIME_BUCKET).step(30) do |i|
-        min = i / 60
-        seconds = i % 60
         buckets[i] = {};
-        buckets[i][:display] = min.to_s + ':' + seconds.to_s.rjust(2, '0')
+        buckets[i][:display] = Time.at(i).strftime("%-M:%S")
         buckets[i][:display] += '+' if i == MAX_TIME_BUCKET
         buckets[i][:details] = []
         buckets[i][:count] = 0
@@ -43,7 +41,7 @@ class SummaryStep
       bucket_time = [result.completed_seconds, MAX_TIME_BUCKET].min
       bucket_time = (bucket_time / 30) * 30
 
-      buckets[bucket_time][:details] += [{id: result.id, time: result.completed_seconds}]
+      buckets[bucket_time][:details] += [{id: result.id, step_id: result.scenario_step_id, time: result.completed_seconds, user_id: result.user_id}]
       buckets[bucket_time][:count] += 1
     end
 
