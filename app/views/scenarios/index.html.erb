@@ -1,35 +1,34 @@
-<h1>
-  Scenarios
-  <a href='<%=new_scenario_path%>' class='btn btn-default btnNewScenario'>
-  <i class='glyphicon glyphicon-plus-sign'></i> New Scenario</a>
-</h1>
-
-<% if flash[:scenario_message] %>
-
-<div class="alert alert-warning alert-dismissible" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <%=flash[:scenario_message]%>
+<div class='pageheader'>
+  <h1>Manage your active scenarios</h1>
 </div>
+<section id="main-content">
+  <% if flash[:scenario_message] %>
 
-<% end %>
+  <div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <%=flash[:scenario_message]%>
+  </div>
 
-<table class='table'>
-	<thead>
-		<tr>
-			<th>Title</th>
-			<th>Description</th>
-      <th>Completed</th>
-			<th>Show</th>
-		</tr>
-	</thead>
-	<tbody>
-	<% @scenarios.each do |scenario| %>
-		<tr>
-			<td><%= scenario.title %></td>
-			<td><%= scenario.description %></td>
-      <td><%= scenario.user_completed_count || 0 %> / <%= scenario.user_count || 0 %></td>
-			<td><%= link_to 'Show', scenario_path(scenario) %></td>
-		</tr>
-	<% end %>
-	</tbody>
-</table>
+  <% end %>
+
+  <table class='table'>
+  	<thead>
+  		<tr>
+  			<th>Title</th>
+  			<th>Description</th>
+        <th>Completed</th>
+  			<th>Show</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  	<% @scenarios.each do |scenario| %>
+  		<tr>
+  			<td><%= scenario.title %></td>
+  			<td><%= scenario.description %></td>
+        <td><%= scenario.user_completed_count || 0 %> / <%= scenario.user_count || 0 %></td>
+  			<td><%= link_to 'Show', scenario_path(scenario) %></td>
+  		</tr>
+  	<% end %>
+  	</tbody>
+  </table>
+</section>

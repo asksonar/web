@@ -7,14 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= render partial: 'nav/header' %>
-
-<div class='container <%=params[:controller]%>'>
-  <%= yield %>
-</div>
-
-<%= render partial: 'nav/footer' %>
-
+  <section id="main-wrapper" class="theme-red sidebar-opened">
+    <%= render partial: 'nav/header' %>
+    <%= render partial: 'nav/left' %>
+    <section class="main-content-wrapper <%=params[:controller]%>">
+      <%= yield %>
+      <%= render partial: 'nav/footer' %>
+    </section>
+  </section>
 </body>
 </html>

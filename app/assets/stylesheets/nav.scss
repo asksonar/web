@@ -1,10 +1,11 @@
-.navbar {
-  .navbar-brand {
-    padding: 5px 15px;
-  }
-  .navbar-brand img {
-    display: inline-block;
-  }
+#header .nav a {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #1d212a;
+}
+
+#header .nav a:hover {
+  color: #1d212a;
 }
 
 .footer {

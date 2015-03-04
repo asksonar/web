@@ -1,34 +1,36 @@
-<div class='row'>
-  <div class='col-md-7'>
-    <h3>
-      <a href='<%=scenarios_path%>'><i class='fa fa-arrow-circle-left'></i></a>
-      Title:
-    </h3>
+<section id="main-content">
+  <div class='row'>
+    <div class='col-md-7'>
+      <h3>
+        <a href='<%=scenarios_path%>'><i class='fa fa-arrow-circle-left'></i></a>
+        Title:
+      </h3>
 
-    <p><%= @scenario.title %></p>
+      <p><%= @scenario.title %></p>
 
-    <h3>Description:</h3>
-    <p><%= @scenario.description %></p>
+      <h3>Description:</h3>
+      <p><%= @scenario.description %></p>
 
-    <h3>Steps:</h3>
-    <ol>
-    <% @scenario.scenario_steps.each do |step| %>
-      <li><%= step.description %></li>
-    <% end %>
-    </ol>
+      <h3>Steps:</h3>
+      <ol>
+      <% @scenario.scenario_steps.each do |step| %>
+        <li><%= step.description %></li>
+      <% end %>
+      </ol>
+    </div>
+    <div class='col-md-5'>
+      <h3>Users:</h3>
+      <ol>
+      <% @scenario.user_scenarios.each do |user_scenario| %>
+        <li><%= user_scenario.email %> (<%=user_scenario.status%>)</li>
+      <% end %>
+      </ol>
+    </div>
   </div>
-  <div class='col-md-5'>
-    <h3>Users:</h3>
-    <ol>
-    <% @scenario.user_scenarios.each do |user_scenario| %>
-      <li><%= user_scenario.email %> (<%=user_scenario.status%>)</li>
-    <% end %>
-    </ol>
-  </div>
-</div>
 
-Created by <%= @scenario.created_by.email %> at <%= @scenario.created_at %>
+  Created by <%= @scenario.created_by.email %> at <%= @scenario.created_at %>
 
-<%= bootstrap_form_for @scenario, method: :delete do |f| %>
-  <% f.submit "Delete this scenario" %>
-<% end %>
+  <%= bootstrap_form_for @scenario, method: :delete do |f| %>
+    <% f.submit "Delete this scenario" %>
+  <% end %>
+</section>

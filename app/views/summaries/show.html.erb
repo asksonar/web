@@ -1,88 +1,90 @@
-<div class='summary'>
-  <div class='row'>
-    <div class='col-md-8'>
-      <h3>
-        <a href='<%=summaries_path%>'><i class='fa fa-arrow-circle-left'></i></a>
-        <%= @summary.title %>
-      </h3>
-      <p><%= @summary.description %></p>
-    </div>
-    <div class='col-md-4'>
-      <h4><%= @summary.user_completed_count %> users <small>completed</small></h4>
-      <h5><%= @summary.user_count %> users <small>total</small></h5>
-      <span class='total_feeling text-success'><i class='fa fa-smile-o'></i> <%= @summary.total_delighted %></span>
-      <span class='total_feeling text-danger'><i class='fa fa-frown-o'></i>  <%= @summary.total_confused %></span>
+<section id="main-content">
+  <div class='summary'>
+    <div class='row'>
+      <div class='col-md-8'>
+        <h3>
+          <a href='<%=summaries_path%>'><i class='fa fa-arrow-circle-left'></i></a>
+          <%= @summary.title %>
+        </h3>
+        <p><%= @summary.description %></p>
+      </div>
+      <div class='col-md-4'>
+        <h4><%= @summary.user_completed_count %> users <small>completed</small></h4>
+        <h5><%= @summary.user_count %> users <small>total</small></h5>
+        <span class='total_feeling text-success'><i class='fa fa-smile-o'></i> <%= @summary.total_delighted %></span>
+        <span class='total_feeling text-danger'><i class='fa fa-frown-o'></i>  <%= @summary.total_confused %></span>
+      </div>
     </div>
   </div>
-</div>
-<div class='summary_step_container'>
-  <% @summary.summary_steps.each do |summary_step| %>
-    <div class='summary_step'>
-      <div class='row'>
-        <div class='col-md-8'>
-          <h4><%= summary_step.step_order + 1 %>. <%= summary_step.description %></h4>
-        </div>
-      </div>
-      <div class='row'>
-        <div class='col-md-8'>
-          <%# convert javascript converts this into nice graph %>
-          <%# also links to the video for that user %>
-          <div class='summary_time_graph'>
-            <script type='application/json'>
-              <%= raw summary_step.result_time_bucket_hash.values.to_json %>
-            </script>
-            <div id='graph<%= summary_step.step_order%>' class='graph' style="width: 100%; height: 150px; background-color: #FFFFFF;" ></div>
-          </div>
-          <div class='average_time small'>Average time: <%= format('%.0f', (summary_step.average_completed_seconds || 0)) %> seconds</div>
-        </div>
-        <div class='col-md-4 feelingDivContainer'>
-          <%# make ajax call to pull up the full video and transcript %>
-          <% summary_step.delighted_feelings.each_with_index do |feeling, index| %>
-            <div class='feelingDiv <%= 'feelingOverflow' if index > 3 %>'><a class='feeling'
-              data-scenario-step-id='<%=feeling.scenario_step_id%>'
-              data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
-              data-user-id='<%=feeling.user_id%>'>
-                <span class='text-success step_feeling'><i class='fa fa-smile-o'></i></span><!--
-                -->...<%= feeling.context_transcription %>...
-            </a></div>
-          <% end %>
-          <% summary_step.frustrated_feelings.each_with_index do |feeling, index| %>
-            <div class='feelingDiv <%= 'feelingOverflow' if index > 3 %>'><a class='feeling'
-              data-scenario-step-id='<%=feeling.scenario_step_id%>'
-              data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
-              data-user-id='<%=feeling.user_id%>'>
-                <span class='text-danger step_feeling'><i class='fa fa-frown-o'></i></span><!--
-                -->...<%= feeling.context_transcription %>...</a>
-            </div>
-          <% end %>
-          <% if summary_step.delighted_feelings.count > 4 || summary_step.frustrated_feelings.count > 4 %>
-            <div><a class='linkFeelingOverflow'>show more...</a></div>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
-<div class="modal fade" id='summary_video_container'>
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body">
+  <div class='summary_step_container'>
+    <% @summary.summary_steps.each do |summary_step| %>
+      <div class='summary_step'>
         <div class='row'>
-          <div class='col-md-6'>
-            <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered vjs-has-started"
-              controls preload="auto" width="auto" height="400"
-              poster="http://video-js.zencoder.com/oceans-clip.png"
-              data-setup='{"example_option":true}'>
-
-            </video>
+          <div class='col-md-8'>
+            <h4><%= summary_step.step_order + 1 %>. <%= summary_step.description %></h4>
           </div>
-          <div class='col-md-6' id='videoText'></div>
+        </div>
+        <div class='row'>
+          <div class='col-md-8'>
+            <%# convert javascript converts this into nice graph %>
+            <%# also links to the video for that user %>
+            <div class='summary_time_graph'>
+              <script type='application/json'>
+                <%= raw summary_step.result_time_bucket_hash.values.to_json %>
+              </script>
+              <div id='graph<%= summary_step.step_order%>' class='graph' style="width: 100%; height: 150px; background-color: #FFFFFF;" ></div>
+            </div>
+            <div class='average_time small'>Average time: <%= format('%.0f', (summary_step.average_completed_seconds || 0)) %> seconds</div>
+          </div>
+          <div class='col-md-4 feelingDivContainer'>
+            <%# make ajax call to pull up the full video and transcript %>
+            <% summary_step.delighted_feelings.each_with_index do |feeling, index| %>
+              <div class='feelingDiv <%= 'feelingOverflow' if index > 3 %>'><a class='feeling'
+                data-scenario-step-id='<%=feeling.scenario_step_id%>'
+                data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
+                data-user-id='<%=feeling.user_id%>'>
+                  <span class='text-success step_feeling'><i class='fa fa-smile-o'></i></span><!--
+                  -->...<%= feeling.context_transcription %>...
+              </a></div>
+            <% end %>
+            <% summary_step.frustrated_feelings.each_with_index do |feeling, index| %>
+              <div class='feelingDiv <%= 'feelingOverflow' if index > 3 %>'><a class='feeling'
+                data-scenario-step-id='<%=feeling.scenario_step_id%>'
+                data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
+                data-user-id='<%=feeling.user_id%>'>
+                  <span class='text-danger step_feeling'><i class='fa fa-frown-o'></i></span><!--
+                  -->...<%= feeling.context_transcription %>...</a>
+              </div>
+            <% end %>
+            <% if summary_step.delighted_feelings.count > 4 || summary_step.frustrated_feelings.count > 4 %>
+              <div><a class='linkFeelingOverflow'>show more...</a></div>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    <% end %>
+  </div>
+  <div class="modal fade" id='summary_video_container'>
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          <div class='row'>
+            <div class='col-md-6'>
+              <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered vjs-has-started"
+                controls preload="auto" width="auto" height="400"
+                poster="http://video-js.zencoder.com/oceans-clip.png"
+                data-setup='{"example_option":true}'>
+
+              </video>
+            </div>
+            <div class='col-md-6' id='videoText'></div>
+          </div>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+</section>
