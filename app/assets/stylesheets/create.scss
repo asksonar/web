@@ -1,0 +1,52 @@
+// Place all the styles related to the Create controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.create {
+  .templatePanel {
+    .panel-body {
+      height: 400px;
+      padding: 0px;
+      overflow: hidden;
+    }
+    .templatePanelCentered {
+      height: 100%;
+    }
+    .templatePanelCentered > div, .templatePanelCentered > ul {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .templateTitle {
+      text-align: center;
+      padding: 30px;
+      h1 {
+        font-size: 3em;
+        margin-bottom: 10px;
+      }
+    }
+    .templateLinks {
+      padding: 20px;
+      li {
+        list-style: none;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+      }
+    }
+    .templateCustomPanel {
+      cursor: pointer;
+    }
+
+    a:link,a:visited {
+      text-decoration: none;
+      outline: none;
+      color: inherit;
+    }
+
+    a:hover,a:active {
+      outline: none;
+      text-decoration: underline;
+      color: inherit;
+    }
+  }
+}

@@ -4,31 +4,15 @@
 
 .scenarios {
 
-  .btnCancelNewStep {
-    float: none;
-  }
-
   #btnAddNewStep {
-    margin-left: 40px;
-    margin-right: 40px;
-  }
-
-  #btnAddNewStep, #divNewSteps {
-  }
-
-  #divNewSteps {
-  }
-
-  #divNewSteps li {
-    margin-bottom: 10px;
-  }
-
-  #divNewSteps input, #btnAddNewStep {
-    width: 400px;
+    width: 100%;
   }
 
   .divButtons {
-    margin-top: 20px;
+    position: fixed;
+    top: 130px;
+    right: 0px;
+    width: 125px;
   }
 
 }

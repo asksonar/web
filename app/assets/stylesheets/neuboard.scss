@@ -1,4 +1,4 @@
-/*
+/* hack
 @import url("http://fonts.googleapis.com/css?family=Montserrat:400,700");
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800");
 */
@@ -34,8 +34,8 @@ a:hover,a:active {
 }
 
 h1,h2,h3,h4,h5,h6 {
-    /*font-family: "Montserrat", sans-serif;*/
-    color: #424856;
+    /* hack font-family: "Montserrat", sans-serif;*/
+    /* hack color: #424856;*/
     margin: 0
 }
 
@@ -3557,7 +3557,8 @@ label.valid {
 
 .modal-content {
     box-shadow: none;
-    border-radius: 0;
+    /* hack border-radius: 0;*/
+    border-radius: 3px;
     border: solid 10px rgba(255,255,255,0.6)
 }
 
