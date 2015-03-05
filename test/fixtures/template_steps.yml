@@ -1,0 +1,52 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+template_signup_0:
+  template: template_signup
+  step_description: >
+    From the homepage here, try to find the signup page.
+  step_order: 0
+
+template_signup_1:
+  template: template_signup
+  step_description: >
+    Go ahead and signup for a new account.
+  step_order: 1
+
+template_signup_2:
+  template: template_signup
+  step_description: >
+    See if you can log out and then log back in.
+  step_order: 2
+
+template_purchase_0:
+  template: template_purchase
+  step_description: >
+    Please search for a white and gold dress.
+  step_order: 0
+
+template_purchase_1:
+  template: template_purchase
+  step_description: >
+    Add the item to your shopping cart.
+  step_order: 1
+
+template_purchase_2:
+  template: template_purchase
+  step_description: >
+    Checkout and purchase the item.
+  step_order: 2
+
+template_nps_0:
+  template: template_nps
+  step_description: >
+    On a scale of 1 to 10, 1 being the worst and 10 being the best,
+    how likely are you to recommend our service to a friend?
+  step_order: 0
+
+template_homepage_0:
+  template: template_homepage
+  step_description: >
+
+  step_order: 0
+
+

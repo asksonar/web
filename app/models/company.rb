@@ -1,3 +1,3 @@
 class Company < ActiveRecord::Base
-  has_many :researchers, inverse_of: :company, dependent: :destroy
+  has_many :researchers, inverse_of: :company
 end

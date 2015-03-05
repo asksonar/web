@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get  '/account', to: 'account#index'
   get  '/videos.json', to: 'videos#show'
   get  '/create', to: 'create#index'
-  get  '/create/new', to: 'scenarios#new'
+  get  '/create/new', to: 'create#new'
   get  '/share', to: 'share#index'
 
   #get 'home/index'

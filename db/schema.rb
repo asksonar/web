@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150228005532) do
+ActiveRecord::Schema.define(version: 20150305191707) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -71,6 +71,24 @@ ActiveRecord::Schema.define(version: 20150228005532) do
     t.integer  "created_by"
     t.integer  "user_count"
     t.integer  "user_completed_count"
+  end
+
+  create_table "template_steps", force: :cascade do |t|
+    t.integer  "template_id"
+    t.text     "step_description"
+    t.integer  "step_order"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string   "display"
+    t.string   "value"
+    t.string   "scenario_title"
+    t.text     "scenario_description"
+    t.integer  "category"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "user_scenarios", force: :cascade do |t|

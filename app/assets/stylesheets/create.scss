@@ -49,4 +49,29 @@
       color: inherit;
     }
   }
+
+  #createForm {
+    .form-group {
+      margin-bottom: 2px;
+    }
+  }
+
+  #btnAddNewStep {
+    width: 100%;
+  }
+
+  .divButtons {
+    position: fixed;
+    top: 130px;
+    right: 0px;
+    width: 125px;
+
+    .btn {
+      width: 100px;
+    }
+  }
+
+  textarea {
+    resize:vertical;
+  }
 }

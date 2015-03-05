@@ -16,12 +16,12 @@
           <div class='templatePanelCentered'>
             <div class='templateLinks'>
               <ul class='list-unstyled'>
-                <li>
-                  <i class='fa fa-caret-right'></i>
-                  <a href='/create/new?template=signup'>Test your signup flow</a></li>
-                <li>
-                  <i class='fa fa-caret-right'></i>
-                  <a href='/create/new?template=purchase'>Test your purchase flow</a></li>
+                <% @product_templates.each do |template| %>
+                  <li>
+                    <i class='fa fa-caret-right'></i>
+                    <a href='/create/new?template=<%=template.value%>'><%=template.display%></a>
+                  </li>
+                <% end %>
               </ul>
             </div>
           </div>
@@ -41,12 +41,12 @@
           <div class='templatePanelCentered'>
             <div class='templateLinks'>
               <ul class='list-unstyled'>
-                <li>
-                  <i class='fa fa-caret-right'></i>
-                  <a href='/create/new?template=nps'>Get your Net Promoter Score (NPS)</a></li>
-                <li>
-                  <i class='fa fa-caret-right'></i>
-                  <a href='/create/new?template=homepage'>Review your homepage</a></li>
+                <% @marketing_templates.each do |template| %>
+                  <li>
+                    <i class='fa fa-caret-right'></i>
+                    <a href='/create/new?template=<%=template.value%>'><%=template.display%></a>
+                  </li>
+                <% end %>
               </ul>
             </div>
           </div>

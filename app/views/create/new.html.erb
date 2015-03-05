@@ -1,0 +1,54 @@
+<div class='pageheader'>
+  <h1>Create a new scenario</h1>
+</div>
+<section id="main-content">
+  <%= bootstrap_form_for :scenario, url: scenarios_path, html: {id: 'createForm'} do |f| %>
+    <div class='row'>
+      <div class='col-sm-10'>
+        <div class='panel panel-default'>
+          <div class='panel-heading'>
+            <h3 class='panel-title'>Overview for your tester</h3>
+          </div>
+          <div class='panel-body'>
+        		<%= f.text_field :title, hide_label: true, placeholder: 'Give your user a summary', value: (@template ? @template.scenario_title.strip : '') %>
+        		<%= f.text_area :description, hide_label: true, rows: 2, placeholder: 'Add some context for your user',
+              value: (@template ? @template.scenario_description.strip : '') %>
+            <%= f.text_field :url, hide_label: true, placeholder: 'Start your user off at this URL' %>
+          </div>
+        </div>
+        <div class='panel panel-default'>
+          <div class='hidden' id='emptyNewStep'>
+            <%= f.text_area :steps, hide_label: true, rows: 1, placeholder: 'Tell your user what to do next' %>
+          </div>
+          <div class='panel-heading'>
+            <h3 class='panel-title'>Steps for your tester</h3>
+          </div>
+          <div class='panel-body' id='newStepContainer'>
+            <% if @template and @template.template_steps.count > 0 %>
+              <% @template.template_steps.each do |step| %>
+                <%= f.text_area :steps, hide_label: true, rows: 1, placeholder: 'Tell your user what to do next', value: step.step_description.strip %>
+              <% end %>
+            <% else %>
+              <%= f.text_area :steps, hide_label: true, rows: 1, placeholder: 'Tell your user what to do next' %>
+            <% end %>
+          </div>
+          <div class='panel-footer'>
+            <button type="button" class='btn btn-default' id='btnAddNewStep'>
+              <i class='glyphicon glyphicon-plus'></i>
+              Add New Step
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class='panel panel-default divButtons'>
+      <div class='panel-body'>
+    		<%= f.submit 'Save Draft', class: 'btn btn-primary' %>
+        <%= f.submit 'Publish', class: 'btn btn-info' %>
+        <a href='<%=scenarios_path%>' class='btn btn-default'>Delete</a>
+      </div>
+    </div>
+
+  <% end %>
+</section>

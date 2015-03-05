@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :user_scenarios, inverse_of: :scenario, dependent: :destroy
+  has_many :user_scenarios, inverse_of: :scenario
   has_many :scenario_step_videos, inverse_of: :user
   has_many :scenario_step_results, inverse_of: :user
   has_many :scenario_step_feelings, inverse_of: :user
