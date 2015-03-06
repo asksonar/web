@@ -64,10 +64,13 @@
     position: fixed;
     top: 130px;
     right: 0px;
-    width: 125px;
 
     .btn {
       width: 100px;
+    }
+
+    .panel-body {
+      padding: 10px 10px 5px 10px;
     }
   }
 
