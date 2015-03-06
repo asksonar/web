@@ -20,7 +20,7 @@ template_purchase:
     add it to your shopping cart, and then checkout.
   category: 0
 
-template_nps_0:
+template_nps:
   display: Get your Net Promoter Score (NPS)
   value: nps
   scenario_title: What do you think of us?

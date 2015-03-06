@@ -26,4 +26,25 @@ $(function(){
     $('#newStepContainer').append(templateNewStep);
   });
 
+  // TODO: fix this
+  $('#btnSaveDraft').click(function(){
+    $.ajax({
+      url: '/scenarios',
+      type: 'POST'
+    }).done(function(response){
+      $('#scenario_id').val(response.id);
+    });
+  });
+
+  // TODO: fix this
+  var validate = function() {
+
+  };
+
+  // TODO: fix this
+  $('#btnPublish').click(function(){
+    validate();
+    form.submit();
+  });
+
 });

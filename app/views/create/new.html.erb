@@ -5,7 +5,7 @@
   <%= bootstrap_form_for :scenario, url: scenarios_path, html: {id: 'createForm'} do |f| %>
     <div class='row'>
       <div class='col-sm-10'>
-        <div class='panel panel-default'>
+        <div class='panel panel-primary'>
           <div class='panel-heading'>
             <h3 class='panel-title'>Overview for your tester</h3>
           </div>
@@ -16,7 +16,7 @@
             <%= f.text_field :url, hide_label: true, placeholder: 'Start your user off at this URL' %>
           </div>
         </div>
-        <div class='panel panel-default'>
+        <div class='panel panel-primary'>
           <div class='hidden' id='emptyNewStep'>
             <%= f.text_area :steps, hide_label: true, rows: 1, placeholder: 'Tell your user what to do next' %>
           </div>
@@ -44,9 +44,9 @@
 
     <div class='panel panel-default divButtons'>
       <div class='panel-body'>
-    		<%= f.submit 'Save Draft', class: 'btn btn-primary' %>
-        <%= f.submit 'Publish', class: 'btn btn-info' %>
-        <a href='<%=scenarios_path%>' class='btn btn-default'>Delete</a>
+    		<a href='#' id='btnSaveDraft' class='btn btn-primary'>Save Draft</a>
+        <a href='#' id='btnPublish' class='btn btn-info'>Publish</a>
+        <a href='<%=create_path%>' class='btn btn-default'>Cancel</a>
       </div>
     </div>
 

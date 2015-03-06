@@ -11,24 +11,26 @@
 
   <% end %>
 
-  <table class='table'>
-  	<thead>
-  		<tr>
-  			<th>Title</th>
-  			<th>Description</th>
-        <th>Completed</th>
-  			<th>Show</th>
-  		</tr>
-  	</thead>
-  	<tbody>
-  	<% @scenarios.each do |scenario| %>
-  		<tr>
-  			<td><%= scenario.title %></td>
-  			<td><%= scenario.description %></td>
-        <td><%= scenario.user_completed_count || 0 %> / <%= scenario.user_count || 0 %></td>
-  			<td><%= link_to 'Show', scenario_path(scenario) %></td>
-  		</tr>
-  	<% end %>
-  	</tbody>
-  </table>
+  <div class='row'><div class='col-md-12'><div class='panel'><div class='panel-body'>
+    <table class='table table-hover'>
+    	<thead>
+    		<tr>
+          <th>Status</th>
+    			<th>Title</th>
+          <th>Completed</th>
+    			<th>Show</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    	<% @scenarios.each do |scenario| %>
+    		<tr>
+          <td><%= 'scenario.status' %></td>
+    			<td><%= scenario.title %></td>
+          <td><%= scenario.user_completed_count || 0 %> / <%= scenario.user_count || 0 %></td>
+    			<td><%= link_to 'Show', scenario_path(scenario) %></td>
+    		</tr>
+    	<% end %>
+    	</tbody>
+    </table>
+  </div></div></div></div>
 </section>

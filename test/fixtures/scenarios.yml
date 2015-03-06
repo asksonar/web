@@ -12,3 +12,38 @@ scenario_227507:
   user_completed_count: 6
   company: company_one
   created_by: 464670237 #researcher_two
+
+
+scenario_signup:
+  title: Try to sign up for a new login on our site
+  description: >
+    This scenario is to test the process of signing up
+    as a new customer on our new site. You'll be asked to visit the site as if it's
+    your first time and then try to create a new account.
+  company: company_one
+  created_by: 464670237
+
+scenario_purchase:
+  title: Try to purchase an item on our site
+  description: >
+    This scenario is to test the process of finding
+    and purchasing an item.  You'll be asked to search for an item on the site,
+    add it to your shopping cart, and then checkout.
+  company: company_one
+  created_by: 464670237
+
+scenario_nps:
+  title: What do you think of us?
+  description: >
+    This is a quick 1 question survey to gauge your impression
+    of us as a company.
+  company: company_one
+  created_by: 464670237
+
+scenario_homepage:
+  title: Take a look at our site
+  description: >
+    We'd like you to spend a few minutes looking at our site and
+    give us your first impressions.  What stands out to you?  What looks interesting?
+  company: company_one
+  created_by: 464670237
