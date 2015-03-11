@@ -2,7 +2,8 @@ class ScenariosController < ApplicationController
   include EmailUtils
 
 	def index
-		@scenarios = Scenario.where(company: current_user.company)
+    @status = params[:status] || 'published'
+		@scenarios = Scenario.where(company: current_user.company, status: Scenario.statuses[@status])
 	end
 
 	def create

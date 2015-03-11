@@ -10,10 +10,12 @@
             <h3 class='panel-title'>Overview for your tester</h3>
           </div>
           <div class='panel-body'>
+            <%= f.hidden_field :id %>
+            <%= f.hidden_field :status %>
         		<%= f.text_field :title, hide_label: true, placeholder: 'Give your user a summary', value: (@template ? @template.scenario_title.strip : '') %>
-        		<%= f.text_area :description, hide_label: true, rows: 2, placeholder: 'Add some context for your user',
-              value: (@template ? @template.scenario_description.strip : '') %>
             <%= f.text_field :url, hide_label: true, placeholder: 'Start your user off at this URL' %>
+        		<%= f.text_area :description, rows: 2, hide_label: true, placeholder: 'Add some context for your user',
+              value: (@template ? @template.scenario_description.strip : '') %>
           </div>
         </div>
         <div class='panel panel-primary'>

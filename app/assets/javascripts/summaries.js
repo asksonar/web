@@ -6,8 +6,21 @@
 
 $(function(){
 
-  $('.summary_time_graph').each(function(){
-    var thisEl = $(this);
+  $('.summary_steps').on('click', '.fa-chevron-down', function(){
+    $(this).removeClass('fa-chevron-down').addClass('fa-chevron-up');
+    $(this).closest('.panel').find('.panel-body').slideDown(400, function(){
+      setupGraph($(this).find('.summary_time_graph'));
+    });
+  });
+
+  $('.summary_steps').on('click', '.fa-chevron-up', function(){
+    $(this).removeClass('fa-chevron-up').addClass('fa-chevron-down');
+    $(this).closest('.panel').find('.panel-body').slideUp();
+  });
+
+  $('.fa-chevron-down').first().click();
+
+  var setupGraph = function(thisEl){
     var times = JSON.parse(thisEl.find('script').html());
     var graph = thisEl.find('.graph');
 
@@ -53,10 +66,9 @@ $(function(){
     chart.addListener('clickGraphItem', function(event) {
       var details = event.item.dataContext['details'];
     });
+  };
 
-  });
-
-  $('.summary_step_container').on('click', '.feeling', function(event){
+  $('.summary_steps').on('click', '.feeling', function(event){
     var thisEl = $(this);
     var stepId = thisEl.attr('data-scenario-step-id');
     var userId = thisEl.attr('data-user-id');

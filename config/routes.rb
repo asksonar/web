@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get  '/videos.json', to: 'videos#show'
   get  '/create', to: 'create#index'
   get  '/create/new', to: 'create#new'
+  get  '/edit/:id', to: 'create#new', as: :edit
   get  '/share', to: 'share#index'
 
   #get 'home/index'

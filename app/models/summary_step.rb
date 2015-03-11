@@ -52,8 +52,16 @@ class SummaryStep
     @scenario_step.where_feeling_delighted || []
   end
 
-  def frustrated_feelings
+  def total_delighted
+    delighted_feelings.count
+  end
+
+  def confused_feelings
     @scenario_step.where_feeling_confused || []
+  end
+
+  def total_confused
+    confused_feelings.count
   end
 
 end

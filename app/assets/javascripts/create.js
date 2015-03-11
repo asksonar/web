@@ -26,11 +26,16 @@ $(function(){
     $('#newStepContainer').append(templateNewStep);
   });
 
+/*
   // TODO: fix this
   $('#btnSaveDraft').click(function(){
+
+    $('#scenario_status').val('draft');
+
     $.ajax({
       url: '/scenarios',
-      type: 'POST'
+      type: 'POST',
+      dataType: 'json',
     }).done(function(response){
       $('#scenario_id').val(response.id);
     });
@@ -44,7 +49,12 @@ $(function(){
   // TODO: fix this
   $('#btnPublish').click(function(){
     validate();
+    $('#scenario_status').val('publish');
     form.submit();
+  }).done(function(response){
+    $('modal-url').val(response.url);
+    $('modal-published').modal('show');
   });
+*/
 
 });

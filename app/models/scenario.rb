@@ -4,6 +4,7 @@ class Scenario < ActiveRecord::Base
   has_many :scenario_step_feelings, through: :scenario_steps
   belongs_to :company
   belongs_to :created_by, class_name: 'Researcher', foreign_key: :created_by
+  enum status: [:drafts, :published, :completed, :archived]
 
   def self.create(params, researcher)
     scenario = Scenario.new(params)

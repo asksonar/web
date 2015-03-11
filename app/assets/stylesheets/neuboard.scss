@@ -419,7 +419,7 @@ canvas {
 .sidebar .nav .nav-sub {
     list-style: none;
     padding: 0;
-    display: none
+    /* hack display: none*/
 }
 
 .sidebar .nav .nav-sub li>a {
@@ -1663,13 +1663,19 @@ a.btn-info:hover,a.btn-info:active {
 
 .panel>.panel-heading {
     font-weight: 400;
-    text-transform: uppercase;
     padding: 14px 10px
 }
 
 .panel-heading>.panel-title {
     height: auto;
-    font-size: 0.813em
+    font-size: 0.813em;
+    text-transform: uppercase;
+}
+
+.panel-heading>.panel-text {
+    height: auto;
+    font-size: 0.813em;
+    text-transform: initial;
 }
 
 .panel>.panel-footer {
@@ -3556,10 +3562,12 @@ label.valid {
 }
 
 .modal-content {
-    box-shadow: none;
-    /* hack border-radius: 0;*/
+    /* hack box-shadow: none; */
+    box-shadow: 0 5px 15px rgba(0,0,0,.3);
+    /* hack border-radius: 0; */
     border-radius: 3px;
-    border: solid 10px rgba(255,255,255,0.6)
+    /* hack border: solid 10px rgba(255,255,255,0.6) */
+    border: none;
 }
 
 .mail-option ul li {

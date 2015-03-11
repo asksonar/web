@@ -1,5 +1,5 @@
 <div class='pageheader'>
-  <h1>Manage your active scenarios</h1>
+  <h1>Manage your active scenarios - <%= @status.capitalize %></h1>
 </div>
 <section id="main-content">
   <% if flash[:scenario_message] %>
@@ -15,7 +15,6 @@
     <table class='table table-hover'>
     	<thead>
     		<tr>
-          <th>Status</th>
     			<th>Title</th>
           <th>Completed</th>
     			<th>Show</th>
@@ -24,10 +23,15 @@
     	<tbody>
     	<% @scenarios.each do |scenario| %>
     		<tr>
-          <td><%= 'scenario.status' %></td>
     			<td><%= scenario.title %></td>
-          <td><%= scenario.user_completed_count || 0 %> / <%= scenario.user_count || 0 %></td>
-    			<td><%= link_to 'Details', scenario_path(scenario) %></td>
+          <td><%= scenario.user_completed_count || 0 %></td>
+    			<% if scenario.status == 'drafts' %>
+            <td><%= link_to 'Edit Draft', edit_path(scenario) %></td>
+          <% elsif scenario.user_completed_count and scenario.user_completed_count > 0 %>
+            <td><%= link_to 'Summary Results', summary_path(scenario) %></td>
+          <% else %>
+            <td><%= link_to 'Show Details', scenario_path(scenario) %></td>
+          <% end %>
     		</tr>
     	<% end %>
     	</tbody>
