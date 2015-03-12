@@ -17,6 +17,9 @@
 //= require amcharts/all
 //= require amcharts/themes/light
 //= require video
+//= require switchery
+
+// insert new packages above this line
 //= require_tree .
 //= require turbolinks
 
