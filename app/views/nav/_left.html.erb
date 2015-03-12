@@ -1,33 +1,17 @@
 <aside class="sidebar sidebar-left">
+  <a href='/create' class='btn btn-info btnCreate'>Create</a>
+  </div>
   <nav>
     <h5 class="sidebar-header">Scenarios</h5>
     <ul class="nav nav-pills nav-stacked">
       <% if current_user and current_user.is_researcher? %>
-        <li><a href='/create'>Create</a>
-          <ul class='nav-sub'>
-            <li><a href='/create?type=product'>Product</a></li>
-            <li><a href='/create?type=marketing'>Marketing</a></li>
-            <li><a href='/create/new'>Custom</a></li>
-          </ul>
-        </li>
-        <li><a href='/scenarios'>Results</a>
-          <ul class='nav-sub'>
-            <li><a href='/scenarios?status=drafts'>Drafts</a></li>
-            <li><a href='/scenarios?status=published'>Published</a></li>
-            <li><a href='/scenarios?status=completed'>Completed</a></li>
-            <li><a href='/scenarios?status=archived'>Archived</a></li>
-          </ul>
-        </li>
-        <li><a href='/share'>Share</a></li>
+        <%= navbar_item "All Results", '/results' %>
+        <%= navbar_item "My Results", '/my_results' %>
+        <%= navbar_item "Recent Activity", '/recent' %>
+        <%= navbar_item "Drafts", '/drafts' %>
       <% elsif current_user and current_user.is_user? %>
         <%= navbar_item "Manage", '/user_scenarios' %>
       <% end %>
-    </ul>
-  </nav>
-  <nav>
-    <h5 class="sidebar-header">User Panel</h5>
-    <ul class='nav nav-pills nav-stacked'>
-      <li><a href='/users'>Manage</a></li>
     </ul>
   </nav>
 </aside>

@@ -20,11 +20,11 @@ class Summary
   end
 
   def total_delighted
-    @scenario.where_feeling_delighted.count
+    @scenario.total_delighted
   end
 
   def total_confused
-    @scenario.where_feeling_confused.count
+    @scenario.total_confused
   end
 
   def summary_steps

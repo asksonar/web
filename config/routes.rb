@@ -1,15 +1,18 @@
 Rails.application.routes.draw do
   #get 'sessions#login'
   #get 'sessions/login', to: 'sessions#login'
-  get  '/login', to: 'sessions#index', as: :login
+  get '/login', to: 'sessions#index', as: :login
   post '/login/new', to: 'sessions#create', as: :new_login
-  get  '/logout', to: 'sessions#destroy', as: :logout
-  get  '/account', to: 'account#index'
-  get  '/videos.json', to: 'videos#show'
-  get  '/create', to: 'create#index'
-  get  '/create/new', to: 'create#new'
-  get  '/edit/:id', to: 'create#new', as: :edit
-  get  '/share', to: 'share#index'
+  get '/logout', to: 'sessions#destroy', as: :logout
+  get '/account', to: 'account#index'
+  get '/videos.json', to: 'videos#show'
+  get '/create', to: 'create#new'
+  get '/edit/:id', to: 'create#new', as: :edit
+  get '/share', to: 'share#index'
+  get '/results', to: 'scenarios#index', as: :results
+  get '/my_results', to: 'scenarios#my_index', as: :my_results
+  get '/drafts', to: 'drafts#index'
+  get '/recent', to: 'recent#index'
 
   #get 'home/index'
 
