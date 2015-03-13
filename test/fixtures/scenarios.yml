@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 scenario_227507:
-  title: Video Test 2/27 5:05 PM
+  title: Cool Video Test 2/27 5:05 PM
   description: >
     Bacon ipsum dolor amet in incididunt esse chuck fugiat ea.
     Sirloin cupim porchetta venison, pork ipsum leberkas ground round
@@ -17,7 +17,7 @@ scenario_227507:
 scenario_signup:
   title: Try to sign up for a new login on our site
   description: >
-    This scenario is to test the process of signing up
+    This scenario is to test the process of signing up 
     as a new customer on our new site. You'll be asked to visit the site as if it's
     your first time and then try to create a new account.
   company: company_one
