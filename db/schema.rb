@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310202044) do
+ActiveRecord::Schema.define(version: 20150312191826) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -72,6 +75,8 @@ ActiveRecord::Schema.define(version: 20150310202044) do
     t.integer  "user_count"
     t.integer  "user_completed_count"
     t.integer  "status"
+    t.datetime "published_at"
+    t.datetime "completed_at"
   end
 
   create_table "template_steps", force: :cascade do |t|

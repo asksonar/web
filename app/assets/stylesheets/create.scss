@@ -54,11 +54,74 @@
     .form-group {
       margin-bottom: 2px;
     }
-  }
 
+    .ctn-scenario-title {
+      /*margin-bottom: 20px;*/
+    }
+
+    .ctn-scenario-description {
+      margin-bottom: 10px;
+    }
+
+    .ctn-btn-templates {
+      width: 100%;
+      .btn {
+        width: 100%;
+      }
+    }
+
+    .ctn-step {
+      position: relative;
+      .ctn-step-count {
+        position: absolute;
+        width: 60px;
+        text-align: right;
+        left: -62px;
+        top: 10px;
+        opacity: .5;
+      }
+      .ctn-step-input {
+        .ctn-step-input-url {
+          padding-left: 0px;
+          margin-left: -15px;
+          padding-right: 0px;
+        }
+      }
+      .ctn-step-btn {
+        position:absolute;
+        width: 50px;
+        top: 8px;
+        right: -54px;
+
+        i {
+          font-size: 25px;
+          opacity: .15;
+          cursor: pointer;
+        }
+        i:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    .ctn-step:first-child {
+      .btn-remove-step {
+        display: none;
+      }
+    }
+
+    .ctn-save-buttons {
+      margin-top: 15px;
+      .btn {
+        width: 100px;
+      }
+    }
+  }
+/*
   #btnAddNewStep {
     width: 100%;
   }
+
 
   .divButtons {
     position: fixed;
@@ -73,6 +136,7 @@
       padding: 10px 10px 5px 10px;
     }
   }
+*/
 
   textarea {
     resize:vertical;

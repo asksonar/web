@@ -22,9 +22,25 @@ $(function(){
 
   var templateNewStep = $('#emptyNewStep').html();
 
-  $('#btnAddNewStep').click(function(event){
-    $('#newStepContainer').append(templateNewStep);
+  var recountSteps = function(){
+    $('.ctn-step-count').each(function(index){
+      $(this).html('Step ' + (index) + '.');
+    });
+  };
+
+  $('#ctn-step-list').on('click', '.btn-add-step', function(event){
+    var ctnStep = $(this).closest('.ctn-step');
+    ctnStep.after(templateNewStep);
+    recountSteps();
   });
+
+  $('#ctn-step-list').on('click', '.btn-remove-step', function(event){
+    var ctnStep = $(this).closest('.ctn-step');
+    ctnStep.remove();
+    recountSteps();
+  });
+
+  $('#ctn-step-list').html(templateNewStep);
 
 /*
   // TODO: fix this

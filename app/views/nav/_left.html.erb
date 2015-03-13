@@ -1,8 +1,6 @@
 <aside class="sidebar sidebar-left">
-  <a href='/create' class='btn btn-info btnCreate'>Create</a>
-  </div>
+  <div class='div-btn-create'><a href='/create' class='btn btn-info'>New Scenario</a></div>
   <nav>
-    <h5 class="sidebar-header">Scenarios</h5>
     <ul class="nav nav-pills nav-stacked">
       <% if current_user and current_user.is_researcher? %>
         <%= navbar_item "All Results", '/results' %>

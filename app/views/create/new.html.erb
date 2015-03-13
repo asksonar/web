@@ -1,56 +1,78 @@
 <div class='pageheader'>
   <h1>Create a new scenario</h1>
 </div>
-<section id="main-content">
-  <%= bootstrap_form_for :scenario, url: scenarios_path, html: {id: 'createForm'} do |f| %>
-    <div class='row'>
-      <div class='col-sm-10'>
-        <div class='panel panel-primary'>
-          <div class='panel-heading'>
-            <h3 class='panel-title'>Overview for your tester</h3>
-          </div>
-          <div class='panel-body'>
-            <%= f.hidden_field :id %>
-            <%= f.hidden_field :status %>
-        		<%= f.text_field :title, hide_label: true, placeholder: 'Give your user a summary', value: (@template ? @template.scenario_title.strip : '') %>
-            <%= f.text_field :url, hide_label: true, placeholder: 'Start your user off at this URL' %>
-        		<%= f.text_area :description, rows: 2, hide_label: true, placeholder: 'Add some context for your user',
+<section id="main-content"><div class='row'><div class='col-md-9 col-md-offset-1'>
+<%= bootstrap_form_for :scenario, url: scenarios_path, html: {id: 'createForm'} do |f| %>
+  <div class='panel panel-default'>
+  <div class='panel-heading'>
+
+    <div class='row ctn-scenario-title'>
+      <div class='col-md-10'>
+        <%= f.text_field :title, hide_label: true, placeholder: 'Give your scenario a title (only visible to you)', value: (@template ? @template.scenario_title.strip : '') %>
+      </div>
+      <div class='col-md-2'>
+        <div class="btn-group ctn-btn-templates">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            Templates <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <% @product_templates.each do |template| %>
+              <li><a href='/create?template=<%=template.value%>'><%=template.display%></a></li>
+            <% end %>
+            <li class="divider"></li>
+            <% @marketing_templates.each do |template| %>
+              <li><a href='/create?template=<%=template.value%>'><%=template.display%></a></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='panel-body'>
+
+    <div class='row ctn-scenario-description'>
+      <div class='col-md-10 col-md-offset-1'>
+        <%= f.text_area :description, rows: 2, hide_label: true, placeholder: 'Describe for your user what the scenario is about',
               value: (@template ? @template.scenario_description.strip : '') %>
+      </div>
+    </div>
+
+    <div class='hidden' id='emptyNewStep'>
+      <div class='ctn-step'>
+        <div class='ctn-step-count'>Step 1.</div>
+        <div class='ctn-step-input'>
+          <div class='row'>
+            <div class='col-md-8'>
+              <%= f.text_area :steps, hide_label: true, rows: 1, placeholder: 'Tell your user what to do next' %>
+            </div>
+            <div class='col-md-4 ctn-step-input-url'>
+              <%= f.text_field :urls, hide_label: true, placeholder: 'URL to go to (optional)' %>
+            </div>
           </div>
         </div>
-        <div class='panel panel-primary'>
-          <div class='hidden' id='emptyNewStep'>
-            <%= f.text_area :steps, hide_label: true, rows: 1, placeholder: 'Tell your user what to do next' %>
-          </div>
-          <div class='panel-heading'>
-            <h3 class='panel-title'>Steps for your tester</h3>
-          </div>
-          <div class='panel-body' id='newStepContainer'>
-            <% if @template and @template.template_steps.count > 0 %>
-              <% @template.template_steps.each do |step| %>
-                <%= f.text_area :steps, hide_label: true, rows: 1, placeholder: 'Tell your user what to do next', value: step.step_description.strip %>
-              <% end %>
-            <% else %>
-              <%= f.text_area :steps, hide_label: true, rows: 1, placeholder: 'Tell your user what to do next' %>
-            <% end %>
-          </div>
-          <div class='panel-footer'>
-            <button type="button" class='btn btn-default' id='btnAddNewStep'>
-              <i class='glyphicon glyphicon-plus'></i>
-              Add New Step
-            </button>
-          </div>
+        <div class='ctn-step-btn'>
+          <i class='btn-add-step fa fa-plus-circle'></i>
+          <i class='btn-remove-step fa fa-times-circle'></i>
         </div>
       </div>
     </div>
 
-    <div class='panel panel-default divButtons'>
-      <div class='panel-body'>
-    		<a href='#' id='btnSaveDraft' class='btn btn-primary'>Save Draft</a><br/>
-        <a href='#' id='btnPublish' class='btn btn-info'>Publish</a><br/>
-        <a href='<%=create_path%>' class='btn btn-default'>Cancel</a>
+    <div class='row'>
+      <div class='col-md-11 col-md-offset-1'>
+        <div id='ctn-step-list'><!-- insert new steps here -->
+        </div>
       </div>
     </div>
+
+  </div>
+  <div class='panel-footer'>
+
+    <div class='row text-center ctn-save-buttons'>
+      <%= f.submit 'Save', class: 'btn btn-info' %>
+  		<a href='<%=create_path%>' class='btn btn-default'>Cancel</a>
+    </div>
+
+  </div>
 
   <% end %>
 </section>
