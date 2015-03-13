@@ -1699,7 +1699,7 @@ a.btn-info:hover,a.btn-info:active {
 
 .panel>.panel-footer {
     font-weight: 400;
-    text-transform: uppercase;
+    /* hack text-transform: uppercase; */
     padding: 15px
 }
 

@@ -1,78 +1,77 @@
 <div class='pageheader'>
   <h1>Create a new scenario</h1>
-</div>
-<section id="main-content"><div class='row'><div class='col-md-9 col-md-offset-1'>
-<%= bootstrap_form_for :scenario, url: scenarios_path, html: {id: 'createForm'} do |f| %>
-  <div class='panel panel-default'>
-  <div class='panel-heading'>
-
-    <div class='row ctn-scenario-title'>
-      <div class='col-md-10'>
-        <%= f.text_field :title, hide_label: true, placeholder: 'Give your scenario a title (only visible to you)', value: (@template ? @template.scenario_title.strip : '') %>
-      </div>
-      <div class='col-md-2'>
-        <div class="btn-group ctn-btn-templates">
-          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            Templates <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <% @product_templates.each do |template| %>
-              <li><a href='/create?template=<%=template.value%>'><%=template.display%></a></li>
-            <% end %>
-            <li class="divider"></li>
-            <% @marketing_templates.each do |template| %>
-              <li><a href='/create?template=<%=template.value%>'><%=template.display%></a></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
+  <div class='ctn-btn-templates'>
+    <div class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+        Templates <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-right" role="menu">
+        <% @product_templates.each do |template| %>
+          <li><a href='/create?template=<%=template.value%>'><%=template.display%></a></li>
+        <% end %>
+        <li class="divider"></li>
+        <% @marketing_templates.each do |template| %>
+          <li><a href='/create?template=<%=template.value%>'><%=template.display%></a></li>
+        <% end %>
+      </ul>
     </div>
   </div>
-  <div class='panel-body'>
-
-    <div class='row ctn-scenario-description'>
-      <div class='col-md-10 col-md-offset-1'>
-        <%= f.text_area :description, rows: 2, hide_label: true, placeholder: 'Describe for your user what the scenario is about',
-              value: (@template ? @template.scenario_description.strip : '') %>
-      </div>
+</div>
+<section id="main-content">
+<%= bootstrap_form_for :scenario, url: scenarios_path, html: {id: 'createForm'} do |f| %>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>
+      <%= f.text_field :title, hide_label: true, placeholder: 'Give your scenario a title (only visible to you)', value: (@template ? @template.scenario_title.strip : '') %>
     </div>
+    <div class='panel-body'>
 
-    <div class='hidden' id='emptyNewStep'>
-      <div class='ctn-step'>
-        <div class='ctn-step-count'>Step 1.</div>
-        <div class='ctn-step-input'>
-          <div class='row'>
-            <div class='col-md-8'>
-              <%= f.text_area :steps, hide_label: true, rows: 1, placeholder: 'Tell your user what to do next' %>
-            </div>
-            <div class='col-md-4 ctn-step-input-url'>
-              <%= f.text_field :urls, hide_label: true, placeholder: 'URL to go to (optional)' %>
+      <div class='row ctn-scenario-description'>
+        <div class='col-xs-2'>
+            <div class='ctn-left-description'>Summary</div>
+        </div>
+        <div class='col-xs-9'>
+          <%= f.text_area :description, rows: 3, hide_label: true, placeholder: 'Describe for your user what the scenario is about',
+                value: (@template ? @template.scenario_description.strip : '') %>
+        </div>
+      </div>
+
+      <script id="new-step-template" type="text/x-handlebars-template">
+        {{#each steps}}
+        <div class='row ctn-step'>
+          <div class='col-xs-2'>
+            <div class='ctn-step-count ctn-left-description'>Step 1.</div>
+          </div>
+          <div class='col-xs-6 ctn-step-input'>
+            <%= f.text_area :steps, hide_label: true, rows: 1, placeholder: 'Tell your user what to do next', value: '{{description}}' %>
+          </div>
+          <div class='col-xs-3 ctn-step-input-url'>
+            <%= f.text_field :urls, hide_label: true, rows:1, resize: false, placeholder: 'URL (optional)', value: '{{url}}' %>
+          </div>
+          <div class='col-xs-1'>
+            <div class='ctn-step-btn'>
+              <i class='btn-add-step fa fa-plus-circle'></i>
+              <i class='btn-remove-step fa fa-times-circle'></i>
             </div>
           </div>
         </div>
-        <div class='ctn-step-btn'>
-          <i class='btn-add-step fa fa-plus-circle'></i>
-          <i class='btn-remove-step fa fa-times-circle'></i>
-        </div>
+        {{/each}}
+      </script>
+
+      <script type='text/javascript'>
+        var templateSteps;
+        <% if @template %>
+          templateSteps = <%= raw @template.template_steps_json %>;
+        <% end %>
+      </script>
+
+      <div id='ctn-step-list'><!-- insert new steps here -->
       </div>
+
     </div>
-
-    <div class='row'>
-      <div class='col-md-11 col-md-offset-1'>
-        <div id='ctn-step-list'><!-- insert new steps here -->
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <div class='panel-footer'>
-
-    <div class='row text-center ctn-save-buttons'>
+    <div class='panel-footer text-center ctn-save-buttons'>
       <%= f.submit 'Save', class: 'btn btn-info' %>
-  		<a href='<%=create_path%>' class='btn btn-default'>Cancel</a>
+      <a href='<%=create_path%>' class='btn btn-default'>Cancel</a>
     </div>
-
   </div>
-
-  <% end %>
+<% end %>
 </section>

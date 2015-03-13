@@ -20,17 +20,20 @@ $(function(){
     window.location.href = '/create/new?template=custom';
   });
 
-  var templateNewStep = $('#emptyNewStep').html();
+  //var templateNewStep = $('#emptyNewStep').html();
+
+  var newStepTemplate = Handlebars.compile($('#new-step-template').html());
+  var emptyStep = {steps:[{}]};
 
   var recountSteps = function(){
     $('.ctn-step-count').each(function(index){
-      $(this).html('Step ' + (index) + '.');
+      $(this).html('Step ' + (index + 1) + '.');
     });
   };
 
   $('#ctn-step-list').on('click', '.btn-add-step', function(event){
     var ctnStep = $(this).closest('.ctn-step');
-    ctnStep.after(templateNewStep);
+    ctnStep.after(newStepTemplate(emptyStep));
     recountSteps();
   });
 
@@ -40,7 +43,13 @@ $(function(){
     recountSteps();
   });
 
-  $('#ctn-step-list').html(templateNewStep);
+  if (templateSteps) {
+    $('#ctn-step-list').html(newStepTemplate(templateSteps));
+  } else {
+    $('#ctn-step-list').html(newStepTemplate(emptyStep));
+  }
+
+  autosize($('.create textarea'));
 
 /*
   // TODO: fix this
