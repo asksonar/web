@@ -14,6 +14,19 @@ class Scenario < ActiveRecord::Base
     return scenario
   end
 
+  def self.drafts(extra_where={})
+    Scenario
+      .where(status: statuses[:drafts])
+      .where(extra_where)
+      .order(updated_at: :desc)
+  end
+
+  def self.results(extra_where={})
+    Scenario
+      .where(status: [statuses[:live], statuses[:completed]])
+      .where(extra_where)
+  end
+
   def where_feeling_delighted
     scenario_step_feelings.where(feeling: ScenarioStepFeeling.feelings[:delighted])
   end

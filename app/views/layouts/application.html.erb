@@ -10,7 +10,7 @@
   <section id="main-wrapper" class="theme-red sidebar-opened">
     <%= render partial: 'nav/header' %>
     <%= render partial: 'nav/left' %>
-    <section class="main-content-wrapper <%=params[:controller]%>">
+    <section id="main-<%=params[:controller] + '-' + params[:action] %>" class="main-content-wrapper">
       <%= yield %>
       <%= render partial: 'nav/footer' %>
     </section>

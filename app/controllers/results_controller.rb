@@ -1,12 +1,9 @@
-class SummariesController < ApplicationController
-  def index
-    @scenarios = Scenario.where(company: current_user.company).where("user_count >= 1")
-  end
+class ResultsController < ApplicationController
 
   def index
     hash = {}
     hash[:company] = current_user.company
-    if @status = params[:status] then hash[:status] = Scenario.statuses[@status] end
+
     if @owner = params[:owner]
       if @owner == 'me'
         hash[:created_by] = current_user.id
@@ -15,7 +12,7 @@ class SummariesController < ApplicationController
       end
     end
 
-    @scenarios = Scenario.where(hash)
+    @results = Scenario.results(hash)
   end
 
   def my_index
@@ -26,5 +23,7 @@ class SummariesController < ApplicationController
 
   def show
     @summary = Summary.new(Scenario.find(params[:id]))
+    #@scenario = Scenario.find(params[:id])
   end
+
 end

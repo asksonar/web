@@ -22,7 +22,7 @@ scenario_signup:
     your first time and then try to create a new account.
   company: company_one
   status: 1
-  created_by: 806634123
+  created_by: 535896771 #researcher_one_a
 
 scenario_purchase:
   title: Try to purchase an item on our site
@@ -30,9 +30,9 @@ scenario_purchase:
     This scenario is to test the process of finding
     and purchasing an item.  You'll be asked to search for an item on the site,
     add it to your shopping cart, and then checkout.
-  company: company_one
+  company: company_two
   status: 0
-  created_by: 806634123
+  created_by: 464670237 #researcher_two
 
 scenario_nps:
   title: What do you think of us?

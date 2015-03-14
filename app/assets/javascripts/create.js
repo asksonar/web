@@ -22,8 +22,16 @@ $(function(){
 
   //var templateNewStep = $('#emptyNewStep').html();
 
-  var newStepTemplate = Handlebars.compile($('#new-step-template').html());
   var emptyStep = {steps:[{}]};
+  var newStepTemplate;
+  if ($('#new-step-template').length > 0) {
+    newStepTemplate = Handlebars.compile($('#new-step-template').html());
+    if (templateSteps) {
+      $('#ctn-step-list').html(newStepTemplate(templateSteps));
+    } else {
+      $('#ctn-step-list').html(newStepTemplate(emptyStep));
+    }
+  }
 
   var recountSteps = function(){
     $('.ctn-step-count').each(function(index){
@@ -42,12 +50,6 @@ $(function(){
     ctnStep.remove();
     recountSteps();
   });
-
-  if (templateSteps) {
-    $('#ctn-step-list').html(newStepTemplate(templateSteps));
-  } else {
-    $('#ctn-step-list').html(newStepTemplate(emptyStep));
-  }
 
   autosize($('.create textarea'));
 

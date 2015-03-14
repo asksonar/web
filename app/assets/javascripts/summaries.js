@@ -138,21 +138,23 @@ $(function(){
     $(this).hide();
   });
 
-  videojs('example_video_1').ready(function(){
-    this.on('timeupdate', function(){
-      var currentTime = this.currentTime();
-      console.log(currentTime);
-      var videoTextLinks = $('#videoText .videoTextLink').removeClass('activeVideoTextLink');
-      var videoTextLink;
-      for(var i = videoTextLinks.length - 1; i >= 0; i-- ) {
-        videoTextLink = $(videoTextLinks[i]);
-        if (videoTextLink.attr('data-timestamp') <= currentTime) {
-          videoTextLink.addClass('activeVideoTextLink');
-          break;
+  if (document.getElementById('example_video_1')) {
+    videojs('example_video_1').ready(function(){
+      this.on('timeupdate', function(){
+        var currentTime = this.currentTime();
+        console.log(currentTime);
+        var videoTextLinks = $('#videoText .videoTextLink').removeClass('activeVideoTextLink');
+        var videoTextLink;
+        for(var i = videoTextLinks.length - 1; i >= 0; i-- ) {
+          videoTextLink = $(videoTextLinks[i]);
+          if (videoTextLink.attr('data-timestamp') <= currentTime) {
+            videoTextLink.addClass('activeVideoTextLink');
+            break;
+          }
         }
-      }
+      });
     });
-  });
+  }
 
   $('#videoText').on('click', '.videoTextLink', function() {
     var video = videojs('example_video_1');

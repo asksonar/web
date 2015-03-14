@@ -1,3 +1,81 @@
 // Place all the styles related to the drafts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#main-drafts-new, #main-drafts-edit {
+
+  .form-group {
+    margin-bottom: 2px;
+  }
+
+  .ctn-btn-templates {
+    position: absolute;
+    right: 7px;
+    top: 7px;
+
+    .dropdown-toggle {
+      margin-bottom: 0px;
+    }
+  }
+
+  .ctn-left-description {
+    margin-top: 10px;
+    margin-right: -25px;
+    text-align: right;
+    opacity: .5;
+    white-space: nowrap;
+    font-size: 85%;
+  }
+
+  .ctn-step {
+    .ctn-step-input {
+      padding-right: 0px;
+    }
+    .ctn-step-input-url {
+      padding-left: 5px;
+    }
+    .ctn-step-btn {
+      margin-top: 7px;
+      margin-left: -24px;
+      white-space: nowrap;
+
+      i {
+        font-size: 25px;
+        opacity: .15;
+        cursor: pointer;
+      }
+      i:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  .ctn-step:first-child {
+    .btn-remove-step {
+      display: none;
+    }
+  }
+
+  .ctn-save-buttons {
+    .btn {
+      width: 100px;
+    }
+  }
+
+}
+
+#main-drafts-index {
+  .panel {
+    margin-bottom: 5px;
+    cursor: pointer;
+
+    .scenario-description {
+      max-height: 2em;
+      overflow: hidden;
+    }
+  }
+
+  .panel :hover {
+    background-color: #eee;
+  }
+}
