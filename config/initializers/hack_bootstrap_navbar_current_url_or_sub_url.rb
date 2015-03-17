@@ -1,3 +1,4 @@
+=begin
 module BootstrapNavbar::Helpers
   def current_url_or_sub_url?(url)
     uri, current_uri = [url, current_url].map do |url|
@@ -15,3 +16,4 @@ module BootstrapNavbar::Helpers
     end
   end
 end
+=end

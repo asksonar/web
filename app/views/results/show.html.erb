@@ -1,14 +1,57 @@
 <div class='pageheader'>
-  <h1><%= @summary.title %></h1>
+  <div class='row'>
+    <div class='col-md-5'>
+      <h1><%= @summary.title %></h1>
+    </div>
+    <div class='col-md-7 ctn-top-actions'>
+      <div class="btn-group">
+        <div class="input-group">
+          <input type="text" class="form-control" readonly value='<%= @summary.share_link %>'>
+          <span class="input-group-btn">
+            <a class="btn btn-success" type="button"><i class='fa fa-link'></i> Copy Link</a>
+            <a class='btn btn-info' data-toggle="modal" data-target='#modal-preview'><i class='fa fa-desktop'></i> Preview</a>
+            <a class="btn btn-default" type="button"><i class='fa fa-folder-o'></i> Archive</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id='modal-preview'>
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          <img src="/assets/screenshot.png">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
 </div>
 <section id='main-content'>
+
+  <% if flash[:first_publish] %>
+    <div class="alert alert-success alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <strong>Scenario Published</strong> - Your scenario is now ready to be shared with your users
+    </div>
+  <% end %>
+
   <div class='row'>
     <div class='panel'><div class='panel-body'>
       <div class='col-md-8'>
         <p><%= @summary.description %></p>
       </div>
       <div class='col-md-4'>
-        <h1><%= @summary.user_completed_count %> users <small>completed</small></h4>
+        <h1><%= @summary.user_completed_count || 0 %> users <small>completed</small></h4>
         <!--<h5><%= @summary.user_count %> users <small>total</small></h5>-->
         <span class='total_feeling text-success'><i class='fa fa-smile-o'></i> <%= @summary.total_delighted %></span>
         <span class='total_feeling text-danger'><i class='fa fa-frown-o'></i>  <%= @summary.total_confused %></span>

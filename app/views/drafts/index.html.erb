@@ -2,6 +2,13 @@
   <h1>Your drafts</h1>
 </div>
 <section id="main-content">
+  <% if flash[:saved_draft_title] %>
+    <div class="alert alert-success alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <strong>Draft Saved</strong> - <%= flash[:saved_draft_title] %>
+    </div>
+  <% end %>
+
   <% @scenarios.each do |scenario| %>
     <div class='row'>
       <div class='col-md-12'>

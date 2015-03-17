@@ -22,22 +22,23 @@ $(function(){
 
   //var templateNewStep = $('#emptyNewStep').html();
 
-  var emptyStep = {steps:[{}]};
-  var newStepTemplate;
-  if ($('#new-step-template').length > 0) {
-    newStepTemplate = Handlebars.compile($('#new-step-template').html());
-    if (templateSteps) {
-      $('#ctn-step-list').html(newStepTemplate(templateSteps));
-    } else {
-      $('#ctn-step-list').html(newStepTemplate(emptyStep));
-    }
-  }
-
   var recountSteps = function(){
     $('.ctn-step-count').each(function(index){
       $(this).html('Step ' + (index + 1) + '.');
     });
   };
+
+  var emptyStep = {steps:[{}]};
+  var newStepTemplate;
+  if ($('#new-step-template').length > 0) {
+    newStepTemplate = Handlebars.compile($('#new-step-template').html());
+    if (scenarioSteps.steps.length > 0) {
+      $('#ctn-step-list').html(newStepTemplate(scenarioSteps));
+      recountSteps();
+    } else {
+      $('#ctn-step-list').html(newStepTemplate(emptyStep));
+    }
+  }
 
   $('#ctn-step-list').on('click', '.btn-add-step', function(event){
     var ctnStep = $(this).closest('.ctn-step');
@@ -51,7 +52,7 @@ $(function(){
     recountSteps();
   });
 
-  autosize($('.create textarea'));
+  autosize($('#main-drafts-new textarea, #main-drafts-edit textarea'));
 
 /*
   // TODO: fix this
