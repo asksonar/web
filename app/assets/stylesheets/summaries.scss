@@ -4,57 +4,6 @@
 
 .summaries {
 
-  .summary {
-    margin-bottom: 20px;
-  }
 
-  .summary_step {
-    margin-bottom: 5px;
-    background-color: #f8f8f8;
-    padding: 10px 20px;
-  }
-
-  .total_feeling {
-    margin-right: 9px;
-  }
-
-  .step_feeling {
-    margin-right: 5px;
-  }
-
-  .average_time {
-    text-align: center;
-    margin-top: 5px;
-  }
-
-  .linkVideo {
-    pointer-events: auto;
-    cursor: pointer;
-  }
-
-  .feelingOverflow {
-    display: none;
-  }
-
-  .feelingDiv {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  .activeVideoTextLink {
-    font-weight: bold;
-  }
-
-  .summary_steps {
-    .panel-body {
-      display: none; /* start off collapsed */
-    }
-
-    ol {
-      margin-left: -10px;
-      margin-bottom: 0px;
-    }
-  }
 
 }
