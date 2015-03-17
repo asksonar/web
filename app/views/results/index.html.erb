@@ -11,7 +11,7 @@
 
   <% end %>
 
-	<% @scenarios.each do |scenario| %>
+  <% @results.each do |scenario| %>
     <div class='row
       <% if scenario.status == 'live' %>live
       <% elsif scenario.status == 'completed' %>completed
@@ -19,11 +19,11 @@
       <% end %>
     '>
       <div class='col-md-12'>
-        <div class='panel' path='<%=summary_path(scenario)%>'>
+        <div class='panel' path='<%= @owner == 'me' ? my_result_path(scenario) : result_path(scenario) %>'>
           <div class='panel-body'>
             <div class='row'>
               <div class='col-md-8'>
-        	      <h2><%= scenario.title %></h2>
+                <h2><%= scenario.title %></h2>
                 <h2 class='scenario-description'><small><%= scenario.description %></small></h2>
 
               </div>
@@ -39,5 +39,5 @@
         </div>
       </div>
     </div>
-	<% end %>
+  <% end %>
 </section>

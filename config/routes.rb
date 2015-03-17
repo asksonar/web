@@ -6,13 +6,17 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy', as: :logout
   get '/account', to: 'account#index'
   get '/videos.json', to: 'videos#show'
-  get '/create', to: 'create#new'
-  get '/edit/:id', to: 'create#new', as: :edit
-  get '/share', to: 'share#index'
-  get '/results', to: 'scenarios#index', as: :results
-  get '/my_results', to: 'scenarios#my_index', as: :my_results
-  get '/drafts', to: 'drafts#index'
+
+  get '/create', to: 'drafts#new'
+  #get '/edit/:id', to: 'create#new', as: :edit
+  #get '/share', to: 'share#index'
+  #get '/results', to: 'scenarios#index', as: :results
+
+  get '/my_results', to: 'results#my_index'
+
+  #get '/drafts', to: 'drafts#index'
   get '/recent', to: 'recent#index'
+  get '/create', to: 'create#index'
 
   #get 'home/index'
 
@@ -31,9 +35,13 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  resources :scenarios
-  resources :user_scenarios
-  resources :summaries
+
+  # resources :scenarios
+  # resources :user_scenarios
+  resources :drafts
+  resources :results
+  resources :my_results, controller: 'results'
+
 
   # Example resource route with options:
   #   resources :products do

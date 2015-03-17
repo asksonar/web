@@ -18,6 +18,9 @@
 //= require amcharts/themes/light
 //= require video
 //= require switchery
+//= require sortable
+//= require handlebars-v3.0.0
+//= require autosize
 
 // insert new packages above this line
 //= require_tree .

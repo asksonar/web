@@ -50,15 +50,74 @@
     }
   }
 
+  .ctn-btn-templates {
+    position: absolute;
+    right: 7px;
+    top: 7px;
+
+    .dropdown-toggle {
+      margin-bottom: 0px;
+    }
+  }
+
   #createForm {
     .form-group {
       margin-bottom: 2px;
     }
-  }
 
+    .ctn-scenario-description {
+      margin-bottom: 10px;
+    }
+
+    .ctn-left-description {
+      margin-top: 10px;
+      margin-right: -25px;
+      text-align: right;
+      opacity: .5;
+      white-space: nowrap;
+      font-size: 85%;
+    }
+
+    .ctn-step {
+      .ctn-step-input {
+        padding-right: 0px;
+      }
+      .ctn-step-input-url {
+        padding-left: 5px;
+      }
+      .ctn-step-btn {
+        margin-top: 7px;
+        margin-left: -24px;
+        white-space: nowrap;
+
+        i {
+          font-size: 25px;
+          opacity: .15;
+          cursor: pointer;
+        }
+        i:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    .ctn-step:first-child {
+      .btn-remove-step {
+        display: none;
+      }
+    }
+
+    .ctn-save-buttons {
+      .btn {
+        width: 100px;
+      }
+    }
+  }
+/*
   #btnAddNewStep {
     width: 100%;
   }
+
 
   .divButtons {
     position: fixed;
@@ -73,6 +132,7 @@
       padding: 10px 10px 5px 10px;
     }
   }
+*/
 
   textarea {
     resize:vertical;

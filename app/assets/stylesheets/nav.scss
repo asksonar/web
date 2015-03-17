@@ -13,8 +13,10 @@
   text-align: center;
 }
 
-
-.btnCreate {
+li.div-btn-create {
   margin: 20px 20px 15px 20px;
-  width: 200px;
+  a {
+    background-color: #1f7bb6;
+    color: #ffffff;
+  }
 }
