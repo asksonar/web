@@ -8,13 +8,13 @@ scenario_step_227507_0:
 scenario_step_227507_1:
   scenario: scenario_227507
   description: >
-    Next, go to Amazon.com, and try to find a purple umbrella and add it to your cart.  As much as possible, it will help us if you can try to think out loud so we know what you're thinking about.
+    Next, use www.movietickets.com to find a movie you’d be interested in seeing on Sunday afternoon.  As much as possible, it will help us if you can try to think out loud so we know what you're thinking about.
   step_order: 1
 
 scenario_step_227507_2:
   scenario: scenario_227507
   description: >
-    Go to Overstock.com, and try to find a purple umbrella and add it to your cart.
+    Use www.fandago.com to find a movie you’d be interested in seeing on Sunday afternoon.
   step_order: 2
 
 scenario_step_227507_3:
@@ -26,5 +26,5 @@ scenario_step_227507_3:
 scenario_step_227507_4:
   scenario: scenario_227507
   description: >
-    How likely is it that you would recommend Amazon.com to a friend?
+    How likely is it that you would recommend fandango.com to a friend?
   step_order: 4
