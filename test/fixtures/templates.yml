@@ -3,7 +3,7 @@
 template_signup:
   display: Test your signup flow
   value: signup
-  scenario_title: Test your signup flow
+  scenario_title: Test your signup flow really
   scenario_description: >
     This scenario is to test the process of signing up
     as a new customer on our new site. You'll be asked to visit the site as if it's
