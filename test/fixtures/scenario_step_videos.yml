@@ -1,1 +1,77 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+<% 14..19.times do |n| %>
+scenario_step_video_227507_0_<%= n %>:
+  scenario_step: scenario_step_227507_0
+  user: user_227507_<%= n %>
+  transcription_json: >
+    {"0":"Bacon ipsum dolor amet meatball short",
+    "3":"loin beef ribs, aliquip ball tip officia",
+    "6":"qui drumstick. Enim cillum reprehenderit",
+    "9":"beef salami rump. Pork loin capicola et",
+    "12":"pork belly, cillum rump ad corned beef",
+    "15":"kevin ball tip beef ribs nisi pancetta ut",
+    "18":"exercitation. Adipisicing fugiat aliqua",
+    "21":"biltong bacon nisi. Lorem velit pork",
+    "24":"belly, sirloin venison capicola eu",
+    "27":"ullamco occaecat eiusmod et biltong",
+    "30":"officia fugiat ham. Meatloaf shoulder",
+    "33":"officia enim"}
+<% end %>
+
+<% 14..19.times do |n| %>
+scenario_step_video_227507_1_<%= n %>:
+  scenario_step: scenario_step_227507_1
+  user: user_227507_<%= n %>
+  transcription_json: >
+    {"0":"Bacon ipsum dolor amet meatball short",
+    "3":"loin beef ribs, aliquip ball tip officia",
+    "6":"qui drumstick. Enim cillum reprehenderit",
+    "9":"beef salami rump. Pork loin capicola et",
+    "12":"pork belly, cillum rump ad corned beef",
+    "15":"kevin ball tip beef ribs nisi pancetta ut",
+    "18":"exercitation. Adipisicing fugiat aliqua",
+    "21":"biltong bacon nisi. Lorem velit pork",
+    "24":"belly, sirloin venison capicola eu",
+    "27":"ullamco occaecat eiusmod et biltong",
+    "30":"officia fugiat ham. Meatloaf shoulder",
+    "33":"officia enim"}
+<% end %>
+
+<% 14..19.times do |n| %>
+scenario_step_video_227507_2_<%= n %>:
+  scenario_step: scenario_step_227507_2
+  user: user_227507_<%= n %>
+  transcription_json: >
+    {"0":"Bacon ipsum dolor amet meatball short",
+    "3":"loin beef ribs, aliquip ball tip officia",
+    "6":"qui drumstick. Enim cillum reprehenderit",
+    "9":"beef salami rump. Pork loin capicola et",
+    "12":"pork belly, cillum rump ad corned beef",
+    "15":"kevin ball tip beef ribs nisi pancetta ut",
+    "18":"exercitation. Adipisicing fugiat aliqua",
+    "21":"biltong bacon nisi. Lorem velit pork",
+    "24":"belly, sirloin venison capicola eu",
+    "27":"ullamco occaecat eiusmod et biltong",
+    "30":"officia fugiat ham. Meatloaf shoulder",
+    "33":"officia enim"}
+<% end %>
+
+<% 14..19.times do |n| %>
+scenario_step_video_227507_3_<%= n %>:
+  scenario_step: scenario_step_227507_3
+  user: user_227507_<%= n %>
+  transcription_json: >
+    {"0":"Bacon ipsum dolor amet meatball short",
+    "3":"loin beef ribs, aliquip ball tip officia",
+    "6":"qui drumstick. Enim cillum reprehenderit",
+    "9":"beef salami rump. Pork loin capicola et",
+    "12":"pork belly, cillum rump ad corned beef",
+    "15":"kevin ball tip beef ribs nisi pancetta ut",
+    "18":"exercitation. Adipisicing fugiat aliqua",
+    "21":"biltong bacon nisi. Lorem velit pork",
+    "24":"belly, sirloin venison capicola eu",
+    "27":"ullamco occaecat eiusmod et biltong",
+    "30":"officia fugiat ham. Meatloaf shoulder",
+    "33":"officia enim"}
+<% end %>

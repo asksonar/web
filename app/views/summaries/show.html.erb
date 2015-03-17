@@ -1,29 +1,43 @@
-<section id="main-content">
-  <div class='summary'>
-    <div class='row'>
+<div class='pageheader'>
+  <h1><%= @summary.title %></h1>
+</div>
+<section id='main-content'>
+  <div class='row'>
+    <div class='panel'><div class='panel-body'>
       <div class='col-md-8'>
-        <h3>
-          <a href='<%=summaries_path%>'><i class='fa fa-arrow-circle-left'></i></a>
-          <%= @summary.title %>
-        </h3>
         <p><%= @summary.description %></p>
       </div>
       <div class='col-md-4'>
-        <h4><%= @summary.user_completed_count %> users <small>completed</small></h4>
-        <h5><%= @summary.user_count %> users <small>total</small></h5>
+        <h1><%= @summary.user_completed_count %> users <small>completed</small></h4>
+        <!--<h5><%= @summary.user_count %> users <small>total</small></h5>-->
         <span class='total_feeling text-success'><i class='fa fa-smile-o'></i> <%= @summary.total_delighted %></span>
         <span class='total_feeling text-danger'><i class='fa fa-frown-o'></i>  <%= @summary.total_confused %></span>
       </div>
-    </div>
+    </div></div>
   </div>
-  <div class='summary_step_container'>
-    <% @summary.summary_steps.each do |summary_step| %>
-      <div class='summary_step'>
+  <div class='summary_steps'>
+  <% @summary.summary_steps.each do |summary_step| %>
+    <div class='row'><div class='col-md-12'><div class='panel panel-default'>
+      <div class='panel-heading'>
         <div class='row'>
           <div class='col-md-8'>
-            <h4><%= summary_step.step_order + 1 %>. <%= summary_step.description %></h4>
+            <ol start='<%= summary_step.step_order + 1 %>'><li>
+              <h3 class='panel-text'><%= summary_step.description %></h3>
+            </li></ol>
+          </div>
+          <div class='col-md-4'>
+            <h2><%= format('%.0f', (summary_step.average_completed_seconds || 0)) %> seconds<small> on average</small></h2>
+            <div>
+              <span class='total_feeling text-success'><i class='fa fa-smile-o'></i> <%= summary_step.total_delighted %></span>
+              <span class='total_feeling text-danger'><i class='fa fa-frown-o'></i>  <%= summary_step.total_confused %></span>
+            </div>
           </div>
         </div>
+        <div class="actions pull-right">
+          <i class="fa fa-chevron-down"></i>
+        </div>
+      </div><!-- panel-heading -->
+      <div class='panel-body'>
         <div class='row'>
           <div class='col-md-8'>
             <%# convert javascript converts this into nice graph %>
@@ -47,7 +61,7 @@
                   -->...<%= feeling.context_transcription %>...
               </a></div>
             <% end %>
-            <% summary_step.frustrated_feelings.each_with_index do |feeling, index| %>
+            <% summary_step.confused_feelings.each_with_index do |feeling, index| %>
               <div class='feelingDiv <%= 'feelingOverflow' if index > 3 %>'><a class='feeling'
                 data-scenario-step-id='<%=feeling.scenario_step_id%>'
                 data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
@@ -56,14 +70,15 @@
                   -->...<%= feeling.context_transcription %>...</a>
               </div>
             <% end %>
-            <% if summary_step.delighted_feelings.count > 4 || summary_step.frustrated_feelings.count > 4 %>
+            <% if summary_step.total_delighted > 4 || summary_step.total_confused > 4 %>
               <div><a class='linkFeelingOverflow'>show more...</a></div>
             <% end %>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
+      </div><!-- panel-body-->
+    </div><!-- panel --></div><!-- col-md-12 --></div><!-- row -->
+  <% end %>
+  </div><!-- summary_steps -->
   <div class="modal fade" id='summary_video_container'>
     <div class="modal-dialog modal-lg">
       <div class="modal-content">

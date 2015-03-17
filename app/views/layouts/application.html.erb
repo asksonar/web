@@ -7,10 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <section id="main-wrapper" class="theme-red sidebar-opened">
+  <section id="main-wrapper" class="theme-red">
     <%= render partial: 'nav/header' %>
     <%= render partial: 'nav/left' %>
-    <section class="main-content-wrapper <%=params[:controller]%>">
+    <section id="main-<%=params[:controller] + '-' + params[:action] %>" class="main-content-wrapper">
       <%= yield %>
       <%= render partial: 'nav/footer' %>
     </section>

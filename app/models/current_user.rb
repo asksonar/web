@@ -28,4 +28,8 @@ class CurrentUser
     @user_or_researcher.company if is_researcher?
   end
 
+  def id
+    @user_or_researcher.id
+  end
+
 end

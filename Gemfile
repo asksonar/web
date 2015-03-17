@@ -38,6 +38,10 @@ gem 'jquery-turbolinks'
 
 gem 'videojs_rails', '~> 4.6.1'
 
+gem 'switchery-rails'
+
+gem 'obfuscate_id', '~> 0.2.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -1,5 +1,5 @@
 <div class='pageheader'>
-  <h1>Manage your active scenarios</h1>
+  <h1>Manage <%= @owner == 'me' ? 'your' : 'all' %> results</h1>
 </div>
 <section id="main-content">
   <% if flash[:scenario_message] %>
@@ -11,26 +11,33 @@
 
   <% end %>
 
-  <div class='row'><div class='col-md-12'><div class='panel'><div class='panel-body'>
-    <table class='table table-hover'>
-    	<thead>
-    		<tr>
-          <th>Status</th>
-    			<th>Title</th>
-          <th>Completed</th>
-    			<th>Show</th>
-    		</tr>
-    	</thead>
-    	<tbody>
-    	<% @scenarios.each do |scenario| %>
-    		<tr>
-          <td><%= 'scenario.status' %></td>
-    			<td><%= scenario.title %></td>
-          <td><%= scenario.user_completed_count || 0 %> / <%= scenario.user_count || 0 %></td>
-    			<td><%= link_to 'Show', scenario_path(scenario) %></td>
-    		</tr>
-    	<% end %>
-    	</tbody>
-    </table>
-  </div></div></div></div>
+	<% @scenarios.each do |scenario| %>
+    <div class='row
+      <% if scenario.status == 'live' %>live
+      <% elsif scenario.status == 'completed' %>completed
+      <% else %>live
+      <% end %>
+    '>
+      <div class='col-md-12'>
+        <div class='panel' path='<%=summary_path(scenario)%>'>
+          <div class='panel-body'>
+            <div class='row'>
+              <div class='col-md-8'>
+        	      <h2><%= scenario.title %></h2>
+                <h2 class='scenario-description'><small><%= scenario.description %></small></h2>
+
+              </div>
+              <div class='col-md-4'>
+                <h2><%= scenario.user_completed_count || 0 %> users <small>completed</small></h2>
+        <span class='total_feeling text-success'><i class='fa fa-smile-o'></i> <%= scenario.total_delighted %></span>
+        <span class='total_feeling text-danger'><i class='fa fa-frown-o'></i>  <%= scenario.total_confused %></span>
+                <h4><small>published by </small><%= scenario.created_by.email %></h4>
+                <h4><small><%= time_ago_in_words(scenario.created_at)%> ago</small></h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+	<% end %>
 </section>

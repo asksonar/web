@@ -46,4 +46,15 @@
     font-weight: bold;
   }
 
+  .summary_steps {
+    .panel-body {
+      display: none; /* start off collapsed */
+    }
+
+    ol {
+      margin-left: -10px;
+      margin-bottom: 0px;
+    }
+  }
+
 }

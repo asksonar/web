@@ -2,8 +2,12 @@
 
 researcher_one:
   company: company_one
-  email: asdf@research.com
+  email: one@research.com
 
 researcher_two:
   company: company_two
-  email: asdf@research2.com
+  email: two@research2.com
+
+researcher_one_a:
+  company: company_one
+  email: one_a@research.com
