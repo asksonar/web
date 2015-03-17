@@ -10,6 +10,22 @@ scenario_feeling_227507_0_<%= n %>:
 <% end %>
 <% end %>
 
+
+scenario_feeling_227507_0_50:
+  scenario_step: scenario_step_227507_0
+  user: user_227507_0
+  feeling_at_seconds: 3
+  feeling: 0
+  context_transcription: 'I really love how easy this part is.'
+
+scenario_feeling_227507_0_51:
+  scenario_step: scenario_step_227507_0
+  user: user_227507_0
+  feeling_at_seconds: 6
+  feeling: 1
+  context_transcription: "I really don't know what's going on here."
+
+
 <% 14..19.times do |n| %>
 <% if rand(0..1) > 0 %>
 user_scenario_227507_1_<%= n %>:

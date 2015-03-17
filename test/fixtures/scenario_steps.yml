@@ -1,25 +1,30 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 scenario_step_227507_0:
   scenario: scenario_227507
-  description: 'Culpa cow ground round, irure voluptate eu jowl ut beef ribs. Venison adipisicing ground round, ut flank sausage chuck pastrami fugiat magna irure quis eiusmod.'
+  description: >
+    Look at our homepage and tell us what you think it is, what strikes you about it, and what you think you would click on first.  Navigate around a bit, and tell us what you think as you navigate to each page.
   step_order: 0
 
 scenario_step_227507_1:
   scenario: scenario_227507
-  description: 'Enim consectetur tongue, tempor cupim laborum voluptate magna proident ut bacon chicken eiusmod. Magna lorem ham hock et hamburger brisket, sunt pork chop cow fatback quis rump. Drumstick pancetta quis reprehenderit.'
+  description: >
+    Next, go to Amazon.com, and try to find a purple umbrella and add it to your cart.  As much as possible, it will help us if you can try to think out loud so we know what you're thinking about.
   step_order: 1
 
 scenario_step_227507_2:
   scenario: scenario_227507
-  description: 'Alcatra in anim drumstick t-bone tempor consectetur magna exercitation rump est sirloin sed in pig. Landjaeger ut drumstick et minim, pancetta turkey do velit.'
+  description: >
+    Go to Overstock.com, and try to find a purple umbrella and add it to your cart.
   step_order: 2
 
 scenario_step_227507_3:
   scenario: scenario_227507
-  description: 'Et tail ut prosciutto voluptate ham in excepteur porchetta ball tip frankfurter alcatra dolor duis. Elit quis pastrami, velit labore pig spare ribs.'
+  description: >
+    Which site did you prefer?  Why?
   step_order: 3
 
 scenario_step_227507_4:
   scenario: scenario_227507
-  description: 'Cow nulla sed eiusmod reprehenderit bacon qui et. Leberkas tempor do ham short ribs ball tip andouille pancetta brisket mollit turkey.'
+  description: >
+    How likely is it that you would recommend Amazon.com to a friend?
   step_order: 4
