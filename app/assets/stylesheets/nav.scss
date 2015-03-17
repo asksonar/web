@@ -13,10 +13,18 @@
   text-align: center;
 }
 
+.sidebar-mini li.div-btn-create {
+  margin: auto;
+}
+
 li.div-btn-create {
   margin: 20px 20px 15px 20px;
   a {
-    background-color: #1f7bb6;
-    color: #ffffff;
+    background-color: #1f7bb6 !important;
+    color: #ffffff !important;
+  }
+
+  a:hover {
+    background-color: #238acc !important;
   }
 }

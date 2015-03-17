@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require amcharts/all
@@ -24,5 +23,4 @@
 
 // insert new packages above this line
 //= require_tree .
-//= require turbolinks
 
