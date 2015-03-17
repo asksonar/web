@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 
   def index
     if session[:researcher_id]
-      redirect_to scenarios_path
+      redirect_to results_path
     elsif session[:user_id]
       redirect_to user_scenarios_path
     end
@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
       researcher = Researcher.find_by(email: email)
       if researcher
         session[:researcher_id] = researcher.id
-        redirect_to scenarios_path
+        redirect_to results_path
         return
       else
         flash[:error] = 'There was an error with your researcher email.'
