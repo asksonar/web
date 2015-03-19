@@ -22,14 +22,14 @@ class DraftsController < ApplicationController
     ActiveRecord::Base.transaction do
 
       if params[:commit] == 'Save'
-        create_action = Scenario.create_draft
+        create_action = Proc.new { |x| Scenario.create_draft(x) }
       elsif params[:commit] == 'Publish'
-        create_action = Scenario.create_live
+        create_action = Proc.new { |x| Scenario.create_live(x) }
       else
         raise "Illegal commit value of " + params[:commit]
       end
 
-      @scenario = create_action(scenario_params.merge({
+      @scenario = create_action.call(scenario_params.merge({
         created_by: current_user.researcher,
         company: current_user.company,
       }))
