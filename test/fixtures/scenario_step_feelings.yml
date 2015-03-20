@@ -1,4 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+
+<%=
+<=begin %>
 <% 14..19.times do |n| %>
 <% if rand(0..1) > 0 %>
 scenario_feeling_227507_0_<%= n %>:
@@ -9,21 +13,7 @@ scenario_feeling_227507_0_<%= n %>:
   context_transcription: 'Dolore in qui biltong short loin.'
 <% end %>
 <% end %>
-
-
-scenario_feeling_227507_0_50:
-  scenario_step: scenario_step_227507_0
-  user: user_227507_0
-  feeling_at_seconds: 3
-  feeling: 0
-  context_transcription: 'I really love how easy this part is.'
-
-scenario_feeling_227507_0_51:
-  scenario_step: scenario_step_227507_0
-  user: user_227507_0
-  feeling_at_seconds: 6
-  feeling: 1
-  context_transcription: "I really don't know what's going on here."
+<=end %>
 
 
 <% 14..19.times do |n| %>
@@ -58,3 +48,94 @@ user_scenario_227507_3_<%= n %>:
   context_transcription: 'Pancetta qui shoulder short loin'
 <% end %>
 <% end %>
+
+%>
+
+
+scenario_feeling_227507_0_50:
+  scenario_step: scenario_step_227507_0
+  user: user_227507_0
+  feeling_at_seconds: 3
+  feeling: 0
+  context_transcription: >
+    Oh man, this is a great way to see all the latest releases!
+
+scenario_feeling_227507_0_51:
+  scenario_step: scenario_step_227507_2
+  user: user_227507_0
+  feeling_at_seconds: 6
+  feeling: 
+  context_transcription: >
+    I really like how easy it was to find nearby movie theaters.
+
+scenario_feeling_227507_0_52:
+  scenario_step: scenario_step_227507_2
+  user: user_227507_0
+  feeling_at_seconds: 9
+  feeling: 0
+  context_transcription: >
+    The movie theaters are sorted really well.
+  
+scenario_feeling_227507_0_52:
+  scenario_step: scenario_step_227507_2
+  user: user_227507_0
+  feeling_at_seconds: 12
+  feeling: 0
+  context_transcription: >
+    I'm disappointed Hot Tub Time Machine was sold out, but awesome that I didn't go to the theater only to be disappointed.
+  
+scenario_feeling_227507_0_52:
+  scenario_step: scenario_step_227507_3
+  user: user_227507_0
+  feeling_at_seconds: 3
+  feeling: 0
+  context_transcription: >
+    It was so easy, I ended up buying tickets on the spot!
+
+scenario_feeling_227507_0_52:
+  scenario_step: scenario_step_227507_3
+  user: user_227507_0
+  feeling_at_seconds: 6
+  feeling: 0
+  context_transcription: >
+    I love how new movies were so well laid out.
+  
+scenario_feeling_227507_0_52:
+  scenario_step: scenario_step_227507_3
+  user: user_227507_0
+  feeling_at_seconds: 9
+  feeling: 0
+  context_transcription: >
+    I loved that the trailer was embedded right there.
+
+scenario_feeling_227507_0_52:
+  scenario_step: scenario_step_227507_3
+  user: user_227507_0
+  feeling_at_seconds: 12
+  feeling: 0
+  context_transcription: >
+    The fan ratings made it really easy to make a short list of movies I thought I would like.
+
+scenario_feeling_227507_0_52:
+  scenario_step: scenario_step_227507_3
+  user: user_227507_0
+  feeling_at_seconds: 3
+  feeling: 1
+  context_transcription: >
+    All of the movies suck.  Not enough selection.
+  
+scenario_feeling_227507_0_52:
+  scenario_step: scenario_step_227507_3
+  user: user_227507_0
+  feeling_at_seconds: 6
+  feeling: 1
+  context_transcription: >
+    I want to see a scifi movie, but it was really hard to find one.
+  
+scenario_feeling_227507_0_52:
+  scenario_step: scenario_step_227507_3
+  user: user_227507_0
+  feeling_at_seconds: 9
+  feeling: 1
+  context_transcription: >
+    The trailer took a really long time to load.  Not a big deal, just pretty annoying.
