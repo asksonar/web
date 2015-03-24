@@ -109,36 +109,34 @@ scenario_step_overall_product_impressions_4:
     What do you use now instead of Spotify?  Why?
   step_order: 4
 
-
-
 scenario_step_brand_impressions_0:
-scenario: scenario_brand_impressions
-description: >
-  Go to Soundviz.com.  Without clicking on anything, what's your impression of the site?  What does it do?  What does it stand for?
-step_order: 0
+  scenario: scenario_brand_impressions
+  description: >
+    Go to Soundviz.com.  Without clicking on anything, what's your impression of the site?
+    What does it do?  What does it stand for?
+  step_order: 0
 
 scenario_step_brand_impressions_1:
-scenario: scenario_brand_impressions
-description: >
-  Click on "How it works".  Explain in your own words what the company does, and what its product is.
-step_order: 1
+  scenario: scenario_brand_impressions
+  description: >
+    Click on "How it works".  Explain in your own words what the company does, and what its product is.
+  step_order: 1
 
 scenario_step_brand_impressions_2:
-scenario: scenario_brand_impressions
-description: >
-  Try creating a soundviz.  Please remember to talk out loud as you continue onwards.
-step_order: 2
+  scenario: scenario_brand_impressions
+  description: >
+    Try creating a soundviz.  Please remember to talk out loud as you continue onwards.
+  step_order: 2
 
 scenario_step_brand_impressions_3:
-scenario: scenario_brand_impressions
-description: >
-  What other Soundviz's do you think would be cool to make?
-step_order: 3
+  scenario: scenario_brand_impressions
+  description: >
+    What other soundviz's do you think would be cool to make?
+  step_order: 3
 
 scenario_step_brand_impressions_4:
-scenario: scenario_brand_impressions
-description: >
-  Would you recommend Soundviz.com to a friend?
-step_order: 4
-
+  scenario: scenario_brand_impressions
+  description: >
+    Would you recommend Soundviz.com to a friend?
+  step_order: 4
 
