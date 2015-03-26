@@ -35,7 +35,7 @@ scenario_nps:
     This is a quick 1 question survey to gauge your impression
     of us as a company.
   company: company_one
-  status: 1
+  status: 0
   created_by: 806634123
 
 scenario_homepage:
@@ -44,7 +44,7 @@ scenario_homepage:
     We'd like you to spend a few minutes looking at our site and
     give us your first impressions.  What stands out to you?  What looks interesting?
   company: company_one
-  status: 1
+  status: 0
   created_by: 806634123
 
 
