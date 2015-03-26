@@ -4,6 +4,11 @@ class ScenarioStep < ActiveRecord::Base
   has_many :scenario_step_feelings, inverse_of: :scenario_step
   has_many :scenario_step_videos, inverse_of: :scenario_step
   #obfuscate_id spin: 10109225
+  after_initialize :default_values, unless: :persisted?
+
+  def default_values
+    self.uuid = SecureRandom.uuid
+  end
 
   def where_feeling_delighted
     scenario_step_feelings.where(feeling: ScenarioStepFeeling.feelings[:delighted])

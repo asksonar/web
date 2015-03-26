@@ -1,0 +1,28 @@
+<div class='pageheader'>
+  <h1>Welcome!</h1>
+</div>
+<section id='main-content'>
+  <script type='text/javascript'>
+    var scenarioParams = <%= raw @scenario.share_link_params_json %>
+  </script>
+
+  <div class='row'><div class='col-md-12'><div class='panel panel-default'>
+
+    <div class='panel-body'>
+      <div class='col-md-12'>
+        <p><%= @scenario.description %></p>
+      </div>
+
+      <%= bootstrap_form_for :user_scenario do |f| %>
+        <%= f.hidden_field :scenario_uuid, value: @scenario.uuid %>
+        <%= f.text_field :email %>
+      <% end %>
+
+    </div>
+    <div class='panel-footer'>
+      <div class='btn btn-primary' id='btn-start'>Start</div>
+    </div>
+
+  </div></div></div>
+
+</section>

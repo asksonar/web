@@ -6,6 +6,11 @@ class Scenario < ActiveRecord::Base
   belongs_to :created_by, class_name: 'Researcher', foreign_key: :created_by
   enum status: [:drafts, :live, :completed]
   #obfuscate_id spin: 42650656
+  after_initialize :default_values, unless: :persisted?
+
+  def default_values
+    self.uuid = SecureRandom.uuid
+  end
 
   def self.create_draft(hash)
     Scenario.create(hash.merge({status: statuses[:drafts]}))
@@ -67,7 +72,22 @@ class Scenario < ActiveRecord::Base
   end
 
   def share_link
-    "https://www.purplecow.com/scenarios/123456789"
+    'http://localhost:3000/user/scenarios/' + uuid
+  end
+
+  def share_link_params_json
+    {
+      uuid: uuid,
+      description: description,
+      steps: scenario_steps.map { |step|
+        {
+          #id: (step.to_param || ''),
+          uuid: (step.uuid || ''),
+          description: (step.description || '').strip,
+          url: (step.url || '').strip
+        }
+      }
+    }.to_json
   end
 
   def summary_steps
