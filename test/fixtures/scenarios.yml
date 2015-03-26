@@ -35,7 +35,7 @@ scenario_nps:
     This is a quick 1 question survey to gauge your impression
     of us as a company.
   company: company_one
-  status: 0
+  status: 1
   created_by: 806634123
 
 scenario_homepage:
@@ -44,7 +44,7 @@ scenario_homepage:
     We'd like you to spend a few minutes looking at our site and
     give us your first impressions.  What stands out to you?  What looks interesting?
   company: company_one
-  status: 0
+  status: 1
   created_by: 806634123
 
 
@@ -54,7 +54,7 @@ scenario_value_proposition:
     We'd like to understand how you use CRM.  What's useful?  What's not?  
     What do you wish it could do?  Thanks in advance for your participation!
   company: company_one
-  status: 0
+  status: 1
   created_by: 806634123
   
 scenario_overall_product_impressions:
@@ -63,7 +63,7 @@ scenario_overall_product_impressions:
   description: >
     We'd like to take just a minute of your time to help understand your impression of Spotify.
   company: company_one
-  status: 0
+  status: 1
   created_by: 806634123
 
 scenario_brand_impressions:
@@ -71,7 +71,7 @@ scenario_brand_impressions:
   description: >
     We'd love to take a minute to get your impression on a new product in the market.
   company: company_one
-  status: 0
+  status: 1
   created_by: 806634123
 
 
