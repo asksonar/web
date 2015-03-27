@@ -1,6 +1,8 @@
 
 $(function(){
 
+  $('#div-started-study').hide();
+
   $('#btn-start').click(function() {
 
     /*
@@ -24,7 +26,8 @@ $(function(){
         console.log('Response from launching the app: ' + response);
       });
 
-      $('#btn-start').attr('disabled', true);
+      $('#div-start-study').hide();
+      $('#div-started-study').show();
     });
 
 

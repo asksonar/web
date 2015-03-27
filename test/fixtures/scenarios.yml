@@ -13,16 +13,18 @@ scenario_227507:
   status: 2
   company: company_one
   created_by: 806634123 #researcher_one
+  uuid: <%= SecureRandom.uuid %>
 
 scenario_signup:
   title: Try to sign up for a new login on our site
   description: >
-    This scenario is to test the process of signing up 
+    This scenario is to test the process of signing up
     as a new customer on our new site. You'll be asked to visit the site as if it's
     your first time and then try to create a new account.
   company: company_one
   status: 1
   created_by: 535896771 #researcher_one_a
+  uuid: <%= SecureRandom.uuid %>
 
 scenario_purchase:
   title: Try to purchase an item on our site
@@ -33,6 +35,7 @@ scenario_purchase:
   company: company_two
   status: 0
   created_by: 464670237 #researcher_two
+  uuid: <%= SecureRandom.uuid %>
 
 scenario_nps:
   title: What do you think of us?
@@ -42,6 +45,7 @@ scenario_nps:
   company: company_one
   status: 0
   created_by: 806634123
+  uuid: <%= SecureRandom.uuid %>
 
 scenario_homepage:
   title: Take a look at our site
@@ -51,3 +55,4 @@ scenario_homepage:
   company: company_one
   status: 0
   created_by: 806634123
+  uuid: <%= SecureRandom.uuid %>
