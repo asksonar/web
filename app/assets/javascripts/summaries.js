@@ -30,12 +30,14 @@ $(function(){
       "creditsPosition": "top-right",
       "hideBalloonTime": 2000,
       "categoryField": "display",
+      "gridAboveGraphs": true,
       "graphs": [{
-        "fillAlphas": .3,
+        "fillAlphas": .8,
+        "lineAlphas": .2,
         "type": "column",
         "valueField": "count",
         "showHandOnHover": true,
-        "columnWidth": 1,
+        "columnWidth": .75,
         "balloonFunction": function(graphDataItem, graph) {
           var details = graphDataItem.dataContext.details;
           var display = '';
@@ -54,8 +56,24 @@ $(function(){
           return display;
         }
       }],
+      categoryAxis: {
+        "gridPosition": "start",
+        "tickPosition": "start",
+        "gridAlpha": 0
+      },
+      /*
+      "categoryAxis": [{
+        "title": input.val(),
+        "titleBold": false
+      }],
+      */
       "valueAxes": [{
-        "minVerticalGap": 30
+        "minVerticalGap": 30,
+        "title": "Users",
+        "titleBold": false,
+        "gridColor":"#FFFFFF",
+        "gridAlpha": 0.2,
+        "dashLength": 0
       }],
       "balloon": {
         "fixedPosition": true

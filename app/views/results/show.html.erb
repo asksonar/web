@@ -2,15 +2,20 @@
   <div class='row'>
     <div class='col-md-5'>
       <h1><%= @summary.title %></h1>
+      <h2>
+        <small>created by</small>
+        <%= @summary.created_by.email %>
+        <small><%= time_ago_in_words(@summary.created_at)%> ago</small>
+      </h1>
     </div>
     <div class='col-md-7 ctn-top-actions'>
       <div class="btn-group">
         <div class="input-group">
           <input type="text" class="form-control" readonly value='<%= @summary.share_link %>'>
           <span class="input-group-btn">
-            <a class="btn btn-success" type="button"><i class='fa fa-link'></i> Copy Link</a>
-            <a class='btn btn-info' data-toggle="modal" data-target='#modal-preview'><i class='fa fa-desktop'></i> Preview</a>
-            <a class="btn btn-default" type="button"><i class='fa fa-folder-o'></i> Archive</a>
+            <a class="btn btn-success" type="button"><i class='fa fa-link'></i><span> Copy Share Link</span></a>
+            <a class='btn btn-info' data-toggle="modal" data-target='#modal-preview'><i class='fa fa-desktop'></i><span> Preview</span></a>
+            <a class="btn btn-default" type="button"><i class='fa fa-folder-o'></i><span> Archive</span></a>
           </span>
         </div>
       </div>
@@ -91,7 +96,7 @@
               </script>
               <div id='graph<%= summary_step.step_order%>' class='graph' style="width: 100%; height: 150px; background-color: #FFFFFF;" ></div>
             </div>
-            <div class='average_time small'>Average time: <%= format('%.0f', (summary_step.average_completed_seconds || 0)) %> seconds</div>
+            <div class='average_time'>Average time on task <%= summary_step.average_completed_minutes %></div>
           </div>
           <div class='col-md-4 feelingDivContainer'>
             <%# make ajax call to pull up the full video and transcript %>

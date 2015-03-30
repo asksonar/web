@@ -26,7 +26,7 @@
 <section id="main-content">
 <%= bootstrap_form_for @scenario, url: @scenario.id ? draft_path(@scenario) : drafts_path, html: {id: 'create-form'} do |f| %>
   <%= f.hidden_field :id, value: @scenario.id %> <!-- #to_param -->
-  <div class='panel panel-default'>
+  <div class='row'><div class='col-md-12 col-lg-10 col-lg-offset-1'><div class='panel panel-default'>
     <div class='panel-heading'>
       <%= f.text_field :title, hide_label: true, placeholder: 'Give your scenario a title (only visible to you)' %>
     </div>
@@ -73,10 +73,10 @@
 
     </div>
     <div class='panel-footer text-center ctn-save-buttons'>
-      <%= f.submit 'Save', class: 'btn btn-info' %>
-      <%= f.submit 'Publish', class: 'btn btn-success' %>
-      <a href='<%=create_path%>' class='btn btn-default'>Cancel</a>
+      <%= f.submit 'Save Draft', class: 'btn btn-info' %>
+      <%= f.submit 'Create', class: 'btn btn-success' %>
+      <a href='<%=results_path%>' class='btn btn-default'>Cancel</a>
     </div>
-  </div>
+  </div></div></div>
 <% end %>
 </section>

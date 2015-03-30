@@ -18,6 +18,10 @@ class SummaryStep
     @scenario_step.scenario_step_results.average(:completed_seconds)
   end
 
+  def average_completed_minutes
+    Time.at(@scenario_step.scenario_step_results.average(:completed_seconds) || 0).strftime("%-M:%S")
+  end
+
   def result_time_hash
     @scenario_step.scenario_step_results.map { |result|
       { id: result.id, time: result.completed_seconds }
