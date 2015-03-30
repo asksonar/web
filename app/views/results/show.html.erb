@@ -11,7 +11,7 @@
     <div class='col-md-7 ctn-top-actions'>
       <div class="btn-group">
         <div class="input-group">
-          <input type="text" class="form-control" readonly value='<%= @summary.share_link %>'>
+          <input type="text" id='input-share-link' class="form-control" readonly value='<%= @summary.share_link %>'>
           <span class="input-group-btn">
             <a class="btn btn-success" id='btn-copy-share-link' data-clipboard-text='<%= @summary.share_link %>'><i class='fa fa-link'></i><span> Copy Share Link</span></a>
             <a class='btn btn-info btn-hover-show' id='btn-preview' data-toggle="modal" data-target='#modal-preview'><i class='fa fa-desktop'></i><span> Preview</span></a>

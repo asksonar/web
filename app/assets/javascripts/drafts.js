@@ -9,8 +9,6 @@ $(function(){
     window.location.href = $(this).attr('path');
   });
 
-  autosize($('textarea'));
-
   var recountSteps = function(){
     $('.ctn-step-count').each(function(index){
       $(this).html('Step ' + (index + 1) + '.');
@@ -40,5 +38,7 @@ $(function(){
     ctnStep.remove();
     recountSteps();
   });
+
+  autosize($('textarea'));
 
 });

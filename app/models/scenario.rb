@@ -71,7 +71,7 @@ class Scenario < ActiveRecord::Base
   end
 
   def share_link
-    'http://localhost:3000/user/scenarios/' + uuid
+    '/user/scenarios/' + uuid
   end
 
   def share_link_params_json

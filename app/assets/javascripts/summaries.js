@@ -6,7 +6,11 @@
 
 $(function(){
 
-  new ZeroClipboard(document.getElementById("btn-copy-share-link"));
+  $('#input-share-link').val(window.location.origin + $('#input-share-link').val());
+
+  new ZeroClipboard(document.getElementById("btn-copy-share-link")).on("copy", function(event) {
+    event.clipboardData.setData( "text/plain", $('#input-share-link').val());
+  });
   new ZeroClipboard(document.getElementById("btn-copy-video-link")).on( "copy", function (event) {
     event.clipboardData.setData( "text/plain", $('#input-url-base').val() + $('#input-url-time').val());
   });
@@ -142,7 +146,7 @@ $(function(){
         var modalTitle = '[' + data.user_email + '] - ' + (data.step_order + 1) + ') ' + data.step_description;
         $('.modal-title').html(modalTitle);
 
-        $('#input-url-base').val(data.share_link + '?t=');
+        $('#input-url-base').val(window.location.origin + data.share_link + '?t=');
       }
 
       video.currentTime(timeSeconds);
