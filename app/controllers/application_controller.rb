@@ -11,5 +11,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def drafts_count
+    Scenario.drafts(current_user.id).count
+  end
+
   helper_method :current_user
+  helper_method :drafts_count
 end

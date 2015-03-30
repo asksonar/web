@@ -22,9 +22,7 @@ class ResultsController < ApplicationController
   end
 
   def show
-    #@summary = Summary.new(Scenario.find(params[:id]))
     @summary = Scenario.find(params[:id])
-    #@scenario = Scenario.find(params[:id])
   end
 
 end

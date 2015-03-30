@@ -1,9 +1,4 @@
 class SessionsController < ApplicationController
-#  def login
-    #render :nothing => true
-#    render :text => 'hello'
-#  end
-
   def index
     if session[:researcher_id]
       redirect_to results_path

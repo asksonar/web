@@ -21,18 +21,17 @@ class Template < ActiveRecord::Base
     }.to_json
   end
 
-  def to_scenario(scenario_id)
-    Scenario.new({
-      id: scenario_id,
-      title: scenario_title,
-      description: scenario_description,
-      scenario_steps: template_steps.map { |step|
-        ScenarioStep.new({
-          description: (step.step_description || '').strip,
-          url: (step.step_url || '').strip
-        })
-      }
-    })
+  def to_scenario(scenario)
+    scenario.dup
+    scenario.title = scenario_title
+    scenario.description = scenario_description
+    scenario.scenario_steps = template_steps.map { |step|
+      ScenarioStep.new({
+        description: (step.step_description || '').strip,
+        url: (step.step_url || '').strip
+      })
+    }
+    scenario
   end
 
 end

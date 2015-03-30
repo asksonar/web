@@ -5,7 +5,7 @@ class DraftsController < ApplicationController
   })
 
   def index
-    @scenarios = Scenario.drafts
+    @scenarios = Scenario.drafts(current_user.id)
   end
 
   def new
@@ -13,7 +13,7 @@ class DraftsController < ApplicationController
     @product_templates = Template.product_templates
     @marketing_templates = Template.marketing_templates
     if @template = Template.find_by(value: params[:template])
-      @scenario = @template.to_scenario(@scenario.id) #to_param)
+      @scenario = @template.to_scenario(@scenario) #to_param)
     end
   end
 

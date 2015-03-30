@@ -4,15 +4,16 @@
 
 #main-drafts-new, #main-drafts-edit {
 
+  textarea {
+    resize: none;
+  }
+
   .form-group {
     margin-bottom: 2px;
   }
 
-  .ctn-btn-templates {
-    position: absolute;
-    right: 7px;
-    top: 7px;
-
+  .ctn-input-title {
+    margin-top: 5px;
     .dropdown-toggle {
       margin-bottom: 0px;
     }
@@ -72,6 +73,7 @@
     .scenario-description {
       max-height: 2em;
       overflow: hidden;
+      line-height: .8em;
     }
   }
 

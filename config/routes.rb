@@ -1,31 +1,23 @@
 Rails.application.routes.draw do
-  #get 'sessions#login'
-  #get 'sessions/login', to: 'sessions#login'
-  get '/login', to: 'sessions#index', as: :login
-  post '/login/new', to: 'sessions#create', as: :new_login
-  get '/logout', to: 'sessions#destroy', as: :logout
-  get '/account', to: 'account#index'
-  get '/videos.json', to: 'videos#show'
-
-  get '/create', to: 'drafts#new'
-  #get '/edit/:id', to: 'create#new', as: :edit
-  #get '/share', to: 'share#index'
-  #get '/results', to: 'scenarios#index', as: :results
-
-  get '/my_results', to: 'results#my_index'
-
-  #get '/drafts', to: 'drafts#index'
-  get '/recent', to: 'recent#index'
-  get '/create', to: 'create#index'
-
-  #get 'home/index'
+  get '/login',       to: 'sessions#index', as: :login
+ post '/login/new',   to: 'sessions#create', as: :new_login
+  get '/logout',      to: 'sessions#destroy', as: :logout
+  get '/account',     to: 'account#index'
+  get '/videos.json', to: 'videos_json#show'
+  get '/create',      to: 'drafts#new'
+  get '/my_results',  to: 'results#my_index'
+  get '/recent',      to: 'recent#index'
+  get '/create',      to: 'create#index'
+  get '/user/scenarios/:id', to: 'user_scenarios#index'
+ post '/user/scenarios/new', to: 'user_scenarios#new'
+  get '/share/videos/:id', to: 'share_videos#show'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-  root 'home#index'
+  #root 'home#index'
+  root to: redirect('/results')
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -36,12 +28,9 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  # resources :scenarios
-  # resources :user_scenarios
   resources :drafts
   resources :results
   resources :my_results, controller: 'results'
-
 
   # Example resource route with options:
   #   resources :products do
