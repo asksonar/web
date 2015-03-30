@@ -24,7 +24,7 @@ $(function(){
     $(this).closest('.panel').find('.panel-body').slideUp();
   });
 
-  $('.fa-chevron-down').first().click();
+  $('.fa-chevron-down').click();
 
   var setupGraph = function(thisEl){
     var times = JSON.parse(thisEl.find('script').html());

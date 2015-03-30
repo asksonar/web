@@ -22,6 +22,10 @@ class SummaryStep
     Time.at(@scenario_step.scenario_step_results.average(:completed_seconds) || 0).strftime("%-M:%S")
   end
 
+  def has_results?
+    @scenario_step.scenario_step_results.count > 0
+  end
+
   def result_time_hash
     @scenario_step.scenario_step_results.map { |result|
       { id: result.id, time: result.completed_seconds }
