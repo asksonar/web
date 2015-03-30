@@ -2,29 +2,141 @@
 scenario_step_227507_0:
   scenario: scenario_227507
   description: >
-    Look at our homepage and tell us what you think it is, what strikes you about it, and what you think you would click on first.  Navigate around a bit, and tell us what you think as you navigate to each page.
+    Please show us how you would find a movie you want to see this Friday night using the internet.
   step_order: 0
 
 scenario_step_227507_1:
   scenario: scenario_227507
   description: >
-    Next, go to Amazon.com, and try to find a purple umbrella and add it to your cart.  As much as possible, it will help us if you can try to think out loud so we know what you're thinking about.
+    If there was one thing you could change about the steps you just went through to make it easier, what would it be?  Show us.
   step_order: 1
 
 scenario_step_227507_2:
   scenario: scenario_227507
   description: >
-    Go to Overstock.com, and try to find a purple umbrella and add it to your cart.
+    Go ahead and find a movie you want to see Saturday night using fandango.com.
   step_order: 2
 
 scenario_step_227507_3:
   scenario: scenario_227507
   description: >
-    Which site did you prefer?  Why?
+    What was great about that process?  Where do we stand out?
   step_order: 3
 
 scenario_step_227507_4:
   scenario: scenario_227507
   description: >
-    How likely is it that you would recommend Amazon.com to a friend?
+    What was most lacking in the fandango.com steps?  Suggestions to fix it?
   step_order: 4
+
+
+
+######## scenario_step_value_proposition
+scenario_step_value_proposition_0:
+  scenario: scenario_value_proposition
+  description: >
+    What system were you using for your CRM before hearing about Salesforce?  Could you show us using that system how you managed your opportunities from first call to close?
+  step_order: 0
+
+scenario_step_value_proposition_1:
+  scenario: scenario_value_proposition
+  description: >
+    Show us what worked particularly well about that system?  What do you miss about it?
+  step_order: 1
+
+scenario_step_value_proposition_2:
+  scenario: scenario_value_proposition
+  description: >
+    Show us what major challenges you had using it?
+  step_order: 2
+
+scenario_step_value_proposition_3:
+  scenario: scenario_value_proposition
+  description: >
+    Now that you're using Salesforce, please show us which parts you find most valuable.
+  step_order: 3
+
+scenario_step_value_proposition_4:
+  scenario: scenario_value_proposition
+  description: >
+    Now that you're using Salesforce, please show us which parts you found most confusing.
+  step_order: 4
+
+scenario_step_value_proposition_5:
+  scenario: scenario_value_proposition
+  description: >
+    Please describe how happy or dissatisfied you are with Salesforce.
+  step_order: 5
+
+scenario_step_value_proposition_6:
+  scenario: scenario_value_proposition
+  description: >
+    Could you imagine leaving Salesforce?  If so, why?
+  step_order: 6
+
+
+
+
+######## scenario_overall_product_impressions
+
+scenario_step_overall_product_impressions_0:
+  scenario: scenario_overall_product_impressions
+  description: >
+    Could you show us what you were using to play music on your computer before Spotify?
+  step_order: 0
+
+scenario_step_overall_product_impressions_1:
+  scenario: scenario_overall_product_impressions
+  description: >
+    What made you initially interested in Spotify?  What did you hope it would do for you?
+  step_order: 1
+  
+scenario_step_overall_product_impressions_2:
+  scenario: scenario_overall_product_impressions
+  description: >
+    What did you like about the trial?
+  step_order: 2
+  
+scenario_step_overall_product_impressions_3:
+  scenario: scenario_overall_product_impressions
+  description: >
+    What did you dislike about the trial?
+  step_order: 3
+
+scenario_step_overall_product_impressions_4:
+  scenario: scenario_overall_product_impressions
+  description: >
+    What do you use now instead of Spotify?  Why?
+  step_order: 4
+
+scenario_step_brand_impressions_0:
+  scenario: scenario_brand_impressions
+  description: >
+    Go to Soundviz.com.  Without clicking on anything, what's your impression of the site?
+    What does it do?  What does it stand for?
+  step_order: 0
+
+scenario_step_brand_impressions_1:
+  scenario: scenario_brand_impressions
+  description: >
+    Click on "How it works".  Explain in your own words what the company does, and what its product is.
+  step_order: 1
+
+scenario_step_brand_impressions_2:
+  scenario: scenario_brand_impressions
+  description: >
+    Try creating a soundviz.  Please remember to talk out loud as you continue onwards.
+  step_order: 2
+
+scenario_step_brand_impressions_3:
+  scenario: scenario_brand_impressions
+  description: >
+    What other soundviz's do you think would be cool to make?
+  step_order: 3
+
+scenario_step_brand_impressions_4:
+  scenario: scenario_brand_impressions
+  description: >
+    Would you recommend Soundviz.com to a friend?
+  step_order: 4
+
