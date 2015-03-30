@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
     elsif session[:user_id]
       redirect_to user_scenarios_path
     end
+    render :layout => false
   end
 
   def create
