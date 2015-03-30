@@ -28,11 +28,10 @@ class Scenario < ActiveRecord::Base
     update(hash.merge({status: Scenario.statuses[:live]}))
   end
 
-
-  def self.drafts(extra_where={})
+  def self.drafts(created_by)
     Scenario
       .where(status: statuses[:drafts])
-      .where(extra_where)
+      .where(created_by: created_by)
       .order(updated_at: :desc)
   end
 

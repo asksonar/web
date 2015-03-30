@@ -5,7 +5,7 @@ class DraftsController < ApplicationController
   })
 
   def index
-    @scenarios = Scenario.drafts
+    @scenarios = Scenario.drafts(current_user.id)
   end
 
   def new

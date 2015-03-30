@@ -9,7 +9,7 @@ $(function(){
     window.location.href = $(this).attr('path');
   });
 
-  autosize($('#main-drafts-new textarea, #main-drafts-edit textarea'));
+  autosize($('textarea'));
 
   var recountSteps = function(){
     $('.ctn-step-count').each(function(index){

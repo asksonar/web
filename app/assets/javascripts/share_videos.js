@@ -5,7 +5,7 @@
 */
 
 $(function(){
-  if (!$('#main-share_videos-show')) {
+  if ($('#main-share_videos-show').length == 0) {
     return;
   }
 
@@ -24,8 +24,5 @@ $(function(){
 
     $('#videoText').html(videoTranscript);
   }
-
-
-
 
 });
