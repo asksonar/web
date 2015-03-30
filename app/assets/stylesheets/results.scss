@@ -52,7 +52,12 @@
         display: none;
       }
     }
-    .btn:hover {
+    .zeroclipboard-is-hover {
+      span {
+        display: initial;
+      }
+    }
+    .btn-hover-show:hover {
       span {
         display: initial;
       }
@@ -89,6 +94,9 @@
     pointer-events: auto;
     cursor: pointer;
   }
+  .linkVideo:hover {
+    font-weight: bold;
+  }
 
   .feelingOverflow {
     display: none;
@@ -102,6 +110,42 @@
 
   .activeVideoTextLink {
     font-weight: bold;
+  }
+
+  .modal {
+    .modal-header {
+      .modal-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .close {
+        margin-left: 10px;
+      }
+    }
+    .ctn-video-share-link {
+      margin-top: 10px;
+
+      #input-url-base {
+        width: 85%;
+      }
+      #input-url-time {
+        width: 15%;
+      }
+      .btn {
+        padding-bottom: 7px;
+
+        span {
+          display: none;
+        }
+      }
+      .zeroclipboard-is-hover {
+        span {
+          display: initial;
+        }
+      }
+    }
+
   }
 
 }

@@ -20,6 +20,7 @@
 //= require sortable
 //= require handlebars-v3.0.0
 //= require autosize
+//= require zeroclipboard
 
 // insert new packages above this line
 //= require_tree .

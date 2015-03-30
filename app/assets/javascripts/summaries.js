@@ -6,6 +6,12 @@
 
 $(function(){
 
+  new ZeroClipboard(document.getElementById("btn-copy-share-link"));
+  new ZeroClipboard(document.getElementById("btn-copy-video-link")).on( "copy", function (event) {
+    event.clipboardData.setData( "text/plain", $('#input-url-base').val() + $('#input-url-time').val());
+  });
+
+
   $('.summary_steps').on('click', '.fa-chevron-down', function(){
     $(this).removeClass('fa-chevron-down').addClass('fa-chevron-up');
     $(this).closest('.panel').find('.panel-body').slideDown(400, function(){
@@ -132,6 +138,11 @@ $(function(){
         }
 
         $('#videoText').html(videoTranscript);
+
+        var modalTitle = '[' + data.user_email + '] - ' + (data.step_order + 1) + ') ' + data.step_description;
+        $('.modal-title').html(modalTitle);
+
+        $('#input-url-base').val(data.share_link + '?t=');
       }
 
       video.currentTime(timeSeconds);
@@ -160,7 +171,8 @@ $(function(){
     videojs('example_video_1').ready(function(){
       this.on('timeupdate', function(){
         var currentTime = this.currentTime();
-        console.log(currentTime);
+        $('#input-url-time').val(parseInt(currentTime));
+        //console.log(currentTime);
         var videoTextLinks = $('#videoText .videoTextLink').removeClass('activeVideoTextLink');
         var videoTextLink;
         for(var i = videoTextLinks.length - 1; i >= 0; i-- ) {
