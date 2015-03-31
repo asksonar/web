@@ -21,9 +21,9 @@ class DraftsController < ApplicationController
     # save all the changes
     ActiveRecord::Base.transaction do
 
-      if params[:commit] == 'Save'
+      if params[:draft]
         create_action = Proc.new { |x| Scenario.create_draft(x) }
-      elsif params[:commit] == 'Publish'
+      elsif params[:publish]
         create_action = Proc.new { |x| Scenario.create_live(x) }
       else
         raise "Illegal commit value of " + params[:commit]
@@ -37,7 +37,7 @@ class DraftsController < ApplicationController
       @scenario.scenario_steps.create(scenario_steps_params)
     end
 
-    if params[:commit] == 'Publish'
+    if params[:publish]
       flash[:first_publish] = true
       redirect_to result_path(@scenario)
     else
@@ -63,9 +63,9 @@ class DraftsController < ApplicationController
   def update
     @scenario = Scenario.find(params[:id])
     ActiveRecord::Base.transaction do
-      if params[:commit] == 'Save'
+      if params[:draft]
         @scenario.update_draft(scenario_params)
-      elsif params[:commit] == 'Publish'
+      elsif params[:publish]
         @scenario.update_live(scenario_params.merge({
           published_at: Time.new
         }))
@@ -90,7 +90,7 @@ class DraftsController < ApplicationController
       end
     end
 
-    if params[:commit] == 'Publish'
+    if params[:publish]
       flash[:first_publish] = true
       redirect_to result_path(@scenario)
     else
