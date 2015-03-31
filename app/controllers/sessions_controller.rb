@@ -1,15 +1,11 @@
 class SessionsController < ApplicationController
-#  def login
-    #render :nothing => true
-#    render :text => 'hello'
-#  end
-
   def index
     if session[:researcher_id]
       redirect_to results_path
     elsif session[:user_id]
       redirect_to user_scenarios_path
     end
+    render :layout => false
   end
 
   def create

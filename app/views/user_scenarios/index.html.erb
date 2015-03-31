@@ -1,34 +1,34 @@
 <div class='pageheader'>
-  <h1>Manage your active scenarios</h1>
+  <h1>Welcome to your study!</h1>
 </div>
-<section id="main-content">
-  <table class='table'>
-    <thead>
-      <tr>
-        <th>Status</th>
-        <th>Company</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Start</th>
-      </tr>
-    </thead>
-    <tbody>
-    <% @user_scenarios.each do |user_scenario| %>
-      <tr>
-        <td><%= user_scenario.status %></td>
-        <td><%= user_scenario.company_name %></td>
-        <td><%= user_scenario.title %></td>
-        <td><%= user_scenario.description %></td>
-        <td><%= link_to 'Start', scenario_path(user_scenario.scenario) %></td>
-      </tr>
-    <% end %>
-    <% if @user_scenarios.blank? %>
-      <tr>
-        <td colspan="3">
-          No scenarios assigned to you yet
-        </td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+<section id='main-content'>
+  <script type='text/javascript'>
+    var scenarioParams = <%= raw @scenario.share_link_params_json %>
+  </script>
+
+  <div id='div-start-study' class='row'><div class='col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1'><div class='panel panel-default'>
+
+    <div class='panel-body'>
+      <%= bootstrap_form_for :user_scenario do |f| %>
+        <%= f.hidden_field :scenario_uuid, value: @scenario.uuid %>
+
+        <%= f.label :summary %>
+        <p><%= @scenario.description %></p>
+        <%= f.text_field :email %>
+        <%= f.check_box :anonymous, label: 'Take study anonymously' %>
+      <% end %>
+
+    </div>
+    <div class='panel-footer'>
+      <div class='btn btn-primary' id='btn-start'>Start</div>
+    </div>
+
+  </div></div></div>
+
+  <div id='div-started-study' class='row'><div class='col-md-12'><div class='panel panel-default'>
+    <div class='panel-body'>
+      Study has started...
+    </div>
+  </div></div></div>
+
 </section>

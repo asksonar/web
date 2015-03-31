@@ -4,6 +4,13 @@ class UserScenario < ActiveRecord::Base
 
   enum status: [:pending, :inprogress, :completed]
 
+  after_initialize :default_values, unless: :persisted?
+
+  def default_values
+    self.uuid = SecureRandom.uuid
+    self.status = self.status || 0
+  end
+
   def self.bulk_create(users, scenario)
     user_scenarios = []
     users.each do |user|

@@ -1,0 +1,27 @@
+<div class='pageheader'>
+  <%= @user.email %> - <%= @scenario.title %>
+</div>
+<section id='main-content'>
+
+  <script type='text/javascript'>
+    var videoJSON = <%= raw @video.transcription_json %>
+  </script>
+
+  <div class='row'><div class='panel'><div class='panel-body'>
+    <h3><%= @scenario.description %></h3>
+    <h4><%= @scenario_step.step_order + 1 %>) <%= @scenario_step.description %></h4>
+  </div></div></div>
+  <div class='row'><div class='col-md-12'><div class='panel'><div class='panel-body'>
+    <div class='row'>
+      <div class='col-md-6'>
+        <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered vjs-has-started"
+          controls preload="auto" width="auto" height="300"
+          poster="http://video-js.zencoder.com/oceans-clip.png"
+          data-setup='{"example_option":true}'>
+        </video>
+      </div>
+      <div class='col-md-6' id='videoText'></div>
+    </div>
+  </div></div></div></div>
+
+</section>

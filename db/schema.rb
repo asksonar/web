@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150313185854) do
+ActiveRecord::Schema.define(version: 20150324235342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20150313185854) do
     t.datetime "updated_at",  null: false
     t.integer  "step_order"
     t.string   "url"
+    t.string   "uuid"
   end
 
   create_table "scenarios", force: :cascade do |t|
@@ -78,6 +79,7 @@ ActiveRecord::Schema.define(version: 20150313185854) do
     t.integer  "status"
     t.datetime "published_at"
     t.datetime "completed_at"
+    t.string   "uuid"
   end
 
   create_table "template_steps", force: :cascade do |t|
@@ -105,6 +107,7 @@ ActiveRecord::Schema.define(version: 20150313185854) do
     t.integer  "status"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "uuid"
   end
 
   create_table "users", force: :cascade do |t|
