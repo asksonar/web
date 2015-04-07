@@ -74,7 +74,7 @@ scenario_feeling_227507_0_52:
   context_transcription: >
     The movie theaters are sorted really well.
   
-scenario_feeling_227507_0_52:
+scenario_feeling_227507_0_53:
   scenario_step: scenario_step_227507_2
   user: user_227507_0
   feeling_at_seconds: 12
@@ -82,7 +82,7 @@ scenario_feeling_227507_0_52:
   context_transcription: >
     I'm disappointed Hot Tub Time Machine was sold out, but awesome that I didn't go to the theater only to be disappointed.
   
-scenario_feeling_227507_0_52:
+scenario_feeling_227507_0_54:
   scenario_step: scenario_step_227507_3
   user: user_227507_0
   feeling_at_seconds: 3
@@ -90,7 +90,7 @@ scenario_feeling_227507_0_52:
   context_transcription: >
     It was so easy, I ended up buying tickets on the spot!
 
-scenario_feeling_227507_0_52:
+scenario_feeling_227507_0_55:
   scenario_step: scenario_step_227507_3
   user: user_227507_0
   feeling_at_seconds: 6
@@ -98,7 +98,7 @@ scenario_feeling_227507_0_52:
   context_transcription: >
     I love how new movies were so well laid out.
   
-scenario_feeling_227507_0_52:
+scenario_feeling_227507_0_56:
   scenario_step: scenario_step_227507_3
   user: user_227507_0
   feeling_at_seconds: 9
@@ -106,7 +106,7 @@ scenario_feeling_227507_0_52:
   context_transcription: >
     I loved that the trailer was embedded right there.
 
-scenario_feeling_227507_0_52:
+scenario_feeling_227507_0_57:
   scenario_step: scenario_step_227507_3
   user: user_227507_0
   feeling_at_seconds: 12
@@ -114,7 +114,7 @@ scenario_feeling_227507_0_52:
   context_transcription: >
     The fan ratings made it really easy to make a short list of movies I thought I would like.
 
-scenario_feeling_227507_0_52:
+scenario_feeling_227507_0_58:
   scenario_step: scenario_step_227507_3
   user: user_227507_0
   feeling_at_seconds: 3
@@ -122,7 +122,7 @@ scenario_feeling_227507_0_52:
   context_transcription: >
     All of the movies suck.  Not enough selection.
   
-scenario_feeling_227507_0_52:
+scenario_feeling_227507_0_59:
   scenario_step: scenario_step_227507_3
   user: user_227507_0
   feeling_at_seconds: 6
@@ -130,7 +130,7 @@ scenario_feeling_227507_0_52:
   context_transcription: >
     I want to see a scifi movie, but it was really hard to find one.
   
-scenario_feeling_227507_0_52:
+scenario_feeling_227507_0_60:
   scenario_step: scenario_step_227507_3
   user: user_227507_0
   feeling_at_seconds: 9

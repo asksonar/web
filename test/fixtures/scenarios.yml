@@ -58,7 +58,7 @@ scenario_value_proposition:
     We'd like to understand how you use CRM.  What's useful?  What's not?
     What do you wish it could do?  Thanks in advance for your participation!
   company: company_one
-  status: 0
+  status: 1
   created_by: 806634123
   uuid: <%= SecureRandom.uuid %>
 
@@ -68,7 +68,7 @@ scenario_overall_product_impressions:
   description: >
     We'd like to take just a minute of your time to help understand your impression of Spotify.
   company: company_one
-  status: 0
+  status: 1
   created_by: 806634123
   uuid: <%= SecureRandom.uuid %>
 
@@ -77,6 +77,6 @@ scenario_brand_impressions:
   description: >
     We'd love to take a minute to get your impression on a new product in the market.
   company: company_one
-  status: 0
+  status: 1
   created_by: 806634123
   uuid: <%= SecureRandom.uuid %>
