@@ -26,12 +26,12 @@
     }
   }
 
-  .navbar-left {
+  .nav-left {
     position: absolute;
     left: 0;
   }
 
-  .navbar-right {
+  .nav-right {
     position: absolute;
     right: 0;
   }
@@ -41,10 +41,10 @@
   .header .brand {
     width: 240px;
   }
-  .navbar-left {
+  .nav-left {
     float: left;
   }
-  .navbar-right {
+  .nav-right {
     float: right;
   }
 }
@@ -86,6 +86,10 @@
       color: #FFF;
       width: 200px;
       text-align: center;
+      opacity: .95;
+    }
+    a:hover {
+      opacity: 1;
     }
   }
 

@@ -1,0 +1,38 @@
+#main-results-index, #main-results-my_index {
+
+  .panel {
+    margin-bottom: 5px;
+    cursor: pointer;
+
+    .scenario-description {
+      margin-top: 3px;
+
+      small {
+        display: block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
+    .creator-description {
+      margin-top: 3px;
+    }
+  }
+
+  .live .panel {
+    border-left: #3c763d 10px solid;
+  }
+
+  .live .panel :hover {
+      background-color: #dff0d8;
+  }
+
+  .completed .panel {
+    border-left: #909aa0 10px solid;
+  }
+
+  .completed .panel :hover {
+    background-color: #eee;
+  }
+
+}

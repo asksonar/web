@@ -6,7 +6,12 @@
 
 $(function(){
 
+  if (!$('#main-results-show')) {
+    return;
+  }
+
   $('#input-share-link').val(window.location.origin + $('#input-share-link').val());
+
 
   new ZeroClipboard(document.getElementById("btn-copy-share-link")).on("copy", function(event) {
     event.clipboardData.setData( "text/plain", $('#input-share-link').val());
@@ -15,17 +20,31 @@ $(function(){
     event.clipboardData.setData( "text/plain", $('#input-url-base').val() + $('#input-url-time').val());
   });
 
+  $('.main-content-header').on('click', '#btn-archive', function() {
+    $(this).find('.btn').toggleClass('active');
+  });
 
-  $('.summary_steps').on('click', '.fa-chevron-down', function(){
+  $('.main-content-header').on('click', '#input-share-link', function() {
+    this.setSelectionRange(0, this.value.length);
+  });
+
+  $('#btn-archive, #btn-copy-share-link, #btn-preview').tooltip()
+
+  $('.main-content').on('click', '.fa-chevron-down', function(){
     $(this).removeClass('fa-chevron-down').addClass('fa-chevron-up');
     $(this).closest('.panel').find('.panel-body').slideDown(400, function(){
       setupGraph($(this).find('.summary_time_graph'));
     });
   });
 
-  $('.summary_steps').on('click', '.fa-chevron-up', function(){
+  $('.main-content').on('click', '.fa-chevron-up', function(){
     $(this).removeClass('fa-chevron-up').addClass('fa-chevron-down');
     $(this).closest('.panel').find('.panel-body').slideUp();
+  });
+
+  $('.main-content').on('click', '.link-feeling-overflow', function(){
+    $(this).parents('.feelings-container').find('.feeling-overflow').show();
+    $(this).hide();
   });
 
   $('.fa-chevron-down').click();
@@ -41,35 +60,23 @@ $(function(){
       "hideBalloonTime": 2000,
       "categoryField": "display",
       "gridAboveGraphs": true,
+      "backgroundColor": '#FAFAFA',
+      "backgroundAlpha": 1,
       "graphs": [{
-        "fillAlphas": .8,
-        "lineAlphas": .2,
+        "fillAlphas": 1,
+        "lineAlphas": 0,
         "type": "column",
         "valueField": "count",
-        "showHandOnHover": true,
         "columnWidth": .75,
-        "balloonFunction": function(graphDataItem, graph) {
-          var details = graphDataItem.dataContext.details;
-          var display = '';
-          var time = 0;
-          var mins, secs;
-          for(var i = 0; i < details.length; i++) {
-            time = details[i].time;
-            mins = Math.floor(time / 60);
-            secs = time % 60;
-
-            display += "<a class='linkVideo feeling' \
-            data-scenario-step-id='" + details[i].step_id + "' \
-            data-user-id='" + details[i].user_id + "' \
-            >" + mins + ":" + ('00' + secs).slice(-2) + "</a><br/>";
-          }
-          return display;
-        }
+        "showBalloon": false
       }],
       categoryAxis: {
-        "gridPosition": "start",
-        "tickPosition": "start",
-        "gridAlpha": 0
+        "title": "time",
+        "titleBold": false,
+        "gridAlpha": 0,
+        "tickLength": 0,
+        "gridCount": 0,
+        "autoGridCount": false
       },
       /*
       "categoryAxis": [{
@@ -78,12 +85,14 @@ $(function(){
       }],
       */
       "valueAxes": [{
-        "minVerticalGap": 30,
-        "title": "Users",
+        "title": "users",
         "titleBold": false,
-        "gridColor":"#FFFFFF",
-        "gridAlpha": 0.2,
-        "dashLength": 0
+        "gridAlpha": 0,
+        "tickLength": 0,
+        "gridCount": 0,
+        "autoGridCount": false,
+        "showFirstLabel": false,
+        "showLastLabel": false
       }],
       "balloon": {
         "fixedPosition": true
@@ -96,7 +105,7 @@ $(function(){
     });
   };
 
-  $('.summary_steps').on('click', '.feeling', function(event){
+  $('.main-content').on('click', '.feeling', function(event){
     var thisEl = $(this);
     var stepId = thisEl.attr('data-scenario-step-id');
     var userId = thisEl.attr('data-user-id');
@@ -164,11 +173,6 @@ $(function(){
   $('#summary_video_container').on('hide.bs.modal', function(){
     var video = videojs('example_video_1');
     video.pause();
-  });
-
-  $('.linkFeelingOverflow').click(function(){
-    $(this).parents('.feelingDivContainer').find('.feelingOverflow').show();
-    $(this).hide();
   });
 
   if (document.getElementById('example_video_1')) {

@@ -1,0 +1,183 @@
+#main-results-show {
+
+  .main-content-header {
+    h3 {
+      width: 95px;
+      float: left;
+    }
+    h3 + p {
+      margin-left: 95px;
+    }
+
+    .summary-container {
+      p.sub {
+        margin-top: 5px;
+      }
+      h3 {
+        margin-top: 10px;
+      }
+      h3 + p {
+        margin-top: 10px;
+      }
+    }
+
+    .buttons-container {
+      h2 {
+        display: inline-block;
+      }
+      #btn-archive {
+        cursor: pointer;
+        border: 1px solid #999;
+        margin-top: -2px;
+        .btn{
+          margin: 2px;
+          color: #C5C5C5;
+          box-shadow: none;
+          background: none;
+        }
+        .btn:hover {
+          color: #999;
+        }
+        .btn-success.active {
+          background: #8DD2E4;
+          color: #FFF;
+        }
+        .btn-failure.active {
+          background: #999;
+          color: #FFF;
+        }
+      }
+      #btn-copy-share-link {
+        background: #31B6AE;
+        color: #FFF;
+        margin-right: 2px;
+      }
+      #btn-preview {
+        background: #05647C;
+        color: #FFF;
+      }
+      #input-share-link {
+        margin-top: 10px;
+        cursor: text;
+      }
+    }
+
+    .highlights-counts-container {
+      margin-top: 10px;
+    }
+
+    .counts-container {
+      h1 i {
+        width: 27px;
+      }
+      h1 + p.sub {
+        margin-left: 27px;
+      }
+      h2 {
+        margin-top: 15px;
+      }
+    }
+  }
+
+  .panel {
+    position: relative;
+
+    .panel-body-toggle {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      z-index: 100;
+      padding: 5px;
+      background: #FAFAFA;
+    }
+
+  }
+
+  .panel-heading {
+    h1 i {
+      width: 27px;
+    }
+    ol {
+      padding-left: 25px;
+      margin-bottom: 0px;
+    }
+  }
+
+  .panel-body {
+    display: none; /* start off collapsed */
+    margin-top: 10px;
+
+    .feelings-container {
+      margin-left: 25px;
+    }
+    .confused-feeling-container {
+      margin-top: 10px;
+    }
+    .feeling-div {
+      margin-left: 12px + 5px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .feeling-overflow {
+      display: none;
+    }
+  }
+
+  .graph {
+    height: 100px;
+  }
+
+  .linkVideo {
+    pointer-events: auto;
+    cursor: pointer;
+  }
+  .linkVideo:hover {
+    font-weight: bold;
+  }
+
+
+
+  .activeVideoTextLink {
+    font-weight: bold;
+  }
+
+
+
+  .modal {
+    .modal-header {
+      .modal-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .close {
+        margin-left: 10px;
+      }
+    }
+    .ctn-video-share-link {
+      margin-top: 10px;
+
+      #input-url-base {
+        width: 85%;
+      }
+      #input-url-time {
+        width: 15%;
+      }
+      .btn {
+        padding-bottom: 7px;
+
+        span {
+          display: none;
+        }
+      }
+      .zeroclipboard-is-hover {
+        span {
+          display: initial;
+        }
+      }
+    }
+
+  }
+
+}

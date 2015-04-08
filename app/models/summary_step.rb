@@ -14,6 +14,10 @@ class SummaryStep
     @scenario_step.description
   end
 
+  def completed_users
+    @scenario_step.scenario_step_results.count
+  end
+
   def average_completed_seconds
     @scenario_step.scenario_step_results.average(:completed_seconds)
   end
