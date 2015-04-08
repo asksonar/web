@@ -1,0 +1,54 @@
+@font-face {
+  font-family: BookAlt;
+  src: url(asset-path('Neutra Text Book Alt.otf')) format("opentype");
+}
+
+@font-face {
+  font-family: DemiAlt;
+  src: url(asset_path('Neutra Text Demi Alt.otf')) format("opentype");
+}
+
+body {
+  font-family: BookAlt;
+  font-size: 14px;
+}
+
+a {
+  color: #05647C;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  line-height: 16px;
+}
+
+p + p {
+  margin-top: 6px;
+}
+
+p.explanation {
+  font-size: 12px;
+  color: #999;
+  line-height: 13px;
+}
+
+p.explanation + p.explanation {
+  margin-top: 4px;
+}
+
+h1 {
+  font-family: DemiAlt;
+  font-size: 22px;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+h3 {
+  font-family: DemiAlt;
+  font-size: 14px;
+}

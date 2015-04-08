@@ -7,9 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <section id="main-wrapper" class="theme-red">
-    <%= render partial: 'nav/header' %>
+  <section id="main-wrapper">
     <%= render partial: 'nav/left' %>
+    <%= render partial: 'nav/header' %>
     <section id="main-<%=params[:controller] + '-' + params[:action] %>" class="main-content-wrapper">
       <%= yield %>
       <%= render partial: 'nav/footer' %>

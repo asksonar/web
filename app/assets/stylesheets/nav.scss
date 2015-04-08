@@ -1,80 +1,92 @@
-#header, #login-header {
-  div.brand {
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
+.header {
+  img {
+    height: 34px;
+  }
+
+  .brand {
+    width: 100%;
+    float: left;
+    margin-top: 5px;
     text-align: center;
   }
-  a.logo {
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
 
-    margin-top: 7px;
-    margin-left: -5px;
-
-    div {
-      float: left;
-      font-size: 32px;
-      text-transform: none;
-    }
-    i {
-      transform: scaleX(-1) rotateZ(45deg);
-      opacity: .7;
-      font-size: 26px;
-    }
-    .left-ping {
-      width: 16px;
-      margin-left: -2px;
-      margin-right: 1px;
-      margin-top: 2px;
-      overflow: hidden;
-    }
-    .right-ping {
-      width: 16px;
-      margin-left: 0px;
-      margin-right: -2px;
-      margin-top: 2px;
-      overflow: hidden;
-      transform: scaleX(-1);
-    }
-  }
   .nav {
-    a {
-      padding-top: 20px;
-      padding-bottom: 20px;
-      color: #1d212a;
-    }
-    a:hover {
-      color: #1d212a;
-    }
-    @media (min-width: 768px) {
-      .toggle-left {
-        display: none;
+    >li>a {
+      padding: 0px 5px;
+      height: 44px;
+      line-height: 44px;
+      color: #FFF;
+      >i {
+        font-size: 18px;
+        padding: 0px 10px;
       }
     }
+    >li>a:hover {
+      color: #1CA5C9;
+    }
+  }
+
+  .navbar-left {
+    position: absolute;
+    left: 0;
+  }
+
+  .navbar-right {
+    position: absolute;
+    right: 0;
   }
 }
 
-.footer {
-  padding: 40px;
-  text-align: center;
+@media (min-width: $screen-sm-min) {
+  .header .brand {
+    width: 240px;
+  }
+  .navbar-left {
+    float: left;
+  }
+  .navbar-right {
+    float: right;
+  }
 }
 
-.sidebar-mini li.div-btn-create {
-  margin: auto;
-}
+.sidebar nav {
+  padding-left: 20px;
+  padding-top: 20px;
 
-li.div-btn-create {
-  margin: 20px 20px 15px 20px;
-  a {
-    background-color: #1f7bb6 !important;
-    color: #ffffff !important;
+  li a {
+    color: #FFF;
+    font-size: 18px;
+    border-radius: 0px;
+    padding: 10px;
+    i {
+      color: #C0E6F0;
+    }
   }
 
-  a:hover {
-    background-color: #238acc !important;
+  li + li {
+    margin-top: 5px;
   }
+
+  li a:hover {
+    background: #999;
+  }
+
+  li.active a, li.active a:hover {
+    background: #F5F5F5;
+    color: #000;
+    i {
+      color: #1CA5C9;
+    }
+  }
+
+  li.div-btn-create {
+    margin-bottom: 20px;
+    a {
+      background: #F69526;
+      color: #FFF;
+      width: 200px;
+      text-align: center;
+    }
+  }
+
 }
