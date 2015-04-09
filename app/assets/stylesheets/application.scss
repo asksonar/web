@@ -22,8 +22,5 @@
 @import "video-js";
 @import "switchery";
 
-@import "*";
-
-a {
-  cursor: pointer;
-}
+@import "shared/*";
+@import "controllers/*";

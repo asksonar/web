@@ -1,7 +1,7 @@
-<div class='pageheader'>
-  <h1>Your drafts</h1>
-</div>
-<section id="main-content">
+<section class='main-content-header'>
+  <h1>My Drafts</h1>
+</section>
+<section class="main-content">
   <% if flash[:saved_draft_title] %>
     <div class="alert alert-success alert-dismissable">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -10,24 +10,18 @@
   <% end %>
 
   <% @scenarios.each do |scenario| %>
-    <div class='row'>
-      <div class='col-md-12'>
-        <div class='panel' path='<%=edit_draft_path(scenario)%>'>
-          <div class='panel-body'>
-            <div class='row'>
-              <div class='col-md-8'>
-                <h2><%= scenario.title %></h2>
-                <h2 class='scenario-description'><small><%= scenario.description %></small></h2>
-              </div>
-              <div class='col-md-4'>
-                <h2><%= scenario.scenario_steps.count %> step<%= scenario.scenario_steps.count == 1 ? '' : 's'%></h2>
-                <h4><small>created by </small><%= scenario.created_by.email %></h4>
-                <h4><small>last updated </small><%= time_ago_in_words(scenario.updated_at) %> ago</h4>
-              </div>
-            </div>
-          </div>
+    <a class='panel' href='<%=edit_draft_path(scenario)%>'>
+      <div class='row'>
+        <div class='col-md-8'>
+          <h1><%= scenario.title %></h1>
+          <p class='sub'>created <%= time_ago_in_words(scenario.created_at) %> ago</p>
+        </div>
+        <div class='col-md-4'>
+          <h2><%= scenario.scenario_steps.count %> step<%= scenario.scenario_steps.count == 1 ? '' : 's'%></h2>
+          <p>last updated <%= time_ago_in_words(scenario.updated_at) %> ago</p>
         </div>
       </div>
-    </div>
+    </a>
   <% end %>
+
 </section>

@@ -2,6 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#main-drafts-index {
+  .panel {
+    p {
+      margin-top: 5px;
+    }
+  }
+}
+
 #main-drafts-new, #main-drafts-edit {
 
   textarea {
@@ -63,21 +71,4 @@
     }
   }
 
-}
-
-#main-drafts-index {
-  .panel {
-    margin-bottom: 5px;
-    cursor: pointer;
-
-    .scenario-description {
-      max-height: 2em;
-      overflow: hidden;
-      line-height: .8em;
-    }
-  }
-
-  .panel :hover {
-    background-color: #eee;
-  }
 }

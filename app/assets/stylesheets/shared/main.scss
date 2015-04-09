@@ -20,6 +20,7 @@ body {
 
 a[href] {
   color: #05647C;
+  cursor: pointer;
 }
 
 a[href]:hover {
@@ -70,7 +71,7 @@ h3 {
 .btn {
   border-radius: 0px;
   border: 1px transparent;
-  opacity: .95;
+  opacity: .9;
 }
 
 .btn:hover {
