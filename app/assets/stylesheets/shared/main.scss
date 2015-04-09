@@ -18,12 +18,12 @@ body {
   font-size: 14px;
 }
 
-a[href] {
+a {
   color: #05647C;
   cursor: pointer;
 }
 
-a[href]:hover {
+a:hover {
   color: #05647C;
   text-decoration: underline;
 }
@@ -76,6 +76,36 @@ h3 {
 
 .btn:hover {
   opacity: 1;
+}
+
+.btn-green, .btn-green:hover {
+  background-color: #31B6AE;
+  color: #FFF;
+}
+
+.btn-dark-blue, .btn-dark-blue:hover {
+  background-color: #05647C;
+  color: #FFF;
+}
+
+.btn-medium-blue, .btn-medium-blue:hover {
+  background-color: #1CA5C9;
+  color: #FFF;
+}
+
+.btn-light-blue, .btn-light-blue:hover {
+  background-color: #8ED2E4;
+  color: #FFF;
+}
+
+.btn-grey, .btn-grey:hover {
+  background-color: #999;
+  color: #FFF;
+}
+
+.btn-orange, .btn-orange:hover{
+  background-color: #F69526;
+  color: #FFF;
 }
 
 input.form-control {

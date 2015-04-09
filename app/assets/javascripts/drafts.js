@@ -10,7 +10,7 @@ $(function(){
   });
 
   var recountSteps = function(){
-    $('.ctn-step-count').each(function(index){
+    $('.ctn-count').each(function(index){
       $(this).html((index + 1) + '.');
     });
   };

@@ -40,31 +40,35 @@
     }
   }
 
-  .panel {
+  .main-content {
     textarea {
       resize: none;
       padding-left: 6px;
       padding-right: 6px;
     }
-    input {
-      padding-left: 6px;
-      padding-right: 6px;
+
+    .summary-container, .steps-container {
+      input {
+        padding-left: 6px;
+        padding-right: 6px;
+      }
+      p {
+        margin-bottom: 10px;
+      }
     }
 
-
-    p {
-      margin-bottom: 10px;
-    }
     .summary-container {
       margin-bottom: 30px;
     }
+
     .steps-container {
       margin-bottom: 20px;
+
       .ctn-count {
         width: 40px;
         line-height: 33px;
       }
-      .ctn-step {
+      .ctn-description {
         margin-left: 40px;
       }
       .ctn-url-btns {
@@ -77,13 +81,15 @@
         width: 70px;
         .btn {
           font-family: sans-serif;
-          background: black;
-          color: white;
           line-height: 34px;
           width: 34px;
           padding: 0px;
           margin-left: 1px;
           float: left;
+          opacity: .5;
+        }
+        .btn:hover {
+          opacity: 1;
         }
         .btn-add-step {
           font-size: 30px;
@@ -92,67 +98,27 @@
           font-size: 26px;
         }
       }
+      .ctn-step:first-child {
+        .btn-remove-step {
+          display: none;
+        }
+      }
       .form-group {
         margin-bottom: 10px;
       }
     }
-  }
 
-/*
-  .form-group {
-    margin-bottom: 2px;
-  }
-
-  .ctn-input-title {
-    margin-top: 5px;
-    .dropdown-toggle {
-      margin-bottom: 0px;
-    }
-  }
-
-  .ctn-left-description {
-    margin-top: 10px;
-    margin-right: -25px;
-    text-align: right;
-    opacity: .5;
-    white-space: nowrap;
-    font-size: 85%;
-  }
-
-  .ctn-step {
-    .ctn-step-input {
-      padding-right: 0px;
-    }
-    .ctn-step-input-url {
-      padding-left: 5px;
-    }
-    .ctn-step-btn {
-      margin-top: 7px;
-      margin-left: -24px;
-      white-space: nowrap;
-
-      i {
-        font-size: 25px;
-        opacity: .15;
-        cursor: pointer;
+    .buttons-container {
+      p {
+        max-width: 270px;
+        margin-top: 3px; /* 31px (button height) - 25 (text height) / 2 */
+        margin-right: 10px;
       }
-      i:hover {
-        opacity: 1;
+      .btn + .btn {
+        margin-left: 1px;
       }
     }
   }
-  */
 
-  .ctn-step:first-child {
-    .btn-remove-step {
-      display: none;
-    }
-  }
-
-  .ctn-save-buttons {
-    .btn {
-      width: 100px;
-    }
-  }
 
 }

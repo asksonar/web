@@ -11,7 +11,7 @@
     <div class='col-xs-4'>
 
       <div class="btn-group" id='btn-template-group'>
-        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+        <a class="btn btn-light-blue dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
           Start from a template<span class="caret"></span>
         </a>
         <ul class="dropdown-menu dropdown-menu-right" role="menu">
@@ -40,6 +40,7 @@
 <section class="main-content">
 
   <div class='panel'>
+
     <div class='summary-container'>
       <p>
         This is a summary which will be shown to the panelists. You should describe blah blah blah some helper text of what to write in this section.
@@ -54,55 +55,38 @@
       <div id='ctn-step-list'><!-- insert new steps here --></div>
     </div>
 
-    <div class='row'>
-      <%= f.submit 'Save Draft', name: 'draft', class: 'btn btn-info' %>
-      <%= f.submit 'Create', name: 'publish', class: 'btn btn-success' %>
-      <a href='<%=results_path%>' class='btn btn-default'>Cancel</a>
+    <div class='clearfix buttons-container'>
+      <a href='<%=results_path%>' class='btn btn-grey pull-left'>Cancel</a>
+
+      <%= f.submit 'Create study', name: 'publish', class: 'btn btn-dark-blue pull-right' %>
+      <%= f.submit 'Save as draft', name: 'draft', class: 'btn btn-light-blue pull-right' %>
+      <p class='sub pull-right'>If you’re done setting up the study, create it. You’ll be able to send the link to panelists on the next screen.</p>
     </div>
 
   </div>
-
 </section>
+
 
 <script id="new-step-template" type="text/x-handlebars-template">
   {{#each steps}}
-  <div class='row'>
+  <div class='row ctn-step'>
     <%= f.hidden_field :id, value: '{{id}}', name: 'scenario_steps[][id]' %>
     <div class='col-xs-8'>
       <h1 class='ctn-count pull-left'>1.</h1>
-      <div class='ctn-step'>
+      <div class='ctn-description'>
         <%= f.text_area :description, hide_label: true, rows: 1, placeholder: 'Tell the panelist what to do', value: '{{description}}', name: 'scenario_steps[][description]' %>
       </div>
     </div>
     <div class='col-xs-4 ctn-url-btns'>
       <div class='ctn-btns pull-right'>
-        <a class='btn btn-add-step'>+</a>
-        <a class='btn btn-remove-step'>x</a>
+        <a class='btn btn-add-step btn-light-blue'>+</a>
+        <a class='btn btn-remove-step btn-grey'>x</a>
       </div>
       <div class='ctn-url'>
         <%= f.text_field :url, hide_label: true, placeholder: 'URL (optional)', value: '{{url}}', name: 'scenario_steps[][url]' %>
       </div>
     </div>
   </div>
-
-  <!--
-    <div class='col-xs-2'>
-      <div class='ctn-step-count ctn-left-description'>Step 1.</div>
-    </div>
-    <div class='col-xs-6 ctn-step-input'>
-      <%= f.text_area :description, hide_label: true, rows: 1, placeholder: 'Tell your user what to do next', value: '{{description}}', name: 'scenario_steps[][description]' %>
-    </div>
-    <div class='col-xs-3 ctn-step-input-url'>
-      <%= f.text_field :url, hide_label: true, placeholder: 'URL (optional)', value: '{{url}}', name: 'scenario_steps[][url]' %>
-    </div>
-    <div class='col-xs-1'>
-      <div class='ctn-step-btn'>
-        <i class='btn-add-step fa fa-plus-circle'></i>
-        <i class='btn-remove-step fa fa-times-circle'></i>
-      </div>
-    </div>
-  </div>
-  -->
   {{/each}}
 </script>
 
