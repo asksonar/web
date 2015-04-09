@@ -1,3 +1,47 @@
+#main-results-index, #main-results-my_index {
+
+  a.panel {
+    cursor: pointer;
+    display: block;
+    color: #333333;
+
+    span {
+      display: block;
+    }
+
+    .title-container {
+      h1 + p {
+        margin-top: 10px;
+      }
+    }
+
+    .counts-container {
+      margin-bottom: 10px;
+      h1 i {
+        width: 27px;
+      }
+      h1 + p.sub {
+        margin-left: 27px;
+      }
+    }
+
+    span {
+      margin-right: 10px;
+      padding: 5px 10px;
+      display: inline-block;
+    }
+    span + h2 {
+      display: inline-block;
+    }
+    span.label-live {
+      background: #8DD2E4;
+    }
+    span.label-not-live {
+      background: #999;
+    }
+  }
+}
+
 #main-results-show {
 
   .main-content-header {

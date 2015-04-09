@@ -18,11 +18,11 @@ body {
   font-size: 14px;
 }
 
-a {
+a[href] {
   color: #05647C;
 }
 
-a:hover {
+a[href]:hover {
   color: #05647C;
   text-decoration: underline;
 }
