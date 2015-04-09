@@ -2,8 +2,10 @@ class SessionsController < ApplicationController
   def index
     if session[:researcher_id]
       redirect_to results_path
+      return
     elsif session[:user_id]
       redirect_to user_scenarios_path
+      return
     end
     render :layout => false
   end

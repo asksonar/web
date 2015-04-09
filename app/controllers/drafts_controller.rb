@@ -8,8 +8,8 @@ class DraftsController < ApplicationController
     @scenarios = Scenario.drafts(current_user.id)
   end
 
-  def new
-    @scenario = @scenario || EMPTY_SCENARIO
+  def new(scenario = EMPTY_SCENARIO)
+    @scenario = scenario
     @product_templates = Template.product_templates
     @marketing_templates = Template.marketing_templates
     if @template = Template.find_by(value: params[:template])
@@ -54,8 +54,7 @@ class DraftsController < ApplicationController
   end
 
   def edit
-    @scenario = Scenario.find(params[:id])
-    new
+    new(Scenario.find(params[:id]))
     render :new
     # need to modify the new page to indicate it is editing
   end
