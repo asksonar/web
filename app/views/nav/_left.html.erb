@@ -7,8 +7,7 @@
         <%= navbar_item "New Study", '/create', class: 'div-btn-create' %>
 
         <%= navbar_item "<i class='fa fa-fw fa-bar-chart'></i> All Results", '/results' %>
-        <%= navbar_item "<i class='fa fa-fw fa-star-o'></i> My Results", '/my_results' %>
-        <%= navbar_item "<i class='fa fa-fw fa-users'></i> Recent Activity", '/recent' %>
+        <%= navbar_item "<i class='fa fa-fw fa-user'></i> My Results", '/my_results' %>
         <%= navbar_item "<i class='fa fa-fw fa-edit'></i> Drafts (" + drafts_count.to_s + ')', '/drafts' %>
       <% elsif current_user and current_user.is_user? %>
         <%= navbar_item "Manage", '/user_scenarios' %>

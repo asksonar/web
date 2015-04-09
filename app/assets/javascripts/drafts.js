@@ -11,7 +11,7 @@ $(function(){
 
   var recountSteps = function(){
     $('.ctn-step-count').each(function(index){
-      $(this).html('Step ' + (index + 1) + '.');
+      $(this).html((index + 1) + '.');
     });
   };
 

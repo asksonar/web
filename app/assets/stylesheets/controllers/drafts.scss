@@ -12,10 +12,93 @@
 
 #main-drafts-new, #main-drafts-edit {
 
-  textarea {
-    resize: none;
+  .main-content-header {
+    #btn-template-group {
+      width: 100%;
+      .btn {
+        width: 100%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        .caret {
+          position: absolute;
+          right: 10px;
+          top: 17px;
+        }
+      }
+      ul {
+        width: 100%;
+        a {
+          white-space: normal;
+        }
+      }
+    }
+    .header-sub-text {
+      margin-top: 5px;
+      .template-sub-text {
+        text-align: center;
+      }
+    }
   }
 
+  .panel {
+    textarea {
+      resize: none;
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+    input {
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+
+
+    p {
+      margin-bottom: 10px;
+    }
+    .summary-container {
+      margin-bottom: 30px;
+    }
+    .steps-container {
+      margin-bottom: 20px;
+      .ctn-count {
+        width: 40px;
+        line-height: 33px;
+      }
+      .ctn-step {
+        margin-left: 40px;
+      }
+      .ctn-url-btns {
+        padding-left: 5px;
+      }
+      .ctn-url {
+        margin-right: 90px;
+      }
+      .ctn-btns {
+        width: 70px;
+        .btn {
+          font-family: sans-serif;
+          background: black;
+          color: white;
+          line-height: 34px;
+          width: 34px;
+          padding: 0px;
+          margin-left: 1px;
+          float: left;
+        }
+        .btn-add-step {
+          font-size: 30px;
+        }
+        .btn-remove-step {
+          font-size: 26px;
+        }
+      }
+      .form-group {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+/*
   .form-group {
     margin-bottom: 2px;
   }
@@ -58,6 +141,7 @@
       }
     }
   }
+  */
 
   .ctn-step:first-child {
     .btn-remove-step {

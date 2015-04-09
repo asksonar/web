@@ -1,21 +1,19 @@
 <%= bootstrap_form_for @scenario, url: @scenario.id ? draft_path(@scenario) : drafts_path, html: {id: 'create-form'} do |f| %>
-<div class='pageheader'>
-  <h1>
-    <% if @scenario.id %>
-      Edit your scenario&nbsp;&nbsp;<small>last updated <%= time_ago_in_words(@scenario.updated_at) %> ago</small>
-    <% else %>
-      Create a new scenario
-    <% end %>
-  </h1>
-  <div class='row ctn-input-title'>
-    <div class='col-xs-11'>
-      <%= f.text_field :title, hide_label: true, placeholder: 'Give your scenario a title (only visible to you)' %>
+  <%= f.hidden_field :id, value: @scenario.id %>
+
+<section class='main-content-header'>
+  <div class='row'>
+    <div class='col-xs-8'>
+      <h1>
+        <%= f.text_field :title, hide_label: true, placeholder: 'Title your study', class: 'input-lg' %>
+      </h1>
     </div>
-    <div class='col-xs-1'>
-      <div class="btn-group pull-right">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          Templates <span class="caret"></span>
-        </button>
+    <div class='col-xs-4'>
+
+      <div class="btn-group" id='btn-template-group'>
+        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          Start from a template<span class="caret"></span>
+        </a>
         <ul class="dropdown-menu dropdown-menu-right" role="menu">
           <% @product_templates.each do |template| %>
             <li><a href='?template=<%=template.value%>'><%=template.display%></a></li>
@@ -28,57 +26,88 @@
       </div>
     </div>
   </div>
-</div>
-<section id="main-content">
-  <%= f.hidden_field :id, value: @scenario.id %> <!-- #to_param -->
-  <div class='row'><div class='col-md-12 col-lg-10 col-lg-offset-1'><div class='panel panel-default'>
-    <div class='panel-body'>
 
-      <div class='row ctn-scenario-description'>
-        <div class='col-xs-2'>
-          <div class='ctn-left-description'>Summary</div>
-        </div>
-        <div class='col-xs-9'>
-          <%= f.text_area :description, rows: 3, hide_label: true, placeholder: 'Describe for your user what the scenario is about' %>
-        </div>
-      </div>
-
-      <script id="new-step-template" type="text/x-handlebars-template">
-        {{#each steps}}
-        <div class='row ctn-step'>
-          <%= f.hidden_field :id, value: '{{id}}', name: 'scenario_steps[][id]' %>
-          <div class='col-xs-2'>
-            <div class='ctn-step-count ctn-left-description'>Step 1.</div>
-          </div>
-          <div class='col-xs-6 ctn-step-input'>
-            <%= f.text_area :description, hide_label: true, rows: 1, placeholder: 'Tell your user what to do next', value: '{{description}}', name: 'scenario_steps[][description]' %>
-          </div>
-          <div class='col-xs-3 ctn-step-input-url'>
-            <%= f.text_field :url, hide_label: true, placeholder: 'URL (optional)', value: '{{url}}', name: 'scenario_steps[][url]' %>
-          </div>
-          <div class='col-xs-1'>
-            <div class='ctn-step-btn'>
-              <i class='btn-add-step fa fa-plus-circle'></i>
-              <i class='btn-remove-step fa fa-times-circle'></i>
-            </div>
-          </div>
-        </div>
-        {{/each}}
-      </script>
-
-      <script type='text/javascript'>
-        var scenarioSteps = <%= raw @scenario.scenario_steps_json %>;
-      </script>
-
-      <div id='ctn-step-list'><!-- insert new steps here -->
-      </div>
-
+  <div class='row header-sub-text'>
+    <div class='col-xs-8'>
+      <p class='sub'>This title is just for internal purposes.  Your panelists will never see this.</p>
     </div>
-    <div class='panel-footer text-center ctn-save-buttons'>
+    <div class='col-xs-4'>
+      <p class='template-sub-text'>or just start typing below.</p>
+    </div>
+  </div>
+
+</section>
+<section class="main-content">
+
+  <div class='panel'>
+    <div class='summary-container'>
+      <p>
+        This is a summary which will be shown to the panelists. You should describe blah blah blah some helper text of what to write in this section.
+      </p>
+      <%= f.text_area :description, rows: 3, hide_label: true, placeholder: 'Welcome the panelist to the study.' %>
+    </div>
+
+    <div class='steps-container'>
+      <p>
+        Now tell your panelists what you’d like them to do. Go step by step, leading them through your test. Some more text about how to type here. Some text about how panelists will experience these steps.
+      </p>
+      <div id='ctn-step-list'><!-- insert new steps here --></div>
+    </div>
+
+    <div class='row'>
       <%= f.submit 'Save Draft', name: 'draft', class: 'btn btn-info' %>
       <%= f.submit 'Create', name: 'publish', class: 'btn btn-success' %>
       <a href='<%=results_path%>' class='btn btn-default'>Cancel</a>
     </div>
-  </div></div></div>
+
+  </div>
+
 </section>
+
+<script id="new-step-template" type="text/x-handlebars-template">
+  {{#each steps}}
+  <div class='row'>
+    <%= f.hidden_field :id, value: '{{id}}', name: 'scenario_steps[][id]' %>
+    <div class='col-xs-8'>
+      <h1 class='ctn-count pull-left'>1.</h1>
+      <div class='ctn-step'>
+        <%= f.text_area :description, hide_label: true, rows: 1, placeholder: 'Tell the panelist what to do', value: '{{description}}', name: 'scenario_steps[][description]' %>
+      </div>
+    </div>
+    <div class='col-xs-4 ctn-url-btns'>
+      <div class='ctn-btns pull-right'>
+        <a class='btn btn-add-step'>+</a>
+        <a class='btn btn-remove-step'>x</a>
+      </div>
+      <div class='ctn-url'>
+        <%= f.text_field :url, hide_label: true, placeholder: 'URL (optional)', value: '{{url}}', name: 'scenario_steps[][url]' %>
+      </div>
+    </div>
+  </div>
+
+  <!--
+    <div class='col-xs-2'>
+      <div class='ctn-step-count ctn-left-description'>Step 1.</div>
+    </div>
+    <div class='col-xs-6 ctn-step-input'>
+      <%= f.text_area :description, hide_label: true, rows: 1, placeholder: 'Tell your user what to do next', value: '{{description}}', name: 'scenario_steps[][description]' %>
+    </div>
+    <div class='col-xs-3 ctn-step-input-url'>
+      <%= f.text_field :url, hide_label: true, placeholder: 'URL (optional)', value: '{{url}}', name: 'scenario_steps[][url]' %>
+    </div>
+    <div class='col-xs-1'>
+      <div class='ctn-step-btn'>
+        <i class='btn-add-step fa fa-plus-circle'></i>
+        <i class='btn-remove-step fa fa-times-circle'></i>
+      </div>
+    </div>
+  </div>
+  -->
+  {{/each}}
+</script>
+
+<script type='text/javascript'>
+  var scenarioSteps = <%= raw @scenario.scenario_steps_json %>;
+</script>
+
 <% end %>
