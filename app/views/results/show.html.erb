@@ -1,11 +1,22 @@
 <section class='main-content-header'>
   <%= bsh_split_panel 'col-md-8' do %>
     <div class='row'>
-      <div class='col-md-8 summary-container'>
+      <div class='col-md-8 summary-highlights-container'>
         <h1><%= @summary.title %></h1>
         <p class='sub'>by <%= '@summary.created_by.full_name' %> (<%= @summary.created_by.email %>)</p>
-        <h3>Description:</h3>
-        <p><%= @summary.description %></p>
+        <div class='summary-container'>
+          <p>
+            <span class='h3'>Description:</span><span><%= @summary.description %></span>
+          </p>
+        </div>
+        <div class='highlights-container'>
+          <% @summary.highlights.each_with_index do |highlight, index| %>
+            <p><% if index == 0 %><span class='h3'>Highlights:</span><%= highlight %><% end %></p>
+          <% end %>
+          <% if @summary.highlights.count == 0 %>
+            <p><span class='h3'>Highlights:</span><span class='sub'>no highlights added yet</span></p>
+          <% end %>
+        </div>
       </div>
       <div class='col-md-4 buttons-container'>
 
@@ -21,15 +32,8 @@
         </div>
 
         <input type="text" id='input-share-link' class="form-control" readonly value='<%= @summary.share_link %>'>
-      </div>
-    </div>
-    <div class='row highlights-counts-container'>
-      <div class='col-md-8'>
-        <h3>Highlights:</h3>
-        <p>ruby each highlights</p>
-      </div>
-      <div class='col-md-4 counts-container'>
-        <div class='row'>
+
+        <div class='row counts-container'>
           <div class='col-xs-6'>
             <h1><i class='fa fa-smile-o text-success'></i><%= @summary.total_delighted %></h1>
             <p class='sub'>moment<%= @summary.total_delighted != 1 ? 's' : '' %></p>
@@ -68,9 +72,11 @@
           <div class='row'>
             <div class='col-xs-6'>
               <h1><i class='fa fa-smile-o text-success'></i><%= summary_step.total_delighted %></h1>
+              <p class='sub'>moment<%= summary_step.total_delighted != 1 ? 's' : '' %></p>
             </div>
             <div class='col-xs-6'>
-              <h1><i class='fa fa-frown-o text-danger'></i><%= summary_step.total_delighted %></h1>
+              <h1><i class='fa fa-frown-o text-danger'></i><%= summary_step.total_confused %></h1>
+              <p class='sub'>moment<%= summary_step.total_confused != 1 ? 's' : '' %></p>
             </div>
           </div>
         </div>
@@ -78,35 +84,30 @@
       <div class='row panel-body'>
         <div class='col-xs-8'>
           <div class='feelings-container'>
-            <div class='delighted-feeling-container <%= 'hidden' if summary_step.total_delighted < 1 %>'>
-              <i class='fa fa-smile-o text-success pull-left'></i>
-              <% summary_step.delighted_feelings.each_with_index do |feeling, index| %>
-                <p class='feeling-div <%= 'feeling-overflow' if index > 2 %>'><a class='feeling'
+            <div class='delighted-feelings-container <%= 'hidden' if summary_step.total_delighted < 1 %>'>
+              <h1><i class='fa fa-smile-o text-success pull-left'></i></h1>
+              <% summary_step.delighted_feelings.each do |feeling| %>
+                <p class='feeling-div'><a class='feeling'
                   data-scenario-step-id='<%=feeling.scenario_step_id%>'
                   data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
                   data-user-id='<%=feeling.user_id%>'>...<%= feeling.context_transcription %>...</a>
                 </p>
               <% end %>
             </div>
-            <div class='confused-feeling-container <%= 'hidden' if summary_step.total_confused < 1 %>'>
-              <i class='fa fa-frown-o text-danger pull-left'></i>
-              <% summary_step.confused_feelings.each_with_index do |feeling, index| %>
-                <p class='feeling-div <%= 'feeling-overflow' if index > 2 %>'><a class='feeling'
+            <div class='confused-feelings-container <%= 'hidden' if summary_step.total_confused < 1 %>'>
+              <h1><i class='fa fa-frown-o text-danger pull-left'></i></h1>
+              <% summary_step.confused_feelings.each do |feeling| %>
+                <p class='feeling-div'><a class='feeling'
                   data-scenario-step-id='<%=feeling.scenario_step_id%>'
                   data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
                   data-user-id='<%=feeling.user_id%>'>...<%= feeling.context_transcription %>...</a>
                 </p>
               <% end %>
             </div>
-            <% if summary_step.total_delighted > 3 or summary_step.total_confused > 3 %>
-              <p><a class='link-feeling-overflow'>show more...</a></p>
-            <% end %>
             <% if summary_step.total_delighted == 0 and summary_step.total_confused == 0 %>
-              <p class='sub'><i class='fa fa-question-circle'></i> no responses yet</p>
+              <p class='sub'><i class='fa fa-question-circle'></i> no moments yet</p>
             <% end %>
           </div>
-
-
         </div>
         <div class='col-xs-4'>
 
@@ -118,7 +119,7 @@
             </script>
             <div id='graph<%= summary_step.step_order%>' class='graph'></div>
           </div>
-          <div class='average-time pull-left'><%= summary_step.average_completed_minutes %> avg</div>
+          <div class='average-time pull-left'><%= summary_step.average_completed_minutes %> average</div>
           <p class='sub pull-right'><%= summary_step.completed_users %> users</p>
 
         </div>

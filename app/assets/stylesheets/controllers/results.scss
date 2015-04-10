@@ -32,23 +32,27 @@
 #main-results-show {
 
   .main-content-header {
-    h3 {
-      width: 95px;
-      float: left;
-    }
-    h3 + p {
-      margin-left: 95px;
-    }
-
-    .summary-container {
+    .summary-highlights-container {
       p.sub {
         margin-top: 5px;
       }
-      h3 {
+
+      .summary-container,  .highlights-container {
         margin-top: 10px;
+        span.h3 {
+          display: inline-block;
+          text-indent: -95px;
+        }
+        p {
+          margin-left: 95px;
+        }
       }
-      h3 + p {
-        margin-top: 10px;
+      .summary-container {
+        max-height: 3em;
+        overflow: hidden;
+      }
+      .summary-container:hover {
+        max-height: inherit;
       }
     }
 
@@ -59,10 +63,11 @@
       #btn-archive {
         cursor: pointer;
         border: 1px solid #999;
-        margin-top: -2px;
         .btn{
           margin: 2px;
           color: #C5C5C5;
+          padding-top: 3px;
+          padding-bottom: 3px;
           box-shadow: none;
           background: none;
         }
@@ -93,19 +98,11 @@
       }
     }
 
-    .highlights-counts-container {
-      margin-top: 10px;
-    }
-
     .counts-container {
+      margin-top: 30px;
+      margin-bottom: 15px;
       h1 i {
         width: 27px;
-      }
-      h1 + p.sub {
-        margin-left: 27px;
-      }
-      h2 {
-        margin-top: 15px;
       }
     }
   }
@@ -137,22 +134,19 @@
 
   .panel-body {
     display: none; /* start off collapsed */
-    margin-top: 10px;
 
     .feelings-container {
       margin-left: 25px;
+      margin-top: 20px;
     }
-    .confused-feeling-container {
-      margin-top: 10px;
+    .confused-feelings-container {
+      margin-top: 20px;
     }
     .feeling-div {
-      margin-left: 12px + 5px;
+      margin-left: 26px;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-    }
-    .feeling-overflow {
-      display: none;
     }
   }
 

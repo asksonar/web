@@ -93,4 +93,8 @@ class Scenario < ActiveRecord::Base
     scenario_steps.map { |step| SummaryStep.new(step) }
   end
 
+  def highlights
+    []
+  end
+
 end
