@@ -10,7 +10,7 @@
   <% end %>
 
   <% @results.each do |scenario| %>
-    <a class='panel' href='<%= @owner == 'me' ? my_result_path(scenario) : result_path(scenario) %>'>
+    <a class='panel <%=scenario.status%>' href='<%= @owner == 'me' ? my_result_path(scenario) : result_path(scenario) %>'>
       <%= bsh_split_panel 'col-md-8' do %>
         <div class='row'>
           <div class='col-md-8 title-container'>
@@ -28,15 +28,14 @@
                 <p class='sub'>moment<%= scenario.total_confused != 1 ? 's' : '' %></p>
               </div>
             </div>
-
-            <% if scenario.status == 'live' %>
-              <span class='label-live'>Live</span>
-            <% elsif scenario.status == 'completed' %>
-              <span class='label-not-live'>Not Live</span>
-            <% else %>
-              error
-            <% end %>
-            <h2><%= scenario.user_completed_count || 0 %> users</h2>
+            <div class='row'>
+              <div class='col-xs-6'>
+                <h2><%= scenario.user_completed_count || 0 %> users</h2>
+              </div>
+              <div class='col-xs-6'>
+                <h2 class='label-live'><span>Not </span>Live</h2>
+              </div>
+            </div>
           </div>
         </div>
       <% end %>

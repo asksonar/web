@@ -8,13 +8,16 @@
   src: url(asset_path('Neutra Text Demi Alt.otf')) format("opentype");
 }
 
+
 body {
-  font-family: BookAlt;
+  //font-family: BookAlt;
+  font-family: 'Brandon Grotesque Regular';
   font-size: 14px;
 }
 
 .body {
-  font-family: BookAlt;
+  //font-family: BookAlt;
+  font-family: 'Brandon Grotesque Regular';
   font-size: 14px;
 }
 
@@ -49,7 +52,8 @@ p.sub + p.sub {
 }
 
 h1 {
-  font-family: DemiAlt;
+  //font-family: DemiAlt;
+  font-family: 'Brandon Grotesque Medium';
   font-size: 22px;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -62,7 +66,8 @@ h2 {
 }
 
 h3 {
-  font-family: DemiAlt;
+  //font-family: DemiAlt;
+  font-family: 'Brandon Grotesque Medium';
   font-size: 14px;
   margin-top: 0px;
   margin-bottom: 0px;

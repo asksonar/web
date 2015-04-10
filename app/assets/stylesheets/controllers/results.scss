@@ -1,39 +1,30 @@
 #main-results-index, #main-results-my_index {
 
-  a.panel {
-    span {
-      display: block;
+  .panel.live {
+    border-left: 10px solid #8DD2E4;
+    .label-live span {
+      display: none;
     }
+  }
 
+  .panel.completed {
+    border-left: 10px solid #999;
+    .label-live {
+      color: #999;
+    }
+  }
+
+  a.panel {
     .title-container {
       h1 + p {
         margin-top: 10px;
       }
     }
-
     .counts-container {
       margin-bottom: 10px;
       h1 i {
         width: 27px;
       }
-      h1 + p.sub {
-        margin-left: 27px;
-      }
-    }
-
-    span {
-      margin-right: 10px;
-      padding: 5px 10px;
-      display: inline-block;
-    }
-    span + h2 {
-      display: inline-block;
-    }
-    span.label-live {
-      background: #8DD2E4;
-    }
-    span.label-not-live {
-      background: #999;
     }
   }
 }
