@@ -11,16 +11,19 @@
 
   <% @scenarios.each do |scenario| %>
     <a class='panel' href='<%=edit_draft_path(scenario)%>'>
-      <div class='row'>
-        <div class='col-md-8'>
-          <h1><%= scenario.title %></h1>
-          <p class='sub'>created <%= time_ago_in_words(scenario.created_at) %> ago</p>
+      <%= bsh_split_panel 'col-md-8' do %>
+        <div class='row'>
+          <div class='col-md-8'>
+            <h1><%= scenario.title %></h1>
+            <p class='sub'>created <%= time_ago_in_words(scenario.created_at) %> ago</p>
+            <p><%= scenario.description %></p>
+          </div>
+          <div class='col-md-4'>
+            <h2><%= scenario.scenario_steps.count %> step<%= scenario.scenario_steps.count == 1 ? '' : 's'%></h2>
+            <p class='sub'>last updated <%= time_ago_in_words(scenario.updated_at) %> ago</p>
+          </div>
         </div>
-        <div class='col-md-4'>
-          <h2><%= scenario.scenario_steps.count %> step<%= scenario.scenario_steps.count == 1 ? '' : 's'%></h2>
-          <p>last updated <%= time_ago_in_words(scenario.updated_at) %> ago</p>
-        </div>
-      </div>
+      <% end %>
     </a>
   <% end %>
 

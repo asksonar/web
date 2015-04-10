@@ -1,47 +1,49 @@
 <section class='main-content-header'>
-  <div class='row'>
-    <div class='col-md-8 summary-container'>
-      <h1><%= @summary.title %></h1>
-      <p class='sub'>by <%= '@summary.created_by.full_name' %> (<%= @summary.created_by.email %>)</p>
-      <h3>Description:</h3>
-      <p><%= @summary.description %></p>
-    </div>
-    <div class='col-md-4 buttons-container'>
-
-      <h2 class=''>Live</h2>
-      <div id='btn-archive' class="btn-group" data-placement="bottom" title="Close the study">
-        <a class="btn btn-success active">On</a>
-        <a class="btn btn-failure">Off</a>
+  <%= bsh_split_panel 'col-md-8' do %>
+    <div class='row'>
+      <div class='col-md-8 summary-container'>
+        <h1><%= @summary.title %></h1>
+        <p class='sub'>by <%= '@summary.created_by.full_name' %> (<%= @summary.created_by.email %>)</p>
+        <h3>Description:</h3>
+        <p><%= @summary.description %></p>
       </div>
+      <div class='col-md-4 buttons-container'>
 
-      <div class="btn-group pull-right">
-        <a class="btn btn-default" id='btn-copy-share-link' data-clipboard-text='<%= @summary.share_link %>' data-placement="bottom" title="Copy the share link"><i class='fa fa-link'></i></a>
-        <a class='btn btn-default' id='btn-preview' data-toggle="modal" data-target='#modal-preview' data-placement="bottom" title="Preview the study"><i class='fa fa-desktop'></i></a>
-      </div>
-
-      <input type="text" id='input-share-link' class="form-control" readonly value='<%= @summary.share_link %>'>
-    </div>
-  </div>
-  <div class='row highlights-counts-container'>
-    <div class='col-md-8'>
-      <h3>Highlights:</h3>
-      <p>ruby each highlights</p>
-    </div>
-    <div class='col-md-4 counts-container'>
-      <div class='row'>
-        <div class='col-xs-6'>
-          <h1><i class='fa fa-smile-o text-success'></i><%= @summary.total_delighted %></h1>
-          <p class='sub'>moment<%= @summary.total_delighted != 1 ? 's' : '' %></p>
+        <h2 class=''>Live</h2>
+        <div id='btn-archive' class="btn-group" data-placement="bottom" title="Close the study">
+          <a class="btn btn-success active">On</a>
+          <a class="btn btn-failure">Off</a>
         </div>
-        <div class='col-xs-6'>
-          <h1><i class='fa fa-frown-o text-danger'></i><%= @summary.total_confused %></h1>
-          <p class='sub'>moment<%= @summary.total_confused != 1 ? 's' : '' %></p>
+
+        <div class="btn-group pull-right">
+          <a class="btn btn-default" id='btn-copy-share-link' data-clipboard-text='<%= @summary.share_link %>' data-placement="bottom" title="Copy the share link"><i class='fa fa-link'></i></a>
+          <a class='btn btn-default' id='btn-preview' data-toggle="modal" data-target='#modal-preview' data-placement="bottom" title="Preview the study"><i class='fa fa-desktop'></i></a>
         </div>
+
+        <input type="text" id='input-share-link' class="form-control" readonly value='<%= @summary.share_link %>'>
       </div>
-      <h2><%= @summary.user_completed_count || 0 %> users</h2>
-      <p class='sub'>0 incomplete</p>
     </div>
-  </div>
+    <div class='row highlights-counts-container'>
+      <div class='col-md-8'>
+        <h3>Highlights:</h3>
+        <p>ruby each highlights</p>
+      </div>
+      <div class='col-md-4 counts-container'>
+        <div class='row'>
+          <div class='col-xs-6'>
+            <h1><i class='fa fa-smile-o text-success'></i><%= @summary.total_delighted %></h1>
+            <p class='sub'>moment<%= @summary.total_delighted != 1 ? 's' : '' %></p>
+          </div>
+          <div class='col-xs-6'>
+            <h1><i class='fa fa-frown-o text-danger'></i><%= @summary.total_confused %></h1>
+            <p class='sub'>moment<%= @summary.total_confused != 1 ? 's' : '' %></p>
+          </div>
+        </div>
+        <h2><%= @summary.user_completed_count || 0 %> users</h2>
+        <p class='sub'>0 incomplete</p>
+      </div>
+    </div>
+  <% end %>
 </section>
 <section class='main-content'>
 
@@ -54,72 +56,74 @@
 
   <% @summary.summary_steps.each do |summary_step| %>
   <div class='panel'>
-    <i class="fa fa-chevron-down panel-body-toggle"></i>
-    <div class='row panel-heading'>
-      <div class='col-xs-8'>
-        <h1><ol start='<%= summary_step.step_order + 1 %>'><li>
-          <p class='body'><%= summary_step.description %></p>
-        </li></ol></h1>
-      </div>
-      <div class='col-xs-4'>
-        <div class='row'>
-          <div class='col-xs-6'>
-            <h1><i class='fa fa-smile-o text-success'></i><%= summary_step.total_delighted %></h1>
-          </div>
-          <div class='col-xs-6'>
-            <h1><i class='fa fa-frown-o text-danger'></i><%= summary_step.total_delighted %></h1>
+    <%= bsh_split_panel 'col-md-8' do %>
+      <i class="fa fa-chevron-down panel-body-toggle"></i>
+      <div class='row panel-heading'>
+        <div class='col-xs-8'>
+          <h1><ol start='<%= summary_step.step_order + 1 %>'><li>
+            <p class='body'><%= summary_step.description %></p>
+          </li></ol></h1>
+        </div>
+        <div class='col-xs-4'>
+          <div class='row'>
+            <div class='col-xs-6'>
+              <h1><i class='fa fa-smile-o text-success'></i><%= summary_step.total_delighted %></h1>
+            </div>
+            <div class='col-xs-6'>
+              <h1><i class='fa fa-frown-o text-danger'></i><%= summary_step.total_delighted %></h1>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class='row panel-body'>
-      <div class='col-xs-8'>
-        <div class='feelings-container'>
-          <div class='delighted-feeling-container <%= 'hidden' if summary_step.total_delighted < 1 %>'>
-            <i class='fa fa-smile-o text-success pull-left'></i>
-            <% summary_step.delighted_feelings.each_with_index do |feeling, index| %>
-              <p class='feeling-div <%= 'feeling-overflow' if index > 2 %>'><a class='feeling'
-                data-scenario-step-id='<%=feeling.scenario_step_id%>'
-                data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
-                data-user-id='<%=feeling.user_id%>'>...<%= feeling.context_transcription %>...</a>
-              </p>
+      <div class='row panel-body'>
+        <div class='col-xs-8'>
+          <div class='feelings-container'>
+            <div class='delighted-feeling-container <%= 'hidden' if summary_step.total_delighted < 1 %>'>
+              <i class='fa fa-smile-o text-success pull-left'></i>
+              <% summary_step.delighted_feelings.each_with_index do |feeling, index| %>
+                <p class='feeling-div <%= 'feeling-overflow' if index > 2 %>'><a class='feeling'
+                  data-scenario-step-id='<%=feeling.scenario_step_id%>'
+                  data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
+                  data-user-id='<%=feeling.user_id%>'>...<%= feeling.context_transcription %>...</a>
+                </p>
+              <% end %>
+            </div>
+            <div class='confused-feeling-container <%= 'hidden' if summary_step.total_confused < 1 %>'>
+              <i class='fa fa-frown-o text-danger pull-left'></i>
+              <% summary_step.confused_feelings.each_with_index do |feeling, index| %>
+                <p class='feeling-div <%= 'feeling-overflow' if index > 2 %>'><a class='feeling'
+                  data-scenario-step-id='<%=feeling.scenario_step_id%>'
+                  data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
+                  data-user-id='<%=feeling.user_id%>'>...<%= feeling.context_transcription %>...</a>
+                </p>
+              <% end %>
+            </div>
+            <% if summary_step.total_delighted > 3 or summary_step.total_confused > 3 %>
+              <p><a class='link-feeling-overflow'>show more...</a></p>
+            <% end %>
+            <% if summary_step.total_delighted == 0 and summary_step.total_confused == 0 %>
+              <p class='sub'><i class='fa fa-question-circle'></i> no responses yet</p>
             <% end %>
           </div>
-          <div class='confused-feeling-container <%= 'hidden' if summary_step.total_confused < 1 %>'>
-            <i class='fa fa-frown-o text-danger pull-left'></i>
-            <% summary_step.confused_feelings.each_with_index do |feeling, index| %>
-              <p class='feeling-div <%= 'feeling-overflow' if index > 2 %>'><a class='feeling'
-                data-scenario-step-id='<%=feeling.scenario_step_id%>'
-                data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
-                data-user-id='<%=feeling.user_id%>'>...<%= feeling.context_transcription %>...</a>
-              </p>
-            <% end %>
+
+
+        </div>
+        <div class='col-xs-4'>
+
+          <%# convert javascript converts this into nice graph %>
+          <%# also links to the video for that user %>
+          <div class='summary_time_graph'>
+            <script type='application/json'>
+              <%= raw summary_step.result_time_bucket_hash.values.to_json %>
+            </script>
+            <div id='graph<%= summary_step.step_order%>' class='graph'></div>
           </div>
-          <% if summary_step.total_delighted > 3 or summary_step.total_confused > 3 %>
-            <p><a class='link-feeling-overflow'>show more...</a></p>
-          <% end %>
-          <% if summary_step.total_delighted == 0 and summary_step.total_confused == 0 %>
-            <p class='sub'><i class='fa fa-question-circle'></i> no responses yet</p>
-          <% end %>
+          <div class='average-time pull-left'><%= summary_step.average_completed_minutes %> avg</div>
+          <p class='sub pull-right'><%= summary_step.completed_users %> users</p>
+
         </div>
-
-
       </div>
-      <div class='col-xs-4'>
-
-        <%# convert javascript converts this into nice graph %>
-        <%# also links to the video for that user %>
-        <div class='summary_time_graph'>
-          <script type='application/json'>
-            <%= raw summary_step.result_time_bucket_hash.values.to_json %>
-          </script>
-          <div id='graph<%= summary_step.step_order%>' class='graph'></div>
-        </div>
-        <div class='average-time pull-left'><%= summary_step.average_completed_minutes %> avg</div>
-        <p class='sub pull-right'><%= summary_step.completed_users %> users</p>
-
-      </div>
-    </div>
+    <% end %>
   </div>
   <% end %>
 
@@ -142,29 +146,35 @@
 <div class="modal fade" id='summary_video_container'>
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class='ctn-modal-header'>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Modal title</h4>
-        </div>
-        <div class="modal-body">
-          <div class='row'>
-            <div class='col-md-6'>
-              <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered vjs-has-started"
-                controls preload="auto" width="auto" height="300"
-                poster="http://video-js.zencoder.com/oceans-clip.png"
-                data-setup='{"example_option":true}'>
-              </video>
-              <div class="input-group ctn-video-share-link">
-                <input type="text" class="form-control" id='input-url-base' readonly>
-                <input type='text' class='form-control' id='input-url-time'>
-                <span class="input-group-btn">
-                  <a class="btn btn-success" id="btn-copy-video-link" data-clipboard-text=""><i class="fa fa-link"></i><span> Copy Video Link</span></a>
-                </span>
-              </div>
-            </div>
-            <div class='col-md-6' id='videoText'></div>
+          <h3><%= @summary.title %></h3>
+          <p id='ctn-user-email'></p>
+          <div class='ctn-step-order-description'>
+            <h1>Step <span id='ctn-step-order'></span>.</h1>
+            <h2 id='ctn-step-description'></h2>
           </div>
         </div>
+
+        <div class='row'>
+          <div class='col-md-6'>
+            <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered vjs-has-started"
+              controls preload="auto" width="auto" height="300"
+              poster="http://video-js.zencoder.com/oceans-clip.png"
+              data-setup='{"example_option":true}'>
+            </video>
+            <div class="input-group ctn-video-share-link">
+              This moment at <input type='text' class='form-control' id='input-url-time'>:
+              <div class="input-group-btn">
+                <a class="btn btn-green" id="btn-copy-video-link" data-clipboard-text=""><i class="fa fa-link"></i></a>
+                <a class="btn btn-medium-blue" id="btn-copy-video-link" data-clipboard-text=""><i class="fa fa-link"></i></a>
+              </span>
+              <input type="text" class="form-control" id='input-url-base' readonly>
+            </div>
+          </div>
+          <div class='col-md-6' id='videoText'></div>
+        </div>
+
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->

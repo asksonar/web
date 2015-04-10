@@ -3,15 +3,3 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 */
-
-$(function(){
-
-  $('#main-results-index .panel').click(function(){
-    window.location.href = $(this).attr('path');
-  });
-
-  $('#main-results-my_index .panel').click(function(){
-    window.location.href = $(this).attr('path');
-  });
-
-});

@@ -1,0 +1,10 @@
+.split_panel {
+  overflow: hidden;
+
+  .split_panel_border {
+    padding-bottom: 100%;
+    margin-bottom: -100%;
+    border-right: 1px solid #E3E3E3;
+  }
+
+}

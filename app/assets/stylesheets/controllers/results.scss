@@ -186,6 +186,19 @@
 
 
   .modal {
+    .ctn-modal-header {
+      h3 {
+        display: inline-block;
+      }
+      p {
+        display: inline-block;
+        margin-left: 20px;
+      }
+      .ctn-step-order-description {
+        text-indent: 40px hanging;
+      }
+    }
+
     .modal-header {
       .modal-title {
         white-space: nowrap;

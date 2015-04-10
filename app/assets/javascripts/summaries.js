@@ -152,9 +152,11 @@ $(function(){
 
         $('#videoText').html(videoTranscript);
 
-        var modalTitle = '[' + data.user_email + '] - ' + (data.step_order + 1) + ') ' + data.step_description;
-        $('.modal-title').html(modalTitle);
-
+        //var modalTitle = '[' + data.user_email + '] - ' + (data.step_order + 1) + ') ' + data.step_description;
+        //$('.modal-title').html(modalTitle);
+        $('#ctn-user-email').html(data.user_email);
+        $('#ctn-step-order').html(data.step_order + 1);
+        $('#ctn-step-description').html(data.step_description);
         $('#input-url-base').val(window.location.origin + data.share_link + '?t=');
       }
 

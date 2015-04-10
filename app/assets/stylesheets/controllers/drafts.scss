@@ -4,8 +4,14 @@
 
 #main-drafts-index {
   .panel {
-    p {
+    p.sub {
       margin-top: 5px;
+    }
+    p {
+      margin-top: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
@@ -13,16 +19,23 @@
 #main-drafts-new, #main-drafts-edit {
 
   .main-content-header {
+    .form-group {
+      margin-bottom: 0px;
+    }
     #btn-template-group {
       width: 100%;
       .btn {
+        font-size: 16px;
         width: 100%;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        height: 46px;
+        line-height: 46px;
+        padding-top: 0px;
+        padding-bottom: 0px;
         .caret {
           position: absolute;
           right: 10px;
-          top: 17px;
+          top: 50%;
+          margin-top: -2px; /* half its height of 4px */
         }
       }
       ul {
@@ -33,7 +46,7 @@
       }
     }
     .header-sub-text {
-      margin-top: 5px;
+      margin-top: 10px;
       .template-sub-text {
         text-align: center;
       }

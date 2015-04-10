@@ -5,9 +5,6 @@
 */
 
 $(function(){
-  $('#main-drafts-index .panel').click(function(){
-    window.location.href = $(this).attr('path');
-  });
 
   var recountSteps = function(){
     $('.ctn-count').each(function(index){
