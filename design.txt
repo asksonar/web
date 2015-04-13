@@ -288,3 +288,10 @@ Chrome App
     link back to say you completed the test and that there are others?
 
 
+scenarios
+  scenario_steps (scenario_id)
+  scenario_results (scenario_id, user_id)
+    result_steps (scenario_result_id, scenario_step_id), user_id
+    result_feelings (scenario_result_id, scenario_step_id), scenario_id
+    result_videos (scenario_result_id, scenario_step_id)
+      video_transcriptions (video_id)

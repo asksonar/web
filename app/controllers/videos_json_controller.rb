@@ -1,6 +1,6 @@
 class VideosJsonController < ApplicationController
   def show
-    @video = ScenarioStepVideo.find_by(video_params)
+    @video = ResultVideo.find_by(video_params)
     json = @video.as_json
     json['user_email'] = @video.user.email
     json['step_description'] = @video.scenario_step.description

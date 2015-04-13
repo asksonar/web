@@ -5,7 +5,7 @@ class UserScenariosController < ApplicationController
 
   def new
     @scenario = Scenario.find_by(uuid: params[:id])
-    @user_scenario = UserScenario.create(scenario: @scenario);
+    @user_scenario = ScenarioResult.create(scenario: @scenario);
     render json: {uuid: @user_scenario.uuid}
   end
 

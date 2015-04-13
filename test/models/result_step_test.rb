@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UserScenarioTest < ActiveSupport::TestCase
+class ResultStepTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

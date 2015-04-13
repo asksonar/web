@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
-  has_many :user_scenarios, inverse_of: :scenario
-  has_many :scenario_step_videos, inverse_of: :user
-  has_many :scenario_step_results, inverse_of: :user
-  has_many :scenario_step_feelings, inverse_of: :user
+  has_many :scenario_results, inverse_of: :scenario
+  has_many :result_videos, through: :scenario_results
+  has_many :result_steps, through: :scenario_results
+  has_many :result_feelings, through: :scenario_results
 
   def is_user?
     true

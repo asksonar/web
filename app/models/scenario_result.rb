@@ -1,4 +1,4 @@
-class UserScenario < ActiveRecord::Base
+class ScenarioResult < ActiveRecord::Base
   belongs_to :scenario
   belongs_to :user
 
@@ -14,7 +14,7 @@ class UserScenario < ActiveRecord::Base
   def self.bulk_create(users, scenario)
     user_scenarios = []
     users.each do |user|
-      user_scenarios.push UserScenario
+      user_scenarios.push ScenarioResult
         .create_with(status: :pending)
         .find_or_create_by(user: user, scenario: scenario)
     end

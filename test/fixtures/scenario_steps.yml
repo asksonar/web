@@ -90,13 +90,13 @@ scenario_step_overall_product_impressions_1:
   description: >
     What made you initially interested in Spotify?  What did you hope it would do for you?
   step_order: 1
-  
+
 scenario_step_overall_product_impressions_2:
   scenario: scenario_overall_product_impressions
   description: >
     What did you like about the trial?
   step_order: 2
-  
+
 scenario_step_overall_product_impressions_3:
   scenario: scenario_overall_product_impressions
   description: >

@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+
 <% if false %>
 
   <% 14..19.times do |n| %>
   <% if rand(0..1) > 0 %>
   scenario_feeling_227507_0_<%= n %>:
     scenario_step: scenario_step_227507_0
-    user: user_227507_<%= n %>
+    scenario_result: user_scenario_227507_<%= n %>
     feeling_at_seconds: <%= rand(0..300) %>
     feeling: <%= rand(0..1) %>
     context_transcription: 'Dolore in qui biltong short loin.'
@@ -18,7 +20,7 @@
   <% if rand(0..1) > 0 %>
   user_scenario_227507_1_<%= n %>:
     scenario_step: scenario_step_227507_1
-    user: user_227507_<%= n %>
+    scenario_result: user_scenario_227507_<%= n %>
     feeling_at_seconds: <%= rand(0..300) %>
     feeling: <%= rand(0..1) %>
     context_transcription: 'Leberkas tempor do ham short ribs ball tip andouille'
@@ -29,7 +31,7 @@
   <% if rand(0..1) > 0 %>
   user_scenario_227507_2_<%= n %>:
     scenario_step: scenario_step_227507_2
-    user: user_227507_<%= n %>
+    scenario_result: user_scenario_227507_<%= n %>
     feeling_at_seconds: <%= rand(0..300) %>
     feeling: <%= rand(0..1) %>
     context_transcription: 'Filet mignon shankle short loin'
@@ -40,7 +42,7 @@
   <% if rand(0..1) > 0 %>
   user_scenario_227507_3_<%= n %>:
     scenario_step: scenario_step_227507_3
-    user: user_227507_<%= n %>
+    scenario_result: user_scenario_227507_<%= n %>
     feeling_at_seconds: <%= rand(0..300) %>
     feeling: <%= rand(0..1) %>
     context_transcription: 'Pancetta qui shoulder short loin'
@@ -52,7 +54,7 @@
 
 scenario_feeling_227507_0_50:
   scenario_step: scenario_step_227507_0
-  user: user_227507_0
+  scenario_result: user_scenario_227507_0
   feeling_at_seconds: 3
   feeling: 0
   context_transcription: >
@@ -60,7 +62,7 @@ scenario_feeling_227507_0_50:
 
 scenario_feeling_227507_0_51:
   scenario_step: scenario_step_227507_2
-  user: user_227507_0
+  scenario_result: user_scenario_227507_0
   feeling_at_seconds: 6
   feeling: 0
   context_transcription: >
@@ -68,23 +70,23 @@ scenario_feeling_227507_0_51:
 
 scenario_feeling_227507_0_52:
   scenario_step: scenario_step_227507_2
-  user: user_227507_0
+  scenario_result: user_scenario_227507_0
   feeling_at_seconds: 9
   feeling: 0
   context_transcription: >
     The movie theaters are sorted really well.
-  
+
 scenario_feeling_227507_0_53:
   scenario_step: scenario_step_227507_2
-  user: user_227507_0
+  scenario_result: user_scenario_227507_0
   feeling_at_seconds: 12
   feeling: 0
   context_transcription: >
     I'm disappointed Hot Tub Time Machine was sold out, but awesome that I didn't go to the theater only to be disappointed.
-  
+
 scenario_feeling_227507_0_54:
   scenario_step: scenario_step_227507_3
-  user: user_227507_0
+  scenario_result: user_scenario_227507_0
   feeling_at_seconds: 3
   feeling: 0
   context_transcription: >
@@ -92,15 +94,15 @@ scenario_feeling_227507_0_54:
 
 scenario_feeling_227507_0_55:
   scenario_step: scenario_step_227507_3
-  user: user_227507_0
+  scenario_result: user_scenario_227507_0
   feeling_at_seconds: 6
   feeling: 0
   context_transcription: >
     I love how new movies were so well laid out.
-  
+
 scenario_feeling_227507_0_56:
   scenario_step: scenario_step_227507_3
-  user: user_227507_0
+  scenario_result: user_scenario_227507_0
   feeling_at_seconds: 9
   feeling: 0
   context_transcription: >
@@ -108,7 +110,7 @@ scenario_feeling_227507_0_56:
 
 scenario_feeling_227507_0_57:
   scenario_step: scenario_step_227507_3
-  user: user_227507_0
+  scenario_result: user_scenario_227507_0
   feeling_at_seconds: 12
   feeling: 0
   context_transcription: >
@@ -116,23 +118,23 @@ scenario_feeling_227507_0_57:
 
 scenario_feeling_227507_0_58:
   scenario_step: scenario_step_227507_3
-  user: user_227507_0
+  scenario_result: user_scenario_227507_0
   feeling_at_seconds: 3
   feeling: 1
   context_transcription: >
     All of the movies suck.  Not enough selection.
-  
+
 scenario_feeling_227507_0_59:
   scenario_step: scenario_step_227507_3
-  user: user_227507_0
+  scenario_result: user_scenario_227507_0
   feeling_at_seconds: 6
   feeling: 1
   context_transcription: >
     I want to see a scifi movie, but it was really hard to find one.
-  
+
 scenario_feeling_227507_0_60:
   scenario_step: scenario_step_227507_3
-  user: user_227507_0
+  scenario_result: user_scenario_227507_0
   feeling_at_seconds: 9
   feeling: 1
   context_transcription: >
