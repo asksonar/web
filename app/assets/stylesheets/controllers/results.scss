@@ -61,6 +61,7 @@
         display: inline-block;
       }
       #btn-archive {
+        margin-left: 5px;
         cursor: pointer;
         border: 1px solid #999;
         .btn{
@@ -129,6 +130,12 @@
     ol {
       padding-left: 25px;
       margin-bottom: 0px;
+    }
+
+    .moments-container {
+      div + div {
+        padding-left: 0px;
+      }
     }
   }
 

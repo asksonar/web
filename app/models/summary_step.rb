@@ -23,7 +23,7 @@ class SummaryStep
   end
 
   def average_completed_minutes
-    Time.at(@scenario_step.scenario_step_results.average(:completed_seconds) || 0).strftime("%-Mm %Ss")
+    Time.at(@scenario_step.scenario_step_results.average(:completed_seconds) || 0).strftime("%-Mm %-Ss")
   end
 
   def has_results?
