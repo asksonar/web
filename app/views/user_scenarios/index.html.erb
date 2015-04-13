@@ -10,7 +10,7 @@
 
     <div class='panel-body'>
       <%= bootstrap_form_for :user_scenario do |f| %>
-        <%= f.hidden_field :scenario_uuid, value: @scenario.uuid %>
+        <%= f.hidden_field :scenario_hashid, value: @scenario.hashid %>
 
         <%= f.label :summary %>
         <p><%= @scenario.description %></p>

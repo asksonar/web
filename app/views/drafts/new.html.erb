@@ -70,7 +70,7 @@
 <script id="new-step-template" type="text/x-handlebars-template">
   {{#each steps}}
   <div class='row ctn-step'>
-    <%= f.hidden_field :id, value: '{{id}}', name: 'scenario_steps[][id]' %>
+    <%= f.hidden_field :id, value: '{{hashid}}', name: 'scenario_steps[][id]' %>
     <div class='col-xs-8'>
       <h1 class='ctn-count pull-left'>1.</h1>
       <div class='ctn-description'>

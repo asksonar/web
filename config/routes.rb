@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   get '/my_results',  to: 'results#my_index'
   get '/recent',      to: 'recent#index'
   get '/create',      to: 'create#index'
-  get '/user/scenarios/:id', to: 'user_scenarios#index'
- post '/user/scenarios/new', to: 'user_scenarios#new'
+  get '/studies/:id', to: 'user_scenarios#index'
+ post '/studies/new', to: 'user_scenarios#new'
   get '/share/videos/:id', to: 'share_videos#show'
 
   # The priority is based upon order of creation: first created -> highest priority.

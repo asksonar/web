@@ -5,12 +5,6 @@ class Scenario < ActiveRecord::Base
   belongs_to :company
   belongs_to :created_by, class_name: 'Researcher', foreign_key: :created_by
   enum status: [:drafts, :live, :completed]
-  #obfuscate_id spin: 42650656
-  after_initialize :default_values, unless: :persisted?
-
-  def default_values
-    self.uuid = SecureRandom.uuid
-  end
 
   def self.create_draft(hash)
     Scenario.create(hash.merge({status: statuses[:drafts]}))
@@ -62,7 +56,7 @@ class Scenario < ActiveRecord::Base
       steps: scenario_steps.map { |step|
         {
           #id: (step.to_param || ''),
-          id: (step.id || ''),
+          hashid: (step.hashid || ''),
           description: (step.description || '').strip,
           url: (step.url || '').strip
         }
@@ -71,17 +65,17 @@ class Scenario < ActiveRecord::Base
   end
 
   def share_link
-    '/user/scenarios/' + uuid
+    '/studies/' + hashid
   end
 
   def share_link_params_json
     {
-      uuid: uuid,
+      hashid: hashid,
       description: description,
       steps: scenario_steps.map { |step|
         {
           #id: (step.to_param || ''),
-          uuid: (step.uuid || ''),
+          hashid: (step.hashid || ''),
           description: (step.description || '').strip,
           url: (step.url || '').strip
         }

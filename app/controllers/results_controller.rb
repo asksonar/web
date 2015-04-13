@@ -22,7 +22,7 @@ class ResultsController < ApplicationController
   end
 
   def show
-    @summary = Scenario.find(params[:id])
+    @summary = Scenario.find_by_hashid(params[:id])
   end
 
 end

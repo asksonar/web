@@ -54,13 +54,13 @@ class DraftsController < ApplicationController
   end
 
   def edit
-    new(Scenario.find(params[:id]))
+    new(Scenario.find_by_hashid(params[:id]))
     render :new
     # need to modify the new page to indicate it is editing
   end
 
   def update
-    @scenario = Scenario.find(params[:id])
+    @scenario = Scenario.find_by_hashid(params[:id])
     ActiveRecord::Base.transaction do
       if params[:draft]
         @scenario.update_draft(scenario_params)
@@ -75,7 +75,7 @@ class DraftsController < ApplicationController
       scenario_steps_params_map = {}
       scenario_steps_params.each { |p| scenario_steps_params_map[p[:id]] = p }
       scenario_steps_params_map.each do |id, step|
-        if update_me = ScenarioStep.find_by_id(id)
+        if update_me = ScenarioStep.find_by_hashid(id)
           update_me.update(step)
         else
           @scenario.scenario_steps.create(step)
