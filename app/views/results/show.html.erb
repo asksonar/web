@@ -151,9 +151,9 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h3><%= @summary.title %></h3>
           <p id='ctn-user-email'></p>
-          <div class='ctn-step-order-description'>
-            <h1>Step <span id='ctn-step-order'></span>.</h1>
-            <h2 id='ctn-step-description'></h2>
+
+          <div class='ctn-modal-step-description'>
+            <span class='h1'>Step <span id='ctn-step-order'></span>.</span><span class='h2' id='ctn-step-description'><%= @summary.description %></span>
           </div>
         </div>
 
@@ -164,14 +164,14 @@
               poster="http://video-js.zencoder.com/oceans-clip.png"
               data-setup='{"example_option":true}'>
             </video>
-            <div class="input-group ctn-video-share-link">
-              This moment at <input type='text' class='form-control' id='input-url-time'>:
-              <div class="input-group-btn">
+            <div class="ctn-video-share-link">
+              <h2>This moment at&nbsp;</h2><input type='text' class='h2 form-control' id='input-url-time'>
+              <div class="input-group-btn ctn-video-btns">
                 <a class="btn btn-green" id="btn-copy-video-link" data-clipboard-text=""><i class="fa fa-link"></i></a>
-                <a class="btn btn-medium-blue" id="btn-copy-video-link" data-clipboard-text=""><i class="fa fa-link"></i></a>
-              </span>
-              <input type="text" class="form-control" id='input-url-base' readonly>
+                <a class="btn btn-medium-blue" id="btn-highlight-video-link" data-clipboard-text=""><i class="fa fa-star"></i></a>
+              </div>
             </div>
+            <input type="text" class="form-control" id='input-url-base' readonly>
           </div>
           <div class='col-md-6' id='videoText'></div>
         </div>

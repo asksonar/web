@@ -5,7 +5,13 @@ class ResultVideo < ActiveRecord::Base
   delegate :user, :to => :scenario_result, :allow_nil => true
 
   def share_link
-    '/share/videos/' + id.to_s
+    '/share/videos/' + hashid
+  end
+
+  def transcription_array
+    VideoTranscription.select(:offset, :text)
+      .where(result_video: self)
+      .order(offset: :asc)
   end
 
 end

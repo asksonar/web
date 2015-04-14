@@ -121,7 +121,7 @@ $(function(){
       var videoEl = $('#example_video_1');
       var videoJSON;
       var videoTranscript = "";
-      var time, mins, secs;
+      var time, mins, secs, text;
 
       if (videoEl.attr('data-video-id') !== data.id) {
         videoEl.attr('data-video-id', data.id);
@@ -135,14 +135,16 @@ $(function(){
         ]);
         */
 
-        videoJSON = JSON.parse(data.transcription_json);
-        for(var time in videoJSON) {
+        for(var i = 0; i  < data.transcription_array.length; i++) {
+          time = data.transcription_array[i].offset
+          text = data.transcription_array[i].text.trim();
+
           mins = Math.floor(time / 60);
           secs = time % 60;
 
           videoTranscript += "<a class='videoTextLink' data-timestamp='" + time + "'>"
             + mins + ":" + ('00' + secs).slice(-2) + " "
-            + videoJSON[time] + "</a><br/>";
+            + text + "</a><br/>";
         }
 
         $('#videoText').html(videoTranscript);

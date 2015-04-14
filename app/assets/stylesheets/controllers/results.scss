@@ -169,13 +169,9 @@
     font-weight: bold;
   }
 
-
-
   .activeVideoTextLink {
     font-weight: bold;
   }
-
-
 
   .modal {
     .ctn-modal-header {
@@ -186,42 +182,44 @@
         display: inline-block;
         margin-left: 20px;
       }
-      .ctn-step-order-description {
-        text-indent: 40px hanging;
+      .ctn-modal-step-description {
+        margin-left: 75px;
+        margin-top: 15px;
+        margin-bottom: 30px;
+        span.h1 {
+          display: inline-block;
+          text-indent: -75px;
+          width: 0px;
+        }
       }
     }
 
-    .modal-header {
-      .modal-title {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      .close {
-        margin-left: 10px;
-      }
-    }
     .ctn-video-share-link {
-      margin-top: 10px;
-
-      #input-url-base {
-        width: 85%;
+      margin-top: 20px;
+      h2 {
+        float: left;
+        line-height: 34px;
       }
       #input-url-time {
-        width: 15%;
+        width: 75px;
+        display: inline-block;
       }
-      .btn {
-        padding-bottom: 7px;
+      .ctn-video-btns {
+        float: right;
+        width: 75px;
+        .btn + .btn {
+          margin-left: 1px
+        }
+      }
+    }
 
-        span {
-          display: none;
-        }
-      }
-      .zeroclipboard-is-hover {
-        span {
-          display: initial;
-        }
-      }
+    #input-url-base {
+      margin-top: 10px;
+    }
+
+    #videoText {
+      overflow-y: auto;
+      max-height: 400px;
     }
 
   }

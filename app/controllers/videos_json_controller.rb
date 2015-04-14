@@ -6,6 +6,7 @@ class VideosJsonController < ApplicationController
     json['step_description'] = @video.scenario_step.description
     json['step_order'] = @video.scenario_step.step_order
     json['share_link'] = @video.share_link
+    json['transcription_array'] = @video.transcription_array
     render json: json
   end
 
