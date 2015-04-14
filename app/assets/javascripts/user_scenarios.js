@@ -13,7 +13,7 @@ $(function(){
   */
 
     $.ajax({
-      url: '/user/scenarios/new',
+      url: '/studies/new',
       method: 'POST',
       data: $('#form').serialize(),
       dataType: 'json'

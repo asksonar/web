@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class Panelist < ActiveRecord::Base
   has_many :scenario_results, inverse_of: :scenario
   has_many :result_videos, through: :scenario_results
   has_many :result_steps, through: :scenario_results
@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   def self.bulk_create(emails)
     users = []
     emails.each do |email|
-      users.push User.find_or_create_by(email: email)
+      users.push Panelist.find_or_create_by(email: email)
     end
     return users
   end

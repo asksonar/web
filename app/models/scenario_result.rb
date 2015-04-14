@@ -1,6 +1,6 @@
 class ScenarioResult < ActiveRecord::Base
   belongs_to :scenario
-  belongs_to :user
+  belongs_to :panelist
 
   enum status: [:pending, :inprogress, :completed]
 
@@ -16,7 +16,7 @@ class ScenarioResult < ActiveRecord::Base
     users.each do |user|
       user_scenarios.push ScenarioResult
         .create_with(status: :pending)
-        .find_or_create_by(user: user, scenario: scenario)
+        .find_or_create_by(panelist: user, scenario: scenario)
     end
     return user_scenarios
   end
