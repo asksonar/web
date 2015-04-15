@@ -1,3 +1,72 @@
 // Place all the styles related to the UserScenarios controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#studies-show {
+  .panel {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ctn-setup {
+    div {
+      margin-top: 20px;
+
+      p {
+        float: left;
+        width: 400px - 20px - 20px - 100px - 20px;
+        margin-right: 20px;
+      }
+      .btn {
+        float: left;
+        width: 100px;
+      }
+    }
+  }
+
+  .ctn-study {
+    p.sub {
+      margin-top: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 0px;
+    }
+
+    .ctn-email {
+      margin-top: 20px;
+      p {
+        line-height: 34px;
+      }
+    }
+    .ctn-anonymous {
+      margin-top: 5px;
+      p {
+        line-height: 20px;
+      }
+      div.checkbox {
+        margin-top: 0px;
+      }
+    }
+    .ctn-email,
+    .ctn-anonymous {
+      p {
+        width: 168px;
+        float: left;
+        text-align: right;
+      }
+      input.form-control,
+      div.checkbox {
+        float: right;
+        width: 180px;
+      }
+    }
+
+    .btn {
+      margin-top: 20px;
+    }
+
+  }
+
+}

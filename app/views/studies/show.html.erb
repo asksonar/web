@@ -1,11 +1,54 @@
-<div class='pageheader'>
-  <h1>Welcome to your study!</h1>
-</div>
-<section id='main-content'>
+<section class='main-content-header'>
+  <h1>Thanks for participating!</h1>
+</section>
+<section class="main-content">
+
   <script type='text/javascript'>
     var scenarioParams = <%= raw @scenario.share_link_params_json %>
   </script>
 
+  <div class='panel ctn-setup'>
+    <p>
+      Here's an explanation of Sonar and all the things it does. Chrome extension, steps, done. Here's an explanation of Sonar and all the things it does. Chrome extension, steps, done. Here's an explanation of Sonar and all the things it does. Chrome extension, steps, done.
+    </p>
+    <div class='clearfix'>
+      <p id='txt-install-chrome'>
+        You’ll need to use Chrome to give your feedback. If you already have Chrome, just open this page there.
+      </p>
+      <a id='btn-install-chrome' class='btn btn-grey' disabled>Get Chrome</a>
+    </div>
+    <div class='clearfix'>
+      <p id='txt-install-extension'>
+        You’ll need to use our Chrome extension to give your feedback. It will automatically collect data so you don’t have to worry.
+      </p>
+      <a id='btn-install-extension' class='btn btn-grey' disabled>Get Extension</a>
+    </div>
+  </div>
+  <div class='panel ctn-study'>
+    <p>
+      We’re interested in your movie-watching habits. This could be a longer description.
+    </p>
+    <p class='sub'>
+      This study has 3 steps, and it takes 3 minutes on average.
+    </p>
+    <%= form_for :study do |f| %>
+      <%= f.hidden_field :scenario_hashid, value: @scenario.hashid %>
+      <div class='clearfix ctn-email'>
+        <p>Enter your email to get started</p>
+        <%= f.text_field :email, class: 'form-control' %>
+      </div>
+      <div class='clearfix ctn-anonymous'>
+        <p>Or</p>
+        <%= bootstrap_form_for :study, layout: :horizontal do |bf| %>
+          <%= bf.check_box :anonymous, label: 'Take study anonymously' %>
+        <% end %>
+      </div>
+      <div class='clearfix'>
+        <%= f.submit 'Start giving feedback', class: 'btn btn-grey pull-right', id: 'btn-launch-study', disabled: true %>
+      </div>
+    <% end %>
+  </div>
+<!--
   <div id='div-start-study' class='row'><div class='col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1'><div class='panel panel-default'>
 
     <div class='panel-body'>
@@ -30,5 +73,6 @@
       Study has started...
     </div>
   </div></div></div>
+  -->
 
 </section>
