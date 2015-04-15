@@ -14,7 +14,7 @@
             <p><% if index == 0 %><span class='h3'>Highlights:</span><%= highlight %><% end %></p>
           <% end %>
           <% if @summary.highlights.count == 0 %>
-            <p><span class='h3'>Highlights:</span><span class='sub'>no highlights added yet</span></p>
+            <p><span class='h3'>Highlights:</span><span class='sub'><i class='fa fa-question-circle'></i> no highlights added yet</span></p>
           <% end %>
         </div>
       </div>
@@ -27,7 +27,7 @@
         </div>
 
         <div class="btn-group pull-right">
-          <a class="btn btn-default" id='btn-copy-share-link' data-clipboard-text='<%= @summary.share_link %>' data-placement="bottom" title="Copy the share link"><i class='fa fa-link'></i></a>
+          <a class="btn btn-default" id='btn-copy-share-link' data-placement="bottom" title="Copy the share link"><i class='fa fa-link'></i></a>
           <a class='btn btn-default' id='btn-preview' data-toggle="modal" data-target='#modal-preview' data-placement="bottom" title="Preview the study"><i class='fa fa-desktop'></i></a>
         </div>
 
@@ -149,25 +149,7 @@
             <span class='h1'>Step <span id='ctn-step-order'></span>.</span><span class='h2' id='ctn-step-description'><%= @summary.description %></span>
           </div>
         </div>
-
-        <div class='row'>
-          <div class='col-md-6'>
-            <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered vjs-has-started"
-              controls preload="auto" width="auto" height="300"
-              poster="http://video-js.zencoder.com/oceans-clip.png"
-              data-setup='{"example_option":true}'>
-            </video>
-            <div class="ctn-video-share-link">
-              <h2>This moment at&nbsp;</h2><input type='text' class='h2 form-control' id='input-url-time'>
-              <div class="input-group-btn ctn-video-btns">
-                <a class="btn btn-green" id="btn-copy-video-link" data-clipboard-text=""><i class="fa fa-link"></i></a>
-                <a class="btn btn-medium-blue" id="btn-highlight-video-link" data-clipboard-text=""><i class="fa fa-star"></i></a>
-              </div>
-            </div>
-            <input type="text" class="form-control" id='input-url-base' readonly>
-          </div>
-          <div class='col-md-6' id='videoText'></div>
-        </div>
+        <%= render partial: 'utility/video' %>
 
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

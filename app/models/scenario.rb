@@ -33,6 +33,7 @@ class Scenario < ActiveRecord::Base
     Scenario
       .where(status: [statuses[:live], statuses[:completed]])
       .where(extra_where)
+      .order(published_at: :desc)
   end
 
   def where_feeling_delighted

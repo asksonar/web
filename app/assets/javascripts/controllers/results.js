@@ -13,12 +13,16 @@ $(function(){
   $('#input-share-link').val(window.location.origin + $('#input-share-link').val());
 
 
+
   new ZeroClipboard(document.getElementById("btn-copy-share-link")).on("copy", function(event) {
     event.clipboardData.setData( "text/plain", $('#input-share-link').val());
   });
+
   new ZeroClipboard(document.getElementById("btn-copy-video-link")).on( "copy", function (event) {
-    event.clipboardData.setData( "text/plain", $('#input-url-base').val() + $('#input-url-time').val());
+    event.clipboardData.setData( "text/plain", $('#input-url-base').val());
   });
+
+  $('#btn-archive, #btn-copy-share-link, #btn-preview, #btn-copy-video-link, #btn-highlight-video-link').tooltip();
 
   $('.main-content-header').on('click', '#btn-archive', function() {
     $(this).find('.btn').toggleClass('active');
@@ -28,7 +32,9 @@ $(function(){
     this.setSelectionRange(0, this.value.length);
   });
 
-  $('#btn-archive, #btn-copy-share-link, #btn-preview').tooltip()
+  $('.modal').on('click', '#input-url-base', function() {
+    this.setSelectionRange(0, this.value.length);
+  });
 
   $('.main-content').on('click', '.fa-chevron-down', function(){
     $(this).removeClass('fa-chevron-down').addClass('fa-chevron-up');
@@ -126,14 +132,7 @@ $(function(){
       if (videoEl.attr('data-video-id') !== data.id) {
         videoEl.attr('data-video-id', data.id);
 
-        video.src([{ type: "video/mp4", src: "http://vjs.zencdn.net/v/oceans.mp4" }]);
-        /*
-        video.src([
-          { type: "video/mp4", src: "/videos/video_" + data.id + ".mp4" },
-          { type: "video/webm", src: "/videos/video_" + data.id + ".webm" },
-          { type: "video/ogg", src: "/videos/video_" + data.id + ".ogv" }
-        ]);
-        */
+        video.src(data.src_array);
 
         for(var i = 0; i  < data.transcription_array.length; i++) {
           time = data.transcription_array[i].offset
@@ -154,7 +153,7 @@ $(function(){
         $('#ctn-user-email').html(data.user_email);
         $('#ctn-step-order').html(data.step_order + 1);
         $('#ctn-step-description').html(data.step_description);
-        $('#input-url-base').val(window.location.origin + data.share_link + '?t=');
+        $('#input-url-base').attr('data-base-url', window.location.origin + data.share_link + '?t=');
       }
 
       video.currentTime(timeSeconds);
@@ -178,7 +177,10 @@ $(function(){
     videojs('example_video_1').ready(function(){
       this.on('timeupdate', function(){
         var currentTime = this.currentTime();
-        $('#input-url-time').val(parseInt(currentTime));
+        var currentSeconds = parseInt(currentTime);
+
+        $('#input-url-time').val(Math.floor(currentSeconds / 60) + ':' + ('00' + currentSeconds % 60).slice(-2));
+        $('#input-url-base').val($('#input-url-base').attr('data-base-url') + currentSeconds);
         //console.log(currentTime);
         var videoTextLinks = $('#videoText .videoTextLink').removeClass('activeVideoTextLink');
         var videoTextLink;

@@ -14,4 +14,13 @@ class ResultVideo < ActiveRecord::Base
       .order(offset: :asc)
   end
 
+  def src_array
+    [
+      { type: "video/mp4", src: "http://vjs.zencdn.net/v/oceans.mp4" },
+      #{ type: "video/webm", src: "/videos/video_" + data.id + ".webm" },
+      #{ type: "video/ogg", src: "/videos/video_" + data.id + ".ogv" }
+    ]
+  end
+
+
 end

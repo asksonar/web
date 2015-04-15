@@ -1,27 +1,22 @@
-<div class='pageheader'>
-  <%= @user.email %> - <%= @scenario.title %>
-</div>
-<section id='main-content'>
+<section class='main-content-header'>
+  <h3><a href='<%= result_path(@scenario) %>'><%= @scenario.title %></a></h3>
+  <p id='ctn-user-email'><%= @user.email %></p>
+
+  <div class='ctn-modal-step-description'>
+    <span class='h1'>Step <%= @scenario_step.step_order + 1 %>.</span><span class='h2' id='ctn-step-description'><%= @scenario_step.description %></span>
+  </div>
+</section>
+<section class="main-content">
 
   <script type='text/javascript'>
-    var videoJSON = <%= raw @video.transcription_json %>
+    var transcriptionArray = <%= raw @video.transcription_array.to_json %>;
+    var srcArray = <%= raw @video.src_array.to_json %>;
+    var shareLink = '<%= @video.share_link %>';
   </script>
 
-  <div class='row'><div class='panel'><div class='panel-body'>
-    <h3><%= @scenario.description %></h3>
-    <h4><%= @scenario_step.step_order + 1 %>) <%= @scenario_step.description %></h4>
-  </div></div></div>
-  <div class='row'><div class='col-md-12'><div class='panel'><div class='panel-body'>
-    <div class='row'>
-      <div class='col-md-6'>
-        <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered vjs-has-started"
-          controls preload="auto" width="auto" height="300"
-          poster="http://video-js.zencoder.com/oceans-clip.png"
-          data-setup='{"example_option":true}'>
-        </video>
-      </div>
-      <div class='col-md-6' id='videoText'></div>
+  <div class='panel'>
+    <%= render partial: 'utility/video' %>
     </div>
-  </div></div></div></div>
+  </var>
 
 </section>

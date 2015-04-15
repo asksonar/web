@@ -26,4 +26,8 @@ class ResultsController < ApplicationController
     @summary = Scenario.find_by_hashid(params[:id])
   end
 
+  def update
+
+  end
+
 end

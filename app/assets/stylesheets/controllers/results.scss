@@ -161,18 +161,6 @@
     height: 100px;
   }
 
-  .linkVideo {
-    pointer-events: auto;
-    cursor: pointer;
-  }
-  .linkVideo:hover {
-    font-weight: bold;
-  }
-
-  .activeVideoTextLink {
-    font-weight: bold;
-  }
-
   .modal {
     .ctn-modal-header {
       h3 {
@@ -193,35 +181,6 @@
         }
       }
     }
-
-    .ctn-video-share-link {
-      margin-top: 20px;
-      h2 {
-        float: left;
-        line-height: 34px;
-      }
-      #input-url-time {
-        width: 75px;
-        display: inline-block;
-      }
-      .ctn-video-btns {
-        float: right;
-        width: 75px;
-        .btn + .btn {
-          margin-left: 1px
-        }
-      }
-    }
-
-    #input-url-base {
-      margin-top: 10px;
-    }
-
-    #videoText {
-      overflow-y: auto;
-      max-height: 400px;
-    }
-
   }
 
 }
