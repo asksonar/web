@@ -20,7 +20,9 @@
         font-size: 18px;
       }
     }
-    >li>a:hover, >li>a:focus {
+    >li>a:focus
+    >li>a:hover,
+    >li>a:active {
       color: #1CA5C9;
     }
   }
@@ -74,12 +76,17 @@
     margin-top: 5px;
   }
 
-  li a:hover, li a:focus {
+  li a:focus,
+  li a:hover,
+  li a:active, {
     background: #999;
     color: #FFF;
   }
 
-  li.active a, li.active a:hover {
+  li.active a,
+  li.active a:focus,
+  li.active a:hover,
+  li.active a:active {
     background: #F5F5F5;
     color: #000;
     i {
@@ -96,7 +103,9 @@
       text-align: center;
       opacity: .95;
     }
-    a:hover {
+    a:focus,
+    a:hover,
+    a:active {
       opacity: 1;
       background: #F69526;
       color: #FFF;
