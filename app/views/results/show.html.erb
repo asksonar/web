@@ -21,14 +21,14 @@
       <div class='col-md-4 buttons-container'>
 
         <h2 class=''>Live</h2>
-        <div id='btn-archive' class="btn-group" data-placement="bottom" title="Close the study">
+        <div id='btn-archive' class="btn-group" data-placement="bottom" title="Coming Soon! - Close the study">
           <a class="btn btn-success active">On</a>
           <a class="btn btn-failure">Off</a>
         </div>
 
         <div class="btn-group pull-right">
           <a class="btn btn-default" id='btn-copy-share-link' data-placement="bottom" title="Copy the share link"><i class='fa fa-link'></i></a>
-          <a class='btn btn-default' id='btn-preview' data-toggle="modal" data-target='#modal-preview' data-placement="bottom" title="Preview the study"><i class='fa fa-desktop'></i></a>
+          <a class='btn btn-default' id='btn-preview' data-toggle="modal" data-target='#modal-preview' data-placement="bottom" title="Coming Soon! - Preview the study"><i class='fa fa-desktop'></i></a>
         </div>
 
         <input type="text" id='input-share-link' class="form-control" readonly value='<%= @summary.share_link %>'>
@@ -122,20 +122,6 @@
   <% end %>
 
 </section>
-
-<div class="modal fade" id='modal-preview'>
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Insert semi-dynamic preview here</h4>
-      </div>
-      <div class="modal-body">
-        <img src="/assets/semi_dynamic_preview.png">
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
 <div class="modal fade" id='summary_video_container'>
     <div class="modal-dialog modal-lg">

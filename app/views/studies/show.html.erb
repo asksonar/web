@@ -9,7 +9,7 @@
 
   <div class='panel ctn-setup'>
     <p>
-      Here's an explanation of Sonar and all the things it does. Chrome extension, steps, done. Here's an explanation of Sonar and all the things it does. Chrome extension, steps, done. Here's an explanation of Sonar and all the things it does. Chrome extension, steps, done.
+      Thanks for your participation!  Unlike typical surveys, Sonar shares your screen and audio with the asker so you can stay focused on giving genuine, honest feedback.  So don’t be shy, speak your mind!
     </p>
     <div class='clearfix'>
       <p id='txt-install-chrome'>
@@ -19,7 +19,7 @@
     </div>
     <div class='clearfix'>
       <p id='txt-install-extension'>
-        You’ll need to use our Chrome extension to give your feedback. It will automatically collect data so you don’t have to worry.
+        You’ll need to use our Chrome extension to give your feedback. It will automatically collect data, so you don’t have to worry.
       </p>
       <a id='btn-install-extension' class='btn btn-grey' disabled>Get Extension</a>
     </div>
@@ -40,39 +40,13 @@
       <div class='clearfix ctn-anonymous'>
         <p>Or</p>
         <%= bootstrap_form_for :study, layout: :horizontal do |bf| %>
-          <%= bf.check_box :anonymous, label: 'Take study anonymously' %>
+          <%= bf.check_box :anonymous, label: 'Take the study anonymously' %>
         <% end %>
       </div>
       <div class='clearfix'>
-        <%= f.submit 'Start giving feedback', class: 'btn btn-grey pull-right', id: 'btn-launch-study', disabled: true %>
+        <%= f.submit 'Start giving feedback', class: 'btn btn-grey pull-right', id: 'btn-start', disabled: true %>
       </div>
     <% end %>
   </div>
-<!--
-  <div id='div-start-study' class='row'><div class='col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1'><div class='panel panel-default'>
-
-    <div class='panel-body'>
-      <%= bootstrap_form_for :study do |f| %>
-        <%= f.hidden_field :scenario_hashid, value: @scenario.hashid %>
-
-        <%= f.label :summary %>
-        <p><%= @scenario.description %></p>
-        <%= f.text_field :email %>
-        <%= f.check_box :anonymous, label: 'Take study anonymously' %>
-      <% end %>
-
-    </div>
-    <div class='panel-footer'>
-      <div class='btn btn-primary' id='btn-start'>Start</div>
-    </div>
-
-  </div></div></div>
-
-  <div id='div-started-study' class='row'><div class='col-md-12'><div class='panel panel-default'>
-    <div class='panel-body'>
-      Study has started...
-    </div>
-  </div></div></div>
-  -->
 
 </section>

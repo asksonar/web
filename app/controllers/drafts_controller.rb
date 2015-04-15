@@ -39,7 +39,7 @@ class DraftsController < ApplicationController
     end
 
     if params[:publish]
-      flash[:info] = "<strong>Scenario Published</strong> - Your scenario is now ready to be shared with your users"
+      flash[:info] = "<strong>Study Published</strong> - Your study link is now ready to be shared with your users."
       redirect_to result_path(@scenario)
     else
       flash[:info] = "<strong>Draft Saved</strong> - #{@scenario.title}"
@@ -85,7 +85,7 @@ class DraftsController < ApplicationController
     end
 
     if params[:publish]
-      flash[:info] = "<strong>Scenario Published</strong> - Your scenario is now ready to be shared with your users"
+      flash[:info] = "<strong>Study Published</strong> - Your study link is now ready to be shared with your users."
       redirect_to result_path(@scenario)
     else
       flash[:info] = "<strong>Draft Saved</strong> - #{@scenario.title}"

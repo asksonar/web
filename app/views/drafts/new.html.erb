@@ -29,7 +29,9 @@
 
   <div class='row header-sub-text'>
     <div class='col-xs-8'>
-      <p class='sub'>This title is just for internal purposes.  Your panelists will never see this.</p>
+      <p class='sub'>
+        This title is so you can tell your studies apart internally. Your respondents will never see this.
+      </p>
     </div>
     <div class='col-xs-4'>
       <p class='template-sub-text'>or just start typing below.</p>
@@ -43,14 +45,14 @@
 
     <div class='summary-container'>
       <p class='sub'>
-        This is a summary which will be shown to the panelists. You should describe blah blah blah some helper text of what to write in this section.
+        This description gives context and explains to your respondents the overall purpose of your study.
       </p>
-      <%= f.text_area :description, rows: 3, hide_label: true, placeholder: 'Welcome the panelist to the study.' %>
+      <%= f.text_area :description, rows: 3, hide_label: true, placeholder: 'Welcome the panelist to the study' %>
     </div>
 
     <div class='steps-container'>
       <p class='sub'>
-        Now tell your panelists what you’d like them to do. Go step by step, leading them through your test. Some more text about how to type here. Some text about how panelists will experience these steps.
+        Tell your respondents what you’d like them to do, step by step. Sonar will record their screen and voice as they talk their way through your steps.
       </p>
       <div id='ctn-step-list'><!-- insert new steps here --></div>
     </div>
@@ -60,7 +62,9 @@
 
       <%= f.submit 'Create study', name: 'publish', class: 'btn btn-dark-blue pull-right' %>
       <%= f.submit 'Save as draft', name: 'draft', class: 'btn btn-light-blue pull-right' %>
-      <p class='sub pull-right'>If you’re done setting up the study, create it. You’ll be able to send the link to panelists on the next screen.</p>
+      <p class='sub pull-right'>
+        Once the study is created, you’ll be able to share the study link with potential respondents.
+      </p>
     </div>
 
   </div>
