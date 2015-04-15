@@ -38,6 +38,10 @@
       right: 0;
     }
   }
+
+  .logged-out .toggle-sidebar {
+    display: none;
+  }
 }
 
 @media (min-width: $screen-sm-min) {

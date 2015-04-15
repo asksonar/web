@@ -44,6 +44,10 @@ body {
   }
 }
 
+.logged-out .sidebar {
+  display: none;
+}
+
 .sidebar-opened .sidebar {
   left: 0;
   z-index: 100;
@@ -100,6 +104,10 @@ body {
 @media (min-width: $screen-sm-min) {
   .main-content-wrapper {
     margin-left: 240px;
+  }
+  .logged-out .main-content-wrapper {
+    margin-left: 0px;
+    margin-right: 0px;
   }
   .sidebar {
     left: 0;
