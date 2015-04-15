@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :researchers
   get '/login',       to: 'sessions#index', as: :login
  post '/login/new',   to: 'sessions#create', as: :new_login
   get '/logout',      to: 'sessions#destroy', as: :logout
