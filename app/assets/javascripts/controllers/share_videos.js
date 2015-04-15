@@ -5,7 +5,7 @@
 */
 
 $(function(){
-  if ($('#main-share_videos-show').length == 0) {
+  if (!$('#share_videos-show').length) {
     return;
   }
 

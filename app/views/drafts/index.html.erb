@@ -2,12 +2,6 @@
   <h1>My Drafts</h1>
 </section>
 <section class="main-content">
-  <% if flash[:saved_draft_title] %>
-    <div class="alert alert-success alert-dismissable">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-      <strong>Draft Saved</strong> - <%= flash[:saved_draft_title] %>
-    </div>
-  <% end %>
 
   <% @scenarios.each do |scenario| %>
     <a class='panel' href='<%=edit_draft_path(scenario)%>'>

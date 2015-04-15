@@ -1,6 +1,10 @@
 
 $(function(){
 
+  if (!$('#studies-show').length) {
+    return;
+  }
+
   $('#div-started-study').hide();
 
   $('#btn-start').click(function() {

@@ -24,7 +24,7 @@
   <section id="main-wrapper" class="<%= 'logged-out' if not researcher_signed_in? %>">
     <%= render partial: 'nav/left' %>
     <%= render partial: 'nav/header' %>
-    <section id="main-<%=params[:controller] + '-' + params[:action] %>" class="main-content-wrapper">
+    <section id="<%= controller_name + '-' + action_name %>" class="main-content-wrapper">
       <%= yield %>
       <%= render partial: 'nav/footer' %>
     </section>

@@ -1,13 +1,7 @@
-#login-wrapper {
-  input {
-    padding-left: 32px;
-  }
-}
-
-#main-devise\/sessions-new,
-#main-devise\/sessions-create,
-#main-devise\/passwords-new,
-#main-devise\/passwords-create {
+#sessions-new,
+#sessions-create,
+#passwords-new,
+#passwords-create {
   .panel {
     max-width: 400px;
     margin-left: auto;

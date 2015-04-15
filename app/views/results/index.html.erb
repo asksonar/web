@@ -2,12 +2,6 @@
   <h1><%= @owner == 'me' ? 'My' : 'All' %> Results</h1>
 </section>
 <section class="main-content">
-  <% if flash[:scenario_message] %>
-    <div class="alert alert-warning alert-dismissible" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <%=flash[:scenario_message]%>
-    </div>
-  <% end %>
 
   <% @results.each do |scenario| %>
     <a class='panel <%=scenario.status%>' href='<%= @owner == 'me' ? my_result_path(scenario) : result_path(scenario) %>'>

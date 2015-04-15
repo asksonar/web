@@ -1,5 +1,5 @@
-class UserScenariosController < ApplicationController
-  def index
+class StudiesController < ApplicationController
+  def show
     @scenario = Scenario.find_by_hashid(params[:id])
   end
 

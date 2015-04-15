@@ -5,8 +5,6 @@ Rails.application.routes.draw do
   get '/create',      to: 'drafts#new'
   get '/my_results',  to: 'results#my_index'
   get '/create',      to: 'create#index'
-  get '/studies/:id', to: 'user_scenarios#index'
- post '/studies/new', to: 'user_scenarios#new'
   get '/share/videos/:id', to: 'share_videos#show'
 
   get '/accounts/sign_up', to: redirect('http://www.asksonar.com/sign-up')
@@ -26,6 +24,7 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
+  resources :studies
   resources :drafts
   resources :results
   resources :my_results, controller: 'results'

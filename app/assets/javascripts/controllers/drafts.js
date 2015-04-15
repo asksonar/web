@@ -5,6 +5,9 @@
 */
 
 $(function(){
+  if (!$('#drafts-new, #drafts-edit').length) {
+    return;
+  }
 
   var recountSteps = function(){
     $('.ctn-count').each(function(index){

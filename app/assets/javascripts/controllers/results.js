@@ -6,7 +6,7 @@
 
 $(function(){
 
-  if (!$('#main-results-show')) {
+  if (!$('#results-show').length) {
     return;
   }
 

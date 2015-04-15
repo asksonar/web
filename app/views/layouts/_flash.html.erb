@@ -3,15 +3,25 @@
       var notificationController = new NotificationController();
 
       <% if flash[:notice] %>
-        notificationController.info('<%= j flash[:notice] %>');
+        notificationController.info('<%= j raw flash[:notice] %>');
       <% end %>
 
       <% if flash[:alert] %>
-        notificationController.error('<%= j flash[:alert] %>');
+        notificationController.error('<%= j raw flash[:alert] %>');
       <% end %>
 
-      <% resource.errors.full_messages.each do |message| %>
-        notificationController.error('<%= j message %>');
+      <% if defined? resource %>
+        <% resource.errors.full_messages.each do |message| %>
+          notificationController.error('<%= j raw message %>');
+        <% end %>
+      <% end %>
+
+      <% if flash[:info] %>
+        notificationController.info('<%= j raw flash[:info] %>');
+      <% end %>
+
+      <% if flash[:error] %>
+        notificationController.error('<%= j raw flash[:error] %>');
       <% end %>
     });
 

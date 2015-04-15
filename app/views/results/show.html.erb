@@ -51,13 +51,6 @@
 </section>
 <section class='main-content'>
 
-  <% if flash[:first_publish] %>
-    <div class="alert alert-success alert-dismissable">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-      <strong>Scenario Published</strong> - Your scenario is now ready to be shared with your users
-    </div>
-  <% end %>
-
   <% @summary.summary_steps.each do |summary_step| %>
   <div class='panel'>
     <%= bsh_split_panel 'col-md-8' do %>
