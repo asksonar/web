@@ -79,21 +79,12 @@ $(function(){
         "gridCount": 0,
         "autoGridCount": false
       },
-      /*
-      "categoryAxis": [{
-        "title": input.val(),
-        "titleBold": false
-      }],
-      */
       "valueAxes": [{
         "title": "users",
         "titleBold": false,
         "gridAlpha": 0,
         "tickLength": 0,
-        "gridCount": 0,
-        "autoGridCount": false,
-        "showFirstLabel": false,
-        "showLastLabel": false
+        "labelsEnabled": false
       }],
       "balloon": {
         "fixedPosition": true
@@ -111,9 +102,6 @@ $(function(){
     var stepId = thisEl.attr('data-scenario-step-id');
     var userId = thisEl.attr('data-user-id');
     var timeSeconds = thisEl.attr('data-feeling-at-seconds') || 0;
-
-    //stepId = 976353875;
-    //userId = 1023569919;
 
     $.ajax({
       url:"/videos.json",
@@ -148,8 +136,6 @@ $(function(){
 
         $('#videoText').html(videoTranscript);
 
-        //var modalTitle = '[' + data.user_email + '] - ' + (data.step_order + 1) + ') ' + data.step_description;
-        //$('.modal-title').html(modalTitle);
         $('#ctn-user-email').html(data.user_email);
         $('#ctn-step-order').html(data.step_order + 1);
         $('#ctn-step-description').html(data.step_description);
@@ -181,7 +167,7 @@ $(function(){
 
         $('#input-url-time').val(Math.floor(currentSeconds / 60) + ':' + ('00' + currentSeconds % 60).slice(-2));
         $('#input-url-base').val($('#input-url-base').attr('data-base-url') + currentSeconds);
-        //console.log(currentTime);
+
         var videoTextLinks = $('#videoText .videoTextLink').removeClass('activeVideoTextLink');
         var videoTextLink;
         for(var i = videoTextLinks.length - 1; i >= 0; i-- ) {

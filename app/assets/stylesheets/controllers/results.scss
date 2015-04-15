@@ -156,6 +156,11 @@
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+    .summary_time_graph {
+      a {
+        display: none !important;
+      }
+    }
   }
 
   .graph {
