@@ -1,13 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :researchers
-  get '/login',       to: 'sessions#index', as: :login
- post '/login/new',   to: 'sessions#create', as: :new_login
-  get '/logout',      to: 'sessions#destroy', as: :logout
-  get '/account',     to: 'account#index'
+  devise_for :researchers, path: 'accounts'
+
   get '/videos.json', to: 'videos_json#show'
   get '/create',      to: 'drafts#new'
   get '/my_results',  to: 'results#my_index'
-  get '/recent',      to: 'recent#index'
   get '/create',      to: 'create#index'
   get '/studies/:id', to: 'user_scenarios#index'
  post '/studies/new', to: 'user_scenarios#new'

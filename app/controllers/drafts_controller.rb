@@ -1,11 +1,12 @@
 class DraftsController < ApplicationController
+  before_action :authenticate_researcher!
 
   EMPTY_SCENARIO = Scenario.new({
     scenario_steps: [ScenarioStep.new()]
   })
 
   def index
-    @scenarios = Scenario.drafts(current_user.id)
+    @scenarios = Scenario.drafts(current_researcher.id)
   end
 
   def new(scenario = EMPTY_SCENARIO)
@@ -30,8 +31,8 @@ class DraftsController < ApplicationController
       end
 
       @scenario = create_action.call(scenario_params.merge({
-        created_by: current_user.researcher,
-        company: current_user.company,
+        created_by: current_researcher,
+        company: current_researcher.company,
       }))
 
       @scenario.scenario_steps.create(scenario_steps_params)

@@ -6,7 +6,7 @@ module ActiveRecordHashids
   end
 
   def hashid
-    self.class.hashids.encode(id)
+    id && self.class.hashids.encode(id)
   end
 
   def to_param

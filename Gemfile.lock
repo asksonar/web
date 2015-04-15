@@ -106,6 +106,7 @@ GEM
       railties (= 4.2.0)
       sprockets-rails
     rails-assets-amcharts (3.13.3)
+    rails-assets-animate.css (3.2.6)
     rails-assets-autosize (2.0.1)
     rails-assets-bootstrap (3.3.4)
       rails-assets-jquery (>= 1.9.1)
@@ -199,6 +200,7 @@ DEPENDENCIES
   pg
   rails (= 4.2.0)
   rails-assets-amcharts!
+  rails-assets-animate.css!
   rails-assets-autosize!
   rails-assets-bootstrap-sass!
   rails-assets-fontawesome!

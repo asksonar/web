@@ -66,6 +66,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-zeroclipboard'
   # gives us nice-looking error messages, configured in application.html.erb
   gem 'rails-assets-remarkable-bootstrap-notify'
+  # add animations for notify
+  gem 'rails-assets-animate.css'
 end
 
 group :development, :test do

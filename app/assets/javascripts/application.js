@@ -19,6 +19,7 @@
 //= require handlebars
 //= require autosize
 //= require zeroclipboard
+//= require remarkable-bootstrap-notify
 
 // insert new packages above this line
 //= require_tree .

@@ -29,5 +29,20 @@
       <%= render partial: 'nav/footer' %>
     </section>
   </section>
+
+  <script type='text/javascript'>
+    $(function(){
+      var notificationController = new NotificationController();
+
+      <% if flash[:notice] %>
+        notificationController.info('<%= j flash[:notice] %>');
+      <% end %>
+
+      <% if flash[:alert] %>
+        notificationController.error('<%= j flash[:alert] %>');
+      <% end %>
+    });
+
+  </script>
 </body>
 </html>

@@ -12,12 +12,13 @@
  *
  */
 
-//@import "debug-show-asset-search-paths";
+// @import "debug-show-asset-search-paths";
 
 $icon-font-path: "bootstrap/";
 @import "bootstrap-sass";
 @import "fontawesome";
 @import "video.js";
+@import "animate.css";
 
 // insert new packages above this line
 @import "shared/*";

@@ -12,16 +12,15 @@
 
   .nav {
     >li>a {
-      padding: 0px 5px;
+      padding: 0px 10px;
       height: 44px;
       line-height: 44px;
       color: #FFF;
       >i {
         font-size: 18px;
-        padding: 0px 10px;
       }
     }
-    >li>a:hover {
+    >li>a:hover, >li>a:focus {
       color: #1CA5C9;
     }
   }
@@ -34,6 +33,10 @@
   .nav-right {
     position: absolute;
     right: 0;
+    .dropdown-menu {
+      left: auto;
+      right: 0;
+    }
   }
 }
 
@@ -67,7 +70,7 @@
     margin-top: 5px;
   }
 
-  li a:hover {
+  li a:hover, li a:focus {
     background: #999;
     color: #FFF;
   }
