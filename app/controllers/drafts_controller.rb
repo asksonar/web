@@ -60,6 +60,10 @@ class DraftsController < ApplicationController
     # need to modify the new page to indicate it is editing
   end
 
+  def show
+    redirect_to edit_draft_path
+  end
+
   def update
     @scenario = Scenario.find_by_hashid(params[:id])
     ActiveRecord::Base.transaction do
@@ -73,21 +77,11 @@ class DraftsController < ApplicationController
         raise "Illegal commit value of " + params[:commit]
       end
 
-      scenario_steps_params_map = {}
-      scenario_steps_params.each { |p| scenario_steps_params_map[p[:id]] = p }
-      scenario_steps_params_map.each do |id, step|
-        if update_me = ScenarioStep.find_by_hashid(id)
-          update_me.update(step)
-        else
-          @scenario.scenario_steps.create(step)
-        end
+      @scenario.scenario_steps.each do |step|
+        step.destroy
       end
 
-      @scenario.scenario_steps.each do |step|
-        if not scenario_steps_params_map.keys.include? step.id.to_s
-          step.destroy
-        end
-      end
+      @scenario.scenario_steps.create(scenario_steps_params)
     end
 
     if params[:publish]
@@ -102,11 +96,6 @@ class DraftsController < ApplicationController
     # then the resulting pathing is the same as create pretty much
   end
 
-  def destroy
-    # should just redirect to the All Results page if there is no id
-    # if there is an id, then it should go back to the drafts list and show deleted
-  end
-
   private
     def scenario_params
       params.require(:scenario).permit(:title, :description)
@@ -114,7 +103,7 @@ class DraftsController < ApplicationController
 
     def scenario_steps_params
       params.require(:scenario_steps).each_with_index.map do |step, index|
-        return_val = ActionController::Parameters.new(step).permit(:id, :description, :url)
+        return_val = ActionController::Parameters.new(step).permit(:description, :url)
         return_val[:step_order] = index
         return_val
       end
