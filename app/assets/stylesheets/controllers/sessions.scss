@@ -4,10 +4,52 @@
   }
 }
 
-#main-devise/sessions-new {
-  width: 400px;
-  margin-top: 40px;
-  padding: 40px;
+#main-devise\/sessions-new,
+#main-devise\/sessions-create,
+#main-devise\/passwords-new,
+#main-devise\/passwords-create {
+  .panel {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 
+    .form-group {
+      margin-bottom: 0px;
+    }
+
+    .form-group + .form-group {
+      margin-top: 10px;
+    }
+
+    .form-group + .form-group + .form-group {
+      margin-top: 0px;
+    }
+
+    p + .form-group {
+      margin-top: 10px;
+    }
+
+
+    .ctn-remember-forgot {
+      .checkbox {
+        float: left;
+      }
+      a {
+        padding-top: 7px; // match the checkbox
+      }
+    }
+
+    .btn-dark-blue {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .link-sign-up {
+      margin-top: 30px;
+      p {
+        line-height: 31px;
+      }
+    }
+  }
 
 }

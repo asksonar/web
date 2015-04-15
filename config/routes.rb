@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :researchers, path: 'accounts'
+
 
   get '/videos.json', to: 'videos_json#show'
   get '/create',      to: 'drafts#new'
@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get '/studies/:id', to: 'user_scenarios#index'
  post '/studies/new', to: 'user_scenarios#new'
   get '/share/videos/:id', to: 'share_videos#show'
+
+  get '/accounts/sign_up', to: redirect('http://www.asksonar.com/sign-up')
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -27,6 +29,8 @@ Rails.application.routes.draw do
   resources :drafts
   resources :results
   resources :my_results, controller: 'results'
+
+  devise_for :researchers, path: 'accounts'
 
   # Example resource route with options:
   #   resources :products do

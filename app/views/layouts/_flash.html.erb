@@ -1,0 +1,20 @@
+<script type='text/javascript'>
+    $(function(){
+      var notificationController = new NotificationController();
+
+      <% if flash[:notice] %>
+        notificationController.info('<%= j flash[:notice] %>');
+      <% end %>
+
+      <% if flash[:alert] %>
+        notificationController.error('<%= j flash[:alert] %>');
+      <% end %>
+
+      <% resource.errors.full_messages.each do |message| %>
+        notificationController.error('<%= j message %>');
+      <% end %>
+    });
+
+  </script>
+
+

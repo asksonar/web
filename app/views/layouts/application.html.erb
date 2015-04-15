@@ -30,19 +30,7 @@
     </section>
   </section>
 
-  <script type='text/javascript'>
-    $(function(){
-      var notificationController = new NotificationController();
+  <%= render partial: 'layouts/flash' %>
 
-      <% if flash[:notice] %>
-        notificationController.info('<%= j flash[:notice] %>');
-      <% end %>
-
-      <% if flash[:alert] %>
-        notificationController.error('<%= j flash[:alert] %>');
-      <% end %>
-    });
-
-  </script>
 </body>
 </html>
