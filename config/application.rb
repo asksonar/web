@@ -25,6 +25,7 @@ module Cero
 
     config.autoload_paths += %W(#{config.root}/lib)
 
+    # load fonts that aren't just in the font folders
     config.assets.precompile << /\.(?:svg|eot|woff|woff2|ttf)$/
   end
 end
