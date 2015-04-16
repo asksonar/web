@@ -34,11 +34,11 @@
   .main-content-header {
     .summary-highlights-container {
       p.sub {
-        margin-top: 5px;
+        margin-top: 10px;
       }
 
       .summary-container,  .highlights-container {
-        margin-top: 10px;
+        margin-top: 20px;
         span.h3 {
           display: inline-block;
           text-indent: -95px;
@@ -48,8 +48,8 @@
         }
       }
       .summary-container {
-        max-height: 3em;
-        overflow: hidden;
+        //max-height: 4em;
+        //overflow: hidden;
       }
       .summary-container:hover {
         max-height: inherit;
