@@ -1,24 +1,11 @@
-@font-face {
-  font-family: BookAlt;
-  src: url(asset-path('Neutra Text Book Alt.otf')) format("opentype");
-}
-
-@font-face {
-  font-family: DemiAlt;
-  src: url(asset_path('Neutra Text Demi Alt.otf')) format("opentype");
-}
-
-
 body {
-  //font-family: BookAlt;
-  font-family: 'Brandon Grotesque Regular';
-  font-size: 14px;
+  font-family: 'BrandonGrotesque-Regular';
+  font-size: 16px;
 }
 
 .body {
-  //font-family: BookAlt;
-  font-family: 'Brandon Grotesque Regular';
-  font-size: 14px;
+  font-family: 'BrandonGrotesque-Regular';
+  font-size: 16px;
 }
 
 a {
@@ -32,7 +19,7 @@ a:hover {
 }
 
 p {
-  line-height: 16px;
+  line-height: 18px;
   margin-top: 0px;
   margin-bottom: 0px;
 }
@@ -42,12 +29,12 @@ p + p {
 }
 
 .sub {
-  font-size: 12px;
+  font-size: 14px;
   color: #999;
 }
 
 p.sub {
-  line-height: 13px;
+  line-height: 15px;
 }
 
 p.sub + p.sub {
@@ -55,23 +42,22 @@ p.sub + p.sub {
 }
 
 h1, .h1 {
-  //font-family: DemiAlt;
-  font-family: 'Brandon Grotesque Medium';
-  font-size: 22px;
+  font-family: 'BrandonGrotesque-Medium';
+  font-size: 24px;
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
 h2, .h2 {
-  font-size: 22px;
+  font-size: 24px;
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
 h3, .h3 {
   //font-family: DemiAlt;
-  font-family: 'Brandon Grotesque Medium';
-  font-size: 14px;
+  font-family: 'BrandonGrotesque-Medium';
+  font-size: 16px;
   margin-top: 0px;
   margin-bottom: 0px;
 }

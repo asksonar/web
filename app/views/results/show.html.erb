@@ -35,11 +35,11 @@
 
         <div class='row counts-container'>
           <div class='col-xs-6'>
-            <h1><i class='fa fa-smile-o text-success'></i><%= @summary.total_delighted %></h1>
+            <h1><i class='feeling-delighted'></i><%= @summary.total_delighted %></h1>
             <p class='sub'>moment<%= @summary.total_delighted != 1 ? 's' : '' %></p>
           </div>
           <div class='col-xs-6'>
-            <h1><i class='fa fa-frown-o text-danger'></i><%= @summary.total_confused %></h1>
+            <h1><i class='feeling-confused'></i><%= @summary.total_confused %></h1>
             <p class='sub'>moment<%= @summary.total_confused != 1 ? 's' : '' %></p>
           </div>
         </div>
@@ -64,11 +64,11 @@
         <div class='col-xs-4'>
           <div class='row moments-container'>
             <div class='col-xs-6'>
-              <h1><i class='fa fa-smile-o text-success'></i><%= summary_step.total_delighted %></h1>
+              <h1><i class='feeling-delighted'></i><%= summary_step.total_delighted %></h1>
               <p class='sub'>moment<%= summary_step.total_delighted != 1 ? 's' : '' %></p>
             </div>
             <div class='col-xs-6'>
-              <h1><i class='fa fa-frown-o text-danger'></i><%= summary_step.total_confused %></h1>
+              <h1><i class='feeling-confused'></i><%= summary_step.total_confused %></h1>
               <p class='sub'>moment<%= summary_step.total_confused != 1 ? 's' : '' %></p>
             </div>
           </div>
@@ -78,7 +78,7 @@
         <div class='col-xs-8'>
           <div class='feelings-container'>
             <div class='delighted-feelings-container <%= 'hidden' if summary_step.total_delighted < 1 %>'>
-              <h1><i class='fa fa-smile-o text-success pull-left'></i></h1>
+              <h1><i class='feeling-delighted pull-left'></i></h1>
               <% summary_step.delighted_feelings.each do |feeling| %>
                 <p class='feeling-div'><a class='feeling'
                   data-scenario-step-id='<%=feeling.scenario_step_id%>'
@@ -88,7 +88,7 @@
               <% end %>
             </div>
             <div class='confused-feelings-container <%= 'hidden' if summary_step.total_confused < 1 %>'>
-              <h1><i class='fa fa-frown-o text-danger pull-left'></i></h1>
+              <h1><i class='feeling-confused pull-left'></i></h1>
               <% summary_step.confused_feelings.each do |feeling| %>
                 <p class='feeling-div'><a class='feeling'
                   data-scenario-step-id='<%=feeling.scenario_step_id%>'

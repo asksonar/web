@@ -21,3 +21,28 @@
     height: 15px;
   }
 }
+
+i.feeling-delighted,
+i.feeling-confused {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+}
+
+i.feeling-delighted:before,
+i.feeling-confused:before {
+  content: '';
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+}
+
+i.feeling-confused:before {
+  background-image: image-url('face_bummer.svg');
+}
+
+i.feeling-delighted:before {
+  background-image: image-url('face_delight.svg');
+}
