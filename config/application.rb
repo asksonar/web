@@ -25,6 +25,6 @@ module Cero
 
     config.autoload_paths += %W(#{config.root}/lib)
 
-    #config.assets.precompile << /.*.(?:eot|svg|ttf|woff|swf)$/
+    config.assets.precompile << /\.(?:svg|eot|woff|woff2|ttf)$/
   end
 end
