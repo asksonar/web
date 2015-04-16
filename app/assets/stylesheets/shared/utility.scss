@@ -46,3 +46,11 @@ i.feeling-confused:before {
 i.feeling-delighted:before {
   background-image: image-url('face_delight.svg');
 }
+
+i.feeling-confused.white-mouth:before {
+  background-image: image-url('face_bummer_white_mouth.svg');
+}
+
+i.feeling-delighted.white-mouth:before {
+  background-image: image-url('face_delight_white_mouth.svg');
+}
