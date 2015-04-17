@@ -5,13 +5,13 @@
 
   <% @results.each do |scenario| %>
     <a class='panel <%=scenario.status%>' href='<%= @owner == 'me' ? my_result_path(scenario) : result_path(scenario) %>'>
-      <%= bsh_split_panel 'col-md-8' do %>
+      <%= bsh_split_panel 'col-sm-8' do %>
         <div class='row'>
-          <div class='col-md-8 title-container'>
+          <div class='col-sm-8 title-container'>
             <h1><%= scenario.title %></h1>
             <p class='sub'>created by <%= scenario.created_by.email %> <%= time_ago_in_words(scenario.created_at)%> ago</p>
           </div>
-          <div class='col-md-4'>
+          <div class='col-sm-4'>
             <div class='row counts-container'>
               <div class='col-xs-6'>
                 <h1><i class='feeling-delighted'></i><%= scenario.total_delighted %></h1>

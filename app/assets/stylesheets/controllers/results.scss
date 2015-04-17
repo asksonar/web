@@ -16,8 +16,9 @@
 
   a.panel {
     .title-container {
-      h1 + p {
+      p {
         margin-top: 10px;
+        margin-bottom: 20px;
       }
     }
     .counts-container {
@@ -33,6 +34,7 @@
 
   .main-content-header {
     .summary-highlights-container {
+      margin-bottom: 20px;
       p.sub {
         margin-top: 10px;
       }
