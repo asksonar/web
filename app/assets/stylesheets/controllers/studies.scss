@@ -9,23 +9,57 @@
     margin-right: auto;
   }
 
+  .fa-check-circle {
+    color: #1CA5C9;
+    font-size: 32px;
+  }
+
+  .step {
+    .el-enabled,
+    .el-disabled,
+    .el-completed {
+      display: none;
+    }
+  }
+
+  p.el-completed {
+    line-height: 32px; /* hack for one-line items to look better */
+  }
+
+  .step-enabled .el-enabled {
+    display: block;
+  }
+
+  .step-disabled .el-disabled {
+    display: block;
+  }
+
+  .step-completed .el-completed {
+    display: block;
+  }
+
   .ctn-setup {
-    div {
+    .step {
+      position: relative;
       margin-top: 20px;
 
-      p {
-        float: left;
-        width: 400px - 20px - 20px - 100px - 20px;
-        margin-right: 20px;
-      }
       .btn {
-        float: left;
         width: 100px;
+      }
+
+      .btn, i {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      p {
+        margin-right: 115px;
       }
     }
   }
 
   .ctn-study {
+
     p.sub {
       margin-top: 10px;
     }
@@ -34,36 +68,11 @@
       margin-bottom: 0px;
     }
 
-    .ctn-email {
+    form {
       margin-top: 20px;
-      p {
-        line-height: 34px;
-      }
-    }
-    .ctn-anonymous {
-      margin-top: 5px;
-      p {
-        line-height: 20px;
-      }
-      div.checkbox {
-        margin-top: 0px;
-      }
-    }
-    .ctn-email,
-    .ctn-anonymous {
-      p {
-        width: 168px;
-        float: left;
-        text-align: right;
-      }
-      input.form-control,
-      div.checkbox {
-        float: right;
-        width: 180px;
-      }
     }
 
-    .btn {
+    .ctn-start-feedback {
       margin-top: 20px;
     }
 

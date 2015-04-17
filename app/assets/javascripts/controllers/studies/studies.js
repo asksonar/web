@@ -1,11 +1,20 @@
-
 $(function(){
 
   if (!$('#studies-show').length) {
     return;
   }
 
-  $('#div-started-study').hide();
+  var view = new StudiesView({
+    'ctnInstallChrome': $('#ctn-install-chrome'),
+    'ctnInstallExtension': $('#ctn-install-extension'),
+    'ctnStartFeedback': $('.ctn-study')
+  });
+  var controller = new StudiesController(view, "https://chrome.google.com/webstore/detail/neeoccancikpmendfnglomhpeckokjei", {
+    'btnInstallExtension': $('#btn-install-extension'),
+    'btnStartFeedback': $('#btn-start-feedback')
+  });
+
+  controller.refresh();
 
   $('#btn-start').click(function() {
 

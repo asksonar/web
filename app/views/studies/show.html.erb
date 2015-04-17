@@ -11,40 +11,51 @@
     <p>
       Thanks for your participation!  Unlike typical surveys, Sonar shares your screen and audio with the asker so you can stay focused on giving genuine, honest feedback.  So don’t be shy, speak your mind!
     </p>
-    <div class='clearfix'>
-      <p id='txt-install-chrome'>
+
+    <div class='step step-enabled' id='ctn-install-chrome'>
+      <p class='el-enabled el-disabled'>
         You’ll need to use Chrome to give your feedback. If you already have Chrome, just open this page there.
       </p>
-      <a id='btn-install-chrome' class='btn btn-grey' disabled>Get Chrome</a>
-    </div>
-    <div class='clearfix'>
-      <p id='txt-install-extension'>
-        You’ll need to use our Chrome extension to give your feedback. It will automatically collect data, so you don’t have to worry.
+      <p class='el-completed'>
+        You're on Chrome!
       </p>
-      <a id='btn-install-extension' class='btn btn-grey' disabled>Get Extension</a>
+      <a id='btn-install-chrome' class='btn btn-dark-blue pull-right el-enabled' href='https://www.google.com/chrome/browser/desktop/index.html' target='_blank'>Get Chrome</a>
+      <a class='btn btn-grey el-disabled'>Get Chrome</a>
+      <i class='fa fa-check-circle el-completed'></i>
+    </div>
+
+    <div class='step step-enabled' id='ctn-install-extension'>
+      <p class='el-enabled el-disabled'>
+        You’ll need to use our Chrome extension to give your feedback. Don't worry, this only needs to be activated once.
+      </p>
+      <p class='el-completed'>
+        You've got our extension!
+      </p>
+      <a id='btn-install-extension' class='btn btn-dark-blue pull-right el-enabled'>Get Extension</a>
+      <a class='btn btn-grey pull-right el-disabled'>Get Extension</a>
+      <i class='fa fa-check-circle pull-right el-completed'></i>
     </div>
   </div>
-  <div class='panel ctn-study'>
+  <div class='panel ctn-study step step-enabled'>
     <p>
       We’re interested in your movie-watching habits. This could be a longer description.
     </p>
     <p class='sub'>
       This study has 3 steps, and it takes 3 minutes on average.
     </p>
-    <%= form_for :study do |f| %>
+    <%= bootstrap_form_for :study, layout: :horizontal do |f| %>
       <%= f.hidden_field :scenario_hashid, value: @scenario.hashid %>
-      <div class='clearfix ctn-email'>
-        <p>Enter your email to get started</p>
-        <%= f.text_field :email, class: 'form-control' %>
-      </div>
-      <div class='clearfix ctn-anonymous'>
-        <p>Or</p>
-        <%= bootstrap_form_for :study, layout: :horizontal do |bf| %>
-          <%= bf.check_box :anonymous, label: 'Take the study anonymously' %>
+      <div class='el-enabled el-disabled'>
+        <%= f.text_field :email %>
+        <%= f.form_group do %>
+          <p class='sub'>Or leave it blank to take the study anonymously</p>
         <% end %>
       </div>
-      <div class='clearfix'>
-        <%= f.submit 'Start giving feedback', class: 'btn btn-grey pull-right', id: 'btn-start', disabled: true %>
+      <div class='clearfix ctn-start-feedback'>
+        <%= f.submit 'Start giving feedback', class: 'btn btn-dark-blue pull-right el-enabled', id: 'btn-start-feedback' %>
+        <a class='btn btn-grey pull-right el-disabled'>Start giving feedback</a>
+        <i class='fa fa-check-circle el-completed pull-right'></i>
+        <p class='el-completed pull-right'>Your study has started!</p>
       </div>
     <% end %>
   </div>
