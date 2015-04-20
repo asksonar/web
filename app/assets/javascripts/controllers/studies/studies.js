@@ -9,7 +9,7 @@ $(function(){
     'ctnInstallExtension': $('#ctn-install-extension'),
     'ctnStartFeedback': $('.ctn-study')
   });
-  var controller = new StudiesController(view, "https://chrome.google.com/webstore/detail/neeoccancikpmendfnglomhpeckokjei", {
+  var controller = new StudiesController(view, "https://chrome.google.com/webstore/detail/ifnadmakmckbjjhbnjcjpfeeljhhmgib", {
     'btnInstallExtension': $('#btn-install-extension'),
     'btnStartFeedback': $('#btn-start-feedback')
   });

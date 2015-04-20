@@ -2,7 +2,7 @@ class ScenarioResult < ActiveRecord::Base
   belongs_to :scenario
   belongs_to :panelist
 
-  enum status: [:pending, :inprogress, :completed]
+  enum status: [:pending, :inprogress, :completed, :aborted]
 
   after_initialize :default_values, unless: :persisted?
 
