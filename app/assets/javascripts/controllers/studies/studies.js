@@ -16,7 +16,7 @@ $(function(){
 
   controller.refresh();
 
-  $('#btn-start').click(function() {
+  $('#btn-start-feedback').click(function() {
 
     /*
     var appId = 'neeoccancikpmendfnglomhpeckokjei';
@@ -26,13 +26,13 @@ $(function(){
   */
 
     $.ajax({
-      url: '/studies/new',
+      url: '/studies',
       method: 'POST',
-      data: $('#form').serialize(),
+      data: $('form').serialize(),
       dataType: 'json'
     }).done(function(response){
       var launchAppParams = {};
-      launchAppParams[response.uuid] = scenarioParams;
+      launchAppParams[response.hashid] = scenarioParams;
 
       var appId = 'neeoccancikpmendfnglomhpeckokjei';
       chrome.runtime.sendMessage(appId, {launchApp: launchAppParams}, function(response) {

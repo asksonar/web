@@ -7,7 +7,6 @@ class ScenarioResult < ActiveRecord::Base
   after_initialize :default_values, unless: :persisted?
 
   def default_values
-    self.uuid = SecureRandom.uuid
     self.status = self.status || 0
   end
 

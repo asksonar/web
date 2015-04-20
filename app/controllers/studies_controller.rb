@@ -3,10 +3,10 @@ class StudiesController < ApplicationController
     @scenario = Scenario.find_by_hashid(params[:id])
   end
 
-  def new
-    @scenario = Scenario.find_by_hashid(arams[:id])
+  def create
+    @scenario = Scenario.find_by_hashid(params[:study][:scenario_hashid])
     @user_scenario = ScenarioResult.create(scenario: @scenario);
-    render json: {uuid: @user_scenario.uuid}
+    render json: {hashid: @user_scenario.hashid}
   end
 
 end
