@@ -15,7 +15,7 @@ module ActiveRecordHashids
 
   module ClassMethods
     def hashids
-      @@hashids ||= Hashids.new(self.name + 'f%jpdDF3c7ZZ@T&C7Zh^sk22gTKmxj#3', 8)
+      @hashids ||= Hashids.new(self.name + 'f%jpdDF3c7ZZ@T&C7Zh^sk22gTKmxj#3', 8)
     end
 
     def find_by_hashid(hashid)
