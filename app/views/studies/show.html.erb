@@ -43,7 +43,7 @@
     <p class='sub'>
       This study has 3 steps, and it takes 3 minutes on average.
     </p>
-    <%= bootstrap_form_for :study, layout: :horizontal do |f| %>
+    <%= bootstrap_form_for :study, layout: :horizontal, html: { onsubmit: "return false;" } do |f| %>
       <%= f.hidden_field :scenario_hashid, value: @scenario.hashid %>
       <div class='el-enabled el-disabled'>
         <%= f.text_field :email %>
