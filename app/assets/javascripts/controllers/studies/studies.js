@@ -1,5 +1,7 @@
 $(function(){
 
+  var APP_ID = 'ifnadmakmckbjjhbnjcjpfeeljhhmgib';
+
   if (!$('#studies-show').length) {
     return;
   }
@@ -9,7 +11,7 @@ $(function(){
     'ctnInstallExtension': $('#ctn-install-extension'),
     'ctnStartFeedback': $('.ctn-study')
   });
-  var controller = new StudiesController(view, "https://chrome.google.com/webstore/detail/ifnadmakmckbjjhbnjcjpfeeljhhmgib", {
+  var controller = new StudiesController(view, "https://chrome.google.com/webstore/detail/" + APP_ID, {
     'btnInstallExtension': $('#btn-install-extension'),
     'btnStartFeedback': $('#btn-start-feedback')
   });
@@ -34,8 +36,7 @@ $(function(){
       var launchAppParams = {};
       launchAppParams[response.hashid] = scenarioParams;
 
-      var appId = 'neeoccancikpmendfnglomhpeckokjei';
-      chrome.runtime.sendMessage(appId, {launchApp: launchAppParams}, function(response) {
+      chrome.runtime.sendMessage(APP_ID, {launchApp: launchAppParams}, function(response) {
         console.log('Response from launching the app: ' + response);
       });
 
