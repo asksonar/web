@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415022304) do
+ActiveRecord::Schema.define(version: 20150421101145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20150415022304) do
     t.integer  "feeling"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
-    t.float    "feeling_at_seconds"
+    t.decimal  "feeling_at_seconds"
     t.text     "context_transcription"
     t.integer  "scenario_result_id"
   end
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20150415022304) do
     t.integer  "scenario_step_id"
     t.datetime "started_at"
     t.datetime "completed_at"
-    t.integer  "completed_seconds"
+    t.decimal  "completed_seconds"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "scenario_result_id"
