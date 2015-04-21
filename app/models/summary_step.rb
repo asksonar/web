@@ -50,7 +50,7 @@ class SummaryStep
     #  '0:00':[], '0:30':[], '1:00':[], '1:30':[], '2:00':[], '2:30':[], '3:00+':[]
     #}
     @scenario_step.result_steps.each do |result|
-      bucket_time = [result.completed_seconds, MAX_TIME_BUCKET].min
+      bucket_time = [result.completed_seconds.to_i, MAX_TIME_BUCKET].min
       bucket_time = (bucket_time / 30) * 30
 
       buckets[bucket_time][:details] += [{id: result.id, step_id: result.scenario_step_id, time: result.completed_seconds}]
