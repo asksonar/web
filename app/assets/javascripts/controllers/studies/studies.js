@@ -1,6 +1,7 @@
 $(function(){
 
   var APP_ID = 'ifnadmakmckbjjhbnjcjpfeeljhhmgib';
+  //var APP_ID = 'neeoccancikpmendfnglomhpeckokjei';
 
   if (!$('#studies-show').length) {
     return;
@@ -11,40 +12,11 @@ $(function(){
     'ctnInstallExtension': $('#ctn-install-extension'),
     'ctnStartFeedback': $('.ctn-study')
   });
-  var controller = new StudiesController(view, "https://chrome.google.com/webstore/detail/" + APP_ID, {
+  var controller = new StudiesController(view, APP_ID, {
     'btnInstallExtension': $('#btn-install-extension'),
-    'btnStartFeedback': $('#btn-start-feedback')
+    'btnStartFeedback': $('#btn-start-feedback'),
+    'form': $('form')
   });
 
   controller.refresh();
-
-  $('#btn-start-feedback').click(function() {
-
-    /*
-    var appId = 'neeoccancikpmendfnglomhpeckokjei';
-    chrome.runtime.sendMessage(appId, {launchApp: launchAppParams}, function(response) {
-      console.log('Response from launching the app: ' + response);
-    });
-  */
-
-    $.ajax({
-      url: '/studies',
-      method: 'POST',
-      data: $('form').serialize(),
-      dataType: 'json'
-    }).done(function(response){
-      var launchAppParams = {};
-      launchAppParams[response.hashid] = scenarioParams;
-
-      chrome.runtime.sendMessage(APP_ID, {launchApp: launchAppParams}, function(response) {
-        console.log('Response from launching the app: ' + response);
-      });
-
-      $('#div-start-study').hide();
-      $('#div-started-study').show();
-    });
-
-
-  });
-
 });

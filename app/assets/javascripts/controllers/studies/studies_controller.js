@@ -1,9 +1,10 @@
-function StudiesController(view, url, config) {
+function StudiesController(view, appId, config) {
   this.view = view;
-  this.url = url;
+  this.appId = appId;
 
   this.$btnInstallExtension = config.btnInstallExtension;
   this.$btnStartFeedback = config.btnStartFeedback;
+  this.$form = config.form;
 
   this.init();
   this.initListeners();
@@ -12,18 +13,34 @@ function StudiesController(view, url, config) {
 StudiesController.prototype.init = function() {
   this.$btnInstallExtension.on('click', $.proxy(this.installExtension, this));
   this.$btnStartFeedback.on('click', $.proxy(this.startFeedback, this));
+
+  this.view.enableInstallChrome();
+  this.view.disableInstallExtension();
+  this.view.disableStartFeedback();
 }
 
 StudiesController.prototype.initListeners = function() {
-
 }
 
 StudiesController.prototype.hasChrome = function() {
   return chrome && chrome.webstore && chrome.webstore.install;
 }
 
-StudiesController.prototype.hasExtension = function() {
-  return this.hasChrome() && chrome.app.isInstalled;
+StudiesController.prototype.checkForExtension = function() {
+  if (!this.hasChrome()) {
+    return;
+  }
+
+  this.view.enableInstallExtension();
+
+  var responseCallback = function(response) {
+    if (response === true) {
+      this.view.completeInstallExtension();
+      this.view.enableStartFeedback();
+    }
+  };
+
+  chrome.runtime.sendMessage(this.appId, 'isInstalledApp?', $.proxy(responseCallback, this));
 }
 
 StudiesController.prototype.installExtension = function() {
@@ -38,29 +55,38 @@ StudiesController.prototype.installExtension = function() {
     notificationController.error('There was an error activating the extension.');
   };
 
-  chrome.webstore.install(this.url, $.proxy(successCallback, this), $.proxy(failureCallback, this));
+  chrome.webstore.install("https://chrome.google.com/webstore/detail/" + this.appId,
+    $.proxy(successCallback, this), $.proxy(failureCallback, this));
 }
 
-StudiesController.prototype.launchExtension = function() {
-  this.view.completeStartFeedback();
+StudiesController.prototype.startFeedback = function() {
+  var launchedAppResponse = function(response) {
+    if (response === true) {
+      this.view.completeStartFeedback();
+    } else {
+      var notificationController = new NotificationController();
+      notificationController.error('There was an error launching the study.');
+    }
+  }
+
+  var ajaxDone = function(response) {
+    var launchAppParams = {};
+    launchAppParams[response.hashid] = scenarioParams;
+
+    chrome.runtime.sendMessage(this.appId, {launchApp: launchAppParams}, $.proxy(launchedAppResponse, this));
+  }
+
+  $.ajax({
+    url: '/studies',
+    method: 'POST',
+    data: this.$form.serialize(),
+    dataType: 'json'
+  }).done($.proxy(ajaxDone, this));
 }
 
 StudiesController.prototype.refresh = function() {
   if (this.hasChrome()) {
     this.view.completeInstallChrome();
-    this.view.enableInstallExtension();
-  } else {
-    this.view.enableInstallChrome();
-    this.view.disableInstallExtension();
-    this.view.disableStartFeedback();
-    return;
-  }
-
-  if (this.hasExtension()) {
-    this.view.completeInstallExtension();
-    this.view.enableStartFeedback();
-  } else {
-    this.view.enableInstallExtension();
-    this.view.disableStartFeedback();
+    this.checkForExtension();
   }
 }
