@@ -36,6 +36,14 @@ class Scenario < ActiveRecord::Base
       .order(published_at: :desc)
   end
 
+  def user_count
+    scenario_results.count
+  end
+
+  def user_completed_count
+    scenario_results.where(status: ScenarioResult.statuses[:completed]).count
+  end
+
   def where_feeling_delighted
     result_feelings.where(feeling: ResultFeeling.feelings[:delighted])
   end

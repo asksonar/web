@@ -44,7 +44,7 @@
           </div>
         </div>
         <h2><%= @summary.user_completed_count || 0 %> users</h2>
-        <p class='sub'>0 incomplete</p>
+        <p class='sub'><%= @summary.user_count - @summary.user_completed_count %> incomplete</p>
       </div>
     </div>
   <% end %>
