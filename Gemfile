@@ -48,6 +48,8 @@ gem 'rails_bootstrap_navbar'
 gem 'hashids'
 # user login framework
 gem 'devise'
+# better server than webrick
+gem 'thin'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables
