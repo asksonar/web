@@ -1,4 +1,6 @@
 class ResultVideo < ActiveRecord::Base
+  VIDEO_BASE = 'http://video.asksonar.com/output'
+
   belongs_to :scenario_step
   belongs_to :scenario_result
   has_many :video_transcriptions, inverse_of: :result_video
@@ -16,8 +18,8 @@ class ResultVideo < ActiveRecord::Base
 
   def src_array
     [
-      { type: "video/mp4", src: "http://vjs.zencdn.net/v/oceans.mp4" },
-      #{ type: "video/webm", src: "/videos/video_" + data.id + ".webm" },
+      { type: "video/mp4", src: "#{VIDEO_BASE}/#{scenario_result.hashid}/#{hashid}.mp4" },
+      { type: "video/webm", src: "#{VIDEO_BASE}/#{scenario_result.hashid}/#{hashid}.mp4" }
       #{ type: "video/ogg", src: "/videos/video_" + data.id + ".ogv" }
     ]
   end
