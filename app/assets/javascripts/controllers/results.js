@@ -101,7 +101,7 @@ $(function(){
     var thisEl = $(this);
     var stepId = thisEl.attr('data-scenario-step-id');
     var userId = thisEl.attr('data-user-id');
-    var timeSeconds = thisEl.attr('data-feeling-at-seconds') || 0;
+    var timeSeconds = parseFloat(thisEl.attr('data-feeling-at-seconds') || 0) - 5;
 
     $.ajax({
       url:"/videos.json",
