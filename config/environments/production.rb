@@ -78,7 +78,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # add mail configurations for use by devise to send forgot password mails
-  config.action_mailer.default_url_options = { host: 'asksonar.com' }
+  config.action_mailer.default_url_options = { host: 'my.asksonar.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:              'smtp.mandrillapp.com',
