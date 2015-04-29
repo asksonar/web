@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   resources :results
   resources :my_results, controller: 'results'
 
-  devise_for :researchers, path: 'accounts'
+  devise_for :researchers, path: 'accounts', path_names: { sign_in: 'login', sign_out: 'logout' }
 
   # Example resource route with options:
   #   resources :products do
