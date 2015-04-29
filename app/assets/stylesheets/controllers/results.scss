@@ -127,17 +127,20 @@
   }
 
   .panel-heading {
-    h1 i {
-      margin-right: 5px;
-    }
-    ol {
-      padding-left: 25px;
-      margin-bottom: 0px;
+    .summary-step-description {
+      margin-left: 25px;
+      span.h1 {
+        text-indent: -25px;
+        display: inline-block;
+      }
     }
 
     .moments-container {
       div + div {
         padding-left: 0px;
+      }
+      h1 i {
+        margin-right: 5px;
       }
     }
   }
@@ -174,18 +177,21 @@
       h3 {
         display: inline-block;
       }
-      p {
+      p#ctn-user-email {
         display: inline-block;
         margin-left: 20px;
       }
       .ctn-modal-step-description {
-        margin-left: 75px;
+        margin-left: 80px;
         margin-top: 15px;
         margin-bottom: 30px;
         span.h1 {
+          text-indent: -80px;
           display: inline-block;
-          text-indent: -75px;
           width: 0px;
+          span {
+            display: inline;
+          }
         }
       }
     }
