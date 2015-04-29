@@ -1,3 +1,12 @@
+<% content_for :title do %>
+  <% if @scenario.id %>
+  Edit Study
+  <% else %>
+  New Study
+  <% end %>
+<% end %>
+
+
 <%= bootstrap_form_for @scenario, url: @scenario.id ? draft_path(@scenario) : drafts_path, html: {id: 'create-form'} do |f| %>
   <%= f.hidden_field :id, value: @scenario.id %>
 

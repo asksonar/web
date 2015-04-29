@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>sonar</title>
+  <title>Sonar |
+    <% if content_for? :title %>
+      <%= content_for :title %>
+    <% else %>
+      Understanding Users
+    <% end %>
+  </title>
   <%= favicon_link_tag 'sonarFavicon.ico' %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>

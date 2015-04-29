@@ -1,8 +1,10 @@
+<% content_for :title do %><%= @summary.title %><% end %>
+
 <section class='main-content-header'>
   <%= bsh_split_panel 'col-md-8' do %>
     <div class='row'>
       <div class='col-md-8 summary-highlights-container'>
-        <h1><%= @summary.title %></h1>
+        <h1><%= content_for :title %></h1>
         <p class='sub'>by <%= @summary.created_by.full_name %> (<%= @summary.created_by.email %>)</p>
         <div class='summary-container'>
           <p>

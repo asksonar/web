@@ -1,5 +1,9 @@
+<% content_for :title do %>
+  <%= @owner == 'me' ? 'My' : 'All' %> Results
+<% end %>
+
 <section class='main-content-header'>
-  <h1><%= @owner == 'me' ? 'My' : 'All' %> Results</h1>
+  <h1><%= content_for :title %></h1>
 </section>
 <section class="main-content">
 
