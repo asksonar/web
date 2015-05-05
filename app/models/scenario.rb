@@ -1,16 +1,10 @@
 class Scenario < ActiveRecord::Base
 	has_many :scenario_steps, -> { order step_order: :asc }, inverse_of: :scenario
-  has_many :user_scenarios, inverse_of: :scenario
-  has_many :scenario_step_feelings, through: :scenario_steps
+  has_many :scenario_results, inverse_of: :scenario
+  has_many :result_feelings, through: :scenario_steps
   belongs_to :company
   belongs_to :created_by, class_name: 'Researcher', foreign_key: :created_by
   enum status: [:drafts, :live, :completed]
-  #obfuscate_id spin: 42650656
-  after_initialize :default_values, unless: :persisted?
-
-  def default_values
-    self.uuid = SecureRandom.uuid
-  end
 
   def self.create_draft(hash)
     Scenario.create(hash.merge({status: statuses[:drafts]}))
@@ -39,14 +33,23 @@ class Scenario < ActiveRecord::Base
     Scenario
       .where(status: [statuses[:live], statuses[:completed]])
       .where(extra_where)
+      .order(published_at: :desc)
+  end
+
+  def user_count
+    scenario_results.count
+  end
+
+  def user_completed_count
+    scenario_results.where(status: ScenarioResult.statuses[:completed]).count
   end
 
   def where_feeling_delighted
-    scenario_step_feelings.where(feeling: ScenarioStepFeeling.feelings[:delighted])
+    result_feelings.where(feeling: ResultFeeling.feelings[:delighted])
   end
 
   def where_feeling_confused
-    scenario_step_feelings.where(feeling: ScenarioStepFeeling.feelings[:confused])
+    result_feelings.where(feeling: ResultFeeling.feelings[:confused])
   end
 
   def total_delighted
@@ -62,7 +65,7 @@ class Scenario < ActiveRecord::Base
       steps: scenario_steps.map { |step|
         {
           #id: (step.to_param || ''),
-          id: (step.id || ''),
+          hashid: (step.hashid || ''),
           description: (step.description || '').strip,
           url: (step.url || '').strip
         }
@@ -71,17 +74,17 @@ class Scenario < ActiveRecord::Base
   end
 
   def share_link
-    '/user/scenarios/' + uuid
+    '/studies/' + hashid
   end
 
   def share_link_params_json
     {
-      uuid: uuid,
+      hashid: hashid,
       description: description,
       steps: scenario_steps.map { |step|
         {
           #id: (step.to_param || ''),
-          uuid: (step.uuid || ''),
+          hashid: (step.hashid || ''),
           description: (step.description || '').strip,
           url: (step.url || '').strip
         }
@@ -91,6 +94,10 @@ class Scenario < ActiveRecord::Base
 
   def summary_steps
     scenario_steps.map { |step| SummaryStep.new(step) }
+  end
+
+  def highlights
+    []
   end
 
 end

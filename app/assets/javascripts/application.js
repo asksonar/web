@@ -11,16 +11,15 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require bootstrap-sprockets
-//= require amcharts/all
+//= require bootstrap
+//= require amcharts
+//= require amcharts/serial
 //= require amcharts/themes/light
 //= require video
-//= require switchery
-//= require sortable
-//= require handlebars-v3.0.0
+//= require handlebars
 //= require autosize
 //= require zeroclipboard
+//= require remarkable-bootstrap-notify
 
 // insert new packages above this line
 //= require_tree .

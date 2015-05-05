@@ -1,0 +1,47 @@
+.video-container {
+
+  .ctn-video-share-link {
+    margin-top: 20px;
+    h2 {
+      float: left;
+      line-height: 34px;
+    }
+    #input-url-time {
+      width: 75px;
+      display: inline-block;
+    }
+    .ctn-video-btns {
+      float: right;
+      width: 75px;
+      .btn {
+        float: right;
+      }
+      #btn-highlight-video-link {
+        margin-left: 1px
+      }
+    }
+  }
+
+  #input-url-base {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    cursor: text;
+  }
+
+  #videoText {
+    overflow-y: auto;
+
+    .activeVideoTextLink {
+      font-weight: bold;
+    }
+  }
+
+}
+
+.modal .video-container #videoText {
+  max-height: 400px;
+}
+
+.panel .video-container #btn-highlight-video-link {
+  display: none;
+}

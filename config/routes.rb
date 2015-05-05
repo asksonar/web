@@ -1,16 +1,13 @@
 Rails.application.routes.draw do
-  get '/login',       to: 'sessions#index', as: :login
- post '/login/new',   to: 'sessions#create', as: :new_login
-  get '/logout',      to: 'sessions#destroy', as: :logout
-  get '/account',     to: 'account#index'
+
+
   get '/videos.json', to: 'videos_json#show'
   get '/create',      to: 'drafts#new'
   get '/my_results',  to: 'results#my_index'
-  get '/recent',      to: 'recent#index'
   get '/create',      to: 'create#index'
-  get '/user/scenarios/:id', to: 'user_scenarios#index'
- post '/user/scenarios/new', to: 'user_scenarios#new'
   get '/share/videos/:id', to: 'share_videos#show'
+
+  get '/accounts/sign_up', to: redirect('http://www.asksonar.com/sign-up')
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -27,9 +24,12 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
+  resources :studies
   resources :drafts
   resources :results
   resources :my_results, controller: 'results'
+
+  devise_for :researchers, path: 'accounts', path_names: { sign_in: 'login', sign_out: 'logout' }
 
   # Example resource route with options:
   #   resources :products do

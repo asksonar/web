@@ -1,157 +1,151 @@
-<div class='pageheader'>
-  <div class='row'>
-    <div class='col-md-5'>
-      <h1><%= @summary.title %></h1>
-      <h2>
-        <small>created by</small>
-        <%= @summary.created_by.email %>
-        <small><%= time_ago_in_words(@summary.created_at)%> ago</small>
-      </h1>
-    </div>
-    <div class='col-md-7 ctn-top-actions'>
-      <div class="btn-group">
-        <div class="input-group">
-          <input type="text" id='input-share-link' class="form-control" readonly value='<%= @summary.share_link %>'>
-          <span class="input-group-btn">
-            <a class="btn btn-success" id='btn-copy-share-link' data-clipboard-text='<%= @summary.share_link %>'><i class='fa fa-link'></i><span> Copy Share Link</span></a>
-            <a class='btn btn-info btn-hover-show' id='btn-preview' data-toggle="modal" data-target='#modal-preview'><i class='fa fa-desktop'></i><span> Preview</span></a>
-            <a class="btn btn-default btn-hover-show" id='btn-archive'><i class='fa fa-folder-o'></i><span> Archive</span></a>
-          </span>
+<% content_for :title do %><%= @summary.title %><% end %>
+
+<section class='main-content-header'>
+  <%= bsh_split_panel 'col-md-8' do %>
+    <div class='row'>
+      <div class='col-md-8 summary-highlights-container'>
+        <h1><%= content_for :title %></h1>
+        <p class='sub'>by <%= @summary.created_by.full_name %> (<%= @summary.created_by.email %>)</p>
+        <div class='summary-container'>
+          <p>
+            <span class='h3'>Description:</span><span><%= @summary.description %></span>
+          </p>
+        </div>
+        <div class='highlights-container'>
+          <% @summary.highlights.each_with_index do |highlight, index| %>
+            <p><% if index == 0 %><span class='h3'>Highlights:</span><%= highlight %><% end %></p>
+          <% end %>
+          <% if @summary.highlights.count == 0 %>
+            <p><span class='h3'>Highlights:</span><span class='sub'><i class='fa fa-question-circle'></i> no highlights added yet</span></p>
+          <% end %>
         </div>
       </div>
-    </div>
-  </div>
+      <div class='col-md-4 buttons-container'>
 
-  <div class="modal fade" id='modal-preview'>
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Insert semi-dynamic preview here</h4>
+        <h2 class=''>Live</h2>
+        <div id='btn-archive' class="btn-group" data-placement="bottom" title="Coming Soon! - Close the study">
+          <a class="btn btn-success active">On</a>
+          <a class="btn btn-failure">Off</a>
         </div>
-        <div class="modal-body">
-          <img src="/assets/semi_dynamic_preview.png">
+
+        <div class="btn-group pull-right">
+          <a class="btn btn-default" id='btn-copy-share-link' data-placement="bottom" title="Copy the share link"><i class='fa fa-link'></i></a>
+          <a class='btn btn-default' id='btn-preview' data-toggle="modal" data-target='#modal-preview' data-placement="bottom" title="Coming Soon! - Preview the study"><i class='fa fa-desktop'></i></a>
         </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
 
-</div>
-<section id='main-content'>
+        <input type="text" id='input-share-link' class="form-control" readonly value='<%= @summary.share_link %>'>
 
-  <% if flash[:first_publish] %>
-    <div class="alert alert-success alert-dismissable">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-      <strong>Scenario Published</strong> - Your scenario is now ready to be shared with your users
+        <div class='row counts-container'>
+          <div class='col-xs-6'>
+            <h1><i class='feeling-delighted'></i><%= @summary.total_delighted %></h1>
+            <p class='sub'>moment<%= @summary.total_delighted != 1 ? 's' : '' %></p>
+          </div>
+          <div class='col-xs-6'>
+            <h1><i class='feeling-confused'></i><%= @summary.total_confused %></h1>
+            <p class='sub'>moment<%= @summary.total_confused != 1 ? 's' : '' %></p>
+          </div>
+        </div>
+        <h2><%= @summary.user_completed_count || 0 %> users</h2>
+        <p class='sub'><%= @summary.user_count - @summary.user_completed_count %> incomplete</p>
+      </div>
     </div>
   <% end %>
-
-  <div class='row'>
-    <div class='panel'><div class='panel-body'>
-      <div class='col-md-8'>
-        <p><%= @summary.description %></p>
-      </div>
-      <div class='col-md-4'>
-        <h1><%= @summary.user_completed_count || 0 %> users <small>completed</small></h4>
-        <!--<h5><%= @summary.user_count %> users <small>total</small></h5>-->
-        <span class='total_feeling text-success'><i class='fa fa-smile-o'></i> <%= @summary.total_delighted %></span>
-        <span class='total_feeling text-danger'><i class='fa fa-frown-o'></i>  <%= @summary.total_confused %></span>
-      </div>
-    </div></div>
-  </div>
-  <div class='summary_steps'>
-  <% @summary.summary_steps.each do |summary_step| %>
-    <div class='row'><div class='col-md-12'><div class='panel panel-default'>
-      <div class='panel-heading'>
-        <div class='row'>
-          <div class='col-md-8'>
-            <ol start='<%= summary_step.step_order + 1 %>'><li>
-              <h3 class='panel-text'><%= summary_step.description %></h3>
-            </li></ol>
-          </div>
-          <div class='col-md-4'>
-            <h2><%= format('%.0f', (summary_step.average_completed_seconds || 0)) %> seconds<small> on average</small></h2>
-            <div>
-              <span class='total_feeling text-success'><i class='fa fa-smile-o'></i> <%= summary_step.total_delighted %></span>
-              <span class='total_feeling text-danger'><i class='fa fa-frown-o'></i>  <%= summary_step.total_confused %></span>
-            </div>
-          </div>
-        </div>
-        <% if summary_step.has_results? %>
-          <div class="actions pull-right">
-            <i class="fa fa-chevron-down"></i>
-          </div>
-        <% end %>
-      </div><!-- panel-heading -->
-      <div class='panel-body'>
-        <div class='row'>
-          <div class='col-md-8'>
-            <%# convert javascript converts this into nice graph %>
-            <%# also links to the video for that user %>
-            <div class='summary_time_graph'>
-              <script type='application/json'>
-                <%= raw summary_step.result_time_bucket_hash.values.to_json %>
-              </script>
-              <div id='graph<%= summary_step.step_order%>' class='graph' style="width: 100%; height: 150px; background-color: #FFFFFF;" ></div>
-            </div>
-            <div class='average_time'>Average time on task <%= summary_step.average_completed_minutes %></div>
-          </div>
-          <div class='col-md-4 feelingDivContainer'>
-            <%# make ajax call to pull up the full video and transcript %>
-            <% summary_step.delighted_feelings.each_with_index do |feeling, index| %>
-              <div class='feelingDiv <%= 'feelingOverflow' if index > 3 %>'><a class='feeling'
-                data-scenario-step-id='<%=feeling.scenario_step_id%>'
-                data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
-                data-user-id='<%=feeling.user_id%>'>
-                  <span class='text-success step_feeling'><i class='fa fa-smile-o'></i></span><!--
-                  -->...<%= feeling.context_transcription %>...
-              </a></div>
-            <% end %>
-            <% summary_step.confused_feelings.each_with_index do |feeling, index| %>
-              <div class='feelingDiv <%= 'feelingOverflow' if index > 3 %>'><a class='feeling'
-                data-scenario-step-id='<%=feeling.scenario_step_id%>'
-                data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
-                data-user-id='<%=feeling.user_id%>'>
-                  <span class='text-danger step_feeling'><i class='fa fa-frown-o'></i></span><!--
-                  -->...<%= feeling.context_transcription %>...</a>
-              </div>
-            <% end %>
-            <% if summary_step.total_delighted > 4 || summary_step.total_confused > 4 %>
-              <div><a class='linkFeelingOverflow'>show more...</a></div>
-            <% end %>
-          </div>
-        </div>
-      </div><!-- panel-body-->
-    </div><!-- panel --></div><!-- col-md-12 --></div><!-- row -->
-  <% end %>
-  </div><!-- summary_steps -->
-  <div class="modal fade" id='summary_video_container'>
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Modal title</h4>
-        </div>
-        <div class="modal-body">
-          <div class='row'>
-            <div class='col-md-6'>
-              <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered vjs-has-started"
-                controls preload="auto" width="auto" height="300"
-                poster="http://video-js.zencoder.com/oceans-clip.png"
-                data-setup='{"example_option":true}'>
-              </video>
-              <div class="input-group ctn-video-share-link">
-                <input type="text" class="form-control" id='input-url-base' readonly>
-                <input type='text' class='form-control' id='input-url-time'>
-                <span class="input-group-btn">
-                  <a class="btn btn-success" id="btn-copy-video-link" data-clipboard-text=""><i class="fa fa-link"></i><span> Copy Video Link</span></a>
-                </span>
-              </div>
-            </div>
-            <div class='col-md-6' id='videoText'></div>
-          </div>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
 </section>
+<section class='main-content'>
+
+  <% @summary.summary_steps.each do |summary_step| %>
+  <div class='panel'>
+    <%= bsh_split_panel 'col-xs-8' do %>
+      <i class="fa fa-chevron-down panel-body-toggle"></i>
+      <div class='row panel-heading'>
+        <div class='col-xs-8'>
+          <div>
+            <p class='summary-step-description'>
+              <span class='h1'><%= summary_step.step_order + 1 %>.</span><span><%= summary_step.description %></span>
+            </p>
+          </div>
+          <!--
+          <h1><ol start='<%= summary_step.step_order + 1 %>'><li>
+            <p class='body'><%= summary_step.description %></p>
+          </li></ol></h1>
+          -->
+        </div>
+        <div class='col-xs-4'>
+          <div class='row moments-container'>
+            <div class='col-xs-6'>
+              <h1><i class='feeling-delighted'></i><%= summary_step.total_delighted %></h1>
+              <p class='sub'>moment<%= summary_step.total_delighted != 1 ? 's' : '' %></p>
+            </div>
+            <div class='col-xs-6'>
+              <h1><i class='feeling-confused'></i><%= summary_step.total_confused %></h1>
+              <p class='sub'>moment<%= summary_step.total_confused != 1 ? 's' : '' %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='row panel-body'>
+        <div class='col-xs-8'>
+          <div class='feelings-container'>
+            <div class='delighted-feelings-container <%= 'hidden' if summary_step.total_delighted < 1 %>'>
+              <h1><i class='feeling-delighted pull-left'></i></h1>
+              <% summary_step.delighted_feelings.each do |feeling| %>
+                <p class='feeling-div'><a class='feeling'
+                  data-scenario-step-id='<%=feeling.scenario_step_id%>'
+                  data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
+                  >...<%= feeling.context_transcription %>...</a>
+                </p>
+              <% end %>
+            </div>
+            <div class='confused-feelings-container <%= 'hidden' if summary_step.total_confused < 1 %>'>
+              <h1><i class='feeling-confused pull-left'></i></h1>
+              <% summary_step.confused_feelings.each do |feeling| %>
+                <p class='feeling-div'><a class='feeling'
+                  data-scenario-step-id='<%=feeling.scenario_step_id%>'
+                  data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
+                  >...<%= feeling.context_transcription %>...</a>
+                </p>
+              <% end %>
+            </div>
+            <% if summary_step.total_delighted == 0 and summary_step.total_confused == 0 %>
+              <p class='sub'><i class='fa fa-question-circle'></i> no moments yet</p>
+            <% end %>
+          </div>
+        </div>
+        <div class='col-xs-4'>
+
+          <%# convert javascript converts this into nice graph %>
+          <%# also links to the video for that user %>
+          <div class='summary_time_graph'>
+            <script type='application/json'>
+              <%= raw summary_step.result_time_bucket_hash.values.to_json %>
+            </script>
+            <div id='graph<%= summary_step.step_order%>' class='graph'></div>
+          </div>
+          <div class='average-time pull-left'><%= summary_step.average_completed_minutes %> average</div>
+          <p class='sub pull-right'><%= summary_step.completed_users %> users</p>
+
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% end %>
+
+</section>
+
+<div class="modal fade" id='summary_video_container'>
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class='ctn-modal-header'>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h3><%= @summary.title %></h3>
+          <p id='ctn-user-email'></p>
+
+          <p class='ctn-modal-step-description'>
+            <span class='h1'>Step&nbsp;<span id='ctn-step-order'></span>.</span><span class='h2' id='ctn-step-description'><%= @summary.description %></span>
+          </p>
+        </div>
+        <%= render partial: 'utility/video' %>
+
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->

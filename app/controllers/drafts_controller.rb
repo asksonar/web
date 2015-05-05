@@ -1,15 +1,16 @@
 class DraftsController < ApplicationController
+  before_action :authenticate_researcher!
 
   EMPTY_SCENARIO = Scenario.new({
     scenario_steps: [ScenarioStep.new()]
   })
 
   def index
-    @scenarios = Scenario.drafts(current_user.id)
+    @scenarios = Scenario.drafts(current_researcher.id)
   end
 
-  def new
-    @scenario = @scenario || EMPTY_SCENARIO
+  def new(scenario = EMPTY_SCENARIO)
+    @scenario = scenario
     @product_templates = Template.product_templates
     @marketing_templates = Template.marketing_templates
     if @template = Template.find_by(value: params[:template])
@@ -30,18 +31,18 @@ class DraftsController < ApplicationController
       end
 
       @scenario = create_action.call(scenario_params.merge({
-        created_by: current_user.researcher,
-        company: current_user.company,
+        created_by: current_researcher,
+        company: current_researcher.company,
       }))
 
       @scenario.scenario_steps.create(scenario_steps_params)
     end
 
     if params[:publish]
-      flash[:first_publish] = true
+      flash[:info] = "<strong>Study Published</strong> - Your study link is now ready to be shared with your users."
       redirect_to result_path(@scenario)
     else
-      flash[:saved_draft_title] = @scenario.title
+      flash[:info] = "<strong>Draft Saved</strong> - #{@scenario.title}"
       redirect_to drafts_path
     end
 
@@ -54,14 +55,17 @@ class DraftsController < ApplicationController
   end
 
   def edit
-    @scenario = Scenario.find(params[:id])
-    new
+    new(Scenario.find_by_hashid(params[:id]))
     render :new
     # need to modify the new page to indicate it is editing
   end
 
+  def show
+    redirect_to edit_draft_path
+  end
+
   def update
-    @scenario = Scenario.find(params[:id])
+    @scenario = Scenario.find_by_hashid(params[:id])
     ActiveRecord::Base.transaction do
       if params[:draft]
         @scenario.update_draft(scenario_params)
@@ -73,38 +77,23 @@ class DraftsController < ApplicationController
         raise "Illegal commit value of " + params[:commit]
       end
 
-      scenario_steps_params_map = {}
-      scenario_steps_params.each { |p| scenario_steps_params_map[p[:id]] = p }
-      scenario_steps_params_map.each do |id, step|
-        if update_me = ScenarioStep.find_by_id(id)
-          update_me.update(step)
-        else
-          @scenario.scenario_steps.create(step)
-        end
+      @scenario.scenario_steps.each do |step|
+        step.destroy
       end
 
-      @scenario.scenario_steps.each do |step|
-        if not scenario_steps_params_map.keys.include? step.id.to_s
-          step.destroy
-        end
-      end
+      @scenario.scenario_steps.create(scenario_steps_params)
     end
 
     if params[:publish]
-      flash[:first_publish] = true
+      flash[:info] = "<strong>Study Published</strong> - Your study link is now ready to be shared with your users."
       redirect_to result_path(@scenario)
     else
-      flash[:saved_draft_title] = @scenario.title
+      flash[:info] = "<strong>Draft Saved</strong> - #{@scenario.title}"
       redirect_to drafts_path
     end
 
     # need to update in place
     # then the resulting pathing is the same as create pretty much
-  end
-
-  def destroy
-    # should just redirect to the All Results page if there is no id
-    # if there is an id, then it should go back to the drafts list and show deleted
   end
 
   private
@@ -114,7 +103,7 @@ class DraftsController < ApplicationController
 
     def scenario_steps_params
       params.require(:scenario_steps).each_with_index.map do |step, index|
-        return_val = ActionController::Parameters.new(step).permit(:id, :description, :url)
+        return_val = ActionController::Parameters.new(step).permit(:description, :url)
         return_val[:step_order] = index
         return_val
       end

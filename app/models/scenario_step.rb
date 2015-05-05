@@ -1,20 +1,15 @@
 class ScenarioStep < ActiveRecord::Base
   belongs_to :scenario
-  has_many :scenario_step_results, -> { order completed_seconds: :asc }, inverse_of: :scenario_step
-  has_many :scenario_step_feelings, inverse_of: :scenario_step
-  has_many :scenario_step_videos, inverse_of: :scenario_step
+  has_many :result_steps, -> { order completed_seconds: :asc }, inverse_of: :scenario_step
+  has_many :result_feelings, inverse_of: :scenario_step
+  has_many :result_videos, inverse_of: :scenario_step
   #obfuscate_id spin: 10109225
-  after_initialize :default_values, unless: :persisted?
-
-  def default_values
-    self.uuid = SecureRandom.uuid
-  end
 
   def where_feeling_delighted
-    scenario_step_feelings.where(feeling: ScenarioStepFeeling.feelings[:delighted])
+    result_feelings.where(feeling: ResultFeeling.feelings[:delighted])
   end
 
   def where_feeling_confused
-    scenario_step_feelings.where(feeling: ScenarioStepFeeling.feelings[:confused])
+    result_feelings.where(feeling: ResultFeeling.feelings[:confused])
   end
 end

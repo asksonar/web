@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>sonar</title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <title>Sonar |
+    <% if content_for? :title %>
+      <%= content_for :title %>
+    <% else %>
+      Understanding Users
+    <% end %>
+  </title>
+  <%= favicon_link_tag 'sonarFavicon.ico' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
+  <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/ifnadmakmckbjjhbnjcjpfeeljhhmgib">
 </head>
 <body>
-  <section id="main-wrapper" class="theme-red">
-    <%= render partial: 'nav/header' %>
+  <section id="main-wrapper" class="<%= 'logged-out' if not researcher_signed_in? %>">
     <%= render partial: 'nav/left' %>
-    <section id="main-<%=params[:controller] + '-' + params[:action] %>" class="main-content-wrapper">
+    <%= render partial: 'nav/header' %>
+    <section id="<%= controller_name + '-' + action_name %>" class="main-content-wrapper">
       <%= yield %>
       <%= render partial: 'nav/footer' %>
     </section>
   </section>
+
+  <%= render partial: 'utility/flash' %>
+
 </body>
 </html>

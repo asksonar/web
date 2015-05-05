@@ -3,11 +3,17 @@
 researcher_one:
   company: company_one
   email: one@research.com
+  full_name: Researcher One
+  encrypted_password: <%= Researcher.new.send(:password_digest, 'password') %>
 
 researcher_two:
   company: company_two
   email: two@research2.com
+  full_name: Researcher Two
+  encrypted_password: <%= Researcher.new.send(:password_digest, 'password') %>
 
 researcher_one_a:
   company: company_one
   email: one_a@research.com
+  full_name: Researcher One-A
+  encrypted_password: <%= Researcher.new.send(:password_digest, 'password') %>

@@ -14,20 +14,24 @@ class SummaryStep
     @scenario_step.description
   end
 
+  def completed_users
+    @scenario_step.result_steps.count
+  end
+
   def average_completed_seconds
-    @scenario_step.scenario_step_results.average(:completed_seconds)
+    @scenario_step.result_steps.average(:completed_seconds)
   end
 
   def average_completed_minutes
-    Time.at(@scenario_step.scenario_step_results.average(:completed_seconds) || 0).strftime("%-M:%S")
+    Time.at(@scenario_step.result_steps.average(:completed_seconds) || 0).strftime("%-Mm %-Ss")
   end
 
   def has_results?
-    @scenario_step.scenario_step_results.count > 0
+    @scenario_step.result_steps.count > 0
   end
 
   def result_time_hash
-    @scenario_step.scenario_step_results.map { |result|
+    @scenario_step.result_steps.map { |result|
       { id: result.id, time: result.completed_seconds }
     }
   end
@@ -45,11 +49,11 @@ class SummaryStep
     #buckets = {
     #  '0:00':[], '0:30':[], '1:00':[], '1:30':[], '2:00':[], '2:30':[], '3:00+':[]
     #}
-    @scenario_step.scenario_step_results.each do |result|
-      bucket_time = [result.completed_seconds, MAX_TIME_BUCKET].min
+    @scenario_step.result_steps.each do |result|
+      bucket_time = [result.completed_seconds.to_i, MAX_TIME_BUCKET].min
       bucket_time = (bucket_time / 30) * 30
 
-      buckets[bucket_time][:details] += [{id: result.id, step_id: result.scenario_step_id, time: result.completed_seconds, user_id: result.user_id}]
+      buckets[bucket_time][:details] += [{id: result.id, step_id: result.scenario_step_id, time: result.completed_seconds}]
       buckets[bucket_time][:count] += 1
     end
 

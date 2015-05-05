@@ -1,3 +1,5 @@
+raise 'Ruby version must be greater than or equal to 2.1.2' unless  RUBY_VERSION >= '2.1.2'
+
 source 'https://rubygems.org'
 
 
@@ -5,7 +7,6 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.0'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
-gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -16,33 +17,13 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+#gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
-gem 'bootstrap-sass', '~> 3.3'
-
-gem 'bootstrap_form', '~> 2.3.0'
-gem 'rails_bootstrap_navbar'
-
-gem 'font-awesome-sass', '~> 4.3.0'
-
-gem 'amcharts.rb', '~> 3.11.2.14'
-
-# fix for turbolinks and jquery bindings
-gem 'jquery-turbolinks'
-
-gem 'videojs_rails', '~> 4.6.1'
-
-gem 'switchery-rails'
-
-gem 'obfuscate_id', '~> 0.2.0'
-
-gem 'zeroclipboard-rails', '~> 0.1.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -52,6 +33,44 @@ gem 'zeroclipboard-rails', '~> 0.1.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+#######################################
+# insert new packages below this line #
+#######################################
+
+# use postgres instead of sqlite3
+gem 'pg'
+# bootstrap_form_for helper
+gem 'bootstrap_form', '~> 2.3.0'
+# navbar_item helper
+gem 'rails_bootstrap_navbar'
+# used in ActiveRecordHashids for obfuscating ids
+gem 'hashids'
+# user login framework
+gem 'devise'
+# better server than webrick
+gem 'thin'
+
+source 'https://rails-assets.org' do
+  # bootstrap with sass variables
+  gem 'rails-assets-bootstrap-sass'
+  # more icon elements than bootstrap has
+  gem 'rails-assets-fontawesome'
+  # amcharts chart library
+  gem 'rails-assets-handlebars'
+  # makes our textarea elements dynamically resize as people type
+  gem 'rails-assets-amcharts'
+  # videojs html5 video library
+  gem 'rails-assets-video.js'
+  # handlebars javascript templating library
+  gem 'rails-assets-autosize'
+  # lets us copy to clipboard
+  gem 'rails-assets-zeroclipboard'
+  # gives us nice-looking error messages, configured in application.html.erb
+  gem 'rails-assets-remarkable-bootstrap-notify'
+  # add animations for notify
+  gem 'rails-assets-animate.css'
+end
 
 group :development, :test do
   # Call 'debugger' anywhere in the code to stop execution and get a debugger console

@@ -1,0 +1,139 @@
+body {
+  font-family: 'BrandonGrotesque-Regular';
+  font-size: 16px;
+}
+
+.body {
+  font-family: 'BrandonGrotesque-Regular';
+  font-size: 16px;
+}
+
+a {
+  color: #05647C;
+  cursor: pointer;
+}
+
+a:hover {
+  color: #05647C;
+  text-decoration: underline;
+}
+
+p {
+  line-height: 18px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+p + p {
+  margin-top: 6px;
+}
+
+.sub {
+  font-size: 14px;
+  color: #999;
+}
+
+p.sub {
+  line-height: 15px;
+}
+
+p.sub + p.sub {
+  margin-top: 4px;
+}
+
+h1, .h1 {
+  font-family: 'BrandonGrotesque-Medium';
+  font-size: 24px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+h2, .h2 {
+  font-size: 24px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+h3, .h3 {
+  //font-family: DemiAlt;
+  font-family: 'BrandonGrotesque-Medium';
+  font-size: 16px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.btn {
+  border-radius: 0px;
+  border: 1px transparent;
+  opacity: .9;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+
+.btn-green, .btn-green:hover {
+  background-color: #31B6AE;
+  color: #FFF;
+}
+
+.btn-dark-blue, .btn-dark-blue:hover {
+  background-color: #05647C;
+  color: #FFF;
+}
+
+.btn-medium-blue, .btn-medium-blue:hover {
+  background-color: #1CA5C9;
+  color: #FFF;
+}
+
+.btn-light-blue, .btn-light-blue:hover {
+  background-color: #8ED2E4;
+  color: #FFF;
+}
+
+.btn-grey, .btn-grey:hover {
+  background-color: #999;
+  color: #FFF;
+}
+
+.btn-orange, .btn-orange:hover{
+  background-color: #F69526;
+  color: #FFF;
+}
+
+.form-control {
+  border-radius: 0px;
+}
+
+.form-control:focus {
+  border-color: #1CA5C9;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(28, 165, 201, 0.6);
+}
+
+.dropdown-menu {
+  border-radius: 0px;
+  margin-top: 0px;
+}
+
+.modal-content {
+  border-radius: 0px;
+  padding: 20px;
+  background-color: #FAFAFA;
+}
+
+
+.panel {
+  padding: 20px;
+  background: #FAFAFA;
+  border: none;
+  border-radius: 0px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+
+  .panel-heading {
+    padding: 0px;
+  }
+  .panel-body {
+    padding: 0px;
+  }
+}

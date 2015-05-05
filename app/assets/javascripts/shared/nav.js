@@ -1,6 +1,5 @@
 $(function(){
-  $('#toggle-left').click(function(){
-    //$('#main-wrapper').toggleClass('sidebar-mini');
+  $('#toggle-sidebar').click(function(){
     $('#main-wrapper').toggleClass('sidebar-opened');
   });
 });

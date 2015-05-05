@@ -8,7 +8,6 @@ scenario_227507:
   status: 2
   company: company_one
   created_by: 806634123 #researcher_one
-  uuid: <%= SecureRandom.uuid %>
 
 scenario_signup:
   title: Try to sign up for a new login on our site
@@ -19,7 +18,6 @@ scenario_signup:
   company: company_one
   status: 1
   created_by: 535896771 #researcher_one_a
-  uuid: <%= SecureRandom.uuid %>
 
 scenario_purchase:
   title: Try to purchase an item on our site
@@ -30,7 +28,6 @@ scenario_purchase:
   company: company_two
   status: 0
   created_by: 464670237 #researcher_two
-  uuid: <%= SecureRandom.uuid %>
 
 scenario_nps:
   title: What do you think of us?
@@ -40,7 +37,6 @@ scenario_nps:
   company: company_one
   status: 0
   created_by: 806634123
-  uuid: <%= SecureRandom.uuid %>
 
 scenario_homepage:
   title: Take a look at our site
@@ -50,7 +46,6 @@ scenario_homepage:
   company: company_one
   status: 0
   created_by: 806634123
-  uuid: <%= SecureRandom.uuid %>
 
 scenario_value_proposition:
   title: Uncovering Salesforce.com's most valuable features and functionality
@@ -60,7 +55,6 @@ scenario_value_proposition:
   company: company_one
   status: 1
   created_by: 806634123
-  uuid: <%= SecureRandom.uuid %>
 
 scenario_overall_product_impressions:
   title: >
@@ -70,7 +64,6 @@ scenario_overall_product_impressions:
   company: company_one
   status: 1
   created_by: 806634123
-  uuid: <%= SecureRandom.uuid %>
 
 scenario_brand_impressions:
   title: May - Monthly Brand Impressions
@@ -79,4 +72,3 @@ scenario_brand_impressions:
   company: company_one
   status: 1
   created_by: 806634123
-  uuid: <%= SecureRandom.uuid %>
