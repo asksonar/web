@@ -91,6 +91,7 @@
               <% summary_step.delighted_feelings.each do |feeling| %>
                 <p class='feeling-div'><a class='feeling'
                   data-scenario-step-id='<%=feeling.scenario_step_id%>'
+                  data-scenario-result-id='<%=feeling.scenario_result_id%>'
                   data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
                   >...<%= feeling.context_transcription %>...</a>
                 </p>
@@ -101,6 +102,7 @@
               <% summary_step.confused_feelings.each do |feeling| %>
                 <p class='feeling-div'><a class='feeling'
                   data-scenario-step-id='<%=feeling.scenario_step_id%>'
+                  data-scenario-result-id='<%=feeling.scenario_result_id%>'
                   data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
                   >...<%= feeling.context_transcription %>...</a>
                 </p>

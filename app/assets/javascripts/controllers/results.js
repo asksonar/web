@@ -100,14 +100,14 @@ $(function(){
   $('.main-content').on('click', '.feeling', function(event){
     var thisEl = $(this);
     var stepId = thisEl.attr('data-scenario-step-id');
-    var userId = thisEl.attr('data-user-id');
+    var scenarioResultId = thisEl.attr('data-scenario-result-id');
     var timeSeconds = parseFloat(thisEl.attr('data-feeling-at-seconds') || 0) - 5;
 
     $.ajax({
       url:"/videos.json",
       data: {
         scenario_step_id: stepId,
-        user_id: userId
+        scenario_result_id: scenarioResultId,
       },
       dataType: 'json'
     }).done(function(data){

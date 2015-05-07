@@ -13,6 +13,6 @@ class VideosJsonController < ApplicationController
 
   private
     def video_params
-      params.permit(:scenario_step_id, :user_id)
+      params.permit(:scenario_step_id, :scenario_result_id)
     end
 end
