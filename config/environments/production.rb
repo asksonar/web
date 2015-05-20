@@ -89,4 +89,5 @@ Rails.application.configure do
     authentication:       'plain'
   }
 
+  config.properties = YAML.load(File.read('config/properties/production.yml'))
 end

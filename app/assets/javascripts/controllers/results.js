@@ -10,10 +10,6 @@ $(function(){
     return;
   }
 
-  $('#input-share-link').val(window.location.origin + $('#input-share-link').val());
-
-
-
   new ZeroClipboard(document.getElementById("btn-copy-share-link")).on("copy", function(event) {
     event.clipboardData.setData( "text/plain", $('#input-share-link').val());
   });
@@ -139,7 +135,7 @@ $(function(){
         $('#ctn-user-email').html(data.user_email);
         $('#ctn-step-order').html(data.step_order + 1);
         $('#ctn-step-description').html(data.step_description);
-        $('#input-url-base').attr('data-base-url', window.location.origin + data.share_link + '?t=');
+        $('#input-url-base').attr('data-base-url', data.share_link + '?t=');
       }
 
       video.currentTime(timeSeconds);

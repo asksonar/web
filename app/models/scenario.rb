@@ -74,7 +74,7 @@ class Scenario < ActiveRecord::Base
   end
 
   def share_link
-    '/studies/' + hashid
+    Rails.configuration.properties['web_base_url'] + '/studies/' + hashid
   end
 
   def share_link_params_json
