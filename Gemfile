@@ -2,7 +2,6 @@ raise 'Ruby version must be greater than or equal to 2.1.2' unless  RUBY_VERSION
 
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use sqlite3 as the database for Active Record
@@ -12,9 +11,9 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+# gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+# gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 #gem 'jquery-rails'
@@ -29,7 +28,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -62,6 +61,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-amcharts'
   # videojs html5 video library
   gem 'rails-assets-video.js'
+  # videojs plugin for markers
+  gem 'rails-assets-videojs-markers'
   # handlebars javascript templating library
   gem 'rails-assets-autosize'
   # lets us copy to clipboard
