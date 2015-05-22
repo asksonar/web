@@ -3,7 +3,7 @@ worker_processes 2
 preload_app true
 # preload_app false
 timeout 30
-listen 3000
+listen 3001
 listen "/tmp/unicorn.web.sock"
 stdout_path "/var/log/unicorn/stdout.log"
 stderr_path "/var/log/unicorn/stderr.log"
