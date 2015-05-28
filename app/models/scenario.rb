@@ -36,6 +36,10 @@ class Scenario < ActiveRecord::Base
       .order(published_at: :desc)
   end
 
+  def step_count
+    scenario_steps.count
+  end
+
   def user_count
     scenario_results.count
   end

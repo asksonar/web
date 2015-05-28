@@ -1,5 +1,5 @@
-worker_processes 2
-# worker_processes 1
+#worker_processes 2
+worker_processes 1
 preload_app true
 # preload_app false
 timeout 30
