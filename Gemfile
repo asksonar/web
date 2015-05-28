@@ -3,13 +3,13 @@ raise 'Ruby version must be greater than or equal to 2.1.2' unless  RUBY_VERSION
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.0'
+gem 'rails'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
 # gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -20,9 +20,9 @@ gem 'uglifier', '>= 1.3.0'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'sdoc', group: :doc
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -37,7 +37,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # use postgres instead of sqlite3
 gem 'pg'
 # bootstrap_form_for helper
-gem 'bootstrap_form', '~> 2.3.0'
+gem 'bootstrap_form'
 # navbar_item helper
 gem 'rails_bootstrap_navbar'
 # used in ActiveRecordHashids for obfuscating ids
@@ -59,7 +59,7 @@ source 'https://rails-assets.org' do
   # makes our textarea elements dynamically resize as people type
   gem 'rails-assets-amcharts'
   # videojs html5 video library
-  gem 'rails-assets-video.js'
+  gem 'rails-assets-videojs', '~> 4'
   # videojs plugin for markers
   gem 'rails-assets-videojs-markers'
   # handlebars javascript templating library
@@ -78,7 +78,7 @@ group :development, :test do
   gem 'byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
