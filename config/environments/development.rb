@@ -43,7 +43,12 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # load custom configuration properties
-  config.properties = YAML.load(File.read(File.join(Rails.root,'config/properties/development.yml')))
+  config_path = File.join(Rails.root,'config/properties/development.yml')
+  puts 'config_path: ' + config_path
+  config_contents = File.read(config_path)
+  puts 'config_contents: ' + config_contents
+  config.properties = YAML.load(config_contents)
+  puts config.properties
 
   # enable remote byebugging
   #Byebug.wait_connection = true
