@@ -1,4 +1,5 @@
 require 'yaml'
+require 'byebug'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -42,5 +43,13 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # load custom configuration properties
-  config.properties = YAML.load(File.read('config/properties/development.yml'))
+  config.properties = YAML.load(File.read(File.join(Rails.root,'config/properties/development.yml')))
+
+  # enable remote byebugging
+  #Byebug.wait_connection = true
+  #Byebug.start_server('localhost', 9876)
+
+  # log to stdout
+  #config.logger = Logger.new(STDOUT)
+  #config.logger.level = Logger.const_get(ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'DEBUG')
 end

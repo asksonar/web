@@ -85,11 +85,11 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address:              'smtp.mandrillapp.com',
     port:                 587,
-    domain:               'example.com',
+    domain:               'my.asksonar.com',
     user_name:            ENV['MANDRILL_USERNAME'],
     password:             ENV['MANDRILL_PASSWORD'],
     authentication:       'plain'
   }
 
-  config.properties = YAML.load(File.read('config/properties/production.yml'))
+  config.properties = YAML.load(File.read(File.join(Rails.root,'config/properties/production.yml')))
 end
