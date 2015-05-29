@@ -27,12 +27,12 @@ VideoController.prototype.pause = function() {
   this.video.pause();
 }
 
-VideoController.prototype.src = function() {
-  this.video.src.call(arguments);
+VideoController.prototype.src = function(srcArray) {
+  this.video.src(srcArray);
 }
 
-VideoController.prototype.currentTime = function() {
-  this.video.currentTime.call(arguments);
+VideoController.prototype.currentTime = function(currentSeconds) {
+  this.video.currentTime(currentSeconds);
 }
 
 VideoController.prototype.onTimeUpdate = function() {
