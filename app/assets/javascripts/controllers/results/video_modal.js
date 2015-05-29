@@ -99,7 +99,7 @@ VideoModal.prototype.updateVideoTime = function(event, timestamp) {
   var videoTextLinks = this.$videoText.find('.videoTextLink').removeClass('activeVideoTextLink');
   var videoTextLink;
   for(var i = videoTextLinks.length - 1; i >= 0; i-- ) {
-    videoTextLink = videoTextLinks[i];
+    videoTextLink = $(videoTextLinks[i]);
     if (videoTextLink.attr('data-timestamp') <= timestamp) {
       videoTextLink.addClass('activeVideoTextLink');
       break;

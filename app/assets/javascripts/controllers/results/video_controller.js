@@ -11,8 +11,8 @@ VideoController.prototype.init = function() {
   this.video.on('timeupdate', $.proxy(this.onTimeUpdate, this));
 }
 
-VideoController.prototype.on = function() {
-  this.eventBus.on.call(arguments);
+VideoController.prototype.on = function(event, callback) {
+  this.eventBus.on(event, callback);
 }
 
 VideoController.prototype.play = function(timestamp) {
@@ -29,6 +29,7 @@ VideoController.prototype.pause = function() {
 
 VideoController.prototype.src = function(srcArray) {
   this.video.src(srcArray);
+  //this.video.src("http://vjs.zencdn.net/v/oceans.mp4");
 }
 
 VideoController.prototype.currentTime = function(currentSeconds) {
