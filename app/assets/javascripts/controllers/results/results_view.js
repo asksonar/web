@@ -15,6 +15,7 @@ ResultsView.prototype.init = function() {
   this.$divMainContent.on('click', '.feeling', $.proxy(this.loadModal, this));
   this.$btnArchive.on('click', $.proxy(this.toggleArchive, this));
   new ClipboardInput(this.$btnCopyShareLink, this.$inputShareLink);
+  this.showAllPanels();
 }
 
 ResultsView.prototype.toggleArchive = function() {
