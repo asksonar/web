@@ -4,7 +4,7 @@ function ClipboardInput($button, $input) {
     this.setSelectionRange(0, this.value.length);
   });
 
-  new ZeroClipboard($button.attr('id')).on( "copy", $.proxy(function (event) {
+  new ZeroClipboard($button.get()).on( "copy", $.proxy(function (event) {
     event.clipboardData.setData("text/plain", $input.val());
   }, this));
 
