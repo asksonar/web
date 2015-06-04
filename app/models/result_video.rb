@@ -15,6 +15,8 @@ class ResultVideo < ActiveRecord::Base
   end
 
   def src_array
+    #return [ { type: "video/mp4", src: "http://vjs.zencdn.net/v/oceans.mp4" } ]
+
     [
       { type: "video/mp4", src: "#{VIDEO_BASE}/#{scenario_result.hashid}/#{hashid}.mp4" },
       { type: "video/webm", src: "#{VIDEO_BASE}/#{scenario_result.hashid}/#{hashid}.mp4" }

@@ -85,32 +85,31 @@
       </div>
       <div class='row panel-body'>
         <div class='col-xs-8'>
-          <div class='feelings-container'>
-            <div class='delighted-feelings-container <%= 'hidden' if scenario_step.total_delighted < 1 %>'>
-              <h1><i class='feeling-delighted pull-left'></i></h1>
-              <% scenario_step.delighted_feelings.each do |feeling| %>
-                <p class='feeling-div'><a class='feeling'
-                  data-scenario-step-id='<%=feeling.scenario_step_id%>'
-                  data-scenario-result-id='<%=feeling.scenario_result_id%>'
-                  data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
-                  >...<%= feeling.context_transcription %>...</a>
-                </p>
+          <div class='results-container'>
+
+          <% scenario_step.result_steps_newest.each do |result_step| %>
+            <a class='video-link'
+              data-scenario-step-id='<%=result_step.scenario_step_id%>'
+              data-scenario-result-id='<%=result_step.scenario_result_id%>'
+            >
+              <% if rand(2) > 0 #result_step.has_confused? %>
+                <i class='feeling-confused'></i>
+                <i class='feeling-delighted'></i>
+              <% elsif rand(2) > 0 %>
+                <i class='feeling-empty'></i>
+                <i class='feeling-delighted'></i>
+              <% elsif rand(2) > 0 %>
+                <i class='feeling-empty'></i>
+                <i class='feeling-confused'></i>
+              <% else rand(2) > 0 %>
+                <i class='feeling-empty'></i>
+                <i class='feeling-empty'></i>
               <% end %>
-            </div>
-            <div class='confused-feelings-container <%= 'hidden' if scenario_step.total_confused < 1 %>'>
-              <h1><i class='feeling-confused pull-left'></i></h1>
-              <% scenario_step.confused_feelings.each do |feeling| %>
-                <p class='feeling-div'><a class='feeling'
-                  data-scenario-step-id='<%=feeling.scenario_step_id%>'
-                  data-scenario-result-id='<%=feeling.scenario_result_id%>'
-                  data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
-                  >...<%= feeling.context_transcription %>...</a>
-                </p>
-              <% end %>
-            </div>
-            <% if scenario_step.total_delighted == 0 and scenario_step.total_confused == 0 %>
-              <p class='sub'><i class='fa fa-question-circle'></i> no moments yet</p>
-            <% end %>
+              <span class='sub'><%= result_step.created_at.strftime("%b %d") %> - [<%= result_step.email %>]</span>
+              <%= result_step.first_transcription_text %>...
+            </a>
+          <% end %>
+
           </div>
         </div>
         <div class='col-xs-4'>

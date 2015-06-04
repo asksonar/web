@@ -12,7 +12,7 @@ function ResultsView(config, modal) {
 ResultsView.prototype.init = function() {
   this.$divMainContent.on('click', '.fa-chevron-down', $.proxy(this.showPanel, this));
   this.$divMainContent.on('click', '.fa-chevron-up', $.proxy(this.hidePanel, this));
-  this.$divMainContent.on('click', '.feeling', $.proxy(this.loadModal, this));
+  this.$divMainContent.on('click', '.video-link', $.proxy(this.loadModal, this));
   this.$btnArchive.on('click', $.proxy(this.toggleArchive, this));
   new ClipboardInput(this.$btnCopyShareLink, this.$inputShareLink);
   this.showAllPanels();
