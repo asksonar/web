@@ -134,19 +134,19 @@
 </section>
 
 <div class="modal fade" id='summary_video_container'>
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class='ctn-modal-header'>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h3><%= @scenario.title %></h3>
-          <p id='ctn-user-email'></p>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class='ctn-modal-header'>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3><%= @scenario.title %></h3>
+        <p id='ctn-user-email'></p>
 
-          <p class='ctn-modal-step-description'>
-            <span class='h1'>Step&nbsp;<span id='ctn-step-order'></span>.</span><span class='h2' id='ctn-step-description'><%= @scenario.description %></span>
-          </p>
-        </div>
-        <%= render partial: 'utility/video' %>
+        <p class='ctn-modal-step-description'>
+          <span class='h1'>Step&nbsp;<span id='ctn-step-order'></span>.</span><span class='h2' id='ctn-step-description'><%= @scenario.description %></span>
+        </p>
+      </div>
+      <%= render partial: 'utility/video' %>
 
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
