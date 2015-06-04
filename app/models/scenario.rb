@@ -96,10 +96,6 @@ class Scenario < ActiveRecord::Base
     }.to_json
   end
 
-  def summary_steps
-    scenario_steps.map { |step| SummaryStep.new(step) }
-  end
-
   def highlights
     []
   end

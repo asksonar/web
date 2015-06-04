@@ -1,5 +1,6 @@
-web_base_url: http://localhost:3000
-video_base_url: http://localhost:5000/output
+web_base_url: http://dockerhost:3000
+video_base_url: http://dockerhost:5000/output
 sign_up_url: http://www.asksonar.com/sign-up
 
 chrome_app_id: plkkekmhfkddjdfgphbbnklkopldedfb
+#chrome_app_id: ifnadmakmckbjjhbnjcjpfeeljhhmgib

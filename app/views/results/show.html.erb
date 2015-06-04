@@ -1,21 +1,21 @@
-<% content_for :title do %><%= @summary.title %><% end %>
+<% content_for :title do %><%= @scenario.title %><% end %>
 
 <section class='main-content-header'>
   <%= bsh_split_panel 'col-md-8' do %>
     <div class='row'>
       <div class='col-md-8 summary-highlights-container'>
         <h1><%= content_for :title %></h1>
-        <p class='sub'>by <%= @summary.created_by.full_name %> (<%= @summary.created_by.email %>)</p>
+        <p class='sub'>by <%= @scenario.created_by.full_name %> (<%= @scenario.created_by.email %>)</p>
         <div class='summary-container'>
           <p>
-            <span class='h3'>Description:</span><span><%= @summary.description %></span>
+            <span class='h3'>Description:</span><span><%= @scenario.description %></span>
           </p>
         </div>
         <div class='highlights-container'>
-          <% @summary.highlights.each_with_index do |highlight, index| %>
+          <% @scenario.highlights.each_with_index do |highlight, index| %>
             <p><% if index == 0 %><span class='h3'>Highlights:</span><%= highlight %><% end %></p>
           <% end %>
-          <% if @summary.highlights.count == 0 %>
+          <% if @scenario.highlights.count == 0 %>
             <p><span class='h3'>Highlights:</span><span class='sub'><i class='fa fa-question-circle'></i> no highlights added yet</span></p>
           <% end %>
         </div>
@@ -33,27 +33,27 @@
           <a class='btn btn-default' id='btn-preview' data-toggle="modal" data-target='#modal-preview' data-placement="bottom" title="Coming Soon! - Preview the study"><i class='fa fa-desktop'></i></a>
         </div>
 
-        <input type="text" id='input-share-link' class="form-control" readonly value='<%= @summary.share_link %>'>
+        <input type="text" id='input-share-link' class="form-control" readonly value='<%= @scenario.share_link %>'>
 
         <div class='row counts-container'>
           <div class='col-xs-6'>
-            <h1><i class='feeling-delighted'></i><%= @summary.total_delighted %></h1>
-            <p class='sub'>moment<%= @summary.total_delighted != 1 ? 's' : '' %></p>
+            <h1><i class='feeling-delighted'></i><%= @scenario.total_delighted %></h1>
+            <p class='sub'>moment<%= @scenario.total_delighted != 1 ? 's' : '' %></p>
           </div>
           <div class='col-xs-6'>
-            <h1><i class='feeling-confused'></i><%= @summary.total_confused %></h1>
-            <p class='sub'>moment<%= @summary.total_confused != 1 ? 's' : '' %></p>
+            <h1><i class='feeling-confused'></i><%= @scenario.total_confused %></h1>
+            <p class='sub'>moment<%= @scenario.total_confused != 1 ? 's' : '' %></p>
           </div>
         </div>
-        <h2><%= @summary.user_completed_count || 0 %> users</h2>
-        <p class='sub'><%= @summary.user_count - @summary.user_completed_count %> incomplete</p>
+        <h2><%= @scenario.user_completed_count || 0 %> users</h2>
+        <p class='sub'><%= @scenario.user_count - @scenario.user_completed_count %> incomplete</p>
       </div>
     </div>
   <% end %>
 </section>
 <section class='main-content'>
 
-  <% @summary.summary_steps.each do |summary_step| %>
+  <% @scenario.scenario_steps[0,1].each do |scenario_step| %>
   <div class='panel'>
     <%= bsh_split_panel 'col-xs-8' do %>
       <i class="fa fa-chevron-down panel-body-toggle"></i>
@@ -61,24 +61,24 @@
         <div class='col-xs-8'>
           <div>
             <p class='summary-step-description'>
-              <span class='h1'><%= summary_step.step_order + 1 %>.</span><span><%= summary_step.description %></span>
+              <span class='h1'><%= scenario_step.step_order + 1 %>.</span><span><%= scenario_step.description %></span>
             </p>
           </div>
           <!--
-          <h1><ol start='<%= summary_step.step_order + 1 %>'><li>
-            <p class='body'><%= summary_step.description %></p>
+          <h1><ol start='<%= scenario_step.step_order + 1 %>'><li>
+            <p class='body'><%= scenario_step.description %></p>
           </li></ol></h1>
           -->
         </div>
         <div class='col-xs-4'>
           <div class='row moments-container'>
             <div class='col-xs-6'>
-              <h1><i class='feeling-delighted'></i><%= summary_step.total_delighted %></h1>
-              <p class='sub'>moment<%= summary_step.total_delighted != 1 ? 's' : '' %></p>
+              <h1><i class='feeling-delighted'></i><%= scenario_step.total_delighted %></h1>
+              <p class='sub'>moment<%= scenario_step.total_delighted != 1 ? 's' : '' %></p>
             </div>
             <div class='col-xs-6'>
-              <h1><i class='feeling-confused'></i><%= summary_step.total_confused %></h1>
-              <p class='sub'>moment<%= summary_step.total_confused != 1 ? 's' : '' %></p>
+              <h1><i class='feeling-confused'></i><%= scenario_step.total_confused %></h1>
+              <p class='sub'>moment<%= scenario_step.total_confused != 1 ? 's' : '' %></p>
             </div>
           </div>
         </div>
@@ -86,9 +86,9 @@
       <div class='row panel-body'>
         <div class='col-xs-8'>
           <div class='feelings-container'>
-            <div class='delighted-feelings-container <%= 'hidden' if summary_step.total_delighted < 1 %>'>
+            <div class='delighted-feelings-container <%= 'hidden' if scenario_step.total_delighted < 1 %>'>
               <h1><i class='feeling-delighted pull-left'></i></h1>
-              <% summary_step.delighted_feelings.each do |feeling| %>
+              <% scenario_step.delighted_feelings.each do |feeling| %>
                 <p class='feeling-div'><a class='feeling'
                   data-scenario-step-id='<%=feeling.scenario_step_id%>'
                   data-scenario-result-id='<%=feeling.scenario_result_id%>'
@@ -97,9 +97,9 @@
                 </p>
               <% end %>
             </div>
-            <div class='confused-feelings-container <%= 'hidden' if summary_step.total_confused < 1 %>'>
+            <div class='confused-feelings-container <%= 'hidden' if scenario_step.total_confused < 1 %>'>
               <h1><i class='feeling-confused pull-left'></i></h1>
-              <% summary_step.confused_feelings.each do |feeling| %>
+              <% scenario_step.confused_feelings.each do |feeling| %>
                 <p class='feeling-div'><a class='feeling'
                   data-scenario-step-id='<%=feeling.scenario_step_id%>'
                   data-scenario-result-id='<%=feeling.scenario_result_id%>'
@@ -108,7 +108,7 @@
                 </p>
               <% end %>
             </div>
-            <% if summary_step.total_delighted == 0 and summary_step.total_confused == 0 %>
+            <% if scenario_step.total_delighted == 0 and scenario_step.total_confused == 0 %>
               <p class='sub'><i class='fa fa-question-circle'></i> no moments yet</p>
             <% end %>
           </div>
@@ -119,12 +119,12 @@
           <%# also links to the video for that user %>
           <div class='summary_time_graph'>
             <script type='application/json'>
-              <%= raw summary_step.result_time_bucket_hash.values.to_json %>
+              <%= raw scenario_step.result_time_bucket_hash.values.to_json %>
             </script>
-            <div id='graph<%= summary_step.step_order%>' class='graph'></div>
+            <div id='graph<%= scenario_step.step_order%>' class='graph'></div>
           </div>
-          <div class='average-time pull-left'><%= summary_step.average_completed_minutes %> average</div>
-          <p class='sub pull-right'><%= summary_step.completed_users %> users</p>
+          <div class='average-time pull-left'><%= scenario_step.average_completed_minutes %> average</div>
+          <p class='sub pull-right'><%= scenario_step.completed_users %> users</p>
 
         </div>
       </div>
@@ -139,11 +139,11 @@
       <div class="modal-content">
         <div class='ctn-modal-header'>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h3><%= @summary.title %></h3>
+          <h3><%= @scenario.title %></h3>
           <p id='ctn-user-email'></p>
 
           <p class='ctn-modal-step-description'>
-            <span class='h1'>Step&nbsp;<span id='ctn-step-order'></span>.</span><span class='h2' id='ctn-step-description'><%= @summary.description %></span>
+            <span class='h1'>Step&nbsp;<span id='ctn-step-order'></span>.</span><span class='h2' id='ctn-step-description'><%= @scenario.description %></span>
           </p>
         </div>
         <%= render partial: 'utility/video' %>

@@ -3,7 +3,7 @@ class ResultVideo < ActiveRecord::Base
 
   belongs_to :scenario_step
   belongs_to :scenario_result
-  has_many :video_transcriptions, inverse_of: :result_video
+  has_many :video_transcriptions, -> { order offset: :asc }, inverse_of: :result_video
   delegate :panelist, :to => :scenario_result, :allow_nil => true
 
   def share_link
@@ -11,9 +11,7 @@ class ResultVideo < ActiveRecord::Base
   end
 
   def transcription_array
-    VideoTranscription.select(:offset, :text)
-      .where(result_video: self)
-      .order(offset: :asc)
+    video_transcriptions.select(:offset, :text)
   end
 
   def src_array
@@ -24,5 +22,8 @@ class ResultVideo < ActiveRecord::Base
     ]
   end
 
+  def transcription_start
+    video_transcriptions.first.text
+  end
 
 end
