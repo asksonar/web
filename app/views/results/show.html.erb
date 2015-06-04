@@ -53,7 +53,7 @@
 </section>
 <section class='main-content'>
 
-  <% @scenario.scenario_steps[0,1].each do |scenario_step| %>
+  <% @scenario.scenario_steps.each do |scenario_step| %>
   <div class='panel'>
     <%= bsh_split_panel 'col-xs-8' do %>
       <i class="fa fa-chevron-down panel-body-toggle"></i>
