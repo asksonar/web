@@ -3,30 +3,25 @@
 #passwords-new,
 #passwords-create,
 #passwords-edit,
-#passwords-update {
+#passwords-update,
+#registrations-new,
+#registrations-create {
   .panel {
     max-width: 400px;
     margin-left: auto;
     margin-right: auto;
 
     .form-group {
-      margin-bottom: 0px;
-    }
-
-    .form-group + .form-group {
-      margin-top: 10px;
-    }
-
-    .form-group + .form-group + .form-group {
-      margin-top: 0px;
+      margin-bottom: 10px;
     }
 
     p + .form-group {
       margin-top: 10px;
     }
 
-
     .ctn-remember-forgot {
+      margin-top: -10px;
+
       .checkbox {
         float: left;
       }
@@ -37,7 +32,7 @@
 
     .btn-dark-blue {
       width: 100%;
-      margin-top: 20px;
+      margin-top: 10px;
     }
 
     .link-sign-up {
