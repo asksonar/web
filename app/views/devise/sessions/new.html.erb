@@ -6,7 +6,7 @@
 <section class='main-content'>
   <div class='panel'>
 
-    <%= bootstrap_form_for resource, as: resource_name, url: session_path(resource_name), layout: :horizontal do |f| %>
+    <%= bootstrap_form_for resource, as: resource_name, url: session_path(resource_name), layout: :horizontal, inline_errors: false do |f| %>
       <%= f.email_field :email, autofocus: true %>
       <%= f.password_field :password, autocomplete: "off" %>
       <% if devise_mapping.rememberable? -%>
