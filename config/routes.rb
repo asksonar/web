@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/my_results',  to: 'results#my_index'
   get '/create',      to: 'create#index'
   get '/share/videos/:id', to: 'share_videos#show'
+  get '/ping', to: 'ping#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
