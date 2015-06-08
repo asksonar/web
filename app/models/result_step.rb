@@ -44,7 +44,7 @@ class ResultStep < ActiveRecord::Base
   end
 
   def first_transcription_text
-    transcriptions ? transcriptions.first.text : '< no transcription >'
+    !transcriptions.nil? && !transcriptions.first.nil? ? transcriptions.first.text : '< no transcription >'
   end
 
 end
