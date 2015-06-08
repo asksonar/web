@@ -1,4 +1,4 @@
-raise 'Ruby version must be greater than or equal to 2.1.2' unless  RUBY_VERSION >= '2.1.2'
+ruby "2.2.0"
 
 source 'https://rubygems.org'
 

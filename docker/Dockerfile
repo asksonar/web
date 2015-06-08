@@ -19,13 +19,13 @@ RUN apt-get -y install inotify-tools
 RUN apt-get -y install rsync
 
 # write our own nginx.conf
-ADD nginx.conf /etc/nginx/nginx.conf
+ADD nginx/nginx.conf /etc/nginx/nginx.conf
 # add environment variables to nginx
-ADD env.conf /etc/nginx/main.d/env.conf
+ADD nginx/main.d/env.conf /etc/nginx/main.d/env.conf
 # remove the default site
 RUN rm /etc/nginx/sites-enabled/default
 # set my default site
-ADD server.conf /etc/nginx/sites-enabled/server.conf
+ADD nginx/sites-enabled/server.conf /etc/nginx/sites-enabled/server.conf
 
 # add our unicorn log files if they don't exist
 RUN mkdir -p /var/log/unicorn
@@ -39,7 +39,11 @@ RUN touch /var/log/unicorn/stderr.log
 # run bundle and unicorn upon startup
 RUN mkdir -p /etc/my_init.d
 #ADD bundle_install.sh /etc/my_init.d/bundle_install.sh
-ADD start_unicorn.sh /etc/my_init.d/start_unicorn.sh
+#ADD start_unicorn.sh /etc/my_init.d/start_unicorn.sh
+
+# startup scripts that can be passed to /sbin/my_init -- COMMAND ARGUMENTS...
+# exit 0 if you want to just run it and then shut it down
+ADD my_startup /etc/my_startup
 
 # enable nginx
 RUN rm -f /etc/service/nginx/down
