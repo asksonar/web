@@ -106,7 +106,11 @@
                 <i class='feeling-empty'></i>
               <% end %>
               <span class='sub'><%= result_step.created_at.strftime("%b %d") %> - [<%= result_step.email %>]</span>
-              <%= result_step.first_transcription_text %>...
+              <% if result_step.first_transcription_text.nil? %>
+                &lt;no transcription&gt;
+              <% else %>
+                <%= result_step.first_transcription_text %> ...
+              <% end %>
             </a>
           <% end %>
 
