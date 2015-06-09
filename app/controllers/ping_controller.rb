@@ -1,5 +1,6 @@
 class PingController < ApplicationController
   def index
+
     details = {}
     database_connected = ActiveRecord::Base.connected?
     details['database_connected'] = database_connected
@@ -12,6 +13,7 @@ class PingController < ApplicationController
 
     details['status'] = status
 
+    headers['Last-Modified'] = Time.now.httpdate
     render status: status, json: details
   end
 
