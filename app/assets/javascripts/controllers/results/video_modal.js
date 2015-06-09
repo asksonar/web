@@ -82,7 +82,7 @@ VideoModal.prototype.playVideo = function(timestamp) {
 }
 
 VideoModal.prototype.clickVideoText = function(event) {
-  var timestamp = $(event.target).attr('data-timestamp');
+  var timestamp = $(event.currentTarget).attr('data-timestamp');
   this.playVideo(timestamp);
 }
 

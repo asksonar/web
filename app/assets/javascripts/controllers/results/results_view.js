@@ -23,7 +23,7 @@ ResultsView.prototype.toggleArchive = function() {
 }
 
 ResultsView.prototype.loadModal = function(event) {
-  var thisEl = $(event.target);
+  var thisEl = $(event.currentTarget);
   var scenarioStepId = thisEl.attr('data-scenario-step-id');
   var scenarioResultId = thisEl.attr('data-scenario-result-id');
   var timeSeconds = parseFloat(thisEl.attr('data-feeling-at-seconds') || 0) - 5;
@@ -32,7 +32,7 @@ ResultsView.prototype.loadModal = function(event) {
 }
 
 ResultsView.prototype.showPanel = function(event) {
-  var chevron = $(event.target);
+  var chevron = $(event.currentTarget);
   var panelBody = chevron.closest('.panel').find('.panel-body');
 
   chevron.removeClass('fa-chevron-down').addClass('fa-chevron-up');
@@ -49,7 +49,7 @@ ResultsView.prototype.showAllPanels = function() {
 }
 
 ResultsView.prototype.hidePanel = function(event) {
-  var chevron = $(event.target);
+  var chevron = $(event.currentTarget);
   var panelBody = chevron.closest('.panel').find('.panel-body');
 
   chevron.removeClass('fa-chevron-up').addClass('fa-chevron-down');
