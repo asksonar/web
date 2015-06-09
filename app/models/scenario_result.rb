@@ -22,37 +22,7 @@ class ScenarioResult < ActiveRecord::Base
 
   def email
     if panelist.email.empty? then
-      first_name = ['Jenny', 'Johnny'][id % 2]
-      last_name = [
-        'Alpha',
-        'Bravo',
-        'Charlie',
-        'Delta',
-        'Echo',
-        'Foxtrot',
-        'Golf',
-        'Hotel',
-        'India',
-        'Juliet',
-        'Kilo',
-        'Lima',
-        'Mike',
-        'November',
-        'Oscar',
-        'Papa',
-        'Quebec',
-        'Romeo',
-        'Sierra',
-        'Tango',
-        'Uniform',
-        'Victor',
-        'Whiskey',
-        'X-ray',
-        'Yankee',
-        'Zulu',
-      ][id % 26]
-
-      first_name + ' ' + last_name
+      'anonymous'
     else
       panelist.email
     end
