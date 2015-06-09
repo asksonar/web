@@ -92,16 +92,16 @@
               data-scenario-step-id='<%=result_step.scenario_step_id%>'
               data-scenario-result-id='<%=result_step.scenario_result_id%>'
             >
-              <% if rand(2) > 0 #result_step.has_confused? %>
+              <% if result_step.has_confused? and result_step.has_delighted? %>
                 <i class='feeling-confused'></i>
                 <i class='feeling-delighted'></i>
-              <% elsif rand(2) > 0 %>
+              <% elsif result_step.has_delighted? %>
                 <i class='feeling-empty'></i>
                 <i class='feeling-delighted'></i>
-              <% elsif rand(2) > 0 %>
+              <% elsif result_step.has_confused? %>
                 <i class='feeling-empty'></i>
                 <i class='feeling-confused'></i>
-              <% else rand(2) > 0 %>
+              <% else %>
                 <i class='feeling-empty'></i>
                 <i class='feeling-empty'></i>
               <% end %>
