@@ -66,7 +66,11 @@ VideoModal.prototype.buildTranscript = function(transcriptArray) {
       + text + "</a><br/>";
   }
 
-  return videoTranscript;
+  if (videoTranscript) {
+    return videoTranscript;
+  } else {
+    return "(no transcription)";
+  }
 }
 
 VideoModal.prototype.show = function() {

@@ -127,7 +127,7 @@
               <% end %>
               <span class='sub'><%= result_step.created_at.strftime("%b %d") %> - [<%= result_step.email %>]</span>
               <% if result_step.first_transcription_text.nil? %>
-                &lt;no transcription&gt;
+                (no transcription)
               <% else %>
                 <%= result_step.first_transcription_text %> ...
               <% end %>
