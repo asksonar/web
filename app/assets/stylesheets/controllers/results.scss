@@ -142,6 +142,18 @@
       h1 i {
         margin-right: 5px;
       }
+
+      .video-link {
+        white-space: nowrap;
+      }
+
+      .moments-popover {
+        display: inline-block;
+        text-decoration: none;
+        border: none;
+        outline: none;
+        white-space: nowrap;
+      }
     }
   }
 
