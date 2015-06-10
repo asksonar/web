@@ -1,9 +1,4 @@
-body {
-  font-family: 'BrandonGrotesque-Regular';
-  font-size: 16px;
-}
-
-.body {
+body, .body {
   font-family: 'BrandonGrotesque-Regular';
   font-size: 16px;
 }
@@ -19,6 +14,7 @@ a:hover {
 }
 
 p {
+  font-family: 'BrandonGrotesque-Regular';
   line-height: 18px;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -49,13 +45,13 @@ h1, .h1 {
 }
 
 h2, .h2 {
+  font-family: 'BrandonGrotesque-Regular';
   font-size: 24px;
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
 h3, .h3 {
-  //font-family: DemiAlt;
   font-family: 'BrandonGrotesque-Medium';
   font-size: 16px;
   margin-top: 0px;
