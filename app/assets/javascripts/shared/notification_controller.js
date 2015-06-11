@@ -22,6 +22,12 @@ NotificationController.prototype.info = function(message) {
   $.notify(message, { delay: 2000 });
 }
 
+NotificationController.prototype.warn = function(message) {
+  $.notify(message, { delay: 5000 });
+}
+
 NotificationController.prototype.error = function(message) {
   $.notify(message);
 }
+
+window.notify = new NotificationController();

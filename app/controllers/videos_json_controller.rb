@@ -1,6 +1,11 @@
 class VideosJsonController < ApplicationController
   def show
     @video = ResultVideo.find_by(video_params)
+    if @video.nil?
+      render status: 500, plain: "<strong>Error Loading Video</strong> - The video has not yet been uploaded."
+      return
+    end
+
     json = @video.as_json
     json['user_email'] = @video.panelist.email
     json['step_description'] = @video.scenario_step.description

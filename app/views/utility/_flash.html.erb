@@ -1,27 +1,25 @@
 <script type='text/javascript'>
     $(function(){
-      var notificationController = new NotificationController();
-
       <% if flash[:notice] %>
-        notificationController.info('<%= j raw flash[:notice] %>');
+        notify.info('<%= j raw flash[:notice] %>');
       <% end %>
 
       <% if flash[:alert] %>
-        notificationController.error('<%= j raw flash[:alert] %>');
+        notify.error('<%= j raw flash[:alert] %>');
       <% end %>
 
       <% if defined? resource %>
         <% resource.errors.full_messages.each do |message| %>
-          notificationController.error('<%= j raw message %>');
+          notify.error('<%= j raw message %>');
         <% end %>
       <% end %>
 
       <% if flash[:info] %>
-        notificationController.info('<%= j raw flash[:info] %>');
+        notify.info('<%= j raw flash[:info] %>');
       <% end %>
 
       <% if flash[:error] %>
-        notificationController.error('<%= j raw flash[:error] %>');
+        notify.error('<%= j raw flash[:error] %>');
       <% end %>
     });
 

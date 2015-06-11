@@ -44,15 +44,13 @@ StudiesController.prototype.checkForExtension = function() {
 }
 
 StudiesController.prototype.installExtension = function() {
-  var notificationController = new NotificationController();
-
   var successCallback = function() {
     this.refresh();
-    notificationController.info('Extension successfully activated.');
+    notify.info('Extension successfully activated.');
   };
 
   var failureCallback = function() {
-    notificationController.error('There was an error activating the extension.');
+    notify.warn('There was an error activating the extension.');
   };
 
   chrome.webstore.install("https://chrome.google.com/webstore/detail/" + this.appId,
@@ -64,8 +62,7 @@ StudiesController.prototype.startFeedback = function() {
     if (response === true) {
       this.view.completeStartFeedback();
     } else {
-      var notificationController = new NotificationController();
-      notificationController.error('There was an error launching the study.');
+      notify.warn('There was an error launching the study.');
     }
   }
 

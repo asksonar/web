@@ -48,6 +48,8 @@ VideoModal.prototype.load = function(scenarioStepId, scenarioResultId, timeSecon
     this.video.currentTime(timeSeconds);
     this.show();
 
+  }, this)).fail($.proxy(function(jqXHR, textStatus, errorThrown){
+    notify.warn(jqXHR.responseText);
   }, this));
 }
 
