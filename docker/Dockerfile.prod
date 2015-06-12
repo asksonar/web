@@ -17,5 +17,7 @@ ENV RACK_ENV=production
 ENV RAILS_ENV=production
 ENV SECRET_KEY_BASE=b12e527df727aa2de82b08aec149d24577443af0302a32d0261df305f47665fc09c11760cb0aa461af44f97a83663c4bc195788e5ba033c65f1bdd15b6e29ac5
 ENV DATABASE_URL=postgres://dbadmin:vUM9bCvS4xNgr9M@sonar.ceogf0soa8au.us-west-1.rds.amazonaws.com:5432/dbadmin
+ENV MANDRILL_USERNAME=jonathan@asksonar.com
+ENV MANDRILL_PASSWORD=dLlB-4ejRCHpwjoTWY01eg
 
 RUN vendor/bundle/bin/rake assets:precompile
