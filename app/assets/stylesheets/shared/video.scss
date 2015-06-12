@@ -40,6 +40,11 @@
     }
   }
 
+  .vjs-default-skin .vjs-play-progress {
+    // the original #66a8cc is bluish and hides our green
+    background: #CCCCCC url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAP0lEQVQIHWWMAQoAIAgDR/QJ/Ub//04+w7ZICBwcOg5FZi5iBB82AGzixEglJrd4TVK5XUJpskSTEvpdFzX9AB2pGziSQcvAAAAAAElFTkSuQmCC) -50% 0 repeat
+  }
+
 }
 
 .modal .video-container #videoText {

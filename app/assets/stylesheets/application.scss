@@ -18,6 +18,8 @@ $icon-font-path: "bootstrap/";
 @import "bootstrap-sass";
 @import "fontawesome";
 @import "videojs";
+@import "videojs-markers/dist/videojs.markers";
+@import "videojs-youtube-progress";
 @import "animate.css/animate";
 @import "Brandon_Grotesque";
 

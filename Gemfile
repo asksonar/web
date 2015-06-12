@@ -62,6 +62,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-videojs', '~> 4'
   # videojs plugin for markers
   gem 'rails-assets-videojs-markers'
+  # videojs plugin for keeping the bar progress bar always visible
+  gem 'rails-assets-videojs-youtube-progress'
   # handlebars javascript templating library
   gem 'rails-assets-autosize'
   # lets us copy to clipboard
@@ -87,6 +89,7 @@ group :development, :test do
   #gem 'rails-dev-tweaks', '~> 1.1'
 end
 
-group :production do
-  gem 'rails_12factor'
-end
+# needed by heroku
+# group :production do
+#   gem 'rails_12factor'
+# end

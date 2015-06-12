@@ -55,3 +55,20 @@ i.feeling-confused.white-mouth:before {
 i.feeling-delighted.white-mouth:before {
   background-image: image-url('face_delight_white_mouth.svg');
 }
+
+// if you need to fill in some padding
+.background-delighted {
+  background: #1CC67D !important; // made important so it can be used with videojs-markers
+}
+
+.background-confused {
+  background: #F57340 !important; // made important so it can be used with videojs-markers
+}
+
+.color-highlighted {
+  color: #FFDC00 !important; // made important so it can be used with videojs-markers
+}
+
+.background-highlighted{
+  background: #FFDC00 !important; // made important so it can be used with videojs-markers
+}

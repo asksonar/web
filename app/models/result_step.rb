@@ -47,4 +47,8 @@ class ResultStep < ActiveRecord::Base
     !transcriptions.nil? && !transcriptions.first.nil? ? transcriptions.first.text : nil
   end
 
+  def highlights
+    return []
+  end
+
 end

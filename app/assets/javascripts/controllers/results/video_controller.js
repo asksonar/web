@@ -8,7 +8,33 @@ VideoController.prototype.init = function() {
   this.eventBus = $({});
 
   this.video = videojs(this.videoId);
+  this.video.markers({
+    markerStyle: {
+      'width':'7px',
+      'border-radius': '30%',
+      'background-color': 'black'
+    },
+    markerTip:{
+      display: true,
+      text: function(marker) {
+        return marker.text;
+      }
+    },
+    breakOverlay:{
+      display: false
+    },
+    onMarkerReached: function(marker) {},
+    markers: []
+  });
+
+  this.video.markers.add([{time:5,text:'Im new'}]);
+
+  window.player = this.video;
+
   this.video.on('timeupdate', $.proxy(this.onTimeUpdate, this));
+  // videojs-markers will load the markers from options {} above upon loadedmetadata
+  // so we will then load our own markers after that point
+  this.video.on("loadedmetadata", $.proxy(this.loadMarkers, this));
 }
 
 VideoController.prototype.on = function(event, callback) {
@@ -29,7 +55,39 @@ VideoController.prototype.pause = function() {
 
 VideoController.prototype.src = function(srcArray) {
   this.video.src(srcArray);
-  //this.video.src("http://vjs.zencdn.net/v/oceans.mp4");
+}
+
+VideoController.prototype.markers = function(arrayDelightedTimes, arrayConfusedTimes, arrayHighlightedTimes) {
+  this.arrayDelightedTimes = arrayDelightedTimes || [];
+  this.arrayConfusedTimes = arrayConfusedTimes || [];
+  this.arrayHighlightedTimes = arrayHighlightedTimes || [];
+}
+
+VideoController.prototype.loadMarkers = function() {
+  this.video.markers.removeAll();
+  this.video.markers.add(this.arrayDelightedTimes.map(function(time) {
+    return {
+      time: time,
+      text: ":)",
+      class: 'background-delighted'
+    }
+  }));
+
+  this.video.markers.add(this.arrayConfusedTimes.map(function(time) {
+    return {
+      time: time,
+      text: ":(",
+      class: 'background-confused'
+    }
+  }));
+
+  this.video.markers.add(this.arrayHighlightedTimes.map(function(time) {
+    return {
+      time: time,
+      text: "*",
+      class: 'background-highlighted'
+    }
+  }));
 }
 
 VideoController.prototype.currentTime = function(currentSeconds) {

@@ -33,9 +33,10 @@ VideoModal.prototype.load = function(scenarioStepId, scenarioResultId, timeSecon
     dataType: 'json'
   }).done($.proxy(function(data){
 
-    if (this.$modal.attr('data-video-id') !== data.id) {
+    if (this.$modal.attr('data-video-id') != data.id) {
       this.$modal.attr('data-video-id', data.id);
 
+      this.video.markers(data.delighted_array, data.confused_array, data.highlighted_array);
       this.video.src(data.src_array);
 
       this.$videoText.html(this.buildTranscript(data.transcription_array));
