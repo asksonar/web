@@ -36,6 +36,10 @@ class Scenario < ActiveRecord::Base
       .order(published_at: :desc)
   end
 
+  def step_count
+    scenario_steps.count
+  end
+
   def user_count
     scenario_results.count
   end
@@ -74,7 +78,7 @@ class Scenario < ActiveRecord::Base
   end
 
   def share_link
-    '/studies/' + hashid
+    Rails.configuration.properties['web_base_url'] + '/studies/' + hashid
   end
 
   def share_link_params_json
@@ -90,10 +94,6 @@ class Scenario < ActiveRecord::Base
         }
       }
     }.to_json
-  end
-
-  def summary_steps
-    scenario_steps.map { |step| SummaryStep.new(step) }
   end
 
   def highlights

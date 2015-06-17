@@ -1,3 +1,6 @@
+require 'yaml'
+require 'byebug'
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -38,4 +41,21 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # load custom configuration properties
+  config_path = File.join(Rails.root,'config/properties/development.yml')
+  puts 'config_path: ' + config_path
+  config_contents = File.read(config_path)
+  puts 'config_contents: ' + config_contents
+  config.properties = YAML.load(config_contents)
+  puts config.properties
+
+  # enable remote byebugging
+  #Byebug.wait_connection = true
+  #Byebug.start_server('localhost', 9876)
+
+  # log to stdout as preferred by unicorn (which we do use) and heroku (which we used to use)
+  config.logger = Logger.new(STDOUT)
+  config.logger.level = Logger.const_get(ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'DEBUG')
+  config.log_level    = (ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].downcase : 'debug').to_sym
 end

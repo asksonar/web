@@ -10,4 +10,16 @@ class ResultFeeling < ActiveRecord::Base
   def self.where_scenario_step_confused(scenario_step)
     ResultFeeling.where(scenario_step: scenario_step, feeling: feelings[:confused])
   end
+
+  def email
+    scenario_result.email
+  end
+
+  def seconds_pretty_print
+    if feeling_at_seconds > 60 * 60
+      Time.at(feeling_at_seconds).strftime('%H:%M:%S')
+    else
+      Time.at(feeling_at_seconds).strftime('%M:%S')
+    end
+  end
 end

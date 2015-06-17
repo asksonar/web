@@ -1,20 +1,32 @@
 class DraftsController < ApplicationController
   before_action :authenticate_researcher!
 
-  EMPTY_SCENARIO = Scenario.new({
-    scenario_steps: [ScenarioStep.new()]
-  })
-
   def index
     @scenarios = Scenario.drafts(current_researcher.id)
   end
 
-  def new(scenario = EMPTY_SCENARIO)
+  def new
+    p 'calling new'
+    new_or_edit(Scenario.new({
+      scenario_steps: [ScenarioStep.new()]
+    }))
+    render :new
+  end
+
+  def edit
+    p 'calling edit'
+    new_or_edit(Scenario.find_by_hashid(params[:id]))
+    render :new
+    # TODO: modify the new page to indicate it is editing
+  end
+
+  def new_or_edit(scenario)
+    p scenario
     @scenario = scenario
     @product_templates = Template.product_templates
     @marketing_templates = Template.marketing_templates
     if @template = Template.find_by(value: params[:template])
-      @scenario = @template.to_scenario(@scenario) #to_param)
+      @scenario = @template.to_scenario(@scenario)
     end
   end
 
@@ -24,8 +36,10 @@ class DraftsController < ApplicationController
 
       if params[:draft]
         create_action = Proc.new { |x| Scenario.create_draft(x) }
+        p 'create_draft'
       elsif params[:publish]
         create_action = Proc.new { |x| Scenario.create_live(x) }
+        p 'create_live'
       else
         raise "Illegal commit value of " + params[:commit]
       end
@@ -52,12 +66,6 @@ class DraftsController < ApplicationController
     # if we just save the draft
     #   redirect to draft list
     #   flash that list
-  end
-
-  def edit
-    new(Scenario.find_by_hashid(params[:id]))
-    render :new
-    # need to modify the new page to indicate it is editing
   end
 
   def show

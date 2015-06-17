@@ -34,7 +34,11 @@ $(function(){
       this.play();
     });
 
-    $('#videoText').html(videoTranscript);
+    if (videoTranscript) {
+      $('#videoText').html(videoTranscript);
+    } else {
+      $('#videoText').html('(no transcription)');
+    }
   }
 
   if (document.getElementById('example_video_1')) {

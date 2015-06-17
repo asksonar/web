@@ -21,7 +21,11 @@ class ScenarioResult < ActiveRecord::Base
   end
 
   def email
-    return user.email
+    if panelist.email.empty? then
+      'anonymous'
+    else
+      panelist.email
+    end
   end
 
   def title

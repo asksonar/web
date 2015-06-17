@@ -1,0 +1,3 @@
+#!/bin/sh
+docker exec web rsync -av --delete /var/src/app/ /home/app/webapp/app/
+docker exec web rsync -av --delete /var/src/config/ /home/app/webapp/config/

@@ -15,7 +15,8 @@
 //= require amcharts
 //= require amcharts/serial
 //= require amcharts/themes/light
-//= require video
+//= require videojs
+//= require videojs-markers
 //= require handlebars
 //= require autosize
 //= require zeroclipboard

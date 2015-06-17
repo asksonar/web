@@ -1,0 +1,34 @@
+<% content_for :main_wrapper_class do %>
+  logged-out
+<% end %>
+
+<% content_for :nav_left do %>
+  <!-- no left nav -->
+<% end %>
+
+<% content_for :nav_header do %>
+  <%# centered sonar header %>
+  <%= render partial: 'nav/header_no_login' %>
+<% end %>
+
+<section class="main-content">
+
+  <div class='panel ctn-help'>
+    <h3>Your feedback is important. Really.</h3>
+    <p>Sonar is different from your average survey. We want to see what you do, and hear what you think.
+    </p>
+  </div>
+
+  <div class='panel ctn-help'>
+    <h3>How do you give feedback?</h3>
+    <img src='<%=asset_path 'plugin_help.png' %>'>
+  </div>
+
+  <div class='panel'>
+    <h3>Study description</h3>
+    <p>
+      <%= @scenario.description %>
+    </p>
+  </div>
+
+</section>

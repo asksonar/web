@@ -4,14 +4,9 @@
 
 #studies-show {
   .panel {
-    max-width: 400px;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-  }
-
-  .fa-check-circle {
-    color: #1CA5C9;
-    font-size: 32px;
   }
 
   .step {
@@ -20,10 +15,6 @@
     .el-completed {
       display: none;
     }
-  }
-
-  p.el-completed {
-    line-height: 32px; /* hack for one-line items to look better */
   }
 
   .step-enabled .el-enabled {
@@ -38,30 +29,48 @@
     display: block;
   }
 
+  .step {
+    line-height: 32px;
+
+    i {
+      color: #1CA5C9;
+      font-size: 32px;
+      float: left;
+      margin-right: 5px;
+      padding-right: 1px; /* bug with FA- circle gets cut off */
+    }
+
+  }
+
   .ctn-setup {
-    .step {
-      position: relative;
-      margin-top: 20px;
+    .el-disabled {
+      color: #999;
+    }
+    .step + .step {
+      margin-top: 10px;
+    }
+  }
 
-      .btn {
-        width: 100px;
-      }
-
-      .btn, i {
-        position: absolute;
-        right: 0;
-        top: 0;
-      }
-      p {
-        margin-right: 115px;
-      }
+  .ctn-help {
+    h3 {
+      margin-bottom: 10px;
+    }
+    img {
+      width: 100%;
     }
   }
 
   .ctn-study {
+    position: relative; /* for the overlay */
 
-    p.sub {
-      margin-top: 10px;
+    .overlay {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: .5;
+      background-color: rgb(227, 227, 227);
     }
 
     .form-group {

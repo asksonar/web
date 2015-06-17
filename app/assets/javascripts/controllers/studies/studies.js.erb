@@ -1,7 +1,6 @@
 $(function(){
 
-  var APP_ID = 'ifnadmakmckbjjhbnjcjpfeeljhhmgib';
-  //var APP_ID = 'neeoccancikpmendfnglomhpeckokjei';
+  var APP_ID = '<%= Rails.configuration.properties['chrome_app_id'] %>';
 
   if (!$('#studies-show').length) {
     return;
@@ -10,6 +9,8 @@ $(function(){
   var view = new StudiesView({
     'ctnInstallChrome': $('#ctn-install-chrome'),
     'ctnInstallExtension': $('#ctn-install-extension'),
+    'ctnSetup': $('.ctn-setup'),
+    'ctnHelp': $('.ctn-help'),
     'ctnStartFeedback': $('.ctn-study')
   });
   var controller = new StudiesController(view, APP_ID, {

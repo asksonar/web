@@ -6,7 +6,7 @@
 <section class='main-content'>
   <div class='panel'>
 
-    <%= bootstrap_form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, layout: :horizontal do |f| %>
+    <%= bootstrap_form_for resource, as: resource_name, url: password_path(resource_name), inline_errors: false, html: { method: :post }, layout: :horizontal do |f| %>
 
       <p>Enter your email and we will send you instructions on how to reset your password.</p>
 

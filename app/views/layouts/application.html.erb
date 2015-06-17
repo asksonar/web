@@ -15,9 +15,20 @@
   <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/ifnadmakmckbjjhbnjcjpfeeljhhmgib">
 </head>
 <body>
-  <section id="main-wrapper" class="<%= 'logged-out' if not researcher_signed_in? %>">
-    <%= render partial: 'nav/left' %>
-    <%= render partial: 'nav/header' %>
+  <section id="main-wrapper" class="<%= 'logged-out' if not researcher_signed_in? %> <%= content_for :main_wrapper_class %>">
+
+    <% if content_for? :nav_left %>
+      <%= content_for :nav_left %>
+    <% else %>
+      <%= render partial: 'nav/left' %>
+    <% end %>
+
+    <% if content_for? :nav_header %>
+      <%= content_for :nav_header %>
+    <% else %>
+      <%= render partial: 'nav/header' %>
+    <% end %>
+
     <section id="<%= controller_name + '-' + action_name %>" class="main-content-wrapper">
       <%= yield %>
       <%= render partial: 'nav/footer' %>

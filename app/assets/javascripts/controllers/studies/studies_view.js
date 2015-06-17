@@ -1,6 +1,8 @@
 function StudiesView(config) {
   this.$ctnInstallChrome = config.ctnInstallChrome;
   this.$ctnInstallExtension = config.ctnInstallExtension;
+  this.$ctnSetup = config.ctnSetup;
+  this.$ctnHelp = config.ctnHelp;
   this.$ctnStartFeedback = config.ctnStartFeedback;
 
   this.init();
@@ -56,12 +58,18 @@ StudiesView.prototype.completeInstallExtension = function() {
 
 StudiesView.prototype.enableStartFeedback = function() {
   this.enableStep(this.$ctnStartFeedback);
+  this.$ctnSetup.hide();
+  this.$ctnHelp.show();
 }
 
 StudiesView.prototype.disableStartFeedback = function() {
   this.disableStep(this.$ctnStartFeedback);
+  this.$ctnSetup.show();
+  this.$ctnHelp.hide();
 }
 
 StudiesView.prototype.completeStartFeedback = function() {
   this.completeStep(this.$ctnStartFeedback);
+  this.$ctnSetup.hide();
+  this.$ctnHelp.show();
 }

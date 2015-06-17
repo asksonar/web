@@ -23,11 +23,7 @@ class ResultsController < ApplicationController
   end
 
   def show
-    @summary = Scenario.find_by_hashid(params[:id])
-  end
-
-  def update
-
+    @scenario = Scenario.find_by_hashid(params[:id])
   end
 
 end
