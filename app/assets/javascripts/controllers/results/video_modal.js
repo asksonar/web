@@ -62,7 +62,7 @@ VideoModal.prototype.buildTranscript = function(transcriptArray) {
     text = transcriptArray[i].text.trim();
 
     mins = Math.floor(time / 60);
-    secs = time % 60;
+    secs = Math.floor(time) % 60;
 
     videoTranscript += "<a class='videoTextLink' data-timestamp='" + time + "'>"
       + mins + ":" + ('00' + secs).slice(-2) + " "
