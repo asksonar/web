@@ -61,6 +61,8 @@ StudiesController.prototype.startFeedback = function() {
   var launchedAppResponse = function(response) {
     if (response === true) {
       this.view.completeStartFeedback();
+    } else if (typeof response === "string") {
+      notify.warn(response);
     } else {
       notify.warn('There was an error launching the study.');
     }
