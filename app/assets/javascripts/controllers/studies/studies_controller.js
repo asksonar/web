@@ -7,36 +7,32 @@ function StudiesController(view, appId, config) {
   this.$form = config.form;
 
   this.init();
-  this.initListeners();
+  this.initHandlers();
 }
 
 StudiesController.prototype.init = function() {
-  this.$btnInstallExtension.on('click', $.proxy(this.installExtension, this));
-  this.$btnStartFeedback.on('click', $.proxy(this.startFeedback, this));
-
-  this.view.enableInstallChrome();
-  this.view.disableInstallExtension();
-  this.view.disableStartFeedback();
 }
 
-StudiesController.prototype.initListeners = function() {
+StudiesController.prototype.initHandlers = function() {
+  this.$btnInstallExtension.on('click', $.proxy(this.installExtension, this));
+  this.$btnStartFeedback.on('click', $.proxy(this.startFeedback, this));
 }
 
 StudiesController.prototype.hasChrome = function() {
-  return chrome && chrome.webstore && chrome.webstore.install;
+  return window.chrome && chrome.webstore && chrome.webstore.install;
 }
 
 StudiesController.prototype.checkForExtension = function() {
   if (!this.hasChrome()) {
+    this.view.showInstallChrome();
     return;
   }
 
-  this.view.enableInstallExtension();
-
   var responseCallback = function(response) {
     if (response === true) {
-      this.view.completeInstallExtension();
-      this.view.enableStartFeedback();
+      this.view.showStudy();
+    } else {
+      this.view.showInstallExtension();
     }
   };
 
@@ -45,7 +41,7 @@ StudiesController.prototype.checkForExtension = function() {
 
 StudiesController.prototype.installExtension = function() {
   var successCallback = function() {
-    this.refresh();
+    this.view.showStudy(true);
     notify.info('Extension successfully activated.');
   };
 
@@ -60,7 +56,7 @@ StudiesController.prototype.installExtension = function() {
 StudiesController.prototype.startFeedback = function() {
   var launchedAppResponse = function(response) {
     if (response === true) {
-      this.view.completeStartFeedback();
+      this.view.startStudy();
     } else if (typeof response === "string") {
       notify.warn(response);
     } else {
@@ -81,11 +77,4 @@ StudiesController.prototype.startFeedback = function() {
     data: this.$form.serialize(),
     dataType: 'json'
   }).done($.proxy(ajaxDone, this));
-}
-
-StudiesController.prototype.refresh = function() {
-  if (this.hasChrome()) {
-    this.view.completeInstallChrome();
-    this.checkForExtension();
-  }
 }

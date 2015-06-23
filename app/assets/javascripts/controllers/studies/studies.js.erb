@@ -6,18 +6,18 @@ $(function(){
     return;
   }
 
-  var view = new StudiesView({
+  window.view = new StudiesView({
     'ctnInstallChrome': $('#ctn-install-chrome'),
     'ctnInstallExtension': $('#ctn-install-extension'),
-    'ctnSetup': $('.ctn-setup'),
-    'ctnHelp': $('.ctn-help'),
-    'ctnStartFeedback': $('.ctn-study')
+    'ctnStudy': $('#ctn-study'),
+    'ctnStartFeedback': $('#ctn-start-feedback'),
+    'ctnRestartFeedback': $('#ctn-restart-feedback')
   });
-  var controller = new StudiesController(view, APP_ID, {
+  window.controller = new StudiesController(view, APP_ID, {
     'btnInstallExtension': $('#btn-install-extension'),
     'btnStartFeedback': $('#btn-start-feedback'),
     'form': $('form')
   });
 
-  controller.refresh();
+  controller.checkForExtension();
 });
