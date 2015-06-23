@@ -21,6 +21,7 @@
 //= require autosize
 //= require zeroclipboard
 //= require remarkable-bootstrap-notify
+//= require zendesk_widget
 
 // insert new packages above this line
 //= require_tree .

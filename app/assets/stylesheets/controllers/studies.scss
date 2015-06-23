@@ -4,87 +4,40 @@
 
 #studies-show {
   .panel {
-    max-width: 600px;
+    max-width: 500px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  .step {
-    .el-enabled,
-    .el-disabled,
-    .el-completed {
-      display: none;
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  .ctn-btn-text {
+    margin-top: 15px;
+
+    p {
+      line-height: 31px;
+    }
+    .btn {
+      height: 31px;
     }
   }
 
-  .step-enabled .el-enabled {
-    display: block;
+  #ctn-start-feedback {
+    margin-top: 15px;
   }
 
-  .step-disabled .el-disabled {
-    display: block;
+  #ctn-restart-feedback {
+    margin-top: 20px;
   }
 
-  .step-completed .el-completed {
-    display: block;
-  }
-
-  .step {
-    line-height: 32px;
-
-    i {
-      color: #1CA5C9;
-      font-size: 32px;
-      float: left;
-      margin-right: 5px;
-      padding-right: 1px; /* bug with FA- circle gets cut off */
-    }
-
-  }
-
-  .ctn-setup {
-    .el-disabled {
-      color: #999;
-    }
-    .step + .step {
-      margin-top: 10px;
-    }
-  }
-
-  .ctn-help {
-    h3 {
-      margin-bottom: 10px;
-    }
-    img {
-      width: 100%;
-    }
-  }
-
-  .ctn-study {
-    position: relative; /* for the overlay */
-
-    .overlay {
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: .5;
-      background-color: rgb(227, 227, 227);
-    }
-
-    .form-group {
-      margin-bottom: 0px;
-    }
-
-    form {
-      margin-top: 20px;
-    }
-
-    .ctn-start-feedback {
-      margin-top: 20px;
-    }
-
+  #ctn-install-chrome,
+  #ctn-install-extension,
+  #ctn-study,
+  #ctn-start-feedback,
+  #ctn-restart-feedback {
+    display: none;
   }
 
 }
