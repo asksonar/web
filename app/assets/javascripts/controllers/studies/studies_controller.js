@@ -67,6 +67,12 @@ StudiesController.prototype.startFeedback = function() {
   var ajaxDone = function(response) {
     var launchAppParams = {};
     launchAppParams[response.hashid] = scenarioParams;
+    launchAppParams['screen'] = {
+      availLeft: screen.availLeft,
+      availTop: screen.availTop,
+      availWidth: screen.availWidth,
+      availHeight: screen.availHeight
+    }
 
     chrome.runtime.sendMessage(this.appId, {launchApp: launchAppParams}, $.proxy(launchedAppResponse, this));
   }
