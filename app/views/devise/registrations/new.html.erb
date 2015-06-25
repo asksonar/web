@@ -7,13 +7,19 @@
   <div class='panel'>
     <%= bootstrap_form_for resource, as: resource_name, url: registration_path(resource_name), layout: :horizontal, inline_errors: false do |f| %>
 
-        <%= f.email_field :email, autofocus: true %>
+        <%= f.text_field :full_name, autofocus: true,
+          label_col: 'col-sm-5', control_col: 'col-sm-7' %>
+
+        <%= f.email_field :email,
+          label_col: 'col-sm-5', control_col: 'col-sm-7' %>
         <% if @validatable %>
           <em>(<%= @minimum_password_length %> characters minimum)</em>
         <% end %>
-        <%= f.password_field :password, autocomplete: "off" %>
+        <%= f.password_field :password, autocomplete: "off",
+          label_col: 'col-sm-5', control_col: 'col-sm-7' %>
 
-        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+        <%= f.password_field :password_confirmation, autocomplete: "off",
+          label_col: 'col-sm-5', control_col: 'col-sm-7' %>
 
         <%= f.submit "Sign up", class: 'btn btn-dark-blue' %>
     <% end %>

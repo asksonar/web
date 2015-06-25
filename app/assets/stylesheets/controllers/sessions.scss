@@ -3,11 +3,28 @@
 #passwords-new,
 #passwords-create,
 #passwords-edit,
+#passwords-update {
+  .panel {
+    max-width: 400px;
+  }
+}
+
+#registrations-new,
+#registrations-create {
+  .panel {
+    max-width: 450px;
+  }
+}
+
+#sessions-new,
+#sessions-create,
+#passwords-new,
+#passwords-create,
+#passwords-edit,
 #passwords-update,
 #registrations-new,
 #registrations-create {
   .panel {
-    max-width: 400px;
     margin-left: auto;
     margin-right: auto;
 
