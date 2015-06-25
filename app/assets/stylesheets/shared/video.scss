@@ -10,16 +10,10 @@
       width: 75px;
       display: inline-block;
     }
-    .ctn-video-btns {
-      float: right;
-      width: 75px;
-      .btn {
-        float: right;
-      }
-      #btn-highlight-video-link {
-        margin-left: 1px
-      }
-    }
+  }
+
+  #btn-copy-video-link {
+    margin-left: 1px;
   }
 
   #input-url-base {
