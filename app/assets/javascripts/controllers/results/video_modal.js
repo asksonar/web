@@ -101,7 +101,16 @@ VideoModal.prototype.updateVideoTime = function(event, timestamp) {
   this.$inputUrlTime.val(displayTime);
 
   var displayUrl = this.$inputUrlBase.attr('data-base-url') + currentSeconds;
+  var inputUrlBaseDom = this.$inputUrlBase.get(0);
+  var selectionStart = inputUrlBaseDom.selectionStart;
+  var selectionEnd = inputUrlBaseDom.selectionEnd;
+  var selectionAll = selectionEnd - selectionStart == inputUrlBaseDom.value.length;
   this.$inputUrlBase.val(displayUrl);
+  if (selectionAll) {
+    inputUrlBaseDom.setSelectionRange(0, inputUrlBaseDom.value.length);
+  } else {
+    inputUrlBaseDom.setSelectionRange(selectionStart, selectionEnd);
+  }
 
   var videoTextLinks = this.$videoText.find('.videoTextLink').removeClass('activeVideoTextLink');
   var videoTextLink;
