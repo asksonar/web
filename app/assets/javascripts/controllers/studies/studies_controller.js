@@ -82,5 +82,7 @@ StudiesController.prototype.startFeedback = function() {
     method: 'POST',
     data: this.$form.serialize(),
     dataType: 'json'
-  }).done($.proxy(ajaxDone, this));
+  }).done($.proxy(ajaxDone, this)).fail(function(jqXHR) {
+    notify.error(jqXHR.responseText, 'There was an error starting your study.');
+  });
 }
