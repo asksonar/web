@@ -7,19 +7,13 @@
       line-height: 34px;
     }
     #input-url-time {
-      width: 75px;
+      width: 80px;
       display: inline-block;
     }
-    .ctn-video-btns {
-      float: right;
-      width: 75px;
-      .btn {
-        float: right;
-      }
-      #btn-highlight-video-link {
-        margin-left: 1px
-      }
-    }
+  }
+
+  #btn-copy-video-link {
+    margin-left: 1px;
   }
 
   #input-url-base {

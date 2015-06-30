@@ -6,9 +6,11 @@
     </video>
     <div class="ctn-video-share-link">
       <h2>This moment at&nbsp;</h2><input type='text' class='h2 form-control' id='input-url-time' readonly>
-      <div class="input-group-btn ctn-video-btns">
-        <a class="btn btn-medium-blue" id="btn-highlight-video-link" data-placement="bottom" title="Coming Soon! - Highlight this moment in the video"><i class="fa fa-star"></i></a>
-        <a class="btn btn-green" id="btn-copy-video-link" data-placement="bottom" title="Copy the video share link"><i class="fa fa-link"></i></a>
+      <div class="btn-group pull-right">
+        <a class="btn btn-medium-blue" id="btn-highlight-video-link" data-placement="bottom" title="Highlight this moment in the video" data-toggle="tooltip"><i class="fa fa-star"></i></a>
+        <div class='btn-wrapper-tooltip' data-placement="bottom" title="Copy the video share link" data-toggle="tooltip">
+          <a class="btn btn-green" id="btn-copy-video-link"><i class="fa fa-link"></i></a>
+        </div>
       </div>
     </div>
     <input type="text" class="form-control" id='input-url-base' readonly>

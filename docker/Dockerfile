@@ -15,7 +15,6 @@ CMD ["/sbin/my_init"]
 
 # install inotify and rsync so we can automatically copy our src folder
 RUN apt-get update
-RUN apt-get -y install inotify-tools
 RUN apt-get -y install rsync
 
 # write our own nginx.conf

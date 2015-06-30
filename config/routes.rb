@@ -2,9 +2,8 @@ Rails.application.routes.draw do
 
 
   get '/videos.json', to: 'videos_json#show'
-  get '/create',      to: 'drafts#new'
+  get '/create',      to: 'drafts#new' # so it doesn't highlight the left nav
   get '/my_results',  to: 'results#my_index'
-  get '/create',      to: 'create#index'
   get '/share/videos/:id', to: 'share_videos#show'
   get '/ping', to: 'ping#index'
 
@@ -23,6 +22,7 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
+  resources :highlights, only: [:create]
   resources :studies do
     resource :help, only: [:show]
   end

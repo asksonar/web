@@ -70,16 +70,10 @@ $(function(){
     video.play();
   });
 
-  $('#btn-archive, #btn-copy-share-link, #btn-preview, #btn-copy-video-link, #btn-highlight-video-link').tooltip();
+  $('[data-toggle="tooltip"]').tooltip();
 
-  new ZeroClipboard(document.getElementById("btn-copy-video-link")).on( "copy", function (event) {
-    event.clipboardData.setData( "text/plain", $('#input-url-base').val());
-  });
+  new ClipboardInput($('#btn-copy-video-link'), $('#input-url-base'));
 
-  $('.modal').on('click', '#input-url-base', function() {
-    this.setSelectionRange(0, this.value.length);
-  });
-
-  $('#input-url-base').attr('data-base-url', window.location.origin + shareLink + '?t=');
+  $('#input-url-base').attr('data-base-url', shareLink + '?t=');
 
 });

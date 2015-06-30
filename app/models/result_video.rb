@@ -15,7 +15,7 @@ class ResultVideo < ActiveRecord::Base
   end
 
   def src_array
-    #return [ { type: "video/mp4", src: "http://vjs.zencdn.net/v/oceans.mp4" } ]
+    # return [ { type: "video/mp4", src: "http://vjs.zencdn.net/v/oceans.mp4" } ]
 
     [
       { type: "video/mp4", src: "#{VIDEO_BASE}/#{scenario_result.hashid}/#{hashid}.mp4" },
@@ -26,6 +26,20 @@ class ResultVideo < ActiveRecord::Base
 
   def transcription_start
     video_transcriptions.first.text
+  end
+
+  def transcription_at(seconds)
+    current_transcription = nil
+
+    video_transcriptions.select(:offset, :text).each do |transcription|
+      if transcription.offset <= seconds
+        current_transcription = transcription['text']
+      else
+        break
+      end
+    end
+
+    return current_transcription
   end
 
 end

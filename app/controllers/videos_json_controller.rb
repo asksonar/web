@@ -20,7 +20,7 @@ class VideosJsonController < ApplicationController
     json['src_array'] = @video.src_array
     json['delighted_array'] = @result_step.feelings_delighted.map { |feeling| feeling.feeling_at_seconds }
     json['confused_array'] = @result_step.feelings_confused.map { |feeling| feeling.feeling_at_seconds }
-    json['highlighted_array'] = @result_step.highlights.map { |highlight| highlight.at_seconds }
+    json['highlighted_array'] = @result_step.highlights.map { |highlight| highlight.offset_seconds }
     render json: json
   end
 

@@ -7,6 +7,7 @@ function VideoModal(config, video) {
   this.$divStepOrder = config.divStepOrder;
   this.$divStepDescription = config.divStepDescription;
   this.$btnCopyVideoLink = config.btnCopyVideoLink;
+  this.$btnHighlightVideoLink = config.btnHighlightVideoLink;
 
   this.video = video;
 
@@ -17,6 +18,7 @@ VideoModal.prototype.init = function() {
   this.$modal.on('shown.bs.modal', $.proxy(this.playVideo, this));
   this.$modal.on('hide.bs.modal', $.proxy(this.pauseVideo, this));
   this.$videoText.on('click', '.videoTextLink', $.proxy(this.clickVideoText, this));
+  this.$btnHighlightVideoLink.on('click', $.proxy(this.generateHighlight, this));
 
   this.video.on('timeupdate', $.proxy(this.updateVideoTime, this));
 
@@ -24,6 +26,7 @@ VideoModal.prototype.init = function() {
 }
 
 VideoModal.prototype.load = function(scenarioStepId, scenarioResultId, timeSeconds) {
+
   $.ajax({
     url:"/videos.json",
     data: {
@@ -32,9 +35,10 @@ VideoModal.prototype.load = function(scenarioStepId, scenarioResultId, timeSecon
     },
     dataType: 'json'
   }).done($.proxy(function(data){
-
-    if (this.$modal.attr('data-video-id') != data.id) {
-      this.$modal.attr('data-video-id', data.id);
+    if (this.videoId != data.id) {
+      this.scenarioStepId = scenarioStepId;
+      this.scenarioResultId = scenarioResultId;
+      this.videoId = data.id;
 
       this.video.markers(data.delighted_array, data.confused_array, data.highlighted_array);
       this.video.src(data.src_array);
@@ -101,7 +105,16 @@ VideoModal.prototype.updateVideoTime = function(event, timestamp) {
   this.$inputUrlTime.val(displayTime);
 
   var displayUrl = this.$inputUrlBase.attr('data-base-url') + currentSeconds;
+  var inputUrlBaseDom = this.$inputUrlBase.get(0);
+  var selectionStart = inputUrlBaseDom.selectionStart;
+  var selectionEnd = inputUrlBaseDom.selectionEnd;
+  var selectionAll = inputUrlBaseDom.value.length > 0 && selectionEnd - selectionStart == inputUrlBaseDom.value.length;
   this.$inputUrlBase.val(displayUrl);
+  if (selectionAll) {
+    inputUrlBaseDom.setSelectionRange(0, inputUrlBaseDom.value.length);
+  } else {
+    inputUrlBaseDom.setSelectionRange(selectionStart, selectionEnd);
+  }
 
   var videoTextLinks = this.$videoText.find('.videoTextLink').removeClass('activeVideoTextLink');
   var videoTextLink;
@@ -113,4 +126,29 @@ VideoModal.prototype.updateVideoTime = function(event, timestamp) {
     }
   }
 
+}
+
+VideoModal.prototype.generateHighlight = function() {
+  var offsetSeconds = this.video.currentTime();
+
+  $.ajax({
+    type: "POST",
+    url: "/highlights",
+    data: {
+      scenario_step_id: this.scenarioStepId,
+      scenario_result_id: this.scenarioResultId,
+      offset_seconds: offsetSeconds,
+      authenticity_token: AUTH_TOKEN
+    },
+    dataType: 'json'
+  }).done($.proxy(function(data){
+
+    // draw the highlights
+    this.video.markers(data.delighted_array, data.confused_array, data.highlighted_array);
+    // normally triggered by calling this.video.src
+    this.video.loadMarkers();
+
+  }, this)).fail($.proxy(function(jqXHR, textStatus, errorThrown){
+    notify.warn(jqXHR.responseText);
+  }, this));
 }

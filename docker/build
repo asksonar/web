@@ -11,10 +11,11 @@ docker run -d --name db \
   -p 5432:5432 \
   postgres:9.4.1
 # no need to forcibly delete, can just hook up to it when it's up
+# TODO: hide error message if it's already running => check docker ps?
 docker start db
 
 # build any new changes to the image
-cd ~/sonar/web/docker/
+cd ~/sonar/web/docker
 docker build -t local/web .
 # delete the old image
 # TODO: don't delete if there are no changes
@@ -29,4 +30,4 @@ docker run -d --name web \
   local/web \
   /sbin/my_init -- sh -c '/etc/my_startup/start_bundle.sh && /etc/my_startup/start_rsync.sh && /etc/my_startup/start_unicorn.sh'
 
-docker logs -f web
+~/sonar/web/docker/synch

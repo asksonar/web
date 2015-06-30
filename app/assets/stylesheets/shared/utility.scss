@@ -72,3 +72,12 @@ i.feeling-delighted.white-mouth:before {
 .background-highlighted{
   background: #FFDC00 !important; // made important so it can be used with videojs-markers
 }
+
+.btn-wrapper-tooltip {
+  display: inline-block;
+}
+
+.btn-group .btn-wrapper-tooltip {
+  position: relative;
+  float: left;
+}

@@ -4,9 +4,8 @@ $(function(){
     return;
   }
 
-  $('#btn-archive, #btn-copy-share-link, #btn-preview, #btn-copy-video-link, #btn-highlight-video-link').tooltip();
+  $('[data-toggle="tooltip"]').tooltip();
   $('[data-toggle="popover"]').popover();
-
 
   var videoController = new VideoController({
     videoId: 'example_video_1'
@@ -19,9 +18,11 @@ $(function(){
     divUserEmail: $('#ctn-user-email'),
     divStepOrder: $('#ctn-step-order'),
     divStepDescription: $('#ctn-step-description'),
-    btnCopyVideoLink: $('#btn-copy-video-link')
+    btnCopyVideoLink: $('#btn-copy-video-link'),
+    btnHighlightVideoLink: $('#btn-highlight-video-link')
   }, videoController);
   var view = new ResultsView({
+    divAllContent: $('.main-content-wrapper'),
     divMainContent: $('.main-content'),
     btnCopyShareLink: $('#btn-copy-share-link'),
     inputShareLink: $('#input-share-link'),
