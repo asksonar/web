@@ -13,6 +13,7 @@ $(function(){
     $('.ctn-count').each(function(index){
       $(this).html((index + 1) + '.');
     });
+    autosize($('textarea'));
   };
 
   var emptyStep = {steps:[{}]};

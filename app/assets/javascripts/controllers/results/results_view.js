@@ -20,7 +20,36 @@ ResultsView.prototype.init = function() {
 }
 
 ResultsView.prototype.toggleArchive = function() {
-  this.$btnArchive.find('.btn').toggleClass('active');
+  var isOn = this.$btnArchive.find('.btn-success').hasClass('active');
+
+  $.ajax({
+    type: 'POST',
+    url: new URL(window.location.href).pathname,
+    data: {
+      _method: 'PUT',
+      is_on: isOn,
+      authenticity_token: AUTH_TOKEN
+    }
+  }).success($.proxy(function(){
+
+    this.$btnArchive.find('.btn').toggleClass('active');
+    if (isOn) {
+      notify.info('<strong>Study Archived</strong> - Your share link is no longer active.');
+      this.$inputShareLink.slideUp();
+      this.$btnCopyShareLink.hide();
+      this.$btnArchive.attr('data-original-title', 'Re-open the study');
+      this.$btnArchive.tooltip('show');
+    } else {
+      notify.info('<strong>Study Active</strong> - Your share link is now active.');
+      this.$inputShareLink.slideDown();
+      this.$btnCopyShareLink.show();
+      this.$btnArchive.attr('data-original-title', 'Close the study');
+      this.$btnArchive.tooltip('show');
+    }
+
+  }, this)).fail($.proxy(function(jqXHR){
+    notify.error(jqXHR.responseText, 'There was an error setting the Live state.');
+  }, this));
 }
 
 ResultsView.prototype.loadModal = function(event) {
