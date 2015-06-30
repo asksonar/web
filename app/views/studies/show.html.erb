@@ -4,6 +4,8 @@
     var scenarioParams = <%= raw @scenario.share_link_params_json %>
   </script>
 
+<% if @scenario.live? %>
+
   <div class='panel'>
     <h1><%= @scenario.created_by.full_name %> needs your feedback!</h1>
     <p>Sonar records your screen and voice to make giving feedback easy.</p>
@@ -45,5 +47,13 @@
     </div>
 
   </div>
+
+<% else %>
+
+  <div class='panel'>
+    <h2>Thanks for your enthusiasm, but this study is no longer active.</h2>
+  </div>
+
+<% end %>
 
 </section>
