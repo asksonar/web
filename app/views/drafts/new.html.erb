@@ -12,7 +12,7 @@
   <section class='main-content-header'>
     <div class='row'>
       <div
-        <% if @scenario.drafts? %>
+        <% if @scenario.can_add_steps? %>
           class='col-xs-8'
         <% else %>
           class='col-xs-12'
@@ -23,7 +23,7 @@
         </h1>
       </div>
 
-      <% if @scenario.drafts? %>
+      <% if @scenario.can_add_steps? %>
       <div class='col-xs-4'>
 
         <div class="btn-group" id='btn-template-group'>
@@ -46,7 +46,7 @@
 
     <div class='row header-sub-text'>
       <div
-        <% if @scenario.drafts? %>
+        <% if @scenario.can_add_steps? %>
           class='col-xs-8'
         <% else %>
           class='col-xs-12'
@@ -56,7 +56,7 @@
           This title is so you can tell your studies apart internally. Your respondents will never see this.
         </p>
       </div>
-      <% if @scenario.drafts? %>
+      <% if @scenario.can_add_steps? %>
       <div class='col-xs-4'>
         <p class='template-sub-text'>or just start typing below.</p>
       </div>
@@ -122,13 +122,13 @@
         </div>
       </div>
       <div class='col-xs-4 ctn-url-btns'>
-        <% if @scenario.drafts? %>
+        <% if @scenario.can_add_steps? %>
           <div class='ctn-btns pull-right'>
             <a class='btn btn-add-step btn-light-blue'>+</a>
             <a class='btn btn-remove-step btn-grey'>x</a>
           </div>
         <% end %>
-        <div <% if @scenario.drafts? %>class='ctn-url'<% end %>>
+        <div <% if @scenario.can_add_steps? %>class='ctn-url'<% end %>>
           <%= f.text_field :url, hide_label: true, placeholder: 'URL (optional)', value: '{{url}}', name: 'scenario_steps[][url]' %>
         </div>
       </div>

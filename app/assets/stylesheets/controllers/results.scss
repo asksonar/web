@@ -125,6 +125,33 @@
     }
   }
 
+  .main-content {
+    position: relative;
+  }
+
+  .panel-hero {
+    z-index: 120;
+    .input-group {
+      input, a {
+        height: 34px /* height doens't seem to line up otherwise */
+      }
+      #input-share-link {
+        cursor: text;
+      }
+    }
+  }
+
+  .panel-mask {
+    z-index: 110;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #000;
+    opacity: .5;
+  }
+
   .panel {
     position: relative;
 

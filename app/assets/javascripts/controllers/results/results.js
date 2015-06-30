@@ -26,6 +26,9 @@ $(function(){
     divMainContent: $('.main-content'),
     btnCopyShareLink: $('#btn-copy-share-link'),
     inputShareLink: $('#input-share-link'),
-    btnArchive: $('#btn-archive')
+    btnArchive: $('#btn-archive'),
+    btnHeroCopyShareLink: $('#btn-hero-copy-share-link'),
+    inputHeroShareLink: $('#input-hero-share-link')
+
   }, videoModal);
 });

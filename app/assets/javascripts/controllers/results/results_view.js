@@ -4,6 +4,8 @@ function ResultsView(config, modal) {
   this.$btnCopyShareLink = config.btnCopyShareLink;
   this.$inputShareLink = config.inputShareLink;
   this.$btnArchive = config.btnArchive;
+  this.$btnHeroCopyShareLink = config.btnHeroCopyShareLink;
+  this.$inputHeroShareLink = config.inputHeroShareLink;
 
   this.modal = modal;
 
@@ -16,6 +18,7 @@ ResultsView.prototype.init = function() {
   this.$divMainContent.on('click', '.fa-chevron-up', $.proxy(this.hidePanel, this));
   this.$btnArchive.on('click', $.proxy(this.toggleArchive, this));
   new ClipboardInput(this.$btnCopyShareLink, this.$inputShareLink);
+  new ClipboardInput(this.$btnHeroCopyShareLink, this.$inputHeroShareLink);
   this.showAllPanels();
 }
 
