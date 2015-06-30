@@ -7,6 +7,10 @@ class Scenario < ActiveRecord::Base
   belongs_to :created_by, class_name: 'Researcher', foreign_key: :created_by
   enum status: [:drafts, :live, :completed]
 
+  def can_add_steps?
+    self.drafts? or self.user_count.nil? or self.user_count == 0
+  end
+
   def self.create_draft(hash)
     Scenario.create(hash.merge({status: statuses[:drafts]}))
   end
