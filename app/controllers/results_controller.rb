@@ -26,4 +26,16 @@ class ResultsController < ApplicationController
     @scenario = Scenario.find_by_hashid(params[:id])
   end
 
+  def update
+    @results = Scenario.find_by_hashid(params[:id])
+    if params[:is_on]
+      @results.status = :completed
+    else
+      @results.status = :live
+    end
+    @results.save()
+
+    render plain: 'OK'
+  end
+
 end

@@ -149,6 +149,6 @@ VideoModal.prototype.generateHighlight = function() {
     this.video.loadMarkers();
 
   }, this)).fail($.proxy(function(jqXHR, textStatus, errorThrown){
-    notify.warn(jqXHR.responseText);
+    notify.error(jqXHR.responseText, 'There was an error saving your Highlight.');
   }, this));
 }
