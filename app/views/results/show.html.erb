@@ -42,8 +42,8 @@
         </div>
 
         <div class="btn-group pull-right">
-          <div class='btn-wrapper-tooltip' data-placement="bottom" title="Coming Soon! - Preview the study" data-toggle="tooltip">
-            <a class='btn btn-default' id='btn-preview' data-toggle="modal" data-target='#modal-preview' ><i class='fa fa-desktop'></i></a>
+          <div class='btn-wrapper-tooltip' data-placement="bottom" title="Edit the study" data-toggle="tooltip">
+            <a class='btn btn-default' id='btn-edit' href='<%= edit_draft_path %>'><i class='fa fa-edit'></i></a>
           </div>
           <div class='btn-wrapper-tooltip' data-placement="bottom" title="Copy the share link" data-toggle="tooltip">
             <a class="btn btn-default" id='btn-copy-share-link' <% if @scenario.completed? %>style='display:none'<% end %>><i class='fa fa-link'></i></a>

@@ -8,7 +8,8 @@ class DraftsController < ApplicationController
   def new
     p 'calling new'
     new_or_edit(Scenario.new({
-      scenario_steps: [ScenarioStep.new()]
+      scenario_steps: [ScenarioStep.new()],
+      status: :drafts
     }))
     render :new
   end
@@ -79,6 +80,8 @@ class DraftsController < ApplicationController
         @scenario.update_draft(scenario_params)
       elsif params[:publish]
         @scenario.update_live(scenario_params)
+      elsif params[:update]
+        @scenario.update(scenario_params)
       else
         raise "Illegal commit value of " + params[:commit]
       end
@@ -93,9 +96,12 @@ class DraftsController < ApplicationController
     if params[:publish]
       flash[:info] = "<strong>Study Published</strong> - Your study link is now ready to be shared with your users."
       redirect_to result_path(@scenario)
-    else
+    elsif params[:draft]
       flash[:info] = "<strong>Draft Saved</strong> - #{@scenario.title}"
       redirect_to drafts_path
+    elsif params[:update]
+      flash[:info] = "<strong>Study Updated</strong> - Your study link is now ready to be shared with your users."
+      redirect_to result_path(@scenario)
     end
 
     # need to update in place
