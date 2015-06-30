@@ -29,6 +29,18 @@ class Scenario < ActiveRecord::Base
     }))
   end
 
+  def set_live()
+    self.status = :live
+    self.published_at = Time.new
+    self.save()
+  end
+
+  def set_completed()
+    self.status = :completed
+    self.completed_at = Time.new
+    self.save()
+  end
+
   def self.drafts(created_by)
     Scenario
       .where(status: statuses[:drafts])

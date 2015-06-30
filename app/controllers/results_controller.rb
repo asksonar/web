@@ -28,12 +28,13 @@ class ResultsController < ApplicationController
 
   def update
     @results = Scenario.find_by_hashid(params[:id])
+
+    # we are toggling, so set it to the reverse of whatever it currently is
     if params[:is_on] == 'true'
-      @results.status = :completed
+      @results.set_completed()
     else
-      @results.status = :live
+      @results.set_live()
     end
-    @results.save()
 
     render plain: 'OK'
   end
