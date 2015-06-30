@@ -86,11 +86,23 @@ class DraftsController < ApplicationController
         raise "Illegal commit value of " + params[:commit]
       end
 
-      @scenario.scenario_steps.each do |step|
-        step.destroy
+      if params[:update]
+        # only update the text of them in order
+        scenario_steps_params.each do |new_step|
+          old_step = @scenario.scenario_steps.find_by(step_order: new_step[:step_order])
+          old_step.description = new_step[:description]
+          old_step.url = new_step[:url]
+          old_step.save()
+        end
+
+      else
+        @scenario.scenario_steps.each do |step|
+          step.destroy
+        end
+
+        @scenario.scenario_steps.create(scenario_steps_params)
       end
 
-      @scenario.scenario_steps.create(scenario_steps_params)
     end
 
     if params[:publish]
