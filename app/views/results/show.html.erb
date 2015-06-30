@@ -32,7 +32,6 @@
 
         <h2 class=''>Live</h2>
 
-
         <div id='btn-archive' class="btn-group" data-placement="bottom" data-toggle="tooltip"
           <% if @scenario.live? %>title="Close the study"<% end %>
           <% if @scenario.completed? %>title="Re-open the study"<% end %>
@@ -78,7 +77,11 @@
         <div class='col-xs-8'>
           <div>
             <p class='summary-step-description'>
-              <span class='h1'><%= scenario_step.step_order + 1 %>.</span><span><%= scenario_step.description %></span>
+              <span class='h1'><%= scenario_step.step_order + 1 %>.</span><span><%= scenario_step.description %>
+                <% if scenario_step.url %>
+                <br/><a target="_blank" href='<%=ppu_http(scenario_step.url)%>' data-placement="right" data-toggle="tooltip" title="<%=ppu_http(scenario_step.url)%>"><%=ppu_host(scenario_step.url)%></a>
+                <% end %>
+              </span>
             </p>
           </div>
           <!--
