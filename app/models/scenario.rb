@@ -2,6 +2,7 @@ class Scenario < ActiveRecord::Base
 	has_many :scenario_steps, -> { order step_order: :asc }, inverse_of: :scenario
   has_many :scenario_results, inverse_of: :scenario
   has_many :result_feelings, through: :scenario_steps
+  has_many :result_highlights, through: :scenario_steps
   belongs_to :company
   belongs_to :created_by, class_name: 'Researcher', foreign_key: :created_by
   enum status: [:drafts, :live, :completed]
@@ -97,7 +98,7 @@ class Scenario < ActiveRecord::Base
   end
 
   def highlights
-    []
+    result_highlights
   end
 
 end

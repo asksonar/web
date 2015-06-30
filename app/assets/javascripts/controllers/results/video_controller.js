@@ -91,7 +91,7 @@ VideoController.prototype.loadMarkers = function() {
 }
 
 VideoController.prototype.currentTime = function(currentSeconds) {
-  this.video.currentTime(currentSeconds);
+  return this.video.currentTime(currentSeconds);
 }
 
 VideoController.prototype.onTimeUpdate = function() {

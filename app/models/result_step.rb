@@ -11,6 +11,10 @@ class ResultStep < ActiveRecord::Base
     ResultFeeling.where(scenario_step: scenario_step, scenario_result: scenario_result)
   end
 
+  def highlights
+    ResultHighlight.where(scenario_step: scenario_step, scenario_result: scenario_result)
+  end
+
   def feelings_delighted
     feelings.where(feeling: ResultFeeling.feelings[:delighted])
   end
@@ -45,10 +49,6 @@ class ResultStep < ActiveRecord::Base
 
   def first_transcription_text
     !transcriptions.nil? && !transcriptions.first.nil? ? transcriptions.first.text : nil
-  end
-
-  def highlights
-    return []
   end
 
 end

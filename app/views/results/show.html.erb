@@ -13,7 +13,15 @@
         </div>
         <div class='highlights-container'>
           <% @scenario.highlights.each_with_index do |highlight, index| %>
-            <p><% if index == 0 %><span class='h3'>Highlights:</span><%= highlight %><% end %></p>
+            <p>
+              <% if index == 0 %><span class='h3'>Highlights:</span><% end %><!--
+           --><a class='video-link'
+                data-scenario-step-id='<%=highlight.scenario_step_id%>'
+                data-scenario-result-id='<%=highlight.scenario_result_id%>'
+                data-feeling-at-seconds='<%=highlight.offset_seconds%>'
+              ><span class='sub'><%= ppt_date(highlight.result_step.created_at) %> - [<%= highlight.result_step.email %>]</span> <%= dt_transcription(highlight.context_transcription) %> ...
+              </a>
+            </p>
           <% end %>
           <% if @scenario.highlights.count == 0 %>
             <p><span class='h3'>Highlights:</span><span class='sub'><i class='fa fa-question-circle'></i> no highlights added yet</span></p>
@@ -83,7 +91,7 @@
                   data-scenario-step-id='<%=feeling.scenario_step_id%>'
                   data-scenario-result-id='<%=feeling.scenario_result_id%>'
                   data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
-                  ><span class='sub'>[<%= feeling.seconds_pretty_print %>]</span> <%= feeling.email %></a>
+                  ><span class='sub'>[<%= ppt_seconds(feeling.feeling_at_seconds) %>]</span> <%= feeling.email %></a>
                 <% end %>"
               >
                 <h1><i class='feeling-delighted'></i><%= scenario_step.total_delighted %></h1>
@@ -97,7 +105,7 @@
                   data-scenario-step-id='<%=feeling.scenario_step_id%>'
                   data-scenario-result-id='<%=feeling.scenario_result_id%>'
                   data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
-                  ><span class='sub'>[<%= feeling.seconds_pretty_print %>]</span> <%= feeling.email %></a>
+                  ><span class='sub'>[<%= ppt_seconds(feeling.feeling_at_seconds) %>]</span> <%= feeling.email %></a>
                 <% end %>"
               >
                 <h1><i class='feeling-confused'></i><%= scenario_step.total_confused %></h1>
@@ -129,12 +137,8 @@
                 <i class='feeling-empty'></i>
                 <i class='feeling-empty'></i>
               <% end %>
-              <span class='sub'><%= result_step.created_at.strftime("%b %d") %> - [<%= result_step.email %>]</span>
-              <% if result_step.first_transcription_text.nil? %>
-                (no transcription)
-              <% else %>
-                <%= result_step.first_transcription_text %> ...
-              <% end %>
+              <span class='sub'><%= ppt_date(result_step.created_at) %> - [<%= result_step.email %>]</span>
+              <%= dt_transcription(result_step.first_transcription_text) %> ...
             </a>
           <% end %>
 

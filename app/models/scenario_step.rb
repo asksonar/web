@@ -2,6 +2,7 @@ class ScenarioStep < ActiveRecord::Base
   belongs_to :scenario
   has_many :result_steps, -> { order completed_seconds: :asc }, inverse_of: :scenario_step
   has_many :result_feelings, -> { order feeling_at_seconds: :asc }, inverse_of: :scenario_step
+  has_many :result_highlights, -> { order offset_seconds: :asc }, inverse_of: :scenario_step
   has_many :result_videos, inverse_of: :scenario_step
   #obfuscate_id spin: 10109225
 
