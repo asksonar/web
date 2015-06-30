@@ -6,17 +6,24 @@
   <% end %>
 <% end %>
 
-
 <%= bootstrap_form_for @scenario, url: @scenario.id ? draft_path(@scenario) : drafts_path, html: {id: 'create-form'} do |f| %>
   <%= f.hidden_field :id, value: @scenario.id %>
 
   <section class='main-content-header'>
     <div class='row'>
-      <div class='col-xs-8'>
+      <div
+        <% if @scenario.drafts? %>
+          class='col-xs-8'
+        <% else %>
+          class='col-xs-12'
+        <% end %>
+      >
         <h1>
           <%= f.text_field :title, hide_label: true, placeholder: 'Title your study', class: 'input-lg' %>
         </h1>
       </div>
+
+      <% if @scenario.drafts? %>
       <div class='col-xs-4'>
 
         <div class="btn-group" id='btn-template-group'>
@@ -34,17 +41,26 @@
           </ul>
         </div>
       </div>
+      <% end %>
     </div>
 
     <div class='row header-sub-text'>
-      <div class='col-xs-8'>
+      <div
+        <% if @scenario.drafts? %>
+          class='col-xs-8'
+        <% else %>
+          class='col-xs-12'
+        <% end %>
+      >
         <p class='sub'>
           This title is so you can tell your studies apart internally. Your respondents will never see this.
         </p>
       </div>
+      <% if @scenario.drafts? %>
       <div class='col-xs-4'>
         <p class='template-sub-text'>or just start typing below.</p>
       </div>
+      <% end %>
     </div>
 
   </section>
@@ -66,15 +82,31 @@
         <div id='ctn-step-list'><!-- insert new steps here --></div>
       </div>
 
-      <div class='clearfix buttons-container'>
-        <a href='<%=results_path%>' class='btn btn-grey pull-left'>Cancel</a>
+      <% if @scenario.drafts? %>
 
-        <%= f.submit 'Create study', name: 'publish', class: 'btn btn-dark-blue pull-right' %>
-        <%= f.submit 'Save as draft', name: 'draft', class: 'btn btn-light-blue pull-right' %>
-        <p class='sub pull-right'>
-          Once the study is created, you’ll be able to share the study link with potential respondents.
-        </p>
-      </div>
+        <div class='clearfix buttons-container'>
+          <a href='<%=results_path%>' class='btn btn-grey pull-left'>Cancel</a>
+
+          <%= f.submit 'Create study', name: 'publish', class: 'btn btn-dark-blue pull-right' %>
+          <%= f.submit 'Save as draft', name: 'draft', class: 'btn btn-light-blue pull-right' %>
+          <p class='sub pull-right'>
+            Once the study is created, you’ll be able to share the study link with potential respondents.
+          </p>
+        </div>
+
+      <% else %>
+
+        <div class='clearfix buttons-container'>
+          <a href='<%=result_path%>' class='btn btn-grey pull-left'>Cancel</a>
+
+          <%= f.submit 'Update study', name: 'update', class: 'btn btn-dark-blue pull-right' %>
+
+          <p class='sub pull-right'>
+            Once the study is created, you’ll be able to share the study link with potential respondents.
+          </p>
+        </div>
+
+      <% end %>
 
     </div>
   </section>
@@ -90,11 +122,13 @@
         </div>
       </div>
       <div class='col-xs-4 ctn-url-btns'>
-        <div class='ctn-btns pull-right'>
-          <a class='btn btn-add-step btn-light-blue'>+</a>
-          <a class='btn btn-remove-step btn-grey'>x</a>
-        </div>
-        <div class='ctn-url'>
+        <% if @scenario.drafts? %>
+          <div class='ctn-btns pull-right'>
+            <a class='btn btn-add-step btn-light-blue'>+</a>
+            <a class='btn btn-remove-step btn-grey'>x</a>
+          </div>
+        <% end %>
+        <div <% if @scenario.drafts? %>class='ctn-url'<% end %>>
           <%= f.text_field :url, hide_label: true, placeholder: 'URL (optional)', value: '{{url}}', name: 'scenario_steps[][url]' %>
         </div>
       </div>
