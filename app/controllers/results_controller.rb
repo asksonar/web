@@ -28,7 +28,7 @@ class ResultsController < ApplicationController
 
   def update
     @results = Scenario.find_by_hashid(params[:id])
-    if params[:is_on]
+    if params[:is_on] == 'true'
       @results.status = :completed
     else
       @results.status = :live

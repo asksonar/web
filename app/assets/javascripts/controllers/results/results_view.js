@@ -37,10 +37,14 @@ ResultsView.prototype.toggleArchive = function() {
       notify.info('<strong>Study Archived</strong> - Your share link is no longer active.');
       this.$inputShareLink.slideUp();
       this.$btnCopyShareLink.hide();
+      this.$btnArchive.attr('data-original-title', 'Re-open the study');
+      this.$btnArchive.tooltip('show');
     } else {
       notify.info('<strong>Study Active</strong> - Your share link is now active.');
       this.$inputShareLink.slideDown();
       this.$btnCopyShareLink.show();
+      this.$btnArchive.attr('data-original-title', 'Close the study');
+      this.$btnArchive.tooltip('show');
     }
 
   }, this)).fail($.proxy(function(jqXHR){
