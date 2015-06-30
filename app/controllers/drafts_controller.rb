@@ -78,9 +78,7 @@ class DraftsController < ApplicationController
       if params[:draft]
         @scenario.update_draft(scenario_params)
       elsif params[:publish]
-        @scenario.update_live(scenario_params.merge({
-          published_at: Time.new
-        }))
+        @scenario.update_live(scenario_params)
       else
         raise "Illegal commit value of " + params[:commit]
       end
