@@ -19,7 +19,7 @@ class ResultVideo < ActiveRecord::Base
 
     [
       { type: "video/mp4", src: "#{VIDEO_BASE}/#{scenario_result.hashid}/#{hashid}.mp4" },
-      { type: "video/webm", src: "#{VIDEO_BASE}/#{scenario_result.hashid}/#{hashid}.mp4" }
+      { type: "video/webm", src: "#{VIDEO_BASE}/#{scenario_result.hashid}/#{hashid}.webm" }
       #{ type: "video/ogg", src: "/videos/video_" + data.id + ".ogv" }
     ]
   end
