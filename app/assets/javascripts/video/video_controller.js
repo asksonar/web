@@ -65,29 +65,35 @@ VideoController.prototype.markers = function(arrayDelightedTimes, arrayConfusedT
 
 VideoController.prototype.loadMarkers = function() {
   this.video.markers.removeAll();
-  this.video.markers.add(this.arrayDelightedTimes.map(function(time) {
-    return {
-      time: time,
-      text: ":)",
-      class: 'background-delighted'
-    }
-  }));
+  if (this.arrayDelightedTimes) {
+    this.video.markers.add(this.arrayDelightedTimes.map(function(time) {
+      return {
+        time: time,
+        text: ":)",
+        class: 'background-delighted'
+      }
+    }));
+  }
 
-  this.video.markers.add(this.arrayConfusedTimes.map(function(time) {
-    return {
-      time: time,
-      text: ":(",
-      class: 'background-confused'
-    }
-  }));
+  if (this.arrayConfusedTimes) {
+    this.video.markers.add(this.arrayConfusedTimes.map(function(time) {
+      return {
+        time: time,
+        text: ":(",
+        class: 'background-confused'
+      }
+    }));
+  }
 
-  this.video.markers.add(this.arrayHighlightedTimes.map(function(time) {
-    return {
-      time: time,
-      text: "*",
-      class: 'background-highlighted'
-    }
-  }));
+  if (this.arrayHighlightedTimes) {
+    this.video.markers.add(this.arrayHighlightedTimes.map(function(time) {
+      return {
+        time: time,
+        text: "*",
+        class: 'background-highlighted'
+      }
+    }));
+  }
 }
 
 VideoController.prototype.currentTime = function(currentSeconds) {
