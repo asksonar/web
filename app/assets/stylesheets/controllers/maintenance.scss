@@ -1,0 +1,104 @@
+#home-maintenance {
+
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  text-align: center;
+
+  h1 {
+    font-size: 36px;
+    margin-top: 20px;
+  }
+
+  h2 {
+    font-size: 30px;
+    margin-top: 10px;
+  }
+
+  #custom-bottom-section {
+    height: 150px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #14647b;
+  }
+
+  #custom-bottom-light-waves {
+    background: image-url('waves_sm_ltblue.png') repeat-x;
+    display: block;
+    position: absolute;
+    height: 100px;
+    width: 110%;
+    left: -10%;
+    top: -100px;
+    z-index: 96;
+  }
+
+  #custom-bottom-dark-waves {
+    background: image-url('waves_dkblue.png') repeat-x;
+    display: block;
+    position: absolute;
+    height: 100px;
+    width: 100%;
+    left: 0;
+    top: -100px;
+    margin-top: 1px;
+    z-index: 99;
+  }
+
+  #custom-bottom-sun {
+    display: block;
+    position: absolute;
+    background: image-url('footer_sun@2x.png') no-repeat left bottom;
+    background-size: 100%;
+    height: 400px;
+    width: 400px;
+    max-width: 80%;
+    left: 15%;
+    z-index: 95;
+    top: -465px;
+  }
+
+  #custom-bottom-boat {
+    display: block;
+    position: absolute;
+    background: image-url('footer_boat@2x.png') no-repeat left top;
+    background-size: 100%;
+    height: 171px;
+    width: 132px;
+    z-index: 98;
+    left: 15%;
+    margin-left: 90px;
+    top: -215px;
+  }
+
+  #custom-bottom-beeps {
+    display: block;
+    position: absolute;
+    background: image-url('bfooter_beeps@2x.png') no-repeat left top;
+    background-size: 100%;
+    height: 150px;
+    width: 200px;
+    max-width: 80%;
+    left: 15%;
+    margin-left: 40px;
+    top: -50px;
+    z-index: 99;
+  }
+
+  #custom-bottom-rocks {
+    display: block;
+    position: absolute;
+    background: image-url('rocks2@2x.png') no-repeat left bottom;
+    background-size: 100%;
+    height: 120px;
+    width: 400px;
+    max-width: 70%;
+    left: 15%;
+    margin-left: 50px;
+    z-index: 98;
+    bottom: 0px;
+  }
+
+}
