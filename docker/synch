@@ -1,6 +1,6 @@
 #!/bin/sh
 
-fswatch -0 ~/sonar | while read -d "" EVENT
+fswatch -0 ~/sonar/web | while read -d "" EVENT
   do
     #DIR=$(dirname "${EVENT}")
     #VAR_SRC_DIR=${DIR//*\/sonar\/web//var/src}

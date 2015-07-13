@@ -27,10 +27,6 @@ VideoController.prototype.init = function() {
     markers: []
   });
 
-  this.video.markers.add([{time:5,text:'Im new'}]);
-
-  window.player = this.video;
-
   this.video.on('timeupdate', $.proxy(this.onTimeUpdate, this));
   // videojs-markers will load the markers from options {} above upon loadedmetadata
   // so we will then load our own markers after that point
