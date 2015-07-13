@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sonar |
+    <% if content_for? :title %>
+      <%= content_for :title %>
+    <% else %>
+      Understanding Users
+    <% end %>
+  </title>
+  <%= favicon_link_tag 'sonarFavicon.ico' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+  <%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery? %>
+  <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/ifnadmakmckbjjhbnjcjpfeeljhhmgib">
+</head>
+<body>
+  <section id="main-wrapper" class='logged-out'>
+
+    <%= render partial: 'nav/plain_header' %>
+
+    <section id="<%= controller_name + '-' + action_name %>" class="main-content-wrapper">
+      <%= yield %>
+    </section>
+  </section>
+
+  <%= render partial: 'utility/flash' %>
+
+</body>
+</html>
