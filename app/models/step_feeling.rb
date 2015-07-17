@@ -3,7 +3,7 @@ class StepFeeling < ActiveRecord::Base
   belongs_to :result_step
 
   def email
-    scenario_result.email
+    result_step.email
   end
 
 end

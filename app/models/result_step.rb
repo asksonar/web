@@ -26,7 +26,7 @@ class ResultStep < ActiveRecord::Base
   end
 
   def feelings_delighted
-    feelings.where(feeling: ResultFeeling.feelings[:delighted])
+    feelings.where(feeling: StepFeeling.feelings[:delighted])
   end
 
   def total_delighted
@@ -38,7 +38,7 @@ class ResultStep < ActiveRecord::Base
   end
 
   def feelings_confused
-    feelings.where(feeling: ResultFeeling.feelings[:confused])
+    feelings.where(feeling: StepFeeling.feelings[:confused])
   end
 
   def total_confused
