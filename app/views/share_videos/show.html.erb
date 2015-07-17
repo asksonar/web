@@ -9,9 +9,9 @@
 <section class="main-content">
 
   <script type='text/javascript'>
-    var transcriptionArray = <%= raw @video.transcription_array.to_json %>;
+    var transcriptionArray = <%= raw @result_step.transcription_array.to_json %>;
     var srcArray = <%= raw @video.src_array.to_json %>;
-    var shareLink = '<%= @video.share_link %>';
+    var shareLink = '<%= @result_step.share_link %>';
   </script>
 
   <div class='panel'>

@@ -2,7 +2,8 @@ Rails.application.routes.draw do
 
   get '/ping', to: 'ping#index'
 
-  # get '(*all)', to: 'home#maintenance'
+  #get '(*all)', to: 'home#maintenance'
+  get '/studies/(*all)', to: 'home#maintenance'
 
   get '/videos.json', to: 'videos_json#show'
   get '/create',      to: 'drafts#new' # so it doesn't highlight the left nav

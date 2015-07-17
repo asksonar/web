@@ -1,8 +1,5 @@
 class Panelist < ActiveRecord::Base
-  has_many :scenario_results, inverse_of: :scenario
-  has_many :result_videos, through: :scenario_results
-  has_many :result_steps, through: :scenario_results
-  has_many :result_feelings, through: :scenario_results
+  has_many :scenario_results
 
   def is_user?
     true

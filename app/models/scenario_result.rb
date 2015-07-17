@@ -1,6 +1,7 @@
 class ScenarioResult < ActiveRecord::Base
   belongs_to :scenario
   belongs_to :panelist
+  has_many :result_steps, inverse_of: :scenario_result
 
   enum status: [:pending, :inprogress, :completed, :aborted]
 
