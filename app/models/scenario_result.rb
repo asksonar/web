@@ -7,6 +7,8 @@ class ScenarioResult < ActiveRecord::Base
 
   after_initialize :default_values, unless: :persisted?
 
+  HASHIDS_SALT = 'NCH&Yc!QWk58'
+
   def default_values
     self.status = self.status || 0
   end
