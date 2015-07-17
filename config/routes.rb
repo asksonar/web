@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
 
+  get '/ping', to: 'ping#index'
+
+  # get '(*all)', to: 'home#maintenance'
 
   get '/videos.json', to: 'videos_json#show'
-  get '/create',      to: 'drafts#new'
+  get '/create',      to: 'drafts#new' # so it doesn't highlight the left nav
   get '/my_results',  to: 'results#my_index'
-  get '/create',      to: 'create#index'
   get '/share/videos/:id', to: 'share_videos#show'
-
-  get '/accounts/sign_up', to: redirect('http://www.asksonar.com/sign-up')
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -24,7 +24,10 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  resources :studies
+  resources :highlights, only: [:create]
+  resources :studies do
+    resource :help, only: [:show]
+  end
   resources :drafts
   resources :results
   resources :my_results, controller: 'results'

@@ -10,4 +10,9 @@ class ResultFeeling < ActiveRecord::Base
   def self.where_scenario_step_confused(scenario_step)
     ResultFeeling.where(scenario_step: scenario_step, feeling: feelings[:confused])
   end
+
+  def email
+    scenario_result.email
+  end
+
 end

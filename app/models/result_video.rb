@@ -1,28 +1,45 @@
 class ResultVideo < ActiveRecord::Base
-  VIDEO_BASE = 'http://video.asksonar.com/output'
+  VIDEO_BASE = Rails.configuration.properties['video_base_url']
 
   belongs_to :scenario_step
   belongs_to :scenario_result
-  has_many :video_transcriptions, inverse_of: :result_video
+  has_many :video_transcriptions, -> { order offset: :asc }, inverse_of: :result_video
   delegate :panelist, :to => :scenario_result, :allow_nil => true
 
   def share_link
-    '/share/videos/' + hashid
+    Rails.configuration.properties['web_base_url'] +  '/share/videos/' + hashid
   end
 
   def transcription_array
-    VideoTranscription.select(:offset, :text)
-      .where(result_video: self)
-      .order(offset: :asc)
+    video_transcriptions.select(:offset, :text)
   end
 
   def src_array
+    # return [ { type: "video/mp4", src: "http://vjs.zencdn.net/v/oceans.mp4" } ]
+
     [
       { type: "video/mp4", src: "#{VIDEO_BASE}/#{scenario_result.hashid}/#{hashid}.mp4" },
-      { type: "video/webm", src: "#{VIDEO_BASE}/#{scenario_result.hashid}/#{hashid}.mp4" }
+      { type: "video/webm", src: "#{VIDEO_BASE}/#{scenario_result.hashid}/#{hashid}.webm" }
       #{ type: "video/ogg", src: "/videos/video_" + data.id + ".ogv" }
     ]
   end
 
+  def transcription_start
+    video_transcriptions.first.text
+  end
+
+  def transcription_at(seconds)
+    current_transcription = nil
+
+    video_transcriptions.select(:offset, :text).each do |transcription|
+      if transcription.offset <= seconds
+        current_transcription = transcription['text']
+      else
+        break
+      end
+    end
+
+    return current_transcription
+  end
 
 end

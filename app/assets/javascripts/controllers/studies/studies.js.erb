@@ -1,0 +1,23 @@
+$(function(){
+
+  var APP_ID = '<%= Rails.configuration.properties['chrome_app_id'] %>';
+
+  if (!$('#studies-show').length) {
+    return;
+  }
+
+  window.view = new StudiesView({
+    'ctnInstallChrome': $('#ctn-install-chrome'),
+    'ctnInstallExtension': $('#ctn-install-extension'),
+    'ctnStudy': $('#ctn-study'),
+    'ctnStartFeedback': $('#ctn-start-feedback'),
+    'ctnRestartFeedback': $('#ctn-restart-feedback')
+  });
+  window.controller = new StudiesController(view, APP_ID, {
+    'btnInstallExtension': $('#btn-install-extension'),
+    'btnStartFeedback': $('#btn-start-feedback'),
+    'form': $('form')
+  });
+
+  controller.checkForExtension();
+});

@@ -1,67 +1,48 @@
 function StudiesView(config) {
   this.$ctnInstallChrome = config.ctnInstallChrome;
   this.$ctnInstallExtension = config.ctnInstallExtension;
+  this.$ctnStudy = config.ctnStudy;
   this.$ctnStartFeedback = config.ctnStartFeedback;
+  this.$ctnRestartFeedback = config.ctnRestartFeedback;
 
   this.init();
 }
 
 StudiesView.prototype.init = function() {
-  this.enableInstallChrome();
-  this.disableInstallExtension();
-  this.disableStartFeedback();
 }
 
-StudiesView.prototype.enableStep = function(element) {
-  element.addClass('step-enabled');
-  element.removeClass('step-disabled');
-  element.removeClass('step-completed');
+StudiesView.prototype.showInstallChrome = function() {
+  this.$ctnInstallChrome.show();
+  this.$ctnInstallExtension.hide();
+  this.$ctnStudy.hide();
 }
 
-StudiesView.prototype.disableStep = function(element) {
-  element.removeClass('step-enabled');
-  element.addClass('step-disabled');
-  element.removeClass('step-completed');
+StudiesView.prototype.showInstallExtension = function() {
+  this.$ctnInstallChrome.hide();
+  this.$ctnInstallExtension.show();
+  this.$ctnStudy.hide();
 }
 
-StudiesView.prototype.completeStep = function(element) {
-  element.removeClass('step-enabled');
-  element.removeClass('step-disabled');
-  element.addClass('step-completed');
+StudiesView.prototype.showStudy = function(animate) {
+  this.$ctnInstallChrome.hide();
+
+  this.$ctnStartFeedback.show();
+  this.$ctnRestartFeedback.hide();
+
+  if (animate === true) {
+    this.$ctnInstallExtension.slideUp();
+    this.$ctnStudy.slideDown();
+  } else {
+    this.$ctnInstallExtension.hide();
+    this.$ctnStudy.show();
+  }
 }
 
-StudiesView.prototype.enableInstallChrome = function() {
-  this.enableStep(this.$ctnInstallChrome);
+StudiesView.prototype.startStudy = function() {
+  this.$ctnInstallChrome.hide();
+  this.$ctnInstallExtension.hide();
+  this.$ctnStudy.show();
+  this.$ctnStartFeedback.hide();
+  this.$ctnRestartFeedback.hide().fadeIn();
 }
 
-StudiesView.prototype.disableInstallChrome = function() {
-  this.disableStep(this.$ctnInstallChrome);
-}
-
-StudiesView.prototype.completeInstallChrome = function() {
-  this.completeStep(this.$ctnInstallChrome);
-}
-
-StudiesView.prototype.enableInstallExtension = function() {
-  this.enableStep(this.$ctnInstallExtension);
-}
-
-StudiesView.prototype.disableInstallExtension = function() {
-  this.disableStep(this.$ctnInstallExtension);
-}
-
-StudiesView.prototype.completeInstallExtension = function() {
-  this.completeStep(this.$ctnInstallExtension);
-}
-
-StudiesView.prototype.enableStartFeedback = function() {
-  this.enableStep(this.$ctnStartFeedback);
-}
-
-StudiesView.prototype.disableStartFeedback = function() {
-  this.disableStep(this.$ctnStartFeedback);
-}
-
-StudiesView.prototype.completeStartFeedback = function() {
-  this.completeStep(this.$ctnStartFeedback);
-}

@@ -4,78 +4,40 @@
 
 #studies-show {
   .panel {
-    max-width: 400px;
+    max-width: 500px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  .fa-check-circle {
-    color: #1CA5C9;
-    font-size: 32px;
+  h1 {
+    margin-bottom: 10px;
   }
 
-  .step {
-    .el-enabled,
-    .el-disabled,
-    .el-completed {
-      display: none;
+  .ctn-btn-text {
+    margin-top: 15px;
+
+    p {
+      line-height: 31px;
+    }
+    .btn {
+      height: 31px;
     }
   }
 
-  p.el-completed {
-    line-height: 32px; /* hack for one-line items to look better */
+  #ctn-start-feedback {
+    margin-top: 15px;
   }
 
-  .step-enabled .el-enabled {
-    display: block;
+  #ctn-restart-feedback {
+    margin-top: 20px;
   }
 
-  .step-disabled .el-disabled {
-    display: block;
-  }
-
-  .step-completed .el-completed {
-    display: block;
-  }
-
-  .ctn-setup {
-    .step {
-      position: relative;
-      margin-top: 20px;
-
-      .btn {
-        width: 100px;
-      }
-
-      .btn, i {
-        position: absolute;
-        right: 0;
-        top: 0;
-      }
-      p {
-        margin-right: 115px;
-      }
-    }
-  }
-
-  .ctn-study {
-
-    p.sub {
-      margin-top: 10px;
-    }
-
-    .form-group {
-      margin-bottom: 0px;
-    }
-
-    form {
-      margin-top: 20px;
-    }
-
-    .ctn-start-feedback {
-      margin-top: 20px;
-    }
-
+  #ctn-install-chrome,
+  #ctn-install-extension,
+  #ctn-study,
+  #ctn-start-feedback,
+  #ctn-restart-feedback {
+    display: none;
   }
 
 }

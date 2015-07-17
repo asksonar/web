@@ -23,11 +23,20 @@ class ResultsController < ApplicationController
   end
 
   def show
-    @summary = Scenario.find_by_hashid(params[:id])
+    @scenario = Scenario.find_by_hashid(params[:id])
   end
 
   def update
+    @results = Scenario.find_by_hashid(params[:id])
 
+    # we are toggling, so set it to the reverse of whatever it currently is
+    if params[:is_on] == 'true'
+      @results.set_completed()
+    else
+      @results.set_live()
+    end
+
+    render plain: 'OK'
   end
 
 end

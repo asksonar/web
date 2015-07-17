@@ -1,63 +1,59 @@
-<section class='main-content-header'>
-  <h1>Thanks for participating!</h1>
-</section>
 <section class="main-content">
 
   <script type='text/javascript'>
     var scenarioParams = <%= raw @scenario.share_link_params_json %>
   </script>
 
-  <div class='panel ctn-setup'>
-    <p>
-      Thanks for your participation!  Unlike typical surveys, Sonar shares your screen and audio with the asker so you can stay focused on giving genuine, honest feedback.  So don’t be shy, speak your mind!
-    </p>
+<% if @scenario.live? %>
 
-    <div class='step step-enabled' id='ctn-install-chrome'>
-      <p class='el-enabled el-disabled'>
-        You’ll need to use Chrome to give your feedback. If you already have Chrome, just open this page there.
-      </p>
-      <p class='el-completed'>
-        You're on Chrome!
-      </p>
-      <a id='btn-install-chrome' class='btn btn-dark-blue pull-right el-enabled' href='https://www.google.com/chrome/browser/desktop/index.html' target='_blank'>Get Chrome</a>
-      <a class='btn btn-grey el-disabled'>Get Chrome</a>
-      <i class='fa fa-check-circle el-completed'></i>
+  <div class='panel'>
+    <h1><%= @scenario.created_by.full_name %> needs your feedback!</h1>
+    <p>Sonar records your screen and voice to make giving feedback easy.</p>
+
+    <div id='ctn-install-chrome' class='clearfix ctn-btn-text'>
+      <a id='btn-install-chrome' href='https://www.google.com/chrome/browser/desktop/index.html' class='pull-right btn btn-orange'>Get Chrome</a>
+      <p class='sub'>Get Chrome to record your screen and voice.</p>
     </div>
 
-    <div class='step step-enabled' id='ctn-install-extension'>
-      <p class='el-enabled el-disabled'>
-        You’ll need to use our Chrome extension to give your feedback. Don't worry, this only needs to be activated once.
-      </p>
-      <p class='el-completed'>
-        You've got our extension!
-      </p>
-      <a id='btn-install-extension' class='btn btn-dark-blue pull-right el-enabled'>Get Extension</a>
-      <a class='btn btn-grey pull-right el-disabled'>Get Extension</a>
-      <i class='fa fa-check-circle pull-right el-completed'></i>
+    <div id='ctn-install-extension' class='clearfix ctn-btn-text'>
+      <a id='btn-install-extension' class='pull-right btn btn-orange'>Install Plugin</a>
+      <p class='sub'>Install the Chrome plugin to record your screen and voice.</p>
     </div>
   </div>
-  <div class='panel ctn-study step step-enabled'>
+
+  <div id='ctn-study' class='panel'>
+    <h1>How can I help?</h1>
     <p>
-      We’re interested in your movie-watching habits. This could be a longer description.
+      <%= @scenario.description %>
     </p>
-    <p class='sub'>
-      This study has 3 steps, and it takes 3 minutes on average.
-    </p>
-    <%= bootstrap_form_for :study, layout: :horizontal, html: { onsubmit: "return false;" } do |f| %>
-      <%= f.hidden_field :scenario_hashid, value: @scenario.hashid %>
-      <div class='el-enabled el-disabled'>
-        <%= f.text_field :email %>
-        <%= f.form_group do %>
-          <p class='sub'>Or leave it blank to take the study anonymously</p>
-        <% end %>
+
+    <div id='ctn-start-feedback'>
+
+      <%= bootstrap_form_for :study, layout: :horizontal, html: { onsubmit: "return false;" } do |f| %>
+        <%= f.hidden_field :scenario_hashid, value: @scenario.hashid %>
+        <div class='el-enabled el-disabled'>
+          <%= f.text_field :email, label: 'Enter your email to get started:', label_col: 'col-sm-6', control_col: 'col-sm-6' %>
+        </div>
+      <% end %>
+
+      <div class='clearfix ctn-btn-text'>
+        <a class='btn btn-orange pull-right' id='btn-start-feedback'>Start giving feedback</a>
+        <p class='sub'>This study has <%= @scenario.step_count %> steps.</p>
       </div>
-      <div class='clearfix ctn-start-feedback'>
-        <a class='btn btn-dark-blue pull-right el-enabled' id='btn-start-feedback'>Start giving feedback</a>
-        <a class='btn btn-grey pull-right el-disabled'>Start giving feedback</a>
-        <i class='fa fa-check-circle el-completed pull-right'></i>
-        <p class='el-completed'>Your study has started!</p>
-      </div>
-    <% end %>
+
+    </div>
+    <div id='ctn-restart-feedback'>
+      <p class='sub'>Your study has begun! You can refresh this page if you want to retake the study.</p>
+    </div>
+
   </div>
+
+<% else %>
+
+  <div class='panel'>
+    <h2>Thanks for your enthusiasm, but this study is no longer active.</h2>
+  </div>
+
+<% end %>
 
 </section>

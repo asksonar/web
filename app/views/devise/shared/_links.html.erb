@@ -5,7 +5,8 @@
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
   <div class='link-sign-up clearfix'>
     <p class='pull-left'>Don’t have an account yet?</p>
-    <%= link_to "Sign up", new_registration_path(resource_name), class: 'pull-right btn btn-grey' %>
+    <%# link_to "Sign up", new_registration_path(resource_name), class: 'pull-right btn btn-grey' %>
+    <%= link_to "Sign up", Rails.configuration.properties['sign_up_url'], class: 'pull-right btn btn-grey' %>
   </div>
 <% end -%>
 

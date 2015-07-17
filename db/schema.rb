@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150423224410) do
+ActiveRecord::Schema.define(version: 20150709231128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,15 @@ ActiveRecord::Schema.define(version: 20150423224410) do
     t.integer  "scenario_result_id"
   end
 
+  create_table "result_highlights", force: :cascade do |t|
+    t.integer  "scenario_step_id"
+    t.integer  "scenario_result_id"
+    t.float    "offset_seconds"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.text     "context_transcription"
+  end
+
   create_table "result_steps", force: :cascade do |t|
     t.integer  "scenario_step_id"
     t.datetime "started_at"
@@ -73,6 +82,9 @@ ActiveRecord::Schema.define(version: 20150423224410) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "scenario_result_id"
+    t.string   "uuid"
+    t.float    "offset_seconds"
+    t.float    "length_seconds"
   end
 
   create_table "scenario_results", force: :cascade do |t|
@@ -125,7 +137,7 @@ ActiveRecord::Schema.define(version: 20150423224410) do
 
   create_table "video_transcriptions", force: :cascade do |t|
     t.integer  "result_video_id"
-    t.integer  "offset"
+    t.float    "offset"
     t.string   "text"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false

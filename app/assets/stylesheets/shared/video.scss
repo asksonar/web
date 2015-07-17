@@ -7,19 +7,13 @@
       line-height: 34px;
     }
     #input-url-time {
-      width: 75px;
+      width: 80px;
       display: inline-block;
     }
-    .ctn-video-btns {
-      float: right;
-      width: 75px;
-      .btn {
-        float: right;
-      }
-      #btn-highlight-video-link {
-        margin-left: 1px
-      }
-    }
+  }
+
+  #btn-copy-video-link {
+    margin-left: 1px;
   }
 
   #input-url-base {
@@ -28,18 +22,24 @@
     cursor: text;
   }
 
+  h1 {
+    margin-bottom: 10px;
+  }
+
   #videoText {
     overflow-y: auto;
+    max-height: 360px;
 
     .activeVideoTextLink {
       font-weight: bold;
     }
   }
 
-}
+  .vjs-default-skin .vjs-play-progress {
+    // the original #66a8cc is bluish and hides our green
+    background: #CCCCCC url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzO9IAAAAP0lEQVQIHWWMAQoAIAgDR/QJ/Ub//04+w7ZICBwcOg5FZi5iBB82AGzixEglJrd4TVK5XUJpskSTEvpdFzX9AB2pGziSQcvAAAAAAElFTkSuQmCC) -50% 0 repeat
+  }
 
-.modal .video-container #videoText {
-  max-height: 400px;
 }
 
 .panel .video-container #btn-highlight-video-link {

@@ -2,16 +2,24 @@ class Scenario < ActiveRecord::Base
 	has_many :scenario_steps, -> { order step_order: :asc }, inverse_of: :scenario
   has_many :scenario_results, inverse_of: :scenario
   has_many :result_feelings, through: :scenario_steps
+  has_many :result_highlights, through: :scenario_steps
   belongs_to :company
   belongs_to :created_by, class_name: 'Researcher', foreign_key: :created_by
   enum status: [:drafts, :live, :completed]
+
+  def can_add_steps?
+    self.drafts? or self.user_count.nil? or self.user_count == 0
+  end
 
   def self.create_draft(hash)
     Scenario.create(hash.merge({status: statuses[:drafts]}))
   end
 
   def self.create_live(hash)
-    Scenario.create(hash.merge({status: statuses[:live]}))
+    Scenario.create(hash.merge({
+      status: statuses[:live],
+      published_at: Time.new
+    }))
   end
 
   def update_draft(hash)
@@ -19,7 +27,22 @@ class Scenario < ActiveRecord::Base
   end
 
   def update_live(hash)
-    update(hash.merge({status: Scenario.statuses[:live]}))
+    update(hash.merge({
+      status: Scenario.statuses[:live],
+      published_at: Time.new
+    }))
+  end
+
+  def set_live()
+    self.status = :live
+    self.published_at = Time.new
+    self.save()
+  end
+
+  def set_completed()
+    self.status = :completed
+    self.completed_at = Time.new
+    self.save()
   end
 
   def self.drafts(created_by)
@@ -34,6 +57,10 @@ class Scenario < ActiveRecord::Base
       .where(status: [statuses[:live], statuses[:completed]])
       .where(extra_where)
       .order(published_at: :desc)
+  end
+
+  def step_count
+    scenario_steps.count
   end
 
   def user_count
@@ -74,7 +101,7 @@ class Scenario < ActiveRecord::Base
   end
 
   def share_link
-    '/studies/' + hashid
+    Rails.configuration.properties['web_base_url'] + '/studies/' + hashid
   end
 
   def share_link_params_json
@@ -92,12 +119,8 @@ class Scenario < ActiveRecord::Base
     }.to_json
   end
 
-  def summary_steps
-    scenario_steps.map { |step| SummaryStep.new(step) }
-  end
-
   def highlights
-    []
+    result_highlights
   end
 
 end
