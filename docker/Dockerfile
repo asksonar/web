@@ -47,6 +47,12 @@ ADD my_startup /etc/my_startup
 # enable nginx
 RUN rm -f /etc/service/nginx/down
 
+# forward request and error logs to docker log collector
+RUN ln -sf /dev/stdout /var/log/nginx/access.log
+RUN ln -sf /dev/stderr /var/log/nginx/error.log
+RUN ln -sf /dev/stdout /var/log/unicorn/stdout.log
+RUN ln -sf /dev/stderr /var/log/unicorn/stderr.log
+
 WORKDIR /home/app/webapp
 
 # Clean up APT when done.
