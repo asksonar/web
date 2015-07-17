@@ -1,18 +1,18 @@
 class ScenarioStep < ActiveRecord::Base
   belongs_to :scenario
   has_many :result_steps, -> { order completed_seconds: :asc }, inverse_of: :scenario_step
-  has_many :result_feelings, -> { order feeling_at_seconds: :asc }, inverse_of: :scenario_step
-  has_many :result_highlights, -> { order offset_seconds: :asc }, through: :result_steps
-  has_many :step_videos, -> { order offset_seconds: :asc }, through: :result_steps
+  has_many :step_feelings, through: :result_steps
+  has_many :step_highlights, through: :result_steps
+  has_many :step_videos, through: :result_steps
 
   MAX_TIME_BUCKET=180
 
   def where_feeling_delighted
-    result_feelings.where(feeling: ResultFeeling.feelings[:delighted])
+    step_feelings.where(feeling: ResultFeeling.feelings[:delighted])
   end
 
   def where_feeling_confused
-    result_feelings.where(feeling: ResultFeeling.feelings[:confused])
+    step_feelings.where(feeling: ResultFeeling.feelings[:confused])
   end
 
   def completed_users

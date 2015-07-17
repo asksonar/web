@@ -4,8 +4,8 @@ class Scenario < ActiveRecord::Base
   has_many :scenario_steps, -> { order step_order: :asc }, inverse_of: :scenario
   has_many :scenario_results, inverse_of: :scenario
   has_many :result_steps, through: :scenario_results
-  has_many :result_feelings, through: :scenario_steps
-  has_many :result_highlights, through: :result_steps
+  has_many :step_feelings, through: :result_steps
+  has_many :step_highlights, through: :result_steps
   enum status: [:drafts, :live, :completed]
 
   def can_add_steps?
@@ -73,11 +73,11 @@ class Scenario < ActiveRecord::Base
   end
 
   def where_feeling_delighted
-    result_feelings.where(feeling: ResultFeeling.feelings[:delighted])
+    step_feelings.where(feeling: ResultFeeling.feelings[:delighted])
   end
 
   def where_feeling_confused
-    result_feelings.where(feeling: ResultFeeling.feelings[:confused])
+    step_feelings.where(feeling: ResultFeeling.feelings[:confused])
   end
 
   def total_delighted
