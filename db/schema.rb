@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150709231128) do
+ActiveRecord::Schema.define(version: 20150717121049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,25 +48,6 @@ ActiveRecord::Schema.define(version: 20150709231128) do
   add_index "researchers", ["email"], name: "index_researchers_on_email", unique: true, using: :btree
   add_index "researchers", ["reset_password_token"], name: "index_researchers_on_reset_password_token", unique: true, using: :btree
 
-  create_table "result_feelings", force: :cascade do |t|
-    t.integer  "scenario_step_id"
-    t.integer  "feeling"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.float    "feeling_at_seconds"
-    t.text     "context_transcription"
-    t.integer  "scenario_result_id"
-  end
-
-  create_table "result_highlights", force: :cascade do |t|
-    t.integer  "scenario_step_id"
-    t.integer  "scenario_result_id"
-    t.float    "offset_seconds"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.text     "context_transcription"
-  end
-
   create_table "result_steps", force: :cascade do |t|
     t.integer  "scenario_step_id"
     t.datetime "started_at"
@@ -75,16 +56,6 @@ ActiveRecord::Schema.define(version: 20150709231128) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "scenario_result_id"
-  end
-
-  create_table "result_videos", force: :cascade do |t|
-    t.integer  "scenario_step_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "scenario_result_id"
-    t.string   "uuid"
-    t.float    "offset_seconds"
-    t.float    "length_seconds"
   end
 
   create_table "scenario_results", force: :cascade do |t|
@@ -116,6 +87,47 @@ ActiveRecord::Schema.define(version: 20150709231128) do
     t.datetime "completed_at"
   end
 
+  create_table "step_feelings", force: :cascade do |t|
+    t.integer  "scenario_step_id"
+    t.integer  "feeling"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.float    "feeling_at_seconds"
+    t.text     "context_transcription"
+    t.integer  "scenario_result_id"
+    t.integer  "result_step_id"
+  end
+
+  create_table "step_highlights", force: :cascade do |t|
+    t.integer  "scenario_step_id"
+    t.integer  "scenario_result_id"
+    t.float    "offset_seconds"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.text     "context_transcription"
+    t.integer  "result_step_id"
+  end
+
+  create_table "step_transcriptions", force: :cascade do |t|
+    t.integer  "result_video_id"
+    t.float    "offset"
+    t.string   "text"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "result_step_id"
+  end
+
+  create_table "step_videos", force: :cascade do |t|
+    t.integer  "scenario_step_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "scenario_result_id"
+    t.string   "uuid"
+    t.float    "offset_seconds"
+    t.float    "length_seconds"
+    t.integer  "result_step_id"
+  end
+
   create_table "template_steps", force: :cascade do |t|
     t.integer  "template_id"
     t.text     "step_description"
@@ -133,14 +145,6 @@ ActiveRecord::Schema.define(version: 20150709231128) do
     t.integer  "category"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
-  end
-
-  create_table "video_transcriptions", force: :cascade do |t|
-    t.integer  "result_video_id"
-    t.float    "offset"
-    t.string   "text"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
   end
 
 end
