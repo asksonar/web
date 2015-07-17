@@ -2,7 +2,6 @@ class HighlightsController < ApplicationController
 
   def create
     @result_step = ResultStep.find_by(result_step_params)
-    @result_video = ResultVideo.find_by(result_step_params)
     StepHighlight.create(
       result_step: @result_step,
       offset_seconds: highlight_params[:offset_seconds]

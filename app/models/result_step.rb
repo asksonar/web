@@ -1,12 +1,14 @@
 class ResultStep < ActiveRecord::Base
   belongs_to :scenario_step
-  belongs_to :panelist
   belongs_to :scenario_result
+  delegate :panelist, :to => :scenario_result, :allow_nil => true
   has_many :step_highlights, inverse_of: :result_step
   has_many :step_transcriptions, -> { order offset: :asc }, inverse_of: :result_step
+  has_many :step_videos, inverse_of: :result_step
 
   def video
-    ResultVideo.find_by(scenario_step: scenario_step, scenario_result: scenario_result)
+    # TODO: handle case where we have multiple videos for a result_step
+    step_videos.first
   end
 
   def feelings
@@ -15,6 +17,10 @@ class ResultStep < ActiveRecord::Base
 
   def highlights
     step_highlights
+  end
+
+  def share_link
+    Rails.configuration.properties['web_base_url'] +  '/share/videos/' + hashid
   end
 
   def feelings_delighted

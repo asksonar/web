@@ -1,13 +1,8 @@
-class ResultVideo < ActiveRecord::Base
+class StepVideo < ActiveRecord::Base
   VIDEO_BASE = Rails.configuration.properties['video_base_url']
 
-  belongs_to :scenario_step
-  belongs_to :scenario_result
-  delegate :panelist, :to => :scenario_result, :allow_nil => true
-
-  def share_link
-    Rails.configuration.properties['web_base_url'] +  '/share/videos/' + hashid
-  end
+  belongs_to :result_step
+  delegate :panelist, :to => :result_step, :allow_nil => true
 
   def src_array
     # return [ { type: "video/mp4", src: "http://vjs.zencdn.net/v/oceans.mp4" } ]

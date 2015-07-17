@@ -3,7 +3,7 @@ class ScenarioStep < ActiveRecord::Base
   has_many :result_steps, -> { order completed_seconds: :asc }, inverse_of: :scenario_step
   has_many :result_feelings, -> { order feeling_at_seconds: :asc }, inverse_of: :scenario_step
   has_many :result_highlights, -> { order offset_seconds: :asc }, through: :result_steps
-  has_many :result_videos, inverse_of: :scenario_step
+  has_many :step_videos, -> { order offset_seconds: :asc }, through: :result_steps
 
   MAX_TIME_BUCKET=180
 

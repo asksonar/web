@@ -1,9 +1,9 @@
 class ShareVideosController < ApplicationController
   def show
-    @video = ResultVideo.find_by_hashid(params[:id])
-    @result_step = @video.result_step
-    @scenario_step = @video.scenario_step
+    @result_step = ResultStep.find_by_hashid(params[:id])
+    @video = @result_step.video
+    @scenario_step = @result_step.scenario_step
     @scenario = @scenario_step.scenario
-    @user = @video.panelist
+    @user = @result_step.panelist
   end
 end
