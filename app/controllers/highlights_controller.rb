@@ -4,7 +4,7 @@ class HighlightsController < ApplicationController
     @result_step = ResultStep.find_by(result_step_params)
     StepHighlight.create(
       result_step: @result_step,
-      offset_seconds: highlight_params[:offset_seconds]
+      offset_seconds: highlight_params[:offset_seconds],
       context_transcription: @result_step.transcription_at(highlight_params[:offset_seconds].to_f)
     )
 
