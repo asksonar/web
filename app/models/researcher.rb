@@ -7,6 +7,8 @@ class Researcher < ActiveRecord::Base
   before_create :create_company
   validates_presence_of :full_name
 
+  HASHIDS_SALT = 'M7k&59nN$XjZ'
+
   def is_researcher?
     true
   end

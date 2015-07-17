@@ -5,7 +5,8 @@ class ScenarioStep < ActiveRecord::Base
   has_many :step_highlights, through: :result_steps
   has_many :step_videos, through: :result_steps
 
-  MAX_TIME_BUCKET=180
+  HASHIDS_SALT = 'c@9F*bVEKWpT'
+  MAX_TIME_BUCKET = 180
 
   def where_feeling_delighted
     step_feelings.where(feeling: StepFeeling.feelings[:delighted])

@@ -8,6 +8,8 @@ class Scenario < ActiveRecord::Base
   has_many :step_highlights, through: :result_steps
   enum status: [:drafts, :live, :completed]
 
+  HASHIDS_SALT = '8UTnU7cJm*bP'
+
   def can_add_steps?
     self.drafts? or self.user_count.nil? or self.user_count == 0
   end

@@ -1,6 +1,7 @@
 class StepVideo < ActiveRecord::Base
   belongs_to :result_step
 
+  HASHIDS_SALT = 'Akn94V3&%9Tu'
   VIDEO_BASE = Rails.configuration.properties['video_base_url']
 
   def src_array
