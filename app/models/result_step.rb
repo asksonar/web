@@ -2,6 +2,7 @@ class ResultStep < ActiveRecord::Base
   belongs_to :scenario_step
   belongs_to :panelist
   belongs_to :scenario_result
+  has_many :step_highlights, inverse_of: :result_step
 
   def video
     ResultVideo.find_by(scenario_step: scenario_step, scenario_result: scenario_result)
@@ -12,7 +13,7 @@ class ResultStep < ActiveRecord::Base
   end
 
   def highlights
-    ResultHighlight.where(scenario_step: scenario_step, scenario_result: scenario_result)
+    step_highlights
   end
 
   def feelings_delighted
