@@ -6,7 +6,7 @@ class HighlightsController < ApplicationController
     StepHighlight.create(
       result_step: @result_step,
       offset_seconds: highlight_params[:offset_seconds]
-      context_transcription: @result_video.transcription_at(highlight_params[:offset_seconds].to_f)
+      context_transcription: @result_step.transcription_at(highlight_params[:offset_seconds].to_f)
     )
 
     json = {}

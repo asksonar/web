@@ -3,6 +3,7 @@ class ResultStep < ActiveRecord::Base
   belongs_to :panelist
   belongs_to :scenario_result
   has_many :step_highlights, inverse_of: :result_step
+  has_many :step_transcriptions, -> { order offset: :asc }, inverse_of: :result_step
 
   def video
     ResultVideo.find_by(scenario_step: scenario_step, scenario_result: scenario_result)
@@ -45,11 +46,29 @@ class ResultStep < ActiveRecord::Base
   end
 
   def transcriptions
-    video ? video.video_transcriptions : nil
+    step_transcriptions
+  end
+
+  def transcription_array
+    transcriptions.select(:offset, :text)
   end
 
   def first_transcription_text
     !transcriptions.nil? && !transcriptions.first.nil? ? transcriptions.first.text : nil
+  end
+
+  def transcription_at(seconds)
+    current_transcription = nil
+
+    transcriptions.select(:offset, :text).each do |transcription|
+      if transcription.offset <= seconds
+        current_transcription = transcription['text']
+      else
+        break
+      end
+    end
+
+    return current_transcription
   end
 
 end

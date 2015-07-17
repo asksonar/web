@@ -16,7 +16,7 @@ class VideosJsonController < ApplicationController
     json['step_description'] = @video.scenario_step.description
     json['step_order'] = @video.scenario_step.step_order
     json['share_link'] = @video.share_link
-    json['transcription_array'] = @video.transcription_array
+    json['transcription_array'] = @result_step.transcription_array
     json['src_array'] = @video.src_array
     json['delighted_array'] = @result_step.feelings_delighted.map { |feeling| feeling.feeling_at_seconds }
     json['confused_array'] = @result_step.feelings_confused.map { |feeling| feeling.feeling_at_seconds }

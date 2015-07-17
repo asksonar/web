@@ -1,4 +1,4 @@
-class VideoTranscription < ActiveRecord::Base
-  belongs_to :result_video
+class StepTranscription < ActiveRecord::Base
+  belongs_to :result_step
 
 end
