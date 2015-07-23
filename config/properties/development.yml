@@ -1,5 +1,6 @@
 web_base_url: http://dockerhost:3000
-video_base_url: http://dockerhost:5000/output
+#video_base_url: http://videos.dev.asksonar.com
+video_base_url: http://vjs.zencdn.net/v/oceans.mp4?
 sign_up_url: http://www.asksonar.com/sign-up
 
 chrome_app_id: plkkekmhfkddjdfgphbbnklkopldedfb
