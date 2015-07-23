@@ -18,6 +18,9 @@ class StudiesStepController < ApplicationController
       completed_seconds: completed_seconds
     )
 
+    # check for any videos that were inserted previously
+    result_step.link_videos
+
     step['feelings'].each do |feeling|
 
       feeling_type = feeling['type']

@@ -81,4 +81,11 @@ class ResultStep < ActiveRecord::Base
     return current_transcription
   end
 
+  def link_videos
+    StepVideo.where(
+      scenario_result: scenario_result,
+      scenario_step: scenario_step
+    ).update_all(result_step_id: id)
+  end
+
 end

@@ -1,5 +1,7 @@
 class StepVideo < ActiveRecord::Base
   belongs_to :result_step
+  belongs_to :scenario_result
+  belongs_to :scenario_step
 
   HASHIDS_SALT = 'Akn94V3&%9Tu'
   VIDEO_BASE = Rails.configuration.properties['video_base_url']
