@@ -22,9 +22,18 @@ StudiesController.prototype.hasChrome = function() {
   return window.chrome && chrome.webstore && chrome.webstore.install;
 }
 
-StudiesController.prototype.checkForExtension = function() {
+StudiesController.prototype.checkForChrome = function() {
   if (!this.hasChrome()) {
     this.view.showInstallChrome();
+    return false;
+  } else {
+    this.view.showInstallExtension();
+    return true;
+  }
+}
+
+StudiesController.prototype.checkForExtension = function() {
+  if (!this.checkForChrome()) {
     return;
   }
 
@@ -66,7 +75,8 @@ StudiesController.prototype.startFeedback = function() {
 
   var ajaxDone = function(response) {
     var launchAppParams = {};
-    launchAppParams[response.hashid] = scenarioParams;
+    launchAppParams['scenario'] = scenarioParams;
+    launchAppParams['scenarioResultHashId'] = response.hashid;
     launchAppParams['screen'] = {
       availLeft: screen.availLeft,
       availTop: screen.availTop,
