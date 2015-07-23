@@ -1,5 +1,6 @@
 require 'yaml'
 require 'byebug'
+require 'require_reloader'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -46,7 +47,7 @@ Rails.application.configure do
   config_path = File.join(Rails.root,'config/properties/development.yml')
   puts 'config_path: ' + config_path
   config_contents = File.read(config_path)
-  puts 'config_contents: ' + config_contents
+  # puts 'config_contents: ' + config_contents
   config.properties = YAML.load(config_contents)
   puts config.properties
 
@@ -58,4 +59,8 @@ Rails.application.configure do
   config.logger = Logger.new(STDOUT)
   config.logger.level = Logger.const_get(ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'DEBUG')
   config.log_level    = (ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].downcase : 'debug').to_sym
+
+  # https://github.com/teohm/require_reloader
+  # auto-reload gems that we reference via path:
+  RequireReloader.watch_local_gems!
 end

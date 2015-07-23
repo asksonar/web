@@ -1,5 +1,7 @@
 ruby "2.2.0"
 
+gem 'workers_video', path: 'workers_video'
+
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -49,6 +51,12 @@ gem 'thin'
 # Use Unicorn as the primary app server
 gem 'unicorn'
 
+gem 'aws-sdk'
+
+gem 'resque', '~> 1'
+
+gem 'resque-web', require: 'resque_web'
+
 source 'https://rails-assets.org' do
   # bootstrap with sass variables
   gem 'rails-assets-bootstrap-sass'
@@ -84,6 +92,8 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'require_reloader'
 
   # be more clever about reloading code to speed up refreshes
   #gem 'rails-dev-tweaks', '~> 1.1'
