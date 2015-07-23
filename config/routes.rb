@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/ping', to: 'ping#index'
 
   #get '(*all)', to: 'home#maintenance'
-  get '/studies/(*all)', to: 'home#maintenance'
+  #get '/studies/(*all)', to: 'home#maintenance'
 
   get '/videos.json', to: 'videos_json#show'
   get '/create',      to: 'drafts#new' # so it doesn't highlight the left nav
@@ -27,13 +27,17 @@ Rails.application.routes.draw do
 
   resources :highlights, only: [:create]
   resources :studies do
-    resource :help, only: [:show]
+    resources :step, only: [:create], controller: 'studies_step'
+    resources :video, only: [:create, :update], controller: 'studies_video'
   end
   resources :drafts
   resources :results
   resources :my_results, controller: 'results'
 
   devise_for :researchers, path: 'accounts', path_names: { sign_in: 'login', sign_out: 'logout' }
+
+  ResqueWeb::Engine.eager_load!
+  mount ResqueWeb::Engine => "/resque"
 
   # Example resource route with options:
   #   resources :products do

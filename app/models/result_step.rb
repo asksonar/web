@@ -6,6 +6,7 @@ class ResultStep < ActiveRecord::Base
   has_many :step_highlights, -> { order offset_seconds: :asc }, inverse_of: :result_step
   has_many :step_videos, -> { order offset_seconds: :asc }, inverse_of: :result_step
   has_many :step_transcriptions, -> { order offset: :asc }, inverse_of: :result_step
+  enum status: [:pending, :uploaded]
 
   HASHIDS_SALT = '4$g&QNrACfVp'
 
