@@ -14,6 +14,12 @@ docker run -d --name db \
 # TODO: hide error message if it's already running => check docker ps?
 docker start db
 
+docker run -d --name redis \
+  -p 6379:6379 \
+  redis:2.8 \
+  redis-server --appendonly yes
+docker start redis
+
 # build any new changes to the image
 cd ~/sonar/web/docker
 docker build -t local/web .
@@ -23,11 +29,13 @@ docker rm -f web
 # start the new image
 docker run -d --name web \
   -v ~/sonar/web:/var/src \
-  -p 3000:80 -p 3443:443 -p 3001:3001 \
+  -p 3000:80 -p 3443:443 -p 3001:3001 -p 80:80 \
   --link db:db \
+  --link redis:redis \
   -e "DATABASE_URL=postgres://postgres@db:5432/postgres" \
   -e "SECRET_KEY_BASE=bd75f41c7a4684b94f4ef0cafceb0966293a5b43c2dcf3bed76bbe085c0ec0ea58392ecfdd72f341ef3ea558d8fe3b86bd61bb15955302c675acc8b5fa073823" \
+  -e "RAILS_RESQUE_REDIS=redis://redis:6379/0" \
   local/web \
-  /sbin/my_init -- sh -c '/etc/my_startup/start_bundle.sh && /etc/my_startup/start_rsync.sh && /etc/my_startup/start_unicorn.sh'
+#  /sbin/my_init -- sh -c '/etc/my_startup/start_bundle.sh && /etc/my_startup/start_rsync.sh && /etc/my_startup/start_unicorn.sh'
 
-~/sonar/web/docker/synch
+#~/sonar/web/docker/synch
