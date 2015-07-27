@@ -40,12 +40,23 @@ StudiesController.prototype.checkForExtension = function() {
   var responseCallback = function(response) {
     if (response === true) {
       this.view.showStudy();
+      this.checkForExtensionUpdate();
     } else {
       this.view.showInstallExtension();
     }
   };
 
   chrome.runtime.sendMessage(this.appId, 'isInstalledApp?', $.proxy(responseCallback, this));
+}
+
+StudiesController.prototype.checkForExtensionUpdate = function() {
+
+  var responseCallback = function(response) {
+    if (response !== true) {
+      notify.warn('The extension needs to be updated.  Please refresh the page and try again.');
+    }
+  }
+  chrome.runtime.sendMessage(this.appId, 'update!', $.proxy(responseCallback, this));
 }
 
 StudiesController.prototype.installExtension = function() {
