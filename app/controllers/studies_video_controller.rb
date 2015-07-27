@@ -35,7 +35,7 @@ class StudiesVideoController < ApplicationController
   def update
     scenario_result = ScenarioResult.find_by_hashid(params[:study_id])
     uuid = params[:id]
-    WorkersVideo.process_uploaded_s3_video_async(uuid)
+    Resque.enqueue(ProcessUploadedS3VideoWorker, uuid)
     render plain: 'OK'
   end
 
