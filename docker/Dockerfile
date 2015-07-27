@@ -17,6 +17,9 @@ CMD ["/sbin/my_init"]
 RUN apt-get update
 RUN apt-get -y install rsync
 
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 # write our own nginx.conf
 ADD nginx/nginx.conf /etc/nginx/nginx.conf
 # add environment variables to nginx
@@ -53,7 +56,8 @@ RUN ln -sf /dev/stderr /var/log/nginx/error.log
 RUN ln -sf /dev/stdout /var/log/unicorn/stdout.log
 RUN ln -sf /dev/stderr /var/log/unicorn/stderr.log
 
-WORKDIR /home/app/webapp
+# for thin to use
+RUN mkdir -p /tmp/pids
+RUN mkdir -p /tmp/sockets
 
-# Clean up APT when done.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+WORKDIR /home/app/webapp

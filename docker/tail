@@ -1,2 +1,3 @@
 #!/bin/sh
-docker exec web tail -f /var/log/unicorn/stdout.log
+#docker exec web tail -f /var/log/unicorn/stdout.log
+docker logs -f web
