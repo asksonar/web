@@ -28,7 +28,7 @@ module Cero
     # load fonts that aren't just in the font folders
     config.assets.precompile << /\.(?:svg|eot|woff|woff2|ttf)$/
 
-    # log to stdout as preferred by unicorn (which we do use) and heroku (which we used to use)
+    # log to stdout to dump onto docker logs
     config.logger = Logger.new(STDOUT)
     config.logger.level = Logger.const_get(ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'DEBUG')
     config.log_level    = (ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].downcase : 'debug').to_sym
