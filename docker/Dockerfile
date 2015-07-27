@@ -47,6 +47,8 @@ RUN mkdir -p /etc/my_init.d
 # exit 0 if you want to just run it and then shut it down
 ADD my_startup /etc/my_startup
 
+RUN mkdir -p /etc/my_init.d
+
 # enable nginx
 RUN rm -f /etc/service/nginx/down
 
