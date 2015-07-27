@@ -55,11 +55,6 @@ Rails.application.configure do
   #Byebug.wait_connection = true
   #Byebug.start_server('localhost', 9876)
 
-  # log to stdout as preferred by unicorn (which we do use) and heroku (which we used to use)
-  config.logger = Logger.new(STDOUT)
-  config.logger.level = Logger.const_get(ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'DEBUG')
-  config.log_level    = (ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].downcase : 'debug').to_sym
-
   # https://github.com/teohm/require_reloader
   # auto-reload gems that we reference via path:
   RequireReloader.watch_local_gems!

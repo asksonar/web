@@ -97,9 +97,4 @@ Rails.application.configure do
   # puts 'config_contents: ' + config_contents
   config.properties = YAML.load(config_contents)
   puts config.properties
-
-  # log to stdout as preferred by unicorn (which we do use) and heroku (which we used to use)
-  config.logger = Logger.new(STDOUT)
-  config.logger.level = Logger.const_get(ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'DEBUG')
-  config.log_level    = (ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].downcase : 'debug').to_sym
 end
