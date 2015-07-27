@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721204517) do
+ActiveRecord::Schema.define(version: 20150727084103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,10 +53,13 @@ ActiveRecord::Schema.define(version: 20150721204517) do
     t.datetime "started_at"
     t.datetime "completed_at"
     t.float    "completed_seconds"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "scenario_result_id"
     t.integer  "status"
+    t.text     "first_transcription"
+    t.integer  "total_delighted"
+    t.integer  "total_confused"
   end
 
   create_table "scenario_results", force: :cascade do |t|
@@ -111,7 +114,7 @@ ActiveRecord::Schema.define(version: 20150721204517) do
 
   create_table "step_transcriptions", force: :cascade do |t|
     t.integer  "result_video_id"
-    t.float    "offset"
+    t.float    "offset_seconds"
     t.string   "text"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
