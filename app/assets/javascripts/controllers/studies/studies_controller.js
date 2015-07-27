@@ -22,21 +22,41 @@ StudiesController.prototype.hasChrome = function() {
   return window.chrome && chrome.webstore && chrome.webstore.install;
 }
 
-StudiesController.prototype.checkForExtension = function() {
+StudiesController.prototype.checkForChrome = function() {
   if (!this.hasChrome()) {
     this.view.showInstallChrome();
+    return false;
+  } else {
+    this.view.showInstallExtension();
+    return true;
+  }
+}
+
+StudiesController.prototype.checkForExtension = function() {
+  if (!this.checkForChrome()) {
     return;
   }
 
   var responseCallback = function(response) {
     if (response === true) {
       this.view.showStudy();
+      this.checkForExtensionUpdate();
     } else {
       this.view.showInstallExtension();
     }
   };
 
   chrome.runtime.sendMessage(this.appId, 'isInstalledApp?', $.proxy(responseCallback, this));
+}
+
+StudiesController.prototype.checkForExtensionUpdate = function() {
+
+  var responseCallback = function(response) {
+    if (response !== true) {
+      notify.warn('The extension needs to be updated.  Please refresh the page and try again.');
+    }
+  }
+  chrome.runtime.sendMessage(this.appId, 'update!', $.proxy(responseCallback, this));
 }
 
 StudiesController.prototype.installExtension = function() {
@@ -66,7 +86,8 @@ StudiesController.prototype.startFeedback = function() {
 
   var ajaxDone = function(response) {
     var launchAppParams = {};
-    launchAppParams[response.hashid] = scenarioParams;
+    launchAppParams['scenario'] = scenarioParams;
+    launchAppParams['scenarioResultHashId'] = response.hashid;
     launchAppParams['screen'] = {
       availLeft: screen.availLeft,
       availTop: screen.availTop,

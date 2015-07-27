@@ -57,11 +57,10 @@ ResultsView.prototype.toggleArchive = function() {
 
 ResultsView.prototype.loadModal = function(event) {
   var thisEl = $(event.currentTarget);
-  var scenarioStepId = thisEl.attr('data-scenario-step-id');
-  var scenarioResultId = thisEl.attr('data-scenario-result-id');
+  var resultStepHashId = thisEl.attr('data-result-step-hashid');
   var timeSeconds = parseFloat(thisEl.attr('data-feeling-at-seconds') || 0) - 5;
 
-  this.modal.load(scenarioStepId, scenarioResultId, timeSeconds);
+  this.modal.load(resultStepHashId, timeSeconds);
 }
 
 ResultsView.prototype.showPanel = function(event) {

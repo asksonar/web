@@ -94,12 +94,7 @@ Rails.application.configure do
   config_path = File.join(Rails.root,'config/properties/production.yml')
   puts 'config_path: ' + config_path
   config_contents = File.read(config_path)
-  puts 'config_contents: ' + config_contents
+  # puts 'config_contents: ' + config_contents
   config.properties = YAML.load(config_contents)
   puts config.properties
-
-  # log to stdout as preferred by unicorn (which we do use) and heroku (which we used to use)
-  config.logger = Logger.new(STDOUT)
-  config.logger.level = Logger.const_get(ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].upcase : 'DEBUG')
-  config.log_level    = (ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].downcase : 'debug').to_sym
 end

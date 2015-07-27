@@ -79,7 +79,7 @@ class ScenarioStep < ActiveRecord::Base
   end
 
   def result_steps_newest
-    ResultStep.where(scenario_step: self).order(created_at: :desc)
+    result_steps.sort_by(&:created_at).reverse!
   end
 
 end

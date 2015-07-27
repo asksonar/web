@@ -5,7 +5,8 @@ class ResultStep < ActiveRecord::Base
   has_many :step_feelings, -> { order feeling_at_seconds: :asc }, inverse_of: :result_step
   has_many :step_highlights, -> { order offset_seconds: :asc }, inverse_of: :result_step
   has_many :step_videos, -> { order offset_seconds: :asc }, inverse_of: :result_step
-  has_many :step_transcriptions, -> { order offset: :asc }, inverse_of: :result_step
+  has_many :step_transcriptions, -> { order offset_seconds: :asc }, inverse_of: :result_step
+  enum status: [:pending, :uploaded]
 
   HASHIDS_SALT = '4$g&QNrACfVp'
 
@@ -30,20 +31,12 @@ class ResultStep < ActiveRecord::Base
     feelings.where(feeling: StepFeeling.feelings[:delighted])
   end
 
-  def total_delighted
-    feelings_delighted.count
-  end
-
   def has_delighted?
     total_delighted > 0
   end
 
   def feelings_confused
     feelings.where(feeling: StepFeeling.feelings[:confused])
-  end
-
-  def total_confused
-    feelings_confused.count
   end
 
   def has_confused?
@@ -59,7 +52,7 @@ class ResultStep < ActiveRecord::Base
   end
 
   def transcription_array
-    transcriptions.select(:offset, :text)
+    transcriptions.select(:offset_seconds, :text)
   end
 
   def first_transcription_text
@@ -69,8 +62,8 @@ class ResultStep < ActiveRecord::Base
   def transcription_at(seconds)
     current_transcription = nil
 
-    transcriptions.select(:offset, :text).each do |transcription|
-      if transcription.offset <= seconds
+    transcriptions.select(:offset_seconds, :text).each do |transcription|
+      if transcription.offset_seconds <= seconds
         current_transcription = transcription['text']
       else
         break
@@ -78,6 +71,13 @@ class ResultStep < ActiveRecord::Base
     end
 
     return current_transcription
+  end
+
+  def link_videos
+    StepVideo.where(
+      scenario_result: scenario_result,
+      scenario_step: scenario_step
+    ).update_all(result_step_id: id)
   end
 
 end

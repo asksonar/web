@@ -25,20 +25,17 @@ VideoModal.prototype.init = function() {
   new ClipboardInput(this.$btnCopyVideoLink, this.$inputUrlBase);
 }
 
-VideoModal.prototype.load = function(scenarioStepId, scenarioResultId, timeSeconds) {
+VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {
 
   $.ajax({
     url:"/videos.json",
     data: {
-      scenario_step_id: scenarioStepId,
-      scenario_result_id: scenarioResultId,
+      result_step_hashid: resultStepHashId
     },
     dataType: 'json'
   }).done($.proxy(function(data){
-    if (this.videoId != data.id) {
-      this.scenarioStepId = scenarioStepId;
-      this.scenarioResultId = scenarioResultId;
-      this.videoId = data.id;
+    if (this.resultStepHashId != data.result_step_hashid) {
+      this.resultStepHashId = data.result_step_hashid;
 
       this.video.markers(data.delighted_array, data.confused_array, data.highlighted_array);
       this.video.src(data.src_array);
@@ -62,7 +59,7 @@ VideoModal.prototype.buildTranscript = function(transcriptArray) {
   var videoTranscript = "";
   var time, mins, secs, text;
   for(var i = 0; i  < transcriptArray.length; i++) {
-    time = transcriptArray[i].offset
+    time = transcriptArray[i].offset_seconds;
     text = transcriptArray[i].text.trim();
 
     mins = Math.floor(time / 60);
@@ -135,8 +132,7 @@ VideoModal.prototype.generateHighlight = function() {
     type: "POST",
     url: "/highlights",
     data: {
-      scenario_step_id: this.scenarioStepId,
-      scenario_result_id: this.scenarioResultId,
+      result_step_hashid: this.resultStepHashId,
       offset_seconds: offsetSeconds,
       authenticity_token: AUTH_TOKEN
     },
@@ -147,6 +143,8 @@ VideoModal.prototype.generateHighlight = function() {
     this.video.markers(data.delighted_array, data.confused_array, data.highlighted_array);
     // normally triggered by calling this.video.src
     this.video.loadMarkers();
+
+    notify.info('Your highlight has been added.');
 
   }, this)).fail($.proxy(function(jqXHR, textStatus, errorThrown){
     notify.error(jqXHR.responseText, 'There was an error saving your Highlight.');

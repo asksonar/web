@@ -16,8 +16,7 @@
             <p>
               <% if index == 0 %><span class='h3'>Highlights:</span><% end %><!--
            --><a class='video-link'
-                data-scenario-step-id='<%=highlight.scenario_step_id%>'
-                data-scenario-result-id='<%=highlight.scenario_result_id%>'
+                data-result-step-hashid='<%=highlight.result_step.hashid%>'
                 data-feeling-at-seconds='<%=highlight.offset_seconds%>'
               ><span class='sub'><%= ppt_date(highlight.result_step.created_at) %> - [<%= highlight.result_step.email %>]</span> <%= dt_transcription(highlight.context_transcription) %> ...
               </a>
@@ -124,8 +123,7 @@
               <a class='moments-popover' tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-html="true"
                 data-content="<% scenario_step.delighted_feelings.each do |feeling| %>
                   <a class='video-link'
-                  data-scenario-step-id='<%=feeling.scenario_step_id%>'
-                  data-scenario-result-id='<%=feeling.scenario_result_id%>'
+                  data-result-step-hashid='<%=feeling.result_step.hashid%>'
                   data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
                   ><span class='sub'>[<%= ppt_seconds(feeling.feeling_at_seconds) %>]</span> <%= feeling.email %></a>
                 <% end %>"
@@ -138,8 +136,7 @@
               <a class='moments-popover' tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-html="true"
                 data-content="<% scenario_step.confused_feelings.each do |feeling| %>
                   <a class='video-link'
-                  data-scenario-step-id='<%=feeling.scenario_step_id%>'
-                  data-scenario-result-id='<%=feeling.scenario_result_id%>'
+                  data-result-step-hashid='<%=feeling.result_step.hashid%>'
                   data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
                   ><span class='sub'>[<%= ppt_seconds(feeling.feeling_at_seconds) %>]</span> <%= feeling.email %></a>
                 <% end %>"
@@ -157,8 +154,7 @@
 
           <% scenario_step.result_steps_newest.each do |result_step| %>
             <a class='video-link'
-              data-scenario-step-id='<%=result_step.scenario_step_id%>'
-              data-scenario-result-id='<%=result_step.scenario_result_id%>'
+              data-result-step-hashid='<%=result_step.hashid%>'
             >
               <% if result_step.has_confused? and result_step.has_delighted? %>
                 <i class='feeling-confused'></i>
@@ -174,7 +170,7 @@
                 <i class='feeling-empty'></i>
               <% end %>
               <span class='sub'><%= ppt_date(result_step.created_at) %> - [<%= result_step.email %>]</span>
-              <%= dt_transcription(result_step.first_transcription_text) %> ...
+              <%= dt_transcription(result_step.first_transcription) %> ...
             </a>
           <% end %>
 
