@@ -1,7 +1,5 @@
 ruby "2.2.0"
 
-gem 'workers_video', path: 'workers_video'
-
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -48,13 +46,8 @@ gem 'hashids'
 gem 'devise'
 # better server than webrick
 gem 'thin'
-# Use Unicorn as the primary app server
-gem 'unicorn'
-
-gem 'aws-sdk'
-
+# needs to declared here as well as gemspec for resque-web to work
 gem 'resque', '~> 1'
-
 gem 'resque-web', require: 'resque_web'
 
 source 'https://rails-assets.org' do
