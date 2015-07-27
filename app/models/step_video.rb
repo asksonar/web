@@ -7,8 +7,6 @@ class StepVideo < ActiveRecord::Base
   VIDEO_BASE = Rails.configuration.properties['video_base_url']
 
   def src_array
-    # return [ { type: "video/mp4", src: "http://vjs.zencdn.net/v/oceans.mp4" } ]
-
     [
       { type: "video/mp4", src: "#{VIDEO_BASE}/#{hashid}/video.mp4" },
       { type: "video/webm", src: "#{VIDEO_BASE}/#{hashid}/video.webm" }
