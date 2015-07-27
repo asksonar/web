@@ -16,8 +16,7 @@
             <p>
               <% if index == 0 %><span class='h3'>Highlights:</span><% end %><!--
            --><a class='video-link'
-                data-scenario-step-id='<%=highlight.scenario_step_id%>'
-                data-scenario-result-id='<%=highlight.scenario_result_id%>'
+                data-result-step-hashid='<%=highlight.result_step.hashid%>'
                 data-feeling-at-seconds='<%=highlight.offset_seconds%>'
               ><span class='sub'><%= ppt_date(highlight.result_step.created_at) %> - [<%= highlight.result_step.email %>]</span> <%= dt_transcription(highlight.context_transcription) %> ...
               </a>

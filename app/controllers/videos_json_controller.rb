@@ -13,7 +13,7 @@ class VideosJsonController < ApplicationController
     end
 
     json = {}
-    json['hashid'] = @result_step.hashid
+    json['result_step_hashid'] = @result_step.hashid
     json['src_array'] = @video.src_array
     json['share_link'] = @result_step.share_link
     json['user_email'] = @result_step.panelist.email

@@ -34,8 +34,8 @@ VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {
     },
     dataType: 'json'
   }).done($.proxy(function(data){
-    if (this.hashid != data.hashid) {
-      this.hashid = data.hashid;
+    if (this.resultStepHashId != data.result_step_hashid) {
+      this.resultStepHashId = data.result_step_hashid;
 
       this.video.markers(data.delighted_array, data.confused_array, data.highlighted_array);
       this.video.src(data.src_array);
@@ -132,8 +132,7 @@ VideoModal.prototype.generateHighlight = function() {
     type: "POST",
     url: "/highlights",
     data: {
-      scenario_step_id: this.scenarioStepId,
-      scenario_result_id: this.scenarioResultId,
+      result_step_hashid: this.resultStepHashId,
       offset_seconds: offsetSeconds,
       authenticity_token: AUTH_TOKEN
     },
@@ -144,6 +143,8 @@ VideoModal.prototype.generateHighlight = function() {
     this.video.markers(data.delighted_array, data.confused_array, data.highlighted_array);
     // normally triggered by calling this.video.src
     this.video.loadMarkers();
+
+    notify.info('Your highlight has been added.');
 
   }, this)).fail($.proxy(function(jqXHR, textStatus, errorThrown){
     notify.error(jqXHR.responseText, 'There was an error saving your Highlight.');

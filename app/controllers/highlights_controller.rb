@@ -1,11 +1,11 @@
 class HighlightsController < ApplicationController
 
   def create
-    @result_step = ResultStep.find_by(result_step_params)
+    @result_step = ResultStep.find_by_hashid(params[:result_step_hashid])
     StepHighlight.create(
       result_step: @result_step,
-      offset_seconds: highlight_params[:offset_seconds],
-      context_transcription: @result_step.transcription_at(highlight_params[:offset_seconds].to_f)
+      offset_seconds: params[:offset_seconds],
+      context_transcription: @result_step.transcription_at(params[:offset_seconds].to_f)
     )
 
     json = {}
@@ -14,14 +14,5 @@ class HighlightsController < ApplicationController
     json['highlighted_array'] = @result_step.highlights.map { |highlight| highlight.offset_seconds }
     render json: json
   end
-
-  private
-    def highlight_params
-      params.permit(:offset_seconds)
-    end
-
-    def result_step_params
-      params.permit(:scenario_step_id, :scenario_result_id)
-    end
 
 end
