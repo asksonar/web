@@ -59,7 +59,7 @@ VideoModal.prototype.buildTranscript = function(transcriptArray) {
   var videoTranscript = "";
   var time, mins, secs, text;
   for(var i = 0; i  < transcriptArray.length; i++) {
-    time = transcriptArray[i].offset
+    time = transcriptArray[i].offset_seconds;
     text = transcriptArray[i].text.trim();
 
     mins = Math.floor(time / 60);
