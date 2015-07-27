@@ -25,20 +25,17 @@ VideoModal.prototype.init = function() {
   new ClipboardInput(this.$btnCopyVideoLink, this.$inputUrlBase);
 }
 
-VideoModal.prototype.load = function(scenarioStepId, scenarioResultId, timeSeconds) {
+VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {
 
   $.ajax({
     url:"/videos.json",
     data: {
-      scenario_step_id: scenarioStepId,
-      scenario_result_id: scenarioResultId,
+      result_step_hashid: resultStepHashId
     },
     dataType: 'json'
   }).done($.proxy(function(data){
-    if (this.videoId != data.id) {
-      this.scenarioStepId = scenarioStepId;
-      this.scenarioResultId = scenarioResultId;
-      this.videoId = data.id;
+    if (this.hashid != data.hashid) {
+      this.hashid = data.hashid;
 
       this.video.markers(data.delighted_array, data.confused_array, data.highlighted_array);
       this.video.src(data.src_array);

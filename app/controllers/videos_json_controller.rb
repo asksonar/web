@@ -1,8 +1,9 @@
 class VideosJsonController < ApplicationController
   def show
-    @result_step = ResultStep.find_by(video_params)
+    @result_step = ResultStep.find_by_hashid(params[:result_step_hashid])
     if @result_step.nil?
       render status: 500, plain: "<strong>Error Loading Video</strong> - The video could not be found."
+      return
     end
 
     @video = @result_step.video
@@ -11,7 +12,8 @@ class VideosJsonController < ApplicationController
       return
     end
 
-    json = @video.as_json
+    json = {}
+    json['hashid'] = @result_step.hashid
     json['src_array'] = @video.src_array
     json['share_link'] = @result_step.share_link
     json['user_email'] = @result_step.panelist.email
@@ -24,8 +26,4 @@ class VideosJsonController < ApplicationController
     render json: json
   end
 
-  private
-    def video_params
-      params.permit(:scenario_step_id, :scenario_result_id)
-    end
 end
