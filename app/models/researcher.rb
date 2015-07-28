@@ -11,10 +11,6 @@ class Researcher < ActiveRecord::Base
 
   HASHIDS_SALT = 'M7k&59nN$XjZ'
 
-  def is_researcher?
-    true
-  end
-
   private
     def create_company
       self.company = Company.create();
