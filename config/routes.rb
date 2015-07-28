@@ -36,8 +36,15 @@ Rails.application.routes.draw do
 
   devise_for :researchers, path: 'accounts', path_names: { sign_in: 'login', sign_out: 'logout' }
 
+  resque_web_constraint = lambda do |request|
+    current_user = request.env['warden'].user
+    current_user.present? && current_user.respond_to?(:super_admin?) && current_user.super_admin?
+  end
+
   ResqueWeb::Engine.eager_load!
-  mount ResqueWeb::Engine => "/resque"
+  constraints resque_web_constraint do
+    mount ResqueWeb::Engine => "/resque"
+  end
 
   # Example resource route with options:
   #   resources :products do
