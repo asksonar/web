@@ -89,5 +89,6 @@
 #walkthrough-arrow {
   position: absolute;
   display: none;
-  z-index: 1042;
+  z-index: 1051; // one larger than modal popup
+  overflow: visible;
 }

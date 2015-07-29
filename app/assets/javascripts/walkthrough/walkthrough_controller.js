@@ -44,15 +44,15 @@ WalkthroughController.prototype.show = function() {
 }
 
 WalkthroughController.prototype.showStart = function() {
-  var overlay = this.overlay.showCreate();
-  if (!overlay) {
+  var target = this.overlay.showCreate();
+  if (!target) {
     return;
   }
 
   var popup = this.view.showStart();
   this.arrow.draw(
-    popup.offset().left + 15, popup.offset().top + popup.outerHeight() / 2,
-    overlay.offset().left + overlay.outerWidth(), overlay.offset().top + overlay.outerHeight() / 2,
+    popup.offset().left + 10, popup.offset().top + popup.outerHeight() / 2,
+    target.offset().left + target.outerWidth() + 30, target.offset().top + target.outerHeight() / 2,
     'horizontal'
   );
   this.arrow.show();
@@ -62,41 +62,80 @@ WalkthroughController.prototype.showStart = function() {
 }
 
 WalkthroughController.prototype.showTemplate = function() {
-  if (!this.overlay.showTemplate()) {
+  var target = this.overlay.showTemplate();
+  if (!target) {
     return;
   }
 
-  this.view.showTemplate();
+  var popup = this.view.showTemplate();
+  this.arrow.draw(
+    popup.offset().left + popup.outerWidth() - 10, popup.offset().top + popup.outerHeight() / 2,
+    target.offset().left - 30, target.offset().top + target.outerHeight() / 2,
+    'horizontal'
+  );
+  this.arrow.show();
 
-  this.$btnTemplate.on('shown.bs.dropdown', $.proxy(this.showDropdown,this));
+  this.$btnTemplate.on('shown.bs.dropdown', $.proxy(this.showDropdown, this, popup));
   this.$btnTemplate.find('.dropdown-menu li').addClass('disabled');
   this.$btnTemplate.find('.dropdown-menu').prepend("<li><a href='?template=sample&walkthrough=create'>Sample study</a></li>");
 }
 
-WalkthroughController.prototype.showDropdown = function() {
-  if (!this.overlay.showDropdown()) {
+WalkthroughController.prototype.showDropdown = function(popup) {
+  var target = this.overlay.showDropdown();
+  if (!target) {
     return;
   }
 
+  this.arrow.draw(
+    popup.offset().left + popup.outerWidth() - 10, popup.offset().top + popup.outerHeight() / 2,
+    target.offset().left - 30, target.offset().top + target.outerHeight() / 2,
+    'horizontal'
+  );
+  this.arrow.show();
+
   this.$btnTemplate.on('hidden.bs.dropdown', $.proxy(function() {
-    this.overlay.show(this.$btnTemplate);
+    var target = this.overlay.show(this.$btnTemplate);
+    this.arrow.draw(
+      popup.offset().left + popup.outerWidth() - 10, popup.offset().top + popup.outerHeight() / 2,
+      target.offset().left - 30, target.offset().top + target.outerHeight() / 2,
+      'horizontal'
+    );
+    this.arrow.show();
   }, this));
 }
 
 WalkthroughController.prototype.showCreate = function() {
-  if (!this.overlay.showPublish()) {
+  var target = this.overlay.showPublish();
+  if (!target) {
     return;
   }
 
-  this.view.showCreate();
+  var popup = this.view.showCreate();
+
+  this.arrow.draw(
+    popup.offset().left + popup.outerWidth() / 2, popup.offset().top + popup.outerHeight() - 10,
+    target.offset().left - 30, target.offset().top + target.outerHeight() / 2,
+    'horizontal'
+  );
+  this.arrow.show();
 }
 
 WalkthroughController.prototype.showShare = function() {
-  if (!this.overlay.showHero()) {
+  var target = this.overlay.showHero();
+  if (!target) {
     return;
   }
 
-  this.view.showShare();
+  var popup = this.view.showShare();
+
+  var target = this.$btnCopyHero;
+
+  this.arrow.draw(
+    popup.offset().left + popup.outerWidth() / 2, popup.offset().top + popup.outerHeight() - 10,
+    target.offset().left + target.outerWidth() / 2, target.offset().top - 25,
+    'vertical'
+  );
+  this.arrow.show();
 
   // shouldn't trigger if zeroclipboard is available
   this.$btnCopyHero.on('click', $.proxy(this.createSampleResponse, this));
@@ -121,11 +160,19 @@ WalkthroughController.prototype.createSampleResponse = function() {
 }
 
 WalkthroughController.prototype.showResults = function() {
-  if (!this.overlay.showResults()) {
+  var target = this.overlay.showResults();
+  if (!target) {
     return;
   }
 
-  this.view.showResults();
+  var popup = this.view.showResults();
+
+  this.arrow.draw(
+    popup.offset().left + popup.outerWidth() / 2, popup.offset().top + popup.outerHeight() - 10,
+    target.offset().left + target.outerWidth() / 2, target.offset().top - 30,
+    'vertical'
+  );
+  this.arrow.show();
 
   this.$linkFirstResult.on('click', $.proxy(this.showModal, this));
 }
@@ -137,11 +184,25 @@ WalkthroughController.prototype.showModal = function() {
     'padding-top': '200px'
   });
 
-  this.view.showModal();
+  this.arrow.hide();
+  var popup = this.view.showModal();
 
+  this.$modal.on('shown.bs.modal', $.proxy(function() {
+    var target = this.$modal.find('button.close');
+    this.arrow.draw(
+      popup.offset().left + popup.outerWidth() / 2, popup.offset().top + popup.outerHeight() - 10,
+      target.offset().left - 25, target.offset().top + target.outerHeight() / 2,
+      'horizontal'
+    );
+    this.arrow.show();
+  }, this));
+
+  this.$modal.on('hide.bs.modal', $.proxy(this.arrow.hide, this.arrow));
   this.$modal.on('hidden.bs.modal', $.proxy(this.showFinish, this));
 }
 
 WalkthroughController.prototype.showFinish = function() {
   this.view.showFinish();
+
+  this.arrow.hide();
 }

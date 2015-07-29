@@ -53,8 +53,6 @@ WalkthroughArrow.prototype.draw = function(startX, startY, endX, endY, orientati
   this.endY = endY;
   this.orientation = orientation;
 
-  var buffer = this.markerSize;
-
   var left = Math.min(startX, endX);
   var top = Math.min(startY, endY);
 
@@ -64,7 +62,7 @@ WalkthroughArrow.prototype.draw = function(startX, startY, endX, endY, orientati
   if (orientation == 'horizontal') {
     height *= 1.5;
   } else if (orientation == 'vertical') {
-    width *= 1.5;
+    width *= 1;
   }
 
   this.$svg.css({
@@ -77,15 +75,15 @@ WalkthroughArrow.prototype.draw = function(startX, startY, endX, endY, orientati
   var path = "";
 
   if (endX > startX) {
-    path += 'M' + (startX - left + 10);
+    path += 'M' + (startX - left);
   } else {
-    path += 'M' + (startX - left - 10);
+    path += 'M' + (startX - left);
   }
 
   if (endY > startY) {
-    path += ',' + (startY - top + 10);
+    path += ',' + (startY - top);
   } else {
-    path += ',' + (startY - top - 10);
+    path += ',' + (startY - top);
   }
 
   if (orientation == 'horizontal') {
@@ -95,15 +93,15 @@ WalkthroughArrow.prototype.draw = function(startX, startY, endX, endY, orientati
   }
 
   if (endX > startX) {
-    path += ' ' + (endX - left - buffer);
+    path += ' ' + (endX - left);
   } else {
-    path += ' ' + (endX - left + buffer);
+    path += ' ' + (endX - left);
   }
 
   if (endY > startY) {
-    path += ' ' + (endY - top - buffer);
+    path += ' ' + (endY - top);
   } else {
-    path += ' ' + (endY - top + buffer);
+    path += ' ' + (endY - top);
   }
 
   this.$path.get(0).setAttribute('d', path);
