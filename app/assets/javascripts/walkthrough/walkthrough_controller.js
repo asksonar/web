@@ -80,7 +80,6 @@ WalkthroughController.prototype.showCreate = function() {
     return;
   }
 
-  this.view.hidePopups();
   this.view.showOneBee();
 }
 
@@ -124,21 +123,17 @@ WalkthroughController.prototype.showResults = function() {
 }
 
 WalkthroughController.prototype.showModal = function() {
+  this.overlay.coverAll();
+
   this.$modal.css({
     'padding-top': '200px'
   });
 
-  this.view.hidePopups();
   this.view.showThreeBee();
-
-  this.overlay.coverAll();
 
   this.$modal.on('hidden.bs.modal', $.proxy(this.showFinish, this));
 }
 
 WalkthroughController.prototype.showFinish = function() {
-  this.view.hidePopups();
   this.view.showFinish();
 }
-
-

@@ -20,16 +20,6 @@ WalkthroughView.prototype.init = function() {
 WalkthroughView.prototype.initHandlers = function() {
 }
 
-WalkthroughView.prototype.hidePopups = function() {
-  this.$start.hide();
-  this.$one.hide();
-  this.$oneBee.hide();
-  this.$two.hide();
-  this.$three.hide();
-  this.$threeBee.hide();
-  this.$finish.hide();
-}
-
 WalkthroughView.prototype.showStart = function() {
   this.$start.show();
   this.$start.find('i').popover('show');
@@ -41,6 +31,7 @@ WalkthroughView.prototype.showOne = function() {
 }
 
 WalkthroughView.prototype.showOneBee = function() {
+  this.$one.hide();
   this.$oneBee.show();
   this.$oneBee.find('i').popover('show');
 }
@@ -56,11 +47,14 @@ WalkthroughView.prototype.showThree = function() {
 }
 
 WalkthroughView.prototype.showThreeBee = function() {
+  this.$three.hide();
   this.$threeBee.show();
   this.$threeBee.find('i').popover('show');
 }
 
 WalkthroughView.prototype.showFinish = function() {
+  this.$three.hide();
+  this.$threeBee.hide();
   this.$finish.show();
   this.$finish.find('i').popover('show');
 }
