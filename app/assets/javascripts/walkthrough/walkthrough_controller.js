@@ -5,6 +5,7 @@ function WalkthroughController(config, overlay, view, arrow) {
   this.$btnPublish = config.btnPublish;
   this.$panelHero = config.panelHero;
   this.$btnCopyHero = config.btnCopyHero;
+  this.$btnCopyLink = config.btnCopyLink;
   this.$linkFirstResult = config.linkFirstResult;
   this.$modal = config.modal;
 
@@ -34,11 +35,11 @@ WalkthroughController.prototype.show = function() {
       break;
     case '?walkthrough=share':
       this.overlay.showNone();
-      $(window).on('load', $.proxy(this.showShare, this));
+      $(window).on('load', $.proxy(this.showShareHero, this));
       break;
     case '?walkthrough=results':
       this.overlay.showNone();
-      $(window).on('load', $.proxy(this.showResults, this))
+      $(window).on('load', $.proxy(this.showResults, this));
       break;
   }
 }
@@ -120,15 +121,16 @@ WalkthroughController.prototype.showCreate = function() {
   this.arrow.show();
 }
 
-WalkthroughController.prototype.showShare = function() {
+WalkthroughController.prototype.showShareHero = function() {
   var target = this.overlay.showHero();
   if (!target) {
+    this.showShareCopyLink();
     return;
   }
 
   var popup = this.view.showShare();
 
-  var target = this.$btnCopyHero;
+  target = this.$btnCopyHero;
 
   this.arrow.draw(
     popup.offset().left + popup.outerWidth() / 2, popup.offset().top + popup.outerHeight() - 10,
@@ -140,7 +142,33 @@ WalkthroughController.prototype.showShare = function() {
   // shouldn't trigger if zeroclipboard is available
   this.$btnCopyHero.on('click', $.proxy(this.createSampleResponse, this));
   // shouldn't trigger is flash isn't available
-  new ZeroClipboard(this.$btnCopyHero.get()).on( "copy", $.proxy(this.createSampleResponse, this));
+  new ZeroClipboard(this.$btnCopyHero.get()).on("copy", $.proxy(this.createSampleResponse, this));
+}
+
+WalkthroughController.prototype.showShareCopyLink = function() {
+  var target = this.overlay.showCopyLink();
+  if (!target) {
+    return;
+  }
+
+  var popup = this.view.showShare();
+
+  this.arrow.draw(
+    popup.offset().left + popup.outerWidth() - 10, popup.offset().top + popup.outerHeight() / 2,
+    target.offset().left - 25, target.offset().top + target.outerHeight() / 2,
+    'horizontal'
+  );
+  this.arrow.show();
+
+  var linkToResults = function() {
+    location = new URL(location.href).pathname + '?walkthrough=results';
+  }
+
+  // shouldn't trigger if zeroclipboard is available
+  this.$btnCopyLink.on('click', linkToResults);
+  // shouldn't trigger is flash isn't available
+  new ZeroClipboard(this.$btnCopyLink.get()).on("copy", linkToResults);
+
 }
 
 WalkthroughController.prototype.createSampleResponse = function() {
@@ -190,9 +218,9 @@ WalkthroughController.prototype.showModal = function() {
   this.$modal.on('shown.bs.modal', $.proxy(function() {
     var target = this.$modal.find('button.close');
     this.arrow.draw(
-      popup.offset().left + popup.outerWidth() / 2, popup.offset().top + popup.outerHeight() - 10,
-      target.offset().left - 25, target.offset().top + target.outerHeight() / 2,
-      'horizontal'
+      popup.offset().left + popup.outerWidth() - 10, popup.offset().top + popup.outerHeight() / 2 ,
+      target.offset().left + target.outerWidth() / 2, target.offset().top - 40,
+      'vertical'
     );
     this.arrow.show();
   }, this));

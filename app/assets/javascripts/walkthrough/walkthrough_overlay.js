@@ -9,6 +9,7 @@ function WalkthroughOverlay(config) {
   this.$btnTemplate = config.btnTemplate;
   this.$btnPublish = config.btnPublish;
   this.$panelHero = config.panelHero;
+  this.$btnCopyLink = config.btnCopyLink;
   this.$linkFirstResult = config.linkFirstResult;
 
   this.init();
@@ -18,7 +19,7 @@ WalkthroughOverlay.prototype.init = function() {
 }
 
 WalkthroughOverlay.prototype.show = function(target) {
-  if (!target) {
+  if (!target || target.length == 0) {
     return false;
   }
 
@@ -67,6 +68,10 @@ WalkthroughOverlay.prototype.showPublish = function() {
 
 WalkthroughOverlay.prototype.showHero = function() {
   return this.show(this.$panelHero);
+}
+
+WalkthroughOverlay.prototype.showCopyLink = function() {
+  return this.show(this.$btnCopyLink);
 }
 
 WalkthroughOverlay.prototype.showResults = function() {

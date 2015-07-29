@@ -11,6 +11,7 @@ $(function(){
     btnTemplate: $('#btn-template-group'),
     btnPublish: $('.btn[name="publish"]'),
     panelHero: $('.panel-hero'),
+    btnCopyLink: $('#btn-copy-share-link'),
     linkFirstResult: $('.results-container .video-link').first()
   });
 
@@ -35,6 +36,7 @@ $(function(){
     btnPublish: $('.btn[name="publish"]'),
     panelHero: $('.panel-hero'),
     btnCopyHero: $('#btn-hero-copy-share-link'),
+    btnCopyLink: $('#btn-copy-share-link'),
     linkFirstResult: $('.results-container .video-link').first(),
     modal: $('#summary_video_container')
   }, walkthroughOverlay, walkthroughView, walkthroughArrow);
