@@ -15,39 +15,10 @@ function WalkthroughOverlay(config) {
   this.init();
 }
 
+WalkthroughOverlay.prototype = new Overlay();
+WalkthroughOverlay.prototype.constructor = Overlay;
+
 WalkthroughOverlay.prototype.init = function() {
-}
-
-WalkthroughOverlay.prototype.show = function(target) {
-  if (!target || target.length == 0) {
-    return false;
-  }
-
-  $('body').addClass('modal-open');
-
-  var top = target.offset().top;
-  var left = target.offset().left;
-  var height = target.outerHeight();
-  var width = target.outerWidth();
-
-  this.$top.css({
-    height: top - this.padding
-  }).show();
-  this.$left.css({
-    top: top - this.padding,
-    height: height + this.padding + this.padding,
-    width: left - this.padding
-  }).show();
-  this.$right.css({
-    top: top - this.padding,
-    height: height + this.padding + this.padding,
-    width: $(window).width() - width - left - this.padding
-  }).show();
-  this.$bottom.css({
-    height: $(window).height() - top - height - this.padding
-  }).show();
-
-  return target;
 }
 
 WalkthroughOverlay.prototype.showCreate = function() {
@@ -76,28 +47,4 @@ WalkthroughOverlay.prototype.showCopyLink = function() {
 
 WalkthroughOverlay.prototype.showResults = function() {
   return this.show(this.$linkFirstResult);
-}
-
-WalkthroughOverlay.prototype.showNone = function() {
-  $('body').addClass('modal-open');
-
-  this.$top.css({
-    height: $(window).height()
-  }).show();
-  this.$left.hide();
-  this.$right.hide();
-  this.$bottom.hide();
-
-  return true;
-}
-
-WalkthroughOverlay.prototype.hide = function() {
-  $('body').removeClass('modal-open');
-
-  this.$top.hide();
-  this.$left.hide();
-  this.$right.hide();
-  this.$bottom.hide();
-
-  return true;
 }

@@ -44,5 +44,6 @@ StudiesView.prototype.startStudy = function() {
   this.$ctnStudy.show();
   this.$ctnStartFeedback.hide();
   this.$ctnRestartFeedback.hide().fadeIn();
+  window.overlay.showNone(true);
 }
 

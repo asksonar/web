@@ -24,5 +24,9 @@
 //= require zendesk_widget
 
 // insert new packages above this line
+
+//= require_tree ./shared
+// insert packages that need to be loaded in order above this line
+
 //= require_tree .
 
