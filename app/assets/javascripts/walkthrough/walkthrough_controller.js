@@ -20,30 +20,30 @@ WalkthroughController.prototype.show = function() {
 
   switch(window.location.search) {
     case '?walkthrough=start':
-      this.overlay.coverAll();
+      this.overlay.showNone();
       $(window).on('load', $.proxy(this.showStart, this));
       break;
     case '?walkthrough=template':
-      this.overlay.coverAll();
+      this.overlay.showNone();
       $(window).on('load', $.proxy(this.showTemplate, this));
         break;
     case '?template=sample&walkthrough=create':
-      this.overlay.coverAll();
+      this.overlay.showNone();
       $(window).on('load', $.proxy(this.showCreate, this));
       break;
     case '?walkthrough=share':
-      this.overlay.coverAll();
+      this.overlay.showNone();
       $(window).on('load', $.proxy(this.showShare, this));
       break;
     case '?walkthrough=results':
-      this.overlay.coverAll();
+      this.overlay.showNone();
       $(window).on('load', $.proxy(this.showResults, this))
       break;
   }
 }
 
 WalkthroughController.prototype.showStart = function() {
-  if (!this.overlay.show(this.$btnCreate)) {
+  if (!this.overlay.showCreate()) {
     return;
   }
 
@@ -54,7 +54,7 @@ WalkthroughController.prototype.showStart = function() {
 }
 
 WalkthroughController.prototype.showTemplate = function() {
-  if (!this.overlay.show(this.$btnTemplate)) {
+  if (!this.overlay.showTemplate()) {
     return;
   }
 
@@ -66,7 +66,7 @@ WalkthroughController.prototype.showTemplate = function() {
 }
 
 WalkthroughController.prototype.showDropdown = function() {
-  if (!this.overlay.show(this.$btnTemplate.find('ul li:first-child'))) {
+  if (!this.overlay.showDropdown()) {
     return;
   }
 
@@ -76,7 +76,7 @@ WalkthroughController.prototype.showDropdown = function() {
 }
 
 WalkthroughController.prototype.showCreate = function() {
-  if (!this.overlay.show(this.$btnPublish)) {
+  if (!this.overlay.showPublish()) {
     return;
   }
 
@@ -84,7 +84,7 @@ WalkthroughController.prototype.showCreate = function() {
 }
 
 WalkthroughController.prototype.showShare = function() {
-  if (!this.overlay.show(this.$panelHero)) {
+  if (!this.overlay.showHero()) {
     return;
   }
 
@@ -113,7 +113,7 @@ WalkthroughController.prototype.createSampleResponse = function() {
 }
 
 WalkthroughController.prototype.showResults = function() {
-  if (!this.overlay.show(this.$linkFirstResult)) {
+  if (!this.overlay.showResults()) {
     return;
   }
 
@@ -123,7 +123,7 @@ WalkthroughController.prototype.showResults = function() {
 }
 
 WalkthroughController.prototype.showModal = function() {
-  this.overlay.coverAll();
+  this.overlay.showNone();
 
   this.$modal.css({
     'padding-top': '200px'

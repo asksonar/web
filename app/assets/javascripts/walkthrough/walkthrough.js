@@ -1,11 +1,17 @@
 $(function(){
 
-  var overlay = new Overlay({
+  var walkthroughOverlay = new WalkthroughOverlay({
     topOverlay: $('#top-overlay'),
     leftOverlay: $('#left-overlay'),
     rightOverlay: $('#right-overlay'),
     bottomOverlay: $('#bottom-overlay'),
-    padding: 5
+    padding: 5,
+
+    btnCreate: $('.div-btn-create a'),
+    btnTemplate: $('#btn-template-group'),
+    btnPublish: $('.btn[name="publish"]'),
+    panelHero: $('.panel-hero'),
+    linkFirstResult: $('.results-container .video-link').first()
   });
 
   var walkthroughView = new WalkthroughView({
