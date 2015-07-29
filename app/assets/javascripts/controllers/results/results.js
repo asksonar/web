@@ -28,7 +28,8 @@ $(function(){
     inputShareLink: $('#input-share-link'),
     btnArchive: $('#btn-archive'),
     btnHeroCopyShareLink: $('#btn-hero-copy-share-link'),
-    inputHeroShareLink: $('#input-hero-share-link')
+    inputHeroShareLink: $('#input-hero-share-link'),
+    panelHero: $('.panel-hero')
 
   }, videoModal);
 });
