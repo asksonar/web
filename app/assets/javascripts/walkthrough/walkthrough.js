@@ -42,5 +42,6 @@ $(function(){
   walkthroughController.show();
 
   window.arrow = walkthroughArrow;
+  window.walkthroughController = walkthroughController;
 
 });

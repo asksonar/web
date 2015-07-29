@@ -22,7 +22,7 @@ WalkthroughArrow.prototype.resize = function(strokeWidth) {
   this.size = strokeWidth;
   this.resizeMarker(strokeWidth + 1);
   this.resizePath(strokeWidth);
-  this.resizeSvg(this.startX, this.startY, this.endX, this.endY, this.orientation);
+  this.draw(this.startX, this.startY, this.endX, this.endY, this.orientation);
 }
 
 WalkthroughArrow.prototype.resizeMarker = function(base) {
@@ -46,7 +46,7 @@ WalkthroughArrow.prototype.resizePath = function(strokeWidth) {
   });
 }
 
-WalkthroughArrow.prototype.resizeSvg = function(startX, startY, endX, endY, orientation) {
+WalkthroughArrow.prototype.draw = function(startX, startY, endX, endY, orientation) {
   this.startX = startX;
   this.startY = startY;
   this.endX = endX;

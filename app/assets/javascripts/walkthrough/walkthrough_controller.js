@@ -44,11 +44,18 @@ WalkthroughController.prototype.show = function() {
 }
 
 WalkthroughController.prototype.showStart = function() {
-  if (!this.overlay.showCreate()) {
+  var overlay = this.overlay.showCreate();
+  if (!overlay) {
     return;
   }
 
-  this.view.showStart();
+  var popup = this.view.showStart();
+  this.arrow.draw(
+    popup.offset().left + 15, popup.offset().top + popup.outerHeight() / 2,
+    overlay.offset().left + overlay.outerWidth(), overlay.offset().top + overlay.outerHeight() / 2,
+    'horizontal'
+  );
+  this.arrow.show();
 
   var btnCreateHref = this.$btnCreate.attr('href');
   this.$btnCreate.attr('href', btnCreateHref + '?walkthrough=template');

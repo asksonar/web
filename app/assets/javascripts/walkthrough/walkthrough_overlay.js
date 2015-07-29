@@ -46,7 +46,7 @@ WalkthroughOverlay.prototype.show = function(target) {
     height: $(window).height() - top - height - this.padding
   }).show();
 
-  return true;
+  return target;
 }
 
 WalkthroughOverlay.prototype.showCreate = function() {
