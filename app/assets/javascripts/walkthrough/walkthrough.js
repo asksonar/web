@@ -13,7 +13,7 @@ $(function(){
     panelHero: $('.panel-hero'),
     btnCopyLink: $('#btn-copy-share-link'),
     linkFirstResult: $('.results-container .video-link').first()
-  });
+  }, window.overlay);
 
   var walkthroughView = new WalkthroughView({
     start: $('#walkthrough-start'),
@@ -42,8 +42,4 @@ $(function(){
   }, walkthroughOverlay, walkthroughView, walkthroughArrow);
 
   walkthroughController.show();
-
-  window.arrow = walkthroughArrow;
-  window.walkthroughController = walkthroughController;
-
 });
