@@ -32,8 +32,13 @@ class ResultsController < ApplicationController
     # we are toggling, so set it to the reverse of whatever it currently is
     if params[:is_on] == 'true'
       @results.set_completed()
-    else
+    elsif params[:is_on] == 'false'
       @results.set_live()
+    end
+
+    # we need to generate sample data for the study
+    if params[:walkthrough]=='true'
+      ScenarioResult.generate_new_sample_result(@results)
     end
 
     render plain: 'OK'

@@ -80,4 +80,25 @@ class ResultStep < ActiveRecord::Base
     ).update_all(result_step_id: id)
   end
 
+  def generate_new_sample_result(new_scenario_step, new_scenario_result)
+    new_result_step = self.dup
+    new_result_step.scenario_step = new_scenario_step
+    new_result_step.scenario_result = new_scenario_result
+    new_result_step.save
+
+    step_feelings.each do |step_feeling|
+      step_feeling.generate_new_sample_result(new_result_step)
+    end
+    step_highlights.each do |step_highlight|
+      step_highlight.generate_new_sample_result(new_result_step)
+    end
+    step_videos.each do |step_video|
+      step_video.generate_new_sample_result(new_result_step)
+    end
+    step_transcriptions do |step_transcription|
+      step_transcription.generate_new_sample_result(new_result_step)
+    end
+
+  end
+
 end

@@ -3,10 +3,6 @@ class Panelist < ActiveRecord::Base
 
   HASHIDS_SALT = '3tufg2pFpRR@'
 
-  def is_user?
-    true
-  end
-
   def self.bulk_create(emails)
     users = []
     emails.each do |email|

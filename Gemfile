@@ -49,6 +49,8 @@ gem 'thin'
 # needs to declared here as well as gemspec for resque-web to work
 gem 'resque', '~> 1'
 gem 'resque-web', require: 'resque_web'
+# use s3 calls
+gem 'aws-sdk'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables

@@ -8,4 +8,10 @@ class StepFeeling < ActiveRecord::Base
     result_step.email
   end
 
+  def generate_new_sample_result(new_result_step)
+    new_step_feeling = self.dup
+    new_step_feeling.result_step = new_result_step
+    new_step_feeling.save
+  end
+
 end
