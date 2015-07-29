@@ -10,11 +10,11 @@ $(function(){
 
   var walkthroughView = new WalkthroughView({
     start: $('#walkthrough-start'),
-    one: $('#walkthrough-one'),
-    oneBee: $('#walkthrough-one-bee'),
-    two: $('#walkthrough-two'),
-    three: $('#walkthrough-three'),
-    threeBee: $('#walkthrough-three-bee'),
+    template: $('#walkthrough-template'),
+    create: $('#walkthrough-create'),
+    share: $('#walkthrough-share'),
+    results: $('#walkthrough-results'),
+    modal: $('#walkthrough-modal'),
     finish: $('#walkthrough-finish')
   });
 

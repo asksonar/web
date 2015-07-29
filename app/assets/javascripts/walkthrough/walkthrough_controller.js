@@ -58,7 +58,7 @@ WalkthroughController.prototype.showTemplate = function() {
     return;
   }
 
-  this.view.showOne();
+  this.view.showTemplate();
 
   this.$btnTemplate.on('shown.bs.dropdown', $.proxy(this.showDropdown,this));
   this.$btnTemplate.find('.dropdown-menu li').addClass('disabled');
@@ -80,7 +80,7 @@ WalkthroughController.prototype.showCreate = function() {
     return;
   }
 
-  this.view.showOneBee();
+  this.view.showCreate();
 }
 
 WalkthroughController.prototype.showShare = function() {
@@ -88,7 +88,7 @@ WalkthroughController.prototype.showShare = function() {
     return;
   }
 
-  this.view.showTwo();
+  this.view.showShare();
 
   // shouldn't trigger if zeroclipboard is available
   this.$btnCopyHero.on('click', $.proxy(this.createSampleResponse, this));
@@ -117,7 +117,7 @@ WalkthroughController.prototype.showResults = function() {
     return;
   }
 
-  this.view.showThree();
+  this.view.showResults();
 
   this.$linkFirstResult.on('click', $.proxy(this.showModal, this));
 }
@@ -129,7 +129,7 @@ WalkthroughController.prototype.showModal = function() {
     'padding-top': '200px'
   });
 
-  this.view.showThreeBee();
+  this.view.showModal();
 
   this.$modal.on('hidden.bs.modal', $.proxy(this.showFinish, this));
 }

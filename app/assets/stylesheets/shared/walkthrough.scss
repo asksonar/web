@@ -56,26 +56,25 @@
   }
 
   #walkthrough-start i,
-  #walkthrough-one i {
+  #walkthrough-template i {
     margin: 20px 0px;
   }
 
-  #walkthrough-one-bee i,
-  #walkthrough-three-bee i,
-  #walkthrough-four-bee i {
+  #walkthrough-create i,
+  #walkthrough-modal i {
     margin: 30px 0px;
   }
 
-  #walkthrough-two i {
+  #walkthrough-share i {
     margin: 40px 0px;
   }
 
-  #walkthrough-three i.feeling-confused,
+  #walkthrough-results i.feeling-confused,
   #walkthrough-finish i.feeling-confused {
     margin: 10px 0px;
   }
 
-  #walkthrough-three i.feeling-delighted {
+  #walkthrough-results i.feeling-delighted {
     margin-top: 20px;
     margin-bottom: 10px;
   }

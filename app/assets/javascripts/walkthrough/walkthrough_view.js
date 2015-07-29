@@ -1,10 +1,10 @@
 function WalkthroughView(config, overlay) {
   this.$start = config.start;
-  this.$one = config.one;
-  this.$oneBee = config.oneBee;
-  this.$two = config.two;
-  this.$three = config.three;
-  this.$threeBee = config.threeBee;
+  this.$template = config.template;
+  this.$create = config.create;
+  this.$share = config.share;
+  this.$results = config.results;
+  this.$modal = config.modal;
   this.$finish = config.finish;
 
 
@@ -25,37 +25,36 @@ WalkthroughView.prototype.showStart = function() {
   this.$start.find('i').popover('show');
 }
 
-WalkthroughView.prototype.showOne = function() {
-  this.$one.show();
-  this.$one.find('i').popover('show');
+WalkthroughView.prototype.showTemplate = function() {
+  this.$template.show();
+  this.$template.find('i').popover('show');
 }
 
-WalkthroughView.prototype.showOneBee = function() {
-  this.$one.hide();
-  this.$oneBee.show();
-  this.$oneBee.find('i').popover('show');
+WalkthroughView.prototype.showCreate = function() {
+  this.$create.show();
+  this.$create.find('i').popover('show');
 }
 
-WalkthroughView.prototype.showTwo = function() {
-  this.$two.show();
-  this.$two.find('i').popover('show');
+WalkthroughView.prototype.showShare = function() {
+  this.$share.show();
+  this.$share.find('i').popover('show');
 }
 
-WalkthroughView.prototype.showThree = function() {
-  this.$three.show();
-  this.$three.find('i').popover('show');
+WalkthroughView.prototype.showResults = function() {
+  this.$results.show();
+  this.$results.find('i').popover('show');
 }
 
-WalkthroughView.prototype.showThreeBee = function() {
-  this.$three.hide();
-  this.$threeBee.show();
-  this.$threeBee.find('i').popover('show');
+WalkthroughView.prototype.showModal = function() {
+  this.$results.hide();
+  this.$modal.fadeIn();
+  this.$modal.find('i').popover('show');
 }
 
 WalkthroughView.prototype.showFinish = function() {
-  this.$three.hide();
-  this.$threeBee.hide();
-  this.$finish.show();
+  this.$results.hide();
+  this.$modal.hide();
+  this.$finish.fadeIn();
   this.$finish.find('i').popover('show');
 }
 
