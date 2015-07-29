@@ -24,6 +24,11 @@ $(function(){
     finish: $('#walkthrough-finish')
   });
 
+  var walkthroughArrow = new WalkthroughArrow({
+    svg: $('#walkthrough-arrow'),
+    size: 10
+  });
+
   var walkthroughController = new WalkthroughController({
     btnCreate: $('.div-btn-create a'),
     btnTemplate: $('#btn-template-group'),
@@ -32,8 +37,10 @@ $(function(){
     btnCopyHero: $('#btn-hero-copy-share-link'),
     linkFirstResult: $('.results-container .video-link').first(),
     modal: $('#summary_video_container')
-  }, overlay, walkthroughView);
+  }, walkthroughOverlay, walkthroughView, walkthroughArrow);
 
   walkthroughController.show();
+
+  window.arrow = walkthroughArrow;
 
 });

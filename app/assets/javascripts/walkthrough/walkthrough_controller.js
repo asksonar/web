@@ -1,4 +1,4 @@
-function WalkthroughController(config, overlay, view) {
+function WalkthroughController(config, overlay, view, arrow) {
   this.$btnCreate = config.btnCreate;
   this.$btnTemplate = config.btnTemplate;
   this.$dropdownTemplate = config.dropdownTemplate;
@@ -10,6 +10,7 @@ function WalkthroughController(config, overlay, view) {
 
   this.overlay = overlay;
   this.view = view;
+  this.arrow = arrow;
 }
 
 WalkthroughController.prototype.init = function() {
