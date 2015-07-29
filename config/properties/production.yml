@@ -2,7 +2,7 @@ web_base_url: http://my.asksonar.com
 video_base_url: http://videos.asksonar.com
 sign_up_url: http://www.asksonar.com/sign-up
 chrome_app_id: ifnadmakmckbjjhbnjcjpfeeljhhmgib
-sample_scenario_result_id: 1059619281
+sample_scenario_result_id: 1036380636
 
 s3_access_key: 'AKIAJQSUTS47ULBM5I7A'
 s3_secret_key: 'ZInBlvHJIaNYzr569Vdn2UWFzzgJN4ZkafGF5FeK'
