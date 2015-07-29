@@ -142,7 +142,7 @@ WalkthroughController.prototype.showShareHero = function() {
   // shouldn't trigger if zeroclipboard is available
   this.$btnCopyHero.on('click', $.proxy(this.createSampleResponse, this));
   // shouldn't trigger is flash isn't available
-  new ZeroClipboard(this.$btnCopyHero.get()).on("copy", $.proxy(this.createSampleResponse, this));
+  //new ZeroClipboard(this.$btnCopyHero.get()).on("copy", $.proxy(this.createSampleResponse, this));
 }
 
 WalkthroughController.prototype.showShareCopyLink = function() {
@@ -167,7 +167,7 @@ WalkthroughController.prototype.showShareCopyLink = function() {
   // shouldn't trigger if zeroclipboard is available
   this.$btnCopyLink.on('click', linkToResults);
   // shouldn't trigger is flash isn't available
-  new ZeroClipboard(this.$btnCopyLink.get()).on("copy", linkToResults);
+  //new ZeroClipboard(this.$btnCopyLink.get()).on("copy", linkToResults);
 
 }
 
@@ -219,7 +219,7 @@ WalkthroughController.prototype.showModal = function() {
     var target = this.$modal.find('button.close');
     this.arrow.draw(
       popup.offset().left + popup.outerWidth() - 10, popup.offset().top + popup.outerHeight() / 2 ,
-      target.offset().left + target.outerWidth() / 2, target.offset().top - 40,
+      target.offset().left + target.outerWidth() / 2, target.offset().top - 45,
       'vertical'
     );
     this.arrow.show();
