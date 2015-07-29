@@ -34,7 +34,9 @@ Rails.application.routes.draw do
   resources :results
   resources :my_results, controller: 'results'
 
-  devise_for :researchers, path: 'accounts', path_names: { sign_in: 'login', sign_out: 'logout' }
+  devise_for :researchers, path: 'accounts',
+    path_names: { sign_in: 'login', sign_out: 'logout' },
+    controllers: {registrations: "registrations"}
 
   resque_web_constraint = lambda do |request|
     current_user = request.env['warden'].user
