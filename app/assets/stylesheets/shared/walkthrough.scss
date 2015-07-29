@@ -33,7 +33,7 @@
 #walkthrough-popups {
   > div {
     position: fixed;
-    z-index: 1200;
+    z-index: 1041; // one larger than modal backdrop's 1040
     display: none;
     left: 0;
     right: 0;

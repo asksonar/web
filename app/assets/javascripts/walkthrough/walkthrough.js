@@ -15,8 +15,10 @@ $(function(){
     two: $('#walkthrough-two'),
     three: $('#walkthrough-three'),
     threeBee: $('#walkthrough-three-bee'),
-    finish: $('#walkthrough-finish'),
+    finish: $('#walkthrough-finish')
+  });
 
+  var walkthroughController = new WalkthroughController({
     btnCreate: $('.div-btn-create a'),
     btnTemplate: $('#btn-template-group'),
     btnPublish: $('.btn[name="publish"]'),
@@ -24,10 +26,7 @@ $(function(){
     btnCopyHero: $('#btn-hero-copy-share-link'),
     linkFirstResult: $('.results-container .video-link').first(),
     modal: $('#summary_video_container')
-
-  }, overlay);
-
-  var walkthroughController = new WalkthroughController(walkthroughView);
+  }, overlay, walkthroughView);
 
   walkthroughController.show();
 
