@@ -2,3 +2,10 @@ web_base_url: http://my.asksonar.com
 video_base_url: http://videos.asksonar.com
 sign_up_url: http://www.asksonar.com/sign-up
 chrome_app_id: ifnadmakmckbjjhbnjcjpfeeljhhmgib
+
+s3_access_key: 'AKIAJQSUTS47ULBM5I7A'
+s3_secret_key: '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'
+s3_region: 'us-west-1'
+s3_upload_bucket: 'upload.asksonar.com'
+s3_videos_bucket: 'videos.asksonar.com'
+s3_backup_bucket: 'backup.asksonar.com'

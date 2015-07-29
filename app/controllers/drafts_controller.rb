@@ -61,6 +61,10 @@ class DraftsController < ApplicationController
       redirect_to drafts_path
     end
 
+    if params[:scenario][:template] == 'sample'
+      response.location += '?walkthrough=share'
+    end
+
     # if we published
     #   redirect to individual results page
     #   flash that we are now able to share with customers
