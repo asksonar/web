@@ -33,6 +33,8 @@
 #results-show {
 
   .main-content-header {
+    position: relative; // for the split_panel
+
     .summary-highlights-container {
       margin-bottom: 20px;
       p.sub {
@@ -129,10 +131,6 @@
     }
   }
 
-  .main-content {
-    position: relative;
-  }
-
   .panel-hero {
     z-index: 120;
     .input-group {
@@ -145,20 +143,7 @@
     }
   }
 
-  .panel-mask {
-    z-index: 110;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: #000;
-    opacity: .5;
-  }
-
   .panel {
-    position: relative;
-
     .panel-body-toggle {
       position: absolute;
       right: 10px;
