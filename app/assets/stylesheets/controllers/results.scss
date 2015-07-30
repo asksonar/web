@@ -178,6 +178,12 @@
         text-indent: -30px;
         display: inline-block;
       }
+      a {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
 
     .moments-container {

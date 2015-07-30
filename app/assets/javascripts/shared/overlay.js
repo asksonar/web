@@ -35,10 +35,12 @@ Overlay.prototype.show = function(target, dismissible) {
   }).show();
   this.$right.css({
     top: top - this.padding,
+    left: left + width + this.padding,
     height: height + this.padding + this.padding,
     width: $(window).width() - width - left - this.padding
   }).show();
   this.$bottom.css({
+    top: top + height + this.padding,
     height: $(window).height() - top - height - this.padding
   }).show();
 
@@ -56,6 +58,11 @@ Overlay.prototype.show = function(target, dismissible) {
     this.$left.on('click', $.proxy(groupDismiss, this));
     this.$right.on('click', $.proxy(groupDismiss, this));
     this.$bottom.on('click', $.proxy(groupDismiss, this));
+  } else {
+    this.$top.off('click');
+    this.$left.off('click');
+    this.$right.off('click');
+    this.$bottom.off('click');
   }
 
   return target;
