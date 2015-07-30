@@ -8,6 +8,8 @@ class Scenario < ActiveRecord::Base
   has_many :step_highlights, through: :result_steps
   enum status: [:drafts, :live, :completed]
 
+  before_validation :sanitize_and_whitespace_description_title
+
   HASHIDS_SALT = '8UTnU7cJm*bP'
 
   def can_add_steps?
@@ -125,5 +127,13 @@ class Scenario < ActiveRecord::Base
   def highlights
     step_highlights
   end
+
+  protected
+    def sanitize_and_whitespace_description_title
+      self.description = self.description.gsub(/\r/, '') if self.description;
+      sanitizer = Rails::Html::FullSanitizer.new
+      self.description = sanitizer.sanitize(self.description)
+      self.title = sanitizer.sanitize(self.title)
+    end
 
 end

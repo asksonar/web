@@ -95,7 +95,7 @@ class ResultStep < ActiveRecord::Base
     step_videos.each do |step_video|
       step_video.generate_new_sample_result(new_result_step)
     end
-    step_transcriptions do |step_transcription|
+    step_transcriptions.each do |step_transcription|
       step_transcription.generate_new_sample_result(new_result_step)
     end
 

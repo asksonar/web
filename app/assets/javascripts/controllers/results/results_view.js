@@ -6,6 +6,7 @@ function ResultsView(config, modal) {
   this.$btnArchive = config.btnArchive;
   this.$btnHeroCopyShareLink = config.btnHeroCopyShareLink;
   this.$inputHeroShareLink = config.inputHeroShareLink;
+  this.$panelHero = config.panelHero;
 
   this.modal = modal;
 
@@ -20,6 +21,7 @@ ResultsView.prototype.init = function() {
   new ClipboardInput(this.$btnCopyShareLink, this.$inputShareLink);
   new ClipboardInput(this.$btnHeroCopyShareLink, this.$inputHeroShareLink);
   this.showAllPanels();
+  this.highlightHero();
 }
 
 ResultsView.prototype.toggleArchive = function() {
@@ -130,4 +132,8 @@ ResultsView.prototype.setupGraph = function(timesArray, graphId) {
   chart.addListener('clickGraphItem', function(event) {
     var details = event.item.dataContext['details'];
   });
+}
+
+ResultsView.prototype.highlightHero = function() {
+  window.overlay.show(this.$panelHero, true);
 }

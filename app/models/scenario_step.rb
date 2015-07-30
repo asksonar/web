@@ -5,6 +5,8 @@ class ScenarioStep < ActiveRecord::Base
   has_many :step_highlights, through: :result_steps
   has_many :step_videos, through: :result_steps
 
+  before_validation :sanitize_description_url
+
   HASHIDS_SALT = 'c@9F*bVEKWpT'
   MAX_TIME_BUCKET = 180
 
@@ -81,5 +83,13 @@ class ScenarioStep < ActiveRecord::Base
   def result_steps_newest
     result_steps.sort_by(&:created_at).reverse!
   end
+
+  protected
+
+    def sanitize_description_url
+      sanitizer = Rails::Html::FullSanitizer.new
+      self.description = sanitizer.sanitize(self.description)
+      self.url = sanitizer.sanitize(self.url)
+    end
 
 end

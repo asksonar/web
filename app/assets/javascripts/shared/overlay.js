@@ -13,7 +13,7 @@ Overlay.prototype.init = function() {
 
 }
 
-Overlay.prototype.show = function(target) {
+Overlay.prototype.show = function(target, dismissible) {
   if (!target || target.length == 0) {
     return false;
   }
@@ -41,6 +41,22 @@ Overlay.prototype.show = function(target) {
   this.$bottom.css({
     height: $(window).height() - top - height - this.padding
   }).show();
+
+  if (dismissible === true) {
+
+    var groupDismiss = function() {
+      this.hide();
+      this.$top.off('click');
+      this.$left.off('click');
+      this.$right.off('click');
+      this.$bottom.off('click');
+    }
+
+    this.$top.on('click', $.proxy(groupDismiss, this));
+    this.$left.on('click', $.proxy(groupDismiss, this));
+    this.$right.on('click', $.proxy(groupDismiss, this));
+    this.$bottom.on('click', $.proxy(groupDismiss, this));
+  }
 
   return target;
 }
