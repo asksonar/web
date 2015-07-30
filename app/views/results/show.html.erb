@@ -104,7 +104,7 @@
             <p class='summary-step-description'>
               <span class='h1'><%= scenario_step.step_order + 1 %>.</span><span><%= scenario_step.description %>
                 <% if scenario_step.url %>
-                <br/><a target="_blank" href='<%=ppu_http(scenario_step.url)%>' data-placement="right" data-toggle="tooltip" title="<%=ppu_http(scenario_step.url)%>"><%=ppu_host(scenario_step.url)%></a>
+                <br/><a target="_blank" href='<%=ppu_http(scenario_step.url)%>'><%=ppu_http(scenario_step.url)%></a>
                 <% end %>
               </span>
             </p>

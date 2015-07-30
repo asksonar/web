@@ -23,7 +23,7 @@ module PrettyPrintUrlHelper
 
       return uri.to_s
     rescue
-      return '<INVALID URL> ' + url
+      return '// <INVALID URL> ' + url
     end
   end
 end
