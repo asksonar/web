@@ -49,6 +49,9 @@ ADD my_startup /etc/my_startup
 
 RUN mkdir -p /etc/my_init.d
 
+# add our ssl certs
+ADD ssl /etc/ssl
+
 # enable nginx
 RUN rm -f /etc/service/nginx/down
 
