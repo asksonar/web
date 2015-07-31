@@ -1,5 +1,5 @@
-web_base_url: https://my.asksonar.com
-video_base_url: https://s3-us-west-1.amazonaws.com/videos.asksonar.com
+web_base_url: http://my.asksonar.com
+video_base_url: http://videos.asksonar.com
 sign_up_url: http://www.asksonar.com/sign-up
 chrome_app_id: ifnadmakmckbjjhbnjcjpfeeljhhmgib
 sample_scenario_result_id: 1036380636
