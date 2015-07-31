@@ -37,8 +37,9 @@
   </section>
 
   <%= render partial: 'utility/flash' %>
+  <%= render partial: 'utility/overlay' %>
 
-  <%= render partial: 'utility/walkthrough' %>
+  <%= render partial: 'utility/walkthrough' if params[:walkthrough] %>
 
 </body>
 </html>

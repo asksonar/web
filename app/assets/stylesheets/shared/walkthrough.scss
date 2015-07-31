@@ -1,34 +1,3 @@
-#walkthrough-overlay {
-  div {
-    position: fixed;
-    z-index: 1000;
-    background-color: #000;
-    opacity: .6;
-    display: none;
-  }
-
-  #top-overlay {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  #left-overlay {
-    left:0;
-  }
-
-  #right-overlay {
-
-  }
-
-  #bottom-overlay {
-    left: 0;
-    width: 100%;
-  }
-
-}
-
 #walkthrough-popups {
   > div {
     position: fixed;
