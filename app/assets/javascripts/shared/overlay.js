@@ -25,6 +25,9 @@ Overlay.prototype.show = function(target, dismissible) {
   var height = target.outerHeight();
   var width = target.outerWidth();
 
+  var windowHeight = $(window).height();
+  var windowWidth = $(window).width();
+
   this.$top.css({
     height: top - this.padding
   }).show();
@@ -36,12 +39,10 @@ Overlay.prototype.show = function(target, dismissible) {
   this.$right.css({
     top: top - this.padding,
     left: left + width + this.padding,
-    height: height + this.padding + this.padding,
-    width: $(window).width() - width - left - this.padding
+    height: height + this.padding + this.padding
   }).show();
   this.$bottom.css({
-    top: top + height + this.padding,
-    height: $(window).height() - top - height - this.padding
+    top: top + height + this.padding
   }).show();
 
   if (dismissible === true) {
@@ -72,7 +73,7 @@ Overlay.prototype.showNone = function(dismissible) {
   $('body').addClass('modal-open');
 
   this.$top.css({
-    height: $(window).height()
+    height: '100%'
   }).show();
   this.$left.hide();
   this.$right.hide();

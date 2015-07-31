@@ -1,4 +1,7 @@
 $(function(){
+  if (!$('#walkthrough-popups').length) {
+    return;
+  }
 
   var walkthroughOverlay = new WalkthroughOverlay({
     topOverlay: $('#top-overlay'),
