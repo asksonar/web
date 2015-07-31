@@ -1,6 +1,6 @@
-web_base_url: https://local.asksonar.com
-video_base_url: https://s3-us-west-1.amazonaws.com/videos.dev.engsonar.com
-sign_up_url: https://www.asksonar.com/sign-up
+web_base_url: http://dockerhost:3000
+video_base_url: http://videos.dev.engsonar.com.s3.amazonaws.com
+sign_up_url: http://www.asksonar.com/sign-up
 chrome_app_id: plkkekmhfkddjdfgphbbnklkopldedfb
 sample_scenario_result_id: 1036380517
 
