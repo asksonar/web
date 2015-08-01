@@ -77,11 +77,11 @@ class Scenario < ActiveRecord::Base
   end
 
   def where_feeling_delighted
-    step_feelings.where(feeling: StepFeeling.feelings[:delighted])
+    step_feelings.delighted
   end
 
   def where_feeling_confused
-    step_feelings.where(feeling: StepFeeling.feelings[:confused])
+    step_feelings.confused
   end
 
   def total_delighted

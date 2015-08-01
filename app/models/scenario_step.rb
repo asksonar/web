@@ -12,11 +12,11 @@ class ScenarioStep < ActiveRecord::Base
   MAX_TIME_BUCKET = 180
 
   def where_feeling_delighted
-    step_feelings.where(feeling: StepFeeling.feelings[:delighted])
+    step_feelings.delighted
   end
 
   def where_feeling_confused
-    step_feelings.where(feeling: StepFeeling.feelings[:confused])
+    step_feelings.confused
   end
 
   def completed_users
