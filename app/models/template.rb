@@ -5,11 +5,11 @@ class Template < ActiveRecord::Base
   HASHIDS_SALT = '52X^wGkdt6*T'
 
   def self.product_templates
-    Template.where(category: categories[:product])
+    Template.product
   end
 
   def self.marketing_templates
-    Template.where(category: categories[:marketing])
+    Template.marketing
   end
 
   def template_steps_json

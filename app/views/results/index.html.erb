@@ -19,16 +19,16 @@
           <div class='row counts-container'>
             <div class='col-xs-6'>
               <h1><i class='feeling-delighted'></i><%= scenario.total_delighted %></h1>
-              <p class='sub'>moment<%= scenario.total_delighted != 1 ? 's' : '' %></p>
+              <p class='sub'><%= pp_plural(scenario.total_delighted, 'moment') %></p>
             </div>
             <div class='col-xs-6'>
               <h1><i class='feeling-confused'></i><%= scenario.total_confused %></h1>
-              <p class='sub'>moment<%= scenario.total_confused != 1 ? 's' : '' %></p>
+              <p class='sub'><%= pp_plural(scenario.total_confused, 'moment') %></p>
             </div>
           </div>
           <div class='row'>
             <div class='col-xs-6'>
-              <h2><%= scenario.user_completed_count || 0 %> users</h2>
+              <h2><%= pp_plural_with_number(scenario.user_completed_count, 'user') %></h2>
             </div>
             <div class='col-xs-6'>
               <h2 class='label-live'><span>Not </span>Live</h2>

@@ -13,7 +13,7 @@ class StudiesVideoController < ApplicationController
       offset_seconds = step['offset'] / 1000.0
       length_seconds = step['length'] / 1000.0
 
-      result_video = StepVideo.create(
+      step_video = StepVideo.create(
         scenario_result: scenario_result,
         scenario_step: scenario_step,
         uuid: uuid,
@@ -23,8 +23,8 @@ class StudiesVideoController < ApplicationController
 
       result_step = ResultStep.find_by(scenario_result: scenario_result, scenario_step: scenario_step)
       if !result_step.nil?
-        result_video.result_step = result_step
-        result_video.save
+        step_video.result_step = result_step
+        step_video.save
       end
 
     end

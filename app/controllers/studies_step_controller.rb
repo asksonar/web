@@ -24,7 +24,8 @@ class StudiesStepController < ApplicationController
       completed_seconds: completed_seconds,
       first_transcription: first_transcription,
       total_delighted: total_delighted,
-      total_confused: total_confused
+      total_confused: total_confused,
+      status: 'pending'
     )
 
     # check for any videos that were inserted previously
