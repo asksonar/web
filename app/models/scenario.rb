@@ -4,6 +4,7 @@ class Scenario < ActiveRecord::Base
   has_many :scenario_steps, -> { order step_order: :asc }, inverse_of: :scenario
   has_many :scenario_results, inverse_of: :scenario
   has_many :result_steps, through: :scenario_results
+  has_many :result_steps_pending, through: :scenario_results
   has_many :step_feelings, through: :result_steps
   has_many :step_highlights, through: :result_steps
   enum status: [:drafts, :live, :completed]
@@ -13,7 +14,7 @@ class Scenario < ActiveRecord::Base
   HASHIDS_SALT = '8UTnU7cJm*bP'
 
   def can_add_steps?
-    self.drafts? or self.user_count.nil? or self.user_count == 0
+    self.user_count == 0
   end
 
   def self.create_draft(hash)
@@ -73,7 +74,11 @@ class Scenario < ActiveRecord::Base
   end
 
   def user_completed_count
-    scenario_results.completed.count
+    scenario_results.completed.count - user_uploading_count
+  end
+
+  def user_uploading_count
+    result_steps_pending.select(:scenario_result_id).uniq.count
   end
 
   def where_feeling_delighted

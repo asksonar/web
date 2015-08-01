@@ -1,6 +1,6 @@
 class ScenarioStep < ActiveRecord::Base
   belongs_to :scenario
-  has_many :result_steps_all, inverse_of: :scenario_step, class_name: 'ResultStep'
+  has_many :result_steps_pending, -> { pending.order(created_at: :desc) }, inverse_of: :scenario_step, class_name: 'ResultStep'
   has_many :result_steps, -> { uploaded.order(created_at: :desc) }, inverse_of: :scenario_step
   has_many :step_feelings, through: :result_steps
   has_many :step_highlights, through: :result_steps
