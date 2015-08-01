@@ -1,6 +1,7 @@
 class ScenarioStep < ActiveRecord::Base
   belongs_to :scenario
-  has_many :result_steps, -> { order completed_seconds: :asc }, inverse_of: :scenario_step
+  has_many :result_steps_all, inverse_of: :scenario_step, class_name: 'ResultStep'
+  has_many :result_steps, -> { uploaded.order(created_at: :desc) }, inverse_of: :scenario_step
   has_many :step_feelings, through: :result_steps
   has_many :step_highlights, through: :result_steps
   has_many :step_videos, through: :result_steps
@@ -78,10 +79,6 @@ class ScenarioStep < ActiveRecord::Base
 
   def total_confused
     confused_feelings.count
-  end
-
-  def result_steps_newest
-    result_steps.sort_by(&:created_at).reverse!
   end
 
   protected

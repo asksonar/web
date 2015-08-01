@@ -73,7 +73,7 @@ class Scenario < ActiveRecord::Base
   end
 
   def user_completed_count
-    scenario_results.where(status: ScenarioResult.statuses[:completed]).count
+    scenario_results.completed.count
   end
 
   def where_feeling_delighted
