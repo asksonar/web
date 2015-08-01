@@ -1,4 +1,4 @@
-web_base_url: https://local.asksonar.com
+web_base_url: https://my-local.asksonar.com
 video_base_url: https://s3-us-west-1.amazonaws.com/videos.dev.engsonar.com
 sign_up_url: https://www.asksonar.com/sign-up
 chrome_app_id: plkkekmhfkddjdfgphbbnklkopldedfb
