@@ -74,11 +74,17 @@ class Scenario < ActiveRecord::Base
   end
 
   def user_completed_count
-    scenario_results.completed.count - user_uploading_count
+    completed_ids = scenario_results.completed.select(:id).collect(&:id)
+    uploaded_ids = result_steps.select(:scenario_result_id).collect(&:scenario_result_id)
+
+    (completed_ids & uploaded_ids).count
   end
 
   def user_uploading_count
-    result_steps_pending.select(:scenario_result_id).uniq.count
+    completed_ids = scenario_results.completed.select(:id).collect(&:id)
+    pending_ids = result_steps_pending.select(:scenario_result_id).collect(&:scenario_result_id)
+
+    (completed_ids & pending_ids).count
   end
 
   def where_feeling_delighted
