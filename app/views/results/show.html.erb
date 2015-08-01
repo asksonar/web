@@ -53,21 +53,21 @@
       <div class='row counts-container'>
         <div class='col-xs-6'>
           <h1><i class='feeling-delighted'></i><%= @scenario.total_delighted %></h1>
-          <p class='sub'>moment<%= @scenario.total_delighted != 1 ? 's' : '' %></p>
+          <p class='sub'><%= pp_plural(@scenario.total_delighted, 'moment') %></p>
         </div>
         <div class='col-xs-6'>
           <h1><i class='feeling-confused'></i><%= @scenario.total_confused %></h1>
-          <p class='sub'>moment<%= @scenario.total_confused != 1 ? 's' : '' %></p>
+          <p class='sub'><%= pp_plural(@scenario.total_confused, 'moment') %></p>
         </div>
       </div>
-      <h2><%= @scenario.user_completed_count || 0 %> users</h2>
-      <p class='sub'><%= @scenario.user_count - @scenario.user_completed_count %> incomplete</p>
+      <h2><%= pp_plural_with_number(@scenario.user_completed_count, 'user') %></h2>
+      <p class='sub'><%= @scenario.user_uploading_count %> uploading</p>
     </div>
   </div>
 </section>
 <section class='main-content'>
 
-  <% if @scenario.user_count.nil? || @scenario.user_count == 0 %>
+  <% if @scenario.user_count == 0 %>
 
   <div class='panel panel-hero'>
     <%= bsh_split_panel 'col-sm-8'%>
@@ -125,7 +125,7 @@
               <% end %>"
             >
               <h1><i class='feeling-delighted'></i><%= scenario_step.total_delighted %></h1>
-              <p class='sub'>moment<%= scenario_step.total_delighted != 1 ? 's' : '' %></p>
+              <p class='sub'><%= pp_plural(scenario_step.total_delighted, 'moment') %></p>
             </a>
           </div>
           <div class='col-xs-6'>
@@ -138,7 +138,7 @@
               <% end %>"
             >
               <h1><i class='feeling-confused'></i><%= scenario_step.total_confused %></h1>
-              <p class='sub'>moment<%= scenario_step.total_confused != 1 ? 's' : '' %></p>
+              <p class='sub'><%= pp_plural(scenario_step.total_confused, 'moment') %></p>
             </a>
           </div>
         </div>
@@ -183,7 +183,7 @@
           <div id='graph<%= scenario_step.step_order%>' class='graph'></div>
         </div>
         <div class='average-time pull-left'><%= scenario_step.average_completed_minutes %> average</div>
-        <p class='sub pull-right'><%= scenario_step.completed_users %> users</p>
+        <p class='sub pull-right'><%= pp_plural_with_number(scenario_step.completed_users, 'user') %></p>
 
       </div>
     </div>

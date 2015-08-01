@@ -17,7 +17,7 @@
           <p><%= scenario.description %></p>
         </div>
         <div class='col-sm-4'>
-          <h2><%= scenario.scenario_steps.count %> step<%= scenario.scenario_steps.count == 1 ? '' : 's'%></h2>
+          <h2><%= pp_plural_with_number(scenario.scenario_steps.count, 'step') %></h2>
           <p class='sub'>last updated <%= time_ago_in_words(scenario.updated_at) %> ago</p>
         </div>
       </div>
