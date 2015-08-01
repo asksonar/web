@@ -60,7 +60,7 @@
           <p class='sub'><%= pp_plural(@scenario.total_confused, 'moment') %></p>
         </div>
       </div>
-      <h2><%= pp_plural_with_number(@scenario.user_completed_count, 'user') %></h2>
+      <h2><%= @scenario.user_completed_count %> completed</h2>
       <p class='sub'><%= @scenario.user_uploading_count %> uploading</p>
     </div>
   </div>
@@ -148,7 +148,7 @@
       <div class='col-xs-8'>
         <div class='results-container'>
 
-        <% scenario_step.result_steps.each do |result_step| %>
+        <% scenario_step.result_steps.order(created_at: :desc).each do |result_step| %>
           <a class='video-link'
             data-result-step-hashid='<%=result_step.hashid%>'
           >
