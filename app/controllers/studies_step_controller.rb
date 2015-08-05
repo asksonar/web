@@ -55,6 +55,8 @@ class StudiesStepController < ApplicationController
       )
     end
 
+    Resque.enqueue(ProcessTranscriptionWorker, result_step.id)
+
     render plain: 'OK'
   end
 
