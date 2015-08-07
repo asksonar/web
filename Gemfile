@@ -51,6 +51,8 @@ gem 'resque', '~> 1'
 gem 'resque-web', require: 'resque_web'
 # use s3 calls
 gem 'aws-sdk'
+# track metrics using mixpanel
+gem 'mixpanel-ruby'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables

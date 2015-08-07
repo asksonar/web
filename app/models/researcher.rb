@@ -5,6 +5,7 @@ class Researcher < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   belongs_to :company
   before_create :create_company
+  after_create :notify_mixpanel
   validates_presence_of :full_name
 
   enum role: [:user, :admin, :super_admin]
@@ -14,6 +15,16 @@ class Researcher < ActiveRecord::Base
   private
     def create_company
       self.company = Company.create();
+    end
+
+    def notify_mixpanel
+      Analytics.tracker.track(self.id, 'Researcher Created')
+      Analytics.tracker.people.set(self.id, {
+        'full_name'       => self.full_name,
+        'company_id'      => self.company_id,
+        'email'           => self.email,
+        'created_at'      => self.created_at
+      });
     end
 
 end
