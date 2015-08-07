@@ -9,6 +9,7 @@ class Scenario < ActiveRecord::Base
   has_many :step_highlights, through: :result_steps
   enum status: [:drafts, :live, :completed]
 
+  after_create :notify_mixpanel_create
   before_validation :sanitize_and_whitespace_description_title
 
   HASHIDS_SALT = '8UTnU7cJm*bP'
@@ -145,6 +146,16 @@ class Scenario < ActiveRecord::Base
       sanitizer = Rails::Html::FullSanitizer.new
       self.description = sanitizer.sanitize(self.description)
       self.title = sanitizer.sanitize(self.title)
+    end
+
+    def notify_mixpanel_create
+      Analytics.tracker.people.increment(self.created_by.id, {
+         'Study Created' => 1
+      })
+    end
+
+    def notify_mixpanel_update
+
     end
 
 end
