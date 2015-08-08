@@ -235,7 +235,7 @@ DEPENDENCIES
   rails-assets-animate.css!
   rails-assets-autosize!
   rails-assets-bootstrap-sass!
-  rails-assets-fontawesome!
+  rails-assets-fontawesome (~> 4.3.0)!
   rails-assets-handlebars!
   rails-assets-remarkable-bootstrap-notify!
   rails-assets-videojs (~> 4)!
