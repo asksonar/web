@@ -58,13 +58,13 @@ source 'https://rails-assets.org' do
   # bootstrap with sass variables
   gem 'rails-assets-bootstrap-sass'
   # more icon elements than bootstrap has
-  gem 'rails-assets-fontawesome'
+  gem 'rails-assets-fontawesome', '~> 4.3.0' # verison 4.4.0 uses /fonts instead of /assets, which breaks
   # amcharts chart library
   gem 'rails-assets-handlebars'
   # makes our textarea elements dynamically resize as people type
   gem 'rails-assets-amcharts'
   # videojs html5 video library
-  gem 'rails-assets-videojs', '~> 4'
+  gem 'rails-assets-videojs', '~> 4' # version 5 is too new, can't load the js/css files correctly
   # videojs plugin for markers
   gem 'rails-assets-videojs-markers'
   # videojs plugin for keeping the bar progress bar always visible
