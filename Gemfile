@@ -58,7 +58,7 @@ source 'https://rails-assets.org' do
   # bootstrap with sass variables
   gem 'rails-assets-bootstrap-sass'
   # more icon elements than bootstrap has
-  gem 'rails-assets-fontawesome', '~> 4.3.0' # verison 4.4.0 uses /fonts instead of /assets, which breaks
+  gem 'rails-assets-fontawesome', '4.3.0' # verison 4.4.0 uses /fonts instead of /assets, which breaks
   # amcharts chart library
   gem 'rails-assets-handlebars'
   # makes our textarea elements dynamically resize as people type
