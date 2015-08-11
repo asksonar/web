@@ -3,6 +3,9 @@ class StudiesController < ApplicationController
 
   def show
     @scenario = Scenario.find_by_hashid(params[:id])
+    if current_researcher.nil?
+      Analytics.instance.respondent_landed(request.remote_ip, @scenario.created_by)
+    end
   end
 
   def create
@@ -20,6 +23,8 @@ class StudiesController < ApplicationController
 
     scenario_result = ScenarioResult.create(scenario: scenario, panelist: panelist)
     render json: {hashid: scenario_result.hashid}
+
+    Analytics.instance.respondent_launched(request.remote_ip, scenario.created_by)
   end
 
   def update
@@ -30,6 +35,14 @@ class StudiesController < ApplicationController
     scenario_result.save()
 
     render plain: 'OK'
+
+    if scenario_result.inprogress?
+      Analytics.instance.respondent_started(request.remote_ip, scenario_result.scenario.created_by)
+    elsif scenario_result.completed?
+      Analytics.instance.respondent_completed(request.remote_ip, scenario_result.scenario.created_by)
+    elsif scenario_result.aborted?
+      Analytics.instance.respondent_aborted(request.remote_ip, scenario_result.scenario.created_by)
+    end
   end
 
 end
