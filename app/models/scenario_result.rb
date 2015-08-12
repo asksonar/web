@@ -44,6 +44,10 @@ class ScenarioResult < ActiveRecord::Base
     return scenario.company.name
   end
 
+  def completed_seconds
+    result_steps.sum(:completed_seconds)
+  end
+
   def self.generate_new_sample_result(new_scenario)
     ActiveRecord::Base.transaction do
 

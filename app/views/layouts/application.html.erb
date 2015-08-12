@@ -10,9 +10,11 @@
   </title>
   <%= favicon_link_tag 'sonarFavicon.ico' %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
+
+  <%= render partial: 'utility/metadata' %>
+
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
-  <%= javascript_tag "var AUTH_TOKEN = '#{form_authenticity_token}';" if protect_against_forgery? %>
   <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/ifnadmakmckbjjhbnjcjpfeeljhhmgib">
 </head>
 <body>
@@ -38,7 +40,6 @@
 
   <%= render partial: 'utility/flash' %>
   <%= render partial: 'utility/overlay' %>
-  <%= render partial: 'utility/metadata' %>
 
   <%= render partial: 'utility/walkthrough' if params[:walkthrough] %>
 
