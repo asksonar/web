@@ -150,11 +150,11 @@ class Scenario < ActiveRecord::Base
     end
 
     def track_study_created
-      Analytics.instance.study_created(self.created_by, self.status)
+      Analytics.instance.study_created(self.created_by, self)
     end
 
     def track_draft_published
-      Analytics.instance.draft_published(self.created_by)
+      Analytics.instance.draft_published(self.created_by, self)
     end
 
 end

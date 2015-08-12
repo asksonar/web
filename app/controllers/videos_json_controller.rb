@@ -25,7 +25,7 @@ class VideosJsonController < ApplicationController
     json['highlighted_array'] = @result_step.highlights.map { |highlight| highlight.offset_seconds }
     render json: json
 
-    Analytics.instance.result_video_viewed(current_researcher)
+    Analytics.instance.result_video_viewed(current_researcher, @result_step.scenario_result.scenario, @result_step)
   end
 
 end
