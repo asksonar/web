@@ -13,9 +13,9 @@ class ApplicationController < ActionController::Base
 
     def track_page_viewed
       if current_researcher.nil?
-        Analytics.instance.page_viewed_signed_out(request.remote_ip, request.url)
+        Analytics.instance.page_viewed_signed_out(request.remote_ip, request)
       else
-        Analytics.instance.page_viewed_signed_in(current_researcher, request.url)
+        Analytics.instance.page_viewed_signed_in(current_researcher, request)
       end
     end
 

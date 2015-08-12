@@ -7,8 +7,8 @@ class ShareVideosController < ApplicationController
     @user = @result_step.panelist
 
     created_by_id = @scenario.created_by.id
-    if current_researcher.id != created_by_id
-      Analytics.instance.share_video_viewed(remote_ip, @scenario.created_by)
+    if current_researcher.nil? or current_researcher.id != created_by_id
+      Analytics.instance.share_video_viewed(request.remote_ip, @scenario.created_by)
     end
   end
 end
