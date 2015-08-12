@@ -7,6 +7,37 @@ class Analytics
       #Resque.enqueue(ProcessMixpanelWorker, type, message)
       @consumer.send!(type, message)
     end
+    @user_agent_parser = UserAgentParser::Parser.new
+  end
+
+  def page_viewed_signed_out(ip_address, request)
+    user_agent = @user_agent_parser.parse(request.user_agent)
+    @tracker.track(ip_address, 'Page viewed', request.query_parameters.merge({
+      'action' => request.parameters[:controller] + '#' + request.parameters[:action],
+      'signed_in' => false,
+      '$browser' =>  user_agent.family,
+      '$browser_version' => user_agent.version.major,
+      '$os' => user_agent.os.name,
+      '$current_url' => request.url,
+      '$device' => user_agent.device.name
+    }), ip_address)
+  end
+
+  def page_viewed_signed_in(researcher, ip_address, request)
+    user_agent = @user_agent_parser.parse(request.user_agent)
+    @tracker.track(researcher.hashid, 'Page viewed', request.query_parameters.merge({
+      action: request.parameters[:controller] + '#' + request.parameters[:action],
+      signed_in: true,
+      '$browser' =>  user_agent.family,
+      '$browser_version' => user_agent.version.major,
+      '$os' => user_agent.os.name,
+      '$current_url' => request.url,
+      '$device' => user_agent.device.name
+    }), ip_address)
+    @tracker.people.set(researcher.id, {
+      'Last page viewed' => Time.new
+    })
+    @tracker.people.plus_one(researcher.id, 'Total page viewed')
   end
 
   def researcher_created(researcher)
