@@ -23,6 +23,7 @@
 //= require remarkable-bootstrap-notify
 //= require zendesk_widget
 //= require mixpanel
+//= require mixpanel/mixpanel
 
 // insert new packages above this line
 
