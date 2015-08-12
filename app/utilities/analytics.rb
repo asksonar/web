@@ -58,7 +58,7 @@ class Analytics
 
   def share_video_viewed(researcher, ip_address, scenario, result_step)
     @tracker.track(researcher.id, 'Share video viewed', {
-      'ip' => ip_address,
+      'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
       'video hashid' => result_step.hashid
     })
@@ -70,7 +70,7 @@ class Analytics
 
   def respondent_landed(researcher, ip_address, scenario)
     @tracker.track(researcher.id, 'Respondent landed', {
-      'ip' => ip_address,
+      'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid
     })
     @tracker.people.set(researcher.id, {
@@ -81,7 +81,7 @@ class Analytics
 
   def respondent_launched(researcher, ip_address, scenario, scenario_result)
     @tracker.track(researcher.id, 'Respondent launched', {
-      'ip' => ip_address,
+      'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
       'result hashid' => scenario_result.hashid
     })
@@ -92,8 +92,8 @@ class Analytics
   end
 
   def respondent_started(researcher, ip_address, scenario, scenario_result)
-    @tracker.track(ip_address, 'Respondent started', {
-      'ip' => ip_address,
+    @tracker.track(researcher.id, 'Respondent started', {
+      'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
       'result hashid' => scenario_result.hashid
     })
@@ -104,8 +104,8 @@ class Analytics
   end
 
   def respondent_completed(researcher, ip_address, scenario, scenario_result)
-    @tracker.track(ip_address, 'Respondent completed', {
-      'ip' => ip_address,
+    @tracker.track(researcher.id, 'Respondent completed', {
+      'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
       'result hashid' => scenario_result.hashid
     })
@@ -116,8 +116,8 @@ class Analytics
   end
 
   def respondent_aborted(researcher, ip_address, scenario, scenario_result)
-    @tracker.track(ip_address, 'Respondent aborted', {
-      'ip' => ip_address,
+    @tracker.track(researcher.id, 'Respondent aborted', {
+      'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
       'result hashid' => scenario_result.hashid
     })
@@ -128,8 +128,8 @@ class Analytics
   end
 
   def respondent_uploaded(researcher, ip_address, scenario, scenario_result)
-    @tracker.track(ip_address, 'Respondent uploaded', {
-      'ip' => ip_address,
+    @tracker.track(researcher.id, 'Respondent uploaded', {
+      'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
       'result hashid' => scenario_result.hashid
     })
