@@ -22,6 +22,7 @@
 //= require zeroclipboard
 //= require remarkable-bootstrap-notify
 //= require zendesk_widget
+//= require mixpanel
 
 // insert new packages above this line
 
@@ -29,4 +30,3 @@
 // insert packages that need to be loaded in order above this line
 
 //= require_tree .
-

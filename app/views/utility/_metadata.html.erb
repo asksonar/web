@@ -1,0 +1,11 @@
+<script type='text/javascript'>
+  var sonar = {};
+  sonar.user = {
+    hashid: '<%= current_researcher.nil? ? nil : current_researcher.hashid %>'
+  };
+  sonar.request = {
+    controller: '<%= request.params[:controller] %>',
+    action: '<%= request.params[:action] %>'
+  }
+
+</script>

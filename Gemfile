@@ -77,6 +77,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-remarkable-bootstrap-notify'
   # add animations for notify
   gem 'rails-assets-animate.css'
+  # add animations for notify
+  gem 'rails-assets-mixpanel'
 end
 
 group :development, :test do

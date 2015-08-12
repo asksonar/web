@@ -1,0 +1,19 @@
+$(function(){
+  mixpanel.init('<%= Rails.configuration.properties['mixpanel_token'] %>');
+
+  var signed_in = sonar.user.hashid;
+  if (signed_in) {
+    mixpanel.identify(sonar.user.hashid);
+    mixpanel.people.set({
+      'Last page viewed': new Date()
+    });
+    mixpanel.people.increment({
+      'Total page viewed': 1
+    });
+  }
+
+  mixpanel.track('Page viewed', {
+    action: sonar.request.controller + '#' + sonar.request.action,
+    signed_in: signed_in
+  });
+});
