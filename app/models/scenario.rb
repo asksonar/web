@@ -9,6 +9,7 @@ class Scenario < ActiveRecord::Base
   has_many :step_highlights, through: :result_steps
   enum status: [:drafts, :live, :completed]
 
+  after_create :track_study_created
   before_validation :sanitize_and_whitespace_description_title
 
   HASHIDS_SALT = '8UTnU7cJm*bP'
@@ -37,6 +38,7 @@ class Scenario < ActiveRecord::Base
       status: Scenario.statuses[:live],
       published_at: Time.new
     }))
+    track_draft_published()
   end
 
   def set_live()
@@ -145,6 +147,14 @@ class Scenario < ActiveRecord::Base
       sanitizer = Rails::Html::FullSanitizer.new
       self.description = sanitizer.sanitize(self.description)
       self.title = sanitizer.sanitize(self.title)
+    end
+
+    def track_study_created
+      Analytics.instance.study_created(self.created_by, self)
+    end
+
+    def track_draft_published
+      Analytics.instance.draft_published(self.created_by, self)
     end
 
 end

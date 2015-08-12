@@ -24,6 +24,8 @@ class VideosJsonController < ApplicationController
     json['confused_array'] = @result_step.feelings_confused.map { |feeling| feeling.feeling_at_seconds }
     json['highlighted_array'] = @result_step.highlights.map { |highlight| highlight.offset_seconds }
     render json: json
+
+    Analytics.instance.result_video_viewed(current_researcher, @result_step.scenario_result.scenario, @result_step)
   end
 
 end

@@ -37,6 +37,11 @@ class StudiesVideoController < ApplicationController
     uuid = params[:id]
     Resque.enqueue(ProcessUploadedS3VideoWorker, uuid)
     render plain: 'OK'
+
+
+    scenario = scenario_result.scenario
+
+    Analytics.instance.respondent_uploaded(scenario.created_by, request.remote_ip, scenario, scenario_result)
   end
 
 end

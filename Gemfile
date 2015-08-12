@@ -51,12 +51,14 @@ gem 'resque', '~> 1'
 gem 'resque-web', require: 'resque_web'
 # use s3 calls
 gem 'aws-sdk'
+# track metrics using mixpanel
+gem 'mixpanel-ruby'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables
   gem 'rails-assets-bootstrap-sass'
   # more icon elements than bootstrap has
-  gem 'rails-assets-fontawesome', '~> 4.3.0' # verison 4.4.0 uses /fonts instead of /assets, which breaks
+  gem 'rails-assets-fontawesome', '4.3.0' # verison 4.4.0 uses /fonts instead of /assets, which breaks
   # amcharts chart library
   gem 'rails-assets-handlebars'
   # makes our textarea elements dynamically resize as people type
@@ -75,6 +77,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-remarkable-bootstrap-notify'
   # add animations for notify
   gem 'rails-assets-animate.css'
+  # add animations for notify
+  gem 'rails-assets-mixpanel'
 end
 
 group :development, :test do

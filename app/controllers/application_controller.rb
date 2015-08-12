@@ -9,5 +9,4 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.for(:sign_up) << :full_name
       devise_parameter_sanitizer.for(:account_update) << :full_name
     end
-
 end
