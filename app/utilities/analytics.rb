@@ -17,7 +17,7 @@ class Analytics
       'action' => request.parameters[:controller] + '#' + request.parameters[:action],
       'is signed in' => false,
       '$browser' =>  user_agent.family,
-      '$browser_version' => user_agent.version.major,
+      '$browser_version' => user_agent.version.nil? ? nil : user_agent.version.major,
       '$os' => user_agent.os.name,
       '$device' => user_agent.device.name,
       '$current_url' => request.url
@@ -31,7 +31,7 @@ class Analytics
       'action' => request.parameters[:controller] + '#' + request.parameters[:action],
       'is signed in' => true,
       '$browser' =>  user_agent.family,
-      '$browser_version' => user_agent.version.major,
+      '$browser_version' => user_agent.version.nil? ? nil : user_agent.version.major,
       '$os' => user_agent.os.name,
       '$device' => user_agent.device.name,
       '$current_url' => request.url
