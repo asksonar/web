@@ -4,7 +4,7 @@ class StudiesController < ApplicationController
   def show
     @scenario = Scenario.find_by_hashid(params[:id])
     if current_researcher.nil?
-      Analytics.instance.respondent_landed(@scenario.created_by, request.remote_ip, @scenario)
+      Analytics.instance.respondent_landed(request.remote_ip, @scenario.created_by, @scenario)
     end
   end
 
@@ -24,7 +24,7 @@ class StudiesController < ApplicationController
     scenario_result = ScenarioResult.create(scenario: scenario, panelist: panelist)
     render json: {hashid: scenario_result.hashid}
 
-    Analytics.instance.respondent_launched(scenario.created_by, request.remote_ip, scenario, scenario_result)
+    Analytics.instance.respondent_launched(request.remote_ip, scenario.created_by, scenario, scenario_result)
   end
 
   def update
@@ -39,11 +39,11 @@ class StudiesController < ApplicationController
     scenario = scenario_result.scenario
 
     if scenario_result.inprogress?
-      Analytics.instance.respondent_started(scenario.created_by, request.remote_ip, scenario, scenario_result)
+      Analytics.instance.respondent_started(request.remote_ip, scenario.created_by, scenario, scenario_result)
     elsif scenario_result.completed?
-      Analytics.instance.respondent_completed(scenario.created_by, request.remote_ip, scenario, scenario_result)
+      Analytics.instance.respondent_completed(request.remote_ip, scenario.created_by, scenario, scenario_result)
     elsif scenario_result.aborted?
-      Analytics.instance.respondent_aborted(scenario.created_by, request.remote_ip, scenario, scenario_result)
+      Analytics.instance.respondent_aborted(request.remote_ip, scenario.created_by, scenario, scenario_result)
     end
   end
 

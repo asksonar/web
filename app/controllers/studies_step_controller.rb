@@ -58,7 +58,7 @@ class StudiesStepController < ApplicationController
     Resque.enqueue(ProcessTranscriptionWorker, result_step.id)
 
     scenario = scenario_result.scenario
-    Analytics.instance.respondent_stepped(scenario.created_by, request.remote_ip, scenario, scenario_result, scenario_step, result_step)
+    Analytics.instance.respondent_stepped(request.remote_ip, scenario.created_by, scenario, scenario_result, scenario_step, result_step)
 
     render plain: 'OK'
   end

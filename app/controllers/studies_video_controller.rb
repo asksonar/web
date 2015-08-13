@@ -41,7 +41,7 @@ class StudiesVideoController < ApplicationController
 
     scenario = scenario_result.scenario
 
-    Analytics.instance.respondent_uploaded(scenario.created_by, request.remote_ip, scenario, scenario_result)
+    Analytics.instance.respondent_uploaded(request.remote_ip, scenario.created_by, scenario, scenario_result)
   end
 
 end
