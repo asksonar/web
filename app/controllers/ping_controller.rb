@@ -1,4 +1,6 @@
 class PingController < ApplicationController
+  skip_after_action :track_page_viewed
+
   def index
 
     details = {}

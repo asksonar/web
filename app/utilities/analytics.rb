@@ -37,9 +37,13 @@ class Analytics
       '$current_url' => request.url
     }), ip_address)
     @tracker.people.set(researcher.hashid, {
-      'Last page viewed' => Time.new
-    })
-    @tracker.people.plus_one(researcher.hashid, 'Total page viewed')
+      'Last page viewed' => Time.new,
+      '$browser' =>  user_agent.family,
+      '$browser_version' => user_agent.version.nil? ? nil : user_agent.version.major,
+      '$os' => user_agent.os.name,
+      '$device' => user_agent.device.name
+    }, ip_address)
+    @tracker.people.plus_one(researcher.hashid, 'Total page viewed', 0)
   end
 
   def researcher_created(researcher)
@@ -54,7 +58,7 @@ class Analytics
       'Researcher hashid' => researcher.hashid,
       '$email' => researcher.email,
       '$created' => researcher.created_at
-    });
+    }, 0);
   end
 
   def study_created(researcher, scenario)
@@ -65,8 +69,8 @@ class Analytics
     })
     @tracker.people.set(researcher.hashid, {
       'Last created study' => Time.new
-    })
-    @tracker.people.plus_one(researcher.hashid, 'Total created study')
+    }, 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total created study', 0)
   end
 
   def draft_published(researcher, scenario)
@@ -76,8 +80,8 @@ class Analytics
     })
     @tracker.people.set(researcher.hashid, {
       'Last published draft' => Time.new
-    })
-    @tracker.people.plus_one(researcher.hashid, 'Total published draft')
+    }, 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total published draft', 0)
   end
 
   def result_video_viewed(researcher, scenario, result_step, is_modal)
@@ -90,8 +94,8 @@ class Analytics
     })
     @tracker.people.set(researcher.hashid, {
       'Last viewed result video' => Time.new
-    })
-    @tracker.people.plus_one(researcher.hashid, 'Total viewed result video')
+    }, 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total viewed result video', 0)
   end
 
   def share_video_viewed(colleague, ip_address, researcher, scenario, result_step)
@@ -111,8 +115,8 @@ class Analytics
     })
     @tracker.people.set(researcher.hashid, {
       'Last colleague viewed share video' => Time.new
-    })
-    @tracker.people.plus_one(researcher.hashid, 'Total colleague viewed share video')
+    }, 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total colleague viewed share video', 0)
   end
 
   def respondent_landed(ip_address, researcher, scenario)
@@ -128,8 +132,8 @@ class Analytics
     })
     @tracker.people.set(researcher.hashid, {
       'Last respondent landed' => Time.new
-    })
-    @tracker.people.plus_one(researcher.hashid, 'Total respondent landed')
+    }, 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total respondent landed', 0)
   end
 
   def respondent_launched(ip_address, researcher, scenario, scenario_result)
@@ -147,8 +151,8 @@ class Analytics
     })
     @tracker.people.set(researcher.hashid, {
       'Last respondent launched' => Time.new
-    })
-    @tracker.people.plus_one(researcher.hashid, 'Total respondent launched')
+    }, 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total respondent launched', 0)
   end
 
   def respondent_started(ip_address, researcher, scenario, scenario_result)
@@ -166,8 +170,8 @@ class Analytics
     })
     @tracker.people.set(researcher.hashid, {
       'Last respondent started' => Time.new
-    })
-    @tracker.people.plus_one(researcher.hashid, 'Total respondent started')
+    }, 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total respondent started', 0)
   end
 
   def respondent_stepped(ip_address, researcher, scenario, scenario_result, scenario_step, result_step)
@@ -191,8 +195,8 @@ class Analytics
     })
     @tracker.people.set(researcher.hashid, {
       'Last respondent stepped' => Time.new
-    })
-    @tracker.people.plus_one(researcher.hashid, 'Total respondent stepped')
+    }, 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total respondent stepped', 0)
   end
 
   def respondent_completed(ip_address, researcher, scenario, scenario_result)
@@ -210,8 +214,8 @@ class Analytics
     })
     @tracker.people.set(researcher.hashid, {
       'Last respondent completed' => Time.new
-    })
-    @tracker.people.plus_one(researcher.hashid, 'Total respondent completed')
+    }, 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total respondent completed', 0)
   end
 
   def respondent_aborted(ip_address, researcher, scenario, scenario_result)
@@ -229,8 +233,8 @@ class Analytics
     })
     @tracker.people.set(researcher.hashid, {
       'Last respondent aborted' => Time.new
-    })
-    @tracker.people.plus_one(researcher.hashid, 'Total respondent aborted')
+    }, 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total respondent aborted', 0)
   end
 
   def respondent_uploaded(ip_address, researcher, scenario, scenario_result)
@@ -248,8 +252,8 @@ class Analytics
     })
     @tracker.people.set(researcher.hashid, {
       'Last respondent uploaded' => Time.new
-    })
-    @tracker.people.plus_one(researcher.hashid, 'Total respondent uploaded')
+    }, 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total respondent uploaded', 0)
   end
 
 end
