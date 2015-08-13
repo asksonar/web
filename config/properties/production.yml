@@ -11,4 +11,4 @@ s3_upload_bucket: 'upload.asksonar.com'
 s3_videos_bucket: 'videos.asksonar.com'
 s3_backup_bucket: 'backup.asksonar.com'
 
-mixpanel_token: 75c1bb9ac2c988436ec62f0b992b0891
+mixpanel_token: 32a9d9b381fa35fd2fdd8ad9c715656b
