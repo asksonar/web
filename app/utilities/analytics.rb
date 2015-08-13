@@ -2,10 +2,8 @@ class Analytics
   include Singleton
 
   def initialize
-    @consumer = Mixpanel::Consumer.new
     @tracker = Mixpanel::Tracker.new(Rails.configuration.properties['mixpanel_token']) do |type, message|
-      #Resque.enqueue(ProcessMixpanelWorker, type, message)
-      @consumer.send!(type, message)
+      Resque.enqueue(ProcessMixpanelWorker, type, message)
     end
     @user_agent_parser = UserAgentParser::Parser.new
   end

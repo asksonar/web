@@ -11,4 +11,4 @@ s3_upload_bucket: 'upload.dev.engsonar.com'
 s3_videos_bucket: 'videos.dev.engsonar.com'
 s3_backup_bucket: 'backup.dev.engsonar.com'
 
-mixpanel_token: caeac361d80e47dc901264c02adae7ee
+mixpanel_token: 288067b052c38b64cc6cce9374d93339
