@@ -7,7 +7,7 @@
   <div class='panel'>
 
     <%= bootstrap_form_for resource, as: resource_name, url: session_path(resource_name), layout: :horizontal, inline_errors: false do |f| %>
-      <%= f.email_field :email, autofocus: true %>
+      <%= f.email_field :email, autofocus: true, value: params[:email] or '' %>
       <%= f.password_field :password, autocomplete: "off" %>
       <% if devise_mapping.rememberable? -%>
         <%= f.form_group :remember_me, class: 'ctn-remember-forgot' do %>
