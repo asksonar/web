@@ -4,8 +4,11 @@ class Researcher < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   belongs_to :company
+
   before_create :create_company
   after_create :track_researcher_created
+  after_create :welcome_email
+
   validates_presence_of :full_name
 
   enum role: [:user, :admin, :super_admin]
@@ -19,6 +22,10 @@ class Researcher < ActiveRecord::Base
 
     def track_researcher_created
       Analytics.instance.researcher_created(self)
+    end
+
+    def welcome_email
+      Mailer.welcome_email(self).deliver_now
     end
 
 end
