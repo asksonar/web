@@ -7,10 +7,45 @@ class Analytics
       #Resque.enqueue(ProcessMixpanelWorker, type, message)
       @consumer.send!(type, message)
     end
+    @user_agent_parser = UserAgentParser::Parser.new
+  end
+
+  def page_viewed_signed_out(ip_address, request)
+    user_agent = @user_agent_parser.parse(request.user_agent)
+    @tracker.track(ip_address, 'Page viewed', request.query_parameters.merge({
+      'time' => Time.new,
+      'action' => request.parameters[:controller] + '#' + request.parameters[:action],
+      'is signed in' => false,
+      '$browser' =>  user_agent.family,
+      '$browser_version' => user_agent.version.major,
+      '$os' => user_agent.os.name,
+      '$device' => user_agent.device.name,
+      '$current_url' => request.url
+    }), ip_address)
+  end
+
+  def page_viewed_signed_in(researcher, ip_address, request)
+    user_agent = @user_agent_parser.parse(request.user_agent)
+    @tracker.track(researcher.hashid, 'Page viewed', request.query_parameters.merge({
+      'time' => Time.new,
+      'action' => request.parameters[:controller] + '#' + request.parameters[:action],
+      'is signed in' => true,
+      '$browser' =>  user_agent.family,
+      '$browser_version' => user_agent.version.major,
+      '$os' => user_agent.os.name,
+      '$device' => user_agent.device.name,
+      '$current_url' => request.url
+    }), ip_address)
+    @tracker.people.set(researcher.hashid, {
+      'Last page viewed' => Time.new
+    })
+    @tracker.people.plus_one(researcher.hashid, 'Total page viewed')
   end
 
   def researcher_created(researcher)
-    @tracker.track(researcher.hashid, 'Researcher created')
+    @tracker.track(researcher.hashid, 'Researcher signed up', {
+      'time' => Time.new
+    })
     @tracker.people.set(researcher.hashid, {
       '$name' => researcher.full_name,
       'Company id' => researcher.company.id,
@@ -23,53 +58,71 @@ class Analytics
   end
 
   def study_created(researcher, scenario)
-    @tracker.track(researcher.hashid, 'Study created', {
+    @tracker.track(researcher.hashid, 'Researcher created study', {
+      'time' => Time.new,
       'status' => scenario.status,
       'scenario hashid' => scenario.hashid
     })
     @tracker.people.set(researcher.hashid, {
-      'Last study created' => Time.new
+      'Last created study' => Time.new
     })
-    @tracker.people.plus_one(researcher.hashid, 'Total study created')
+    @tracker.people.plus_one(researcher.hashid, 'Total created study')
   end
 
   def draft_published(researcher, scenario)
-    @tracker.track(researcher.hashid, 'Draft published', {
+    @tracker.track(researcher.hashid, 'Researcher published draft', {
+      'time' => Time.new,
       'scenario hashid' => scenario.hashid
     })
     @tracker.people.set(researcher.hashid, {
-      'Last draft published' => Time.new
+      'Last published draft' => Time.new
     })
-    @tracker.people.plus_one(researcher.hashid, 'Total draft published')
+    @tracker.people.plus_one(researcher.hashid, 'Total published draft')
   end
 
-  def result_video_viewed(researcher, scenario, result_step)
-    @tracker.track(researcher.hashid, 'Result video viewed', {
+  def result_video_viewed(researcher, scenario, result_step, is_modal)
+    @tracker.track(researcher.hashid, 'Researcher viewed result video', {
+      'time' => Time.new,
+      'is modal' => is_modal,
       'scenario hashid' => scenario.hashid,
       'video hashid' => result_step.hashid,
       'video seconds' => result_step.completed_seconds
     })
     @tracker.people.set(researcher.hashid, {
-      'Last result video viewed' => Time.new
+      'Last viewed result video' => Time.new
     })
-    @tracker.people.plus_one(researcher.hashid, 'Total result video viewed')
+    @tracker.people.plus_one(researcher.hashid, 'Total viewed result video')
   end
 
-  def share_video_viewed(researcher, ip_address, scenario, result_step)
-    @tracker.track(researcher.hashid, 'Share video viewed', {
+  def share_video_viewed(colleague, ip_address, researcher, scenario, result_step)
+    @tracker.track(researcher.hashid, "Researcher's colleague viewed share video", {
+      'time' => Time.new,
+      'ip_address' => ip_address,
+      'scenario hashid' => scenario.hashid,
+      'video hashid' => result_step.hashid,
+      'video seconds' => result_step.completed_seconds
+    })
+    @tracker.track(!colleague.nil? ? colleague.hashid : ip_address, 'Colleague viewed share video', {
+      'time' => Time.new,
       'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
       'video hashid' => result_step.hashid,
       'video seconds' => result_step.completed_seconds
     })
     @tracker.people.set(researcher.hashid, {
-      'Last share video viewed' => Time.new
+      'Last colleague viewed share video' => Time.new
     })
-    @tracker.people.plus_one(researcher.hashid, 'Total share video viewed')
+    @tracker.people.plus_one(researcher.hashid, 'Total colleague viewed share video')
   end
 
-  def respondent_landed(researcher, ip_address, scenario)
-    @tracker.track(researcher.hashid, 'Respondent landed', {
+  def respondent_landed(ip_address, researcher, scenario)
+    @tracker.track(ip_address, 'Respondent landed', {
+      'time' => Time.new,
+      'ip_address' => ip_address,
+      'scenario hashid' => scenario.hashid
+    })
+    @tracker.track(researcher.hashid, "Researcher's respondent landed", {
+      'time' => Time.new,
       'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid
     })
@@ -79,8 +132,15 @@ class Analytics
     @tracker.people.plus_one(researcher.hashid, 'Total respondent landed')
   end
 
-  def respondent_launched(researcher, ip_address, scenario, scenario_result)
-    @tracker.track(researcher.hashid, 'Respondent launched', {
+  def respondent_launched(ip_address, researcher, scenario, scenario_result)
+    @tracker.track(ip_address, 'Respondent launched', {
+      'time' => Time.new,
+      'ip_address' => ip_address,
+      'scenario hashid' => scenario.hashid,
+      'result hashid' => scenario_result.hashid
+    })
+    @tracker.track(researcher.hashid, "Researcher's respondent launched", {
+      'time' => Time.new,
       'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
       'result hashid' => scenario_result.hashid
@@ -91,8 +151,15 @@ class Analytics
     @tracker.people.plus_one(researcher.hashid, 'Total respondent launched')
   end
 
-  def respondent_started(researcher, ip_address, scenario, scenario_result)
-    @tracker.track(researcher.hashid, 'Respondent started', {
+  def respondent_started(ip_address, researcher, scenario, scenario_result)
+    @tracker.track(ip_address, 'Respondent started', {
+      'time' => Time.new,
+      'ip_address' => ip_address,
+      'scenario hashid' => scenario.hashid,
+      'result hashid' => scenario_result.hashid
+    })
+    @tracker.track(researcher.hashid, "Researcher's respondent started", {
+      'time' => Time.new,
       'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
       'result hashid' => scenario_result.hashid
@@ -103,8 +170,18 @@ class Analytics
     @tracker.people.plus_one(researcher.hashid, 'Total respondent started')
   end
 
-  def respondent_stepped(researcher, ip_address, scenario, scenario_result, scenario_step, result_step)
-    @tracker.track(researcher.hashid, 'Respondent stepped', {
+  def respondent_stepped(ip_address, researcher, scenario, scenario_result, scenario_step, result_step)
+    @tracker.track(ip_address, 'Respondent stepped', {
+      'time' => Time.new,
+      'ip_address' => ip_address,
+      'scenario hashid' => scenario.hashid,
+      'result hashid' => scenario_result.hashid,
+      'step order' => scenario_step.step_order,
+      'video hashid' => result_step.hashid,
+      'video seconds' => result_step.completed_seconds
+    })
+    @tracker.track(researcher.hashid, "Researcher's respondent stepped", {
+      'time' => Time.new,
       'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
       'result hashid' => scenario_result.hashid,
@@ -118,8 +195,15 @@ class Analytics
     @tracker.people.plus_one(researcher.hashid, 'Total respondent stepped')
   end
 
-  def respondent_completed(researcher, ip_address, scenario, scenario_result)
-    @tracker.track(researcher.hashid, 'Respondent completed', {
+  def respondent_completed(ip_address, researcher, scenario, scenario_result)
+    @tracker.track(ip_address, 'Respondent completed', {
+      'time' => Time.new,
+      'ip_address' => ip_address,
+      'scenario hashid' => scenario.hashid,
+      'result hashid' => scenario_result.hashid
+    })
+    @tracker.track(researcher.hashid, "Researcher's respondent completed", {
+      'time' => Time.new,
       'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
       'result hashid' => scenario_result.hashid
@@ -130,8 +214,15 @@ class Analytics
     @tracker.people.plus_one(researcher.hashid, 'Total respondent completed')
   end
 
-  def respondent_aborted(researcher, ip_address, scenario, scenario_result)
-    @tracker.track(researcher.hashid, 'Respondent aborted', {
+  def respondent_aborted(ip_address, researcher, scenario, scenario_result)
+    @tracker.track(ip_address, 'Respondent aborted', {
+      'time' => Time.new,
+      'ip_address' => ip_address,
+      'scenario hashid' => scenario.hashid,
+      'result hashid' => scenario_result.hashid
+    })
+    @tracker.track(researcher.hashid, "Researcher's respondent aborted", {
+      'time' => Time.new,
       'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
       'result hashid' => scenario_result.hashid
@@ -142,8 +233,15 @@ class Analytics
     @tracker.people.plus_one(researcher.hashid, 'Total respondent aborted')
   end
 
-  def respondent_uploaded(researcher, ip_address, scenario, scenario_result)
-    @tracker.track(researcher.hashid, 'Respondent uploaded', {
+  def respondent_uploaded(ip_address, researcher, scenario, scenario_result)
+    @tracker.track(ip_address, 'Respondent uploaded', {
+      'time' => Time.new,
+      'ip_address' => ip_address,
+      'scenario hashid' => scenario.hashid,
+      'result hashid' => scenario_result.hashid
+    })
+    @tracker.track(researcher.hashid, "Researcher's respondent uploaded", {
+      'time' => Time.new,
       'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
       'result hashid' => scenario_result.hashid

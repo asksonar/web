@@ -53,6 +53,8 @@ gem 'resque-web', require: 'resque_web'
 gem 'aws-sdk'
 # track metrics using mixpanel
 gem 'mixpanel-ruby'
+# parse user agent for passing to mixpanel
+gem 'user_agent_parser'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables
@@ -77,8 +79,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-remarkable-bootstrap-notify'
   # add animations for notify
   gem 'rails-assets-animate.css'
-  # add animations for notify
-  gem 'rails-assets-mixpanel'
 end
 
 group :development, :test do
