@@ -85,7 +85,7 @@ class Analytics
   end
 
   def result_video_viewed(researcher, scenario, result_step, is_modal)
-    @tracker.track(researcher.hashid, 'Researcher viewed result video', {
+    @tracker.track(researcher.hashid, 'Researcher viewed video', {
       'time' => Time.new,
       'is modal' => is_modal,
       'scenario hashid' => scenario.hashid,
@@ -93,30 +93,32 @@ class Analytics
       'video seconds' => result_step.completed_seconds
     })
     @tracker.people.set(researcher.hashid, {
-      'Last viewed result video' => Time.new
+      'Last viewed video' => Time.new
     }, 0)
-    @tracker.people.plus_one(researcher.hashid, 'Total viewed result video', 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total viewed video', 0)
   end
 
-  def share_video_viewed(colleague, ip_address, researcher, scenario, result_step)
-    @tracker.track(researcher.hashid, "Researcher's colleague viewed share video", {
+  def share_video_viewed(colleague, ip_address, researcher, scenario, result_step, is_modal)
+    @tracker.track(researcher.hashid, "Researcher's colleague viewed video", {
       'time' => Time.new,
+      'is modal' => is_modal,
       'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
       'video hashid' => result_step.hashid,
       'video seconds' => result_step.completed_seconds
     })
-    @tracker.track(!colleague.nil? ? colleague.hashid : ip_address, 'Colleague viewed share video', {
+    @tracker.track(!colleague.nil? ? colleague.hashid : ip_address, 'Colleague viewed video', {
       'time' => Time.new,
+      'is modal' => is_modal,
       'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
       'video hashid' => result_step.hashid,
       'video seconds' => result_step.completed_seconds
     })
     @tracker.people.set(researcher.hashid, {
-      'Last colleague viewed share video' => Time.new
+      'Last colleague viewed video' => Time.new
     }, 0)
-    @tracker.people.plus_one(researcher.hashid, 'Total colleague viewed share video', 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total colleague viewed video', 0)
   end
 
   def respondent_landed(ip_address, researcher, scenario)
