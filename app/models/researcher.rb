@@ -8,6 +8,7 @@ class Researcher < ActiveRecord::Base
   before_create :create_company
   after_create :track_researcher_created
   after_create :welcome_email
+  after_create :subscribe_mailing_list
 
   validates_presence_of :full_name
 
@@ -26,6 +27,10 @@ class Researcher < ActiveRecord::Base
 
     def welcome_email
       Mailer.welcome_email(self).deliver_now
+    end
+
+    def subscribe_mailing_list
+      MailchimpUtility.instance.subscribe_alpha_users(self.email)
     end
 
 end
