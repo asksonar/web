@@ -70,7 +70,7 @@ source 'https://rails-assets.org' do
   # videojs html5 video library
   gem 'rails-assets-videojs', '~> 4' # version 5 is too new, can't load the js/css files correctly
   # videojs plugin for markers
-  gem 'rails-assets-videojs-markers'
+  gem 'rails-assets-videojs-markers', '0.4.0' # version 0.5.0 added some bug with marker times
   # videojs plugin for keeping the bar progress bar always visible
   gem 'rails-assets-videojs-youtube-progress'
   # handlebars javascript templating library
