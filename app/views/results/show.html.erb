@@ -67,14 +67,14 @@
 </section>
 <section class='main-content'>
 
-  <% if @scenario.user_count == 0 %>
+  <% if @scenario.user_completed_count == 0 and @scenario.user_uploading_count == 0 %>
 
   <div class='panel panel-hero'>
     <%= bsh_split_panel 'col-sm-8'%>
     <div class='row'>
       <div class='col-sm-8'>
-        <h1>No has taken your study yet.  Share the link!</h1>
-        <h4>Sends this link to your panelists. The results will appear below.</h4>
+        <h1>No one has taken your study yet.  Share the link!</h1>
+        <h4>Send this link to your panelists. The results will appear below.</h4>
         <div class="input-group">
           <input type="text" id='input-hero-share-link' class="form-control" readonly value='<%= @scenario.share_link %>' <% if @scenario.completed? %>style='display:none'<% end %>>
           <span class='input-group-btn' data-placement="left" title="Copy the share link" data-toggle="tooltip" data-container="#btn-hero-copy-share-link-tooltip">
