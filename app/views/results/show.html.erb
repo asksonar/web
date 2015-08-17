@@ -67,7 +67,7 @@
 </section>
 <section class='main-content'>
 
-  <% if @scenario.user_count == 0 %>
+  <% if @scenario.user_completed_count == 0 and @scenario.user_uploading_count == 0 %>
 
   <div class='panel panel-hero'>
     <%= bsh_split_panel 'col-sm-8'%>
