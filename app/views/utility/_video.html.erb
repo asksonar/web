@@ -22,3 +22,10 @@
     </div>
   </div>
 </div>
+
+<script id="video-text-template" type="text/x-handlebars-template">
+  {{#each rows}}
+  <a class='videoTextLink' data-timestamp='{{time}}'>{{displayTime}} {{displayText}}</a>
+  </br>
+  {{/each}}
+</script>

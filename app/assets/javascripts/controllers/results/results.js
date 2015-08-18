@@ -19,8 +19,10 @@ $(function(){
     divStepOrder: $('#ctn-step-order'),
     divStepDescription: $('#ctn-step-description'),
     btnCopyVideoLink: $('#btn-copy-video-link'),
-    btnHighlightVideoLink: $('#btn-highlight-video-link')
+    btnHighlightVideoLink: $('#btn-highlight-video-link'),
+    scriptVideoTextTemplate: $('#video-text-template')
   }, sonar.videoController);
+
   sonar.resultsView = new ResultsView({
     divAllContent: $('.main-content-wrapper'),
     divMainContent: $('.main-content'),

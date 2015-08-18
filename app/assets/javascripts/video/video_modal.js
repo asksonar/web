@@ -11,6 +11,8 @@ function VideoModal(config, video) {
 
   this.video = video;
 
+  this.videoTextTemplate = Handlebars.compile(config.scriptVideoTextTemplate.html())
+
   this.init();
 }
 
@@ -59,7 +61,9 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
 }
 
 VideoModal.prototype.buildTranscript = function(transcriptArray) {
-  var videoTranscript = "";
+
+  var renderArray = [];
+  var videoTranscript;
   var time, mins, secs, text;
   for(var i = 0; i  < transcriptArray.length; i++) {
     time = transcriptArray[i].offset_seconds;
@@ -72,12 +76,18 @@ VideoModal.prototype.buildTranscript = function(transcriptArray) {
     mins = Math.floor(time / 60);
     secs = Math.floor(time) % 60;
 
-    videoTranscript += "<a class='videoTextLink' data-timestamp='" + time + "'>"
-      + mins + ":" + ('00' + secs).slice(-2) + " "
-      + text + "</a><br/>";
+    renderArray.push({
+      time: time,
+      displayTime: mins + ":" + ('00' + secs).slice(-2),
+      displayText: text
+    });
   }
 
-  if (videoTranscript) {
+  videoTranscript = this.videoTextTemplate({
+    rows: renderArray
+  });
+
+  if (videoTranscript.trim()) {
     return videoTranscript;
   } else {
     return "(no transcription)";
