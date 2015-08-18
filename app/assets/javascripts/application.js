@@ -22,6 +22,8 @@
 //= require zeroclipboard
 //= require remarkable-bootstrap-notify
 //= require zendesk_widget
+//= require history
+//= require URIjs
 
 // insert new packages above this line
 
