@@ -31,7 +31,9 @@ Rails.application.routes.draw do
     resources :video, only: [:create, :update], controller: 'studies_video'
   end
   resources :drafts
-  resources :results
+  resources :results do
+    resources :videos, only: [:show], controller: 'results'
+  end
   resources :my_results, controller: 'results'
 
   devise_for :researchers, path: 'accounts',
