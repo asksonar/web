@@ -214,7 +214,7 @@
 <% if @result_step %>
   <script type='text/javascript'>
     $(function(){
-      sonar.videoModal.loaded(0, <%== {
+      sonar.videoModal.loaded(<%= params[:t] || 0 %>, <%== {
         result_step_hashid: @result_step.hashid,
         delighted_array: @result_step.feelings_delighted.map { |feeling| feeling.feeling_at_seconds },
         confused_array: @result_step.feelings_confused.map { |feeling| feeling.feeling_at_seconds },
