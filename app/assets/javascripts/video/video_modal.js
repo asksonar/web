@@ -11,12 +11,14 @@ function VideoModal(config, video) {
 
   this.video = video;
 
+  this.videoTextTemplate = Handlebars.compile(config.scriptVideoTextTemplate.html())
+
   this.init();
 }
 
 VideoModal.prototype.init = function() {
-  this.$modal.on('shown.bs.modal', $.proxy(this.playVideo, this));
-  this.$modal.on('hide.bs.modal', $.proxy(this.pauseVideo, this));
+  this.$modal.on('shown.bs.modal', $.proxy(this.shown, this));
+  this.$modal.on('hide.bs.modal', $.proxy(this.hidden, this));
   this.$videoText.on('click', '.videoTextLink', $.proxy(this.clickVideoText, this));
   this.$btnHighlightVideoLink.on('click', $.proxy(this.generateHighlight, this));
 
@@ -33,30 +35,35 @@ VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {
       result_step_hashid: resultStepHashId
     },
     dataType: 'json'
-  }).done($.proxy(function(data){
-    if (this.resultStepHashId != data.result_step_hashid) {
-      this.resultStepHashId = data.result_step_hashid;
-
-      this.video.markers(data.delighted_array, data.confused_array, data.highlighted_array);
-      this.video.src(data.src_array);
-
-      this.$videoText.html(this.buildTranscript(data.transcription_array));
-      this.$divUserEmail.html(data.user_email);
-      this.$divStepOrder.html(data.step_order + 1);
-      this.$divStepDescription.html(data.step_description);
-      this.$inputUrlBase.attr('data-base-url', data.share_link + '?t=');
-    }
-
-    this.video.currentTime(timeSeconds);
-    this.show();
-
-  }, this)).fail($.proxy(function(jqXHR, textStatus, errorThrown){
+  }).done($.proxy(this.loaded, this, timeSeconds
+  )).fail($.proxy(function(jqXHR, textStatus, errorThrown) {
     notify.warn(jqXHR.responseText);
   }, this));
 }
 
+// timeSeconds comes first because $.proxy inserts it first
+VideoModal.prototype.loaded = function(timeSeconds, data) {
+  if (this.resultStepHashId != data.result_step_hashid) {
+    this.resultStepHashId = data.result_step_hashid;
+
+    this.video.markers(data.delighted_array, data.confused_array, data.highlighted_array);
+    this.video.src(data.src_array);
+
+    this.$videoText.html(this.buildTranscript(data.transcription_array));
+    this.$divUserEmail.html(data.user_email);
+    this.$divStepOrder.html(data.step_order + 1);
+    this.$divStepDescription.html(data.step_description);
+    this.$inputUrlBase.attr('data-base-url', data.share_link + '?t=');
+  }
+
+  this.video.currentTime(timeSeconds);
+  this.show();
+}
+
 VideoModal.prototype.buildTranscript = function(transcriptArray) {
-  var videoTranscript = "";
+
+  var renderArray = [];
+  var videoTranscript;
   var time, mins, secs, text;
   for(var i = 0; i  < transcriptArray.length; i++) {
     time = transcriptArray[i].offset_seconds;
@@ -69,12 +76,18 @@ VideoModal.prototype.buildTranscript = function(transcriptArray) {
     mins = Math.floor(time / 60);
     secs = Math.floor(time) % 60;
 
-    videoTranscript += "<a class='videoTextLink' data-timestamp='" + time + "'>"
-      + mins + ":" + ('00' + secs).slice(-2) + " "
-      + text + "</a><br/>";
+    renderArray.push({
+      time: time,
+      displayTime: mins + ":" + ('00' + secs).slice(-2),
+      displayText: text
+    });
   }
 
-  if (videoTranscript) {
+  videoTranscript = this.videoTextTemplate({
+    rows: renderArray
+  });
+
+  if (videoTranscript.trim()) {
     return videoTranscript;
   } else {
     return "(no transcription)";
@@ -83,6 +96,20 @@ VideoModal.prototype.buildTranscript = function(transcriptArray) {
 
 VideoModal.prototype.show = function() {
   this.$modal.modal('show');
+}
+
+VideoModal.prototype.shown = function() {
+  this.playVideo();
+  if (location.href.indexOf('videos') < 0) {
+    var newUrl = URI(location.href).segment('videos').segment(this.resultStepHashId);
+    history.replaceState({}, '', newUrl);
+  }
+}
+
+VideoModal.prototype.hidden = function() {
+  this.pauseVideo();
+  var newUrl = '/' + URI(location.href).segment(0) + '/' + URI(location.href).segment(1);
+  history.replaceState({}, '', newUrl);
 }
 
 VideoModal.prototype.pauseVideo = function() {
@@ -127,6 +154,10 @@ VideoModal.prototype.updateVideoTime = function(event, timestamp) {
     }
   }
 
+  if (location.href.indexOf('videos') >= 0) {
+    var newUrl = URI(location.href).search({t:currentSeconds});
+    history.replaceState({}, '', newUrl);
+  }
 }
 
 VideoModal.prototype.generateHighlight = function() {

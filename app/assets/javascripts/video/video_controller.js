@@ -39,7 +39,7 @@ VideoController.prototype.on = function(event, callback) {
 
 VideoController.prototype.play = function(timestamp) {
   if (!isNaN(timestamp)) {
-    this.video.currentTime(timestamp);
+    this.currentTime(timestamp);
   }
   this.video.userActive(true);
   this.video.play();
@@ -93,7 +93,7 @@ VideoController.prototype.loadMarkers = function() {
 }
 
 VideoController.prototype.currentTime = function(currentSeconds) {
-  return this.video.currentTime(currentSeconds);
+  return this.video.currentTime(Math.max(currentSeconds, 0));
 }
 
 VideoController.prototype.onTimeUpdate = function() {

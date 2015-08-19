@@ -192,7 +192,7 @@
 
 </section>
 
-<div class="modal fade" id='summary_video_container'>
+<div class="modal" id='summary_video_container' tabindex='-1'>
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class='ctn-modal-header'>
@@ -209,3 +209,23 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+
+<% if @result_step %>
+  <script type='text/javascript'>
+    $(function(){
+      sonar.videoModal.loaded(<%= params[:t] || 0 %>, <%== {
+        result_step_hashid: @result_step.hashid,
+        delighted_array: @result_step.feelings_delighted.map { |feeling| feeling.feeling_at_seconds },
+        confused_array: @result_step.feelings_confused.map { |feeling| feeling.feeling_at_seconds },
+        highlighted_array: @result_step.highlights.map { |highlight| highlight.offset_seconds },
+        src_array: @result_step.video.src_array,
+        transcription_array: @result_step.transcription_array,
+        user_email: @result_step.panelist.email,
+        step_order: @result_step.scenario_step.step_order,
+        step_description: @result_step.scenario_step.description,
+        share_link: @result_step.share_link
+      }.to_json %>)
+    })
+  </script>
+<% end %>

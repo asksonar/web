@@ -81,6 +81,10 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-remarkable-bootstrap-notify'
   # add animations for notify
   gem 'rails-assets-animate.css'
+  # add backfill support for History.replaceState and its ilk
+  gem 'rails-assets-history'
+  # add helper to manipulate URLs
+  gem 'rails-assets-URIjs'
 end
 
 group :development, :test do
