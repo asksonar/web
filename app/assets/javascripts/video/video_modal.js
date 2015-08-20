@@ -117,7 +117,8 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
       });
 
       parent.find('.video-btn-save').off('click').on('click', function(){
-        alert('saved');
+        notify.info('Your transcript has been updated.');
+
         parent.removeClass('active');
         inputTime.prop('readonly', true);
         inputText.prop('readonly', true);
