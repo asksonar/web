@@ -12,6 +12,7 @@ function VideoModal(config, video) {
   this.$btnToggleNotes = config.btnToggleNotes;
   this.$divVideoContainer = config.divVideoContainer;
   this.$divTranscriptContainer = config.divTranscriptContainer;
+  this.$divVideoTranscriptContainer = config.divVideoTranscriptContainer;
 
   this.video = video;
 
@@ -39,30 +40,22 @@ VideoModal.prototype.toggleViewMode = function(event) {
   var activeTranscripts = this.$btnToggleTranscripts.hasClass('active');
   var activeNotes = this.$btnToggleNotes.hasClass('active');
 
-  if (activeTranscripts || activeNotes) {
-    this.$divVideoContainer.addClass('col-md-6').removeClass('col-md-10');
-    this.$divTranscriptContainer.addClass('col-md-6').removeClass('col-md-2');
-
-    if (activeTranscripts) {
-      this.$videoText.removeClass('hide-transcripts');
-    } else {
-      this.$videoText.addClass('hide-transcripts');
-    }
-
-    if (activeNotes) {
-      this.$videoText.removeClass('hide-notes');
-    } else {
-      this.$videoText.addClass('hide-notes');
-    }
-
-    this.$videoText.removeClass('icon-mode').addClass('text-mode');
-
-  } else {
-    this.$divVideoContainer.addClass('col-md-10').removeClass('col-md-6');
-    this.$divTranscriptContainer.addClass('col-md-2').removeClass('col-md-6');
-    this.$videoText.addClass('icon-mode').removeClass('text-mode');
+  if (activeTranscripts) {
     this.$videoText.removeClass('hide-transcripts');
+  } else {
+    this.$videoText.addClass('hide-transcripts');
+  }
+
+  if (activeNotes) {
+    this.$videoText.removeClass('hide-notes');
+  } else {
     this.$videoText.addClass('hide-notes');
+  }
+
+  if (activeTranscripts || activeNotes) {
+    this.$divVideoTranscriptContainer.removeClass('icon-mode').addClass('text-mode');
+  } else {
+    this.$divVideoTranscriptContainer.removeClass('text-mode').addClass('icon-mode');
   }
 
 }
@@ -213,7 +206,11 @@ VideoModal.prototype.shown = function() {
     var newUrl = URI(location.href).segment('videos').segment(this.resultStepHashId);
     history.replaceState({}, '', newUrl);
   }
+
   autosize.update($('textarea'));
+  window.setTimeout(function() {
+    autosize.update($('textarea'));
+  }, 300);
 }
 
 VideoModal.prototype.hidden = function() {

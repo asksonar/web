@@ -24,7 +24,8 @@ $(function(){
     btnToggleTranscripts: $('#toggle-transcripts'),
     btnToggleNotes: $('#toggle-notes'),
     divVideoContainer: $('.video-container'),
-    divTranscriptContainer: $('.transcript-container')
+    divTranscriptContainer: $('.transcript-container'),
+    divVideoTranscriptContainer: $('.video-transcript-container')
   }, sonar.videoController);
 
   sonar.resultsView = new ResultsView({
