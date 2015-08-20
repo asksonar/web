@@ -25,7 +25,19 @@
 
 <script id="video-text-template" type="text/x-handlebars-template">
   {{#each rows}}
-  <a class='videoTextLink' data-timestamp='{{time}}'>{{displayTime}} {{displayText}}</a>
-  </br>
+  <a class='videoTextLink' data-timestamp='{{time}}'>
+    <span class='video-text-feelings-time'>
+      <span class='video-text-feelings'>
+        {{#if hasConfused }}
+          <i class='feeling-confused'></i>
+        {{/if}}
+        {{#if hasDelighted}}
+          <i class='feeling-delighted'></i>
+        {{/if}}
+      </span>
+      <span class='video-text-time'>{{displayTime}}</span>
+    </span>
+    <span class='video-text'>{{displayText}}</span>
+  </a>
   {{/each}}
 </script>

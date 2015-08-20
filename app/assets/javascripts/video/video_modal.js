@@ -49,7 +49,11 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
     this.video.markers(data.delighted_array, data.confused_array, data.highlighted_array);
     this.video.src(data.src_array);
 
-    this.$videoText.html(this.buildTranscript(data.transcription_array));
+    this.$videoText.html(this.buildTranscript(
+      data.transcription_array,
+      data.delighted_array,
+      data.confused_array
+    ));
     this.$divUserEmail.html(data.user_email);
     this.$divStepOrder.html(data.step_order + 1);
     this.$divStepDescription.html(data.step_description);
@@ -60,11 +64,13 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
   this.show();
 }
 
-VideoModal.prototype.buildTranscript = function(transcriptArray) {
+VideoModal.prototype.buildTranscript = function(transcriptArray, delightedArray, confusedArray) {
 
+  var delightedIndex = 0, confusedIndex = 0;
   var renderArray = [];
   var videoTranscript;
   var time, mins, secs, text;
+  var hasDelighted, hasConfused, nextTime;
   for(var i = 0; i  < transcriptArray.length; i++) {
     time = transcriptArray[i].offset_seconds;
     text = transcriptArray[i].text;
@@ -73,13 +79,37 @@ VideoModal.prototype.buildTranscript = function(transcriptArray) {
       continue;
     }
 
+    hasDelighted = false;
+    hasConfused = false;
+    if ((i + 1) < transcriptArray.length) {
+      nextTime = transcriptArray[i+1].offset_seconds;
+
+      while(delightedArray && delightedArray[delightedIndex] < nextTime) {
+        hasDelighted = true;
+        delightedIndex += 1;
+      }
+      while(confusedArray && confusedArray[confusedIndex] < nextTime) {
+        hasConfused = true;
+        confusedIndex += 1;
+      }
+    } else {
+      if (delightedArray && delightedIndex < delightedArray.length) {
+        hasDelighted = true;
+      }
+      if (confusedArray && confusedIndex < confusedArray.length) {
+        hasConfused = true;
+      }
+    }
+
     mins = Math.floor(time / 60);
     secs = Math.floor(time) % 60;
 
     renderArray.push({
       time: time,
       displayTime: mins + ":" + ('00' + secs).slice(-2),
-      displayText: text
+      displayText: text,
+      hasDelighted: hasDelighted,
+      hasConfused: hasConfused
     });
   }
 
