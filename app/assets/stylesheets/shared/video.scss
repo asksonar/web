@@ -130,6 +130,12 @@
     }
   }
 
+  #videoText.hide-notes {
+    .ctnVideoTextLink.note .videoTextLink {
+      margin-top: -100%;
+    }
+  }
+
   #videoText {
 
     .ctnVideoTextLink.transcript:hover, .ctnVideoTextLink.active {

@@ -85,7 +85,8 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
     this.$videoText.html(this.buildTranscript(
       data.transcription_array,
       data.delighted_array,
-      data.confused_array
+      data.confused_array,
+      data.highlighted_array
     ));
     autosize($('textarea'));
     $('.video-btn-edit').on('click', function() {
@@ -130,7 +131,7 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
 
 }
 
-VideoModal.prototype.buildTranscript = function(transcriptArray, delightedArray, confusedArray) {
+VideoModal.prototype.buildTranscript = function(transcriptArray, delightedArray, confusedArray, highlightedArray) {
 
   var delightedIndex = 0, confusedIndex = 0;
   var renderArray = [];
@@ -168,6 +169,23 @@ VideoModal.prototype.buildTranscript = function(transcriptArray, delightedArray,
       time: time,
       displayClass: 'transcript',
       displayIcon: 'fa fa-align-left',
+      displayText: text,
+      editable: true
+    });
+  }
+
+  for(var i = 0; i  < highlightedArray.length; i++) {
+    time = highlightedArray[i].offset_seconds;
+    text = highlightedArray[i].text;
+    text = (text || '').trim();
+    if (!text) {
+      continue;
+    }
+
+    renderArray.push({
+      time: time,
+      displayClass: 'note',
+      displayIcon: 'fa fa-tag',
       displayText: text,
       editable: true
     });

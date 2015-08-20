@@ -51,6 +51,10 @@ class ResultStep < ActiveRecord::Base
     step_transcriptions
   end
 
+  def highlights_array
+    highlights.select(:offset_seconds, :text)
+  end
+
   def transcription_array
     transcriptions.select(:offset_seconds, :text)
   end
