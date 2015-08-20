@@ -20,7 +20,11 @@ $(function(){
     divStepDescription: $('#ctn-step-description'),
     btnCopyVideoLink: $('#btn-copy-video-link'),
     btnHighlightVideoLink: $('#btn-highlight-video-link'),
-    scriptVideoTextTemplate: $('#video-text-template')
+    scriptVideoTextTemplate: $('#video-text-template'),
+    btnToggleTranscripts: $('#toggle-transcripts'),
+    btnToggleNotes: $('#toggle-notes'),
+    divVideoContainer: $('.video-container'),
+    divTranscriptContainer: $('.transcript-container')
   }, sonar.videoController);
 
   sonar.resultsView = new ResultsView({

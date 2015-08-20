@@ -8,6 +8,10 @@ function VideoModal(config, video) {
   this.$divStepDescription = config.divStepDescription;
   this.$btnCopyVideoLink = config.btnCopyVideoLink;
   this.$btnHighlightVideoLink = config.btnHighlightVideoLink;
+  this.$btnToggleTranscripts = config.btnToggleTranscripts;
+  this.$btnToggleNotes = config.btnToggleNotes;
+  this.$divVideoContainer = config.divVideoContainer;
+  this.$divTranscriptContainer = config.divTranscriptContainer;
 
   this.video = video;
 
@@ -21,10 +25,46 @@ VideoModal.prototype.init = function() {
   this.$modal.on('hide.bs.modal', $.proxy(this.hidden, this));
   this.$videoText.on('click', '.videoTextLink', $.proxy(this.clickVideoText, this));
   this.$btnHighlightVideoLink.on('click', $.proxy(this.generateHighlight, this));
+  this.$btnToggleTranscripts.on('click', $.proxy(this.toggleViewMode, this));
+  this.$btnToggleNotes.on('click', $.proxy(this.toggleViewMode, this));
 
   this.video.on('timeupdate', $.proxy(this.updateVideoTime, this));
 
   new ClipboardInput(this.$btnCopyVideoLink, this.$inputUrlBase);
+}
+
+VideoModal.prototype.toggleViewMode = function(event) {
+  $(event.currentTarget).toggleClass('active');
+
+  var activeTranscripts = this.$btnToggleTranscripts.hasClass('active');
+  var activeNotes = this.$btnToggleNotes.hasClass('active');
+
+  if (activeTranscripts || activeNotes) {
+    this.$divVideoContainer.addClass('col-md-6').removeClass('col-md-10');
+    this.$divTranscriptContainer.addClass('col-md-6').removeClass('col-md-2');
+
+    if (activeTranscripts) {
+      this.$videoText.removeClass('hide-transcripts');
+    } else {
+      this.$videoText.addClass('hide-transcripts');
+    }
+
+    if (activeNotes) {
+      this.$videoText.removeClass('hide-notes');
+    } else {
+      this.$videoText.addClass('hide-notes');
+    }
+
+    this.$videoText.removeClass('icon-mode').addClass('text-mode');
+
+  } else {
+    this.$divVideoContainer.addClass('col-md-10').removeClass('col-md-6');
+    this.$divTranscriptContainer.addClass('col-md-2').removeClass('col-md-6');
+    this.$videoText.addClass('icon-mode').removeClass('text-mode');
+    this.$videoText.removeClass('hide-transcripts');
+    this.$videoText.addClass('hide-notes');
+  }
+
 }
 
 VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {
@@ -71,6 +111,25 @@ VideoModal.prototype.buildTranscript = function(transcriptArray, delightedArray,
   var videoTranscript;
   var time, mins, secs, text;
   var hasDelighted, hasConfused, nextTime;
+
+  for(var i = 0; delightedArray && i  < delightedArray.length; i++) {
+    renderArray.push({
+      time: delightedArray[i],
+      displayClass: 'feeling-delighted',
+      displayIcon: 'feeling-delighted',
+      displayText: "<i class='feeling-delighted'></i>"
+    })
+  }
+
+  for(var i = 0; confusedArray && i  < confusedArray.length; i++) {
+    renderArray.push({
+      time: confusedArray[i],
+      displayClass: 'feeling-confused',
+      displayIcon: 'feeling-confused',
+      displayText: "<i class='feeling-confused'></i>"
+    })
+  }
+
   for(var i = 0; i  < transcriptArray.length; i++) {
     time = transcriptArray[i].offset_seconds;
     text = transcriptArray[i].text;
@@ -79,38 +138,24 @@ VideoModal.prototype.buildTranscript = function(transcriptArray, delightedArray,
       continue;
     }
 
-    hasDelighted = false;
-    hasConfused = false;
-    if ((i + 1) < transcriptArray.length) {
-      nextTime = transcriptArray[i+1].offset_seconds;
+    renderArray.push({
+      time: time,
+      displayClass: 'transcript',
+      displayIcon: 'fa fa-align-left',
+      displayText: text,
+    });
+  }
 
-      while(delightedArray && delightedArray[delightedIndex] < nextTime) {
-        hasDelighted = true;
-        delightedIndex += 1;
-      }
-      while(confusedArray && confusedArray[confusedIndex] < nextTime) {
-        hasConfused = true;
-        confusedIndex += 1;
-      }
-    } else {
-      if (delightedArray && delightedIndex < delightedArray.length) {
-        hasDelighted = true;
-      }
-      if (confusedArray && confusedIndex < confusedArray.length) {
-        hasConfused = true;
-      }
-    }
+  renderArray.sort(function(a, b){
+    return a.time - b.time;
+  });
 
+  for(var i = 0; i < renderArray.length; i++) {
+    time = renderArray[i].time;
     mins = Math.floor(time / 60);
     secs = Math.floor(time) % 60;
 
-    renderArray.push({
-      time: time,
-      displayTime: mins + ":" + ('00' + secs).slice(-2),
-      displayText: text,
-      hasDelighted: hasDelighted,
-      hasConfused: hasConfused
-    });
+    renderArray[i].displayTime = mins + ":" + ('00' + secs).slice(-2)
   }
 
   videoTranscript = this.videoTextTemplate({
