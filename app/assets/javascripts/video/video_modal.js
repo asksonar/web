@@ -94,6 +94,37 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
       data.delighted_array,
       data.confused_array
     ));
+    autosize($('textarea'));
+    $('.video-btn-edit').on('click', function() {
+      var parent = $(this).closest('.ctnVideoTextLink');
+      parent.addClass('active');
+
+      var inputTime = parent.find('.video-text-time');
+      var inputText = parent.find('.video-text-display');
+
+      inputTime.prop('readonly', false);
+      inputText.prop('readonly', false);
+
+      var originalTimeVal = inputTime.val();
+      var originalTextVal = inputText.val();
+
+      parent.find('.video-btn-cancel').off('click').on('click', function() {
+        parent.removeClass('active');
+        inputTime.val(originalTimeVal);
+        inputText.val(originalTextVal);
+        inputTime.prop('readonly', true);
+        inputText.prop('readonly', true);
+      });
+
+      parent.find('.video-btn-save').off('click').on('click', function(){
+        alert('saved');
+        parent.removeClass('active');
+        inputTime.prop('readonly', true);
+        inputText.prop('readonly', true);
+      });
+
+    });
+
     this.$divUserEmail.html(data.user_email);
     this.$divStepOrder.html(data.step_order + 1);
     this.$divStepDescription.html(data.step_description);
@@ -102,6 +133,7 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
 
   this.video.currentTime(timeSeconds);
   this.show();
+
 }
 
 VideoModal.prototype.buildTranscript = function(transcriptArray, delightedArray, confusedArray) {
@@ -179,6 +211,7 @@ VideoModal.prototype.shown = function() {
     var newUrl = URI(location.href).segment('videos').segment(this.resultStepHashId);
     history.replaceState({}, '', newUrl);
   }
+  autosize.update($('textarea'));
 }
 
 VideoModal.prototype.hidden = function() {

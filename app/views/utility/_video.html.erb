@@ -32,10 +32,17 @@
   {{#each rows}}
   <div class='ctnVideoTextLink'>
     <a class='videoTextLink {{displayClass}}' data-timestamp='{{time}}'>
-      <span class='video-text-time'>{{displayTime}}</span>
-      <span class='video-text-icon'><i class='{{displayIcon}}'></i></span>
-      <span class='video-text-display'>{{{displayText}}}</span>
+      <input type='text' class='video-text-time' value='{{displayTime}}' readonly></input>
+      <div class='video-text-icon-display'>
+        <div class='video-text-icon'><i class='{{displayIcon}}'></i></div>
+        <textarea class='video-text-display' rows='1' readonly>{{{displayText}}}</textarea>
+      </div>
     </a>
+    <div class='video-text-buttons'>
+      <span class='video-btn-edit btn btn-orange'><i class='fa fa-edit'></i> Edit</span>
+      <span class='video-btn-save btn btn-success'><i class='fa fa-check'></i> Save</span>
+      <span class='video-btn-cancel btn btn-danger'><i class='fa fa-times'></i> Cancel</span>
+    </div>
   </div>
   {{/each}}
 </script>
