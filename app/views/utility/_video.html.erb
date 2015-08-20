@@ -30,13 +30,21 @@
 
 <script id="video-text-template" type="text/x-handlebars-template">
   {{#each rows}}
-  <div class='ctnVideoTextLink'>
-    <a class='videoTextLink {{displayClass}}' data-timestamp='{{time}}'>
-      <input type='text' class='video-text-time' value='{{displayTime}}' readonly></input>
-      <div class='video-text-icon-display'>
-        <div class='video-text-icon'><i class='{{displayIcon}}'></i></div>
-        <textarea class='video-text-display' rows='1' readonly>{{{displayText}}}</textarea>
-      </div>
+  <div class='ctnVideoTextLink {{displayClass}}'>
+    <a class='videoTextLink' data-timestamp='{{time}}'>
+      {{#if editable}}
+        <input type='text' class='video-text-time' value='{{displayTime}}' readonly></input>
+        <div class='video-text-icon-display'>
+          <div class='video-text-icon'><i class='{{displayIcon}}'></i></div>
+          <textarea class='video-text-display' rows='1' readonly>{{{displayText}}}</textarea>
+        </div>
+      {{else}}
+        <input type='text' class='video-text-time' value='{{displayTime}}' readonly></input>
+        <div class='video-text-icon-display'>
+          <div class='video-text-icon'><i class='{{displayIcon}}'></i></div>
+          <div class='video-text-display'>{{{displayText}}}</div>
+        </div>
+      {{/if}}
     </a>
     <div class='video-text-buttons'>
       <span class='video-btn-edit btn btn-orange'><i class='fa fa-edit'></i> Edit</span>

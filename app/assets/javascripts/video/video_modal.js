@@ -176,6 +176,7 @@ VideoModal.prototype.buildTranscript = function(transcriptArray, delightedArray,
       displayClass: 'transcript',
       displayIcon: 'fa fa-align-left',
       displayText: text,
+      editable: true
     });
   }
 

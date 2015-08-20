@@ -66,7 +66,7 @@
         background-color: initial;
       }
 
-      .video-text-display:read-only {
+      textarea.video-text-display:read-only {
         border-color: transparent;
         background-color: initial;
         outline: none;
@@ -92,7 +92,7 @@
       right: 0;
     }
 
-    .ctnVideoTextLink:hover, .ctnVideoTextLink.active {
+    .ctnVideoTextLink.transcript:hover, .ctnVideoTextLink.active {
       .videoTextLink {
         background-color: white;
         border-color: #C3C3C3;
@@ -104,17 +104,20 @@
     }
 
     .ctnVideoTextLink:hover {
-      .videoTextLink {
-        border-radius: 5px;
-      }
-      .video-btn-edit {
-        display: inline-block;
-      }
       input, textarea {
         cursor: pointer;
       }
       input {
         text-decoration: underline;
+      }
+    }
+
+    .ctnVideoTextLink.transcript:hover {
+      .videoTextLink {
+        border-radius: 5px;
+      }
+      .video-btn-edit {
+        display: inline-block;
       }
     }
 
@@ -147,7 +150,7 @@
   }
 
   #videoText.hide-transcripts {
-    .transcript {
+    .transcript > .videoTextLink {
       margin-top: -100%;
     }
   }
