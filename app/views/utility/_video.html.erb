@@ -25,18 +25,24 @@
     <div id='videoText'>
       <!-- insert transcription here -->
     </div>
+    <a id='btn-add-note' class='btn btn-medium-blue'><i class='fa fa-plus'></i> Add a New Note</a>
   </div>
 </div>
 
 <script id="video-text-template" type="text/x-handlebars-template">
   {{#each rows}}
-  <div class='ctnVideoTextLink {{displayClass}}'>
+    {{> video-text-partial}}
+  {{/each}}
+</script>
+
+<script id='video-text-partial' type='text/x-handlebars-template'>
+  <div class='ctnVideoTextLink {{displayClass}} {{#if active}}active{{/if}}'>
     <a class='videoTextLink' data-timestamp='{{time}}'>
       {{#if editable}}
-        <input type='text' class='video-text-time' value='{{displayTime}}' readonly></input>
+        <input type='text' class='video-text-time' value='{{displayTime}}' {{#unless active}}readonly{{/unless}}></input>
         <div class='video-text-icon-display'>
           <div class='video-text-icon'><i class='{{displayIcon}}'></i></div>
-          <textarea class='video-text-display' rows='1' readonly>{{{displayText}}}</textarea>
+          <textarea class='video-text-display' rows='1' {{#unless active}}readonly{{/unless}}>{{{displayText}}}</textarea>
         </div>
       {{else}}
         <input type='text' class='video-text-time' value='{{displayTime}}' readonly></input>
@@ -52,5 +58,4 @@
       <span class='video-btn-cancel btn btn-danger'><i class='fa fa-times'></i> Cancel</span>
     </div>
   </div>
-  {{/each}}
 </script>

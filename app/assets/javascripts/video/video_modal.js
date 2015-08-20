@@ -13,10 +13,13 @@ function VideoModal(config, video) {
   this.$divVideoContainer = config.divVideoContainer;
   this.$divTranscriptContainer = config.divTranscriptContainer;
   this.$divVideoTranscriptContainer = config.divVideoTranscriptContainer;
+  this.$btnAddNote = config.btnAddNote;
 
   this.video = video;
 
-  this.videoTextTemplate = Handlebars.compile(config.scriptVideoTextTemplate.html())
+  this.videoTextTemplate = Handlebars.compile(config.scriptVideoTextTemplate.html());
+  this.videoTextPartial = Handlebars.compile(config.scriptVideoTextPartial.html());
+  Handlebars.registerPartial("video-text-partial", config.scriptVideoTextPartial.html());
 
   this.init();
 }
@@ -28,6 +31,7 @@ VideoModal.prototype.init = function() {
   this.$btnHighlightVideoLink.on('click', $.proxy(this.generateHighlight, this));
   this.$btnToggleTranscripts.on('click', $.proxy(this.toggleViewMode, this));
   this.$btnToggleNotes.on('click', $.proxy(this.toggleViewMode, this));
+  this.$btnAddNote.on('click', $.proxy(this.createNote, this));
 
   this.video.on('timeupdate', $.proxy(this.updateVideoTime, this));
 
@@ -228,7 +232,7 @@ VideoModal.prototype.shown = function() {
   autosize.update($('textarea'));
   window.setTimeout(function() {
     autosize.update($('textarea'));
-  }, 300);
+  }, 500);
 }
 
 VideoModal.prototype.hidden = function() {
@@ -309,4 +313,49 @@ VideoModal.prototype.generateHighlight = function() {
   }, this)).fail($.proxy(function(jqXHR, textStatus, errorThrown){
     notify.error(jqXHR.responseText, 'There was an error saving your Highlight.');
   }, this));
+}
+
+VideoModal.prototype.createNote = function() {
+  var time = this.video.currentTime();
+  var mins = Math.floor(time / 60);
+  var secs = Math.floor(time) % 60;
+
+  var html = this.videoTextPartial({
+    time: time,
+    displayTime: mins + ":" + ('00' + secs).slice(-2),
+    displayClass: 'note',
+    displayIcon: 'fa fa-tag',
+    displayText: '',
+    editable: true,
+    active: true
+  });
+
+  var followingLink;
+  this.$videoText.find('.videoTextLink').each(function(){
+    if ($(this).attr('data-timestamp') > time) {
+      followingLink = $(this).closest('.ctnVideoTextLink');
+      return false;
+    }
+  });
+
+  followingLink.before(html);
+  var newLink = followingLink.prev();
+
+  var inputTime = newLink.find('.video-text-time');
+  var inputText = newLink.find('.video-text-display');
+
+  inputText.focus();
+
+  newLink.find('.video-btn-cancel').on('click', function() {
+    newLink.remove();
+  });
+
+  newLink.find('.video-btn-save').on('click', function(){
+    notify.info('Your note has been created.');
+
+    newLink.removeClass('active');
+    inputTime.prop('readonly', true);
+    inputText.prop('readonly', true);
+  });
+
 }

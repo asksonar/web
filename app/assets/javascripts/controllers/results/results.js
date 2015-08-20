@@ -21,11 +21,13 @@ $(function(){
     btnCopyVideoLink: $('#btn-copy-video-link'),
     btnHighlightVideoLink: $('#btn-highlight-video-link'),
     scriptVideoTextTemplate: $('#video-text-template'),
+    scriptVideoTextPartial: $('#video-text-partial'),
     btnToggleTranscripts: $('#toggle-transcripts'),
     btnToggleNotes: $('#toggle-notes'),
     divVideoContainer: $('.video-container'),
     divTranscriptContainer: $('.transcript-container'),
-    divVideoTranscriptContainer: $('.video-transcript-container')
+    divVideoTranscriptContainer: $('.video-transcript-container'),
+    btnAddNote: $('#btn-add-note')
   }, sonar.videoController);
 
   sonar.resultsView = new ResultsView({
