@@ -93,6 +93,9 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
       data.highlighted_array
     ));
     autosize($('textarea'));
+    $(window).load(function() {
+      autosize.update($('textarea'));
+    });
     $('.video-btn-edit').on('click', function() {
       var parent = $(this).closest('.ctnVideoTextLink');
       parent.addClass('active');
@@ -115,7 +118,11 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
       });
 
       parent.find('.video-btn-save').off('click').on('click', function(){
-        notify.info('Your transcript has been updated.');
+        if (parent.hasClass('transcript')) {
+          notify.info('Your transcript has been updated.');
+        } else if (parent.hasClass('note')) {
+          notify.info('Your note has been updated.');
+        }
 
         parent.removeClass('active');
         inputTime.prop('readonly', true);
@@ -229,10 +236,6 @@ VideoModal.prototype.shown = function() {
     history.replaceState({}, '', newUrl);
   }
 
-  autosize.update($('textarea'));
-  window.setTimeout(function() {
-    autosize.update($('textarea'));
-  }, 500);
 }
 
 VideoModal.prototype.hidden = function() {
