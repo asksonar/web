@@ -84,19 +84,19 @@ VideoModal.prototype.buildTranscript = function(transcriptArray, delightedArray,
     if ((i + 1) < transcriptArray.length) {
       nextTime = transcriptArray[i+1].offset_seconds;
 
-      while(delightedArray[delightedIndex] < nextTime) {
+      while(delightedArray && delightedArray[delightedIndex] < nextTime) {
         hasDelighted = true;
         delightedIndex += 1;
       }
-      while(confusedArray[confusedIndex] < nextTime) {
+      while(confusedArray && confusedArray[confusedIndex] < nextTime) {
         hasConfused = true;
         confusedIndex += 1;
       }
     } else {
-      if (delightedIndex < delightedArray.length) {
+      if (delightedArray && delightedIndex < delightedArray.length) {
         hasDelighted = true;
       }
-      if (confusedIndex < confusedArray.length) {
+      if (confusedArray && confusedIndex < confusedArray.length) {
         hasConfused = true;
       }
     }

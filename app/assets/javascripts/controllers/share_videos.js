@@ -23,7 +23,8 @@ $(function(){
     divStepOrder: $(),
     divStepDescription: $(),
     btnCopyVideoLink: $('#btn-copy-video-link'),
-    btnHighlightVideoLink: $('#btn-highlight-video-link')
+    btnHighlightVideoLink: $('#btn-highlight-video-link'),
+    scriptVideoTextTemplate: $('#video-text-template')
   }, videoController);
 
   videoController.src(srcArray);
