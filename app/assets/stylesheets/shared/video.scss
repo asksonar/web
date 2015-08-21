@@ -58,6 +58,15 @@
   }
 }
 
+.button-container {
+  #toggle-transcripts {
+    outline: none;
+  }
+  #toggle-transcripts:not(.active) {
+    background-color: #FAFAFA;
+  }
+}
+
 @media (min-width: $screen-md-min) {
   .col-md-6.transcript-container {
     position: absolute;
