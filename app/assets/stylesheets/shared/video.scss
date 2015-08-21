@@ -45,7 +45,7 @@
     max-height: 360px;
     position: relative;
 
-    .activeVideoTextLink {
+    .ctnVideoTextLink:not(.active) .activeVideoTextLink {
       font-weight: bold;
     }
 
@@ -53,7 +53,6 @@
       transition: margin-top 0.2s ease-in-out;
       display: block;
 
-      border: 1px solid transparent;
       margin: 1px;
 
       .video-text-time {
@@ -70,6 +69,14 @@
         border-color: transparent;
         background-color: initial;
         outline: none;
+      }
+
+      .video-text-icon {
+        i {
+          height: 16px;
+          width: 16px;
+        }
+        padding-top: 4px;
       }
 
       .video-text-icon-display {
@@ -93,6 +100,8 @@
     }
 
     .ctnVideoTextLink:hover {
+      cursor: pointer;
+
       input, textarea {
         cursor: pointer;
       }
@@ -101,12 +110,17 @@
       }
     }
 
-    .video-text-buttons .btn {
-      display: none
-    }
-
     .ctnVideoTextLink {
       overflow: hidden;
+    }
+
+    .video-btn-edit {
+      display: none;
+      position: absolute;
+      right: 0;
+      margin-top: -24px;
+      padding: 0px 10px;
+      background-color: #EFEFEF;
     }
 
   }
@@ -138,21 +152,15 @@
 
   #videoText {
 
-    .ctnVideoTextLink.transcript:hover, .ctnVideoTextLink.note:hover, .ctnVideoTextLink.active {
-      .videoTextLink {
-        background-color: white;
-        border-color: #C3C3C3;
-        box-shadow: 0px 1px 1px 0px #CECECE;
-      }
-      .video-text-buttons {
-        display: block;
-      }
+    .ctnVideoTextLink.note {
+      background-color: #f0efde;
+    }
+
+    .ctnVideoTextLink:hover {
+      background-color: #EFEFEF
     }
 
     .ctnVideoTextLink.transcript:hover, .ctnVideoTextLink.note:hover {
-      .videoTextLink {
-        border-radius: 5px;
-      }
       .video-btn-edit {
         display: inline-block;
       }
@@ -160,13 +168,15 @@
 
     .ctnVideoTextLink.transcript.active, .ctnVideoTextLink.note.active {
       .videoTextLink {
-        border-radius: 0px;
+        border: 1px solid #C3C3C3;
+        background-color: white;
+        box-shadow: 0px 1px 1px 0px #CECECE;
       }
       .video-btn-edit {
         display: none;
       }
-      .video-btn-save, .video-btn-cancel {
-        display: inline-block;
+      .video-text-buttons {
+        display: block;
       }
       input, textarea {
         cursor: initial;

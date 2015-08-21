@@ -93,9 +93,6 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
       data.highlighted_array
     ));
     autosize($('textarea'));
-    $(window).load(function() {
-      autosize.update($('textarea'));
-    });
     $('.video-btn-edit').on('click', function() {
       var parent = $(this).closest('.ctnVideoTextLink');
       parent.addClass('active');
@@ -155,7 +152,7 @@ VideoModal.prototype.buildTranscript = function(transcriptArray, delightedArray,
       time: delightedArray[i],
       displayClass: 'feeling-delighted',
       displayIcon: 'feeling-delighted',
-      displayText: "<i class='feeling-delighted'></i>"
+      displayText: "User clicked <i class='feeling-delighted'></i>"
     })
   }
 
@@ -164,7 +161,7 @@ VideoModal.prototype.buildTranscript = function(transcriptArray, delightedArray,
       time: confusedArray[i],
       displayClass: 'feeling-confused',
       displayIcon: 'feeling-confused',
-      displayText: "<i class='feeling-confused'></i>"
+      displayText: "User clicked <i class='feeling-confused'></i>"
     })
   }
 
@@ -236,6 +233,10 @@ VideoModal.prototype.shown = function() {
     history.replaceState({}, '', newUrl);
   }
 
+  autosize.update($('textarea'));
+  $(window).load(function() {
+    autosize.update($('textarea'));
+  });
 }
 
 VideoModal.prototype.hidden = function() {
@@ -253,8 +254,13 @@ VideoModal.prototype.playVideo = function(timestamp) {
 }
 
 VideoModal.prototype.clickVideoText = function(event) {
-  var timestamp = $(event.currentTarget).attr('data-timestamp');
-  this.playVideo(timestamp);
+  var thisEl = $(event.currentTarget);
+  if (thisEl.closest('.ctnVideoTextLink').hasClass('active')) {
+    return;
+  } else {
+    var timestamp = thisEl.attr('data-timestamp');
+    this.playVideo(timestamp);
+  }
 }
 
 VideoModal.prototype.updateVideoTime = function(event, timestamp) {
@@ -268,12 +274,10 @@ VideoModal.prototype.updateVideoTime = function(event, timestamp) {
   var inputUrlBaseDom = this.$inputUrlBase.get(0);
   var selectionStart = inputUrlBaseDom.selectionStart;
   var selectionEnd = inputUrlBaseDom.selectionEnd;
-  var selectionAll = inputUrlBaseDom.value.length > 0 && selectionEnd - selectionStart == inputUrlBaseDom.value.length;
+  var selectionAll = this.$inputUrlBase.is(':focus') && inputUrlBaseDom.value.length > 0 && selectionEnd - selectionStart == inputUrlBaseDom.value.length;
   this.$inputUrlBase.val(displayUrl);
   if (selectionAll) {
     inputUrlBaseDom.setSelectionRange(0, inputUrlBaseDom.value.length);
-  } else {
-    inputUrlBaseDom.setSelectionRange(selectionStart, selectionEnd);
   }
 
   var videoTextLinks = this.$videoText.find('.videoTextLink').removeClass('activeVideoTextLink');

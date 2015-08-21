@@ -37,7 +37,7 @@
 
 <script id='video-text-partial' type='text/x-handlebars-template'>
   <div class='ctnVideoTextLink {{displayClass}} {{#if active}}active{{/if}}'>
-    <a class='videoTextLink' data-timestamp='{{time}}'>
+    <div class='videoTextLink' data-timestamp='{{time}}'>
       {{#if editable}}
         <input type='text' class='video-text-time' value='{{displayTime}}' {{#unless active}}readonly{{/unless}}></input>
         <div class='video-text-icon-display'>
@@ -51,11 +51,12 @@
           <div class='video-text-display'>{{{displayText}}}</div>
         </div>
       {{/if}}
-    </a>
+    </div>
+    <a class='video-btn-edit sub'><i class='fa fa-edit'></i> Edit</a>
     <div class='video-text-buttons'>
-      <span class='video-btn-edit btn btn-orange'><i class='fa fa-edit'></i> Edit</span>
       <span class='video-btn-save btn btn-success'><i class='fa fa-check'></i> Save</span>
       <span class='video-btn-cancel btn btn-danger'><i class='fa fa-times'></i> Cancel</span>
+      <span class='video-btn-cancel btn btn-grey'><i class='fa fa-trash'></i></span>
     </div>
   </div>
 </script>
