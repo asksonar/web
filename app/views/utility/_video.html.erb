@@ -1,31 +1,38 @@
-<div class='row button-container'>
-  <div class="btn-group" role="group" aria-label="...">
-    <button id='toggle-transcripts' type="button" class="btn btn-default active"><i class='fa fa-align-left'></i> Transcripts</button>
-    <button id='toggle-notes' type="button" class="btn btn-default active"><i class='fa fa-tags'></i> Notes</button>
-  </div>
-</div>
 <div class='row video-transcript-container text-mode'>
   <div class='video-container'>
     <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered vjs-has-started"
-      controls preload="auto" width="auto" height="300"
+      controls preload="auto" width="auto" height="auto"
       data-setup='{"example_option":true}'>
     </video>
     <div class="ctn-video-share-link">
-      <h2>This moment at&nbsp;</h2><input type='text' class='h2 form-control' id='input-url-time' readonly>
-      <div class="btn-group pull-right">
-        <a class="btn btn-medium-blue" id="btn-highlight-video-link" data-placement="bottom" title="Highlight this moment in the video" data-toggle="tooltip"><i class="fa fa-star"></i></a>
-        <div class='btn-wrapper-tooltip' data-placement="bottom" title="Copy the video share link" data-toggle="tooltip">
+      <h4>Share this moment: </h4>
+      <div class="input-group">
+        <input type="text" class="form-control" id='input-url-base' readonly>
+
+        <span class='input-group-btn' data-placement="bottom" title="Copy the video share link" data-toggle="tooltip" data-container="#btn-copy-video-link-tooltip">
           <a class="btn btn-green" id="btn-copy-video-link"><i class="fa fa-link"></i></a>
-        </div>
+        </span>
+      </div>
+      <div id='btn-copy-video-link-tooltip'></div>
+    </div>
+    <div class='ctn-video-share-highlight'>
+      <h4>Share a highlight: </h4>
+      <div>
+        <input type='text' class='h2 form-control input-time' id='input-url-time' readonly>
+        to
+        <input type='text' class='h2 form-control input-time' id='input-url-time' readonly>
+        <a id='btn-create-highlight' class='btn btn-dark-blue'><i class='fa fa-arrow-right'></i></a>
       </div>
     </div>
-    <input type="text" class="form-control" id='input-url-base' readonly>
   </div>
   <div class='transcript-container'>
+    <div class='button-container'>
+      <button id='toggle-transcripts' type="button" class="btn btn-default active"><i class='fa fa-align-left'></i> Transcripts</button>
+    </div>
     <div id='videoText'>
       <!-- insert transcription here -->
     </div>
-    <a id='btn-add-note' class='btn btn-medium-blue'><i class='fa fa-plus'></i> Add a New Note</a>
+    <a id='btn-add-note' class='btn btn-medium-blue'><i class='fa fa-plus'></i> Add a Note</a>
   </div>
 </div>
 
@@ -58,5 +65,11 @@
       <span class='video-btn-cancel btn btn-danger'><i class='fa fa-times'></i> Cancel</span>
       <span class='video-btn-cancel btn btn-grey'><i class='fa fa-trash'></i></span>
     </div>
+  </div>
+</script>
+
+<script id='video-resize-button' type='text/x-handlebars-template'>
+  <div class="vjs-custom-resize-control vjs-control " role="button" aria-live="polite" tabindex="0">
+    <div class='vjs-custom-resize-icon'></div>
   </div>
 </script>

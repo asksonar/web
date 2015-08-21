@@ -22,6 +22,7 @@ $(function(){
     btnHighlightVideoLink: $('#btn-highlight-video-link'),
     scriptVideoTextTemplate: $('#video-text-template'),
     scriptVideoTextPartial: $('#video-text-partial'),
+    scriptVideoResizeButton: $('#video-resize-button'),
     btnToggleTranscripts: $('#toggle-transcripts'),
     btnToggleNotes: $('#toggle-notes'),
     divVideoContainer: $('.video-container'),

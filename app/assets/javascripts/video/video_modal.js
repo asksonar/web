@@ -19,6 +19,7 @@ function VideoModal(config, video) {
 
   this.videoTextTemplate = Handlebars.compile(config.scriptVideoTextTemplate.html());
   this.videoTextPartial = Handlebars.compile(config.scriptVideoTextPartial.html());
+  this.videoResizeButton = Handlebars.compile(config.scriptVideoResizeButton.html());
   Handlebars.registerPartial("video-text-partial", config.scriptVideoTextPartial.html());
 
   this.init();
@@ -29,39 +30,31 @@ VideoModal.prototype.init = function() {
   this.$modal.on('hide.bs.modal', $.proxy(this.hidden, this));
   this.$videoText.on('click', '.videoTextLink', $.proxy(this.clickVideoText, this));
   this.$btnHighlightVideoLink.on('click', $.proxy(this.generateHighlight, this));
-  this.$btnToggleTranscripts.on('click', $.proxy(this.toggleViewMode, this));
-  this.$btnToggleNotes.on('click', $.proxy(this.toggleViewMode, this));
+  this.$btnToggleTranscripts.on('click', $.proxy(this.toggleTranscripts, this));
+  // this.$btnToggleNotes.on('click', $.proxy(this.toggleViewMode, this));
   this.$btnAddNote.on('click', $.proxy(this.createNote, this));
 
   this.video.on('timeupdate', $.proxy(this.updateVideoTime, this));
 
+  $('.vjs-control-bar .vjs-fullscreen-control').after(this.videoResizeButton({}));
+  $('.vjs-custom-resize-control').on('click', $.proxy(this.toggleViewMode, this));
+
   new ClipboardInput(this.$btnCopyVideoLink, this.$inputUrlBase);
 }
 
-VideoModal.prototype.toggleViewMode = function(event) {
+VideoModal.prototype.toggleTranscripts = function(event) {
   $(event.currentTarget).toggleClass('active');
-
   var activeTranscripts = this.$btnToggleTranscripts.hasClass('active');
-  var activeNotes = this.$btnToggleNotes.hasClass('active');
 
   if (activeTranscripts) {
     this.$videoText.removeClass('hide-transcripts');
   } else {
     this.$videoText.addClass('hide-transcripts');
   }
+}
 
-  if (activeNotes) {
-    this.$videoText.removeClass('hide-notes');
-  } else {
-    this.$videoText.addClass('hide-notes');
-  }
-
-  if (activeTranscripts || activeNotes) {
-    this.$divVideoTranscriptContainer.removeClass('icon-mode').addClass('text-mode');
-  } else {
-    this.$divVideoTranscriptContainer.removeClass('text-mode').addClass('icon-mode');
-  }
-
+VideoModal.prototype.toggleViewMode = function(event) {
+  this.$divVideoTranscriptContainer.toggleClass('icon-mode').toggleClass('text-mode');
 }
 
 VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {
@@ -345,8 +338,14 @@ VideoModal.prototype.createNote = function() {
     }
   });
 
-  followingLink.before(html);
-  var newLink = followingLink.prev();
+  var newLink;
+  if (followingLink) {
+    followingLink.before(html);
+    newLink = followingLink.prev();
+  } else {
+    this.$videoText.html(html);
+    newLink = this.$videoText.find('.ctnVideoTextLink');
+  }
 
   var inputTime = newLink.find('.video-text-time');
   var inputText = newLink.find('.video-text-display');
