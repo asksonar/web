@@ -107,7 +107,7 @@
     position: relative;
 
     .ctnVideoTextLink:not(.active) .activeVideoTextLink {
-      font-weight: bold;
+      @extend .strong;
     }
 
     .videoTextLink {
@@ -181,8 +181,8 @@
       display: none;
       position: absolute;
       right: 0;
-      margin-top: -24px;
-      padding: 0px 10px;
+      margin-top: -31px;
+      padding: 5px 10px;
       background-color: #EFEFEF;
     }
 
