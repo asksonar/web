@@ -222,7 +222,7 @@ VideoModal.prototype.show = function() {
 VideoModal.prototype.shown = function() {
   this.playVideo();
   if (location.href.indexOf('videos') < 0) {
-    var newUrl = URI(location.href).segment('videos').segment(this.resultStepHashId);
+    var newUrl = URI(location.href).segment('videos').segment(this.resultStepHashId).addSearch("t", 0);
     history.replaceState({}, '', newUrl);
   }
 
@@ -252,7 +252,7 @@ VideoModal.prototype.clickVideoText = function(event) {
     return;
   } else {
     var timestamp = thisEl.attr('data-timestamp');
-    this.playVideo(timestamp);
+    this.currentTime(timestamp);
   }
 }
 
@@ -281,11 +281,6 @@ VideoModal.prototype.updateVideoTime = function(event, timestamp) {
       videoTextLink.addClass('activeVideoTextLink');
       break;
     }
-  }
-
-  if (location.href.indexOf('videos') >= 0) {
-    var newUrl = URI(location.href).search({t:currentSeconds});
-    history.replaceState({}, '', newUrl);
   }
 }
 
