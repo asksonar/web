@@ -253,7 +253,7 @@ VideoModal.prototype.clickVideoText = function(event) {
     return;
   } else {
     var timestamp = thisEl.attr('data-timestamp');
-    this.currentTime(timestamp);
+    this.video.currentTime(timestamp);
   }
 }
 
