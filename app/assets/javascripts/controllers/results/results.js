@@ -28,7 +28,8 @@ $(function(){
     divVideoContainer: $('.video-container'),
     divTranscriptContainer: $('.transcript-container'),
     divVideoTranscriptContainer: $('.video-transcript-container'),
-    btnAddNote: $('#btn-add-note')
+    btnAddNote: $('#btn-add-note'),
+    spanTime: $('.span-time')
   }, sonar.videoController);
 
   sonar.resultsView = new ResultsView({

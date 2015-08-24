@@ -14,6 +14,7 @@ function VideoModal(config, video) {
   this.$divTranscriptContainer = config.divTranscriptContainer;
   this.$divVideoTranscriptContainer = config.divVideoTranscriptContainer;
   this.$btnAddNote = config.btnAddNote;
+  this.$spanTime = config.spanTime;
 
   this.video = video;
 
@@ -262,6 +263,7 @@ VideoModal.prototype.updateVideoTime = function(event, timestamp) {
 
   var displayTime = Math.floor(currentSeconds / 60) + ':' + ('00' + currentSeconds % 60).slice(-2);
   this.$inputUrlTime.val(displayTime);
+  this.$spanTime.text(displayTime);
 
   var displayUrl = this.$inputUrlBase.attr('data-base-url') + currentSeconds;
   var inputUrlBaseDom = this.$inputUrlBase.get(0);
