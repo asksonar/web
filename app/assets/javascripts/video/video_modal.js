@@ -54,7 +54,7 @@ VideoModal.prototype.toggleTranscripts = function(event) {
 }
 
 VideoModal.prototype.toggleViewMode = function(event) {
-  this.$divVideoTranscriptContainer.toggleClass('icon-mode').toggleClass('text-mode');
+  this.$divVideoTranscriptContainer.toggleClass('icon-mode');
 }
 
 VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {
