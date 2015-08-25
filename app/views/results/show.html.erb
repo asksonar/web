@@ -226,6 +226,12 @@
         step_description: @result_step.scenario_step.description,
         share_link: @result_step.share_link
       }.to_json %>)
+
+      <% if params[:t] %>
+        $(window).load(function() {
+          sonar.videoModal.focusLink(<%= params[:t] || 0 %>);
+        });
+      <% end %>
     })
   </script>
 <% end %>

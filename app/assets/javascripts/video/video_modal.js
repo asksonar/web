@@ -130,7 +130,24 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
 
   this.video.currentTime(timeSeconds);
   this.show();
+}
 
+VideoModal.prototype.focusLink = function(timeSeconds) {
+  var videoTextLinks = this.$videoText.find('.videoTextLink');
+  var videoTextLink;
+  for(var i = videoTextLinks.length - 1; i >= 0; i-- ) {
+    videoTextLink = $(videoTextLinks[i]);
+    if (videoTextLink.attr('data-timestamp') <= timeSeconds) {
+      videoTextLink.parent().get(0).scrollIntoView();
+      videoTextLink.parent()
+        .css({'background-color':'#F69526'})
+        .animate({'background-color':''}, 3000)
+        .queue(function() {
+          $(this).removeAttr('style').dequeue();
+        })
+      break;
+    }
+  }
 }
 
 VideoModal.prototype.buildTranscript = function(transcriptArray, delightedArray, confusedArray, highlightedArray) {
