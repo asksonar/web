@@ -1,10 +1,11 @@
 function VideoModal(config, video, transcript) {
   this.$modal = config.modal;
-  this.$inputUrlBase = config.inputUrlBase;
-  this.$inputUrlTime = config.inputUrlTime;
   this.$divUserEmail = config.divUserEmail;
   this.$divStepOrder = config.divStepOrder;
   this.$divStepDescription = config.divStepDescription;
+
+  this.$inputUrlBase = config.inputUrlBase;
+  this.$inputUrlTime = config.inputUrlTime;
   this.$btnCopyVideoLink = config.btnCopyVideoLink;
   this.$btnHighlightVideoLink = config.btnHighlightVideoLink;
   this.$btnToggleTranscripts = config.btnToggleTranscripts;
@@ -74,41 +75,6 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
       data.confused_array,
       data.highlighted_array
     );
-
-    $('.video-btn-edit').on('click', function() {
-      var parent = $(this).closest('.ctnVideoTextLink');
-      parent.addClass('active');
-
-      var inputTime = parent.find('.video-text-time');
-      var inputText = parent.find('.video-text-display');
-
-      inputTime.prop('readonly', false);
-      inputText.prop('readonly', false);
-
-      var originalTimeVal = inputTime.val();
-      var originalTextVal = inputText.val();
-
-      parent.find('.video-btn-cancel').off('click').on('click', function() {
-        parent.removeClass('active');
-        inputTime.val(originalTimeVal);
-        inputText.val(originalTextVal);
-        inputTime.prop('readonly', true);
-        inputText.prop('readonly', true);
-      });
-
-      parent.find('.video-btn-save').off('click').on('click', function(){
-        if (parent.hasClass('transcript')) {
-          notify.info('Your transcript has been updated.');
-        } else if (parent.hasClass('note')) {
-          notify.info('Your note has been updated.');
-        }
-
-        parent.removeClass('active');
-        inputTime.prop('readonly', true);
-        inputText.prop('readonly', true);
-      });
-
-    });
 
     this.$divUserEmail.html(data.user_email);
     this.$divStepOrder.html(data.step_order + 1);

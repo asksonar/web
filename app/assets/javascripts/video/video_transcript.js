@@ -11,7 +11,44 @@ window.VideoTranscript = function(config, video) {
 
 VideoTranscript.prototype.init = function() {
   this.$videoText.on('click', '.videoTextLink', $.proxy(this.clickVideoText, this));
+  this.$videoText.on('click', '.video-btn-edit', $.proxy(this.editVideoText, this));
 };
+
+VideoTranscript.prototype.editVideoText = function(event) {
+  var thisEl = $(event.currentTarget);
+
+  var parent = thisEl.closest('.ctnVideoTextLink');
+  parent.addClass('active');
+
+  var inputTime = parent.find('.video-text-time');
+  var inputText = parent.find('.video-text-display');
+
+  inputTime.prop('readonly', false);
+  inputText.prop('readonly', false);
+
+  var originalTimeVal = inputTime.val();
+  var originalTextVal = inputText.val();
+
+  parent.find('.video-btn-cancel').off('click').on('click', function() {
+    parent.removeClass('active');
+    inputTime.val(originalTimeVal);
+    inputText.val(originalTextVal);
+    inputTime.prop('readonly', true);
+    inputText.prop('readonly', true);
+  });
+
+  parent.find('.video-btn-save').off('click').on('click', function(){
+    if (parent.hasClass('transcript')) {
+      notify.info('Your transcript has been updated.');
+    } else if (parent.hasClass('note')) {
+      notify.info('Your note has been updated.');
+    }
+
+    parent.removeClass('active');
+    inputTime.prop('readonly', true);
+    inputText.prop('readonly', true);
+  });
+}
 
 VideoTranscript.prototype.buildTranscript = function(transcriptArray, delightedArray, confusedArray, highlightedArray) {
   var delightedIndex = 0, confusedIndex = 0;
