@@ -128,7 +128,18 @@
         background-color: initial;
       }
 
+      .video-text-time:-moz-read-only {
+        border-color: transparent;
+        background-color: initial;
+      }
+
       textarea.video-text-display:read-only {
+        border-color: transparent;
+        background-color: initial;
+        outline: none;
+      }
+
+      textarea.video-text-display:-moz-read-only {
         border-color: transparent;
         background-color: initial;
         outline: none;
