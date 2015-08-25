@@ -1,6 +1,5 @@
 function VideoModal(config, video, transcript) {
   this.$modal = config.modal;
-  this.$videoText = config.divVideoText;
   this.$inputUrlBase = config.inputUrlBase;
   this.$inputUrlTime = config.inputUrlTime;
   this.$divUserEmail = config.divUserEmail;
@@ -17,10 +16,7 @@ function VideoModal(config, video, transcript) {
   this.video = video;
   this.transcript = transcript;
 
-  this.videoTextTemplate = Handlebars.compile(config.scriptVideoTextTemplate.html());
-  this.videoTextPartial = Handlebars.compile(config.scriptVideoTextPartial.html());
   this.videoResizeButton = Handlebars.compile(config.scriptVideoResizeButton.html());
-  Handlebars.registerPartial("video-text-partial", config.scriptVideoTextPartial.html());
 
   this.init();
 }
@@ -28,10 +24,8 @@ function VideoModal(config, video, transcript) {
 VideoModal.prototype.init = function() {
   this.$modal.on('shown.bs.modal', $.proxy(this.shown, this));
   this.$modal.on('hide.bs.modal', $.proxy(this.hidden, this));
-  //this.$videoText.on('click', '.videoTextLink', $.proxy(this.clickVideoText, this));
   this.$btnHighlightVideoLink.on('click', $.proxy(this.generateHighlight, this));
   this.$btnToggleTranscripts.on('click', $.proxy(this.toggleTranscripts, this));
-  // this.$btnToggleNotes.on('click', $.proxy(this.toggleViewMode, this));
   this.$btnAddNote.on('click', $.proxy(this.createNote, this));
 
   this.video.on('timeupdate', $.proxy(this.updateVideoTime, this));
@@ -75,13 +69,13 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
     this.video.markers(data.delighted_array, data.confused_array, data.highlighted_array);
     this.video.src(data.src_array);
 
-    this.$videoText.html(this.buildTranscript(
+    this.transcript.buildTranscript(
       data.transcription_array,
       data.delighted_array,
       data.confused_array,
       data.highlighted_array
-    ));
-    autosize($('textarea'));
+    );
+
     $('.video-btn-edit').on('click', function() {
       var parent = $(this).closest('.ctnVideoTextLink');
       parent.addClass('active');
@@ -128,106 +122,7 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
 }
 
 VideoModal.prototype.focusLink = function(timeSeconds) {
-  var videoTextLinks = this.$videoText.find('.videoTextLink');
-  var videoTextLink;
-  for(var i = videoTextLinks.length - 1; i >= 0; i-- ) {
-    videoTextLink = $(videoTextLinks[i]);
-    if (videoTextLink.attr('data-timestamp') <= timeSeconds) {
-      videoTextLink.parent().get(0).scrollIntoView();
-      videoTextLink.parent()
-        .css({'background-color':'#F69526'})
-        .animate({'background-color':''}, 3000)
-        .queue(function() {
-          $(this).removeAttr('style').dequeue();
-        })
-      break;
-    }
-  }
-}
-
-VideoModal.prototype.buildTranscript = function(transcriptArray, delightedArray, confusedArray, highlightedArray) {
-
-  var delightedIndex = 0, confusedIndex = 0;
-  var renderArray = [];
-  var videoTranscript;
-  var time, mins, secs, text;
-  var hasDelighted, hasConfused, nextTime;
-
-  for(var i = 0; delightedArray && i  < delightedArray.length; i++) {
-    renderArray.push({
-      time: delightedArray[i],
-      displayClass: 'feeling-delighted',
-      displayIcon: 'feeling-delighted',
-      displayText: "User clicked <i class='feeling-delighted'></i>"
-    })
-  }
-
-  for(var i = 0; confusedArray && i  < confusedArray.length; i++) {
-    renderArray.push({
-      time: confusedArray[i],
-      displayClass: 'feeling-confused',
-      displayIcon: 'feeling-confused',
-      displayText: "User clicked <i class='feeling-confused'></i>"
-    })
-  }
-
-  for(var i = 0; i  < transcriptArray.length; i++) {
-    time = transcriptArray[i].offset_seconds;
-    text = transcriptArray[i].text;
-    text = (text || '').trim();
-    if (!text) {
-      continue;
-    }
-
-    renderArray.push({
-      time: time,
-      displayClass: 'transcript',
-      displayIcon: 'fa fa-align-left',
-      displayText: text,
-      editable: true
-    });
-  }
-
-/*
-  for(var i = 0; i  < highlightedArray.length; i++) {
-    time = highlightedArray[i].offset_seconds;
-    text = highlightedArray[i].text;
-    text = (text || '').trim();
-    if (!text) {
-      continue;
-    }
-
-    renderArray.push({
-      time: time,
-      displayClass: 'note',
-      displayIcon: 'fa fa-tag',
-      displayText: text,
-      editable: true
-    });
-  }
-*/
-
-  renderArray.sort(function(a, b){
-    return a.time - b.time;
-  });
-
-  for(var i = 0; i < renderArray.length; i++) {
-    time = renderArray[i].time;
-    mins = Math.floor(time / 60);
-    secs = Math.floor(time) % 60;
-
-    renderArray[i].displayTime = mins + ":" + ('00' + secs).slice(-2)
-  }
-
-  videoTranscript = this.videoTextTemplate({
-    rows: renderArray
-  });
-
-  if (videoTranscript.trim()) {
-    return videoTranscript;
-  } else {
-    return "(no transcription)";
-  }
+  this.transcript.focusLink(timeSeconds);
 }
 
 VideoModal.prototype.show = function() {
@@ -261,16 +156,6 @@ VideoModal.prototype.playVideo = function(timestamp) {
   this.video.play(timestamp);
 }
 
-VideoModal.prototype.clickVideoText = function(event) {
-  var thisEl = $(event.currentTarget);
-  if (thisEl.closest('.ctnVideoTextLink').hasClass('active')) {
-    return;
-  } else {
-    var timestamp = thisEl.attr('data-timestamp');
-    this.video.currentTime(timestamp);
-  }
-}
-
 VideoModal.prototype.updateVideoTime = function(event, timestamp) {
 
   var currentSeconds = parseInt(timestamp);
@@ -293,15 +178,7 @@ VideoModal.prototype.updateVideoTime = function(event, timestamp) {
     }
   }
 
-  var videoTextLinks = this.$videoText.find('.videoTextLink').removeClass('activeVideoTextLink');
-  var videoTextLink;
-  for(var i = videoTextLinks.length - 1; i >= 0; i-- ) {
-    videoTextLink = $(videoTextLinks[i]);
-    if (videoTextLink.attr('data-timestamp') <= timestamp) {
-      videoTextLink.addClass('activeVideoTextLink');
-      break;
-    }
-  }
+  this.transcript.activateLink(timestamp);
 }
 
 VideoModal.prototype.generateHighlight = function() {
@@ -332,51 +209,5 @@ VideoModal.prototype.generateHighlight = function() {
 
 VideoModal.prototype.createNote = function() {
   var time = this.video.currentTime();
-  var mins = Math.floor(time / 60);
-  var secs = Math.floor(time) % 60;
-
-  var html = this.videoTextPartial({
-    time: time,
-    displayTime: mins + ":" + ('00' + secs).slice(-2),
-    displayClass: 'note',
-    displayIcon: 'fa fa-tag',
-    displayText: '',
-    editable: true,
-    active: true
-  });
-
-  var followingLink;
-  this.$videoText.find('.videoTextLink').each(function(){
-    if ($(this).attr('data-timestamp') > time) {
-      followingLink = $(this).closest('.ctnVideoTextLink');
-      return false;
-    }
-  });
-
-  var newLink;
-  if (followingLink) {
-    followingLink.before(html);
-    newLink = followingLink.prev();
-  } else {
-    this.$videoText.html(html);
-    newLink = this.$videoText.find('.ctnVideoTextLink');
-  }
-
-  var inputTime = newLink.find('.video-text-time');
-  var inputText = newLink.find('.video-text-display');
-
-  inputText.focus();
-
-  newLink.find('.video-btn-cancel').on('click', function() {
-    newLink.remove();
-  });
-
-  newLink.find('.video-btn-save').on('click', function(){
-    notify.info('Your note has been created.');
-
-    newLink.removeClass('active');
-    inputTime.prop('readonly', true);
-    inputText.prop('readonly', true);
-  });
-
+  this.transcript.createNote(time);
 }

@@ -12,10 +12,11 @@ $(function(){
   });
   var videoTranscript = new VideoTranscript({
     divVideoText: $('#videoText'),
-  });
+    scriptVideoTextTemplate: $('#video-text-template'),
+    scriptVideoTextPartial: $('#video-text-partial')
+  }, videoController);
   var videoModal = new VideoModal({
     modal: $('#summary_video_container'),
-    divVideoText: $('#videoText'), // TODO: remove
     inputUrlTime: $('#input-url-time'),
     inputUrlBase: $('#input-url-base'),
     divUserEmail: $('#ctn-user-email'),
@@ -23,8 +24,6 @@ $(function(){
     divStepDescription: $('#ctn-step-description'),
     btnCopyVideoLink: $('#btn-copy-video-link'),
     btnHighlightVideoLink: $('#btn-highlight-video-link'),
-    scriptVideoTextTemplate: $('#video-text-template'),
-    scriptVideoTextPartial: $('#video-text-partial'),
     scriptVideoResizeButton: $('#video-resize-button'),
     btnToggleTranscripts: $('#toggle-transcripts'),
     btnToggleNotes: $('#toggle-notes'),
