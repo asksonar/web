@@ -193,6 +193,7 @@ VideoModal.prototype.buildTranscript = function(transcriptArray, delightedArray,
     });
   }
 
+/*
   for(var i = 0; i  < highlightedArray.length; i++) {
     time = highlightedArray[i].offset_seconds;
     text = highlightedArray[i].text;
@@ -209,6 +210,7 @@ VideoModal.prototype.buildTranscript = function(transcriptArray, delightedArray,
       editable: true
     });
   }
+*/
 
   renderArray.sort(function(a, b){
     return a.time - b.time;
