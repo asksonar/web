@@ -286,10 +286,14 @@ VideoModal.prototype.updateVideoTime = function(event, timestamp) {
   var inputUrlBaseDom = this.$inputUrlBase.get(0);
   var selectionStart = inputUrlBaseDom.selectionStart;
   var selectionEnd = inputUrlBaseDom.selectionEnd;
-  var selectionAll = this.$inputUrlBase.is(':focus') && inputUrlBaseDom.value.length > 0 && selectionEnd - selectionStart == inputUrlBaseDom.value.length;
+  var selectionAll = inputUrlBaseDom.value.length > 0 && selectionEnd - selectionStart == inputUrlBaseDom.value.length;
   this.$inputUrlBase.val(displayUrl);
-  if (selectionAll) {
-    inputUrlBaseDom.setSelectionRange(0, inputUrlBaseDom.value.length);
+  if (this.$inputUrlBase.is(':focus')) {
+    if (selectionAll) {
+      inputUrlBaseDom.setSelectionRange(0, inputUrlBaseDom.value.length);
+    } else {
+      inputUrlBaseDom.setSelectionRange(selectionStart, selectionEnd);
+    }
   }
 
   var videoTextLinks = this.$videoText.find('.videoTextLink').removeClass('activeVideoTextLink');

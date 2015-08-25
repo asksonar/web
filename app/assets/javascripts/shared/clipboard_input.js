@@ -1,7 +1,11 @@
 function ClipboardInput($button, $input) {
 
   $input.on('click', function() {
-    this.setSelectionRange(0, this.value.length);
+    var thisEl = this;
+    window.setTimeout(function() {
+      thisEl.setSelectionRange(0, thisEl.value.length);
+    }, 0);
+
   });
 
   new ZeroClipboard($button.get()).on( "copy", $.proxy(function (event) {
