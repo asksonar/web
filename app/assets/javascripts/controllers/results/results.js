@@ -7,12 +7,15 @@ $(function(){
   $('[data-toggle="tooltip"]').tooltip();
   $('[data-toggle="popover"]').popover();
 
-  sonar.videoController = new VideoController({
+  var videoController = new VideoController({
     videoId: 'example_video_1'
   });
-  sonar.videoModal = new VideoModal({
-    modal: $('#summary_video_container'),
+  var videoTranscript = new VideoTranscript({
     divVideoText: $('#videoText'),
+  });
+  var videoModal = new VideoModal({
+    modal: $('#summary_video_container'),
+    divVideoText: $('#videoText'), // TODO: remove
     inputUrlTime: $('#input-url-time'),
     inputUrlBase: $('#input-url-base'),
     divUserEmail: $('#ctn-user-email'),
@@ -25,14 +28,12 @@ $(function(){
     scriptVideoResizeButton: $('#video-resize-button'),
     btnToggleTranscripts: $('#toggle-transcripts'),
     btnToggleNotes: $('#toggle-notes'),
-    divVideoContainer: $('.video-container'),
-    divTranscriptContainer: $('.transcript-container'),
     divVideoTranscriptContainer: $('.video-transcript-container'),
     btnAddNote: $('#btn-add-note'),
     spanTime: $('.span-time')
-  }, sonar.videoController);
+  }, videoController, videoTranscript);
 
-  sonar.resultsView = new ResultsView({
+  var resultsView = new ResultsView({
     divAllContent: $('.main-content-wrapper'),
     divMainContent: $('.main-content'),
     btnCopyShareLink: $('#btn-copy-share-link'),
@@ -42,6 +43,8 @@ $(function(){
     inputHeroShareLink: $('#input-hero-share-link'),
     panelHero: $('.panel-hero')
 
-  }, sonar.videoModal);
+  }, videoModal);
+
+  sonar.videoModal = videoModal;
 
 });

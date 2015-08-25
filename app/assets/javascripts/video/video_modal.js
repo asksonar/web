@@ -1,4 +1,4 @@
-function VideoModal(config, video) {
+function VideoModal(config, video, transcript) {
   this.$modal = config.modal;
   this.$videoText = config.divVideoText;
   this.$inputUrlBase = config.inputUrlBase;
@@ -10,13 +10,12 @@ function VideoModal(config, video) {
   this.$btnHighlightVideoLink = config.btnHighlightVideoLink;
   this.$btnToggleTranscripts = config.btnToggleTranscripts;
   this.$btnToggleNotes = config.btnToggleNotes;
-  this.$divVideoContainer = config.divVideoContainer;
-  this.$divTranscriptContainer = config.divTranscriptContainer;
   this.$divVideoTranscriptContainer = config.divVideoTranscriptContainer;
   this.$btnAddNote = config.btnAddNote;
   this.$spanTime = config.spanTime;
 
   this.video = video;
+  this.transcript = transcript;
 
   this.videoTextTemplate = Handlebars.compile(config.scriptVideoTextTemplate.html());
   this.videoTextPartial = Handlebars.compile(config.scriptVideoTextPartial.html());
@@ -29,7 +28,7 @@ function VideoModal(config, video) {
 VideoModal.prototype.init = function() {
   this.$modal.on('shown.bs.modal', $.proxy(this.shown, this));
   this.$modal.on('hide.bs.modal', $.proxy(this.hidden, this));
-  this.$videoText.on('click', '.videoTextLink', $.proxy(this.clickVideoText, this));
+  //this.$videoText.on('click', '.videoTextLink', $.proxy(this.clickVideoText, this));
   this.$btnHighlightVideoLink.on('click', $.proxy(this.generateHighlight, this));
   this.$btnToggleTranscripts.on('click', $.proxy(this.toggleTranscripts, this));
   // this.$btnToggleNotes.on('click', $.proxy(this.toggleViewMode, this));
@@ -47,11 +46,7 @@ VideoModal.prototype.toggleTranscripts = function(event) {
   $(event.currentTarget).toggleClass('active');
   var activeTranscripts = this.$btnToggleTranscripts.hasClass('active');
 
-  if (activeTranscripts) {
-    this.$videoText.removeClass('hide-transcripts');
-  } else {
-    this.$videoText.addClass('hide-transcripts');
-  }
+  this.transcript.showTranscripts(activeTranscripts);
 }
 
 VideoModal.prototype.toggleViewMode = function(event) {
