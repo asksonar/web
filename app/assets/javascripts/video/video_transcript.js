@@ -1,4 +1,4 @@
-window.VideoTranscript = function(config, video) {
+VideoTranscript = function(config, video) {
   this.$videoText = config.divVideoText;
   this.videoTextTemplate = Handlebars.compile(config.scriptVideoTextTemplate.html());
   this.videoTextPartial = Handlebars.compile(config.scriptVideoTextPartial.html());

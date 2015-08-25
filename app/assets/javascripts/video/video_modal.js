@@ -1,25 +1,22 @@
-function VideoModal(config, video, transcript) {
+VideoModal = function(config, video, transcript, videoLink) {
   this.$modal = config.modal;
   this.$divUserEmail = config.divUserEmail;
   this.$divStepOrder = config.divStepOrder;
   this.$divStepDescription = config.divStepDescription;
 
-  this.$inputUrlBase = config.inputUrlBase;
-  this.$inputUrlTime = config.inputUrlTime;
-  this.$btnCopyVideoLink = config.btnCopyVideoLink;
   this.$btnHighlightVideoLink = config.btnHighlightVideoLink;
   this.$btnToggleTranscripts = config.btnToggleTranscripts;
   this.$divVideoTranscriptContainer = config.divVideoTranscriptContainer;
   this.$btnAddNote = config.btnAddNote;
-  this.$spanTime = config.spanTime;
 
   this.video = video;
   this.transcript = transcript;
+  this.videoLink = videoLink;
 
   this.videoResizeButton = Handlebars.compile(config.scriptVideoResizeButton.html());
 
   this.init();
-}
+};
 
 VideoModal.prototype.init = function() {
   this.$modal.on('shown.bs.modal', $.proxy(this.shown, this));
@@ -33,19 +30,18 @@ VideoModal.prototype.init = function() {
   $('.vjs-control-bar .vjs-fullscreen-control').after(this.videoResizeButton({}));
   $('.vjs-custom-resize-control').on('click', $.proxy(this.toggleViewMode, this));
 
-  new ClipboardInput(this.$btnCopyVideoLink, this.$inputUrlBase);
-}
+};
 
 VideoModal.prototype.toggleTranscripts = function(event) {
   $(event.currentTarget).toggleClass('active');
   var activeTranscripts = this.$btnToggleTranscripts.hasClass('active');
 
   this.transcript.showTranscripts(activeTranscripts);
-}
+};
 
 VideoModal.prototype.toggleViewMode = function(event) {
   this.$divVideoTranscriptContainer.toggleClass('icon-mode');
-}
+};
 
 VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {
 
@@ -59,7 +55,7 @@ VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {
   )).fail($.proxy(function(jqXHR, textStatus, errorThrown) {
     notify.warn(jqXHR.responseText);
   }, this));
-}
+};
 
 // timeSeconds comes first because $.proxy inserts it first
 VideoModal.prototype.loaded = function(timeSeconds, data) {
@@ -79,20 +75,21 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
     this.$divUserEmail.html(data.user_email);
     this.$divStepOrder.html(data.step_order + 1);
     this.$divStepDescription.html(data.step_description);
-    this.$inputUrlBase.attr('data-base-url', data.share_link + '?t=');
+
+    this.videoLink.updateShareLink(data.share_link);
   }
 
   this.video.currentTime(timeSeconds);
   this.show();
-}
+};
 
 VideoModal.prototype.focusLink = function(timeSeconds) {
   this.transcript.focusLink(timeSeconds);
-}
+};
 
 VideoModal.prototype.show = function() {
   this.$modal.modal('show');
-}
+};
 
 VideoModal.prototype.shown = function() {
   this.playVideo();
@@ -105,46 +102,26 @@ VideoModal.prototype.shown = function() {
   $(window).load(function() {
     autosize.update($('textarea'));
   });
-}
+};
 
 VideoModal.prototype.hidden = function() {
   this.pauseVideo();
   var newUrl = '/' + URI(location.href).segment(0) + '/' + URI(location.href).segment(1);
   history.replaceState({}, '', newUrl);
-}
+};
 
 VideoModal.prototype.pauseVideo = function() {
   this.video.pause();
-}
+};
 
 VideoModal.prototype.playVideo = function(timestamp) {
   this.video.play(timestamp);
-}
+};
 
 VideoModal.prototype.updateVideoTime = function(event, timestamp) {
-
-  var currentSeconds = parseInt(timestamp);
-
-  var displayTime = Math.floor(currentSeconds / 60) + ':' + ('00' + currentSeconds % 60).slice(-2);
-  this.$inputUrlTime.val(displayTime);
-  this.$spanTime.text(displayTime);
-
-  var displayUrl = this.$inputUrlBase.attr('data-base-url') + currentSeconds;
-  var inputUrlBaseDom = this.$inputUrlBase.get(0);
-  var selectionStart = inputUrlBaseDom.selectionStart;
-  var selectionEnd = inputUrlBaseDom.selectionEnd;
-  var selectionAll = inputUrlBaseDom.value.length > 0 && selectionEnd - selectionStart == inputUrlBaseDom.value.length;
-  this.$inputUrlBase.val(displayUrl);
-  if (this.$inputUrlBase.is(':focus')) {
-    if (selectionAll) {
-      inputUrlBaseDom.setSelectionRange(0, inputUrlBaseDom.value.length);
-    } else {
-      inputUrlBaseDom.setSelectionRange(selectionStart, selectionEnd);
-    }
-  }
-
+  this.videoLink.updateVideoTime(timestamp);
   this.transcript.activateLink(timestamp);
-}
+};
 
 VideoModal.prototype.generateHighlight = function() {
   var offsetSeconds = this.video.currentTime();
@@ -170,9 +147,9 @@ VideoModal.prototype.generateHighlight = function() {
   }, this)).fail($.proxy(function(jqXHR, textStatus, errorThrown){
     notify.error(jqXHR.responseText, 'There was an error saving your Highlight.');
   }, this));
-}
+};
 
 VideoModal.prototype.createNote = function() {
   var time = this.video.currentTime();
   this.transcript.createNote(time);
-}
+};

@@ -10,26 +10,33 @@ $(function(){
   var videoController = new VideoController({
     videoId: 'example_video_1'
   });
+
   var videoTranscript = new VideoTranscript({
     divVideoText: $('#videoText'),
     scriptVideoTextTemplate: $('#video-text-template'),
     scriptVideoTextPartial: $('#video-text-partial')
   }, videoController);
-  var videoModal = new VideoModal({
-    modal: $('#summary_video_container'),
+
+  var videoLink = new VideoLink({
     inputUrlTime: $('#input-url-time'),
     inputUrlBase: $('#input-url-base'),
+    btnCopyVideoLink: $('#btn-copy-video-link'),
+    spanTime: $('.span-time')
+  });
+
+  var videoModal = new VideoModal({
+    modal: $('#summary_video_container'),
     divUserEmail: $('#ctn-user-email'),
     divStepOrder: $('#ctn-step-order'),
     divStepDescription: $('#ctn-step-description'),
-    btnCopyVideoLink: $('#btn-copy-video-link'),
+
     btnHighlightVideoLink: $('#btn-highlight-video-link'),
     scriptVideoResizeButton: $('#video-resize-button'),
     btnToggleTranscripts: $('#toggle-transcripts'),
     divVideoTranscriptContainer: $('.video-transcript-container'),
-    btnAddNote: $('#btn-add-note'),
-    spanTime: $('.span-time')
-  }, videoController, videoTranscript);
+    btnAddNote: $('#btn-add-note')
+
+  }, videoController, videoTranscript, videoLink);
 
   var resultsView = new ResultsView({
     divAllContent: $('.main-content-wrapper'),
