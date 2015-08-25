@@ -13,6 +13,8 @@ $(function(){
 
   var videoTranscript = new VideoTranscript({
     divVideoText: $('#videoText'),
+    btnToggleTranscripts: $('#toggle-transcripts'),
+    btnAddNote: $('#btn-add-note'),
     scriptVideoTextTemplate: $('#video-text-template'),
     scriptVideoTextPartial: $('#video-text-partial')
   }, videoController);
@@ -29,12 +31,9 @@ $(function(){
     divUserEmail: $('#ctn-user-email'),
     divStepOrder: $('#ctn-step-order'),
     divStepDescription: $('#ctn-step-description'),
-
     btnHighlightVideoLink: $('#btn-highlight-video-link'),
     scriptVideoResizeButton: $('#video-resize-button'),
-    btnToggleTranscripts: $('#toggle-transcripts'),
-    divVideoTranscriptContainer: $('.video-transcript-container'),
-    btnAddNote: $('#btn-add-note')
+    divVideoTranscriptContainer: $('.video-transcript-container')
 
   }, videoController, videoTranscript, videoLink);
 

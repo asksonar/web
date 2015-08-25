@@ -5,9 +5,8 @@ VideoModal = function(config, video, transcript, videoLink) {
   this.$divStepDescription = config.divStepDescription;
 
   this.$btnHighlightVideoLink = config.btnHighlightVideoLink;
-  this.$btnToggleTranscripts = config.btnToggleTranscripts;
+
   this.$divVideoTranscriptContainer = config.divVideoTranscriptContainer;
-  this.$btnAddNote = config.btnAddNote;
 
   this.video = video;
   this.transcript = transcript;
@@ -22,21 +21,12 @@ VideoModal.prototype.init = function() {
   this.$modal.on('shown.bs.modal', $.proxy(this.shown, this));
   this.$modal.on('hide.bs.modal', $.proxy(this.hidden, this));
   this.$btnHighlightVideoLink.on('click', $.proxy(this.generateHighlight, this));
-  this.$btnToggleTranscripts.on('click', $.proxy(this.toggleTranscripts, this));
-  this.$btnAddNote.on('click', $.proxy(this.createNote, this));
 
   this.video.on('timeupdate', $.proxy(this.updateVideoTime, this));
 
   $('.vjs-control-bar .vjs-fullscreen-control').after(this.videoResizeButton({}));
   $('.vjs-custom-resize-control').on('click', $.proxy(this.toggleViewMode, this));
 
-};
-
-VideoModal.prototype.toggleTranscripts = function(event) {
-  $(event.currentTarget).toggleClass('active');
-  var activeTranscripts = this.$btnToggleTranscripts.hasClass('active');
-
-  this.transcript.showTranscripts(activeTranscripts);
 };
 
 VideoModal.prototype.toggleViewMode = function(event) {
@@ -149,7 +139,3 @@ VideoModal.prototype.generateHighlight = function() {
   }, this));
 };
 
-VideoModal.prototype.createNote = function() {
-  var time = this.video.currentTime();
-  this.transcript.createNote(time);
-};

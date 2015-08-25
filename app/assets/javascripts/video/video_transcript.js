@@ -1,5 +1,8 @@
 VideoTranscript = function(config, video) {
   this.$videoText = config.divVideoText;
+  this.$btnToggleTranscripts = config.btnToggleTranscripts;
+  this.$btnAddNote = config.btnAddNote;
+
   this.videoTextTemplate = Handlebars.compile(config.scriptVideoTextTemplate.html());
   this.videoTextPartial = Handlebars.compile(config.scriptVideoTextPartial.html());
   Handlebars.registerPartial("video-text-partial", config.scriptVideoTextPartial.html());
@@ -12,6 +15,15 @@ VideoTranscript = function(config, video) {
 VideoTranscript.prototype.init = function() {
   this.$videoText.on('click', '.videoTextLink', $.proxy(this.clickVideoText, this));
   this.$videoText.on('click', '.video-btn-edit', $.proxy(this.editVideoText, this));
+  this.$btnToggleTranscripts.on('click', $.proxy(this.toggleTranscripts, this));
+  this.$btnAddNote.on('click', $.proxy(this.createNote, this));
+};
+
+VideoTranscript.prototype.toggleTranscripts = function(event) {
+  $(event.currentTarget).toggleClass('active');
+  var activeTranscripts = this.$btnToggleTranscripts.hasClass('active');
+
+  this.showTranscripts(activeTranscripts);
 };
 
 VideoTranscript.prototype.editVideoText = function(event) {
@@ -185,7 +197,8 @@ VideoTranscript.prototype.activateLink = function(timeSeconds) {
   }
 }
 
-VideoTranscript.prototype.createNote = function(timeSeconds) {
+VideoTranscript.prototype.createNote = function() {
+  var timeSeconds = this.video.currentTime();
 
   var mins = Math.floor(timeSeconds / 60);
   var secs = Math.floor(timeSeconds) % 60;
