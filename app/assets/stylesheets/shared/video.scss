@@ -202,8 +202,9 @@
     margin: 7px auto;
     transition: width .1s;
   }
-
-  .vjs-custom-resize-icon:hover {
+}
+.vjs-default-skin .vjs-custom-resize-control:hover {
+  .vjs-custom-resize-icon {
     box-shadow: 0em 0em 1em #ffffff;
   }
 }
@@ -287,7 +288,10 @@
     .vjs-custom-resize-icon {
       width: 20px;
     }
-    .vjs-custom-resize-icon:hover {
+  }
+
+  .vjs-custom-resize-control:hover {
+    .vjs-custom-resize-icon {
       width: 25px;
     }
   }
@@ -305,7 +309,9 @@
       .vjs-custom-resize-icon {
         width: 25px;
       }
-      .vjs-custom-resize-icon:hover {
+    }
+    .vjs-custom-resize-control:hover {
+      .vjs-custom-resize-icon {
         width: 20px;
       }
     }
