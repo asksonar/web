@@ -8,7 +8,6 @@ function VideoModal(config, video, transcript) {
   this.$btnCopyVideoLink = config.btnCopyVideoLink;
   this.$btnHighlightVideoLink = config.btnHighlightVideoLink;
   this.$btnToggleTranscripts = config.btnToggleTranscripts;
-  this.$btnToggleNotes = config.btnToggleNotes;
   this.$divVideoTranscriptContainer = config.divVideoTranscriptContainer;
   this.$btnAddNote = config.btnAddNote;
   this.$spanTime = config.spanTime;

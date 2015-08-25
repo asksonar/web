@@ -26,7 +26,6 @@ $(function(){
     btnHighlightVideoLink: $('#btn-highlight-video-link'),
     scriptVideoResizeButton: $('#video-resize-button'),
     btnToggleTranscripts: $('#toggle-transcripts'),
-    btnToggleNotes: $('#toggle-notes'),
     divVideoTranscriptContainer: $('.video-transcript-container'),
     btnAddNote: $('#btn-add-note'),
     spanTime: $('.span-time')
