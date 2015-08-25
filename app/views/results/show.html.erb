@@ -218,7 +218,7 @@
         result_step_hashid: @result_step.hashid,
         delighted_array: @result_step.feelings_delighted.map { |feeling| feeling.feeling_at_seconds },
         confused_array: @result_step.feelings_confused.map { |feeling| feeling.feeling_at_seconds },
-        highlighted_array: @result_step.highlights_array,
+        highlighted_array: @result_step.highlights.map { |highlight| highlight.offset_seconds },
         src_array: @result_step.video.src_array,
         transcription_array: @result_step.transcription_array,
         user_email: @result_step.panelist.email,

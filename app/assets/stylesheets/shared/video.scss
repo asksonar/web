@@ -19,9 +19,12 @@
     #input-url-base {
       cursor: text;
     }
-    #btn-copy-video-link {
+    .btn {
       padding-top: 8px;
       padding-bottom: 7px;
+    }
+    .btn + .btn {
+      margin-left: 1px;
     }
   }
 
