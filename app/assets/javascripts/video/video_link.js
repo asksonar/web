@@ -8,8 +8,13 @@ VideoLink = function(config) {
 };
 
 VideoLink.prototype.init = function() {
-
   new ClipboardInput(this.$btnCopyVideoLink, this.$inputUrlBase);
+
+  this.onTimeupdate = $.proxy(this.onTimeupdate, this);
+}
+
+VideoLink.prototype.onTimeupdate = function(event, timestamp) {
+  this.updateVideoTime(timestamp);
 }
 
 VideoLink.prototype.updateVideoTime = function(timestamp) {

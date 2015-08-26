@@ -33,6 +33,9 @@ $(function(){
     spanTime: $('.span-time')
   });
 
+  videoController.on('timeupdate', videoTranscript.onTimeupdate);
+  videoController.on('timeupdate', videoLink.onTimeupdate);
+
   videoController.markers(
     sonar.resultStep.delightedArray,
     sonar.resultStep.confusedArray,
@@ -47,6 +50,7 @@ $(function(){
     sonar.resultStep.confusedArray,
     sonar.resultStep.highlightedArray
   );
+  videoTranscript.refreshView();
 
   videoLink.updateShareLink(sonar.resultStep.shareLink);
 

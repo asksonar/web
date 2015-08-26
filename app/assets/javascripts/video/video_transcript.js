@@ -17,6 +17,8 @@ VideoTranscript.prototype.init = function() {
   this.$videoText.on('click', '.video-btn-edit', $.proxy(this.editVideoText, this));
   this.$btnToggleTranscripts.on('click', $.proxy(this.toggleTranscripts, this));
   this.$btnAddNote.on('click', $.proxy(this.createNote, this));
+
+  this.onTimeupdate = $.proxy(this.onTimeupdate, this);
 };
 
 VideoTranscript.prototype.refreshView = function() {
@@ -182,7 +184,7 @@ VideoTranscript.prototype.focusLink = function(timeSeconds) {
   var videoTextLink;
   for(var i = videoTextLinks.length - 1; i >= 0; i-- ) {
     videoTextLink = $(videoTextLinks[i]);
-    if (videoTextLink.attr('data-timestamp') <= timeSeconds) {
+    if (parseInt(videoTextLink.attr('data-timestamp')) <= parseInt(timeSeconds)) {
       videoTextLink.parent().get(0).scrollIntoView();
       videoTextLink.parent()
         .css({'background-color':'#F69526'})
@@ -200,12 +202,16 @@ VideoTranscript.prototype.activateLink = function(timeSeconds) {
   var videoTextLink;
   for(var i = videoTextLinks.length - 1; i >= 0; i-- ) {
     videoTextLink = $(videoTextLinks[i]);
-    if (videoTextLink.attr('data-timestamp') <= timeSeconds) {
+    if (parseInt(videoTextLink.attr('data-timestamp')) <= parseInt(timeSeconds)) {
       videoTextLink.addClass('activeVideoTextLink');
       break;
     }
   }
 }
+
+VideoTranscript.prototype.onTimeupdate = function(event, timestamp) {
+  this.activateLink(timestamp);
+};
 
 VideoTranscript.prototype.createNote = function() {
   var timeSeconds = this.video.currentTime();
@@ -225,7 +231,7 @@ VideoTranscript.prototype.createNote = function() {
 
   var followingLink;
   this.$videoText.find('.videoTextLink').each(function(){
-    if ($(this).attr('data-timestamp') > timeSeconds) {
+    if (parseInt($(this).attr('data-timestamp')) > parseInt(timeSeconds)) {
       followingLink = $(this).closest('.ctnVideoTextLink');
       return false;
     }

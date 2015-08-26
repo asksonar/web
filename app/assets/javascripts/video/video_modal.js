@@ -23,8 +23,6 @@ VideoModal.prototype.init = function() {
   this.$btnHighlightVideoLink.on('click', $.proxy(this.generateHighlight, this));
   this.$btnToggleViewMode.on('click', $.proxy(this.toggleViewMode, this));
 
-  this.video.on('timeupdate', $.proxy(this.updateVideoTime, this));
-
   this.setViewModeText();
 };
 
@@ -97,11 +95,6 @@ VideoModal.prototype.shown = function() {
 VideoModal.prototype.hidden = function() {
   this.video.pause();
   new VideoHistory().unloadVideo();
-};
-
-VideoModal.prototype.updateVideoTime = function(event, timestamp) {
-  this.videoLink.updateVideoTime(timestamp);
-  this.transcript.activateLink(timestamp);
 };
 
 VideoModal.prototype.generateHighlight = function() {

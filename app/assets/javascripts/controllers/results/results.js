@@ -29,6 +29,9 @@ $(function(){
     spanTime: $('.span-time')
   });
 
+  videoController.on('timeupdate', videoTranscript.onTimeupdate);
+  videoController.on('timeupdate', videoLink.onTimeupdate);
+
   var videoModal = new VideoModal({
     modal: $('#summary_video_container'),
     divUserEmail: $('#ctn-user-email'),
