@@ -36,13 +36,15 @@ $(function(){
   videoController.on('timeupdate', videoTranscript.onTimeupdate);
   videoController.on('timeupdate', videoLink.onTimeupdate);
 
+  var timeSeconds = new URI(location.href).search(true).t || 0;
+
   videoController.markers(
     sonar.resultStep.delightedArray,
     sonar.resultStep.confusedArray,
     sonar.resultStep.highlightedArray
   );
   videoController.src(sonar.resultStep.srcArray);
-  videoController.play(new URI(location.href).search(true).t || 0);
+  videoController.play(timeSeconds);
 
   videoTranscript.buildTranscript(
     sonar.resultStep.transcriptionArray,
@@ -53,5 +55,11 @@ $(function(){
   videoTranscript.refreshView();
 
   videoLink.updateShareLink(sonar.resultStep.shareLink);
+
+  if (timeSeconds > 0) {
+    $(window).load(function() {
+      videoTranscript.focusLink(timeSeconds);
+    });
+  }
 
 });

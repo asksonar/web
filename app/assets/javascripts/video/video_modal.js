@@ -78,10 +78,6 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
   this.show();
 };
 
-VideoModal.prototype.focusLink = function(timeSeconds) {
-  this.transcript.focusLink(timeSeconds);
-};
-
 VideoModal.prototype.show = function() {
   this.$modal.modal('show');
 };

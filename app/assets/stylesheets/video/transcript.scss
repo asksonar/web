@@ -141,6 +141,19 @@
       }
     }
 
+    div.video-text-display {
+      span {
+        padding-top: 3px; // inputs have 1px + 2px
+        display: inline-block; // inputs are display block
+      }
+
+      i.feeling-delighted:before,
+      i.feeling-confused:before {
+        margin-bottom: -2px; // 18px height -2 = 16px (that of text)
+        margin-left: 4px; // block ignores spaces
+      }
+    }
+
     textarea.video-text-display {
       width: 100%;
       resize: none;

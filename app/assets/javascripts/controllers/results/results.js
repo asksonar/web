@@ -55,9 +55,9 @@ $(function(){
 
   }, videoModal);
 
-  var time = new URI(location.href).search(true).t || 0;
+  var timeSeconds = new URI(location.href).search(true).t || 0;
   if (sonar.resultStep) {
-    videoModal.loaded(time, {
+    videoModal.loaded(timeSeconds, {
       result_step_hashid: sonar.resultStep.hashid,
       delighted_array: sonar.resultStep.delightedArray,
       confused_array: sonar.resultStep.confusedArray,
@@ -70,8 +70,10 @@ $(function(){
       share_link: sonar.resultStep.shareLink
     });
 
-    if (time > 0) {
-      videoModal.focusLink(time);
+    if (timeSeconds > 0) {
+      $(window).load(function() {
+        videoTranscript.focusLink(timeSeconds);
+      });
     }
   }
 

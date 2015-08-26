@@ -13,12 +13,12 @@ VideoLink.prototype.init = function() {
   this.onTimeupdate = $.proxy(this.onTimeupdate, this);
 }
 
-VideoLink.prototype.onTimeupdate = function(event, timestamp) {
-  this.updateVideoTime(timestamp);
+VideoLink.prototype.onTimeupdate = function(event, timeSeconds) {
+  this.updateVideoTime(timeSeconds);
 }
 
-VideoLink.prototype.updateVideoTime = function(timestamp) {
-  var currentSeconds = parseInt(timestamp);
+VideoLink.prototype.updateVideoTime = function(timeSeconds) {
+  var currentSeconds = parseInt(timeSeconds);
 
   var displayTime = Math.floor(currentSeconds / 60) + ':' + ('00' + currentSeconds % 60).slice(-2);
   this.$inputUrlTime.val(displayTime);

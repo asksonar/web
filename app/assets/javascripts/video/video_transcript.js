@@ -86,7 +86,7 @@ VideoTranscript.prototype.buildTranscript = function(transcriptArray, delightedA
       time: delightedArray[i],
       displayClass: 'feeling-delighted',
       displayIcon: 'feeling-delighted',
-      displayText: "User clicked <i class='feeling-delighted'></i>"
+      displayText: "<span>User clicked</span><i class='feeling-delighted'></i>"
     })
   }
 
@@ -95,7 +95,7 @@ VideoTranscript.prototype.buildTranscript = function(transcriptArray, delightedA
       time: confusedArray[i],
       displayClass: 'feeling-confused',
       displayIcon: 'feeling-confused',
-      displayText: "User clicked <i class='feeling-confused'></i>"
+      displayText: "<span>User clicked</span><i class='feeling-confused'></i>"
     })
   }
 
@@ -209,8 +209,8 @@ VideoTranscript.prototype.activateLink = function(timeSeconds) {
   }
 }
 
-VideoTranscript.prototype.onTimeupdate = function(event, timestamp) {
-  this.activateLink(timestamp);
+VideoTranscript.prototype.onTimeupdate = function(event, timeSeconds) {
+  this.activateLink(timeSeconds);
 };
 
 VideoTranscript.prototype.createNote = function() {
