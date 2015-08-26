@@ -39,6 +39,8 @@ VideoTranscript.prototype.editVideoText = function(event) {
   var parent = thisEl.closest('.ctnVideoTextLink');
   parent.addClass('active');
 
+  this.$videoText.addClass('editing');
+
   var inputTime = parent.find('.video-text-time');
   var inputText = parent.find('.video-text-display');
 
@@ -64,6 +66,7 @@ VideoTranscript.prototype.editVideoText = function(event) {
     }
 
     parent.removeClass('active');
+    this.$videoText.removeClass('editing');
     inputTime.prop('readonly', true);
     inputText.prop('readonly', true);
   });

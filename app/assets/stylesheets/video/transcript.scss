@@ -2,235 +2,182 @@
   position: relative;
 }
 
-.button-container {
-  #toggle-transcripts {
-    outline: none;
-    float: right;
-  }
-  #toggle-transcripts:not(.active) {
-    background-color: #FAFAFA;
-  }
-  h2 {
-    line-height: 31px;
-  }
-}
-
-@media (min-width: $screen-md-min) {
-  .col-md-6.transcript-container {
-    position: absolute !important;
-    padding-left: 0px !important;
-  }
-
-  .video-text-container {
-    position: absolute;
-    top: 31px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-
-  .video-transcript-container.editable {
-    .video-text-container {
-      bottom: 30px;
-    }
-  }
-
-}
-
 .transcript-container {
-  transition: width 0.2s ease-in-out;
-  right: 0;
-  height: 100%;
+  @extend .col-md-6;
+  .icon-mode & { @extend .col-md-2; }
 
-  h1 {
-    margin-bottom: 10px;
-  }
+  transition: width 0.2s ease-in-out;
 
   #videoText {
     overflow-y: auto;
     max-height: 100%;
     min-height: 70px;
     position: relative;
-
-    .ctnVideoTextLink:not(.active) .activeVideoTextLink {
-      @extend .strong;
-    }
-
-    .videoTextLink {
-      transition: margin-top 0.2s ease-in-out;
-      display: block;
-
-      margin: 0px 1px 2px 1px;
-
-      border: 1px solid transparent;
-
-      .video-text-time {
-        width: 50px;
-        float: left;
-      }
-
-      .video-text-time:read-only {
-        border-color: transparent;
-        background-color: initial;
-      }
-
-      .video-text-time:-moz-read-only {
-        border-color: transparent;
-        background-color: initial;
-      }
-
-      textarea.video-text-display:read-only {
-        border-color: transparent;
-        background-color: initial;
-        outline: none;
-      }
-
-      textarea.video-text-display:-moz-read-only {
-        border-color: transparent;
-        background-color: initial;
-        outline: none;
-      }
-
-      .video-text-icon {
-        i {
-          height: 16px;
-          width: 16px;
-        }
-        padding-top: 4px;
-      }
-
-      .video-text-icon-display {
-        margin-left: 50px;
-
-        textarea {
-          width: 100%;
-          resize: none;
-          margin-bottom: -8px;
-          min-height: 29px;
-        }
-      }
-    }
-
-    .video-text-buttons {
-      display: none;
-      position: absolute;
-      margin-top: -2px;
-      margin-right: 15px;
-      right: 0;
-    }
-
-    .ctnVideoTextLink:hover {
-      cursor: pointer;
-
-      input, textarea {
-        cursor: pointer;
-      }
-      input {
-        text-decoration: underline;
-      }
-    }
-
-    .ctnVideoTextLink {
-      overflow: hidden;
-    }
-
-    .video-btn-edit {
-      display: none;
-      position: absolute;
-      right: 0;
-      margin-top: -31px;
-      padding: 5px 10px;
-      background-color: #EFEFEF;
-    }
-
   }
 
-}
-
-
-#videoText.hide-transcripts {
-  .ctnVideoTextLink.transcript .videoTextLink {
-    margin-top: -100%;
-  }
-}
-
-.video-transcript-container {
-  .transcript-container {
-    @extend .col-md-6;
-  }
-
-  .video-text-icon {
+  #btn-add-note {
     display: none;
-  }
-}
-
-.video-transcript-container:not(.icon-mode) {
-  .ctnVideoTextLink.note {
-    background-color: #f0efde;
-  }
-
-  .ctnVideoTextLink:hover {
-    background-color: #EFEFEF
-  }
-}
-
-.video-transcript-container.editable:not(.icon-mode) {
-
-  .ctnVideoTextLink.transcript:hover, .ctnVideoTextLink.note:hover {
-    .video-btn-edit {
-      display: inline-block;
-    }
-  }
-
-  .ctnVideoTextLink.transcript.active, .ctnVideoTextLink.note.active {
-    .videoTextLink {
-      border-color: #C3C3C3;
-      background-color: white;
-      box-shadow: 0px 1px 1px 0px #CECECE;
-    }
-    .video-btn-edit {
-      display: none;
-    }
-    .video-text-buttons {
-      display: block;
-    }
-    input, textarea {
-      cursor: initial;
-    }
-    input {
-      text-decoration: initial;
-    }
-  }
-}
-
-.video-transcript-container.icon-mode {
-  .transcript-container {
-    @extend .col-md-2;
+    .editable & { display: block; }
   }
 }
 
 @media (min-width: $screen-md-min) {
-  .video-transcript-container.icon-mode {
+  .transcript-container {
+    right: 0;
+    height: 100%;
+    position: absolute;
+    padding-left: 0px; // needed for header-container
+
+    // need specificity better than "@extend .col-md-2" above
+    .icon-mode & {
+      position: absolute;
+      padding-left: 0px;
+    }
+
+    .video-text-container {
+      position: absolute;
+      top: 31px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      .editable & { bottom: 30px; } // for add button
+    }
+  }
+}
+
+.transcript-header-container {
+  #toggle-transcripts {
+    outline: none;
+    float: right;
+    &:not(.active) { background-color: #FAFAFA; }
+  }
+
+  h2 {
+    line-height: 31px; // to match that of #toggle-transcripts button
+    @media (min-width: $screen-md-min) {
+      .icon-mode & { display: none }
+    }
+  }
+}
+
+.ctnVideoTextLink {
+  overflow: hidden;
+  cursor: pointer;
+
+  &:not(.active):hover .video-text-time {
+    text-decoration: underline;
+  }
+
+  &:not(.active) .activeVideoTextLink {
+    @extend .strong;
+  }
+
+  &:hover {
+    background-color: #EFEFEF
+  }
+
+  &:not(.icon-mode) .note {
+    background-color: #f0efde;
+  }
+}
+
+.videoTextLink {
+  transition: margin-top 0.2s ease-in-out;
+  display: block;
+  margin: 0px 1px 2px 1px;
+  border: 1px solid transparent;
+
+  .hide-transcripts .transcript & {
+    margin-top: -100%;
+  }
+
+  .text-mode .active & {
+    border-color: #C3C3C3;
+    background-color: white;
+    box-shadow: 0px 1px 1px 0px #CECECE;
+  }
+
+  input, textarea {
+    &:read-only {
+      border-color: transparent;
+      background-color: initial;
+      outline: none;
+      cursor: pointer;
+    }
+    // can't be comma'd as per usual for some reason
+    &:-moz-read-only {
+      border-color: transparent;
+      background-color: initial;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+
+  .video-text-time {
+    width: 50px;
+    float: left;
+  }
+
+  .video-text-icon-display {
+    margin-left: 50px;
+
     .video-text-icon {
-      display: block;
+      padding-top: 4px;
+
+      display: none;
+      @media (min-width: $screen-md-min) {
+        .icon-mode & { display: block; }
+      }
+
+      i {
+        height: 16px;
+        width: 16px;
+      }
     }
 
     .video-text-display {
-      display: none;
+      @media (min-width: $screen-md-min) {
+        .icon-mode & { display: none; }
+      }
     }
 
-    .button-container h2 {
-      display: none;
+    textarea.video-text-display {
+      width: 100%;
+      resize: none;
+      margin-bottom: -8px;
+      min-height: 29px;
     }
+  }
+
+}
+
+.video-btn-edit {
+  position: absolute;
+  right: 0;
+  margin-top: -31px;
+  padding: 5px 10px;
+  background-color: #EFEFEF;
+
+  display: none;
+
+  .editable .text-mode .transcript:hover &,
+  .editable .text-mode .note:hover & {
+    display: inline-block;
+  }
+
+  .editing & {
+    display: none !important;
   }
 }
 
-.video-transcript-container:not(.editable) {
-  #btn-add-note {
-    display: none;
-  }
-}
+.video-text-buttons {
+  position: absolute;
+  right: 15px;
+  margin-top: -2px;
 
-#btn-add-note {
-  width: 100%;
+  display: none;
+
+  .text-mode .active & {
+    display: block;
+  }
 }

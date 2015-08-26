@@ -24,10 +24,20 @@ VideoModal.prototype.init = function() {
   this.$btnToggleViewMode.on('click', $.proxy(this.toggleViewMode, this));
 
   this.video.on('timeupdate', $.proxy(this.updateVideoTime, this));
+
+  this.setViewModeText();
 };
 
+VideoModal.prototype.setViewModeIcon = function(event) {
+  this.$divVideoTranscriptContainer.addClass('icon-mode').removeClass('text-mode');
+}
+
+VideoModal.prototype.setViewModeText = function(event) {
+  this.$divVideoTranscriptContainer.removeClass('icon-mode').addClass('text-mode');
+}
+
 VideoModal.prototype.toggleViewMode = function(event) {
-  this.$divVideoTranscriptContainer.toggleClass('icon-mode');
+  this.$divVideoTranscriptContainer.toggleClass('icon-mode').toggleClass('text-mode');
 };
 
 VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {

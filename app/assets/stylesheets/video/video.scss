@@ -1,9 +1,9 @@
-.icon-mode .video-container {
-  @extend .col-md-10;
-}
-
 .video-container {
   @extend .col-md-6;
+
+  .icon-mode & {
+    @extend .col-md-10;
+  }
 
   transition: width 0.2s ease-in-out;
 
@@ -12,54 +12,54 @@
   @media (min-width: $screen-md-min) {
     margin-bottom: 0px;
   }
+}
 
-  .ctn-video-share-link {
-    margin-top: 20px;
-    h4 {
-      float: left;
-      line-height: 34px;
-      margin: 0px;
-    }
-    .input-group {
-      margin-left: 105px;
-    }
-    #input-url-base {
-      cursor: text;
-    }
-    .btn {
-      padding-top: 8px;
-      padding-bottom: 7px;
-    }
-    .btn + .btn {
-      margin-left: 1px;
-    }
+.ctn-video-share-link {
+  margin-top: 20px;
+  h4 {
+    float: left;
+    line-height: 34px;
+    margin: 0px;
+  }
+  .input-group {
+    margin-left: 105px;
+  }
+  #input-url-base {
+    cursor: text;
+  }
+  .btn {
+    padding-top: 8px;
+    padding-bottom: 7px;
+  }
+  .btn + .btn {
+    margin-left: 1px;
+  }
+}
+
+.ctn-video-share-highlight {
+  margin-top: 10px;
+  display: none;
+
+  h4 {
+    float: left;
+    line-height: 34px;
+    margin: 0px;
   }
 
-  .ctn-video-share-highlight {
-    margin-top: 10px;
-    display: none;
+  div {
+    margin-left: 150px;
+  }
 
-    h4 {
-      float: left;
-      line-height: 34px;
-      margin: 0px;
-    }
+  .input-time {
+    width: 80px;
+    display: inline-block;
+  }
 
-    div {
-      margin-left: 150px;
-    }
-
-    .input-time {
-      width: 80px;
-      display: inline-block;
-    }
-
-    #btn-create-highlight {
-      margin-left: 2px;
-      margin-top: -4px;
-      padding-top: 8px;
-      padding-bottom: 7px;
-    }
+  #btn-create-highlight {
+    margin-left: 2px;
+    margin-top: -4px;
+    padding-top: 8px;
+    padding-bottom: 7px;
   }
 }
 
