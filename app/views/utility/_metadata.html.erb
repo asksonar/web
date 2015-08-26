@@ -7,6 +7,25 @@
     controller: '<%= request.params[:controller] %>',
     action: '<%= request.params[:action] %>'
   }
+  <% if @result_step %>
+  sonar.resultStep = {
+    hashid: '<%= @result_step.hashid %>',
+    delightedArray: <%= raw @result_step.delighted_array.to_json %>,
+    confusedArray: <%= raw @result_step.confused_array.to_json %>,
+    highlightedArray: <%= raw @result_step.highlighted_array.to_json %>,
+    srcArray: <%= raw @result_step.src_array.to_json %>,
+    transcriptionArray: <%= raw @result_step.transcription_array.to_json %>,
+    shareLink: '<%= @result_step.share_link %>',
+    email: '<%= @result_step.email %>'
+  };
+  <% end %>
+
+  <% if @scenario_step %>
+  sonar.scenarioStep = {
+    stepOrder: <%= @scenario_step.step_order %>,
+    stepDescription: '<%= @scenario_step.description %>'
+  }
+  <% end %>
 
   <% if protect_against_forgery? %>
     window.AUTH_TOKEN = '<%= form_authenticity_token %>';

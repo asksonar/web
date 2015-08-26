@@ -51,8 +51,20 @@ class ResultStep < ActiveRecord::Base
     step_transcriptions
   end
 
-  def highlights_array
-    highlights.select(:offset_seconds, :text)
+  def delighted_array
+    feelings_delighted.map { |feeling| feeling.feeling_at_seconds }
+  end
+
+  def confused_array
+    feelings_confused.map { |feeling| feeling.feeling_at_seconds }
+  end
+
+  def highlighted_array
+    highlights.map { |highlight| highlight.offset_seconds }
+  end
+
+  def src_array
+    step_videos.first && step_videos.first.src_array
   end
 
   def transcription_array

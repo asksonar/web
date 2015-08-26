@@ -36,4 +36,5 @@ VideoLink.prototype.updateVideoTime = function(timestamp) {
 
 VideoLink.prototype.updateShareLink = function(shareLink) {
   this.$inputUrlBase.attr('data-base-url', shareLink + '?t=');
+  this.$inputUrlBase.val(shareLink + '?t=0');
 }
