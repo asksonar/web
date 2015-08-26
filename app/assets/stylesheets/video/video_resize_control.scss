@@ -4,37 +4,32 @@
   float: right;
   cursor: pointer;
 
+  @media (max-width: $screen-md-min) {
+    display: none;
+  }
+
   .vjs-custom-resize-icon {
     border: 2px solid;
     height: 16px;
     margin: 7px auto;
     transition: width .1s;
   }
-}
 
-.vjs-default-skin .vjs-custom-resize-control:hover {
-  .vjs-custom-resize-icon {
+  &:hover .vjs-custom-resize-icon {
     box-shadow: 0em 0em 1em #ffffff;
   }
-}
 
-.vjs-custom-resize-control {
-  display: none;
-}
-
-@media (min-width: $screen-md-min) {
-
-  .vjs-custom-resize-control {
-    display: block;
-    .vjs-custom-resize-icon {
-      width: 20px;
-    }
+  .vjs-custom-resize-icon {
+    width: 20px;
+  }
+  &:hover .vjs-custom-resize-icon {
+    width: 25px;
   }
 
-  .vjs-custom-resize-control:hover {
-    .vjs-custom-resize-icon {
-      width: 25px;
-    }
+  .icon-mode & .vjs-custom-resize-icon {
+    width: 25px;
   }
-
+  .icon-mode &:hover .vjs-custom-resize-icon {
+    width: 20px;
+  }
 }

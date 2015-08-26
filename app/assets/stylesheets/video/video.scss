@@ -1,6 +1,17 @@
+.icon-mode .video-container {
+  @extend .col-md-10;
+}
+
 .video-container {
+  @extend .col-md-6;
+
   transition: width 0.2s ease-in-out;
+
   margin-bottom: 20px;
+
+  @media (min-width: $screen-md-min) {
+    margin-bottom: 0px;
+  }
 
   .ctn-video-share-link {
     margin-top: 20px;
@@ -50,26 +61,6 @@
       padding-bottom: 7px;
     }
   }
-}
-
-@media (min-width: $screen-md-min) {
-  .video-container {
-    margin-bottom: 0px;
-  }
-}
-
-.video-container {
-  @extend .col-md-6;
-}
-
-.video-transcript-container.icon-mode {
-  .video-container {
-    @extend .col-md-10;
-  }
-}
-
-.panel .video-container #btn-highlight-video-link {
-  display: none;
 }
 
 .video-js {
