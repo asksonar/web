@@ -19,6 +19,13 @@ VideoTranscript.prototype.init = function() {
   this.$btnAddNote.on('click', $.proxy(this.createNote, this));
 };
 
+VideoTranscript.prototype.refreshView = function() {
+  autosize.update($('textarea'));
+  $(window).load(function() {
+    autosize.update($('textarea'));
+  });
+}
+
 VideoTranscript.prototype.toggleTranscripts = function(event) {
   $(event.currentTarget).toggleClass('active');
   var activeTranscripts = this.$btnToggleTranscripts.hasClass('active');

@@ -3,16 +3,15 @@ VideoModal = function(config, video, transcript, videoLink) {
   this.$divUserEmail = config.divUserEmail;
   this.$divStepOrder = config.divStepOrder;
   this.$divStepDescription = config.divStepDescription;
-
-  this.$btnHighlightVideoLink = config.btnHighlightVideoLink;
-
   this.$divVideoTranscriptContainer = config.divVideoTranscriptContainer;
+  this.$btnToggleViewMode = config.btnToggleViewMode
+
+  // TODO: delete the highlight button and its associated logic
+  this.$btnHighlightVideoLink = config.btnHighlightVideoLink;
 
   this.video = video;
   this.transcript = transcript;
   this.videoLink = videoLink;
-
-  this.videoResizeButton = Handlebars.compile(config.scriptVideoResizeButton.html());
 
   this.init();
 };
@@ -20,13 +19,11 @@ VideoModal = function(config, video, transcript, videoLink) {
 VideoModal.prototype.init = function() {
   this.$modal.on('shown.bs.modal', $.proxy(this.shown, this));
   this.$modal.on('hide.bs.modal', $.proxy(this.hidden, this));
+
   this.$btnHighlightVideoLink.on('click', $.proxy(this.generateHighlight, this));
+  this.$btnToggleViewMode.on('click', $.proxy(this.toggleViewMode, this));
 
   this.video.on('timeupdate', $.proxy(this.updateVideoTime, this));
-
-  $('.vjs-control-bar .vjs-fullscreen-control').after(this.videoResizeButton({}));
-  $('.vjs-custom-resize-control').on('click', $.proxy(this.toggleViewMode, this));
-
 };
 
 VideoModal.prototype.toggleViewMode = function(event) {
@@ -62,11 +59,11 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
       data.highlighted_array
     );
 
+    this.videoLink.updateShareLink(data.share_link);
+
     this.$divUserEmail.html(data.user_email);
     this.$divStepOrder.html(data.step_order + 1);
     this.$divStepDescription.html(data.step_description);
-
-    this.videoLink.updateShareLink(data.share_link);
   }
 
   this.video.currentTime(timeSeconds);
@@ -82,30 +79,14 @@ VideoModal.prototype.show = function() {
 };
 
 VideoModal.prototype.shown = function() {
-  this.playVideo();
-  if (location.href.indexOf('videos') < 0) {
-    var newUrl = URI(location.href).segment('videos').segment(this.resultStepHashId).addSearch("t", 0);
-    history.replaceState({}, '', newUrl);
-  }
-
-  autosize.update($('textarea'));
-  $(window).load(function() {
-    autosize.update($('textarea'));
-  });
+  this.video.play();
+  new VideoHistory().loadVideo(this.resultStepHashId);
+  this.transcript.refreshView();
 };
 
 VideoModal.prototype.hidden = function() {
-  this.pauseVideo();
-  var newUrl = '/' + URI(location.href).segment(0) + '/' + URI(location.href).segment(1);
-  history.replaceState({}, '', newUrl);
-};
-
-VideoModal.prototype.pauseVideo = function() {
   this.video.pause();
-};
-
-VideoModal.prototype.playVideo = function(timestamp) {
-  this.video.play(timestamp);
+  new VideoHistory().unloadVideo();
 };
 
 VideoModal.prototype.updateVideoTime = function(event, timestamp) {
