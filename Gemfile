@@ -85,6 +85,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-history'
   # add helper to manipulate URLs
   gem 'rails-assets-URIjs'
+  # add jqueryui for animate controls
+  gem 'rails-assets-jqueryui'
 end
 
 group :development, :test do

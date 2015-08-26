@@ -23,6 +23,8 @@ $icon-font-path: "bootstrap/";
 @import "animate.css/animate";
 @import "Brandon_Grotesque";
 
+@import "**/*";
+
 // insert new packages above this line
 @import "shared/*";
 @import "controllers/*";

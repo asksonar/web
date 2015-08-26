@@ -24,6 +24,7 @@
 //= require zendesk_widget
 //= require history
 //= require URIjs
+//= require jqueryui
 
 // insert new packages above this line
 

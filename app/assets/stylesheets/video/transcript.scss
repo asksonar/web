@@ -1,0 +1,196 @@
+.video-transcript-container {
+  position: relative;
+}
+
+.transcript-container {
+  @extend .col-md-6;
+  .icon-mode & { @extend .col-md-2; }
+
+  transition: width 0.2s ease-in-out;
+
+  #videoText {
+    overflow-y: auto;
+    max-height: 100%;
+    min-height: 70px;
+    position: relative;
+  }
+
+  #btn-add-note {
+    display: none;
+    .editable & { display: block; }
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .transcript-container {
+    right: 0;
+    height: 100%;
+    position: absolute;
+    padding-left: 0px; // needed for header-container
+
+    // need specificity better than "@extend .col-md-2" above
+    .icon-mode & {
+      position: absolute;
+      padding-left: 0px;
+    }
+
+    .video-text-container {
+      position: absolute;
+      top: 31px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      .editable & { bottom: 30px; } // for add button
+    }
+  }
+}
+
+.transcript-header-container {
+  #toggle-transcripts {
+    outline: none;
+    float: right;
+    &:not(.active) { background-color: #FAFAFA; }
+  }
+
+  h2 {
+    line-height: 31px; // to match that of #toggle-transcripts button
+    @media (min-width: $screen-md-min) {
+      .icon-mode & { display: none }
+    }
+  }
+}
+
+.ctnVideoTextLink {
+  overflow: hidden;
+  cursor: pointer;
+
+  &:not(.active):hover .video-text-time {
+    text-decoration: underline;
+  }
+
+  &:not(.active) .activeVideoTextLink {
+    @extend .strong;
+  }
+
+  &:hover {
+    background-color: #EFEFEF
+  }
+
+  &:not(.icon-mode) .note {
+    background-color: #f0efde;
+  }
+}
+
+.videoTextLink {
+  transition: margin-top 0.2s ease-in-out;
+  display: block;
+  margin: 0px 1px 2px 1px;
+  border: 1px solid transparent;
+
+  .hide-transcripts .transcript & {
+    margin-top: -100%;
+  }
+
+  .text-mode .active & {
+    border-color: #C3C3C3;
+    background-color: white;
+    box-shadow: 0px 1px 1px 0px #CECECE;
+  }
+
+  input, textarea {
+    &:read-only {
+      border-color: transparent;
+      background-color: initial;
+      outline: none;
+      cursor: pointer;
+    }
+    // can't be comma'd as per usual for some reason
+    &:-moz-read-only {
+      border-color: transparent;
+      background-color: initial;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+
+  .video-text-time {
+    width: 50px;
+    float: left;
+  }
+
+  .video-text-icon-display {
+    margin-left: 50px;
+
+    .video-text-icon {
+      padding-top: 4px;
+
+      display: none;
+      @media (min-width: $screen-md-min) {
+        .icon-mode & { display: block; }
+      }
+
+      i {
+        height: 16px;
+        width: 16px;
+      }
+    }
+
+    .video-text-display {
+      @media (min-width: $screen-md-min) {
+        .icon-mode & { display: none; }
+      }
+    }
+
+    div.video-text-display {
+      span {
+        padding-top: 3px; // inputs have 1px + 2px
+        display: inline-block; // inputs are display block
+      }
+
+      i.feeling-delighted:before,
+      i.feeling-confused:before {
+        margin-bottom: -2px; // 18px height -2 = 16px (that of text)
+        margin-left: 4px; // block ignores spaces
+      }
+    }
+
+    textarea.video-text-display {
+      width: 100%;
+      resize: none;
+      margin-bottom: -8px;
+      min-height: 29px;
+    }
+  }
+
+}
+
+.video-btn-edit {
+  position: absolute;
+  right: 0;
+  margin-top: -31px;
+  padding: 5px 10px;
+  background-color: #EFEFEF;
+
+  display: none;
+
+  .editable .text-mode .transcript:hover &,
+  .editable .text-mode .note:hover & {
+    display: inline-block;
+  }
+
+  .editing & {
+    display: none !important;
+  }
+}
+
+.video-text-buttons {
+  position: absolute;
+  right: 15px;
+  margin-top: -2px;
+
+  display: none;
+
+  .text-mode .active & {
+    display: block;
+  }
+}

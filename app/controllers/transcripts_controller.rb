@@ -1,12 +1,11 @@
-class HighlightsController < ApplicationController
+class TranscriptsController < ApplicationController
 
-  def create
-    @result_step = ResultStep.find_by_hashid(params[:result_step_hashid])
-    StepHighlight.create(
-      result_step: @result_step,
-      offset_seconds: params[:offset_seconds],
-      text: params[:text]
-    )
+  def update
+    @step_transcription = StepTranscription.find_by_hashid(params[:id])
+
+    @step_transcription.update(transcript_update_params)
+
+    @result_step = @step_transcription.result_step
 
     json = {}
     json['delighted_array'] = @result_step.feelings_delighted.map { |feeling| feeling.feeling_at_seconds }
@@ -14,5 +13,10 @@ class HighlightsController < ApplicationController
     json['highlighted_array'] = @result_step.highlights.map { |highlight| highlight.offset_seconds }
     render json: json
   end
+
+  private
+    def transcript_update_params
+      params.permit(:offset_seconds, :text)
+    end
 
 end

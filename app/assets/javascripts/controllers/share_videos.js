@@ -14,22 +14,52 @@ $(function(){
   var videoController = new VideoController({
     videoId: 'example_video_1'
   });
-  var modal = new VideoModal({
-    modal: $(),
+
+  $('.vjs-control-bar .vjs-fullscreen-control').after($('#video-resize-button').html());
+
+  var videoTranscript = new VideoTranscript({
     divVideoText: $('#videoText'),
-    inputUrlTime: $('#input-url-time'),
-    inputUrlBase: $('#input-url-base'),
-    divUserEmail: $(),
-    divStepOrder: $(),
-    divStepDescription: $(),
-    btnCopyVideoLink: $('#btn-copy-video-link'),
-    btnHighlightVideoLink: $('#btn-highlight-video-link'),
-    scriptVideoTextTemplate: $('#video-text-template')
+    btnToggleTranscripts: $('#toggle-transcripts'),
+    btnAddNote: $('#btn-add-note'),
+    scriptVideoTextTemplate: $('#video-text-template'),
+    scriptVideoTextPartial: $('#video-text-partial')
+
   }, videoController);
 
-  videoController.src(srcArray);
-  videoController.play(new URL(window.location.href).search.substring(3));
-  modal.$videoText.html(modal.buildTranscript(transcriptionArray));
-  modal.$inputUrlBase.attr('data-base-url', shareLink + '?t=');
+  var videoLink = new VideoLink({
+    inputUrlTime: $('#input-url-time'),
+    inputUrlBase: $('#input-url-base'),
+    btnCopyVideoLink: $('#btn-copy-video-link'),
+    spanTime: $('.span-time')
+  });
+
+  videoController.on('timeupdate', videoTranscript.onTimeupdate);
+  videoController.on('timeupdate', videoLink.onTimeupdate);
+
+  var timeSeconds = new URI(location.href).search(true).t || 0;
+
+  videoController.markers(
+    sonar.resultStep.delightedArray,
+    sonar.resultStep.confusedArray,
+    sonar.resultStep.highlightedArray
+  );
+  videoController.src(sonar.resultStep.srcArray);
+  videoController.play(timeSeconds);
+
+  videoTranscript.buildTranscript(
+    sonar.resultStep.transcriptionArray,
+    sonar.resultStep.delightedArray,
+    sonar.resultStep.confusedArray,
+    sonar.resultStep.highlightedArray
+  );
+  videoTranscript.refreshView();
+
+  videoLink.updateShareLink(sonar.resultStep.shareLink);
+
+  if (timeSeconds > 0) {
+    $(window).load(function() {
+      videoTranscript.focusLink(timeSeconds);
+    });
+  }
 
 });

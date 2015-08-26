@@ -37,10 +37,8 @@ VideoController.prototype.on = function(event, callback) {
   this.eventBus.on(event, callback);
 }
 
-VideoController.prototype.play = function(timestamp) {
-  if (!isNaN(timestamp)) {
-    this.currentTime(timestamp);
-  }
+VideoController.prototype.play = function(timeSeconds) {
+  this.currentTime(timeSeconds);
   this.video.userActive(true);
   this.video.play();
 }
@@ -92,11 +90,15 @@ VideoController.prototype.loadMarkers = function() {
   }
 }
 
-VideoController.prototype.currentTime = function(currentSeconds) {
-  return this.video.currentTime(Math.max(currentSeconds, 0));
+VideoController.prototype.currentTime = function(timeSeconds) {
+  if (isNaN(timeSeconds)) {
+    return this.video.currentTime();
+  } else {
+    return this.video.currentTime(Math.max(timeSeconds, 0));
+  }
 }
 
 VideoController.prototype.onTimeUpdate = function() {
-  var currentTime = this.video.currentTime();
+  var currentTime = this.currentTime();
   this.eventBus.trigger('timeupdate', currentTime);
 }
