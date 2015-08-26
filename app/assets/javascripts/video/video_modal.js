@@ -3,7 +3,6 @@ VideoModal = function(config, video, transcript, videoLink) {
   this.$divUserEmail = config.divUserEmail;
   this.$divStepOrder = config.divStepOrder;
   this.$divStepDescription = config.divStepDescription;
-  this.$divVideoTranscriptContainer = config.divVideoTranscriptContainer;
   this.$btnToggleViewMode = config.btnToggleViewMode
 
   // TODO: delete the highlight button and its associated logic
@@ -21,21 +20,6 @@ VideoModal.prototype.init = function() {
   this.$modal.on('hide.bs.modal', $.proxy(this.hidden, this));
 
   this.$btnHighlightVideoLink.on('click', $.proxy(this.generateHighlight, this));
-  this.$btnToggleViewMode.on('click', $.proxy(this.toggleViewMode, this));
-
-  this.setViewModeText();
-};
-
-VideoModal.prototype.setViewModeIcon = function(event) {
-  this.$divVideoTranscriptContainer.addClass('icon-mode').removeClass('text-mode');
-}
-
-VideoModal.prototype.setViewModeText = function(event) {
-  this.$divVideoTranscriptContainer.removeClass('icon-mode').addClass('text-mode');
-}
-
-VideoModal.prototype.toggleViewMode = function(event) {
-  this.$divVideoTranscriptContainer.toggleClass('icon-mode').toggleClass('text-mode');
 };
 
 VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {

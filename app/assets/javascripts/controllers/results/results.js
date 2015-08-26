@@ -11,7 +11,13 @@ $(function(){
     videoId: 'example_video_1'
   });
 
-  $('.vjs-control-bar .vjs-fullscreen-control').after($('#video-resize-button').html());
+  var videoResize = new VideoResize({
+    scriptVideoResizeButtonTemplate: $('#video-resize-button-template'),
+    resizeBtnAfterSelector: '.vjs-fullscreen-control',
+    resizeBtnSelector: '.vjs-custom-resize-control',
+    divVideoTranscriptContainer: $('.video-transcript-container')
+
+  }, videoController);
 
   var videoTranscript = new VideoTranscript({
     divVideoText: $('#videoText'),
@@ -37,9 +43,7 @@ $(function(){
     divUserEmail: $('#ctn-user-email'),
     divStepOrder: $('#ctn-step-order'),
     divStepDescription: $('#ctn-step-description'),
-    btnHighlightVideoLink: $('#btn-highlight-video-link'),
-    divVideoTranscriptContainer: $('.video-transcript-container'),
-    btnToggleViewMode: $('.vjs-custom-resize-control')
+    btnHighlightVideoLink: $('#btn-highlight-video-link')
 
   }, videoController, videoTranscript, videoLink);
 
