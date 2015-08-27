@@ -14,6 +14,7 @@
 
 // @import "debug-show-asset-search-paths";
 
+// dependency packages
 $icon-font-path: "bootstrap/";
 @import "bootstrap-sass";
 @import "fontawesome";
@@ -23,8 +24,9 @@ $icon-font-path: "bootstrap/";
 @import "animate.css/animate";
 @import "Brandon_Grotesque";
 
-@import "**/*";
-
-// insert new packages above this line
+// base package
 @import "shared/*";
+
+// more specific overwriting packages
+@import "video/*";
 @import "controllers/*";

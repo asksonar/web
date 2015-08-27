@@ -8,39 +8,34 @@
 
   transition: width 0.2s ease-in-out;
 
-  #videoText {
-    overflow-y: auto;
-    max-height: 100%;
-    min-height: 70px;
-    position: relative;
-  }
-
   #btn-add-note {
     display: none;
     .editable & { display: block; }
   }
-}
 
-@media (min-width: $screen-md-min) {
-  .transcript-container {
-    right: 0;
-    height: 100%;
-    position: absolute;
-    padding-left: 0px; // needed for header-container
-
-    // need specificity better than "@extend .col-md-2" above
-    .icon-mode & {
+  @media (min-width: $screen-md-min) {
+    &, .icon-mode & { // need specificity better than "@extend .col-md-2" above
       position: absolute;
-      padding-left: 0px;
+      right: 0;
+      height: 100%;
+      padding-left: 0px; // needed for header-container
     }
 
-    .video-text-container {
+    #videoText {
       position: absolute;
-      top: 31px;
-      left: 0;
-      right: 0;
+      top: 31px; // effective height of transcript-header-container
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
+      overflow-y: auto;
+
+      .editable & { bottom: 30px; } // effective height of btn-add-note
+    }
+
+    #btn-add-note {
+      position: absolute;
       bottom: 0;
-      .editable & { bottom: 30px; } // for add button
+      width: 100%;
     }
   }
 }
@@ -76,7 +71,7 @@
     background-color: #EFEFEF
   }
 
-  &:not(.icon-mode) .note {
+  .text-mode .note {
     background-color: #f0efde;
   }
 }
