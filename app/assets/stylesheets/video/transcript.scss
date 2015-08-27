@@ -42,9 +42,13 @@
 
 .transcript-header-container {
   #toggle-transcripts {
-    outline: none;
+    outline: none !important; // need to fight with focus, active, etc.
     float: right;
-    &:not(.active) { background-color: #FAFAFA; }
+    background-color: #FAFAFA;
+
+    .show-transcripts & {
+      @extend .active;
+    }
   }
 
   h2 {
@@ -82,8 +86,11 @@
   margin: 0px 1px 2px 1px;
   border: 1px solid transparent;
 
-  .hide-transcripts .transcript & {
+  .transcript & {
     margin-top: -100%;
+    .show-transcripts & {
+      margin-top: 0px;
+    }
   }
 
   .text-mode .active & {

@@ -20,6 +20,7 @@ $(function(){
   }, videoController);
 
   var videoTranscript = new VideoTranscript({
+    divTranscriptContainer: $('.transcript-container'),
     divVideoText: $('#videoText'),
     btnToggleTranscripts: $('#toggle-transcripts'),
     btnAddNote: $('#btn-add-note'),

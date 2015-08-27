@@ -1,4 +1,5 @@
 VideoTranscript = function(config, video) {
+  this.$container = config.divTranscriptContainer;
   this.$videoText = config.divVideoText;
   this.$btnToggleTranscripts = config.btnToggleTranscripts;
   this.$btnAddNote = config.btnAddNote;
@@ -29,10 +30,7 @@ VideoTranscript.prototype.refreshView = function() {
 }
 
 VideoTranscript.prototype.toggleTranscripts = function(event) {
-  $(event.currentTarget).toggleClass('active');
-  var activeTranscripts = this.$btnToggleTranscripts.hasClass('active');
-
-  this.showTranscripts(activeTranscripts);
+  this.$container.toggleClass('show-transcripts');
 };
 
 VideoTranscript.prototype.editVideoText = function(event) {
@@ -41,10 +39,10 @@ VideoTranscript.prototype.editVideoText = function(event) {
   var parent = thisEl.closest('.ctnVideoTextLink');
   parent.addClass('active');
 
-  this.$videoText.addClass('editing');
-
   var inputTime = parent.find('.video-text-time');
   var inputText = parent.find('.video-text-display');
+  this.$videoText.addClass('editing');
+
 
   inputTime.prop('readonly', false);
   inputText.prop('readonly', false);
@@ -158,15 +156,6 @@ VideoTranscript.prototype.buildTranscript = function(transcriptArray, delightedA
   }
 
   autosize($('textarea'));
-}
-
-VideoTranscript.prototype.showTranscripts = function(showTranscripts) {
-  if (showTranscripts === false) {
-    this.$videoText.addClass('hide-transcripts');
-  } else {
-    this.$videoText.removeClass('hide-transcripts');
-  }
-
 }
 
 VideoTranscript.prototype.clickVideoText = function(event) {
