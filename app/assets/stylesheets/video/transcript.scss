@@ -67,7 +67,7 @@
     text-decoration: underline;
   }
 
-  &:not(.active) .activeVideoTextLink {
+  &.activeVideoTextLink:not(.active) {
     @extend .strong;
   }
 

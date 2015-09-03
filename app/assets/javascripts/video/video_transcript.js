@@ -49,11 +49,7 @@ VideoTranscript.prototype.toggleTranscripts = function(event) {
 };
 
 VideoTranscript.prototype.buildTranscript = function(transcriptArray, delightedArray, confusedArray, highlightedArray) {
-  var delightedIndex = 0, confusedIndex = 0;
-  var renderArray = [];
-  var videoTranscript;
-  var time, mins, secs, text;
-  var hasDelighted, hasConfused, nextTime;
+  var time, text;
 
   for(var i = 0; i < this.timelineArray.length; i++) {
     this.timelineArray[i].remove();
@@ -112,33 +108,18 @@ VideoTranscript.prototype.clickVideoText = function(event) {
 };
 
 VideoTranscript.prototype.focusLink = function(timeSeconds) {
-  var videoTextLinks = this.$videoText.find('.videoTextLink');
-  var videoTextLink;
-  for(var i = videoTextLinks.length - 1; i >= 0; i-- ) {
-    videoTextLink = $(videoTextLinks[i]);
-    if (parseInt(videoTextLink.attr('data-timestamp')) <= parseInt(timeSeconds)) {
-      videoTextLink.parent().get(0).scrollIntoView();
-      videoTextLink.parent()
-        .css({'background-color':'#F69526'})
-        .animate({'background-color':''}, 3000)
-        .queue(function() {
-          $(this).removeAttr('style').dequeue();
-        })
-      break;
-    }
-  }
+  var link = this.findTextLinkBeforeOrEqual(timeSeconds);
+  link.get(0).scrollIntoView();
+  link.css({'background-color':'#F69526'})
+    .animate({'background-color':''}, 3000)
+    .queue(function() {
+      $(this).removeAttr('style').dequeue();
+    });
 }
 
 VideoTranscript.prototype.activateLink = function(timeSeconds) {
-  var videoTextLinks = this.$videoText.find('.videoTextLink').removeClass('activeVideoTextLink');
-  var videoTextLink;
-  for(var i = videoTextLinks.length - 1; i >= 0; i-- ) {
-    videoTextLink = $(videoTextLinks[i]);
-    if (parseInt(videoTextLink.attr('data-timestamp')) <= parseInt(timeSeconds)) {
-      videoTextLink.addClass('activeVideoTextLink');
-      break;
-    }
-  }
+  this.$videoText.children().removeClass('activeVideoTextLink');
+  this.findTextLinkBeforeOrEqual(timeSeconds).addClass('activeVideoTextLink');
 }
 
 VideoTranscript.prototype.onTimeupdate = function(event, timeSeconds) {
