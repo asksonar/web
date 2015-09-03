@@ -80,6 +80,14 @@
   }
 }
 
+.ctnNoTranscript {
+  display: none;
+
+  &:first-child {
+    display: block;
+  }
+}
+
 .videoTextLink {
   transition: margin-top 0.2s ease-in-out;
   display: block;

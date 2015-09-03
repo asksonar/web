@@ -1,0 +1,3 @@
+ReadonlyComponent = function() {
+
+}
