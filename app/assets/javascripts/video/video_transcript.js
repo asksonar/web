@@ -16,25 +16,22 @@ VideoTranscript = function(config, video) {
 };
 
 VideoTranscript.prototype.init = function() {
-  this.$videoText.on('click', '.videoTextLink', $.proxy(this.clickVideoText, this));
-
-  this.$videoText.on('click', '.video-btn-edit', $.proxy(function() {
-    this.$videoText.addClass('editing');
-  }, this));
-  this.$videoText.on('click', '.video-btn-save', $.proxy(function() {
-    this.$videoText.removeClass('editing');
-  }, this));
-  this.$videoText.on('click', '.video-btn-cancel', $.proxy(function() {
-    this.$videoText.removeClass('editing');
-  }, this));
-  this.$videoText.on('click', '.video-btn-trash', $.proxy(function() {
-    this.$videoText.removeClass('editing');
-  }, this));
-
   this.$btnToggleTranscripts.on('click', $.proxy(this.toggleTranscripts, this));
   this.$btnAddNote.on('click', $.proxy(this.createNote, this));
 
+  this.$videoText.on('click', '.videoTextLink', $.proxy(this.clickVideoText, this));
+  this.$videoText.on('startEditing', $.proxy(this.startEditing, this));
+  this.$videoText.on('stopEditing', $.proxy(this.stopEditing, this));
+
   this.onTimeupdate = $.proxy(this.onTimeupdate, this);
+};
+
+VideoTranscript.prototype.startEditing = function() {
+  this.$videoText.addClass('editing');
+};
+
+VideoTranscript.prototype.stopEditing = function() {
+  this.$videoText.removeClass('editing');
 };
 
 VideoTranscript.prototype.refreshView = function() {
@@ -202,5 +199,5 @@ VideoTranscript.prototype.createNote = function() {
     newElement.insertBefore(this.findTextLinkEnd(), true);
   }
 
-  this.$videoText.addClass('editing');
+  newElement.scrollIntoView();
 }

@@ -48,13 +48,13 @@
 </script>
 
 <script id='video-text-partial' type='text/x-handlebars-template'>
-  <div class='ctnVideoTextLink {{displayClass}} {{#if active}}active{{/if}}'>
+  <div class='ctnVideoTextLink {{displayClass}}'>
     <div class='videoTextLink' data-timestamp='{{time}}'>
       {{#if editable}}
-        <input type='text' class='video-text-time' value='{{displayTime}}' {{#unless active}}readonly{{/unless}}></input>
+        <input type='text' class='video-text-time' value='{{displayTime}}' readonly></input>
         <div class='video-text-icon-display'>
           <div class='video-text-icon'><i class='{{displayIcon}}'></i></div>
-          <textarea class='video-text-display' rows='1' {{#unless active}}readonly{{/unless}}>{{{displayText}}}</textarea>
+          <textarea class='video-text-display' rows='1' readonly>{{{displayText}}}</textarea>
         </div>
       {{else}}
         <input type='text' class='video-text-time' value='{{displayTime}}' readonly></input>

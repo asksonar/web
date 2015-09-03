@@ -25,8 +25,7 @@ TimelineElement.prototype.html = function(active) {
     displayClass: this.displayClass,
     displayIcon: this.displayIcon,
     displayText: this.displayText,
-    editable: this.editable,
-    active: active
+    editable: this.editable
   });
 }
 
@@ -37,6 +36,9 @@ TimelineElement.prototype.insertBefore = function(insertBefore, ephemeral) {
   this.ephemeral = ephemeral;
   insertBefore.before(this.html(ephemeral));
   this.init(insertBefore.prev());
+  if (this.ephemeral) {
+    this.edit();
+  }
   return this;
 }
 
@@ -47,9 +49,16 @@ TimelineElement.prototype.insertAfter = function(insertAfter, ephemeral) {
   this.ephemeral = ephemeral;
   insertAfter.after(this.html(ephemeral));
   this.init(insertAfter.next());
+  if (this.ephemeral) {
+    this.edit();
+  }
   return this;
 }
 
 TimelineElement.prototype.remove = function() {
   this.$el.remove();
+}
+
+TimelineElement.prototype.scrollIntoView = function() {
+  this.$el.get(0).scrollIntoView();
 }

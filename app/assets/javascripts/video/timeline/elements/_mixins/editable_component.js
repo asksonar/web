@@ -19,6 +19,7 @@ EditableComponent = function() {
   };
 
   this.edit = function() {
+    this.$el.trigger('startEditing');
     this.$el.addClass('active');
 
     this.originalTimeVal = this.$inputTime.val();
@@ -29,6 +30,7 @@ EditableComponent = function() {
   };
 
   this.save = function() {
+    this.$el.trigger('stopEditing');
     if (this.ephemeral) {
       notify.info('Your ' + this.displayClass + ' has been created.');
       this.ephemeral = false;
@@ -42,6 +44,7 @@ EditableComponent = function() {
   }
 
   this.cancel = function() {
+    this.$el.trigger('stopEditing');
     if (this.ephemeral) {
       this.trash();
     } else {
@@ -54,6 +57,7 @@ EditableComponent = function() {
   };
 
   this.trash = function() {
+    this.$el.trigger('stopEditing');
     this.remove();
   };
 
