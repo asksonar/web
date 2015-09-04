@@ -31,31 +31,31 @@ VideoController.prototype.init = function() {
   // videojs-markers will load the markers from options {} above upon loadedmetadata
   // so we will then load our own markers after that point
   this.video.on("loadedmetadata", $.proxy(this.loadMarkers, this));
-}
+};
 
 VideoController.prototype.on = function(event, callback) {
   this.eventBus.on(event, callback);
-}
+};
 
 VideoController.prototype.play = function(timeSeconds) {
   this.currentTime(timeSeconds);
   this.video.userActive(true);
   this.video.play();
-}
+};
 
 VideoController.prototype.pause = function() {
   this.video.pause();
-}
+};
 
 VideoController.prototype.src = function(srcArray) {
   this.video.src(srcArray);
-}
+};
 
 VideoController.prototype.markers = function(arrayDelightedTimes, arrayConfusedTimes, arrayHighlightedTimes) {
   this.arrayDelightedTimes = arrayDelightedTimes || [];
   this.arrayConfusedTimes = arrayConfusedTimes || [];
   this.arrayHighlightedTimes = arrayHighlightedTimes || [];
-}
+};
 
 VideoController.prototype.loadMarkers = function() {
   this.video.markers.removeAll();
@@ -65,7 +65,7 @@ VideoController.prototype.loadMarkers = function() {
         time: time,
         text: ":)",
         class: 'background-delighted'
-      }
+      };
     }));
   }
 
@@ -75,7 +75,7 @@ VideoController.prototype.loadMarkers = function() {
         time: time,
         text: ":(",
         class: 'background-confused'
-      }
+      };
     }));
   }
 
@@ -85,10 +85,10 @@ VideoController.prototype.loadMarkers = function() {
         time: time,
         text: "*",
         class: 'background-highlighted'
-      }
+      };
     }));
   }
-}
+};
 
 VideoController.prototype.currentTime = function(timeSeconds) {
   if (isNaN(timeSeconds)) {
@@ -96,9 +96,9 @@ VideoController.prototype.currentTime = function(timeSeconds) {
   } else {
     return this.video.currentTime(Math.max(timeSeconds, 0));
   }
-}
+};
 
 VideoController.prototype.onTimeUpdate = function() {
   var currentTime = this.currentTime();
   this.eventBus.trigger('timeupdate', currentTime);
-}
+};

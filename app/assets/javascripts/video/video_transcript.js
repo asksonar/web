@@ -39,21 +39,21 @@ VideoTranscript.prototype.refreshView = function() {
   $(window).load(function() {
     autosize.update($('textarea'));
   });
-}
+};
 
 VideoTranscript.prototype.toggleTranscripts = function(event) {
   this.$container.toggleClass('show-transcripts');
 };
 
 VideoTranscript.prototype.buildTranscript = function(transcriptArray, delightedArray, confusedArray, highlightedArray) {
-  var time, text;
+  var i, time, text;
 
-  for(var i = 0; i < this.timelineArray.length; i++) {
+  for(i = 0; i < this.timelineArray.length; i++) {
     this.timelineArray[i].remove();
   }
   this.timelineArray = [];
 
-  for(var i = 0; delightedArray && i  < delightedArray.length; i++) {
+  for(i = 0; delightedArray && i  < delightedArray.length; i++) {
     this.timelineArray.push(
       new FeelingDelightedElement({
         timeSeconds: delightedArray[i]
@@ -61,7 +61,7 @@ VideoTranscript.prototype.buildTranscript = function(transcriptArray, delightedA
     );
   }
 
-  for(var i = 0; confusedArray && i  < confusedArray.length; i++) {
+  for(i = 0; confusedArray && i  < confusedArray.length; i++) {
     this.timelineArray.push(
       new FeelingConfusedElement({
         timeSeconds: confusedArray[i]
@@ -69,7 +69,7 @@ VideoTranscript.prototype.buildTranscript = function(transcriptArray, delightedA
     );
   }
 
-  for(var i = 0; i  < transcriptArray.length; i++) {
+  for(i = 0; i  < transcriptArray.length; i++) {
     time = transcriptArray[i].offset_seconds;
     text = transcriptArray[i].text;
     text = (text || '').trim();
@@ -89,10 +89,10 @@ VideoTranscript.prototype.buildTranscript = function(transcriptArray, delightedA
     return a.timeSeconds - b.timeSeconds;
   });
 
-  for(var i = 0; i < this.timelineArray.length; i++) {
+  for(i = 0; i < this.timelineArray.length; i++) {
     this.timelineArray[i].insertBefore(this.findTextLinkEnd(), false);
   }
-}
+};
 
 VideoTranscript.prototype.clickVideoText = function(event) {
   var thisEl = $(event.currentTarget);
@@ -112,12 +112,12 @@ VideoTranscript.prototype.focusLink = function(timeSeconds) {
     .queue(function() {
       $(this).removeAttr('style').dequeue();
     });
-}
+};
 
 VideoTranscript.prototype.activateLink = function(timeSeconds) {
   this.$videoText.children().removeClass('activeVideoTextLink');
   this.findTextLinkBeforeOrEqual(timeSeconds).addClass('activeVideoTextLink');
-}
+};
 
 VideoTranscript.prototype.onTimeupdate = function(event, timeSeconds) {
   this.activateLink(timeSeconds);
@@ -159,7 +159,7 @@ VideoTranscript.prototype.findTextLinkBeforeOrEqual = function(timeSeconds) {
   });
 
   return $(textLink).closest('.ctnVideoTextLink');
-}
+};
 
 // if we have 10, 15, 15, 20 and timeSeconds = 15, we get back the 20 element
 // if we ask 25, we get []
@@ -180,7 +180,7 @@ VideoTranscript.prototype.findTextLinkAfter = function(timeSeconds) {
 // gets back the noTranscript placeholder element, which should always be the last element
 VideoTranscript.prototype.findTextLinkEnd = function() {
   return this.$videoText.children().last();
-}
+};
 
 VideoTranscript.prototype.createNote = function() {
   var timeSeconds = this.video.currentTime();
@@ -200,4 +200,4 @@ VideoTranscript.prototype.createNote = function() {
   }
 
   newElement.scrollIntoView();
-}
+};
