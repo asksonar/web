@@ -3,9 +3,9 @@ TranscriptElement = function(config, el) {
   this.displayIcon = 'fa fa-align-left';
   this.timeSeconds = config.timeSeconds;
   this.displayText = config.displayText;
-  this.editComponent = EditableComponent;
-  this.editable = true;
-}
+
+  EditableComponent.call(this);
+};
 
 TranscriptElement.prototype = new TimelineElement();
 TranscriptElement.prototype.constructor = TimelineElement;

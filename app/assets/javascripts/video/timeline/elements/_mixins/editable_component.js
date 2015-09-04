@@ -1,6 +1,7 @@
 EditableComponent = function() {
+  this.editable = true;
 
-  this.init = function() {
+  this.initEdit = function() {
     this.$inputTime = this.$el.find('.video-text-time');
     this.$inputText = this.$el.find('.video-text-display');
     this.$btnEdit = this.$el.find('.video-btn-edit');
@@ -8,10 +9,10 @@ EditableComponent = function() {
     this.$btnCancel = this.$el.find('.video-btn-cancel');
     this.$btnTrash = this.$el.find('.video-btn-trash');
 
-    this.initHandlers();
+    this.initEditHandlers();
   };
 
-  this.initHandlers = function() {
+  this.initEditHandlers = function() {
     this.$btnEdit.on('click', $.proxy(this.edit, this));
     this.$btnSave.on('click', $.proxy(this.save, this));
     this.$btnCancel.on('click', $.proxy(this.cancel, this));
@@ -41,7 +42,7 @@ EditableComponent = function() {
     this.$el.removeClass('active');
     this.$inputTime.prop('readonly', true);
     this.$inputText.prop('readonly', true);
-  }
+  };
 
   this.cancel = function() {
     this.$el.trigger('stopEditing');
@@ -61,5 +62,4 @@ EditableComponent = function() {
     this.remove();
   };
 
-  this.init();
-}
+};
