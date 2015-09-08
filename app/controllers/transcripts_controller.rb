@@ -1,22 +1,18 @@
 class TranscriptsController < ApplicationController
+  attr_writer :service
 
-  def update
-    @step_transcription = StepTranscription.find_by_hashid(params[:id])
-
-    @step_transcription.update(transcript_update_params)
-
-    @result_step = @step_transcription.result_step
-
-    json = {}
-    json['delighted_array'] = @result_step.feelings_delighted.map { |feeling| feeling.feeling_at_seconds }
-    json['confused_array'] = @result_step.feelings_confused.map { |feeling| feeling.feeling_at_seconds }
-    json['highlighted_array'] = @result_step.highlights.map { |highlight| highlight.offset_seconds }
-    render json: json
+  def service
+    @service ||= StepTranscriptionsService.instance
   end
 
-  private
-    def transcript_update_params
-      params.permit(:offset_seconds, :text)
-    end
+  def update
+    step_transcription = service.update_from_hashid(
+      hashid: params[:id],
+      offset_seconds: params[:time],
+      text: params[:text]
+    )
 
+    json = StepTranscriptionPresenter.new(step_transcription).public_json
+    render json: json
+  end
 end

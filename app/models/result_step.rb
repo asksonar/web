@@ -1,12 +1,14 @@
 class ResultStep < ActiveRecord::Base
   belongs_to :scenario_step
   belongs_to :scenario_result
-  delegate :panelist, :to => :scenario_result, :allow_nil => true
   has_many :step_feelings, -> { order feeling_at_seconds: :asc }, inverse_of: :result_step
   has_many :step_highlights, -> { order offset_seconds: :asc }, inverse_of: :result_step
   has_many :step_videos, -> { order offset_seconds: :asc }, inverse_of: :result_step
   has_many :step_transcriptions, -> { order offset_seconds: :asc }, inverse_of: :result_step
   enum status: [:pending, :uploaded]
+
+  delegate :panelist, to: :scenario_result
+  delegate :email, to: :scenario_result
 
   HASHIDS_SALT = '4$g&QNrACfVp'
 
@@ -21,10 +23,6 @@ class ResultStep < ActiveRecord::Base
 
   def highlights
     step_highlights
-  end
-
-  def share_link
-    Rails.configuration.properties['web_base_url'] +  '/share/videos/' + hashid
   end
 
   def feelings_delighted
@@ -43,36 +41,8 @@ class ResultStep < ActiveRecord::Base
     total_confused > 0
   end
 
-  def email
-    scenario_result.email
-  end
-
   def transcriptions
     step_transcriptions
-  end
-
-  def delighted_array
-    feelings_delighted.map { |feeling| feeling.feeling_at_seconds }
-  end
-
-  def confused_array
-    feelings_confused.map { |feeling| feeling.feeling_at_seconds }
-  end
-
-  def highlighted_array
-    highlights.map { |highlight| highlight.offset_seconds }
-  end
-
-  def src_array
-    step_videos.first && step_videos.first.src_array
-  end
-
-  def transcription_array
-    transcriptions.select(:offset_seconds, :text)
-  end
-
-  def first_transcription_text
-    !transcriptions.nil? && !transcriptions.first.nil? ? transcriptions.first.text : nil
   end
 
   def transcription_at(seconds)

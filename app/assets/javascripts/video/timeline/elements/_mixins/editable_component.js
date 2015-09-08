@@ -30,11 +30,17 @@ EditableComponent = function() {
     this.$inputText.prop('readonly', false);
   };
 
-  this.save = function() {
+  this.saveSuccess = function(customMsg) {
     this.$el.trigger('stopEditing');
+
     if (this.ephemeral) {
-      notify.info('Your ' + this.displayClass + ' has been created.');
       this.ephemeral = false;
+    }
+
+    if (typeof customMsg === 'string') {
+      notify.warn(customMsg);
+    } else if (this.ephemeral) {
+      notify.info('Your ' + this.displayClass + ' has been created.');
     } else {
       notify.info('Your ' + this.displayClass + ' has been saved.');
     }
@@ -42,6 +48,16 @@ EditableComponent = function() {
     this.$el.removeClass('active');
     this.$inputTime.prop('readonly', true);
     this.$inputText.prop('readonly', true);
+  };
+
+  this.saveFail = function(customMsg) {
+    if (typeof customMsg === 'string') {
+      notify.warn(customMsg);
+    } else if (this.ephemeral) {
+      notify.warn('There was an error creating your  ' + this.displayClass + '.');
+    } else {
+      notify.warn('There was an error saving your ' + this.displayClass + '.');
+    }
   };
 
   this.cancel = function() {
@@ -57,9 +73,13 @@ EditableComponent = function() {
     }
   };
 
-  this.trash = function() {
+  this.trashSuccess = function() {
     this.$el.trigger('stopEditing');
     this.remove();
+  };
+
+  this.trashFail = function() {
+    notify.warn('There was an error removing your  ' + this.displayClass + '.');
   };
 
 };

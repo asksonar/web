@@ -1,37 +1,19 @@
 class VideosJsonController < ApplicationController
   def show
-    @result_step = ResultStep.find_by_hashid(params[:result_step_hashid])
-    if @result_step.nil?
-      render status: 500, plain: "<strong>Error Loading Video</strong> - The video could not be found."
-      return
+    result_step = ResultStep.find_by_hashid(params[:result_step_hashid])
+    if result_step.nil?
+      return render status: 500, plain: '<strong>Error Loading Video</strong> - The video could not be found.'
     end
 
-    @video = @result_step.video
-    if @video.nil?
-      render status: 500, plain: "<strong>Error Loading Video</strong> - The video has not yet been uploaded."
-      return
+    if result_step.video.nil?
+      return render status: 500, plain: '<strong>Error Loading Video</strong> - The video has not yet been uploaded.'
     end
 
-    json = {}
-    json['result_step_hashid'] = @result_step.hashid
-    json['src_array'] = @video.src_array
-    json['share_link'] = @result_step.share_link
-    json['user_email'] = @result_step.panelist.email
-    json['step_description'] = @result_step.scenario_step.description
-    json['step_order'] = @result_step.scenario_step.step_order
-    json['transcription_array'] = @result_step.transcription_array
-    json['delighted_array'] = @result_step.feelings_delighted.map { |feeling| feeling.feeling_at_seconds }
-    json['confused_array'] = @result_step.feelings_confused.map { |feeling| feeling.feeling_at_seconds }
-    json['highlighted_array'] = @result_step.highlights.map { |highlight| highlight.offset_seconds }
+    Analytics.instance.modal_video_viewed(current_researcher, request.remote_ip, result_step)
+
+    result_step_json = ResultStepPresenter.new(result_step).public_json
+    scenario_step_json = ScenarioStepPresenter.new(result_step.scenario_step).public_json
+    json = result_step_json.merge(scenario_step_json)
     render json: json
-
-    scenario = @result_step.scenario_result.scenario
-    created_by_id = scenario.created_by.id
-    if current_researcher.nil? or current_researcher.id != created_by_id
-      Analytics.instance.share_video_viewed(current_researcher, request.remote_ip, scenario.created_by, scenario, @result_step, true)
-    else
-      Analytics.instance.result_video_viewed(current_researcher, scenario, @result_step, true)
-    end
   end
-
 end

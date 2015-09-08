@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-
   get '/ping', to: 'ping#index'
 
-  #get '(*all)', to: 'home#maintenance'
-  #get '/studies/(*all)', to: 'home#maintenance'
+  # get '(*all)', to: 'home#maintenance'
+  # get '/studies/(*all)', to: 'home#maintenance'
 
   get '/videos.json', to: 'videos_json#show'
   get '/create',      to: 'drafts#new' # so it doesn't highlight the left nav
@@ -25,6 +24,7 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
+  resources :transcripts
   resources :highlights, only: [:create]
   resources :studies do
     resources :step, only: [:create], controller: 'studies_step'
@@ -36,9 +36,10 @@ Rails.application.routes.draw do
   end
   resources :my_results, controller: 'results'
 
-  devise_for :researchers, path: 'accounts',
+  devise_for :researchers,
+    path: 'accounts',
     path_names: { sign_in: 'login', sign_out: 'logout' },
-    controllers: {registrations: "registrations"}
+    controllers: { registrations: 'registrations' }
 
   resque_web_constraint = lambda do |request|
     current_user = request.env['warden'].user
@@ -47,7 +48,7 @@ Rails.application.routes.draw do
 
   ResqueWeb::Engine.eager_load!
   constraints resque_web_constraint do
-    mount ResqueWeb::Engine => "/resque"
+    mount ResqueWeb::Engine => '/resque'
   end
 
   # Example resource route with options:

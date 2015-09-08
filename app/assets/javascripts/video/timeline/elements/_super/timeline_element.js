@@ -1,4 +1,4 @@
-TimelineElement = function(config, el) {
+TimelineElement = function(config) {
 };
 
 TimelineElement.prototype.init = function(el) {
@@ -9,11 +9,22 @@ TimelineElement.prototype.init = function(el) {
   this.initEdit();
 };
 
-TimelineElement.prototype.displayTime = function() {
-  var mins = Math.floor(this.timeSeconds / 60);
-  var secs = Math.floor(this.timeSeconds) % 60;
+TimelineElement.prototype.displayTimeToSecs = function(displayTime) {
+  var mins = parseInt(displayTime.split(':')[0]);
+  var secs = parseInt(displayTime.split(':')[1]);
+
+  return mins * 60 + secs;
+};
+
+TimelineElement.prototype.secsToDisplayTime = function(seconds) {
+  var mins = Math.floor(seconds / 60);
+  var secs = Math.floor(seconds) % 60;
 
   return mins + ":" + ('00' + secs).slice(-2);
+};
+
+TimelineElement.prototype.displayTime = function() {
+  return this.secsToDisplayTime(this.timeSeconds);
 };
 
 TimelineElement.prototype.html = function(active) {

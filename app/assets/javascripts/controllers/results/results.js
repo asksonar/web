@@ -63,16 +63,16 @@ $(function(){
   var timeSeconds = new URI(location.href).search(true).t || 0;
   if (sonar.resultStep) {
     videoModal.loaded(timeSeconds, {
-      result_step_hashid: sonar.resultStep.hashid,
-      delighted_array: sonar.resultStep.delightedArray,
-      confused_array: sonar.resultStep.confusedArray,
-      highlighted_array: sonar.resultStep.highlightedArray,
-      src_array: sonar.resultStep.srcArray,
-      transcription_array: sonar.resultStep.transcriptionArray,
-      user_email: sonar.resultStep.email,
-      step_order: sonar.scenarioStep.stepOrder,
-      step_description: sonar.scenarioStep.stepDescription,
-      share_link: sonar.resultStep.shareLink
+      hashid: sonar.resultStep.hashid,
+      delightedArray: sonar.resultStep.delightedArray,
+      confusedArray: sonar.resultStep.confusedArray,
+      highlightedArray: sonar.resultStep.highlightedArray,
+      srcArray: sonar.resultStep.srcArray,
+      transcriptionArray: sonar.resultStep.transcriptionArray,
+      email: sonar.resultStep.email,
+      stepOrder: sonar.scenarioStep.stepOrder,
+      stepDescription: sonar.scenarioStep.stepDescription,
+      shareLink: sonar.resultStep.shareLink
     });
 
     if (timeSeconds > 0) {

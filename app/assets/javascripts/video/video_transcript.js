@@ -45,8 +45,10 @@ VideoTranscript.prototype.toggleTranscripts = function(event) {
   this.$container.toggleClass('show-transcripts');
 };
 
-VideoTranscript.prototype.buildTranscript = function(transcriptArray, delightedArray, confusedArray, highlightedArray) {
-  var i, time, text;
+VideoTranscript.prototype.buildTranscript = function(resultStepHashId, transcriptArray, delightedArray, confusedArray, highlightedArray) {
+  this.resultStepHashId = resultStepHashId;
+
+  var i, hashid, timeSeconds, text;
 
   for(i = 0; i < this.timelineArray.length; i++) {
     this.timelineArray[i].remove();
@@ -54,23 +56,32 @@ VideoTranscript.prototype.buildTranscript = function(transcriptArray, delightedA
   this.timelineArray = [];
 
   for(i = 0; delightedArray && i  < delightedArray.length; i++) {
+    hashid = delightedArray[i].hashid;
+    timeSeconds = delightedArray[i].timeSeconds;
+
     this.timelineArray.push(
       new FeelingDelightedElement({
-        timeSeconds: delightedArray[i]
+        hashid: hashid,
+        timeSeconds: timeSeconds
       })
     );
   }
 
   for(i = 0; confusedArray && i  < confusedArray.length; i++) {
+    hashid = delightedArray[i].hashid;
+    timeSeconds = delightedArray[i].timeSeconds;
+
     this.timelineArray.push(
       new FeelingConfusedElement({
-        timeSeconds: confusedArray[i]
+        hashid: hashid,
+        timeSeconds: timeSeconds
       })
     );
   }
 
   for(i = 0; i  < transcriptArray.length; i++) {
-    time = transcriptArray[i].offset_seconds;
+    hashid = transcriptArray[i].hashid;
+    timeSeconds = transcriptArray[i].timeSeconds;
     text = transcriptArray[i].text;
     text = (text || '').trim();
     if (!text) {
@@ -79,8 +90,10 @@ VideoTranscript.prototype.buildTranscript = function(transcriptArray, delightedA
 
     this.timelineArray.push(
       new TranscriptElement({
-        timeSeconds: time,
-        displayText: text
+        hashid: hashid,
+        timeSeconds: timeSeconds,
+        displayText: text,
+        resultStepHashId: resultStepHashId
       })
     );
   }
@@ -187,7 +200,8 @@ VideoTranscript.prototype.createNote = function() {
 
   var newElement = new NoteElement({
     timeSeconds: timeSeconds,
-    displayText: ''
+    displayText: '',
+    resultStepHashId: resultStepHashId
   });
 
   this.timelineArray.push(newElement);
