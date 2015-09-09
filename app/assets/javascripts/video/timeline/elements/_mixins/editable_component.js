@@ -19,9 +19,26 @@ EditableComponent = function() {
     this.$btnTrash.on('click', $.proxy(this.trash, this));
   };
 
+  this.setState = function(state) {
+    this.$el.attr('data-state', state);
+  };
+
+  this.getState = function(state) {
+    return this.$el.attr('data-state');
+  };
+
+  this.clearState = function() {
+    this.$el.removeAttr('data-state');
+  };
+
+  this.create = function() {
+    this.edit();
+    this.setState('creating');
+  };
+
   this.edit = function() {
+    this.setState('editing');
     this.$el.trigger('startEditing');
-    this.$el.addClass('active');
 
     this.originalTimeVal = this.$inputTime.val();
     this.originalTextVal = this.$inputText.val();
@@ -45,7 +62,7 @@ EditableComponent = function() {
       notify.info('Your ' + this.displayClass + ' has been saved.');
     }
 
-    this.$el.removeClass('active');
+    this.clearState();
     this.$inputTime.prop('readonly', true);
     this.$inputText.prop('readonly', true);
   };
@@ -62,10 +79,11 @@ EditableComponent = function() {
 
   this.cancel = function() {
     this.$el.trigger('stopEditing');
+
     if (this.ephemeral) {
       this.trash();
     } else {
-      this.$el.removeClass('active');
+      this.clearState();
       this.$inputTime.prop('readonly', true);
       this.$inputText.prop('readonly', true);
       this.$inputTime.val(this.originalTimeVal);

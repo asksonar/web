@@ -52,26 +52,26 @@
 <script id='video-text-partial' type='text/x-handlebars-template'>
   <div class='ctnVideoTextLink {{displayClass}}'>
     <div class='videoTextLink' data-timestamp='{{time}}'>
-      {{#if editable}}
-        <input type='text' class='video-text-time' value='{{displayTime}}' readonly></input>
-        <div class='video-text-icon-display'>
-          <div class='video-text-icon'><i class='{{displayIcon}}'></i></div>
+      <input type='text' class='video-text-time' value='{{displayTime}}' readonly></input>
+      <div class='video-text-icon-display'>
+        <div class='video-text-icon'><i class='{{displayIcon}}'></i></div>
+        {{#if editable}}
           <textarea class='video-text-display' rows='1' readonly>{{{displayText}}}</textarea>
-        </div>
-      {{else}}
-        <input type='text' class='video-text-time' value='{{displayTime}}' readonly></input>
-        <div class='video-text-icon-display'>
-          <div class='video-text-icon'><i class='{{displayIcon}}'></i></div>
+        {{else}}
           <div class='video-text-display'>{{{displayText}}}</div>
-        </div>
-      {{/if}}
+        {{/if}}
+      </div>
     </div>
-    <a class='video-btn-edit sub'><i class='fa fa-edit'></i> Edit</a>
-    <div class='video-text-buttons'>
-      <span class='video-btn-save btn btn-success'><i class='fa fa-check'></i> Save</span>
-      <span class='video-btn-cancel btn btn-danger'><i class='fa fa-times'></i> Cancel</span>
-      <span class='video-btn-trash btn btn-grey'><i class='fa fa-trash'></i></span>
-    </div>
+    {{#if editable}}
+      <a class='video-btn-edit sub'><i class='fa fa-edit'></i> Edit</a>
+      <div class='video-text-buttons'>
+        <span class='video-btn-save btn btn-success'><i class='fa fa-check'></i> Save</span>
+        <span class='video-btn-cancel btn btn-danger'><i class='fa fa-times'></i> Cancel</span>
+        {{#if trashable}}
+          <span class='video-btn-trash btn btn-grey'><i class='fa fa-trash'></i></span>
+        {{/if}}
+      </div>
+    {{/if}}
   </div>
 </script>
 

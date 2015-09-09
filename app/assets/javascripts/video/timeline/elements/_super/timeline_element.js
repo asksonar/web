@@ -27,7 +27,7 @@ TimelineElement.prototype.displayTime = function() {
   return this.secsToDisplayTime(this.timeSeconds);
 };
 
-TimelineElement.prototype.html = function(active) {
+TimelineElement.prototype.html = function() {
   this.videoTextPartial = this.videoTextPartial || Handlebars.compile($('#video-text-partial').html());
 
   return this.videoTextPartial({
@@ -36,32 +36,31 @@ TimelineElement.prototype.html = function(active) {
     displayClass: this.displayClass,
     displayIcon: this.displayIcon,
     displayText: this.displayText,
-    editable: this.editable
+    editable: this.editable,
+    trashable: this.trashable
   });
 };
 
-TimelineElement.prototype.insertBefore = function(insertBefore, ephemeral) {
+TimelineElement.prototype.insertBefore = function(insertBefore, creating) {
   if (this.initialized) {
     throw new Error('element has already been initialized');
   }
-  this.ephemeral = ephemeral;
-  insertBefore.before(this.html(ephemeral));
+  insertBefore.before(this.html());
   this.init(insertBefore.prev());
-  if (this.ephemeral) {
-    this.edit();
+  if (this.creating) {
+    this.create();
   }
   return this;
 };
 
-TimelineElement.prototype.insertAfter = function(insertAfter, ephemeral) {
+TimelineElement.prototype.insertAfter = function(insertAfter, creating) {
   if (this.initialized) {
     throw new Error('element has already been initialized');
   }
-  this.ephemeral = ephemeral;
   insertAfter.after(this.html(ephemeral));
   this.init(insertAfter.next());
-  if (this.ephemeral) {
-    this.edit();
+  if (this.creating) {
+    this.create();
   }
   return this;
 };
