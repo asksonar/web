@@ -1,13 +1,11 @@
 TimelineElement = function(config) {
 };
 
-TimelineElement.prototype.init = function(el) {
-  this.initialized = true;
-  this.$el = el;
-  autosize(this.$el.find('textarea'));
+Initable.call(TimelineElement.prototype);
 
-  this.initEdit();
-};
+TimelineElement.prototype.onInit(function() {
+  this.initialized = true;
+});
 
 TimelineElement.prototype.displayTimeToSecs = function(displayTime) {
   var mins = parseInt(displayTime.split(':')[0]);
@@ -46,20 +44,22 @@ TimelineElement.prototype.insertBefore = function(insertBefore, creating) {
     throw new Error('element has already been initialized');
   }
   insertBefore.before(this.html());
-  this.init(insertBefore.prev());
-  if (this.creating) {
+  this.$el = insertBefore.prev();
+  this.init();
+  if (creating) {
     this.create();
   }
   return this;
 };
 
 TimelineElement.prototype.insertAfter = function(insertAfter, creating) {
+  insertAfter.after(this.html());
   if (this.initialized) {
     throw new Error('element has already been initialized');
   }
-  insertAfter.after(this.html(ephemeral));
-  this.init(insertAfter.next());
-  if (this.creating) {
+  this.$el = insertAfter.next();
+  this.init();
+  if (creating) {
     this.create();
   }
   return this;

@@ -7,7 +7,6 @@ FeelingDelightedElement = function(config) {
 
 FeelingDelightedElement.prototype = new TimelineElement();
 FeelingDelightedElement.prototype.constructor = TimelineElement;
-ReadonlyComponent.call(FeelingDelightedElement.prototype);
 
 FeelingConfusedElement = function(config) {
   this.displayClass = 'feeling-confused';
@@ -18,4 +17,3 @@ FeelingConfusedElement = function(config) {
 
 FeelingConfusedElement.prototype = new TimelineElement();
 FeelingConfusedElement.prototype.constructor = TimelineElement;
-ReadonlyComponent.call(FeelingConfusedElement.prototype);

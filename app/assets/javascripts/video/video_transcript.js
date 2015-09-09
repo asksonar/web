@@ -210,7 +210,7 @@ VideoTranscript.prototype.createNote = function() {
   var newElement = new NoteElement({
     timeSeconds: timeSeconds,
     displayText: '',
-    resultStepHashId: resultStepHashId
+    resultStepHashId: this.resultStepHashId
   });
 
   this.timelineArray.push(newElement);

@@ -7,13 +7,9 @@ function StudiesController(view, appId, config) {
   this.$form = config.form;
 
   this.init();
-  this.initHandlers();
 }
 
 StudiesController.prototype.init = function() {
-}
-
-StudiesController.prototype.initHandlers = function() {
   this.$btnInstallExtension.on('click', $.proxy(this.installExtension, this));
   this.$btnStartFeedback.on('click', $.proxy(this.startFeedback, this));
 }

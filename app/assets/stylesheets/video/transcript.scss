@@ -203,3 +203,7 @@
     display: block;
   }
 }
+
+.ctnVideoTextLink[data-state='creating'] .video-btn-trash {
+  display: none;
+}
