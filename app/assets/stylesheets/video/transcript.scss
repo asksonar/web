@@ -10,7 +10,7 @@
 
   #btn-add-note {
     display: none;
-    .editable & { display: block; }
+    .editable-timeline & { display: block; }
   }
 
   @media (min-width: $screen-md-min) {
@@ -29,7 +29,7 @@
       right: 0px;
       overflow-y: auto;
 
-      .editable & { bottom: 30px; } // effective height of btn-add-note
+      .editable-timeline & { bottom: 30px; } // effective height of btn-add-note
     }
 
     #btn-add-note {
@@ -63,11 +63,11 @@
   overflow: hidden;
   cursor: pointer;
 
-  &:not(.active):hover .video-text-time {
+  &:not([data-state]):hover .video-text-time {
     text-decoration: underline;
   }
 
-  &.activeVideoTextLink:not(.active) {
+  &.activeVideoTextLink:not([data-state]) {
     @extend .strong;
   }
 
@@ -101,7 +101,7 @@
     }
   }
 
-  .text-mode .active & {
+  .text-mode .ctnVideoTextLink[data-state] & {
     border-color: #C3C3C3;
     background-color: white;
     box-shadow: 0px 1px 1px 0px #CECECE;
@@ -183,8 +183,7 @@
 
   display: none;
 
-  .editable .text-mode .transcript:hover &,
-  .editable .text-mode .note:hover & {
+  .editable-timeline .text-mode .ctnVideoTextLink:hover & {
     display: inline-block;
   }
 
@@ -200,7 +199,7 @@
 
   display: none;
 
-  .text-mode .active & {
+  .text-mode .ctnVideoTextLink[data-state] & {
     display: block;
   }
 }
