@@ -119,6 +119,11 @@ VideoTranscript.prototype.clickVideoText = function(event) {
 
 VideoTranscript.prototype.focusLink = function(timeSeconds) {
   var link = this.findTextLinkBeforeOrEqual(timeSeconds);
+  if (link.length === 0) {
+    // we're before the first element in the timeline
+    // so nothing to focus on yet
+    return;
+  }
   link.get(0).scrollIntoView();
   link.css({'background-color':'#F69526'})
     .animate({'background-color':''}, 3000)
@@ -193,6 +198,10 @@ VideoTranscript.prototype.findTextLinkAfter = function(timeSeconds) {
 // gets back the noTranscript placeholder element, which should always be the last element
 VideoTranscript.prototype.findTextLinkEnd = function() {
   return this.$videoText.children().last();
+};
+
+VideoTranscript.prototype.findTextLinkBeginning = function() {
+  return this.$videoText.children().first();
 };
 
 VideoTranscript.prototype.createNote = function() {

@@ -24,6 +24,7 @@ $(function(){
   }, videoController);
 
   var videoTranscript = new VideoTranscript({
+    divTranscriptContainer: $('.transcript-container'),
     divVideoText: $('#videoText'),
     btnToggleTranscripts: $('#toggle-transcripts'),
     btnAddNote: $('#btn-add-note'),
@@ -53,6 +54,7 @@ $(function(){
   videoController.play(timeSeconds);
 
   videoTranscript.buildTranscript(
+    sonar.resultStep.hashid,
     sonar.resultStep.transcriptionArray,
     sonar.resultStep.delightedArray,
     sonar.resultStep.confusedArray,
