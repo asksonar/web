@@ -41,7 +41,11 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
   if (this.resultStepHashId != data.hashid) {
     this.resultStepHashId = data.hashid;
 
-    this.video.markers(data.delightedArray, data.confusedArray, data.highlightedArray);
+    this.video.markers(
+      this.video.collapseTimes(data.delightedArray),
+      this.video.collapseTimes(data.confusedArray),
+      this.video.collapseTimes(data.highlightedArray)
+    );
     this.video.src(data.srcArray);
 
     this.transcript.buildTranscript(

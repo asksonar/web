@@ -24,7 +24,7 @@ class ResultStepPresenter < SimpleDelegator
     feelings_delighted.select(:id, :feeling_at_seconds).map do |feeling|
       {
         hashid: StepFeeling.hashids.encode(feeling.id),
-        timeSeconds: feeling.feeling_at_seconds
+        time: feeling.feeling_at_seconds
       }
     end
   end
@@ -33,7 +33,7 @@ class ResultStepPresenter < SimpleDelegator
     feelings_confused.select(:id, :feeling_at_seconds).map do |feeling|
       {
         hashid: StepFeeling.hashids.encode(feeling.id),
-        timeSeconds: feeling.feeling_at_seconds
+        time: feeling.feeling_at_seconds
       }
     end
   end
@@ -46,7 +46,7 @@ class ResultStepPresenter < SimpleDelegator
     transcriptions.select(:id, :offset_seconds, :text).map do |transcription|
       {
         hashid: StepTranscription.hashids.encode(transcription.id),
-        timeSeconds: transcription.offset_seconds,
+        time: transcription.offset_seconds,
         text: transcription.text
       }
     end

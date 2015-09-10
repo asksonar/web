@@ -46,9 +46,9 @@ $(function(){
   var timeSeconds = new URI(location.href).search(true).t || 0;
 
   videoController.markers(
-    sonar.resultStep.delightedArray,
-    sonar.resultStep.confusedArray,
-    sonar.resultStep.highlightedArray
+    videoController.collapseTimes(sonar.resultStep.delightedArray),
+    videoController.collapseTimes(sonar.resultStep.confusedArray),
+    videoController.collapseTimes(sonar.resultStep.highlightedArray)
   );
   videoController.src(sonar.resultStep.srcArray);
   videoController.play(timeSeconds);
