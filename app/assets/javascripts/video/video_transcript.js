@@ -68,8 +68,8 @@ VideoTranscript.prototype.buildTranscript = function(resultStepHashId, transcrip
   }
 
   for(i = 0; confusedArray && i  < confusedArray.length; i++) {
-    hashid = delightedArray[i].hashid;
-    timeSeconds = delightedArray[i].timeSeconds;
+    hashid = confusedArray[i].hashid;
+    timeSeconds = confusedArray[i].timeSeconds;
 
     this.timelineArray.push(
       new FeelingConfusedElement({
