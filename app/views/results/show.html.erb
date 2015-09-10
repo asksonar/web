@@ -194,14 +194,14 @@
 
 <div class="modal" id='summary_video_container' tabindex='-1'>
   <div class="modal-dialog modal-lg">
-    <div class="modal-content">
+    <div class="modal-content editable-timeline">
       <div class='ctn-modal-header'>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h3><%= @scenario.title %></h3>
         <p id='ctn-user-email'></p>
 
         <p class='ctn-modal-step-description'>
-          <span class='h1'>Step&nbsp;<span id='ctn-step-order'></span>.</span><span class='h2' id='ctn-step-description'><%= @scenario.description %></span>
+          <span class='h1'>Step&nbsp;<span id='ctn-step-order'></span>.</span><span class='h2' id='ctn-step-description'></span>
         </p>
       </div>
       <%= render partial: 'utility/video' %>

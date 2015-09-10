@@ -11,13 +11,9 @@ function WalkthroughView(config, overlay) {
   this.overlay = overlay;
 
   this.init();
-  this.initHandlers();
 }
 
 WalkthroughView.prototype.init = function() {
-}
-
-WalkthroughView.prototype.initHandlers = function() {
 }
 
 WalkthroughView.prototype.showStart = function() {

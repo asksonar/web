@@ -27,7 +27,7 @@ class ResultsController < ApplicationController
       @scenario = Scenario.find_by_hashid(params[:id])
     else
       @scenario = Scenario.find_by_hashid(params[:result_id])
-      @result_step = ResultStep.find_by_hashid(params[:id])
+      @result_step = ResultStepPresenter.new(ResultStep.find_by_hashid(params[:id]))
       @scenario_step = @result_step.scenario_step
     end
   end

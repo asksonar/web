@@ -26,9 +26,8 @@
 //= require URIjs
 //= require jqueryui
 
-// insert new packages above this line
+// insert 3rd party packages above this line
 
-//= require_tree ./shared
-// insert packages that need to be loaded in order above this line
+// beware that require_tree will load in alphabetical, depth-first order
 
 //= require_tree .

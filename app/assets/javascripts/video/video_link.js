@@ -11,11 +11,11 @@ VideoLink.prototype.init = function() {
   new ClipboardInput(this.$btnCopyVideoLink, this.$inputUrlBase);
 
   this.onTimeupdate = $.proxy(this.onTimeupdate, this);
-}
+};
 
 VideoLink.prototype.onTimeupdate = function(event, timeSeconds) {
   this.updateVideoTime(timeSeconds);
-}
+};
 
 VideoLink.prototype.updateVideoTime = function(timeSeconds) {
   var currentSeconds = parseInt(timeSeconds);
@@ -37,9 +37,9 @@ VideoLink.prototype.updateVideoTime = function(timeSeconds) {
       inputUrlBaseDom.setSelectionRange(selectionStart, selectionEnd);
     }
   }
-}
+};
 
 VideoLink.prototype.updateShareLink = function(shareLink) {
   this.$inputUrlBase.attr('data-base-url', shareLink + '?t=');
   this.$inputUrlBase.val(shareLink + '?t=0');
-}
+};

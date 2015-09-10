@@ -3,7 +3,7 @@ VideoModal = function(config, video, transcript, videoLink) {
   this.$divUserEmail = config.divUserEmail;
   this.$divStepOrder = config.divStepOrder;
   this.$divStepDescription = config.divStepDescription;
-  this.$btnToggleViewMode = config.btnToggleViewMode
+  this.$btnToggleViewMode = config.btnToggleViewMode;
 
   // TODO: delete the highlight button and its associated logic
   this.$btnHighlightVideoLink = config.btnHighlightVideoLink;
@@ -38,24 +38,25 @@ VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {
 
 // timeSeconds comes first because $.proxy inserts it first
 VideoModal.prototype.loaded = function(timeSeconds, data) {
-  if (this.resultStepHashId != data.result_step_hashid) {
-    this.resultStepHashId = data.result_step_hashid;
+  if (this.resultStepHashId != data.hashid) {
+    this.resultStepHashId = data.hashid;
 
-    this.video.markers(data.delighted_array, data.confused_array, data.highlighted_array);
-    this.video.src(data.src_array);
+    this.video.markers(data.delightedArray, data.confusedArray, data.highlightedArray);
+    this.video.src(data.srcArray);
 
     this.transcript.buildTranscript(
-      data.transcription_array,
-      data.delighted_array,
-      data.confused_array,
-      data.highlighted_array
+      data.hashid,
+      data.transcriptionArray,
+      data.delightedArray,
+      data.confusedArray,
+      data.highlightedArray
     );
 
-    this.videoLink.updateShareLink(data.share_link);
+    this.videoLink.updateShareLink(data.shareLink);
 
-    this.$divUserEmail.html(data.user_email);
-    this.$divStepOrder.html(data.step_order + 1);
-    this.$divStepDescription.html(data.step_description);
+    this.$divUserEmail.html(data.email);
+    this.$divStepOrder.html(data.stepOrder + 1);
+    this.$divStepDescription.html(data.stepDescription);
   }
 
   this.video.currentTime(timeSeconds);

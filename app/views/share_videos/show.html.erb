@@ -8,12 +8,6 @@
 </section>
 <section class="main-content">
 
-  <script type='text/javascript'>
-    var transcriptionArray = <%= raw @result_step.transcription_array.to_json %>;
-    var srcArray = <%= raw @video.src_array.to_json %>;
-    var shareLink = '<%= @result_step.share_link %>';
-  </script>
-
   <div class='panel'>
     <%= render partial: 'utility/video' %>
     </div>

@@ -82,6 +82,16 @@ class Analytics
     @tracker.people.plus_one(researcher.hashid, 'Total published draft', 0)
   end
 
+  def modal_video_viewed(researcher, ip_address, result_step)
+    scenario = result_step.scenario_result.scenario
+    created_by_id = scenario.created_by.id
+    if researcher.nil? || researcher.id != created_by_id
+      share_video_viewed(researcher, ip_address, scenario.created_by, scenario, result_step, true)
+    else
+      Analytics.instance.result_video_viewed(researcher, scenario, result_step, true)
+    end
+  end
+
   def result_video_viewed(researcher, scenario, result_step, is_modal)
     @tracker.track(researcher.hashid, 'Researcher viewed video', {
       'time' => Time.new,

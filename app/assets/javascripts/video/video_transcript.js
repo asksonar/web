@@ -1,4 +1,5 @@
 VideoTranscript = function(config, video) {
+  this.$container = config.divTranscriptContainer;
   this.$videoText = config.divVideoText;
   this.$btnToggleTranscripts = config.btnToggleTranscripts;
   this.$btnAddNote = config.btnAddNote;
@@ -9,16 +10,28 @@ VideoTranscript = function(config, video) {
 
   this.video = video;
 
+  this.timelineArray = [];
+
   this.init();
 };
 
 VideoTranscript.prototype.init = function() {
-  this.$videoText.on('click', '.videoTextLink', $.proxy(this.clickVideoText, this));
-  this.$videoText.on('click', '.video-btn-edit', $.proxy(this.editVideoText, this));
   this.$btnToggleTranscripts.on('click', $.proxy(this.toggleTranscripts, this));
   this.$btnAddNote.on('click', $.proxy(this.createNote, this));
 
+  this.$videoText.on('click', '.videoTextLink', $.proxy(this.clickVideoText, this));
+  this.$videoText.on('startEditing', $.proxy(this.startEditing, this));
+  this.$videoText.on('stopEditing', $.proxy(this.stopEditing, this));
+
   this.onTimeupdate = $.proxy(this.onTimeupdate, this);
+};
+
+VideoTranscript.prototype.startEditing = function() {
+  this.$videoText.addClass('editing');
+};
+
+VideoTranscript.prototype.stopEditing = function() {
+  this.$videoText.removeClass('editing');
 };
 
 VideoTranscript.prototype.refreshView = function() {
@@ -26,148 +39,73 @@ VideoTranscript.prototype.refreshView = function() {
   $(window).load(function() {
     autosize.update($('textarea'));
   });
-}
-
-VideoTranscript.prototype.toggleTranscripts = function(event) {
-  $(event.currentTarget).toggleClass('active');
-  var activeTranscripts = this.$btnToggleTranscripts.hasClass('active');
-
-  this.showTranscripts(activeTranscripts);
 };
 
-VideoTranscript.prototype.editVideoText = function(event) {
-  var thisEl = $(event.currentTarget);
+VideoTranscript.prototype.toggleTranscripts = function(event) {
+  this.$container.toggleClass('show-transcripts');
+};
 
-  var parent = thisEl.closest('.ctnVideoTextLink');
-  parent.addClass('active');
+VideoTranscript.prototype.buildTranscript = function(resultStepHashId, transcriptArray, delightedArray, confusedArray, highlightedArray) {
+  this.resultStepHashId = resultStepHashId;
 
-  this.$videoText.addClass('editing');
+  var i, hashid, timeSeconds, text;
 
-  var inputTime = parent.find('.video-text-time');
-  var inputText = parent.find('.video-text-display');
+  for(i = 0; i < this.timelineArray.length; i++) {
+    this.timelineArray[i].remove();
+  }
+  this.timelineArray = [];
 
-  inputTime.prop('readonly', false);
-  inputText.prop('readonly', false);
+  for(i = 0; delightedArray && i  < delightedArray.length; i++) {
+    hashid = delightedArray[i].hashid;
+    timeSeconds = delightedArray[i].timeSeconds;
 
-  var originalTimeVal = inputTime.val();
-  var originalTextVal = inputText.val();
-
-  parent.find('.video-btn-cancel').off('click').on('click', function() {
-    parent.removeClass('active');
-    inputTime.val(originalTimeVal);
-    inputText.val(originalTextVal);
-    inputTime.prop('readonly', true);
-    inputText.prop('readonly', true);
-  });
-
-  parent.find('.video-btn-save').off('click').on('click', function(){
-    if (parent.hasClass('transcript')) {
-      notify.info('Your transcript has been updated.');
-    } else if (parent.hasClass('note')) {
-      notify.info('Your note has been updated.');
-    }
-
-    parent.removeClass('active');
-    this.$videoText.removeClass('editing');
-    inputTime.prop('readonly', true);
-    inputText.prop('readonly', true);
-  });
-}
-
-VideoTranscript.prototype.buildTranscript = function(transcriptArray, delightedArray, confusedArray, highlightedArray) {
-  var delightedIndex = 0, confusedIndex = 0;
-  var renderArray = [];
-  var videoTranscript;
-  var time, mins, secs, text;
-  var hasDelighted, hasConfused, nextTime;
-
-  for(var i = 0; delightedArray && i  < delightedArray.length; i++) {
-    renderArray.push({
-      time: delightedArray[i],
-      displayClass: 'feeling-delighted',
-      displayIcon: 'feeling-delighted',
-      displayText: "<span>User clicked</span><i class='feeling-delighted'></i>"
-    })
+    this.timelineArray.push(
+      new FeelingDelightedElement({
+        hashid: hashid,
+        timeSeconds: timeSeconds
+      })
+    );
   }
 
-  for(var i = 0; confusedArray && i  < confusedArray.length; i++) {
-    renderArray.push({
-      time: confusedArray[i],
-      displayClass: 'feeling-confused',
-      displayIcon: 'feeling-confused',
-      displayText: "<span>User clicked</span><i class='feeling-confused'></i>"
-    })
+  for(i = 0; confusedArray && i  < confusedArray.length; i++) {
+    hashid = delightedArray[i].hashid;
+    timeSeconds = delightedArray[i].timeSeconds;
+
+    this.timelineArray.push(
+      new FeelingConfusedElement({
+        hashid: hashid,
+        timeSeconds: timeSeconds
+      })
+    );
   }
 
-  for(var i = 0; i  < transcriptArray.length; i++) {
-    time = transcriptArray[i].offset_seconds;
+  for(i = 0; i  < transcriptArray.length; i++) {
+    hashid = transcriptArray[i].hashid;
+    timeSeconds = transcriptArray[i].timeSeconds;
     text = transcriptArray[i].text;
     text = (text || '').trim();
     if (!text) {
       continue;
     }
 
-    renderArray.push({
-      time: time,
-      displayClass: 'transcript',
-      displayIcon: 'fa fa-align-left',
-      displayText: text,
-      editable: true
-    });
+    this.timelineArray.push(
+      new TranscriptElement({
+        hashid: hashid,
+        timeSeconds: timeSeconds,
+        displayText: text,
+        resultStepHashId: resultStepHashId
+      })
+    );
   }
 
-/*
-  for(var i = 0; i  < highlightedArray.length; i++) {
-    time = highlightedArray[i].offset_seconds;
-    text = highlightedArray[i].text;
-    text = (text || '').trim();
-    if (!text) {
-      continue;
-    }
-
-    renderArray.push({
-      time: time,
-      displayClass: 'note',
-      displayIcon: 'fa fa-tag',
-      displayText: text,
-      editable: true
-    });
-  }
-*/
-
-  renderArray.sort(function(a, b){
-    return a.time - b.time;
+  this.timelineArray.sort(function(a, b){
+    return a.timeSeconds - b.timeSeconds;
   });
 
-  for(var i = 0; i < renderArray.length; i++) {
-    time = renderArray[i].time;
-    mins = Math.floor(time / 60);
-    secs = Math.floor(time) % 60;
-
-    renderArray[i].displayTime = mins + ":" + ('00' + secs).slice(-2)
+  for(i = 0; i < this.timelineArray.length; i++) {
+    this.timelineArray[i].insertBefore(this.findTextLinkEnd(), false);
   }
-
-  videoTranscript = this.videoTextTemplate({
-    rows: renderArray
-  });
-
-  if (videoTranscript.trim()) {
-    this.$videoText.html(videoTranscript);
-  } else {
-    this.$videoText.html("(no transcription)");
-  }
-
-  autosize($('textarea'));
-}
-
-VideoTranscript.prototype.showTranscripts = function(showTranscripts) {
-  if (showTranscripts === false) {
-    this.$videoText.addClass('hide-transcripts');
-  } else {
-    this.$videoText.removeClass('hide-transcripts');
-  }
-
-}
+};
 
 VideoTranscript.prototype.clickVideoText = function(event) {
   var thisEl = $(event.currentTarget);
@@ -180,87 +118,109 @@ VideoTranscript.prototype.clickVideoText = function(event) {
 };
 
 VideoTranscript.prototype.focusLink = function(timeSeconds) {
-  var videoTextLinks = this.$videoText.find('.videoTextLink');
-  var videoTextLink;
-  for(var i = videoTextLinks.length - 1; i >= 0; i-- ) {
-    videoTextLink = $(videoTextLinks[i]);
-    if (parseInt(videoTextLink.attr('data-timestamp')) <= parseInt(timeSeconds)) {
-      videoTextLink.parent().get(0).scrollIntoView();
-      videoTextLink.parent()
-        .css({'background-color':'#F69526'})
-        .animate({'background-color':''}, 3000)
-        .queue(function() {
-          $(this).removeAttr('style').dequeue();
-        })
-      break;
-    }
+  var link = this.findTextLinkBeforeOrEqual(timeSeconds);
+  if (link.length === 0) {
+    // we're before the first element in the timeline
+    // so nothing to focus on yet
+    return;
   }
-}
+  link.get(0).scrollIntoView();
+  link.css({'background-color':'#F69526'})
+    .animate({'background-color':''}, 3000)
+    .queue(function() {
+      $(this).removeAttr('style').dequeue();
+    });
+};
 
 VideoTranscript.prototype.activateLink = function(timeSeconds) {
-  var videoTextLinks = this.$videoText.find('.videoTextLink').removeClass('activeVideoTextLink');
-  var videoTextLink;
-  for(var i = videoTextLinks.length - 1; i >= 0; i-- ) {
-    videoTextLink = $(videoTextLinks[i]);
-    if (parseInt(videoTextLink.attr('data-timestamp')) <= parseInt(timeSeconds)) {
-      videoTextLink.addClass('activeVideoTextLink');
-      break;
-    }
-  }
-}
+  this.$videoText.children().removeClass('activeVideoTextLink');
+  this.findTextLinkBeforeOrEqual(timeSeconds).addClass('activeVideoTextLink');
+};
 
 VideoTranscript.prototype.onTimeupdate = function(event, timeSeconds) {
   this.activateLink(timeSeconds);
 };
 
-VideoTranscript.prototype.createNote = function() {
-  var timeSeconds = this.video.currentTime();
 
-  var mins = Math.floor(timeSeconds / 60);
-  var secs = Math.floor(timeSeconds) % 60;
+// if we have 10, 15, 15, 20 and timeSeconds = 15, we get back the 10 element
+// if we ask timeSeconds = 5, we get []
+VideoTranscript.prototype.findTextLinkBefore = function(timeSeconds) {
+  var textLinks = this.$videoText.find('.videoTextLink');
+  var textLink = textLinks.first();
 
-  var html = this.videoTextPartial({
-    time: timeSeconds,
-    displayTime: mins + ":" + ('00' + secs).slice(-2),
-    displayClass: 'note',
-    displayIcon: 'fa fa-tag',
-    displayText: '',
-    editable: true,
-    active: true
-  });
-
-  var followingLink;
-  this.$videoText.find('.videoTextLink').each(function(){
-    if (parseInt($(this).attr('data-timestamp')) > parseInt(timeSeconds)) {
-      followingLink = $(this).closest('.ctnVideoTextLink');
+  textLinks.each(function(){
+    if (parseInt($(this).attr('data-timestamp')) < parseInt(timeSeconds)) {
+      textLink = this;
+    } else {
       return false;
     }
   });
 
-  var newLink;
-  if (followingLink) {
-    followingLink.before(html);
-    newLink = followingLink.prev();
+  return $(textLink).closest('.ctnVideoTextLink');
+};
+
+// if we have 10, 15, 15, 20 and timeSeconds = 15, we get back the first 15 element
+// if we ask timeSeconds = 5, we get []
+VideoTranscript.prototype.findTextLinkBeforeOrEqual = function(timeSeconds) {
+  var textLinks = this.$videoText.find('.videoTextLink');
+  var textLink;
+
+  textLinks.each(function(){
+    if (parseInt($(this).attr('data-timestamp')) < parseInt(timeSeconds)) {
+      textLink = this;
+    } else if (parseInt($(this).attr('data-timestamp')) == parseInt(timeSeconds)) {
+      textLink = this;
+      return false;
+    } else {
+      return false;
+    }
+  });
+
+  return $(textLink).closest('.ctnVideoTextLink');
+};
+
+// if we have 10, 15, 15, 20 and timeSeconds = 15, we get back the 20 element
+// if we ask 25, we get []
+VideoTranscript.prototype.findTextLinkAfter = function(timeSeconds) {
+  var textLinks = this.$videoText.find('.videoTextLink');
+  var textLink;
+
+  this.$videoText.find('.videoTextLink').each(function(){
+    if (parseInt($(this).attr('data-timestamp')) > parseInt(timeSeconds)) {
+      textLink = $(this).closest('.ctnVideoTextLink');
+      return false;
+    }
+  });
+
+  return $(textLink).closest('.ctnVideoTextLink');
+};
+
+// gets back the noTranscript placeholder element, which should always be the last element
+VideoTranscript.prototype.findTextLinkEnd = function() {
+  return this.$videoText.children().last();
+};
+
+VideoTranscript.prototype.findTextLinkBeginning = function() {
+  return this.$videoText.children().first();
+};
+
+VideoTranscript.prototype.createNote = function() {
+  var timeSeconds = this.video.currentTime();
+
+  var newElement = new NoteElement({
+    timeSeconds: timeSeconds,
+    displayText: '',
+    resultStepHashId: this.resultStepHashId
+  });
+
+  this.timelineArray.push(newElement);
+
+  var insertBefore = this.findTextLinkAfter(timeSeconds);
+  if (insertBefore.length > 0) {
+    newElement.insertBefore(insertBefore, true);
   } else {
-    this.$videoText.html(html);
-    newLink = this.$videoText.find('.ctnVideoTextLink');
+    newElement.insertBefore(this.findTextLinkEnd(), true);
   }
 
-  var inputTime = newLink.find('.video-text-time');
-  var inputText = newLink.find('.video-text-display');
-
-  inputText.focus();
-
-  newLink.find('.video-btn-cancel').on('click', function() {
-    newLink.remove();
-  });
-
-  newLink.find('.video-btn-save').on('click', function(){
-    notify.info('Your note has been created.');
-
-    newLink.removeClass('active');
-    inputTime.prop('readonly', true);
-    inputText.prop('readonly', true);
-  });
-
-}
+  newElement.scrollIntoView();
+};

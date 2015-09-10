@@ -31,7 +31,7 @@ ResultsView.prototype.toggleArchive = function() {
     type: 'POST',
     url: new URL(window.location.href).pathname,
     data: {
-      _method: 'PUT',
+      _method: 'PATCH',
       is_on: isOn,
       authenticity_token: AUTH_TOKEN
     }
