@@ -79,6 +79,25 @@ VideoTranscript.prototype.buildTranscript = function(resultStepHashId, transcrip
     );
   }
 
+  for(i = 0; highlightedArray && i  < highlightedArray.length; i++) {
+    hashid = highlightedArray[i].hashid;
+    timeSeconds = highlightedArray[i].time;
+    text = highlightedArray[i].text;
+    text = (text || '').trim();
+    if (!text) {
+      continue;
+    }
+
+    this.timelineArray.push(
+      new NoteElement({
+        hashid: hashid,
+        timeSeconds: timeSeconds,
+        displayText: text,
+        resultStepHashId: resultStepHashId
+      })
+    );
+  }
+
   for(i = 0; i  < transcriptArray.length; i++) {
     hashid = transcriptArray[i].hashid;
     timeSeconds = transcriptArray[i].time;
