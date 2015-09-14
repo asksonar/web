@@ -5,9 +5,6 @@ VideoModal = function(config, video, transcript, videoLink) {
   this.$divStepDescription = config.divStepDescription;
   this.$btnToggleViewMode = config.btnToggleViewMode;
 
-  // TODO: delete the highlight button and its associated logic
-  this.$btnHighlightVideoLink = config.btnHighlightVideoLink;
-
   this.video = video;
   this.transcript = transcript;
   this.videoLink = videoLink;
@@ -18,8 +15,6 @@ VideoModal = function(config, video, transcript, videoLink) {
 VideoModal.prototype.init = function() {
   this.$modal.on('shown.bs.modal', $.proxy(this.shown, this));
   this.$modal.on('hide.bs.modal', $.proxy(this.hidden, this));
-
-  this.$btnHighlightVideoLink.on('click', $.proxy(this.generateHighlight, this));
 };
 
 VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {
@@ -81,30 +76,3 @@ VideoModal.prototype.hidden = function() {
   this.video.pause();
   new VideoHistory().unloadVideo();
 };
-
-VideoModal.prototype.generateHighlight = function() {
-  var offsetSeconds = this.video.currentTime();
-
-  $.ajax({
-    type: "POST",
-    url: "/highlights",
-    data: {
-      result_step_hashid: this.resultStepHashId,
-      offset_seconds: offsetSeconds,
-      authenticity_token: AUTH_TOKEN
-    },
-    dataType: 'json'
-  }).done($.proxy(function(data){
-
-    // draw the highlights
-    this.video.markers(data.delighted_array, data.confused_array, data.highlighted_array);
-    // normally triggered by calling this.video.src
-    this.video.loadMarkers();
-
-    notify.info('Your highlight has been added.');
-
-  }, this)).fail($.proxy(function(jqXHR, textStatus, errorThrown){
-    notify.error(jqXHR.responseText, 'There was an error saving your Highlight.');
-  }, this));
-};
-
