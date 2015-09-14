@@ -26,12 +26,19 @@ VideoTranscript.prototype.init = function() {
   this.onTimeupdate = $.proxy(this.onTimeupdate, this);
 };
 
-VideoTranscript.prototype.startEditing = function() {
+VideoTranscript.prototype.startEditing = function(event) {
   this.$videoText.addClass('editing');
+
+  var element = $(event.target);
+  this.scrollIntoView(element);
 };
 
 VideoTranscript.prototype.stopEditing = function() {
   this.$videoText.removeClass('editing');
+};
+
+VideoTranscript.prototype.isEditing = function() {
+  return this.$videoText.hasClass('editing');
 };
 
 VideoTranscript.prototype.refreshView = function() {
@@ -128,7 +135,7 @@ VideoTranscript.prototype.buildTranscript = function(resultStepHashId, transcrip
 
 VideoTranscript.prototype.clickVideoText = function(event) {
   var thisEl = $(event.currentTarget);
-  if (thisEl.closest('.ctnVideoTextLink').hasClass('active')) {
+  if (thisEl.closest('.ctnVideoTextLink').attr('data-state')) {
     return;
   } else {
     var timestamp = thisEl.attr('data-timestamp');
@@ -143,12 +150,30 @@ VideoTranscript.prototype.focusLink = function(timeSeconds) {
     // so nothing to focus on yet
     return;
   }
-  link.get(0).scrollIntoView();
+  this.scrollIntoView(link);
   link.css({'background-color':'#F69526'})
     .animate({'background-color':''}, 3000)
     .queue(function() {
       $(this).removeAttr('style').dequeue();
     });
+};
+
+VideoTranscript.prototype.scrollIntoView = function(element) {
+  // element is inside the scrollable container
+  // window refers to the viewable portion of the container
+
+  var windowToContainerTop = this.$videoText.scrollTop();
+  var containerHeight = this.$videoText.height();
+
+  var elementHeight = element.height();
+  var elementToWindowTop = element.position().top;
+  var elementToContainerTop = elementToWindowTop + windowToContainerTop;
+
+  if (elementToWindowTop < 0) {
+    this.$videoText.animate({scrollTop: elementToContainerTop});
+  } else if ((elementToWindowTop + elementHeight) > containerHeight) {
+    this.$videoText.animate({scrollTop: elementToContainerTop + elementHeight  - containerHeight});
+  }
 };
 
 VideoTranscript.prototype.activateLink = function(timeSeconds) {
@@ -224,6 +249,11 @@ VideoTranscript.prototype.findTextLinkBeginning = function() {
 };
 
 VideoTranscript.prototype.createNote = function() {
+  if (this.isEditing()) {
+    notify.info('Editing is already in progress.');
+    return;
+  }
+
   var timeSeconds = this.video.currentTime();
 
   var newElement = new NoteElement({
@@ -240,6 +270,4 @@ VideoTranscript.prototype.createNote = function() {
   } else {
     newElement.insertBefore(this.findTextLinkEnd(), true);
   }
-
-  newElement.scrollIntoView();
 };
