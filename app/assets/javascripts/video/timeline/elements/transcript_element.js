@@ -36,7 +36,7 @@ TranscriptElement.prototype.save = function() {
     }
   }).success($.proxy(function(response) {
     this.$inputText.val(response.text);
-    this.$inputTime.val(this.secsToDisplayTime(response.timeSeconds));
+    this.$inputTime.val(this.secsToDisplayTime(response.time));
     this.saveSuccess();
   }, this)).fail($.proxy(function() {
     this.saveFail();

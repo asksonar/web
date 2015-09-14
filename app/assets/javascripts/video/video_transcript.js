@@ -57,7 +57,7 @@ VideoTranscript.prototype.buildTranscript = function(resultStepHashId, transcrip
 
   for(i = 0; delightedArray && i  < delightedArray.length; i++) {
     hashid = delightedArray[i].hashid;
-    timeSeconds = delightedArray[i].timeSeconds;
+    timeSeconds = delightedArray[i].time;
 
     this.timelineArray.push(
       new FeelingDelightedElement({
@@ -69,7 +69,7 @@ VideoTranscript.prototype.buildTranscript = function(resultStepHashId, transcrip
 
   for(i = 0; confusedArray && i  < confusedArray.length; i++) {
     hashid = confusedArray[i].hashid;
-    timeSeconds = confusedArray[i].timeSeconds;
+    timeSeconds = confusedArray[i].time;
 
     this.timelineArray.push(
       new FeelingConfusedElement({
@@ -79,9 +79,28 @@ VideoTranscript.prototype.buildTranscript = function(resultStepHashId, transcrip
     );
   }
 
+  for(i = 0; highlightedArray && i  < highlightedArray.length; i++) {
+    hashid = highlightedArray[i].hashid;
+    timeSeconds = highlightedArray[i].time;
+    text = highlightedArray[i].text;
+    text = (text || '').trim();
+    if (!text) {
+      continue;
+    }
+
+    this.timelineArray.push(
+      new NoteElement({
+        hashid: hashid,
+        timeSeconds: timeSeconds,
+        displayText: text,
+        resultStepHashId: resultStepHashId
+      })
+    );
+  }
+
   for(i = 0; i  < transcriptArray.length; i++) {
     hashid = transcriptArray[i].hashid;
-    timeSeconds = transcriptArray[i].timeSeconds;
+    timeSeconds = transcriptArray[i].time;
     text = transcriptArray[i].text;
     text = (text || '').trim();
     if (!text) {

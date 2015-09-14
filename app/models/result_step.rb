@@ -3,6 +3,7 @@ class ResultStep < ActiveRecord::Base
   belongs_to :scenario_result
   has_many :step_feelings, -> { order feeling_at_seconds: :asc }, inverse_of: :result_step
   has_many :step_highlights, -> { order offset_seconds: :asc }, inverse_of: :result_step
+  has_many :step_notes, -> { order offset_seconds: :asc }, inverse_of: :result_step
   has_many :step_videos, -> { order offset_seconds: :asc }, inverse_of: :result_step
   has_many :step_transcriptions, -> { order offset_seconds: :asc }, inverse_of: :result_step
   enum status: [:pending, :uploaded]
@@ -56,7 +57,11 @@ class ResultStep < ActiveRecord::Base
       end
     end
 
-    return current_transcription
+    current_transcription
+  end
+
+  def notes
+    step_notes
   end
 
   def link_videos
@@ -67,7 +72,7 @@ class ResultStep < ActiveRecord::Base
   end
 
   def generate_new_sample_result(new_scenario_step, new_scenario_result)
-    new_result_step = self.dup
+    new_result_step = dup
     new_result_step.scenario_step = new_scenario_step
     new_result_step.scenario_result = new_scenario_result
     new_result_step.save
@@ -84,7 +89,5 @@ class ResultStep < ActiveRecord::Base
     step_transcriptions.each do |step_transcription|
       step_transcription.generate_new_sample_result(new_result_step)
     end
-
   end
-
 end

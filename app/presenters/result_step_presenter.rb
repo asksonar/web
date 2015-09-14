@@ -23,8 +23,8 @@ class ResultStepPresenter < SimpleDelegator
   def delighted_array
     feelings_delighted.select(:id, :feeling_at_seconds).map do |feeling|
       {
-        hashid: StepFeeling.hashids.encode(feeling.id),
-        timeSeconds: feeling.feeling_at_seconds
+        hashid: feeling.hashid,
+        time: feeling.feeling_at_seconds
       }
     end
   end
@@ -32,21 +32,28 @@ class ResultStepPresenter < SimpleDelegator
   def confused_array
     feelings_confused.select(:id, :feeling_at_seconds).map do |feeling|
       {
-        hashid: StepFeeling.hashids.encode(feeling.id),
-        timeSeconds: feeling.feeling_at_seconds
+        hashid: feeling.hashid,
+        time: feeling.feeling_at_seconds
       }
     end
   end
 
   def highlighted_array
+    notes.select(:id, :offset_seconds, :text).map do |note|
+      {
+        hashid: note.hashid,
+        time: note.offset_seconds,
+        text: note.text
+      }
+    end
     # highlights.map { |highlight| highlight.offset_seconds }
   end
 
   def transcription_array
     transcriptions.select(:id, :offset_seconds, :text).map do |transcription|
       {
-        hashid: StepTranscription.hashids.encode(transcription.id),
-        timeSeconds: transcription.offset_seconds,
+        hashid: transcription.hashid,
+        time: transcription.offset_seconds,
         text: transcription.text
       }
     end

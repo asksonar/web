@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   #   resources :products
 
   resources :transcripts
-  resources :highlights, only: [:create]
+  resources :notes
   resources :studies do
     resources :step, only: [:create], controller: 'studies_step'
     resources :video, only: [:create, :update], controller: 'studies_video'

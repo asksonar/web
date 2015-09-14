@@ -51,6 +51,16 @@ VideoController.prototype.src = function(srcArray) {
   this.video.src(srcArray);
 };
 
+VideoController.prototype.collapseTimes = function(arrayOfTimeObjects) {
+  if (arrayOfTimeObjects) {
+    return arrayOfTimeObjects.map(function(object) {
+      return object.time;
+    });
+  } else {
+    return [];
+  }
+};
+
 VideoController.prototype.markers = function(arrayDelightedTimes, arrayConfusedTimes, arrayHighlightedTimes) {
   this.arrayDelightedTimes = arrayDelightedTimes || [];
   this.arrayConfusedTimes = arrayConfusedTimes || [];

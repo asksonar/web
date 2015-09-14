@@ -1,4 +1,4 @@
-class StepTranscriptionPresenter < SimpleDelegator
+class StepNotePresenter < SimpleDelegator
   def public_json
     {
       hashid: hashid,

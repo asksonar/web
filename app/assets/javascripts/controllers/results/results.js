@@ -43,9 +43,7 @@ $(function(){
     modal: $('#summary_video_container'),
     divUserEmail: $('#ctn-user-email'),
     divStepOrder: $('#ctn-step-order'),
-    divStepDescription: $('#ctn-step-description'),
-    btnHighlightVideoLink: $('#btn-highlight-video-link')
-
+    divStepDescription: $('#ctn-step-description')
   }, videoController, videoTranscript, videoLink);
 
   var resultsView = new ResultsView({

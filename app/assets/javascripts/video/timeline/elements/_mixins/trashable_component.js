@@ -10,6 +10,7 @@ TrashableComponent = function() {
   this.trashSuccess = function() {
     this.$el.trigger('stopEditing');
     this.remove();
+    notify.info('Your ' + this.displayClass + ' has been removed.');
   };
 
   this.trashFail = function() {
