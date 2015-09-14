@@ -61,18 +61,20 @@
 
 .ctnVideoTextLink {
   overflow: hidden;
-  cursor: pointer;
 
-  &:not([data-state]):hover .video-text-time {
-    text-decoration: underline;
-  }
+  &:not([data-state]) {
+    &:hover {
+      cursor: pointer;
+      background-color: #EFEFEF;
 
-  &.activeVideoTextLink:not([data-state]) {
-    @extend .strong;
-  }
+      .video-text-time {
+        text-decoration: underline;
+      }
+    }
 
-  &:hover {
-    background-color: #EFEFEF
+    &.activeVideoTextLink {
+      @extend .strong;
+    }
   }
 
   .text-mode .note {
