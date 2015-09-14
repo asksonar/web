@@ -33,8 +33,8 @@ EditableComponent = function() {
   };
 
   this.edit = function() {
-    this.$el.trigger('startEditing');
     this.setState('editing');
+    this.$el.trigger('startEditing');
 
     this.originalTimeVal = this.$inputTime.val();
     this.originalTextVal = this.$inputText.val();

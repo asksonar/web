@@ -1,4 +1,4 @@
-TimelineElement = function(config) {
+TimelineElement = function() {
 };
 
 Initable.call(TimelineElement.prototype);
