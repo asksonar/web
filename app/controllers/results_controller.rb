@@ -23,12 +23,16 @@ class ResultsController < ApplicationController
   end
 
   def show
-    if params[:result_id].nil?
-      @scenario = Scenario.find_by_hashid(params[:id])
-    else
+    if !params[:result_id].nil?
       @scenario = Scenario.find_by_hashid(params[:result_id])
       @result_step = ResultStepPresenter.new(ResultStep.find_by_hashid(params[:id]))
       @scenario_step = @result_step.scenario_step
+    elsif !params[:my_result_id].nil?
+      @scenario = Scenario.find_by_hashid(params[:my_result_id])
+      @result_step = ResultStepPresenter.new(ResultStep.find_by_hashid(params[:id]))
+      @scenario_step = @result_step.scenario_step
+    else
+      @scenario = Scenario.find_by_hashid(params[:id])
     end
   end
 

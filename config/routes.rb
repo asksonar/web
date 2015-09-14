@@ -34,7 +34,9 @@ Rails.application.routes.draw do
   resources :results do
     resources :videos, only: [:show], controller: 'results'
   end
-  resources :my_results, controller: 'results'
+  resources :my_results, controller: 'results' do
+    resources :videos, only: [:show], controller: 'results'
+  end
 
   devise_for :researchers,
     path: 'accounts',
