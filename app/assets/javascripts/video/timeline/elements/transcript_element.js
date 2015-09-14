@@ -35,8 +35,8 @@ TranscriptElement.prototype.save = function() {
       authenticity_token: AUTH_TOKEN
     }
   }).success($.proxy(function(response) {
-    this.$inputText.val(response.text);
-    this.$inputTime.val(this.secsToDisplayTime(response.time));
+    this.setTime(response.time);
+    this.setText(response.text);
     this.saveSuccess();
   }, this)).fail($.proxy(function() {
     this.saveFail();

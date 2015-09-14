@@ -33,30 +33,28 @@ VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {
 
 // timeSeconds comes first because $.proxy inserts it first
 VideoModal.prototype.loaded = function(timeSeconds, data) {
-  if (this.resultStepHashId != data.hashid) {
-    this.resultStepHashId = data.hashid;
+  this.resultStepHashId = data.hashid;
 
-    this.video.markers(
-      this.video.collapseTimes(data.delightedArray),
-      this.video.collapseTimes(data.confusedArray),
-      this.video.collapseTimes(data.highlightedArray)
-    );
-    this.video.src(data.srcArray);
+  this.video.markers(
+    this.video.collapseTimes(data.delightedArray),
+    this.video.collapseTimes(data.confusedArray),
+    this.video.collapseTimes(data.highlightedArray)
+  );
+  this.video.src(data.srcArray);
 
-    this.transcript.buildTranscript(
-      data.hashid,
-      data.transcriptionArray,
-      data.delightedArray,
-      data.confusedArray,
-      data.highlightedArray
-    );
+  this.transcript.buildTranscript(
+    data.hashid,
+    data.transcriptionArray,
+    data.delightedArray,
+    data.confusedArray,
+    data.highlightedArray
+  );
 
-    this.videoLink.updateShareLink(data.shareLink);
+  this.videoLink.updateShareLink(data.shareLink);
 
-    this.$divUserEmail.html(data.email);
-    this.$divStepOrder.html(data.stepOrder + 1);
-    this.$divStepDescription.html(data.stepDescription);
-  }
+  this.$divUserEmail.html(data.email);
+  this.$divStepOrder.html(data.stepOrder + 1);
+  this.$divStepDescription.html(data.stepDescription);
 
   this.video.currentTime(timeSeconds);
   this.show();
@@ -76,4 +74,5 @@ VideoModal.prototype.shown = function() {
 VideoModal.prototype.hidden = function() {
   this.video.pause();
   new VideoHistory().unloadVideo();
+  this.transcript.clearView();
 };
