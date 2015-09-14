@@ -21,4 +21,9 @@ class StepNotesService
 
     step_note
   end
+
+  def destroy_from_hashid(hashid)
+    step_note = StepNote.find_by_hashid(hashid)
+    step_note.destroy
+  end
 end

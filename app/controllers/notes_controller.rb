@@ -27,6 +27,7 @@ class NotesController < ApplicationController
   end
 
   def destroy
-
+    service.destroy_from_hashid(params[:id])
+    render plain: 'OK'
   end
 end
