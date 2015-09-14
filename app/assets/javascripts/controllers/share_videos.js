@@ -64,10 +64,8 @@ $(function(){
 
   videoLink.updateShareLink(sonar.resultStep.shareLink);
 
-  if (timeSeconds > 0) {
-    $(window).load(function() {
-      videoTranscript.focusLink(timeSeconds);
-    });
-  }
+  $(window).load(function() {
+    videoTranscript.focusLink(timeSeconds);
+  });
 
 });
