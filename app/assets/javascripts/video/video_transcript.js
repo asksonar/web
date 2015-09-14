@@ -144,6 +144,9 @@ VideoTranscript.prototype.clickVideoText = function(event) {
 };
 
 VideoTranscript.prototype.focusLink = function(timeSeconds) {
+  if (timeSeconds <= 0) {
+    return;
+  }
   var link = this.findTextLinkBeforeOrEqual(timeSeconds);
   if (link.length === 0) {
     // we're before the first element in the timeline

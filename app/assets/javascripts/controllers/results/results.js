@@ -72,12 +72,6 @@ $(function(){
       stepDescription: sonar.scenarioStep.stepDescription,
       shareLink: sonar.resultStep.shareLink
     });
-
-    if (timeSeconds > 0) {
-      $(window).load(function() {
-        videoTranscript.focusLink(timeSeconds);
-      });
-    }
   }
 
 });

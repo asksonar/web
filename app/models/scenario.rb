@@ -7,6 +7,7 @@ class Scenario < ActiveRecord::Base
   has_many :result_steps_pending, through: :scenario_results
   has_many :step_feelings, through: :result_steps
   has_many :step_highlights, through: :result_steps
+  has_many :step_notes, through: :result_steps
   enum status: [:drafts, :live, :completed]
 
   after_create :track_study_created

@@ -60,6 +60,7 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
 
   this.video.currentTime(timeSeconds);
   this.show();
+  this.transcript.focusLink(timeSeconds);
 };
 
 VideoModal.prototype.show = function() {

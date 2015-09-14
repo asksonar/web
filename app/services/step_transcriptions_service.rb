@@ -3,10 +3,18 @@ class StepTranscriptionsService
 
   def update_from_hashid(hashid:, offset_seconds:, text:)
     step_transcription = StepTranscription.find_by_hashid(hashid)
-    step_transcription.update(
-      offset_seconds: offset_seconds,
-      text: text
-    )
+
+    step_transcription.original_text ||= step_transcription.text
+    step_transcription.offset_seconds = offset_seconds
+    step_transcription.text = text
+    step_transcription.save
+
+    result_step = step_transcription.result_step
+    first_transcription = result_step.step_transcriptions.first
+    if first_transcription == step_transcription
+      result_step.first_transcription = first_transcription.text
+      result_step.save
+    end
 
     step_transcription
   end

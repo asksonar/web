@@ -60,7 +60,7 @@ ResultsView.prototype.toggleArchive = function() {
 ResultsView.prototype.loadModal = function(event) {
   var thisEl = $(event.currentTarget);
   var resultStepHashId = thisEl.attr('data-result-step-hashid');
-  var timeSeconds = parseFloat(thisEl.attr('data-feeling-at-seconds') || 0) - 5;
+  var timeSeconds = parseFloat(thisEl.attr('data-feeling-at-seconds') || 0);
 
   this.modal.load(resultStepHashId, timeSeconds);
 }
