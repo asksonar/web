@@ -12,13 +12,13 @@
         </p>
       </div>
       <div class='highlights-container'>
-        <% @scenario.highlights.each_with_index do |highlight, index| %>
+        <% @scenario.step_notes.each_with_index do |note, index| %>
           <p>
-            <% if index == 0 %><span class='h3'>Highlights:</span><% end %><!--
+            <% if index == 0 %><span class='h3'>Notes:</span><% end %><!--
          --><a class='video-link'
-              data-result-step-hashid='<%=highlight.result_step.hashid%>'
-              data-feeling-at-seconds='<%=highlight.offset_seconds%>'
-            ><span class='sub'><%= ppt_date(highlight.result_step.created_at) %> - [<%= highlight.result_step.email %>]</span> <%= dt_transcription(highlight.context_transcription) %> ...
+              data-result-step-hashid='<%=note.result_step.hashid%>'
+              data-feeling-at-seconds='<%=note.offset_seconds%>'
+            ><span class='sub'><%= ppt_date(note.created_at) %></span> <%= dt_transcription(note.text) %> ...
             </a>
           </p>
         <% end %>
