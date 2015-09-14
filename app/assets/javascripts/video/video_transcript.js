@@ -19,9 +19,10 @@ VideoTranscript.prototype.init = function() {
   this.$btnToggleTranscripts.on('click', $.proxy(this.toggleTranscripts, this));
   this.$btnAddNote.on('click', $.proxy(this.createNote, this));
 
-  this.$videoText.on('click', '.videoTextLink', $.proxy(this.clickVideoText, this));
+  this.$videoText.on('click', '.ctnVideoTextLink', $.proxy(this.clickVideoText, this));
   this.$videoText.on('startEditing', $.proxy(this.startEditing, this));
   this.$videoText.on('stopEditing', $.proxy(this.stopEditing, this));
+  this.$videoText.on('startFocusing', $.proxy(this.startFocusing, this));
 
   this.onTimeupdate = $.proxy(this.onTimeupdate, this);
 };
@@ -41,6 +42,20 @@ VideoTranscript.prototype.isEditing = function() {
   return this.$videoText.hasClass('editing');
 };
 
+VideoTranscript.prototype.startFocusing = function(event) {
+  var element = $(event.target);
+  this.scrollIntoView(element);
+};
+
+VideoTranscript.prototype.clearView = function() {
+  for(i = 0; i < this.timelineArray.length; i++) {
+    this.timelineArray[i].remove();
+  }
+  this.timelineArray = [];
+
+  this.stopEditing();
+};
+
 VideoTranscript.prototype.refreshView = function() {
   autosize.update($('textarea'));
   $(window).load(function() {
@@ -57,10 +72,7 @@ VideoTranscript.prototype.buildTranscript = function(resultStepHashId, transcrip
 
   var i, hashid, timeSeconds, text;
 
-  for(i = 0; i < this.timelineArray.length; i++) {
-    this.timelineArray[i].remove();
-  }
-  this.timelineArray = [];
+  this.clearView();
 
   for(i = 0; delightedArray && i  < delightedArray.length; i++) {
     hashid = delightedArray[i].hashid;
@@ -135,7 +147,7 @@ VideoTranscript.prototype.buildTranscript = function(resultStepHashId, transcrip
 
 VideoTranscript.prototype.clickVideoText = function(event) {
   var thisEl = $(event.currentTarget);
-  if (thisEl.closest('.ctnVideoTextLink').attr('data-state')) {
+  if (thisEl.attr('data-state')) {
     return;
   } else {
     var timestamp = thisEl.attr('data-timestamp');
@@ -192,7 +204,7 @@ VideoTranscript.prototype.onTimeupdate = function(event, timeSeconds) {
 // if we have 10, 15, 15, 20 and timeSeconds = 15, we get back the 10 element
 // if we ask timeSeconds = 5, we get []
 VideoTranscript.prototype.findTextLinkBefore = function(timeSeconds) {
-  var textLinks = this.$videoText.find('.videoTextLink');
+  var textLinks = this.$videoText.find('.ctnVideoTextLink');
   var textLink = textLinks.first();
 
   textLinks.each(function(){
@@ -203,13 +215,13 @@ VideoTranscript.prototype.findTextLinkBefore = function(timeSeconds) {
     }
   });
 
-  return $(textLink).closest('.ctnVideoTextLink');
+  return $(textLink);
 };
 
 // if we have 10, 15, 15, 20 and timeSeconds = 15, we get back the first 15 element
 // if we ask timeSeconds = 5, we get []
 VideoTranscript.prototype.findTextLinkBeforeOrEqual = function(timeSeconds) {
-  var textLinks = this.$videoText.find('.videoTextLink');
+  var textLinks = this.$videoText.find('.ctnVideoTextLink');
   var textLink;
 
   textLinks.each(function(){
@@ -223,23 +235,23 @@ VideoTranscript.prototype.findTextLinkBeforeOrEqual = function(timeSeconds) {
     }
   });
 
-  return $(textLink).closest('.ctnVideoTextLink');
+  return $(textLink);
 };
 
 // if we have 10, 15, 15, 20 and timeSeconds = 15, we get back the 20 element
 // if we ask 25, we get []
 VideoTranscript.prototype.findTextLinkAfter = function(timeSeconds) {
-  var textLinks = this.$videoText.find('.videoTextLink');
+  var textLinks = this.$videoText.find('.ctnVideoTextLink');
   var textLink;
 
-  this.$videoText.find('.videoTextLink').each(function(){
+  textLinks.each(function(){
     if (parseInt($(this).attr('data-timestamp')) > parseInt(timeSeconds)) {
-      textLink = $(this).closest('.ctnVideoTextLink');
+      textLink = $(this);
       return false;
     }
   });
 
-  return $(textLink).closest('.ctnVideoTextLink');
+  return $(textLink);
 };
 
 // gets back the noTranscript placeholder element, which should always be the last element
@@ -253,7 +265,7 @@ VideoTranscript.prototype.findTextLinkBeginning = function() {
 
 VideoTranscript.prototype.createNote = function() {
   if (this.isEditing()) {
-    notify.info('Editing is already in progress.');
+    notify.warn('Editing is already in progress.');
     return;
   }
 
@@ -272,5 +284,20 @@ VideoTranscript.prototype.createNote = function() {
     newElement.insertBefore(insertBefore, true);
   } else {
     newElement.insertBefore(this.findTextLinkEnd(), true);
+  }
+};
+
+VideoTranscript.prototype.restoreNote = function(timeSeconds, text) {
+  var newElement = new NoteElement({
+    timeSeconds: timeSeconds,
+    displayText: text,
+    resultStepHashId: this.resultStepHashId
+  });
+
+  var insertBefore = this.findTextLinkAfter(timeSeconds);
+  if (insertBefore.length > 0) {
+    newElement.insertBefore(insertBefore, false);
+  } else {
+    newElement.insertBefore(this.findTextLinkEnd(), false);
   }
 };

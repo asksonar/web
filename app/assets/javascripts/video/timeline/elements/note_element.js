@@ -45,8 +45,8 @@ NoteElement.prototype.save = function() {
     }
   }).success($.proxy(function(response) {
     this.hashid = response.hashid;
-    this.$inputTime.val(this.secsToDisplayTime(response.time));
-    this.$inputText.val(response.text);
+    this.setTime(response.time);
+    this.setText(response.text);
     this.saveSuccess();
   }, this)).fail($.proxy(function() {
     this.saveFail();

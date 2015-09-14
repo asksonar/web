@@ -43,6 +43,29 @@ EditableComponent = function() {
     this.$inputText.prop('readonly', false);
   };
 
+  this.setText = function(text) {
+    this.$inputText.val(text);
+  };
+
+  this.setTime = function(timeSeconds) {
+    this.$inputTime.val(this.secsToDisplayTime(timeSeconds));
+    this.$el.attr('data-timestamp', timeSeconds);
+
+    var prev = this.$el.prev();
+    while(timeSeconds < parseInt(prev.attr('data-timestamp'))) {
+      this.$el.insertBefore(prev);
+      prev = this.$el.prev();
+    }
+
+    var next = this.$el.next();
+    while(timeSeconds > parseInt(next.attr('data-timestamp'))) {
+      this.$el.insertAfter(next);
+      next = this.$el.next();
+    }
+
+    this.$el.trigger('startFocusing');
+  };
+
   this.saveSuccess = function(customMsg) {
     if (typeof customMsg === 'string') {
       notify.warn(customMsg);

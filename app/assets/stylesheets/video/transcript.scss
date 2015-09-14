@@ -75,10 +75,10 @@
     &.activeVideoTextLink {
       @extend .strong;
     }
-  }
 
-  &.note {
-    background-color: #f0efde;
+    &.note {
+      background-color: #f0efde;
+    }
   }
 }
 
@@ -93,7 +93,7 @@
 .videoTextLink {
   transition: margin-top 0.2s ease-in-out;
   display: block;
-  margin: 0px 1px 2px 1px;
+  padding: 2px 0px;
 
   .transcript & {
     margin-top: -100%;
@@ -174,7 +174,7 @@
   right: 0;
   margin-top: -31px;
   padding: 5px 10px;
-  background-color: #EFEFEF;
+  background-color: inherit;
 
   display: none;
 
