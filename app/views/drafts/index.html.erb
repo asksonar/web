@@ -14,7 +14,7 @@
         <div class='col-sm-8'>
           <h1><%= scenario.title %></h1>
           <p class='sub'>created <%= time_ago_in_words(scenario.created_at) %> ago</p>
-          <p><%= scenario.description %></p>
+          <p class='scenario-description'><%= scenario.description %></p>
         </div>
         <div class='col-sm-4'>
           <h2><%= pp_plural_with_number(scenario.scenario_steps.count, 'step') %></h2>

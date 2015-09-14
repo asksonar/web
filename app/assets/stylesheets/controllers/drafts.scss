@@ -3,16 +3,14 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #drafts-index {
-  .panel {
-    p.sub {
-      margin-top: 5px;
-    }
-    p {
-      margin-top: 10px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+  .scenario-description {
+    margin-top: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  p.sub {
+    margin-top: 5px;
   }
 }
 
