@@ -94,19 +94,12 @@
   transition: margin-top 0.2s ease-in-out;
   display: block;
   margin: 0px 1px 2px 1px;
-  border: 1px solid transparent;
 
   .transcript & {
     margin-top: -100%;
     .show-transcripts & {
       margin-top: 0px;
     }
-  }
-
-  .text-mode .ctnVideoTextLink[data-state] & {
-    border-color: #C3C3C3;
-    background-color: white;
-    box-shadow: 0px 1px 1px 0px #CECECE;
   }
 
   input, textarea {
@@ -195,8 +188,8 @@
 }
 
 .video-text-buttons {
-  position: absolute;
-  right: 15px;
+  float: right;
+  margin-right: 15px;
   margin-top: -2px;
 
   display: none;
