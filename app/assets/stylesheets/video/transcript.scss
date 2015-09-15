@@ -80,6 +80,15 @@
       @extend .strong;
     }
 
+  }
+
+  &.transcript {
+    color: #A2A2A2;
+
+    .editable-timeline &,
+    &:hover,
+    &[data-state] {
+      color: inherit;
     }
   }
 }
