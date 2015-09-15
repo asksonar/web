@@ -82,7 +82,7 @@ StudiesController.prototype.startFeedback = function() {
 
   var ajaxDone = function(response) {
     var launchAppParams = {};
-    launchAppParams['scenario'] = scenarioParams;
+    launchAppParams['scenario'] = sonar.scenario;
     launchAppParams['scenarioResultHashId'] = response.hashid;
     launchAppParams['screen'] = {
       availLeft: screen.availLeft,

@@ -14,7 +14,7 @@
 
   <% if @scenario %>
   sonar.scenario = {
-    title: '<%= @scenario.prezi.title %>',
+    hashid: '<%= @scenario.prezi.hashid %>',
     description: '<%= @scenario.prezi.title %>',
     steps: <%= raw @scenario.prezi.scenario_steps_array.to_json %>
   };
