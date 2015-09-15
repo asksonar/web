@@ -1,6 +1,12 @@
 class ResultsController < ApplicationController
   before_action :authenticate_researcher!
 
+  attr_writer :service
+
+  def service
+    @service ||= ScenariosService.instance
+  end
+
   def index
     hash = {}
     hash[:company] = current_researcher.company
@@ -13,7 +19,7 @@ class ResultsController < ApplicationController
       end
     end
 
-    @results = Scenario.results(hash)
+    @results = service.results(hash)
   end
 
   def my_index
@@ -37,18 +43,18 @@ class ResultsController < ApplicationController
   end
 
   def update
-    @results = Scenario.find_by_hashid(params[:id])
+    @result = Scenario.find_by_hashid(params[:id])
 
     # we are toggling, so set it to the reverse of whatever it currently is
     if params[:is_on] == 'true'
-      @results.set_completed()
+      service.set_completed(@result)
     elsif params[:is_on] == 'false'
-      @results.set_live()
+      service.set_live(@result)
     end
 
     # we need to generate sample data for the study
     if params[:walkthrough]=='true'
-      ScenarioResult.generate_new_sample_result(@results)
+      ScenarioResult.generate_new_sample_result(@result)
     end
 
     render plain: 'OK'

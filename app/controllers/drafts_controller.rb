@@ -1,8 +1,19 @@
 class DraftsController < ApplicationController
   before_action :authenticate_researcher!
 
+  attr_writer :scenarios_service
+  attr_writer :drafts_service
+
+  def scenarios_service
+    @scenarios_service ||= ScenariosService.instance
+  end
+
+  def drafts_service
+    @drafts_service ||= DraftsService.instance
+  end
+
   def index
-    @scenarios = Scenario.drafts(current_researcher.id)
+    @scenarios = scenarios_service.drafts(current_researcher.id)
   end
 
   def new
@@ -36,10 +47,10 @@ class DraftsController < ApplicationController
     ActiveRecord::Base.transaction do
 
       if params[:draft]
-        create_action = Proc.new { |x| Scenario.create_draft(x) }
+        create_action = Proc.new { |x| drafts_service.create_draft(x) }
         p 'create_draft'
       elsif params[:publish]
-        create_action = Proc.new { |x| Scenario.create_live(x) }
+        create_action = Proc.new { |x| drafts_service.create_live(x) }
         p 'create_live'
       else
         raise "Illegal commit value of " + params[:commit]
@@ -81,9 +92,9 @@ class DraftsController < ApplicationController
     @scenario = Scenario.find_by_hashid(params[:id])
     ActiveRecord::Base.transaction do
       if params[:draft]
-        @scenario.update_draft(scenario_params)
+        drafts_service.update_draft(@scenario, scenario_params)
       elsif params[:publish]
-        @scenario.update_live(scenario_params)
+        drafts_service.update_live(@scenario, scenario_params)
       elsif params[:update]
         @scenario.update(scenario_params)
       else
