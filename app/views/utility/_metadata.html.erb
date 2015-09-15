@@ -13,39 +13,19 @@
   <% end %>
 
   <% if @scenario %>
-  sonar.scenario = {
-    hashid: '<%= @scenario.prezi.hashid %>',
-    description: '<%= @scenario.prezi.title %>',
-    steps: <%= raw @scenario.prezi.scenario_steps_array.to_json %>
-  };
+    sonar.scenario = <%= raw @scenario.prezi.public_json.to_json %>;
   <% end %>
 
   <% if @template %>
-  sonar.template = {
-    title: '<%= @scenario.prezi.title %>',
-    description: '<%= @scenario.prezi.title %>',
-    steps: <%= raw @template.prezi.template_steps_array.to_json %>
-  };
+    sonar.template = <%= raw @template.prezi.public_json.to_json %>;
   <% end %>
 
   <% if @result_step %>
-  sonar.resultStep = {
-    hashid: '<%= @result_step.prezi.hashid %>',
-    delightedArray: <%= raw @result_step.prezi.delighted_array.to_json %>,
-    confusedArray: <%= raw @result_step.prezi.confused_array.to_json %>,
-    highlightedArray: <%= raw @result_step.prezi.highlighted_array.to_json %>,
-    srcArray: <%= raw @result_step.prezi.src_array.to_json %>,
-    transcriptionArray: <%= raw @result_step.prezi.transcription_array.to_json %>,
-    shareLink: '<%= @result_step.prezi.share_link %>',
-    email: '<%= @result_step.prezi.email %>'
-  };
+  sonar.resultStep = <%= raw @result_step.prezi.public_json.to_json %>;
   <% end %>
 
   <% if @scenario_step %>
-  sonar.scenarioStep = {
-    stepOrder: <%= @scenario_step.prezi.step_order %>,
-    stepDescription: '<%= @scenario_step.prezi.description %>'
-  };
+  sonar.scenarioStep = <%= raw @scenario_step.prezi.public_json.to_json %>;
   <% end %>
 
   <% if protect_against_forgery? %>
