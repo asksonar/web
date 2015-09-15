@@ -17,29 +17,13 @@ class DraftsController < ApplicationController
   end
 
   def new
-    p 'calling new'
-    new_or_edit(Scenario.new({
-      scenario_steps: [ScenarioStep.new()],
-      status: :drafts
-    }))
-    render :new
+    @scenario = Scenario.new.prezi
+    @template = Template.find_by(value: params[:template])
   end
 
   def edit
-    p 'calling edit'
-    new_or_edit(Scenario.find_by_hashid(params[:id]))
-    render :new
-    # TODO: modify the new page to indicate it is editing
-  end
-
-  def new_or_edit(scenario)
-    p scenario
-    @scenario = scenario.prezi
-    @product_templates = Template.product_templates
-    @marketing_templates = Template.marketing_templates
-    if @template = Template.find_by(value: params[:template])
-      @scenario = @template.to_scenario(@scenario)
-    end
+    @scenario = Scenario.find_by_hashid(params[:id]).prezi
+    @template = Template.find_by(value: params[:template])
   end
 
   def create

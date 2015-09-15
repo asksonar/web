@@ -10,6 +10,7 @@ class Scenario < ActiveRecord::Base
   has_many :step_notes, through: :result_steps
   enum status: [:drafts, :live, :completed]
 
+  after_initialize :default_values, unless: :persisted?
   after_create :track_study_created
   before_validation :sanitize_and_whitespace_description_title
 
@@ -44,6 +45,10 @@ class Scenario < ActiveRecord::Base
   end
 
   protected
+    def default_values
+      self.status = 'drafts'
+    end
+
     def sanitize_and_whitespace_description_title
       self.description = self.description.gsub(/\r/, '') if self.description;
       sanitizer = Rails::Html::FullSanitizer.new

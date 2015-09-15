@@ -11,8 +11,8 @@ class TemplatePresenter < SimpleDelegator
   def template_steps_array
     template_steps.map do |step|
       {
-        description: (step.description || '').strip,
-        url: (step.url || '').strip
+        description: (step.step_description || '').strip,
+        url: (step.step_url || '').strip
       }
     end
   end
