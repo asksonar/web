@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get '/create',      to: 'drafts#new' # so it doesn't highlight the left nav
   get '/my_results',  to: 'results#my_index'
   get '/share/videos/:id', to: 'share_videos#show'
+  get '/results/:id/edit', to: 'drafts#edit'
+  get '/my_results/:id/edit', to: 'drafts#edit'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

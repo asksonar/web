@@ -1,0 +1,26 @@
+<script id="new-step-template" type="text/x-handlebars-template">
+  {{#each steps}}
+  <div class='row ctn-step'>
+    <%= f.hidden_field :hashid, value: '{{hashid}}', name: 'scenario_steps[][hashid]' %>
+
+    <div class='col-xs-8'>
+      <h1 class='ctn-count'>1.</h1>
+      <div class='ctn-description'>
+        <%= f.text_area :description, hide_label: true, rows: 1, placeholder: 'Tell the panelist what to do', value: '{{description}}', name: 'scenario_steps[][description]' %>
+      </div>
+    </div>
+    <div class='col-xs-4 ctn-url-btns'>
+      <div class='ctn-btns'>
+        <a class='btn btn-add-step btn-light-blue {{#if hashid}}persisted{{/if}}'><span>+</span</a>
+        <a class='btn btn-remove-step btn-grey {{#if hashid}}persisted{{/if}}'><span>x</span></a>
+        <a class='btn-lock-step {{#if hashid}}persisted{{/if}}'>
+          <i class='fa fa-lock' data-toggle='tooltip' data-placement='bottom' title='Study is in progress'></i>
+        </a>
+      </div>
+      <div class='ctn-url'>
+        <%= f.text_field :url, hide_label: true, placeholder: 'URL (optional)', value: '{{url}}', name: 'scenario_steps[][url]' %>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</script>

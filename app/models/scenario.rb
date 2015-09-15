@@ -10,63 +10,10 @@ class Scenario < ActiveRecord::Base
   has_many :step_notes, through: :result_steps
   enum status: [:drafts, :live, :completed]
 
-  after_create :track_study_created
+  after_initialize :default_values, unless: :persisted?
   before_validation :sanitize_and_whitespace_description_title
 
   HASHIDS_SALT = '8UTnU7cJm*bP'
-
-  def can_add_steps?
-    self.user_count == 0
-  end
-
-  def self.create_draft(hash)
-    Scenario.create(hash.merge({status: statuses[:drafts]}))
-  end
-
-  def self.create_live(hash)
-    Scenario.create(hash.merge({
-      status: statuses[:live],
-      published_at: Time.new
-    }))
-  end
-
-  def update_draft(hash)
-    update(hash.merge({status: Scenario.statuses[:drafts]}))
-  end
-
-  def update_live(hash)
-    update(hash.merge({
-      status: Scenario.statuses[:live],
-      published_at: Time.new
-    }))
-    track_draft_published()
-  end
-
-  def set_live()
-    self.status = :live
-    self.published_at = Time.new
-    self.save()
-  end
-
-  def set_completed()
-    self.status = :completed
-    self.completed_at = Time.new
-    self.save()
-  end
-
-  def self.drafts(created_by)
-    Scenario
-      .where(status: statuses[:drafts])
-      .where(created_by: created_by)
-      .order(updated_at: :desc)
-  end
-
-  def self.results(extra_where={})
-    Scenario
-      .where(status: [statuses[:live], statuses[:completed]])
-      .where(extra_where)
-      .order(published_at: :desc)
-  end
 
   def step_count
     scenario_steps.count
@@ -74,20 +21,6 @@ class Scenario < ActiveRecord::Base
 
   def user_count
     scenario_results.count
-  end
-
-  def user_completed_count
-    completed_ids = scenario_results.completed.select(:id).collect(&:id)
-    uploaded_ids = result_steps.select(:scenario_result_id).collect(&:scenario_result_id)
-
-    (completed_ids & uploaded_ids).count
-  end
-
-  def user_uploading_count
-    completed_ids = scenario_results.completed.select(:id).collect(&:id)
-    pending_ids = result_steps_pending.select(:scenario_result_id).collect(&:scenario_result_id)
-
-    (completed_ids & pending_ids).count
   end
 
   def where_feeling_delighted
@@ -106,56 +39,20 @@ class Scenario < ActiveRecord::Base
     where_feeling_confused.count
   end
 
-  def scenario_steps_json
-    {
-      steps: scenario_steps.map { |step|
-        {
-          #id: (step.to_param || ''),
-          hashid: (step.hashid || ''),
-          description: (step.description || '').strip,
-          url: (step.url || '').strip
-        }
-      }
-    }.to_json
-  end
-
-  def share_link
-    Rails.configuration.properties['web_base_url'] + '/studies/' + hashid
-  end
-
-  def share_link_params_json
-    {
-      hashid: hashid,
-      description: description,
-      steps: scenario_steps.map { |step|
-        {
-          #id: (step.to_param || ''),
-          hashid: (step.hashid || ''),
-          description: (step.description || '').strip,
-          url: (step.url || '').strip
-        }
-      }
-    }.to_json
-  end
-
   def highlights
     step_highlights
   end
 
   protected
+    def default_values
+      self.status = 'drafts'
+    end
+
     def sanitize_and_whitespace_description_title
       self.description = self.description.gsub(/\r/, '') if self.description;
       sanitizer = Rails::Html::FullSanitizer.new
       self.description = sanitizer.sanitize(self.description)
       self.title = sanitizer.sanitize(self.title)
-    end
-
-    def track_study_created
-      Analytics.instance.study_created(self.created_by, self)
-    end
-
-    def track_draft_published
-      Analytics.instance.draft_published(self.created_by, self)
     end
 
 end

@@ -1,6 +1,12 @@
 class ResultsController < ApplicationController
   before_action :authenticate_researcher!
 
+  attr_writer :service
+
+  def service
+    @service ||= ScenariosService.instance
+  end
+
   def index
     hash = {}
     hash[:company] = current_researcher.company
@@ -13,7 +19,7 @@ class ResultsController < ApplicationController
       end
     end
 
-    @results = Scenario.results(hash)
+    @results = service.results(hash)
   end
 
   def my_index
@@ -24,31 +30,31 @@ class ResultsController < ApplicationController
 
   def show
     if !params[:result_id].nil?
-      @scenario = Scenario.find_by_hashid(params[:result_id])
-      @result_step = ResultStepPresenter.new(ResultStep.find_by_hashid(params[:id]))
-      @scenario_step = @result_step.scenario_step
+      @scenario = Scenario.find_by_hashid(params[:result_id]).prezi
+      @result_step = ResultStep.find_by_hashid(params[:id]).prezi
+      @scenario_step = @result_step.scenario_step.prezi
     elsif !params[:my_result_id].nil?
-      @scenario = Scenario.find_by_hashid(params[:my_result_id])
-      @result_step = ResultStepPresenter.new(ResultStep.find_by_hashid(params[:id]))
-      @scenario_step = @result_step.scenario_step
+      @scenario = Scenario.find_by_hashid(params[:my_result_id]).prezi
+      @result_step = ResultStep.find_by_hashid(params[:id]).prezi
+      @scenario_step = @result_step.scenario_step.prezi
     else
-      @scenario = Scenario.find_by_hashid(params[:id])
+      @scenario = Scenario.find_by_hashid(params[:id]).prezi
     end
   end
 
   def update
-    @results = Scenario.find_by_hashid(params[:id])
+    @result = Scenario.find_by_hashid(params[:id])
 
     # we are toggling, so set it to the reverse of whatever it currently is
     if params[:is_on] == 'true'
-      @results.set_completed()
+      service.set_completed(@result)
     elsif params[:is_on] == 'false'
-      @results.set_live()
+      service.set_live(@result)
     end
 
     # we need to generate sample data for the study
     if params[:walkthrough]=='true'
-      ScenarioResult.generate_new_sample_result(@results)
+      ScenarioResult.generate_new_sample_result(@result)
     end
 
     render plain: 'OK'

@@ -15,18 +15,18 @@
 // @import "debug-show-asset-search-paths";
 
 // dependency packages
-$icon-font-path: "bootstrap/";
-@import "bootstrap-sass";
-@import "fontawesome";
-@import "videojs";
-@import "videojs-markers/dist/videojs.markers";
-@import "videojs-youtube-progress";
-@import "animate.css/animate";
-@import "Brandon_Grotesque";
+$icon-font-path: 'bootstrap/';
+@import 'bootstrap-sass';
+@import 'fontawesome';
+@import 'videojs';
+@import 'videojs-markers/dist/videojs.markers';
+@import 'videojs-youtube-progress';
+@import 'animate.css/animate';
+@import 'Brandon_Grotesque';
 
 // base package
-@import "shared/*";
+@import 'shared/*';
 
 // more specific overwriting packages
-@import "video/*";
-@import "controllers/*";
+@import 'video/*';
+@import 'controllers/*';

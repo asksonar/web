@@ -12,7 +12,7 @@ class TranscriptsController < ApplicationController
       text: params[:text]
     )
 
-    json = StepTranscriptionPresenter.new(step_transcription).public_json
+    json = step_transcription.prezi.public_json
     render json: json
   end
 end
