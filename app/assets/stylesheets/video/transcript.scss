@@ -82,6 +82,11 @@
   }
 }
 
+// mediocre hack to split up consecutive notes
+.ctnVideoTextLink.note + .ctnVideoTextLink.note {
+  margin-top: 1px;
+}
+
 .ctnNoTranscript {
   display: none;
 
