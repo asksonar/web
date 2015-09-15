@@ -1,13 +1,13 @@
 class DraftsService
   include Singleton
 
-  def self.create_draft(hash)
-    Scenario.create(hash.merge({status: statuses[:drafts]}))
+  def create_draft(hash)
+    Scenario.create(hash.merge({status: Scenario.statuses[:drafts]}))
   end
 
-  def self.create_live(hash)
+  def create_live(hash)
     Scenario.create(hash.merge({
-      status: statuses[:live],
+      status: Scenario.statuses[:live],
       published_at: Time.new
     }))
   end

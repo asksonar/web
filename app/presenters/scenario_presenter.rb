@@ -1,4 +1,9 @@
 class ScenarioPresenter < SimpleDelegator
+  # needed for bootstrap_form_for
+  def self.validators_on(*attributes)
+    Scenario.validators_on(*attributes)
+  end
+
   def public_json
     {
       hashid: hashid,

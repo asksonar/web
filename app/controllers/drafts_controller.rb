@@ -34,7 +34,7 @@ class DraftsController < ApplicationController
 
   def new_or_edit(scenario)
     p scenario
-    @scenario = scenario
+    @scenario = scenario.prezi
     @product_templates = Template.product_templates
     @marketing_templates = Template.marketing_templates
     if @template = Template.find_by(value: params[:template])
