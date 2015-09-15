@@ -11,8 +11,11 @@
     </div>
     <div class='col-xs-4 ctn-url-btns'>
       <div class='ctn-btns'>
-        <a class='btn btn-add-step btn-light-blue'><span>+</span</a>
-        <a class='btn btn-remove-step btn-grey'><span>x</span></a>
+        <a class='btn btn-add-step btn-light-blue {{#if hashid}}persisted{{/if}}'><span>+</span</a>
+        <a class='btn btn-remove-step btn-grey {{#if hashid}}persisted{{/if}}'><span>x</span></a>
+        <a class='btn-lock-step {{#if hashid}}persisted{{/if}}'>
+          <i class='fa fa-lock' data-toggle='tooltip' data-placement='bottom' title='Study is in progress'></i>
+        </a>
       </div>
       <div class='ctn-url'>
         <%= f.text_field :url, hide_label: true, placeholder: 'URL (optional)', value: '{{url}}', name: 'scenario_steps[][url]' %>

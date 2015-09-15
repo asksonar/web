@@ -11,6 +11,8 @@
 // about supported directives.
 //
 //= require jquery
+//= require jqueryui
+// bootstrap.tooltip needs to override jqueryui.tooltip, so comes after
 //= require bootstrap
 //= require amcharts
 //= require amcharts/serial
@@ -24,7 +26,7 @@
 //= require zendesk_widget
 //= require history
 //= require URIjs
-//= require jqueryui
+
 
 // insert 3rd party packages above this line
 

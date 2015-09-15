@@ -42,4 +42,6 @@ $(function(){
 
   autosize($('textarea'));
 
+  $('[data-toggle="tooltip"]').tooltip();
+
 });

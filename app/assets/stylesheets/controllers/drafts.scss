@@ -115,51 +115,72 @@
   }
 
   .ctn-url {
-    .draft-editable-steps & {
-      margin-right: 90px;
-    }
+    margin-right: 90px;
   }
 
   .ctn-btns {
     width: 70px;
     float: right;
 
-    display: none;
-    .draft-editable-steps & { display: block; }
-
-    .btn {
+    a {
       float: left;
       font-family: sans-serif;
       height: 34px;
       margin-left: 1px;
-      opacity: .5;
       padding: 0px;
-      position: relative;
       width: 34px;
+    }
+
+    .btn {
+      opacity: .5;
+      position: relative;
+
+      &:hover {
+        opacity: 1;
+      }
 
       span {
         left: 0px;
         position: absolute;
         right: 0px;
       }
+    }
 
-      &:hover {
-        opacity: 1;
+    .btn-add-step {
+      span {
+        font-size: 32px;
+        top: -9px;
       }
     }
 
-    .btn-add-step span {
-      font-size: 32px;
-      top: -9px;
+    .btn-remove-step {
+      &.persisted { display: none; }
+      .draft-editable-steps &.persisted { display: block; }
+
+      span {
+        font-size: 26px;
+        top: -3px;
+      }
     }
 
-    .btn-remove-step span {
-      font-size: 26px;
-      top: -3px;
+    .btn-lock-step {
+      color: #999;
+      cursor: initial;
+      opacity: 1;
+      text-align: center;
+
+      display: none;
+      &.persisted { display: block; }
+      .draft-editable-steps &.persisted { display: none; }
+
+      i {
+        font-size: 26px;
+        margin-top: 4px;
+      }
     }
   }
 
-  .ctn-step:first-child .btn-remove-step {
+  .ctn-step:only-child .btn-remove-step {
     display: none;
   }
 
