@@ -16,7 +16,7 @@ class Scenario < ActiveRecord::Base
   HASHIDS_SALT = '8UTnU7cJm*bP'
 
   def can_add_steps?
-    self.user_count == 0
+    user_count == 0
   end
 
   def self.create_draft(hash)
@@ -45,13 +45,13 @@ class Scenario < ActiveRecord::Base
   def set_live()
     self.status = :live
     self.published_at = Time.new
-    self.save()
+    save
   end
 
   def set_completed()
     self.status = :completed
     self.completed_at = Time.new
-    self.save()
+    save
   end
 
   def self.drafts(created_by)
@@ -61,7 +61,7 @@ class Scenario < ActiveRecord::Base
       .order(updated_at: :desc)
   end
 
-  def self.results(extra_where={})
+  def self.results(extra_where = {})
     Scenario
       .where(status: [statuses[:live], statuses[:completed]])
       .where(extra_where)
@@ -104,38 +104,6 @@ class Scenario < ActiveRecord::Base
 
   def total_confused
     where_feeling_confused.count
-  end
-
-  def scenario_steps_json
-    {
-      steps: scenario_steps.map { |step|
-        {
-          #id: (step.to_param || ''),
-          hashid: (step.hashid || ''),
-          description: (step.description || '').strip,
-          url: (step.url || '').strip
-        }
-      }
-    }.to_json
-  end
-
-  def share_link
-    Rails.configuration.properties['web_base_url'] + '/studies/' + hashid
-  end
-
-  def share_link_params_json
-    {
-      hashid: hashid,
-      description: description,
-      steps: scenario_steps.map { |step|
-        {
-          #id: (step.to_param || ''),
-          hashid: (step.hashid || ''),
-          description: (step.description || '').strip,
-          url: (step.url || '').strip
-        }
-      }
-    }.to_json
   end
 
   def highlights

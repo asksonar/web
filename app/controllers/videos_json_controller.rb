@@ -11,8 +11,8 @@ class VideosJsonController < ApplicationController
 
     Analytics.instance.modal_video_viewed(current_researcher, request.remote_ip, result_step)
 
-    result_step_json = ResultStepPresenter.new(result_step).public_json
-    scenario_step_json = ScenarioStepPresenter.new(result_step.scenario_step).public_json
+    result_step_json = result_step.prezi.public_json
+    scenario_step_json = result_step.scenario_step.prezi.public_json
     json = result_step_json.merge(scenario_step_json)
     render json: json
   end

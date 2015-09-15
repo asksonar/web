@@ -11,7 +11,7 @@ class NotesController < ApplicationController
       offset_seconds: params[:time],
       text: params[:text]
     )
-    json = StepNotePresenter.new(step_note).public_json
+    json = step_note.prezi.public_json
     render json: json
   end
 
@@ -22,7 +22,7 @@ class NotesController < ApplicationController
       text: params[:text]
     )
 
-    json = StepNotePresenter.new(step_note).public_json
+    json = step_note.prezi.public_json
     render json: json
   end
 
