@@ -41,6 +41,7 @@ EditableComponent = function() {
 
     this.$inputTime.prop('readonly', false);
     this.$inputText.prop('readonly', false);
+    this.$inputText.focus();
   };
 
   this.setText = function(text) {
