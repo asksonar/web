@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#drafts-index {
+.draft-panel {
   .scenario-description {
     margin-top: 10px;
     overflow: hidden;
@@ -14,122 +14,165 @@
   }
 }
 
-#drafts-new, #drafts-edit {
+.draft-header {
+  p {
+    margin-top: 10px;
+  }
 
-  .main-content-header {
-    .form-group {
-      margin-bottom: 0px;
+  .ctn-title {
+    @extend .col-sm-12;
+    .draft-editable-steps & { @extend .col-sm-8; }
+
+    @media (max-width: $screen-sm-min) {
+      p {
+        margin-bottom: 10px;
+      }
     }
-    #btn-template-group {
+  }
+
+  .ctn-template {
+    @extend .col-sm-4;
+
+    display: none;
+    .draft-editable-steps & { display: block; }
+
+    p {
+      text-align: center;
+    }
+  }
+
+  #btn-template-group {
+    width: 100%;
+
+    .btn {
+      font-size: 16px;
+      height: 46px;
+      line-height: 46px;
+      padding-bottom: 0px;
+      padding-top: 0px;
       width: 100%;
-      .btn {
-        font-size: 16px;
-        width: 100%;
-        height: 46px;
-        line-height: 46px;
-        padding-top: 0px;
-        padding-bottom: 0px;
-        .caret {
-          position: absolute;
-          right: 10px;
-          top: 50%;
-          margin-top: -2px; /* half its height of 4px */
-        }
-      }
-      ul {
-        width: 100%;
-        a {
-          white-space: normal;
-        }
-      }
     }
-    .header-sub-text {
-      margin-top: 10px;
-      .template-sub-text {
-        text-align: center;
+
+    .caret {
+      margin-top: -2px; // half its height of 4px
+      position: absolute;
+      right: 10px;
+      top: 50%;
+    }
+
+    ul {
+      width: 100%;
+
+      a {
+        white-space: normal;
       }
     }
   }
 
-  .main-content {
-    textarea {
-      resize: none;
-      padding-left: 6px;
-      padding-right: 6px;
-    }
+}
 
-    .summary-container, .steps-container {
-      input {
-        padding-left: 6px;
-        padding-right: 6px;
-      }
-      p {
-        margin-bottom: 10px;
-      }
-    }
+.draft-content {
 
-    .summary-container {
-      margin-bottom: 30px;
-    }
+  input {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
 
-    .steps-container {
-      margin-bottom: 20px;
+  textarea {
+    padding-left: 6px;
+    padding-right: 6px;
+    resize: none;
+  }
 
-      .ctn-count {
-        width: 40px;
-        line-height: 33px;
-      }
-      .ctn-description {
-        margin-left: 40px;
-      }
-      .ctn-url-btns {
-        padding-left: 5px;
-      }
-      .ctn-url {
-        margin-right: 90px;
-      }
-      .ctn-btns {
-        width: 70px;
-        .btn {
-          font-family: sans-serif;
-          line-height: 34px;
-          width: 34px;
-          padding: 0px;
-          margin-left: 1px;
-          float: left;
-          opacity: .5;
-        }
-        .btn:hover {
-          opacity: 1;
-        }
-        .btn-add-step {
-          font-size: 30px;
-        }
-        .btn-remove-step {
-          font-size: 26px;
-        }
-      }
-      .ctn-step:first-child {
-        .btn-remove-step {
-          display: none;
-        }
-      }
-      .form-group {
-        margin-bottom: 10px;
-      }
-    }
+  p {
+    margin-bottom: 10px;
+  }
 
-    .buttons-container {
-      p {
-        max-width: 270px;
-        margin-top: 3px; /* 31px (button height) - 25 (text height) / 2 */
-        margin-right: 10px;
-      }
-      .btn + .btn {
-        margin-left: 1px;
-      }
+  .summary-container {
+    margin-bottom: 30px;
+  }
+
+  .steps-container {
+    margin-bottom: 20px;
+  }
+
+  .ctn-step {
+    margin-bottom: 10px;
+  }
+
+  .ctn-count {
+    line-height: 33px;
+    width: 40px;
+    float: left;
+  }
+
+  .ctn-description {
+    margin-left: 40px;
+  }
+
+  .ctn-url-btns {
+    padding-left: 5px;
+  }
+
+  .ctn-url {
+    .draft-editable-steps & {
+      margin-right: 90px;
     }
   }
 
+  .ctn-btns {
+    width: 70px;
+    float: right;
 
+    display: none;
+    .draft-editable-steps & { display: block; }
+
+    .btn {
+      float: left;
+      font-family: sans-serif;
+      height: 34px;
+      margin-left: 1px;
+      opacity: .5;
+      padding: 0px;
+      position: relative;
+      width: 34px;
+
+      span {
+        left: 0px;
+        position: absolute;
+        right: 0px;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    .btn-add-step span {
+      font-size: 32px;
+      top: -9px;
+    }
+
+    .btn-remove-step span {
+      font-size: 26px;
+      top: -3px;
+    }
+  }
+
+  .ctn-step:first-child .btn-remove-step {
+    display: none;
+  }
+
+  .buttons-container {
+    p {
+      margin-bottom: 0px;
+      margin-right: 10px;
+      margin-top: 3px; // 31px (button height) - 25 (text height) / 2
+      max-width: 270px;
+    }
+
+    .btn + .btn {
+      margin-left: 1px;
+    }
+  }
 }

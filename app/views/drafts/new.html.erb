@@ -6,27 +6,22 @@
   <% end %>
 <% end %>
 
-<%= bootstrap_form_for @scenario, url: @scenario.id ? draft_path(@scenario) : drafts_path, html: {id: 'create-form'} do |f| %>
+<%= bootstrap_form_for @scenario, url: @scenario.id ? draft_path(@scenario) : drafts_path, html: {id: 'create-form', class: ('draft-editable-steps' if @scenario.can_add_steps?) } do |f| %>
   <%= f.hidden_field :id, value: @scenario.id %>
   <%= f.hidden_field :template, value: params[:template] %>
 
-  <section class='main-content-header'>
+  <section class='main-content-header draft-header'>
     <div class='row'>
-      <div
-        <% if @scenario.can_add_steps? %>
-          class='col-xs-8'
-        <% else %>
-          class='col-xs-12'
-        <% end %>
-      >
+      <div class='ctn-title'>
         <h1>
           <%= f.text_field :title, hide_label: true, placeholder: 'Title your study', class: 'input-lg' %>
         </h1>
+        <p class='sub'>
+          This title is so you can tell your studies apart internally. Your respondents will never see this.
+        </p>
       </div>
 
-      <% if @scenario.can_add_steps? %>
-      <div class='col-xs-4'>
-
+      <div class='ctn-template'>
         <div class="btn-group" id='btn-template-group'>
           <a class="btn btn-light-blue dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
             Start from a template<span class="caret"></span>
@@ -41,31 +36,12 @@
             <% end %>
           </ul>
         </div>
+        <p>or just start typing below.</p>
       </div>
-      <% end %>
-    </div>
-
-    <div class='row header-sub-text'>
-      <div
-        <% if @scenario.can_add_steps? %>
-          class='col-xs-8'
-        <% else %>
-          class='col-xs-12'
-        <% end %>
-      >
-        <p class='sub'>
-          This title is so you can tell your studies apart internally. Your respondents will never see this.
-        </p>
-      </div>
-      <% if @scenario.can_add_steps? %>
-      <div class='col-xs-4'>
-        <p class='template-sub-text'>or just start typing below.</p>
-      </div>
-      <% end %>
     </div>
 
   </section>
-  <section class="main-content">
+  <section class="main-content draft-content">
 
     <div class='panel'>
 
@@ -83,43 +59,19 @@
         <div id='ctn-step-list'><!-- insert new steps here --></div>
       </div>
 
-      <% if @scenario.drafts? %>
+      <div class='clearfix buttons-container'>
+        <a href='<%=results_path%>' class='btn btn-grey pull-left'>Cancel</a>
 
-        <div class='clearfix buttons-container'>
-          <a href='<%=results_path%>' class='btn btn-grey pull-left'>Cancel</a>
-
+        <% if @scenario.drafts? %>
           <%= f.submit 'Create study', name: 'publish', class: 'btn btn-dark-blue pull-right' %>
           <%= f.submit 'Save as draft', name: 'draft', class: 'btn btn-light-blue pull-right' %>
-          <p class='sub pull-right'>
-            Once the study is created, you’ll be able to share the study link with potential respondents.
-          </p>
-        </div>
-
-      <% elsif @scenario.can_add_steps? %>
-
-        <div class='clearfix buttons-container'>
-          <a href='<%=result_path%>' class='btn btn-grey pull-left'>Cancel</a>
-
+        <% else %>
           <%= f.submit 'Update study', name: 'update', class: 'btn btn-dark-blue pull-right' %>
-
-          <p class='sub pull-right'>
-            Once the study is created, you’ll be able to share the study link with potential respondents.
-          </p>
-        </div>
-
-      <% else %>
-
-        <div class='clearfix buttons-container'>
-          <a href='<%=result_path%>' class='btn btn-grey pull-left'>Cancel</a>
-
-          <%= f.submit 'Update study', name: 'update', class: 'btn btn-dark-blue pull-right' %>
-
-          <p class='sub pull-right'>
-            Once the study is created, you’ll be able to share the study link with potential respondents.
-          </p>
-        </div>
-
-      <% end %>
+        <% end %>
+        <p class='sub pull-right'>
+          Once the study is created, you’ll be able to share the study link with potential respondents.
+        </p>
+      </div>
 
     </div>
   </section>
@@ -129,19 +81,17 @@
     {{#each steps}}
     <div class='row ctn-step'>
       <div class='col-xs-8'>
-        <h1 class='ctn-count pull-left'>1.</h1>
+        <h1 class='ctn-count'>1.</h1>
         <div class='ctn-description'>
           <%= f.text_area :description, hide_label: true, rows: 1, placeholder: 'Tell the panelist what to do', value: '{{description}}', name: 'scenario_steps[][description]' %>
         </div>
       </div>
       <div class='col-xs-4 ctn-url-btns'>
-        <% if @scenario.can_add_steps? %>
-          <div class='ctn-btns pull-right'>
-            <a class='btn btn-add-step btn-light-blue'>+</a>
-            <a class='btn btn-remove-step btn-grey'>x</a>
-          </div>
-        <% end %>
-        <div <% if @scenario.can_add_steps? %>class='ctn-url'<% end %>>
+        <div class='ctn-btns'>
+          <a class='btn btn-add-step btn-light-blue'><span>+</span</a>
+          <a class='btn btn-remove-step btn-grey'><span>x</span></a>
+        </div>
+        <div class='ctn-url'>
           <%= f.text_field :url, hide_label: true, placeholder: 'URL (optional)', value: '{{url}}', name: 'scenario_steps[][url]' %>
         </div>
       </div>
@@ -149,8 +99,8 @@
     {{/each}}
   </script>
 
+<% end %>
   <script type='text/javascript'>
     var scenarioSteps = <%= raw @scenario.scenario_steps_json %>;
   </script>
 
-<% end %>
