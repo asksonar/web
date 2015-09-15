@@ -1,6 +1,8 @@
 <script id="new-step-template" type="text/x-handlebars-template">
   {{#each steps}}
   <div class='row ctn-step'>
+    <%= f.hidden_field :hashid, value: '{{hashid}}', name: 'scenario_steps[][hashid]' %>
+
     <div class='col-xs-8'>
       <h1 class='ctn-count'>1.</h1>
       <div class='ctn-description'>

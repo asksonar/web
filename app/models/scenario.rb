@@ -11,7 +11,6 @@ class Scenario < ActiveRecord::Base
   enum status: [:drafts, :live, :completed]
 
   after_initialize :default_values, unless: :persisted?
-  after_create :track_study_created
   before_validation :sanitize_and_whitespace_description_title
 
   HASHIDS_SALT = '8UTnU7cJm*bP'
@@ -54,14 +53,6 @@ class Scenario < ActiveRecord::Base
       sanitizer = Rails::Html::FullSanitizer.new
       self.description = sanitizer.sanitize(self.description)
       self.title = sanitizer.sanitize(self.title)
-    end
-
-    def track_study_created
-      Analytics.instance.study_created(self.created_by, self)
-    end
-
-    def track_draft_published
-      Analytics.instance.draft_published(self.created_by, self)
     end
 
 end
