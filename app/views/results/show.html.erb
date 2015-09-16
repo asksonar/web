@@ -46,12 +46,13 @@
       </div>
 
       <div class="input-group share-link-group">
-          <input type="text" id='input-share-link' class="form-control" readonly value='<%= @scenario.share_link %>' <% if @scenario.completed? %>style='display:none'<% end %>>
-          <span class='input-group-btn' data-placement="left" title="Copy the share link" data-toggle="tooltip" data-container="#btn-hero-copy-share-link-tooltip">
-            <a class="btn btn-green" id='btn-copy-share-link' <% if @scenario.completed? %>style='display:none'<% end %>><i class='fa fa-link'></i></a>
-          </span>
-        </div>
-        <div id='btn-copy-share-link-tooltip'><!-- otherwise interferes with bootstrap (:not-last-child) selectors --></div>
+        <input type="text" id='input-share-link' class="form-control" readonly value='<%= @scenario.share_link %>' <% if @scenario.completed? %>style='display:none'<% end %>>
+        <span class='input-group-btn' data-placement="bottom" title="Copy the study link" data-toggle="tooltip" data-container="#btn-copy-share-link-tooltip">
+          <a class="btn btn-green" id='btn-copy-share-link' <% if @scenario.completed? %>style='display:none'<% end %>><i class='fa fa-link'></i></a>
+        </span>
+      </div>
+      <div id='btn-copy-share-link-tooltip'><!-- otherwise interferes with bootstrap (:not-last-child) selectors --></div>
+
       <div class='row counts-container'>
         <div class='col-xs-6'>
           <h1><i class='feeling-delighted'></i><%= @scenario.total_delighted %></h1>
