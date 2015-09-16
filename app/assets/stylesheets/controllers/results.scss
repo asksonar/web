@@ -107,18 +107,17 @@
           color: #FFF;
         }
       }
-      #btn-copy-share-link {
-        background: #31B6AE;
-        color: #FFF;
-        margin-left: 1px;
-      }
-      #btn-edit {
-        background: #05647C;
-        color: #FFF;
-      }
-      #input-share-link {
+      .share-link-group {
         margin-top: 10px;
-        cursor: text;
+
+        input {
+          cursor: text;
+        }
+
+        .btn {
+          padding-top: 8px;
+          padding-bottom: 7px;
+        }
       }
     }
 
