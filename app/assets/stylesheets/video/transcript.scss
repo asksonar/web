@@ -63,6 +63,10 @@
   overflow: hidden;
 
   &:not([data-state]) {
+    &.note {
+      background-color: #f0efde;
+    }
+
     &:hover {
       cursor: pointer;
       background-color: #EFEFEF;
@@ -76,10 +80,22 @@
       @extend .strong;
     }
 
-    &.note {
-      background-color: #f0efde;
+  }
+
+  &.transcript {
+    color: #A2A2A2;
+
+    .editable-timeline &,
+    &:hover,
+    &[data-state] {
+      color: inherit;
     }
   }
+}
+
+// mediocre hack to split up consecutive notes
+.ctnVideoTextLink.note + .ctnVideoTextLink.note {
+  margin-top: 1px;
 }
 
 .ctnNoTranscript {

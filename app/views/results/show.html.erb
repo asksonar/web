@@ -41,14 +41,17 @@
 
       <div class="btn-group pull-right">
         <div class='btn-wrapper-tooltip' data-placement="bottom" title="Edit the study" data-toggle="tooltip">
-          <a class='btn btn-default' id='btn-edit' href='<%= edit_result_path %>'><i class='fa fa-edit'></i></a>
-        </div>
-        <div class='btn-wrapper-tooltip' data-placement="bottom" title="Copy the share link" data-toggle="tooltip">
-          <a class="btn btn-default" id='btn-copy-share-link' <% if @scenario.completed? %>style='display:none'<% end %>><i class='fa fa-link'></i></a>
+          <a class='btn btn-dark-blue' id='btn-edit' href='<%= edit_result_path %>'><i class='fa fa-edit'></i></a>
         </div>
       </div>
 
-      <input type="text" id='input-share-link' class="form-control" readonly value='<%= @scenario.share_link %>' <% if @scenario.completed? %>style='display:none'<% end %>>
+      <div class="input-group share-link-group">
+        <input type="text" id='input-share-link' class="form-control" readonly value='<%= @scenario.share_link %>' <% if @scenario.completed? %>style='display:none'<% end %>>
+        <span class='input-group-btn' data-placement="bottom" title="Copy the study link" data-toggle="tooltip" data-container="#btn-copy-share-link-tooltip">
+          <a class="btn btn-green" id='btn-copy-share-link' <% if @scenario.completed? %>style='display:none'<% end %>><i class='fa fa-link'></i></a>
+        </span>
+      </div>
+      <div id='btn-copy-share-link-tooltip'><!-- otherwise interferes with bootstrap (:not-last-child) selectors --></div>
 
       <div class='row counts-container'>
         <div class='col-xs-6'>
