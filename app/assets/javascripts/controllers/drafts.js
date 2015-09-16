@@ -17,15 +17,18 @@ $(function(){
   };
 
   var emptyStep = {steps:[{}]};
-  var newStepTemplate;
-  if ($('#new-step-template').length > 0) {
-    newStepTemplate = Handlebars.compile($('#new-step-template').html());
-    if (sonar.scenario.steps.length > 0) {
-      $('#ctn-step-list').html(newStepTemplate(sonar.scenario));
-      recountSteps();
-    } else {
-      $('#ctn-step-list').html(newStepTemplate(emptyStep));
-    }
+  var newStepTemplate = Handlebars.compile($('#new-step-template').html());
+
+  if (sonar.template) {
+    $('#scenario_title').val(sonar.template.title);
+    $('#scenario_description').val(sonar.template.description);
+    $('#ctn-step-list').html(newStepTemplate(sonar.template));
+    recountSteps();
+  } else if (sonar.scenario.steps.length > 0) {
+    $('#ctn-step-list').html(newStepTemplate(sonar.scenario));
+    recountSteps();
+  } else {
+    $('#ctn-step-list').html(newStepTemplate(emptyStep));
   }
 
   $('#ctn-step-list').on('click', '.btn-add-step', function(event){
