@@ -20,8 +20,8 @@ $(function(){
   var newStepTemplate;
   if ($('#new-step-template').length > 0) {
     newStepTemplate = Handlebars.compile($('#new-step-template').html());
-    if (scenarioSteps.steps.length > 0) {
-      $('#ctn-step-list').html(newStepTemplate(scenarioSteps));
+    if (sonar.scenario.steps.length > 0) {
+      $('#ctn-step-list').html(newStepTemplate(sonar.scenario));
       recountSteps();
     } else {
       $('#ctn-step-list').html(newStepTemplate(emptyStep));
@@ -41,5 +41,7 @@ $(function(){
   });
 
   autosize($('textarea'));
+
+  $('[data-toggle="tooltip"]').tooltip();
 
 });
