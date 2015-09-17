@@ -5,7 +5,6 @@ class DraftsService
     # save all the changes
     ActiveRecord::Base.transaction do
       scenario = Scenario.new(scenario_params)
-      scenario.status = 'drafts'
       publish!(scenario) if publishing
       scenario.created_by = researcher
       scenario.company = researcher.company
