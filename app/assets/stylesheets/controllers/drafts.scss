@@ -181,7 +181,7 @@
   }
 
   .ctn-step:only-child .btn-remove-step {
-    display: none;
+    display: none !important;
   }
 
   .buttons-container {
