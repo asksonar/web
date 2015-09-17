@@ -5,12 +5,13 @@ class DraftsService
     # save all the changes
     ActiveRecord::Base.transaction do
       scenario = Scenario.new(scenario_params)
+      scenario.status = 'drafts'
       publish!(scenario) if publishing
       scenario.created_by = researcher
       scenario.company = researcher.company
       scenario.save
 
-      scenario.scenario_steps.create(scenario_steps_params)
+      scenario.scenario_steps.create(scenario_steps_params.map { |params| params.permit(:description, :url, :step_order) })
 
       track_study_created(researcher, scenario)
 
