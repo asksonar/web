@@ -20,8 +20,8 @@ class DraftsService
 
   def update(scenario, scenario_params, scenario_steps_params, researcher, publishing)
     ActiveRecord::Base.transaction do
-      scenario.update(scenario_params)
       publish!(scenario) if publishing
+      scenario.update(scenario_params)
 
       update_steps!(scenario.scenario_steps, scenario_steps_params)
 
