@@ -5,12 +5,13 @@ class DraftsService
     # save all the changes
     ActiveRecord::Base.transaction do
       scenario = Scenario.new(scenario_params)
+      scenario.status = 'drafts'
       publish!(scenario) if publishing
       scenario.created_by = researcher
       scenario.company = researcher.company
       scenario.save
 
-      scenario.scenario_steps.create(scenario_steps_params)
+      scenario.scenario_steps.create(scenario_steps_params.map { |params| params.permit(:description, :url, :step_order) })
 
       track_study_created(researcher, scenario)
 
@@ -45,14 +46,20 @@ class DraftsService
         old_step.url = new_step[:url]
         old_step.step_order = new_step[:step_order]
         old_step.save
+        new_steps.delete_at(new_step_index)
       else
         old_step.destroy
       end
     end
 
-    new_steps.select { |step| step[:hashid].blank? }.each do |step_params|
-      # need to strip out hashid
-      old_steps.create(step_params.permit(:description, :url, :step_order))
+    new_steps.select { |step| !step.nil? }.each do |step_params|
+      # if it has a hashid, we're trying to restore a deleted connection
+      if step_params[:hashid]
+        id = ScenarioStep.hashids.decode(step_params[:hashid])[0]
+        old_steps.create(step_params.permit(:description, :url, :step_order).merge(id: id))
+      else
+        old_steps.create(step_params.permit(:description, :url, :step_order))
+      end
     end
   end
 
