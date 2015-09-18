@@ -1,0 +1,37 @@
+#highlights-new {
+
+  .main-content-header {
+    @extend .clearfix;
+  }
+
+  .ctn-buttons {
+    float: right;
+    margin-top: 10px;
+  }
+
+  .video-check-show {
+    float: left;
+    margin-left: 6px;
+    margin-right: 3px; // input box gives us 2px border + 1px padding to add up to 6px on the right
+    margin-top: 6px;
+  }
+
+  .videoTextLink {
+    padding-left: 23px; // width of checkbox 14px + margin-left px + margin-right 3px
+  }
+
+  .video-check-show:not(:checked) + .videoTextLink {
+    color: #A2A2A2;
+  }
+
+  .transcript-header-container {
+    #btn-check-show-all {
+      display: inline-block;
+      margin-left: 6px;
+    }
+
+    h2 {
+      display: inline-block;
+    }
+  }
+}

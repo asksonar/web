@@ -4,7 +4,7 @@
       controls preload="auto" width="auto" height="auto"
       data-setup='{"example_option":true}'>
     </video>
-    <div class="ctn-video-share-link">
+    <!-- <div class="ctn-video-share-link">
       <h4>Link to <span class='span-time'></span></h4>
       <div class="input-group">
         <input type="text" class="form-control" id='input-url-base' readonly>
@@ -17,11 +17,14 @@
     </div>
     <div class='ctn-video-share-highlight'>
       <h4>Share a highlight</h4><a id='btn-create-highlight' class='btn btn-dark-blue'><i class='fa fa-arrow-right'></i></a>
-    </div>
+    </div> -->
   </div>
-  <div class='transcript-container show-transcripts'>
+  <div class='transcript-container'>
     <div class='transcript-header-container'>
-      <button id='toggle-transcripts' type="button" class="btn btn-default"><i class='fa fa-align-left'></i> Transcripts</button>
+      <!-- <button id='toggle-transcripts' type="button" class="btn btn-default"><i class='fa fa-align-left'></i> Transcripts</button> -->
+
+      <!--<h2>Timeline</h2>-->
+      <input type='checkbox' id='btn-check-show-all' readonly></input>
       <h2>Timeline</h2>
     </div>
     <div id='videoText'>
@@ -42,6 +45,7 @@
 
 <script id='video-text-partial' type='text/x-handlebars-template'>
   <div class='ctnVideoTextLink clearfix {{displayClass}}' data-timestamp='{{time}}'>
+  <input type='checkbox' class='video-check-show'></input>
     <div class='videoTextLink'>
       <input type='text' class='video-text-time' value='{{displayTime}}' readonly></input>
       <div class='video-text-icon-display'>

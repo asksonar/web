@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   resources :transcripts
   resources :notes
+  resources :highlights
   resources :studies do
     resources :step, only: [:create], controller: 'studies_step'
     resources :video, only: [:create, :update], controller: 'studies_video'

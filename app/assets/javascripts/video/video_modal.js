@@ -52,6 +52,9 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
 
   this.videoLink.updateShareLink(data.shareLink);
 
+  // TODO: fix this
+  $('#btn-create-highlight').attr('href', '/highlights/new?video=' + data.hashid);
+
   this.$divUserEmail.html(data.email);
   this.$divStepOrder.html(data.stepOrder + 1);
   this.$divStepDescription.html(data.stepDescription);

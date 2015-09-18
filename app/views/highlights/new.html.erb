@@ -1,0 +1,20 @@
+<% content_for :title do %>
+  New Highlight
+<% end %>
+
+<%= bootstrap_form_for :highlight do |f| %>
+<section class='main-content-header'>
+  <div class='ctn-title'>
+    <%= f.text_field :title, hide_label: true, placeholder: 'Title your highlight', class: 'input-lg' %>
+  </div>
+  <div class='ctn-buttons'>
+    <a class='btn btn-dark-blue'>Create Highlight</a>
+    <a class='btn btn-grey' href='<%= request.referrer %>'>Cancel</a>
+  </div>
+</section>
+<section class="main-content">
+  <div class='panel editable-timeline'>
+    <%= render partial: 'highlights/partials/video' %>
+  </div>
+</section>
+<% end %>
