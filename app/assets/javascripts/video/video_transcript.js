@@ -166,7 +166,7 @@ VideoTranscript.prototype.focusLink = function(timeSeconds) {
     return;
   }
   this.scrollIntoView(link);
-  link.css({'background-color':'#F69526'})
+  link.find('.videoTextLink').css({'background-color':'#F69526'})
     .animate({'background-color':''}, 3000)
     .queue(function() {
       $(this).removeAttr('style').dequeue();

@@ -63,23 +63,28 @@
   overflow: hidden;
 
   &:not([data-state]) {
-    &.note {
+    cursor: pointer;
+
+    &.note .videoTextLink {
       background-color: #f0efde;
     }
 
-    &:hover {
-      cursor: pointer;
+    &:hover .videoTextLink,
+    &:hover .video-btn-edit {
       background-color: #EFEFEF;
 
-      .video-text-time {
-        text-decoration: underline;
+      .video-btn-edit {
+        background-color: #EFEFEF;
       }
+    }
+
+    &:hover .video-text-time {
+      text-decoration: underline;
     }
 
     &.activeVideoTextLink {
       @extend .strong;
     }
-
   }
 
   &.transcript {
@@ -91,11 +96,6 @@
       color: inherit;
     }
   }
-}
-
-// mediocre hack to split up consecutive notes
-.ctnVideoTextLink.note + .ctnVideoTextLink.note {
-  margin-top: 1px;
 }
 
 .ctnNoTranscript {
@@ -110,6 +110,7 @@
   transition: margin-top 0.2s ease-in-out;
   display: block;
   padding: 2px 0px;
+  margin-bottom: 1px;
 
   .transcript & {
     margin-top: -100%;
@@ -206,7 +207,8 @@
 .video-text-buttons {
   float: right;
   margin-right: 15px;
-  margin-top: -2px;
+  margin-top: -3px; // 2px padding + 1px margin on videoTextLink
+  margin-bottom: 1px; // to replace the 1px margin on videoTextLink we just "overwrote"
 
   display: none;
 
