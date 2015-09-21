@@ -22,20 +22,22 @@
     }
 
     #videoText {
-      position: absolute;
-      top: 31px; // effective height of transcript-header-container
       bottom: 0px;
       left: 0px;
-      right: 0px;
       overflow-y: auto;
+      position: absolute;
+      right: 15px;
+      top: 31px; // effective height of transcript-header-container
+
 
       .editable-timeline & { bottom: 30px; } // effective height of btn-add-note
     }
 
     #btn-add-note {
-      position: absolute;
       bottom: 0;
-      width: 100%;
+      left: 0px;
+      position: absolute;
+      right: 15px;
     }
   }
 }
