@@ -4,11 +4,17 @@
     @extend .clearfix;
   }
 
-  .ctn-buttons {
+  .ctn-video-time-snippet {
     margin-top: 10px;
+
+    input {
+      display: inline-block;
+      width: 100px;
+    }
   }
 
-  #btn-create-highlight {
+  .ctn-buttons {
+    margin-top: 10px;
     float: right;
   }
 
@@ -36,5 +42,10 @@
     h2 {
       display: inline-block;
     }
+  }
+
+  #btn-add-note {
+    float: right;
+    position: inherit;
   }
 }
