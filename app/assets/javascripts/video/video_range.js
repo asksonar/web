@@ -51,8 +51,8 @@ VideoRange.prototype.onVideoTimeUpdate = function(event, currentTime) {
   }
 
   if (currentTime > this.finish) {
-    this.video.currentTime(this.finish);
     this.video.pause();
+    this.video.currentTime(this.finish);
   }
 };
 
