@@ -16,14 +16,14 @@
   }
 
   %vjs-custom-range-marker {
-    width: 14px;
-    height: 16px;
+    width: 16px;
+    height: 18px;
     position: absolute;
     top: -19px;
-    background: #41c00e;
+    background: #F69526;
+    color: #fff;
     display: inline-block;
     border-radius: 2px 2px 0 0;
-    color:#2e2e2e;
     cursor: ew-resize;
 
     &:before {
@@ -36,24 +36,25 @@
       width: 0;
       position: absolute;
       pointer-events: none;
-      border-top-color: #41c00e;
-      border-width: 7px;
-      margin-left: -7px;
+      border-top-color: #F69526;
+      border-width: 8px;
+      margin-left: -8px;
     }
 
     i {
-      font-size: 8px;
+      font-size: 10px;
       margin-top: 2px;
     }
   }
 
   .vjs-custom-range-left-marker {
     @extend %vjs-custom-range-marker;
-    left: -14px;
+    left: 0;
   }
 
   .vjs-custom-range-right-marker {
     @extend %vjs-custom-range-marker;
-    right: -14px;
+    left: 100%;
+    margin-left: -16px;
   }
 }
