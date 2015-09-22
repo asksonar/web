@@ -53,6 +53,17 @@ $(function(){
   videoController.src(sonar.resultStep.srcArray);
   // videoController.play(timeSeconds);
 
+  var videoRange = new VideoRange({
+    inputStart: $('#input-video-time-start'),
+    inputFinish: $('#input-video-time-end'),
+    scriptVideoRangeTemplate: $('#video-range-template'),
+    progressControlSelector : '.vjs-progress-control',
+    rangeLeftMaskSelector: '.vjs-custom-range-left-mask',
+    rangeRightMaskSelector: '.vjs-custom-range-right-mask',
+    rangeLeftMarkerSelector: '.vjs-custom-range-left-marker',
+    rangeRightMarkerSelector: '.vjs-custom-range-right-marker'
+  }, videoController);
+
   videoTranscript.buildTranscript(
     sonar.resultStep.hashid,
     [],
