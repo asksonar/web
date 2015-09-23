@@ -16,6 +16,8 @@ VideoRange = function(config, video) {
   this.init();
 };
 
+Eventable.call(VideoRange.prototype);
+
 VideoRange.prototype.init = function() {
   this.$progressControl = $(this.progressControlSelector);
   this.$progressControl.append(this.$scriptVideoRangeTemplate.html());
@@ -75,6 +77,8 @@ VideoRange.prototype.setStart = function(start) {
   if (this.video.paused()) {
     this.video.currentTime(this.start);
   }
+  this.trigger('videoRangeStartChange', [this.start]);
+  this.trigger('videoRangeChange', [this.start, this.finish]);
 
   return left;
 };
@@ -84,6 +88,8 @@ VideoRange.prototype.setFinish = function(finish) {
   if (this.video.paused()) {
     this.video.currentTime(this.finish);
   }
+  this.trigger('videoRangeFinishChange', [this.finish]);
+  this.trigger('videoRangeChange', [this.start, this.finish]);
 
   return left;
 };
