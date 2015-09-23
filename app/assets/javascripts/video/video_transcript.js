@@ -3,6 +3,8 @@ VideoTranscript = function(config, video) {
   this.$videoText = config.divVideoText;
   this.$btnToggleTranscripts = config.btnToggleTranscripts;
   this.$btnAddNote = config.btnAddNote;
+  this.$timelineBeginning = config.timelineBeginning;
+  this.$timelineEnding = config.timelineEnding;
 
   this.videoTextTemplate = Handlebars.compile(config.scriptVideoTextTemplate.html());
   this.videoTextPartial = Handlebars.compile(config.scriptVideoTextPartial.html());
@@ -141,7 +143,7 @@ VideoTranscript.prototype.buildTranscript = function(resultStepHashId, transcrip
   });
 
   for(i = 0; i < this.timelineArray.length; i++) {
-    this.timelineArray[i].insertBefore(this.findTextLinkEnd(), false);
+    this.timelineArray[i].insertBefore(this.getTimelineEnding(), false);
   }
 };
 
@@ -208,7 +210,7 @@ VideoTranscript.prototype.findTextLinks = function() {
 // if we ask timeSeconds = 5, we get []
 VideoTranscript.prototype.findTextLinkBefore = function(timeSeconds) {
   var textLinks = this.$videoText.find('.ctnVideoTextLink');
-  var textLink = textLinks.first();
+  var textLink;
 
   textLinks.each(function(){
     if (parseInt($(this).attr('data-timestamp')) < parseInt(timeSeconds)) {
@@ -272,12 +274,12 @@ VideoTranscript.prototype.findTextLinksAfter = function(timeSeconds) {
 };
 
 // gets back the noTranscript placeholder element, which should always be the last element
-VideoTranscript.prototype.findTextLinkEnd = function() {
-  return this.$videoText.children().last();
+VideoTranscript.prototype.getTimelineBeginning = function() {
+  return this.$timelineBeginning;
 };
 
-VideoTranscript.prototype.findTextLinkBeginning = function() {
-  return this.$videoText.children().first();
+VideoTranscript.prototype.getTimelineEnding = function() {
+  return this.$timelineEnding;
 };
 
 VideoTranscript.prototype.createNote = function() {
@@ -300,7 +302,7 @@ VideoTranscript.prototype.createNote = function() {
   if (insertBefore.length > 0) {
     newElement.insertBefore(insertBefore, true);
   } else {
-    newElement.insertBefore(this.findTextLinkEnd(), true);
+    newElement.insertBefore(this.getTimelineEnding(), true);
   }
 };
 
@@ -315,6 +317,6 @@ VideoTranscript.prototype.restoreNote = function(timeSeconds, text) {
   if (insertBefore.length > 0) {
     newElement.insertBefore(insertBefore, false);
   } else {
-    newElement.insertBefore(this.findTextLinkEnd(), false);
+    newElement.insertBefore(this.getTimelineEnding(), false);
   }
 };

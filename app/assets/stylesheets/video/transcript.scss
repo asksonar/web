@@ -98,12 +98,13 @@
   }
 }
 
-.ctnNoTranscript {
+.ctn-timeline-beginning,
+.ctn-timeline-ending {
   display: none;
+}
 
-  &:first-child {
-    display: block;
-  }
+.ctn-timeline-beginning + .ctn-timeline-ending {
+  display: block;
 }
 
 .videoTextLink {

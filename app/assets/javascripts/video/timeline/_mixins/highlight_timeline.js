@@ -18,13 +18,13 @@ HighlightTimeline = function(config) {
   this.setHighlightStartFinish = function(startTime, finishTime) {
     var insertAfter = this.findTextLinkBefore(startTime);
     if (insertAfter.length === 0) {
-      insertAfter = this.findTextLinkBeginning();
+      insertAfter = this.getTimelineBeginning();
     }
     insertAfter.after(this.$highlightStart);
 
     var insertBefore = this.findTextLinkAfter(finishTime);
     if (insertBefore.length === 0) {
-      insertBefore = this.findTextLinkEnd();
+      insertBefore = this.getTimelineEnding();
     }
     insertBefore.before(this.$highlightFinish);
 
