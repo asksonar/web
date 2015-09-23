@@ -48,4 +48,22 @@
     float: right;
     position: inherit;
   }
+
+  .ctn-highlight-start {
+    border-bottom: 1px dashed;
+    text-align: center;
+  }
+
+  .ctn-highlight-finish {
+    border-top: 1px dashed;
+    text-align: center;
+  }
+
+  .ctn-highlight-disabled {
+    color: #999;
+
+    .video-check-show {
+      display: none;
+    }
+  }
 }

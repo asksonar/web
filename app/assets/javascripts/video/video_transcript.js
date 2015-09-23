@@ -200,6 +200,9 @@ VideoTranscript.prototype.onTimeupdate = function(event, timeSeconds) {
   this.activateLink(timeSeconds);
 };
 
+VideoTranscript.prototype.findTextLinks = function() {
+  return this.$videoText.find('.ctnVideoTextLink');
+};
 
 // if we have 10, 15, 15, 20 and timeSeconds = 15, we get back the 10 element
 // if we ask timeSeconds = 5, we get []
@@ -216,6 +219,13 @@ VideoTranscript.prototype.findTextLinkBefore = function(timeSeconds) {
   });
 
   return $(textLink);
+};
+
+VideoTranscript.prototype.findTextLinksBefore = function(timeSeconds) {
+  var textLinks = this.$videoText.find('.ctnVideoTextLink');
+  return textLinks.filter(function() {
+    return parseInt($(this).attr('data-timestamp')) < parseInt(timeSeconds);
+  });
 };
 
 // if we have 10, 15, 15, 20 and timeSeconds = 15, we get back the first 15 element
@@ -252,6 +262,13 @@ VideoTranscript.prototype.findTextLinkAfter = function(timeSeconds) {
   });
 
   return $(textLink);
+};
+
+VideoTranscript.prototype.findTextLinksAfter = function(timeSeconds) {
+  var textLinks = this.$videoText.find('.ctnVideoTextLink');
+  return textLinks.filter(function() {
+    return parseInt($(this).attr('data-timestamp')) > parseInt(timeSeconds);
+  });
 };
 
 // gets back the noTranscript placeholder element, which should always be the last element

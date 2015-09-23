@@ -28,15 +28,21 @@
       <!-- <button id='toggle-transcripts' type="button" class="btn btn-default"><i class='fa fa-align-left'></i> Transcripts</button> -->
 
       <!--<h2>Timeline</h2>-->
-      <input type='checkbox' id='btn-check-show-all' readonly></input>
+      <input type='checkbox' id='btn-check-show-all' checked></input>
       <h2>Timeline</h2>
       <a id='btn-add-note' class='btn btn-medium-blue'><i class='fa fa-plus'></i> Add a Note</a>
     </div>
     <div id='videoText'>
+      <!-- insert transcription here -->
+      <div class='ctn-highlight-start sub'>
+        <span>start of highlight</span>
+      </div>
       <div class='ctnNoTranscript'>
         (no transcript)
       </div>
-      <!-- insert transcription here -->
+      <div class='ctn-highlight-finish sub'>
+        <span>end of highlight</span>
+      </div>
     </div>
   </div>
 </div>
@@ -49,7 +55,7 @@
 
 <script id='video-text-partial' type='text/x-handlebars-template'>
   <div class='ctnVideoTextLink clearfix {{displayClass}}' data-timestamp='{{time}}'>
-  <input type='checkbox' class='video-check-show'></input>
+    <input type='checkbox' class='video-check-show' checked></input>
     <div class='videoTextLink'>
       <input type='text' class='video-text-time' value='{{displayTime}}' readonly></input>
       <div class='video-text-icon-display'>

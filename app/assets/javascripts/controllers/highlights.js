@@ -33,6 +33,11 @@ $(function(){
 
   }, videoController);
 
+  HighlightTimeline.call(videoTranscript, {
+    highlightStart: $('.ctn-highlight-start'),
+    highlightFinish: $('.ctn-highlight-finish')
+  });
+
   // var videoLink = new VideoLink({
   //   inputUrlTime: $('#input-url-time'),
   //   inputUrlBase: $('#input-url-base'),
@@ -73,6 +78,8 @@ $(function(){
   );
   videoTranscript.refreshView();
 
+  videoRange.on('videoRangeChange', $.proxy(videoTranscript.onVideoRangeChange, videoTranscript));
+
   // videoLink.updateShareLink(sonar.resultStep.shareLink);
 
   // $(window).load(function() {
@@ -101,5 +108,9 @@ $(function(){
     var checked = $('#btn-check-show-all').prop('checked');
     $('.video-check-show').prop('checked', checked);
   });
+
+  window.videoController = videoController;
+  window.videoRange = videoRange;
+  window.videoTranscript = videoTranscript;
 
 });
