@@ -1,4 +1,4 @@
-Initable = function() {
+Initable = function(handler) {
   this.onInit = function(handler) {
     this.initHandlers = (this.initHandlers || []).slice(0);
     this.initHandlers.push(handler);
@@ -9,4 +9,8 @@ Initable = function() {
       this.initHandlers[i].call(this);
     }
   };
+
+  if (handler) {
+    this.onInit(handler);
+  }
 };

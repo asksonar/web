@@ -37,8 +37,12 @@ $(function(){
 
   HighlightTimeline.call(videoTranscript, {
     highlightStart: $('.ctn-highlight-start'),
-    highlightFinish: $('.ctn-highlight-finish')
+    highlightFinish: $('.ctn-highlight-finish'),
+    checkboxSelector: '.video-check-show',
+    checkAll: $('#btn-check-show-all')
   });
+
+  videoTranscript.init();
 
   // var videoLink = new VideoLink({
   //   inputUrlTime: $('#input-url-time'),
@@ -81,35 +85,13 @@ $(function(){
   videoTranscript.refreshView();
 
   videoRange.on('videoRangeChange', $.proxy(videoTranscript.onVideoRangeChange, videoTranscript));
+  videoRange.on('videoRangeChange', $.proxy(videoTranscript.updateCheckAll, videoTranscript));
 
   // videoLink.updateShareLink(sonar.resultStep.shareLink);
 
   // $(window).load(function() {
     // videoTranscript.focusLink(timeSeconds);
   // });
-
-  $('.video-check-show').on('click', function() {
-    var total = $('.video-check-show').length;
-    var checked = $.makeArray($('.video-check-show')).reduce(function(prev, current) {
-      return prev + ($(current).prop('checked') ? 1 : 0);
-    }, 0);
-
-    if (checked === 0) {
-      $('#btn-check-show-all').prop('checked', false);
-      $('#btn-check-show-all').prop('indeterminate', false);
-    } else if (checked === total) {
-      $('#btn-check-show-all').prop('checked', true);
-      $('#btn-check-show-all').prop('indeterminate', false);
-    } else {
-      $('#btn-check-show-all').prop('checked', false);
-      $('#btn-check-show-all').prop('indeterminate', true);
-    }
-  });
-
-  $('#btn-check-show-all').on('click', function() {
-    var checked = $('#btn-check-show-all').prop('checked');
-    $('.video-check-show').prop('checked', checked);
-  });
 
   window.videoController = videoController;
   window.videoRange = videoRange;

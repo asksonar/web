@@ -30,6 +30,7 @@ $(function(){
     timelineEnding: $('.ctn-timeline-ending')
 
   }, videoController);
+  videoTranscript.init();
 
   var videoLink = new VideoLink({
     inputUrlTime: $('#input-url-time'),

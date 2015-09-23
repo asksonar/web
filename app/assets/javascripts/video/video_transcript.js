@@ -13,11 +13,9 @@ VideoTranscript = function(config, video) {
   this.video = video;
 
   this.timelineArray = [];
-
-  this.init();
 };
 
-VideoTranscript.prototype.init = function() {
+Initable.call(VideoTranscript.prototype, function() {
   this.$btnToggleTranscripts.on('click', $.proxy(this.toggleTranscripts, this));
   this.$btnAddNote.on('click', $.proxy(this.createNote, this));
 
@@ -27,7 +25,7 @@ VideoTranscript.prototype.init = function() {
   this.$videoText.on('startFocusing', $.proxy(this.startFocusing, this));
 
   this.onTimeupdate = $.proxy(this.onTimeupdate, this);
-};
+});
 
 VideoTranscript.prototype.startEditing = function(event) {
   this.$videoText.addClass('editing');

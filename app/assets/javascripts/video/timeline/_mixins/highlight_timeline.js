@@ -1,15 +1,13 @@
 HighlightTimeline = function(config) {
-
   this.$highlightStart = config.highlightStart;
   this.$highlightFinish = config.highlightFinish;
+  this.checkboxSelector = config.checkboxSelector;
+  this.$checkAll = config.checkAll;
 
-  // target.setHighlightStart = function(timeSeconds) {
-  //   this.setHighlightStartFinish(timeSeconds, this.finishTime);
-  // };
-
-  // target.setHighlightFinish = function(timeSeconds) {
-  //   this.setHighlightStartFinish(this.startTime, timeSeconds);
-  // };
+  this.onInit(function() {
+    this.$container.on('click', this.checkboxSelector, $.proxy(this.updateCheckAll, this));
+    this.$checkAll.on('click', $.proxy(this.setCheckAll, this));
+  });
 
   this.onVideoRangeChange = function(event, startTime, finishTime) {
     this.setHighlightStartFinish(startTime, finishTime);
@@ -31,6 +29,30 @@ HighlightTimeline = function(config) {
     this.findTextLinks().removeClass('ctn-highlight-disabled');
     this.findTextLinksBefore(startTime).addClass('ctn-highlight-disabled');
     this.findTextLinksAfter(finishTime).addClass('ctn-highlight-disabled');
+  };
+
+  this.updateCheckAll = function() {
+    var visibleCheckboxes = $(this.checkboxSelector + ':visible');
+    var checked = $.makeArray(visibleCheckboxes).reduce(function(prev, current) {
+      return prev + ($(current).prop('checked') ? 1 : 0);
+    }, 0);
+
+    if (checked === 0) {
+      this.$checkAll.prop('checked', false);
+      this.$checkAll.prop('indeterminate', false);
+    } else if (checked === visibleCheckboxes.length) {
+      this.$checkAll.prop('checked', true);
+      this.$checkAll.prop('indeterminate', false);
+    } else {
+      this.$checkAll.prop('checked', false);
+      this.$checkAll.prop('indeterminate', true);
+    }
+  };
+
+  this.setCheckAll = function() {
+    var checked = this.$checkAll.prop('checked');
+    var visibleCheckboxes = $(this.checkboxSelector + ':visible');
+    visibleCheckboxes.prop('checked', checked);
   };
 
 };
