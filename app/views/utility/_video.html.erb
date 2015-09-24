@@ -41,7 +41,7 @@
 
 <script id='video-text-partial' type='text/x-handlebars-template'>
   <div class='ctnVideoTextLink clearfix {{displayClass}}' data-timestamp='{{time}}'>
-    <div class='videoTextLink'>
+    <div class='videoTextLink clearfix'>
       <input type='text' class='video-text-time' value='{{displayTime}}' readonly></input>
       <div class='video-text-icon-display'>
         <div class='video-text-icon'><i class='{{displayIcon}}'></i></div>
@@ -51,9 +51,11 @@
           <div class='video-text-display'>{{{displayText}}}</div>
         {{/if}}
       </div>
+      {{#if editable}}
+        <a class='video-btn-edit sub'><i class='fa fa-edit'></i> Edit</a>
+      {{/if}}
     </div>
     {{#if editable}}
-      <a class='video-btn-edit sub'><i class='fa fa-edit'></i> Edit</a>
       <div class='video-text-buttons'>
         <span class='video-btn-save btn btn-success btn-colorless'><i class='fa fa-check'></i> Save</span>
         <span class='video-btn-cancel btn btn-danger btn-colorless'><i class='fa fa-times'></i> Cancel</span>

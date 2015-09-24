@@ -19,7 +19,7 @@ Initable.call(VideoTranscript.prototype, function() {
   this.$btnToggleTranscripts.on('click', $.proxy(this.toggleTranscripts, this));
   this.$btnAddNote.on('click', $.proxy(this.createNote, this));
 
-  this.$videoText.on('click', '.ctnVideoTextLink', $.proxy(this.clickVideoText, this));
+  this.$videoText.on('click', '.videoTextLink', $.proxy(this.clickVideoText, this));
   this.$videoText.on('startEditing', $.proxy(this.startEditing, this));
   this.$videoText.on('stopEditing', $.proxy(this.stopEditing, this));
   this.$videoText.on('startFocusing', $.proxy(this.startFocusing, this));
@@ -146,7 +146,7 @@ VideoTranscript.prototype.buildTranscript = function(resultStepHashId, transcrip
 };
 
 VideoTranscript.prototype.clickVideoText = function(event) {
-  var thisEl = $(event.currentTarget);
+  var thisEl = $(event.currentTarget).parent();
   if (thisEl.attr('data-state')) {
     return;
   } else {

@@ -67,19 +67,17 @@
   overflow: hidden;
 
   &:not([data-state]) {
-    cursor: pointer;
-
     &.note .videoTextLink {
       background-color: #f0efde;
     }
 
-    &:hover .videoTextLink,
-    &:hover .video-btn-edit {
+    .videoTextLink:hover {
       background-color: #EFEFEF;
-    }
+      cursor: pointer;
 
-    &:hover .video-text-time {
-      text-decoration: underline;
+      .video-text-time {
+        text-decoration: underline;
+      }
     }
 
     &.activeVideoTextLink {
@@ -188,7 +186,7 @@
 .video-btn-edit {
   position: absolute;
   right: 0;
-  margin-top: -31px;
+  margin-top: -28px;
   padding: 5px 10px;
   background-color: inherit;
 
