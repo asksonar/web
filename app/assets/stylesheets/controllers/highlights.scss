@@ -62,8 +62,17 @@
   .ctn-highlight-disabled {
     color: #999;
 
+    &:hover {
+      background-color: inherit;
+    }
+
+    &[data-state] {
+      color: inherit;
+    }
+
     .video-check-show {
       display: none;
     }
   }
+
 }

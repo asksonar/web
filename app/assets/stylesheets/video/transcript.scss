@@ -87,12 +87,10 @@
     }
   }
 
-  &.transcript {
+  .readonly-timeline &.transcript {
     color: #999;
 
-    .editable-timeline &,
-    &:hover,
-    &[data-state] {
+    &:hover {
       color: inherit;
     }
   }
