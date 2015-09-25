@@ -13,6 +13,11 @@ EditableComponent = function() {
     this.$btnEdit.on('click', $.proxy(this.edit, this));
     this.$btnSave.on('click', $.proxy(this.save, this));
     this.$btnCancel.on('click', $.proxy(this.cancel, this));
+
+    if (this.creating) {
+      this.edit();
+      this.setState('creating');
+    }
   });
 
   this.setState = function(state) {
@@ -25,11 +30,6 @@ EditableComponent = function() {
 
   this.clearState = function() {
     this.$el.removeAttr('data-state');
-  };
-
-  this.create = function() {
-    this.edit();
-    this.setState('creating');
   };
 
   this.edit = function() {

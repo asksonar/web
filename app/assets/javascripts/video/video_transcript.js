@@ -225,7 +225,7 @@ VideoTranscript.prototype.createNote = function() {
 
   var timeSeconds = this.video.currentTime();
 
-  var newElement = new NoteElement({
+  var newElement = NoteElement.create({
     time: timeSeconds,
     text: '',
     resultStepHashId: this.resultStepHashId
@@ -242,7 +242,7 @@ VideoTranscript.prototype.createNote = function() {
 };
 
 VideoTranscript.prototype.restoreNote = function(timeSeconds, text) {
-  var newElement = new NoteElement({
+  var newElement = NoteElement.create({
     time: timeSeconds,
     text: text,
     resultStepHashId: this.resultStepHashId

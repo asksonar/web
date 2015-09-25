@@ -75,10 +75,15 @@ $(function(){
     rangeRightMarkerSelector: '.vjs-custom-range-right-marker'
   }, videoController);
 
+  modulejs.require('NoteElement');
+  modulejs.require('TranscriptElement');
+  modulejs.require('FeelingDelightedElement');
+  modulejs.require('FeelingConfusedElement');
+
   var timelineArray = []
-    .concat(TimelineElement.buildElementArray(sonar.resultStep.delightedArray, FeelingDelightedElement))
-    .concat(TimelineElement.buildElementArray(sonar.resultStep.confusedArray, FeelingConfusedElement))
-    .concat(TimelineElement.buildElementArray(sonar.resultStep.highlightedArray, NoteElement));
+    .concat(FeelingDelightedElement.buildElementArray(sonar.resultStep.delightedArray))
+    .concat(FeelingConfusedElement.buildElementArray(sonar.resultStep.confusedArray))
+    .concat(NoteElement.buildElementArray(sonar.resultStep.highlightedArray));
 
   videoTranscript.buildTranscript(sonar.resultStep.hashid, timelineArray);
   videoTranscript.refreshView();
