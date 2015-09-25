@@ -56,11 +56,17 @@ $(function(){
   videoController.src(sonar.resultStep.srcArray);
   videoController.play(timeSeconds);
 
+  modulejs.require('NoteElement');
+  modulejs.require('TranscriptElement');
+  modulejs.require('FeelingDelightedElement');
+  modulejs.require('FeelingConfusedElement');
+
   var timelineArray = []
-    .concat(TimelineElement.buildElementArray(sonar.resultStep.transcriptionArray, TranscriptElement))
-    .concat(TimelineElement.buildElementArray(sonar.resultStep.delightedArray, FeelingDelightedElement))
-    .concat(TimelineElement.buildElementArray(sonar.resultStep.confusedArray, FeelingConfusedElement))
-    .concat(TimelineElement.buildElementArray(sonar.resultStep.highlightedArray, NoteElement));
+    .concat(TranscriptElement.buildElementArray(sonar.resultStep.transcriptionArray))
+    .concat(FeelingDelightedElement.buildElementArray(sonar.resultStep.delightedArray))
+    .concat(FeelingConfusedElement.buildElementArray(sonar.resultStep.confusedArray))
+    .concat(NoteElement.buildElementArray(sonar.resultStep.highlightedArray));
+
   videoTranscript.buildTranscript(sonar.resultStep.hashid, timelineArray);
 
   videoTranscript.refreshView();

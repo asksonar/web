@@ -76,7 +76,6 @@ $(function(){
   }, videoController);
 
   modulejs.require('NoteElement');
-  modulejs.require('TranscriptElement');
   modulejs.require('FeelingDelightedElement');
   modulejs.require('FeelingConfusedElement');
 
