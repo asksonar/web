@@ -35,7 +35,8 @@ TimelineElement.prototype.html = function() {
     displayIcon: this.displayIcon,
     displayText: this.displayText,
     editable: this.editable,
-    trashable: this.trashable
+    trashable: this.trashable,
+    hashid: this.hashid
   });
 };
 
@@ -71,4 +72,10 @@ TimelineElement.prototype.remove = function() {
 
 TimelineElement.prototype.scrollIntoView = function() {
   this.$el.get(0).scrollIntoView();
+};
+
+TimelineElement.buildElementArray = function(arrayOfElements, elementClass) {
+  return arrayOfElements.map(function(currentValue) {
+    return new elementClass(currentValue);
+  });
 };

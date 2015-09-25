@@ -67,80 +67,17 @@ VideoTranscript.prototype.toggleTranscripts = function(event) {
   this.$container.toggleClass('show-transcripts');
 };
 
-VideoTranscript.prototype.buildTranscript = function(resultStepHashId, transcriptArray, delightedArray, confusedArray, highlightedArray) {
+VideoTranscript.prototype.buildTranscript = function(resultStepHashId, timelineArray) {
   this.resultStepHashId = resultStepHashId;
 
-  var i, hashid, timeSeconds, text;
-
   this.clearView();
-
-  for(i = 0; delightedArray && i  < delightedArray.length; i++) {
-    hashid = delightedArray[i].hashid;
-    timeSeconds = delightedArray[i].time;
-
-    this.timelineArray.push(
-      new FeelingDelightedElement({
-        hashid: hashid,
-        timeSeconds: timeSeconds
-      })
-    );
-  }
-
-  for(i = 0; confusedArray && i  < confusedArray.length; i++) {
-    hashid = confusedArray[i].hashid;
-    timeSeconds = confusedArray[i].time;
-
-    this.timelineArray.push(
-      new FeelingConfusedElement({
-        hashid: hashid,
-        timeSeconds: timeSeconds
-      })
-    );
-  }
-
-  for(i = 0; highlightedArray && i  < highlightedArray.length; i++) {
-    hashid = highlightedArray[i].hashid;
-    timeSeconds = highlightedArray[i].time;
-    text = highlightedArray[i].text;
-    text = (text || '').trim();
-    if (!text) {
-      continue;
-    }
-
-    this.timelineArray.push(
-      new NoteElement({
-        hashid: hashid,
-        timeSeconds: timeSeconds,
-        displayText: text,
-        resultStepHashId: resultStepHashId
-      })
-    );
-  }
-
-  for(i = 0; i  < transcriptArray.length; i++) {
-    hashid = transcriptArray[i].hashid;
-    timeSeconds = transcriptArray[i].time;
-    text = transcriptArray[i].text;
-    text = (text || '').trim();
-    if (!text) {
-      continue;
-    }
-
-    this.timelineArray.push(
-      new TranscriptElement({
-        hashid: hashid,
-        timeSeconds: timeSeconds,
-        displayText: text,
-        resultStepHashId: resultStepHashId
-      })
-    );
-  }
+  this.timelineArray = timelineArray;
 
   this.timelineArray.sort(function(a, b){
     return a.timeSeconds - b.timeSeconds;
   });
 
-  for(i = 0; i < this.timelineArray.length; i++) {
+  for(var i = 0; i < this.timelineArray.length; i++) {
     this.timelineArray[i].insertBefore(this.getTimelineEnding(), false);
   }
 };
@@ -289,8 +226,8 @@ VideoTranscript.prototype.createNote = function() {
   var timeSeconds = this.video.currentTime();
 
   var newElement = new NoteElement({
-    timeSeconds: timeSeconds,
-    displayText: '',
+    time: timeSeconds,
+    text: '',
     resultStepHashId: this.resultStepHashId
   });
 
@@ -306,8 +243,8 @@ VideoTranscript.prototype.createNote = function() {
 
 VideoTranscript.prototype.restoreNote = function(timeSeconds, text) {
   var newElement = new NoteElement({
-    timeSeconds: timeSeconds,
-    displayText: text,
+    time: timeSeconds,
+    text: text,
     resultStepHashId: this.resultStepHashId
   });
 

@@ -42,13 +42,14 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
   );
   this.video.src(data.srcArray);
 
-  this.transcript.buildTranscript(
-    data.hashid,
-    data.transcriptionArray,
-    data.delightedArray,
-    data.confusedArray,
-    data.highlightedArray
-  );
+  var timelineArray = []
+    .concat(TimelineElement.buildElementArray(data.transcriptionArray, TranscriptElement))
+    .concat(TimelineElement.buildElementArray(data.delightedArray, FeelingDelightedElement))
+    .concat(TimelineElement.buildElementArray(data.confusedArray, FeelingConfusedElement))
+    .concat(TimelineElement.buildElementArray(data.highlightedArray, NoteElement));
+
+  this.transcript.buildTranscript(data.hashid, timelineArray);
+
 
   this.videoLink.updateShareLink(data.shareLink);
 

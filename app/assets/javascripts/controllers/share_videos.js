@@ -56,13 +56,13 @@ $(function(){
   videoController.src(sonar.resultStep.srcArray);
   videoController.play(timeSeconds);
 
-  videoTranscript.buildTranscript(
-    sonar.resultStep.hashid,
-    sonar.resultStep.transcriptionArray,
-    sonar.resultStep.delightedArray,
-    sonar.resultStep.confusedArray,
-    sonar.resultStep.highlightedArray
-  );
+  var timelineArray = []
+    .concat(TimelineElement.buildElementArray(sonar.resultStep.transcriptionArray, TranscriptElement))
+    .concat(TimelineElement.buildElementArray(sonar.resultStep.delightedArray, FeelingDelightedElement))
+    .concat(TimelineElement.buildElementArray(sonar.resultStep.confusedArray, FeelingConfusedElement))
+    .concat(TimelineElement.buildElementArray(sonar.resultStep.highlightedArray, NoteElement));
+  videoTranscript.buildTranscript(sonar.resultStep.hashid, timelineArray);
+
   videoTranscript.refreshView();
 
   videoLink.updateShareLink(sonar.resultStep.shareLink);

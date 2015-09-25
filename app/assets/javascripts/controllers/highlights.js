@@ -75,13 +75,12 @@ $(function(){
     rangeRightMarkerSelector: '.vjs-custom-range-right-marker'
   }, videoController);
 
-  videoTranscript.buildTranscript(
-    sonar.resultStep.hashid,
-    [],
-    sonar.resultStep.delightedArray,
-    sonar.resultStep.confusedArray,
-    sonar.resultStep.highlightedArray
-  );
+  var timelineArray = []
+    .concat(TimelineElement.buildElementArray(sonar.resultStep.delightedArray, FeelingDelightedElement))
+    .concat(TimelineElement.buildElementArray(sonar.resultStep.confusedArray, FeelingConfusedElement))
+    .concat(TimelineElement.buildElementArray(sonar.resultStep.highlightedArray, NoteElement));
+
+  videoTranscript.buildTranscript(sonar.resultStep.hashid, timelineArray);
   videoTranscript.refreshView();
 
   videoRange.on('videoRangeChange', $.proxy(videoTranscript.onVideoRangeChange, videoTranscript));

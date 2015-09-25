@@ -1,8 +1,8 @@
 TranscriptElement = function(config) {
   this.displayClass = 'transcript';
   this.displayIcon = 'fa fa-align-left';
-  this.timeSeconds = config.timeSeconds;
-  this.displayText = config.displayText;
+  this.timeSeconds = config.time;
+  this.displayText = config.text;
   this.hashid = config.hashid;
   this.resultStepHashId = config.resultStepHashId;
 };

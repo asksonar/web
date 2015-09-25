@@ -1,8 +1,8 @@
 NoteElement = function(config) {
   this.displayClass = 'note';
   this.displayIcon = 'fa fa-tag';
-  this.timeSeconds = config.timeSeconds;
-  this.displayText = config.displayText;
+  this.timeSeconds = config.time;
+  this.displayText = config.text;
   this.hashid = config.hashid;
   this.resultStepHashId = config.resultStepHashId;
 };
