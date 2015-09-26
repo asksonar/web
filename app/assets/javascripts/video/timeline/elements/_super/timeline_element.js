@@ -1,6 +1,6 @@
 modulejs.define('TimelineElement', function() {
   var timelineElement = Object.create(Object.prototype, {
-    clazz: { value: 'TimelineElement' }
+    modulez: { value: 'TimelineElement' }
   });
 
   Creatable.call(timelineElement);

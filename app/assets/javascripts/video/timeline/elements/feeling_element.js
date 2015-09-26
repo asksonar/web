@@ -1,6 +1,6 @@
 modulejs.define('FeelingDelightedElement', ['TimelineElement'], function(timelineElement) {
   var feelingDelightedElement = Object.create(timelineElement, {
-    clazz: { value: 'FeelingDelightedElement' }
+    modulez: { value: 'FeelingDelightedElement' }
   });
 
   feelingDelightedElement.onCreate(function(config) {
@@ -15,7 +15,9 @@ modulejs.define('FeelingDelightedElement', ['TimelineElement'], function(timelin
 });
 
 modulejs.define('FeelingConfusedElement', ['TimelineElement'], function(timelineElement) {
-  var feelingConfusedElement = Object.create(timelineElement);
+  var feelingConfusedElement = Object.create(timelineElement, {
+    modulez: { value: 'FeelingConfusedElement' }
+  });
 
   feelingConfusedElement.onCreate(function(config) {
     this.displayClass = 'feeling-confused';

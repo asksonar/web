@@ -1,6 +1,6 @@
 modulejs.define('NoteElement', ['TimelineElement'], function(timelineElement) {
   var noteElement = Object.create(timelineElement, {
-    clazz: { value: 'NoteElement' }
+    modulez: { value: 'NoteElement' }
   });
 
   EditableComponent.call(noteElement);

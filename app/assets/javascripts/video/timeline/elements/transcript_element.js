@@ -1,6 +1,6 @@
 modulejs.define('TranscriptElement', ['TimelineElement'], function(timelineElement) {
   var transcriptElement = Object.create(timelineElement, {
-    clazz: { value: 'TranscriptElement' }
+    modulez: { value: 'TranscriptElement' }
   });
 
   EditableComponent.call(transcriptElement);
