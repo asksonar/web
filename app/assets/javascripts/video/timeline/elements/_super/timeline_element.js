@@ -1,11 +1,13 @@
 modulejs.define('TimelineElement', function() {
-  var timelineElement = Object.create(null);
-
-  Initable.call(timelineElement, function() {
-    this.initialized = true;
+  var timelineElement = Object.create(Object.prototype, {
+    clazz: { value: 'TimelineElement' }
   });
 
   Creatable.call(timelineElement);
+  Eventable.call(timelineElement);
+  Initable.call(timelineElement, function() {
+    this.initialized = true;
+  });
 
   timelineElement.displayTimeToSecs = function(displayTime) {
     var mins = parseInt(displayTime.split(':')[0]);
@@ -80,5 +82,5 @@ modulejs.define('TimelineElement', function() {
     }, this));
   };
 
-  window.TimelineElement = timelineElement;
+  return timelineElement;
 });

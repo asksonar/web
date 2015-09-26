@@ -1,10 +1,12 @@
-modulejs.define('NoteElement', ['TimelineElement'], function() {
+modulejs.define('NoteElement', ['TimelineElement'], function(timelineElement) {
+  var noteElement = Object.create(timelineElement, {
+    clazz: { value: 'NoteElement' }
+  });
 
-  window.NoteElement = Object.create(TimelineElement);
-  EditableComponent.call(NoteElement);
-  TrashableComponent.call(NoteElement);
+  EditableComponent.call(noteElement);
+  TrashableComponent.call(noteElement);
 
-  NoteElement.onCreate(function(config) {
+  noteElement.onCreate(function(config) {
     this.displayClass = 'note';
     this.displayIcon = 'fa fa-tag';
     this.timeSeconds = config.time;
@@ -13,7 +15,7 @@ modulejs.define('NoteElement', ['TimelineElement'], function() {
     this.resultStepHashId = config.resultStepHashId;
   });
 
-  NoteElement.save = function() {
+  noteElement.save = function() {
     var time = this.$inputTime.val();
     var text = this.$inputText.val();
 
@@ -44,16 +46,21 @@ modulejs.define('NoteElement', ['TimelineElement'], function() {
         authenticity_token: AUTH_TOKEN
       }
     }).success($.proxy(function(response) {
-      this.hashid = response.hashid;
-      this.setTime(response.time);
-      this.setText(response.text);
-      this.saveSuccess();
+      this.trigger('saveSuccess', response);
     }, this)).fail($.proxy(function() {
-      this.saveFail();
+      this.trigger('saveFail', response);
     }, this));
   };
 
-  NoteElement.trash = function() {
+  var _saveSuccess = noteElement.saveSuccess || $.noop;
+  noteElement.saveSuccess = function(event, response) {
+    _saveSuccess.apply(this, arguments);
+    this.hashid = response.hashid;
+    this.setTime(response.time);
+    this.setText(response.text);
+  };
+
+  noteElement.trash = function() {
     var time = this.$inputTime.val();
     var text = this.$inputText.val();
 
@@ -73,4 +80,6 @@ modulejs.define('NoteElement', ['TimelineElement'], function() {
       this.trashFail();
     }, this));
   };
+
+  return noteElement;
 });

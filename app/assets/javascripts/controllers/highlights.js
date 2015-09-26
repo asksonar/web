@@ -75,14 +75,21 @@ $(function(){
     rangeRightMarkerSelector: '.vjs-custom-range-right-marker'
   }, videoController);
 
-  modulejs.require('NoteElement');
-  modulejs.require('FeelingDelightedElement');
-  modulejs.require('FeelingConfusedElement');
+  var noteElement = modulejs.require('NoteElement');
+  var feelingDelightedElement = modulejs.require('FeelingDelightedElement');
+  var feelingConfusedElement = modulejs.require('FeelingConfusedElement');
+
+  var checkableFeelingDelighted = Object.create(feelingDelightedElement);
+  CheckableComponent.call(checkableFeelingDelighted);
+  var checkableFeelingConfused = Object.create(feelingConfusedElement);
+  CheckableComponent.call(checkableFeelingConfused);
+  var checkableNote = Object.create(noteElement);
+  CheckableComponent.call(checkableNote);
 
   var timelineArray = []
-    .concat(FeelingDelightedElement.buildElementArray(sonar.resultStep.delightedArray))
-    .concat(FeelingConfusedElement.buildElementArray(sonar.resultStep.confusedArray))
-    .concat(NoteElement.buildElementArray(sonar.resultStep.highlightedArray));
+    .concat(checkableFeelingDelighted.buildElementArray(sonar.resultStep.delightedArray))
+    .concat(checkableFeelingConfused.buildElementArray(sonar.resultStep.confusedArray))
+    .concat(checkableNote.buildElementArray(sonar.resultStep.highlightedArray));
 
   videoTranscript.buildTranscript(sonar.resultStep.hashid, timelineArray);
   videoTranscript.refreshView();

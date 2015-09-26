@@ -42,16 +42,16 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
   );
   this.video.src(data.srcArray);
 
-  modulejs.require('NoteElement');
-  modulejs.require('TranscriptElement');
-  modulejs.require('FeelingDelightedElement');
-  modulejs.require('FeelingConfusedElement');
+  var transcriptElement = modulejs.require('TranscriptElement');
+  var feelingDelightedElement = modulejs.require('FeelingDelightedElement');
+  var feelingConfusedElement = modulejs.require('FeelingConfusedElement');
+  var noteElement = modulejs.require('NoteElement');
 
   var timelineArray = []
-    .concat(TranscriptElement.buildElementArray(data.transcriptionArray))
-    .concat(FeelingDelightedElement.buildElementArray(data.delightedArray))
-    .concat(FeelingConfusedElement.buildElementArray(data.confusedArray))
-    .concat(NoteElement.buildElementArray(data.highlightedArray));
+    .concat(transcriptElement.buildElementArray(data.transcriptionArray))
+    .concat(feelingDelightedElement.buildElementArray(data.delightedArray))
+    .concat(feelingConfusedElement.buildElementArray(data.confusedArray))
+    .concat(noteElement.buildElementArray(data.highlightedArray));
 
   this.transcript.buildTranscript(data.hashid, timelineArray);
 

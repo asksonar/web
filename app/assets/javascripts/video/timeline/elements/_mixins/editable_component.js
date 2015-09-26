@@ -14,6 +14,9 @@ EditableComponent = function() {
     this.$btnSave.on('click', $.proxy(this.save, this));
     this.$btnCancel.on('click', $.proxy(this.cancel, this));
 
+    this.on('saveSuccess', $.proxy(this.saveSuccess, this));
+    this.on('saveFail', $.proxy(this.saveFail, this));
+
     if (this.creating) {
       this.edit();
       this.setState('creating');

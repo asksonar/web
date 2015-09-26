@@ -1,7 +1,9 @@
-modulejs.define('FeelingDelightedElement', ['TimelineElement'], function() {
-  window.FeelingDelightedElement = Object.create(TimelineElement);
+modulejs.define('FeelingDelightedElement', ['TimelineElement'], function(timelineElement) {
+  var feelingDelightedElement = Object.create(timelineElement, {
+    clazz: { value: 'FeelingDelightedElement' }
+  });
 
-  FeelingDelightedElement.onCreate(function(config) {
+  feelingDelightedElement.onCreate(function(config) {
     this.displayClass = 'feeling-delighted';
     this.displayIcon = 'feeling-delighted';
     this.timeSeconds = config.time;
@@ -9,12 +11,13 @@ modulejs.define('FeelingDelightedElement', ['TimelineElement'], function() {
     this.hashid = config.hashid;
   });
 
+  return feelingDelightedElement;
 });
 
-modulejs.define('FeelingConfusedElement', ['TimelineElement'], function() {
-  window.FeelingConfusedElement = Object.create(TimelineElement);
+modulejs.define('FeelingConfusedElement', ['TimelineElement'], function(timelineElement) {
+  var feelingConfusedElement = Object.create(timelineElement);
 
-  FeelingConfusedElement.onCreate(function(config) {
+  feelingConfusedElement.onCreate(function(config) {
     this.displayClass = 'feeling-confused';
     this.displayIcon = 'feeling-confused';
     this.timeSeconds = config.time;
@@ -22,4 +25,5 @@ modulejs.define('FeelingConfusedElement', ['TimelineElement'], function() {
     this.hashid = config.hashid;
   });
 
+  return feelingConfusedElement;
 });

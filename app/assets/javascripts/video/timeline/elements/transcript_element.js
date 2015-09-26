@@ -1,10 +1,11 @@
-modulejs.define('TranscriptElement', ['TimelineElement'], function() {
+modulejs.define('TranscriptElement', ['TimelineElement'], function(timelineElement) {
+  var transcriptElement = Object.create(timelineElement, {
+    clazz: { value: 'TranscriptElement' }
+  });
 
-  window.TranscriptElement = Object.create(TimelineElement);
+  EditableComponent.call(transcriptElement);
 
-  EditableComponent.call(TranscriptElement);
-
-  TranscriptElement.onCreate(function(config) {
+  transcriptElement.onCreate(function(config) {
     this.displayClass = 'transcript';
     this.displayIcon = 'fa fa-align-left';
     this.timeSeconds = config.time;
@@ -13,7 +14,7 @@ modulejs.define('TranscriptElement', ['TimelineElement'], function() {
     this.resultStepHashId = config.resultStepHashId;
   });
 
-  TranscriptElement.save = function() {
+  transcriptElement.save = function() {
     var time = this.$inputTime.val();
     var text = this.$inputText.val();
 
@@ -44,4 +45,5 @@ modulejs.define('TranscriptElement', ['TimelineElement'], function() {
     }, this));
   };
 
+  return transcriptElement;
 });

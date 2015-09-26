@@ -1,6 +1,7 @@
 Eventable = function() {
   this.on = function(event, callback) {
-    this.eventBus = this.eventBus || $({});
+    // forcibly reassign this.eventBus so it doesn't muck with parents up the chain
+    this.eventBus = $.extend({}, this.eventBus || $({}));
     this.eventBus.on(event, callback);
   };
   this.trigger = function(type, data) {
