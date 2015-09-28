@@ -27,11 +27,13 @@ VideoController.prototype.init = function() {
     markers: []
   });
 
-  this.video.on('timeupdate', $.proxy(this.onTimeUpdate, this));
+  this.video.on('timeupdate', $.proxy(this.onTimeupdate, this));
   this.video.on('play', $.proxy(this.onPlay, this));
+  this.video.on("loadedmetadata", $.proxy(this.onLoadedmetadata, this));
   // videojs-markers will load the markers from options {} above upon loadedmetadata
   // so we will then load our own markers after that point
   this.video.on("loadedmetadata", $.proxy(this.loadMarkers, this));
+
 };
 
 VideoController.prototype.on = function(event, callback) {
@@ -118,13 +120,17 @@ VideoController.prototype.currentTime = function(timeSeconds) {
   }
 };
 
-VideoController.prototype.onTimeUpdate = function() {
+VideoController.prototype.onTimeupdate = function() {
   var currentTime = this.currentTime();
   this.eventBus.trigger('timeupdate', currentTime);
 };
 
 VideoController.prototype.onPlay = function() {
   this.eventBus.trigger('play');
+};
+
+VideoController.prototype.onLoadedmetadata = function() {
+  this.eventBus.trigger('loaded');
 };
 
 

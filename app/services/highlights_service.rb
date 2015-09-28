@@ -3,7 +3,7 @@ class HighlightsService
 
   # expecting highlight_params of the form something like
   # {"title"=>"", "video_time_start"=>"0:00", "video_time_end"=>"0:06", "note"=>{"M0JEPob7"=>"on", "nP2x424Q"=>"on"}, "feeling"=>{"o59D09ND"=>"on"}}
-  def create(highlight_params)
+  def create(highlight_params, scenario, result_step)
     ScenarioHighlight.create(
       title: highlight_params[:title],
       start_seconds: highlight_params[:start_seconds],
@@ -11,12 +11,14 @@ class HighlightsService
       timeline_elements: {
         notes: highlight_params[:note].keys,
         feelings: highlight_params[:feeling].keys
-      }.to_json
+      }.to_json,
+      scenario: scenario,
+      result_step: result_step
     )
   end
 
-  def update(highlight_params)
-    ScenarioHighlight.update(
+  def update(highlight, highlight_params)
+    highlight.update(
       title: highlight_params[:title],
       start_seconds: highlight_params[:start_seconds],
       end_seconds: highlight_params[:end_seconds],

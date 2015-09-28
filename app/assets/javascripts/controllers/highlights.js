@@ -5,7 +5,7 @@
 */
 
 $(function(){
-  if (!$('#highlights-new').length) {
+  if (!$('#highlights-new').length && !$('#highlights-edit').length) {
     return;
   }
 
@@ -64,17 +64,6 @@ $(function(){
   videoController.src(sonar.resultStep.srcArray);
   // videoController.play(timeSeconds);
 
-  var videoRange = new VideoRange({
-    inputStart: $('#input-video-time-start'),
-    inputFinish: $('#input-video-time-end'),
-    scriptVideoRangeTemplate: $('#video-range-template'),
-    progressControlSelector : '.vjs-progress-control',
-    rangeLeftMaskSelector: '.vjs-custom-range-left-mask',
-    rangeRightMaskSelector: '.vjs-custom-range-right-mask',
-    rangeLeftMarkerSelector: '.vjs-custom-range-left-marker',
-    rangeRightMarkerSelector: '.vjs-custom-range-right-marker'
-  }, videoController);
-
   var checkableFeelingDelighted = Object.create(modulejs.require('FeelingDelightedElement'));
   CheckableComponent.call(checkableFeelingDelighted);
   var checkableFeelingConfused = Object.create(modulejs.require('FeelingConfusedElement'));
@@ -90,8 +79,23 @@ $(function(){
   videoTranscript.buildTranscript(sonar.resultStep.hashid, timelineArray);
   videoTranscript.refreshView();
 
+  var videoRange = new VideoRange({
+    inputStart: $('#input-video-time-start'),
+    inputFinish: $('#input-video-time-end'),
+    hiddenStart: $('#scenario_highlight_start_seconds'),
+    hiddenFinish: $('#scenario_highlight_end_seconds'),
+    scriptVideoRangeTemplate: $('#video-range-template'),
+    progressControlSelector : '.vjs-progress-control',
+    rangeLeftMaskSelector: '.vjs-custom-range-left-mask',
+    rangeRightMaskSelector: '.vjs-custom-range-right-mask',
+    rangeLeftMarkerSelector: '.vjs-custom-range-left-marker',
+    rangeRightMarkerSelector: '.vjs-custom-range-right-marker'
+  }, videoController);
+
   videoRange.on('videoRangeChange', $.proxy(videoTranscript.onVideoRangeChange, videoTranscript));
   videoRange.on('videoRangeChange', $.proxy(videoTranscript.updateCheckAll, videoTranscript));
+
+  videoRange.init();
 
   // videoLink.updateShareLink(sonar.resultStep.shareLink);
 

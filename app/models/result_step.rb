@@ -10,6 +10,7 @@ class ResultStep < ActiveRecord::Base
 
   delegate :panelist, to: :scenario_result
   delegate :email, to: :scenario_result
+  delegate :scenario, to: :scenario_result
 
   HASHIDS_SALT = '4$g&QNrACfVp'
 

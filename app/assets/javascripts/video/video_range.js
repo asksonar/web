@@ -2,6 +2,9 @@ VideoRange = function(config, video) {
   this.$inputStart = config.inputStart;
   this.$inputFinish = config.inputFinish;
 
+  this.$hiddenStart = config.hiddenStart;
+  this.$hiddenFinish = config.hiddenFinish;
+
   this.$scriptVideoRangeTemplate = config.scriptVideoRangeTemplate;
   this.progressControlSelector = config.progressControlSelector;
   this.rangeLeftMaskSelector = config.rangeLeftMaskSelector;
@@ -12,8 +15,6 @@ VideoRange = function(config, video) {
   this.minimumRange = 1;
 
   this.video = video;
-
-  this.init();
 };
 
 Eventable.call(VideoRange.prototype);
@@ -45,6 +46,12 @@ VideoRange.prototype.init = function() {
   this.video.on('play', $.proxy(this.onVideoPlay, this));
   this.$inputStart.on('input', $.proxy(this.inputStart, this));
   this.$inputFinish.on('input', $.proxy(this.inputFinish, this));
+
+  this.setStartFinish(this.$hiddenStart.val(), this.$hiddenFinish.val());
+
+  this.video.on('loaded', $.proxy(function() {
+    this.setStartFinish(this.start, this.finish);
+  }, this));
 };
 
 VideoRange.prototype.onVideoTimeUpdate = function(event, currentTime) {
@@ -77,8 +84,6 @@ VideoRange.prototype.setStart = function(start) {
   if (this.video.paused()) {
     this.video.currentTime(this.start);
   }
-  this.trigger('videoRangeStartChange', [this.start]);
-  this.trigger('videoRangeChange', [this.start, this.finish]);
 
   return left;
 };
@@ -88,37 +93,58 @@ VideoRange.prototype.setFinish = function(finish) {
   if (this.video.paused()) {
     this.video.currentTime(this.finish);
   }
-  this.trigger('videoRangeFinishChange', [this.finish]);
-  this.trigger('videoRangeChange', [this.start, this.finish]);
 
   return left;
 };
 
 VideoRange.prototype.setStartFinish = function(start, finish) {
-  this.start = start || 0;
-  this.finish = finish || this.video.duration();
-  // check bounds
-  this.start = Math.max(this.start, 0);
-  this.finish = Math.min(this.finish, this.video.duration());
-  // start counting minimum range from start
-  this.finish = Math.max(this.finish, this.start + this.minimumRange);
-  // check finish's upper bound
-  this.finish = Math.min(this.finish, this.video.duration());
-  // adjust start as needed based on finish's upper bound
-  this.start = Math.min(this.start, this.finish - this.minimumRange);
-  // check start's lower bound
-  this.start = Math.max(this.start, 0);
+  var previousStart = this.start;
+  var previousFinish = this.finish;
+
+  var startWidth, finishWidth;
+
+  this.start = parseFloat(start) || 0;
+  this.finish = parseFloat(finish) || this.video.duration();
+
+  // useless if video isn't loaded yet
+  if (this.video.duration()) {
+    // check bounds
+    this.start = Math.max(this.start, 0);
+    this.finish = Math.min(this.finish, this.video.duration());
+    // start counting minimum range from start
+    this.finish = Math.max(this.finish, this.start + this.minimumRange);
+    // check finish's upper bound
+    this.finish = Math.min(this.finish, this.video.duration());
+    // adjust start as needed based on finish's upper bound
+    this.start = Math.min(this.start, this.finish - this.minimumRange);
+    // check start's lower bound
+    this.start = Math.max(this.start, 0);
+
+    // draw markers and masks on the video
+    startWidth = this.start / this.video.duration() * this.$progressControl.width();
+    this.$rangeLeftMask.css('width', startWidth);
+    this.$rangeLeftMarker.css('left', startWidth);
+
+    finishWidth = this.finish / this.video.duration() * this.$progressControl.width();
+    this.$rangeRightMask.css('width', this.$progressControl.width() - finishWidth);
+    this.$rangeRightMarker.css('left', finishWidth);
+  }
 
   this.$inputStart.val(TimeDisplay.secsToDisplayTime(Math.floor(this.start)));
   this.$inputFinish.val(TimeDisplay.secsToDisplayTime(Math.ceil(this.finish)));
 
-  var startWidth = this.start / this.video.duration() * this.$progressControl.width();
-  this.$rangeLeftMask.css('width', startWidth);
-  this.$rangeLeftMarker.css('left', startWidth);
+  this.$hiddenStart.val(this.start);
+  this.$hiddenFinish.val(this.finish);
 
-  var finishWidth = this.finish / this.video.duration() * this.$progressControl.width();
-  this.$rangeRightMask.css('width', this.$progressControl.width() - finishWidth);
-  this.$rangeRightMarker.css('left', finishWidth);
+  if (this.start !== previousStart) {
+    this.trigger('videoRangeStartChange', [this.start]);
+  }
+  if (this.finish !== previousFinish) {
+    this.trigger('videoRangeFinishChange', [this.finish]);
+  }
+  if (this.start !== previousStart || this.finish !== previousFinish) {
+    this.trigger('videoRangeChange', [this.start, this.finish]);
+  }
 
   return [startWidth, finishWidth];
 };
