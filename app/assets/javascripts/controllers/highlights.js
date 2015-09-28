@@ -75,15 +75,11 @@ $(function(){
     rangeRightMarkerSelector: '.vjs-custom-range-right-marker'
   }, videoController);
 
-  var noteElement = modulejs.require('NoteElement');
-  var feelingDelightedElement = modulejs.require('FeelingDelightedElement');
-  var feelingConfusedElement = modulejs.require('FeelingConfusedElement');
-
-  var checkableFeelingDelighted = Object.create(feelingDelightedElement);
+  var checkableFeelingDelighted = Object.create(modulejs.require('FeelingDelightedElement'));
   CheckableComponent.call(checkableFeelingDelighted);
-  var checkableFeelingConfused = Object.create(feelingConfusedElement);
+  var checkableFeelingConfused = Object.create(modulejs.require('FeelingConfusedElement'));
   CheckableComponent.call(checkableFeelingConfused);
-  var checkableNote = Object.create(noteElement);
+  var checkableNote = Object.create(modulejs.require('NoteElement'));
   CheckableComponent.call(checkableNote);
 
   var timelineArray = []

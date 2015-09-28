@@ -225,7 +225,10 @@ VideoTranscript.prototype.createNote = function() {
 
   var timeSeconds = this.video.currentTime();
 
-  var newElement = modulejs.require('NoteElement').create({
+  var checkableNoteElement = modulejs.require('NoteElement');
+  CheckableComponent.call(checkableNoteElement);
+
+  var newElement = checkableNoteElement.create({
     time: timeSeconds,
     text: '',
     resultStepHashId: this.resultStepHashId

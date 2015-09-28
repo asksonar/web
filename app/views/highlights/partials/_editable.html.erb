@@ -1,0 +1,12 @@
+<% content_for :video_sub do %>
+  <div class='ctn-video-time-snippet h4'>
+    <%= f.hidden_field :start_seconds %>
+    <%= f.hidden_field :end_seconds %>
+
+    <%= bootstrap_form_tag do |f| %>
+      From: <%= f.text_field :video_time_start, hide_label: true, class: 'h2', id: 'input-video-time-start' %>
+      To: <%= f.text_field :video_time_end, hide_label: true, class: 'h2', id: 'input-video-time-end' %>
+    <% end %>
+
+  </div>
+<% end %>

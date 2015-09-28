@@ -1,0 +1,19 @@
+<% content_for :title do %>
+  Highlight
+<% end %>
+
+<section class='main-content-header'>
+  <div class='ctn-title-buttons'>
+    <div class='ctn-title'>
+      <%= @highlight.title %>
+    </div>
+    <div class='ctn-buttons'>
+      <a class='btn btn-dark-blue' href='<%= edit_highlight_path %>'>Edit</a>
+    </div>
+  </div>
+</section>
+<section class="main-content">
+  <div class='panel readonly-timeline clearfix'>
+    <%= render partial: 'highlights/partials/readonly', layout: 'highlights/layouts/video' %>
+  </div>
+</section>

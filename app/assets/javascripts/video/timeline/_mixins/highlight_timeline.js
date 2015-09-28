@@ -26,9 +26,18 @@ HighlightTimeline = function(config) {
     }
     insertBefore.before(this.$highlightFinish);
 
-    this.findTextLinks().removeClass('ctn-highlight-disabled');
-    this.findTextLinksBefore(startTime).addClass('ctn-highlight-disabled');
-    this.findTextLinksAfter(finishTime).addClass('ctn-highlight-disabled');
+    this.findTextLinks()
+      .removeClass('ctn-highlight-disabled')
+      .find("input[type='checkbox']")
+      .prop('disabled', false);
+    this.findTextLinksBefore(startTime)
+      .addClass('ctn-highlight-disabled')
+      .find("input[type='checkbox']")
+      .prop('disabled', true);
+    this.findTextLinksAfter(finishTime)
+      .addClass('ctn-highlight-disabled')
+      .find("input[type='checkbox']")
+      .prop('disabled', true);;
   };
 
   this.updateCheckAll = function() {

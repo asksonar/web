@@ -4,24 +4,9 @@
       controls preload="auto" width="auto" height="auto"
       data-setup='{"example_option":true}'>
     </video>
-    <!-- <div class="ctn-video-share-link">
-      <h4>Link to <span class='span-time'></span></h4>
-      <div class="input-group">
-        <input type="text" class="form-control" id='input-url-base' readonly>
 
-        <span class='input-group-btn' data-placement="bottom" title="Copy the video share link" data-toggle="tooltip" data-container="#btn-copy-video-link-tooltip">
-          <a class="btn btn-green" id="btn-copy-video-link"><i class="fa fa-link"></i></a>
-        </span>
-      </div>
-      <div id='btn-copy-video-link-tooltip'></div>
-    </div>
-    <div class='ctn-video-share-highlight'>
-      <h4>Share a highlight</h4><a id='btn-create-highlight' class='btn btn-dark-blue'><i class='fa fa-arrow-right'></i></a>
-    </div> -->
-    <div class='ctn-video-time-snippet h4'>
-      From: <input type='text' class="form-control h2" id='input-video-time-start'></input>
-      To: <input type='text' class="form-control h2" id='input-video-time-end'></input>
-    </div>
+    <%= content_for :video_sub %>
+
   </div>
   <div class='transcript-container'>
     <div class='transcript-header-container'>
@@ -54,7 +39,8 @@
 
 <script id='video-text-partial' type='text/x-handlebars-template'>
   <div class='ctnVideoTextLink clearfix {{displayClass}}' data-timestamp='{{time}}'>
-    <input type='checkbox' class='video-check-show' checked></input>
+    <input type='checkbox' name='highlight[{{displayClass}}][{{hashid}}]' class='video-check-show' checked></input>
+
     <div class='videoTextLink clearfix'>
       <input type='text' class='video-text-time' value='{{displayTime}}' readonly></input>
       <div class='video-text-icon-display'>

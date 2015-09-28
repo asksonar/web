@@ -1,0 +1,33 @@
+class HighlightsService
+  include Singleton
+
+  # expecting highlight_params of the form something like
+  # {"title"=>"", "video_time_start"=>"0:00", "video_time_end"=>"0:06", "note"=>{"M0JEPob7"=>"on", "nP2x424Q"=>"on"}, "feeling"=>{"o59D09ND"=>"on"}}
+  def create(highlight_params)
+    ScenarioHighlight.create(
+      title: highlight_params[:title],
+      start_seconds: highlight_params[:start_seconds],
+      end_seconds: highlight_params[:end_seconds],
+      timeline_elements: {
+        notes: highlight_params[:note].keys,
+        feelings: highlight_params[:feeling].keys
+      }.to_json
+    )
+  end
+
+  def update(highlight_params)
+    ScenarioHighlight.update(
+      title: highlight_params[:title],
+      start_seconds: highlight_params[:start_seconds],
+      end_seconds: highlight_params[:end_seconds],
+      timeline_elements: {
+        notes: highlight_params[:note].keys,
+        feelings: highlight_params[:feeling].keys
+      }.to_json
+    )
+  end
+
+  def destroy(highlight)
+    highlight.destroy
+  end
+end

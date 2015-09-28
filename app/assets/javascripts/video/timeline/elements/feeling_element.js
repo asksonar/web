@@ -4,7 +4,7 @@ modulejs.define('FeelingDelightedElement', ['TimelineElement'], function(timelin
   });
 
   feelingDelightedElement.onCreate(function(config) {
-    this.displayClass = 'feeling-delighted';
+    this.displayClass = 'feeling';
     this.displayIcon = 'feeling-delighted';
     this.timeSeconds = config.time;
     this.displayText = "<span>User clicked</span><i class='feeling-delighted'></i>";
@@ -20,7 +20,7 @@ modulejs.define('FeelingConfusedElement', ['TimelineElement'], function(timeline
   });
 
   feelingConfusedElement.onCreate(function(config) {
-    this.displayClass = 'feeling-confused';
+    this.displayClass = 'feeling';
     this.displayIcon = 'feeling-confused';
     this.timeSeconds = config.time;
     this.displayText = "<span>User clicked</span><i class='feeling-confused'></i>";

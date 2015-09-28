@@ -1,0 +1,21 @@
+<% content_for :title do %>
+  Edit Highlight
+<% end %>
+
+<%= bootstrap_form_for @highlight, url: highlights_path(@highlight) do |f| %>
+<section class='main-content-header'>
+  <div class='ctn-title'>
+    <%= f.text_field :title, hide_label: true, placeholder: 'Title your highlight', class: 'input-lg' %>
+  </div>
+</section>
+<section class="main-content">
+  <div class='panel editable-timeline clearfix'>
+    <%= render partial: 'highlights/partials/editable', layout: 'highlights/layouts/video', locals: {f: f} %>
+
+    <div class='ctn-buttons'>
+      <a class='btn btn-grey' id='btn-cancel' href='<%= request.referrer %>'>Cancel</a>
+      <%= f.submit 'Update highlight', name: 'update', class: 'btn btn-dark-blue', id: 'btn-update-highlight' %>
+    </div>
+  </div>
+</section>
+<% end %>
