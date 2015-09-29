@@ -3,7 +3,6 @@ class ScenarioStep < ActiveRecord::Base
   has_many :result_steps_pending, -> { pending }, inverse_of: :scenario_step, class_name: 'ResultStep'
   has_many :result_steps, -> { uploaded }, inverse_of: :scenario_step
   has_many :step_feelings, through: :result_steps
-  has_many :step_highlights, through: :result_steps
   has_many :step_videos, through: :result_steps
 
   before_validation :sanitize_description_url

@@ -35,6 +35,7 @@ class HighlightsController < ApplicationController
   def show
     @scenario_highlight = query.find_by_hashid(params[:id])
     @result_step = @scenario_highlight.result_step
+    @scenario = @result_step.scenario
   end
 
   def destroy

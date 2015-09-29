@@ -41,7 +41,9 @@
         margin-top: 10px;
       }
 
-      .summary-container,  .highlights-container {
+      .summary-container,
+      .highlights-container,
+      .notes-container {
         margin-top: 20px;
         span.h3 {
           display: inline-block;
@@ -59,7 +61,8 @@
         white-space: pre-line;
       }
 
-      .highlights-container {
+      .highlights-container,
+      .notes-container {
         a {
           display: block;
           overflow: hidden;

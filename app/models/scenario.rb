@@ -6,7 +6,7 @@ class Scenario < ActiveRecord::Base
   has_many :result_steps, through: :scenario_results
   has_many :result_steps_pending, through: :scenario_results
   has_many :step_feelings, through: :result_steps
-  has_many :step_highlights, through: :result_steps
+  has_many :scenario_highlights
   has_many :step_notes, through: :result_steps
   enum status: [:drafts, :live, :completed]
 
@@ -39,7 +39,7 @@ class Scenario < ActiveRecord::Base
   end
 
   def highlights
-    step_highlights
+    scenario_highlights
   end
 
   protected

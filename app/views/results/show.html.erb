@@ -11,7 +11,7 @@
           <span class='h3'>Description:</span><span class='summary-description'><%= @scenario.description %></span>
         </p>
       </div>
-      <div class='highlights-container'>
+      <div class='notes-container'>
         <% @scenario.step_notes.each_with_index do |note, index| %>
           <p>
             <% if index == 0 %><span class='h3'>Notes:</span><% end %><!--
@@ -22,10 +22,24 @@
             </a>
           </p>
         <% end %>
+        <% if @scenario.step_notes.count == 0 %>
+          <p><span class='h3'>Notes:</span><span class='sub'><i class='fa fa-question-circle'></i> no notes added yet</span></p>
+        <% end %>
+      </div>
+      <div class='highlights-container'>
+        <% @scenario.highlights.each_with_index do |highlight, index| %>
+          <p>
+            <% if index == 0 %><span class='h3'>Highlights:</span><% end %><!--
+         --><a href='<%= edit_highlight_path(highlight) %>' class='highlight-link'
+            ><span class='sub'><%= ppt_date(highlight.created_at) %></span> <%= dt_transcription(highlight.title) %> ...
+            </a>
+          </p>
+        <% end %>
         <% if @scenario.highlights.count == 0 %>
           <p><span class='h3'>Highlights:</span><span class='sub'><i class='fa fa-question-circle'></i> no highlights added yet</span></p>
         <% end %>
       </div>
+
     </div>
     <div class='col-md-4 buttons-container'>
 

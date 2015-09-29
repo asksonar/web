@@ -67,12 +67,12 @@ HighlightTimeline = function(config) {
   this.setChecked = function(noteHashids, feelingHashids) {
     $(this.checkboxSelector).prop('checked', false);
 
-    var selector = this.checkboxSelector + "[name='scenario_highlight[{{type}}][{{hashid}}]']";
+    var selector = this.checkboxSelector + "[name='scenario_highlight[{type}][{hashid}]']";
     (noteHashids || []).forEach(function(hashid) {
-      $(selector.replace('{{type}}', 'note').replace('{{hashid}}', hashid)).prop('checked', true);
+      $(selector.replace('{type}', 'note').replace('{hashid}', hashid)).prop('checked', true);
     });
     (feelingHashids || []).forEach(function(hashid) {
-      $(selector.replace('{{type}}', 'feeling').replace('{{hashid}}', hashid)).prop('checked', true);
+      $(selector.replace('{type}', 'feeling').replace('{hashid}', hashid)).prop('checked', true);
     });
   };
 
