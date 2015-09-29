@@ -4,12 +4,12 @@
 
 <%= bootstrap_form_for @scenario_highlight, url: highlight_path(@scenario_highlight) do |f| %>
   <section class='main-content-header'>
-    <div class='ctn-title-buttons'>
-      <div class='ctn-title'>
-        <%= @highlight.title %>
+    <div class='row ctn-title-buttons'>
+      <div class='col-md-10 ctn-title'>
+        <h2><%= @scenario_highlight.title %></h2>
       </div>
-      <div class='ctn-buttons'>
-        <a class='btn btn-dark-blue' href='<%= edit_highlight_path %>'>Edit</a>
+      <div class='col-md-2 ctn-buttons'>
+        <a class='btn btn-dark-blue btn-med-bold' href='<%= edit_highlight_path %>' id='btn-edit-highlight'><i class='fa fa-edit'></i> Edit</a>
       </div>
     </div>
   </section>
