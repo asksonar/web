@@ -9,24 +9,16 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  p.sub {
-    margin-top: 5px;
-  }
 }
 
 .draft-header {
-  p {
-    margin-top: 10px;
-  }
 
   .ctn-title {
     @extend .col-sm-12;
     .draft-editable-steps & { @extend .col-sm-8; }
 
     @media (max-width: $screen-sm-min) {
-      p {
-        margin-bottom: 10px;
-      }
+      margin-bottom: 10px;
     }
   }
 
@@ -37,6 +29,7 @@
     .draft-editable-steps & { display: block; }
 
     p {
+      margin-top: 10px;
       text-align: center;
     }
   }
@@ -73,7 +66,7 @@
 
 .draft-content {
 
-  input {
+  input[type='text'] {
     padding-left: 6px;
     padding-right: 6px;
   }
@@ -82,10 +75,6 @@
     padding-left: 6px;
     padding-right: 6px;
     resize: none;
-  }
-
-  p {
-    margin-bottom: 10px;
   }
 
   .summary-container {
@@ -185,15 +174,8 @@
   }
 
   .buttons-container {
-    p {
-      margin-bottom: 0px;
-      margin-right: 10px;
-      margin-top: 3px; // 31px (button height) - 25 (text height) / 2
-      max-width: 270px;
-    }
-
     .btn + .btn {
-      margin-left: 1px;
+      margin-left: 3px;
     }
   }
 }
