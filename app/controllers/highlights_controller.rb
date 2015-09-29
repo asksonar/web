@@ -34,6 +34,7 @@ class HighlightsController < ApplicationController
 
   def show
     @highlight = query.find_by_hashid(params[:id])
+    @result_step = @highlight.result_step
   end
 
   def destroy

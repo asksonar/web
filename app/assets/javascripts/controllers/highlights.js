@@ -5,7 +5,7 @@
 */
 
 $(function(){
-  if (!$('#highlights-new').length && !$('#highlights-edit').length) {
+  if (sonar.request.controller !== 'highlights') {
     return;
   }
 

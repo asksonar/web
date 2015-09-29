@@ -74,3 +74,31 @@
   }
 
 }
+
+#highlights-show {
+  .ctn-highlight-disabled {
+    display: none;
+  }
+
+  #btn-check-show-all {
+    display: none;
+  }
+
+  .video-check-show {
+    display: none;
+  }
+
+  .ctn-highlight-start, .ctn-highlight-finish {
+    display: none;
+  }
+
+  .vjs-custom-range-left-marker,
+  .vjs-custom-range-right-marker {
+    height: 0;
+    top: 0;
+
+    i {
+      display: none;
+    }
+  }
+}
