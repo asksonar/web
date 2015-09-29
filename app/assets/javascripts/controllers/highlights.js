@@ -56,11 +56,6 @@ $(function(){
 
   var timeSeconds = new URI(location.href).search(true).t || 0;
 
-  videoController.markers(
-    videoController.collapseTimes(sonar.resultStep.delightedArray),
-    videoController.collapseTimes(sonar.resultStep.confusedArray),
-    videoController.collapseTimes(sonar.resultStep.highlightedArray)
-  );
   videoController.src(sonar.resultStep.srcArray);
   // videoController.play(timeSeconds);
 

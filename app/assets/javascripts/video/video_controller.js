@@ -8,32 +8,10 @@ VideoController.prototype.init = function() {
   this.eventBus = $({});
 
   this.video = videojs(this.videoId);
-  this.video.markers({
-    markerStyle: {
-      'width':'7px',
-      'border-radius': '30%',
-      'background-color': 'black'
-    },
-    markerTip:{
-      display: true,
-      text: function(marker) {
-        return marker.text;
-      }
-    },
-    breakOverlay:{
-      display: false
-    },
-    onMarkerReached: function(marker) {},
-    markers: []
-  });
 
   this.video.on('timeupdate', $.proxy(this.onTimeupdate, this));
   this.video.on('play', $.proxy(this.onPlay, this));
   this.video.on("loadedmetadata", $.proxy(this.onLoadedmetadata, this));
-  // videojs-markers will load the markers from options {} above upon loadedmetadata
-  // so we will then load our own markers after that point
-  this.video.on("loadedmetadata", $.proxy(this.loadMarkers, this));
-
 };
 
 VideoController.prototype.on = function(event, callback) {
@@ -70,45 +48,6 @@ VideoController.prototype.collapseTimes = function(arrayOfTimeObjects) {
     });
   } else {
     return [];
-  }
-};
-
-VideoController.prototype.markers = function(arrayDelightedTimes, arrayConfusedTimes, arrayHighlightedTimes) {
-  this.arrayDelightedTimes = arrayDelightedTimes || [];
-  this.arrayConfusedTimes = arrayConfusedTimes || [];
-  this.arrayHighlightedTimes = arrayHighlightedTimes || [];
-};
-
-VideoController.prototype.loadMarkers = function() {
-  this.video.markers.removeAll();
-  if (this.arrayDelightedTimes) {
-    this.video.markers.add(this.arrayDelightedTimes.map(function(time) {
-      return {
-        time: time,
-        text: ":)",
-        class: 'background-delighted'
-      };
-    }));
-  }
-
-  if (this.arrayConfusedTimes) {
-    this.video.markers.add(this.arrayConfusedTimes.map(function(time) {
-      return {
-        time: time,
-        text: ":(",
-        class: 'background-confused'
-      };
-    }));
-  }
-
-  if (this.arrayHighlightedTimes) {
-    this.video.markers.add(this.arrayHighlightedTimes.map(function(time) {
-      return {
-        time: time,
-        text: "*",
-        class: 'background-highlighted'
-      };
-    }));
   }
 };
 

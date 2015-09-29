@@ -35,11 +35,6 @@ VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {
 VideoModal.prototype.loaded = function(timeSeconds, data) {
   this.resultStepHashId = data.hashid;
 
-  this.video.markers(
-    this.video.collapseTimes(data.delightedArray),
-    this.video.collapseTimes(data.confusedArray),
-    this.video.collapseTimes(data.highlightedArray)
-  );
   this.video.src(data.srcArray);
 
   var transcriptElement = modulejs.require('TranscriptElement');
