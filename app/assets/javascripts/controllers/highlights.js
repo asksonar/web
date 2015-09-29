@@ -74,6 +74,15 @@ $(function(){
   videoTranscript.buildTranscript(sonar.resultStep.hashid, timelineArray);
   videoTranscript.refreshView();
 
+  if (sonar.scenarioHighlight) {
+    videoTranscript.setChecked(
+      sonar.scenarioHighlight.timeline_elements.notes,
+      sonar.scenarioHighlight.timeline_elements.feelings
+    );
+  } else {
+    videoTranscript.setCheckedNotes();
+  }
+
   var videoRange = new VideoRange({
     inputStart: $('#input-video-time-start'),
     inputFinish: $('#input-video-time-end'),
