@@ -43,8 +43,17 @@
   }
 
   #btn-add-note {
+    color: inherit;
     float: right;
     position: inherit;
+
+    &:hover {
+      @extend .btn-medium-blue;
+    }
+  }
+
+  #videoText {
+    bottom: 0;
   }
 
   .ctn-highlight-start {
@@ -76,6 +85,10 @@
 }
 
 #highlights-show {
+  .ctn-buttons {
+    text-align: right;
+  }
+
   .ctn-highlight-disabled {
     display: none;
   }
