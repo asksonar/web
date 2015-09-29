@@ -28,7 +28,12 @@ $(function(){
     $('#ctn-step-list').html(newStepTemplate(sonar.scenario));
     recountSteps();
   } else {
-    $('#ctn-step-list').html(newStepTemplate(emptyStep));
+    $('#ctn-step-list').html(
+      newStepTemplate(emptyStep) +
+      newStepTemplate(emptyStep) +
+      newStepTemplate(emptyStep)
+    );
+    recountSteps();
   }
 
   $('#ctn-step-list').on('click', '.btn-add-step', function(event){
