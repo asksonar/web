@@ -33,10 +33,10 @@ $(function(){
   videoTranscript.init();
 
   var videoLink = new VideoLink({
-    inputUrlTime: $('#input-url-time'),
     inputUrlBase: $('#input-url-base'),
     btnCopyVideoLink: $('#btn-copy-video-link'),
-    spanTime: $('.span-time')
+    spanTime: $('.span-time'),
+    hrefLink: $('#btn-create-highlight')
   });
 
   videoController.on('timeupdate', videoTranscript.onTimeupdate);

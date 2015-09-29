@@ -37,7 +37,6 @@ $(function(){
   videoTranscript.init();
 
   var videoLink = new VideoLink({
-    inputUrlTime: $('#input-url-time'),
     inputUrlBase: $('#input-url-base'),
     btnCopyVideoLink: $('#btn-copy-video-link'),
     spanTime: $('.span-time')

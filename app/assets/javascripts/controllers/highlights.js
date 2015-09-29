@@ -74,15 +74,6 @@ $(function(){
   videoTranscript.buildTranscript(sonar.resultStep.hashid, timelineArray);
   videoTranscript.refreshView();
 
-  if (sonar.scenarioHighlight) {
-    videoTranscript.setChecked(
-      sonar.scenarioHighlight.timeline_elements.notes,
-      sonar.scenarioHighlight.timeline_elements.feelings
-    );
-  } else {
-    videoTranscript.setCheckedNotes();
-  }
-
   var videoRange = new VideoRange({
     inputStart: $('#input-video-time-start'),
     inputFinish: $('#input-video-time-end'),
@@ -102,14 +93,24 @@ $(function(){
 
   videoRange.init();
 
+  if (sonar.scenarioHighlight) {
+    videoTranscript.setChecked(
+      sonar.scenarioHighlight.timeline_elements.notes,
+      sonar.scenarioHighlight.timeline_elements.feelings
+    );
+  } else {
+    videoRange.setStartFinish(parseFloat(timeSeconds), parseFloat(timeSeconds) + 10);
+    videoTranscript.setCheckedNotes();
+  }
+
+  $(window).load(function() {
+    videoTranscript.focusLink(timeSeconds);
+  });
+
   // videoLink.updateShareLink(sonar.resultStep.shareLink);
 
   // $(window).load(function() {
     // videoTranscript.focusLink(timeSeconds);
   // });
-
-  window.videoController = videoController;
-  window.videoRange = videoRange;
-  window.videoTranscript = videoTranscript;
 
 });
