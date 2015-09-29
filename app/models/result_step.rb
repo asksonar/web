@@ -2,7 +2,6 @@ class ResultStep < ActiveRecord::Base
   belongs_to :scenario_step
   belongs_to :scenario_result
   has_many :step_feelings, -> { order feeling_at_seconds: :asc }, inverse_of: :result_step
-  has_many :step_highlights, -> { order offset_seconds: :asc }, inverse_of: :result_step
   has_many :step_notes, -> { order offset_seconds: :asc }, inverse_of: :result_step
   has_many :step_videos, -> { order offset_seconds: :asc }, inverse_of: :result_step
   has_many :step_transcriptions, -> { order offset_seconds: :asc }, inverse_of: :result_step
@@ -21,10 +20,6 @@ class ResultStep < ActiveRecord::Base
 
   def feelings
     step_feelings
-  end
-
-  def highlights
-    step_highlights
   end
 
   def feelings_delighted
@@ -80,9 +75,6 @@ class ResultStep < ActiveRecord::Base
 
     step_feelings.each do |step_feeling|
       step_feeling.generate_new_sample_result(new_result_step)
-    end
-    step_highlights.each do |step_highlight|
-      step_highlight.generate_new_sample_result(new_result_step)
     end
     step_videos.each do |step_video|
       step_video.generate_new_sample_result(new_result_step)
