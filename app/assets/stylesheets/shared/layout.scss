@@ -67,12 +67,34 @@ body {
 
   .main-content-header {
     background: #F5F5F5;
-    padding: 20px 40px;
+    // match .panel's 20px padding
+    padding: 20px 20px;
+
+    @media (min-width: $screen-sm-min) {
+      padding: 20px 40px;
+    }
+
+    .logged-out & {
+      @media (min-width: $screen-lg-min) {
+        padding: 20px 100px;
+      }
+    }
   }
 
   .main-content {
-    padding: 20px;
     background: #E3E3E3;
+    // .panel has its own 20px padding
+    padding: 20px 0px;
+
+    @media (min-width: $screen-sm-min) {
+      padding: 20px 20px;
+    }
+
+    .logged-out & {
+      @media (min-width: $screen-lg-min) {
+        padding: 20px 100px;
+      }
+    }
 
     .panel {
       margin-bottom: 20px;

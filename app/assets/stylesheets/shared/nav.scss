@@ -9,6 +9,23 @@
     margin-top: 5px;
     text-align: center;
 
+    // centered across .sidebar
+    @media (min-width: $screen-sm-min) {
+      width: 240px;
+    }
+
+    // aligned with .main-content-header
+    .logged-out & {
+      @media (min-width: $screen-sm-min) {
+        text-align: left;
+        margin-left: 40px;
+      }
+
+      @media (min-width: $screen-lg-min) {
+        text-align: left;
+        margin-left: 100px;
+      }
+    }
   }
 
   .brand.force-center {
@@ -35,6 +52,10 @@
   .nav-left {
     position: absolute;
     left: 0;
+
+    @media (min-width: $screen-sm-min) {
+      float: left;
+    }
   }
 
   .nav-right {
@@ -44,24 +65,16 @@
       left: auto;
       right: 0;
     }
+
+    @media (min-width: $screen-sm-min) {
+      float: right;
+    }
   }
 
   .logged-out .toggle-sidebar {
     display: none;
   }
 
-}
-
-@media (min-width: $screen-sm-min) {
-  .header .brand {
-    width: 240px;
-  }
-  .nav-left {
-    float: left;
-  }
-  .nav-right {
-    float: right;
-  }
 }
 
 .sidebar nav {

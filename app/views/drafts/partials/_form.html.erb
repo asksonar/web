@@ -4,9 +4,6 @@
       <h1>
         <%= f.text_field :title, hide_label: true, placeholder: 'Title your study', class: 'input-lg' %>
       </h1>
-      <p class='sub'>
-        This title is so you can tell your studies apart internally. Your respondents will never see this.
-      </p>
     </div>
 
     <div class='ctn-template'>
@@ -34,31 +31,22 @@
   <div class='panel'>
 
     <div class='summary-container'>
-      <p class='sub'>
-        This description gives context and explains to your respondents the overall purpose of your study.
-      </p>
       <%= f.text_area :description, rows: 3, hide_label: true, placeholder: 'Welcome the panelist to the study' %>
     </div>
 
     <div class='steps-container'>
-      <p class='sub'>
-        Tell your respondents what you’d like them to do, step by step. Sonar will record their screen and voice as they talk their way through your steps.
-      </p>
       <div id='ctn-step-list'><!-- insert new steps here --></div>
     </div>
 
     <div class='clearfix buttons-container'>
-      <a href='<%=results_path%>' class='btn btn-grey pull-left'>Cancel</a>
+      <a href='<%=results_path%>' class='btn btn-grey pull-left btn-med'>Cancel</a>
 
       <% if @scenario.drafts? %>
-        <%= f.submit 'Create study', name: 'publish', class: 'btn btn-dark-blue pull-right' %>
-        <%= f.submit 'Save as draft', name: 'draft', class: 'btn btn-light-blue pull-right' %>
+        <%= f.submit 'Create the study', name: 'publish', class: 'btn btn-dark-blue pull-right btn-med-bold' %>
+        <%= f.submit 'Save as a draft', name: 'draft', class: 'btn btn-light-blue pull-right btn-med' %>
       <% else %>
-        <%= f.submit 'Update study', name: 'update', class: 'btn btn-dark-blue pull-right' %>
+        <%= f.submit 'Update the study', name: 'update', class: 'btn btn-dark-blue pull-right btn-med-bold' %>
       <% end %>
-      <p class='sub pull-right'>
-        Once the study is created, you’ll be able to share the study link with potential respondents.
-      </p>
     </div>
 
   </div>
