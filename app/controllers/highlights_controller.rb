@@ -17,29 +17,29 @@ class HighlightsController < ApplicationController
   def create
     result_step = ResultStep.find_by_hashid(params[:scenario_highlight][:result_step_hashid])
     scenario = result_step.scenario
-    @highlight = service.create(highlight_params, scenario, result_step)
-    redirect_to highlight_path(@highlight)
+    @scenario_highlight = service.create(highlight_params, scenario, result_step)
+    redirect_to highlight_path(@scenario_highlight)
   end
 
   def edit
-    @highlight = query.find_by_hashid(params[:id])
-    @result_step = @highlight.result_step
+    @scenario_highlight = query.find_by_hashid(params[:id])
+    @result_step = @scenario_highlight.result_step
   end
 
   def update
-    @highlight = query.find_by_hashid(params[:id])
-    service.update(@highlight, highlight_params)
-    redirect_to highlight_path(@highlight)
+    @scenario_highlight = query.find_by_hashid(params[:id])
+    service.update(@scenario_highlight, highlight_params)
+    redirect_to highlight_path(@scenario_highlight)
   end
 
   def show
-    @highlight = query.find_by_hashid(params[:id])
-    @result_step = @highlight.result_step
+    @scenario_highlight = query.find_by_hashid(params[:id])
+    @result_step = @scenario_highlight.result_step
   end
 
   def destroy
-    @highlight = query.find_by_hashid(params[:id])
-    service.destroy(@highlight)
+    @scenario_highlight = query.find_by_hashid(params[:id])
+    service.destroy(@scenario_highlight)
   end
 
   private
