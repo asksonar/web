@@ -37,12 +37,18 @@ VideoRange.prototype.init = function() {
   this.$rangeLeftMarker.draggable({
     axis:'x',
     containment: this.progressControlSelector,
-    drag: $.proxy(this.dragStart, this)
+    drag: $.proxy(this.dragStart, this),
+    stop: $.proxy(function(event, ui) {
+      this.$rangeLeftMarker.css('left', this.toPercentage(ui.position.left));
+    }, this)
   });
   this.$rangeRightMarker.draggable({
     axis:'x',
     containment: this.progressControlSelector,
-    drag: $.proxy(this.dragFinish, this)
+    drag: $.proxy(this.dragFinish, this),
+    stop: $.proxy(function(event, ui) {
+      this.$rangeRightMarker.css('left', this.toPercentage(ui.position.left));
+    }, this)
   });
 
   this.video.on('timeupdate', $.proxy(this.onVideoTimeUpdate, this));
@@ -55,6 +61,10 @@ VideoRange.prototype.init = function() {
   this.video.on('loaded', $.proxy(function() {
     this.setStartFinish(this.start, this.finish);
   }, this));
+};
+
+VideoRange.prototype.toPercentage = function(val) {
+  return parseFloat(val) / this.$progressControl.width() * 100 + "%";
 };
 
 VideoRange.prototype.onVideoTimeUpdate = function(event, currentTime) {
@@ -125,15 +135,15 @@ VideoRange.prototype.setStartFinish = function(start, finish) {
 
     // draw markers and masks on the video
     leftWidth = this.start / this.video.duration() * this.$progressControl.width();
-    this.$rangeLeftMask.css('width', leftWidth);
-    this.$rangeLeftMarker.css('left', leftWidth);
+    this.$rangeLeftMask.css('width', this.toPercentage(leftWidth));
+    this.$rangeLeftMarker.css('left', this.toPercentage(leftWidth));
 
     rightWidth = this.$progressControl.width() - (this.finish / this.video.duration() * this.$progressControl.width());
-    this.$rangeRightMask.css('width', rightWidth);
-    this.$rangeRightMarker.css('left', this.$progressControl.width() - rightWidth);
+    this.$rangeRightMask.css('width', this.toPercentage(rightWidth));
+    this.$rangeRightMarker.css('left', this.toPercentage(this.$progressControl.width() - rightWidth));
 
-    this.$rangeMiddleMask.css('left', leftWidth);
-    this.$rangeMiddleMask.css('right', rightWidth);
+    this.$rangeMiddleMask.css('left', this.toPercentage(leftWidth));
+    this.$rangeMiddleMask.css('right', this.toPercentage(rightWidth));
   }
 
   this.$inputStart.val(TimeDisplay.secsToDisplayTime(Math.floor(this.start)));
