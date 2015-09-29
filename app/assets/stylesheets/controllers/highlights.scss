@@ -85,6 +85,10 @@
 }
 
 #highlights-show {
+  .video-check-show:not(:checked) + .videoTextLink {
+    display: none;
+  }
+
   .ctn-buttons {
     text-align: right;
   }
