@@ -92,6 +92,7 @@ $(function(){
     progressControlSelector : '.vjs-progress-control',
     rangeLeftMaskSelector: '.vjs-custom-range-left-mask',
     rangeRightMaskSelector: '.vjs-custom-range-right-mask',
+    rangeMiddleMaskSelector: '.vjs-custom-range-middle-mask',
     rangeLeftMarkerSelector: '.vjs-custom-range-left-marker',
     rangeRightMarkerSelector: '.vjs-custom-range-right-marker'
   }, videoController);
