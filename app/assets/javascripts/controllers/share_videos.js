@@ -29,9 +29,12 @@ $(function(){
     btnToggleTranscripts: $('#toggle-transcripts'),
     btnAddNote: $('#btn-add-note'),
     scriptVideoTextTemplate: $('#video-text-template'),
-    scriptVideoTextPartial: $('#video-text-partial')
+    scriptVideoTextPartial: $('#video-text-partial'),
+    timelineBeginning: $('.ctn-timeline-beginning'),
+    timelineEnding: $('.ctn-timeline-ending')
 
   }, videoController);
+  videoTranscript.init();
 
   var videoLink = new VideoLink({
     inputUrlTime: $('#input-url-time'),
@@ -45,21 +48,22 @@ $(function(){
 
   var timeSeconds = new URI(location.href).search(true).t || 0;
 
-  videoController.markers(
-    videoController.collapseTimes(sonar.resultStep.delightedArray),
-    videoController.collapseTimes(sonar.resultStep.confusedArray),
-    videoController.collapseTimes(sonar.resultStep.highlightedArray)
-  );
   videoController.src(sonar.resultStep.srcArray);
   videoController.play(timeSeconds);
 
-  videoTranscript.buildTranscript(
-    sonar.resultStep.hashid,
-    sonar.resultStep.transcriptionArray,
-    sonar.resultStep.delightedArray,
-    sonar.resultStep.confusedArray,
-    sonar.resultStep.highlightedArray
-  );
+  var transcriptElement = modulejs.require('TranscriptElement');
+  var feelingDelightedElement = modulejs.require('FeelingDelightedElement');
+  var feelingConfusedElement = modulejs.require('FeelingConfusedElement');
+  var noteElement = modulejs.require('NoteElement');
+
+  var timelineArray = []
+    .concat(transcriptElement.buildElementArray(sonar.resultStep.transcriptionArray))
+    .concat(feelingDelightedElement.buildElementArray(sonar.resultStep.delightedArray))
+    .concat(feelingConfusedElement.buildElementArray(sonar.resultStep.confusedArray))
+    .concat(noteElement.buildElementArray(sonar.resultStep.highlightedArray));
+
+  videoTranscript.buildTranscript(sonar.resultStep.hashid, timelineArray);
+
   videoTranscript.refreshView();
 
   videoLink.updateShareLink(sonar.resultStep.shareLink);

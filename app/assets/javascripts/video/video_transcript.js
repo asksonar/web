@@ -3,6 +3,8 @@ VideoTranscript = function(config, video) {
   this.$videoText = config.divVideoText;
   this.$btnToggleTranscripts = config.btnToggleTranscripts;
   this.$btnAddNote = config.btnAddNote;
+  this.$timelineBeginning = config.timelineBeginning;
+  this.$timelineEnding = config.timelineEnding;
 
   this.videoTextTemplate = Handlebars.compile(config.scriptVideoTextTemplate.html());
   this.videoTextPartial = Handlebars.compile(config.scriptVideoTextPartial.html());
@@ -11,21 +13,19 @@ VideoTranscript = function(config, video) {
   this.video = video;
 
   this.timelineArray = [];
-
-  this.init();
 };
 
-VideoTranscript.prototype.init = function() {
+Initable.call(VideoTranscript.prototype, function() {
   this.$btnToggleTranscripts.on('click', $.proxy(this.toggleTranscripts, this));
   this.$btnAddNote.on('click', $.proxy(this.createNote, this));
 
-  this.$videoText.on('click', '.ctnVideoTextLink', $.proxy(this.clickVideoText, this));
+  this.$videoText.on('click', '.videoTextLink', $.proxy(this.clickVideoText, this));
   this.$videoText.on('startEditing', $.proxy(this.startEditing, this));
   this.$videoText.on('stopEditing', $.proxy(this.stopEditing, this));
   this.$videoText.on('startFocusing', $.proxy(this.startFocusing, this));
 
   this.onTimeupdate = $.proxy(this.onTimeupdate, this);
-};
+});
 
 VideoTranscript.prototype.startEditing = function(event) {
   this.$videoText.addClass('editing');
@@ -67,86 +67,23 @@ VideoTranscript.prototype.toggleTranscripts = function(event) {
   this.$container.toggleClass('show-transcripts');
 };
 
-VideoTranscript.prototype.buildTranscript = function(resultStepHashId, transcriptArray, delightedArray, confusedArray, highlightedArray) {
+VideoTranscript.prototype.buildTranscript = function(resultStepHashId, timelineArray) {
   this.resultStepHashId = resultStepHashId;
 
-  var i, hashid, timeSeconds, text;
-
   this.clearView();
-
-  for(i = 0; delightedArray && i  < delightedArray.length; i++) {
-    hashid = delightedArray[i].hashid;
-    timeSeconds = delightedArray[i].time;
-
-    this.timelineArray.push(
-      new FeelingDelightedElement({
-        hashid: hashid,
-        timeSeconds: timeSeconds
-      })
-    );
-  }
-
-  for(i = 0; confusedArray && i  < confusedArray.length; i++) {
-    hashid = confusedArray[i].hashid;
-    timeSeconds = confusedArray[i].time;
-
-    this.timelineArray.push(
-      new FeelingConfusedElement({
-        hashid: hashid,
-        timeSeconds: timeSeconds
-      })
-    );
-  }
-
-  for(i = 0; highlightedArray && i  < highlightedArray.length; i++) {
-    hashid = highlightedArray[i].hashid;
-    timeSeconds = highlightedArray[i].time;
-    text = highlightedArray[i].text;
-    text = (text || '').trim();
-    if (!text) {
-      continue;
-    }
-
-    this.timelineArray.push(
-      new NoteElement({
-        hashid: hashid,
-        timeSeconds: timeSeconds,
-        displayText: text,
-        resultStepHashId: resultStepHashId
-      })
-    );
-  }
-
-  for(i = 0; i  < transcriptArray.length; i++) {
-    hashid = transcriptArray[i].hashid;
-    timeSeconds = transcriptArray[i].time;
-    text = transcriptArray[i].text;
-    text = (text || '').trim();
-    if (!text) {
-      continue;
-    }
-
-    this.timelineArray.push(
-      new TranscriptElement({
-        hashid: hashid,
-        timeSeconds: timeSeconds,
-        displayText: text,
-        resultStepHashId: resultStepHashId
-      })
-    );
-  }
+  this.timelineArray = timelineArray;
 
   this.timelineArray.sort(function(a, b){
     return a.timeSeconds - b.timeSeconds;
   });
 
-  for(i = 0; i < this.timelineArray.length; i++) {
-    this.timelineArray[i].insertBefore(this.findTextLinkEnd(), false);
+  for(var i = 0; i < this.timelineArray.length; i++) {
+    this.timelineArray[i].insertBefore(this.getTimelineEnding(), false);
   }
 };
 
 VideoTranscript.prototype.clickVideoText = function(event) {
-  var thisEl = $(event.currentTarget);
+  var thisEl = $(event.currentTarget).parent();
   if (thisEl.attr('data-state')) {
     return;
   } else {
@@ -166,7 +103,7 @@ VideoTranscript.prototype.focusLink = function(timeSeconds) {
     return;
   }
   this.scrollIntoView(link);
-  link.css({'background-color':'#F69526'})
+  link.find('.videoTextLink').css({'background-color':'#F69526'})
     .animate({'background-color':''}, 3000)
     .queue(function() {
       $(this).removeAttr('style').dequeue();
@@ -200,12 +137,15 @@ VideoTranscript.prototype.onTimeupdate = function(event, timeSeconds) {
   this.activateLink(timeSeconds);
 };
 
+VideoTranscript.prototype.findTextLinks = function() {
+  return this.$videoText.find('.ctnVideoTextLink');
+};
 
 // if we have 10, 15, 15, 20 and timeSeconds = 15, we get back the 10 element
 // if we ask timeSeconds = 5, we get []
 VideoTranscript.prototype.findTextLinkBefore = function(timeSeconds) {
   var textLinks = this.$videoText.find('.ctnVideoTextLink');
-  var textLink = textLinks.first();
+  var textLink;
 
   textLinks.each(function(){
     if (parseInt($(this).attr('data-timestamp')) < parseInt(timeSeconds)) {
@@ -216,6 +156,13 @@ VideoTranscript.prototype.findTextLinkBefore = function(timeSeconds) {
   });
 
   return $(textLink);
+};
+
+VideoTranscript.prototype.findTextLinksBefore = function(timeSeconds) {
+  var textLinks = this.$videoText.find('.ctnVideoTextLink');
+  return textLinks.filter(function() {
+    return parseInt($(this).attr('data-timestamp')) < parseInt(timeSeconds);
+  });
 };
 
 // if we have 10, 15, 15, 20 and timeSeconds = 15, we get back the first 15 element
@@ -254,13 +201,20 @@ VideoTranscript.prototype.findTextLinkAfter = function(timeSeconds) {
   return $(textLink);
 };
 
-// gets back the noTranscript placeholder element, which should always be the last element
-VideoTranscript.prototype.findTextLinkEnd = function() {
-  return this.$videoText.children().last();
+VideoTranscript.prototype.findTextLinksAfter = function(timeSeconds) {
+  var textLinks = this.$videoText.find('.ctnVideoTextLink');
+  return textLinks.filter(function() {
+    return parseInt($(this).attr('data-timestamp')) > parseInt(timeSeconds);
+  });
 };
 
-VideoTranscript.prototype.findTextLinkBeginning = function() {
-  return this.$videoText.children().first();
+// gets back the noTranscript placeholder element, which should always be the last element
+VideoTranscript.prototype.getTimelineBeginning = function() {
+  return this.$timelineBeginning;
+};
+
+VideoTranscript.prototype.getTimelineEnding = function() {
+  return this.$timelineEnding;
 };
 
 VideoTranscript.prototype.createNote = function() {
@@ -271,9 +225,12 @@ VideoTranscript.prototype.createNote = function() {
 
   var timeSeconds = this.video.currentTime();
 
-  var newElement = new NoteElement({
-    timeSeconds: timeSeconds,
-    displayText: '',
+  var checkableNoteElement = modulejs.require('NoteElement');
+  CheckableComponent.call(checkableNoteElement);
+
+  var newElement = checkableNoteElement.create({
+    time: timeSeconds,
+    text: '',
     resultStepHashId: this.resultStepHashId
   });
 
@@ -283,14 +240,14 @@ VideoTranscript.prototype.createNote = function() {
   if (insertBefore.length > 0) {
     newElement.insertBefore(insertBefore, true);
   } else {
-    newElement.insertBefore(this.findTextLinkEnd(), true);
+    newElement.insertBefore(this.getTimelineEnding(), true);
   }
 };
 
 VideoTranscript.prototype.restoreNote = function(timeSeconds, text) {
-  var newElement = new NoteElement({
-    timeSeconds: timeSeconds,
-    displayText: text,
+  var newElement = modulejs.require('NoteElement').create({
+    time: timeSeconds,
+    text: text,
     resultStepHashId: this.resultStepHashId
   });
 
@@ -298,6 +255,6 @@ VideoTranscript.prototype.restoreNote = function(timeSeconds, text) {
   if (insertBefore.length > 0) {
     newElement.insertBefore(insertBefore, false);
   } else {
-    newElement.insertBefore(this.findTextLinkEnd(), false);
+    newElement.insertBefore(this.getTimelineEnding(), false);
   }
 };

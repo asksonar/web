@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916014412) do
+ActiveRecord::Schema.define(version: 20150926152459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,17 @@ ActiveRecord::Schema.define(version: 20150916014412) do
     t.text     "first_transcription"
     t.integer  "total_delighted"
     t.integer  "total_confused"
+  end
+
+  create_table "scenario_highlights", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "result_step_id"
+    t.float    "start_seconds"
+    t.float    "end_seconds"
+    t.text     "timeline_elements"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "scenario_id"
   end
 
   create_table "scenario_results", force: :cascade do |t|

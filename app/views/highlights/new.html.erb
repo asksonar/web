@@ -1,0 +1,20 @@
+<% content_for :title do %>
+  New Highlight
+<% end %>
+
+<%= bootstrap_form_for :scenario_highlight, url: highlights_path do |f| %>
+  <%= f.hidden_field :result_step_hashid, value: params[:video] %>
+  <section class='main-content-header'>
+    <%= f.text_field :title, hide_label: true, placeholder: 'Title your highlight', class: 'input-lg' %>
+  </section>
+  <section class="main-content">
+    <div class='panel editable-timeline clearfix'>
+      <%= render partial: 'highlights/partials/editable', layout: 'highlights/layouts/video', locals: {f: f} %>
+
+      <div class='ctn-buttons'>
+        <a class='btn btn-grey btn-med' id='btn-cancel' href='<%= request.referrer %>'>Cancel</a>
+        <%= f.submit 'Create highlight', name: 'create', class: 'btn btn-dark-blue btn-med-bold', id: 'btn-create-highlight' %>
+      </div>
+    </div>
+  </section>
+<% end %>

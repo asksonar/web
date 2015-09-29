@@ -38,8 +38,10 @@ docker run -d --name web \
   -e "RAILS_RESQUE_REDIS=redis://redis:6379/0" \
   --dns 8.8.8.8 --dns 8.8.4.4 \
   local/web
+
+# bundle install
+docker exec web bundle install
 # fire up bash
 docker exec -it web bash -l
-
 # /etc/my_startup/start_bundle.sh
 # /etc/my_startup/start_thin.sh

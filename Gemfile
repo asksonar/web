@@ -87,6 +87,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-URIjs'
   # add jqueryui for animate controls
   gem 'rails-assets-jqueryui'
+  # add modulejs so we don't need to reorder javascript files
+  gem 'rails-assets-modulejs'
 end
 
 group :development, :test do

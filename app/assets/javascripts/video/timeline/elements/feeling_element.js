@@ -1,19 +1,31 @@
-FeelingDelightedElement = function(config) {
-  this.displayClass = 'feeling-delighted';
-  this.displayIcon = 'feeling-delighted';
-  this.timeSeconds = config.timeSeconds;
-  this.displayText = "<span>User clicked</span><i class='feeling-delighted'></i>";
-};
+modulejs.define('FeelingDelightedElement', ['TimelineElement'], function(timelineElement) {
+  var feelingDelightedElement = Object.create(timelineElement, {
+    modulez: { value: 'FeelingDelightedElement' }
+  });
 
-FeelingDelightedElement.prototype = new TimelineElement();
-FeelingDelightedElement.prototype.constructor = TimelineElement;
+  feelingDelightedElement.onCreate(function(config) {
+    this.displayClass = 'feeling';
+    this.displayIcon = 'feeling-delighted';
+    this.timeSeconds = config.time;
+    this.displayText = "<span>User clicked</span><i class='feeling-delighted'></i>";
+    this.hashid = config.hashid;
+  });
 
-FeelingConfusedElement = function(config) {
-  this.displayClass = 'feeling-confused';
-  this.displayIcon = 'feeling-confused';
-  this.timeSeconds = config.timeSeconds;
-  this.displayText = "<span>User clicked</span><i class='feeling-confused'></i>";
-};
+  return feelingDelightedElement;
+});
 
-FeelingConfusedElement.prototype = new TimelineElement();
-FeelingConfusedElement.prototype.constructor = TimelineElement;
+modulejs.define('FeelingConfusedElement', ['TimelineElement'], function(timelineElement) {
+  var feelingConfusedElement = Object.create(timelineElement, {
+    modulez: { value: 'FeelingConfusedElement' }
+  });
+
+  feelingConfusedElement.onCreate(function(config) {
+    this.displayClass = 'feeling';
+    this.displayIcon = 'feeling-confused';
+    this.timeSeconds = config.time;
+    this.displayText = "<span>User clicked</span><i class='feeling-confused'></i>";
+    this.hashid = config.hashid;
+  });
+
+  return feelingConfusedElement;
+});

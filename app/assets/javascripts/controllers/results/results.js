@@ -25,9 +25,12 @@ $(function(){
     btnToggleTranscripts: $('#toggle-transcripts'),
     btnAddNote: $('#btn-add-note'),
     scriptVideoTextTemplate: $('#video-text-template'),
-    scriptVideoTextPartial: $('#video-text-partial')
+    scriptVideoTextPartial: $('#video-text-partial'),
+    timelineBeginning: $('.ctn-timeline-beginning'),
+    timelineEnding: $('.ctn-timeline-ending')
 
   }, videoController);
+  videoTranscript.init();
 
   var videoLink = new VideoLink({
     inputUrlTime: $('#input-url-time'),

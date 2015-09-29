@@ -26,7 +26,7 @@
 //= require zendesk_widget
 //= require history
 //= require URIjs
-
+//= require modulejs
 
 // insert 3rd party packages above this line
 

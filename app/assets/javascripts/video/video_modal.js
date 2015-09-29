@@ -35,22 +35,26 @@ VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {
 VideoModal.prototype.loaded = function(timeSeconds, data) {
   this.resultStepHashId = data.hashid;
 
-  this.video.markers(
-    this.video.collapseTimes(data.delightedArray),
-    this.video.collapseTimes(data.confusedArray),
-    this.video.collapseTimes(data.highlightedArray)
-  );
   this.video.src(data.srcArray);
 
-  this.transcript.buildTranscript(
-    data.hashid,
-    data.transcriptionArray,
-    data.delightedArray,
-    data.confusedArray,
-    data.highlightedArray
-  );
+  var transcriptElement = modulejs.require('TranscriptElement');
+  var feelingDelightedElement = modulejs.require('FeelingDelightedElement');
+  var feelingConfusedElement = modulejs.require('FeelingConfusedElement');
+  var noteElement = modulejs.require('NoteElement');
+
+  var timelineArray = []
+    .concat(transcriptElement.buildElementArray(data.transcriptionArray))
+    .concat(feelingDelightedElement.buildElementArray(data.delightedArray))
+    .concat(feelingConfusedElement.buildElementArray(data.confusedArray))
+    .concat(noteElement.buildElementArray(data.highlightedArray));
+
+  this.transcript.buildTranscript(data.hashid, timelineArray);
+
 
   this.videoLink.updateShareLink(data.shareLink);
+
+  // TODO: fix this
+  $('#btn-create-highlight').attr('href', '/highlights/new?video=' + data.hashid);
 
   this.$divUserEmail.html(data.email);
   this.$divStepOrder.html(data.stepOrder + 1);

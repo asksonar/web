@@ -1,2 +1,6 @@
 #!/bin/sh
+
+# kill the previously running thin running process
+pkill 'ruby2.2'
+# start up new thin process on socket
 bundle exec thin start -S /tmp/sockets/thin.sock
