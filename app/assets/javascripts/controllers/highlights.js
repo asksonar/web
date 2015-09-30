@@ -99,7 +99,8 @@ $(function(){
   if (sonar.scenarioHighlight) {
     videoTranscript.setChecked(
       sonar.scenarioHighlight.timeline_elements.notes,
-      sonar.scenarioHighlight.timeline_elements.feelings
+      sonar.scenarioHighlight.timeline_elements.feelings,
+      sonar.scenarioHighlight.timeline_elements.transcripts
     );
   } else {
     videoRange.setStartFinish(parseFloat(timeSeconds), parseFloat(timeSeconds) + 10);
