@@ -50,11 +50,9 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
 
   this.transcript.buildTranscript(data.hashid, timelineArray);
 
+  $('#btn-create-highlight').attr('data-base-url', '/highlights/new?video=' + data.hashid);
 
   this.videoLink.updateShareLink(data.shareLink);
-
-  // TODO: fix this
-  $('#btn-create-highlight').attr('href', '/highlights/new?video=' + data.hashid);
 
   this.$divUserEmail.html(data.email);
   this.$divStepOrder.html(data.stepOrder + 1);

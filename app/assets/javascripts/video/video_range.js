@@ -7,12 +7,14 @@ VideoRange = function(config, video) {
 
   this.$scriptVideoRangeTemplate = config.scriptVideoRangeTemplate;
   this.progressControlSelector = config.progressControlSelector;
+
   this.rangeLeftMaskSelector = config.rangeLeftMaskSelector;
   this.rangeRightMaskSelector = config.rangeRightMaskSelector;
+  this.rangeMiddleMaskSelector = config.rangeMiddleMaskSelector;
   this.rangeLeftMarkerSelector = config.rangeLeftMarkerSelector;
   this.rangeRightMarkerSelector = config.rangeRightMarkerSelector;
 
-  this.minimumRange = 1;
+  this.minimumRange = 4;
 
   this.video = video;
 };
@@ -25,6 +27,7 @@ VideoRange.prototype.init = function() {
 
   this.$rangeLeftMask = $(this.rangeLeftMaskSelector);
   this.$rangeRightMask = $(this.rangeRightMaskSelector);
+  this.$rangeMiddleMask = $(this.rangeMiddleMaskSelector);
   this.$rangeLeftMarker = $(this.rangeLeftMarkerSelector);
   this.$rangeRightMarker = $(this.rangeRightMarkerSelector);
 
@@ -34,12 +37,18 @@ VideoRange.prototype.init = function() {
   this.$rangeLeftMarker.draggable({
     axis:'x',
     containment: this.progressControlSelector,
-    drag: $.proxy(this.dragStart, this)
+    drag: $.proxy(this.dragStart, this),
+    stop: $.proxy(function(event, ui) {
+      this.$rangeLeftMarker.css('left', this.toPercentage(ui.position.left));
+    }, this)
   });
   this.$rangeRightMarker.draggable({
     axis:'x',
     containment: this.progressControlSelector,
-    drag: $.proxy(this.dragFinish, this)
+    drag: $.proxy(this.dragFinish, this),
+    stop: $.proxy(function(event, ui) {
+      this.$rangeRightMarker.css('left', this.toPercentage(ui.position.left));
+    }, this)
   });
 
   this.video.on('timeupdate', $.proxy(this.onVideoTimeUpdate, this));
@@ -52,6 +61,10 @@ VideoRange.prototype.init = function() {
   this.video.on('loaded', $.proxy(function() {
     this.setStartFinish(this.start, this.finish);
   }, this));
+};
+
+VideoRange.prototype.toPercentage = function(val) {
+  return parseFloat(val) / this.$progressControl.width() * 100 + "%";
 };
 
 VideoRange.prototype.onVideoTimeUpdate = function(event, currentTime) {
@@ -81,7 +94,7 @@ VideoRange.prototype.jumpToFinish = function() {
 
 VideoRange.prototype.setStart = function(start) {
   var left = this.setStartFinish(start, this.finish)[0];
-  if (this.video.paused()) {
+  if (this.video.paused() && this.video.currentTime() < this.start) {
     this.video.currentTime(this.start);
   }
 
@@ -90,7 +103,7 @@ VideoRange.prototype.setStart = function(start) {
 
 VideoRange.prototype.setFinish = function(finish) {
   var left = this.setStartFinish(this.start, finish)[1];
-  if (this.video.paused()) {
+  if (this.video.paused() && this.video.currentTime() > this.finish) {
     this.video.currentTime(this.finish);
   }
 
@@ -101,7 +114,7 @@ VideoRange.prototype.setStartFinish = function(start, finish) {
   var previousStart = this.start;
   var previousFinish = this.finish;
 
-  var startWidth, finishWidth;
+  var leftWidth, rightWidth;
 
   this.start = parseFloat(start) || 0;
   this.finish = parseFloat(finish) || this.video.duration();
@@ -121,13 +134,16 @@ VideoRange.prototype.setStartFinish = function(start, finish) {
     this.start = Math.max(this.start, 0);
 
     // draw markers and masks on the video
-    startWidth = this.start / this.video.duration() * this.$progressControl.width();
-    this.$rangeLeftMask.css('width', startWidth);
-    this.$rangeLeftMarker.css('left', startWidth);
+    leftWidth = this.start / this.video.duration() * this.$progressControl.width();
+    this.$rangeLeftMask.css('width', this.toPercentage(leftWidth));
+    this.$rangeLeftMarker.css('left', this.toPercentage(leftWidth));
 
-    finishWidth = this.finish / this.video.duration() * this.$progressControl.width();
-    this.$rangeRightMask.css('width', this.$progressControl.width() - finishWidth);
-    this.$rangeRightMarker.css('left', finishWidth);
+    rightWidth = this.$progressControl.width() - (this.finish / this.video.duration() * this.$progressControl.width());
+    this.$rangeRightMask.css('width', this.toPercentage(rightWidth));
+    this.$rangeRightMarker.css('left', this.toPercentage(this.$progressControl.width() - rightWidth));
+
+    this.$rangeMiddleMask.css('left', this.toPercentage(leftWidth));
+    this.$rangeMiddleMask.css('right', this.toPercentage(rightWidth));
   }
 
   this.$inputStart.val(TimeDisplay.secsToDisplayTime(Math.floor(this.start)));
@@ -146,7 +162,7 @@ VideoRange.prototype.setStartFinish = function(start, finish) {
     this.trigger('videoRangeChange', [this.start, this.finish]);
   }
 
-  return [startWidth, finishWidth];
+  return [leftWidth, this.$progressControl.width() - rightWidth];
 };
 
 VideoRange.prototype.inputStart = function() {

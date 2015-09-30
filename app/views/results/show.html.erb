@@ -30,7 +30,7 @@
         <% @scenario.highlights.each_with_index do |highlight, index| %>
           <p>
             <% if index == 0 %><span class='h3'>Highlights:</span><% end %><!--
-         --><a href='<%= edit_highlight_path(highlight) %>' class='highlight-link'
+         --><a href='<%= highlight_path(highlight) %>' class='highlight-link'
             ><span class='sub'><%= ppt_date(highlight.created_at) %></span> <%= dt_transcription(highlight.title) %> ...
             </a>
           </p>

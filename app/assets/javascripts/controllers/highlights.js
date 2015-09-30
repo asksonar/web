@@ -74,15 +74,6 @@ $(function(){
   videoTranscript.buildTranscript(sonar.resultStep.hashid, timelineArray);
   videoTranscript.refreshView();
 
-  if (sonar.scenarioHighlight) {
-    videoTranscript.setChecked(
-      sonar.scenarioHighlight.timeline_elements.notes,
-      sonar.scenarioHighlight.timeline_elements.feelings
-    );
-  } else {
-    videoTranscript.setCheckedNotes();
-  }
-
   var videoRange = new VideoRange({
     inputStart: $('#input-video-time-start'),
     inputFinish: $('#input-video-time-end'),
@@ -92,6 +83,7 @@ $(function(){
     progressControlSelector : '.vjs-progress-control',
     rangeLeftMaskSelector: '.vjs-custom-range-left-mask',
     rangeRightMaskSelector: '.vjs-custom-range-right-mask',
+    rangeMiddleMaskSelector: '.vjs-custom-range-middle-mask',
     rangeLeftMarkerSelector: '.vjs-custom-range-left-marker',
     rangeRightMarkerSelector: '.vjs-custom-range-right-marker'
   }, videoController);
@@ -101,14 +93,24 @@ $(function(){
 
   videoRange.init();
 
+  if (sonar.scenarioHighlight) {
+    videoTranscript.setChecked(
+      sonar.scenarioHighlight.timeline_elements.notes,
+      sonar.scenarioHighlight.timeline_elements.feelings
+    );
+  } else {
+    videoRange.setStartFinish(parseFloat(timeSeconds), parseFloat(timeSeconds) + 10);
+    videoTranscript.setCheckedNotes();
+  }
+
+  $(window).load(function() {
+    videoTranscript.focusLink(timeSeconds);
+  });
+
   // videoLink.updateShareLink(sonar.resultStep.shareLink);
 
   // $(window).load(function() {
     // videoTranscript.focusLink(timeSeconds);
   // });
-
-  window.videoController = videoController;
-  window.videoRange = videoRange;
-  window.videoTranscript = videoTranscript;
 
 });
