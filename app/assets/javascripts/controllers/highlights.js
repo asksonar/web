@@ -59,6 +59,8 @@ $(function(){
   videoController.src(sonar.resultStep.srcArray);
   // videoController.play(timeSeconds);
 
+  var checkableTranscript = Object.create(modulejs.require('TranscriptElement'));
+  CheckableComponent.call(checkableTranscript);
   var checkableFeelingDelighted = Object.create(modulejs.require('FeelingDelightedElement'));
   CheckableComponent.call(checkableFeelingDelighted);
   var checkableFeelingConfused = Object.create(modulejs.require('FeelingConfusedElement'));
@@ -67,6 +69,7 @@ $(function(){
   CheckableComponent.call(checkableNote);
 
   var timelineArray = []
+    .concat(checkableTranscript.buildElementArray(sonar.resultStep.transcriptionArray))
     .concat(checkableFeelingDelighted.buildElementArray(sonar.resultStep.delightedArray))
     .concat(checkableFeelingConfused.buildElementArray(sonar.resultStep.confusedArray))
     .concat(checkableNote.buildElementArray(sonar.resultStep.highlightedArray));
