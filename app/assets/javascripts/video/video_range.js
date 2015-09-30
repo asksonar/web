@@ -14,7 +14,7 @@ VideoRange = function(config, video) {
   this.rangeLeftMarkerSelector = config.rangeLeftMarkerSelector;
   this.rangeRightMarkerSelector = config.rangeRightMarkerSelector;
 
-  this.minimumRange = 5;
+  this.minimumRange = 4;
 
   this.video = video;
 };
