@@ -10,7 +10,8 @@ class HighlightsService
       end_seconds: highlight_params[:end_seconds],
       timeline_elements: {
         notes: highlight_params[:note].try(:keys),
-        feelings: highlight_params[:feeling].try(:keys)
+        feelings: highlight_params[:feeling].try(:keys),
+        transcripts: highlight_params[:transcript].try(:keys)
       }.to_json,
       scenario: scenario,
       result_step: result_step
@@ -24,7 +25,8 @@ class HighlightsService
       end_seconds: highlight_params[:end_seconds],
       timeline_elements: {
         notes: highlight_params[:note].try(:keys),
-        feelings: highlight_params[:feeling].try(:keys)
+        feelings: highlight_params[:feeling].try(:keys),
+        transcripts: highlight_params[:transcript].try(:keys)
       }.to_json
     )
   end

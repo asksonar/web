@@ -64,7 +64,7 @@ HighlightTimeline = function(config) {
     visibleCheckboxes.prop('checked', checked);
   };
 
-  this.setChecked = function(noteHashids, feelingHashids) {
+  this.setChecked = function(noteHashids, feelingHashids, transcriptHashids) {
     $(this.checkboxSelector).prop('checked', false);
 
     var selector = this.checkboxSelector + "[name='scenario_highlight[{type}][{hashid}]']";
@@ -73,6 +73,9 @@ HighlightTimeline = function(config) {
     });
     (feelingHashids || []).forEach(function(hashid) {
       $(selector.replace('{type}', 'feeling').replace('{hashid}', hashid)).prop('checked', true);
+    });
+    (transcriptHashids || []).forEach(function(hashid) {
+      $(selector.replace('{type}', 'transcript').replace('{hashid}', hashid)).prop('checked', true);
     });
   };
 
