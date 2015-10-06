@@ -1,66 +1,73 @@
 class StudiesStepController < ApplicationController
   protect_from_forgery with: :null_session
 
+  after_action :track_respondent_stepped, only: :create
+
+  attr_writer :result_steps_service
+
+  def result_steps_service
+    @result_steps_service ||= ResultStepsService.instance
+  end
+
   def create
-    scenario_result = ScenarioResult.find_by_hashid(params[:study_id])
-    step = JSON.parse(params[:step_json])
-    feelings = step['feelings']
-    transcriptions = step['speechRecognition']['results']
+    @scenario_result = ScenarioResult.find_by_hashid(params_study_hashid)
+    @scenario_step = ScenarioStep.find_by_hashid(params_scenario_step_hashid)
 
-    first_transcription = transcriptions.length > 0 ? transcriptions[0]['text'] : ''
-    total_delighted = feelings.count { |feeling| feeling['type'] == 'delighted' }
-    total_confused = feelings.count { |feeling| feeling['type'] == 'confused' }
-
-    scenario_step = ScenarioStep.find_by_hashid(step['scenarioStepHashId'])
-    started_at = Time.at(step['start'] / 1000.0).iso8601(3)
-    completed_at = Time.at(step['finish'] / 1000.0).iso8601(3)
-    completed_seconds = step['length'] / 1000.0
-
-    result_step = ResultStep.create(
-      scenario_result: scenario_result,
-      scenario_step: scenario_step,
-      started_at: started_at,
-      completed_at: completed_at,
-      completed_seconds: completed_seconds,
-      first_transcription: first_transcription,
-      total_delighted: total_delighted,
-      total_confused: total_confused,
-      status: 'pending'
+    @result_step = result_steps_service.create_with_feelings_transcriptions(
+      step_params,
+      feelings_params,
+      transcriptions_params,
+      @scenario_result,
+      @scenario_step
     )
 
-    # check for any videos that were inserted previously
-    result_step.link_videos
-
-    feelings.each do |feeling|
-
-      feeling_type = feeling['type']
-      feeling_at_seconds = feeling['offset'] / 1000.0
-
-      step_feeling = StepFeeling.create(
-        result_step: result_step,
-        feeling: feeling_type,
-        feeling_at_seconds: feeling_at_seconds
-      )
-    end
-
-    transcriptions.each do |transcription|
-
-      transcription_text = transcription['text']
-      transcription_at_seconds = transcription['offset'] / 1000.0
-
-      step_transcription = StepTranscription.create(
-        result_step: result_step,
-        offset_seconds: transcription_at_seconds,
-        text: transcription_text
-      )
-    end
-
-    Resque.enqueue(ProcessTranscriptionWorker, result_step.id)
-
-    scenario = scenario_result.scenario
-    Analytics.instance.respondent_stepped(request.remote_ip, scenario.created_by, scenario, scenario_result, scenario_step, result_step)
+    Resque.enqueue(ProcessTranscriptionWorker, @result_step.id)
 
     render plain: 'OK'
   end
 
+  def track_respondent_stepped
+    scenario = @scenario_result.scenario
+    Analytics.instance.respondent_stepped(request.remote_ip, scenario.created_by, scenario, @scenario_result, @scenario_step, @result_step)
+  end
+
+  private
+
+  def params_study_hashid
+    params[:study_id]
+  end
+
+  def params_step
+    @params_step ||= JSON.parse(params[:step_json])
+  end
+
+  def params_scenario_step_hashid
+    params_step['scenarioStepHashId']
+  end
+
+  def step_params
+    {
+      started_at: Time.at(params_step['start'] / 1000.0).iso8601(3),
+      completed_at: Time.at(params_step['finish'] / 1000.0).iso8601(3),
+      completed_seconds: params_step['length'] / 1000.0
+    }
+  end
+
+  def feelings_params
+    params_step['feelings'].map do |feeling|
+      {
+        feeling: feeling['type'],
+        feeling_at_seconds: feeling['offset'] / 1000.0
+      }
+    end
+  end
+
+  def transcriptions_params
+    params_step['speechRecognition']['results'].map do |transcription|
+      {
+        offset_seconds: transcription['offset'] / 1000.0,
+        text: transcription['text']
+      }
+    end
+  end
 end

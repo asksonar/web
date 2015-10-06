@@ -60,13 +60,6 @@ class ResultStep < ActiveRecord::Base
     step_notes
   end
 
-  def link_videos
-    StepVideo.where(
-      scenario_result: scenario_result,
-      scenario_step: scenario_step
-    ).update_all(result_step_id: id)
-  end
-
   def generate_new_sample_result(new_scenario_step, new_scenario_result)
     new_result_step = dup
     new_result_step.scenario_step = new_scenario_step
