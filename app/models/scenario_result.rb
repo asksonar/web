@@ -14,16 +14,6 @@ class ScenarioResult < ActiveRecord::Base
     self.status = self.status || 0
   end
 
-  def self.bulk_create(users, scenario)
-    user_scenarios = []
-    users.each do |user|
-      user_scenarios.push ScenarioResult
-        .create_with(status: :pending)
-        .find_or_create_by(panelist: user, scenario: scenario)
-    end
-    return user_scenarios
-  end
-
   def email
     if panelist.email.empty? then
       'anonymous'

@@ -2,9 +2,14 @@ class ResultsController < ApplicationController
   before_action :authenticate_researcher!
 
   attr_writer :service
+  attr_writer :query
 
   def service
     @service ||= ScenariosService.instance
+  end
+
+  def query
+    @query ||= ScenariosQuery.instance
   end
 
   def index
@@ -19,7 +24,7 @@ class ResultsController < ApplicationController
       end
     end
 
-    @results = service.results(hash)
+    @results = query.results(hash)
   end
 
   def my_index

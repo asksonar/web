@@ -2,10 +2,15 @@ class DraftsController < ApplicationController
   before_action :authenticate_researcher!
 
   attr_writer :scenarios_service
+  attr_writer :scenarios_query
   attr_writer :drafts_service
 
   def scenarios_service
     @scenarios_service ||= ScenariosService.instance
+  end
+
+  def scenarios_query
+    @scenarios_query ||= ScenariosQuery.instance
   end
 
   def drafts_service
@@ -13,7 +18,7 @@ class DraftsController < ApplicationController
   end
 
   def index
-    @scenarios = scenarios_service.drafts(current_researcher.id)
+    @scenarios = scenarios_query.drafts(current_researcher.id)
   end
 
   def new
