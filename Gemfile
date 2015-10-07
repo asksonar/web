@@ -55,8 +55,6 @@ gem 'aws-sdk'
 gem 'mixpanel-ruby'
 # parse user agent for passing to mixpanel
 gem 'user_agent_parser'
-# add users to mailing list
-gem 'mailchimp-api', require: 'mailchimp'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables

@@ -30,7 +30,7 @@ class Researcher < ActiveRecord::Base
     end
 
     def subscribe_mailing_list
-      MailchimpUtility.instance.subscribe_alpha_users(self.email)
+      Resque.enqueue(SubscribeMailingListWorker, email, 'alpha_users')
     end
 
 end

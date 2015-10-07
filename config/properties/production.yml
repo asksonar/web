@@ -12,7 +12,3 @@ s3_videos_bucket: 'videos.asksonar.com'
 s3_backup_bucket: 'backup.asksonar.com'
 
 mixpanel_token: 32a9d9b381fa35fd2fdd8ad9c715656b
-
-mailchimp_api_key: 4c72c1aaf033cc59ccb856e5bad5a326-us10
-mailchimp_list_ids:
-  alpha_users: 24aa5d32d2
