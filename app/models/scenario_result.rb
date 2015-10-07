@@ -14,14 +14,6 @@ class ScenarioResult < ActiveRecord::Base
     self.status = self.status || 0
   end
 
-  def email
-    if panelist.email.empty? then
-      'anonymous'
-    else
-      panelist.email
-    end
-  end
-
   def title
     return scenario.title
   end

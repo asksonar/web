@@ -12,6 +12,14 @@ class ResultStepPresenter < SimpleDelegator
     }
   end
 
+  def email
+    if panelist.email.empty?
+      'anonymous'
+    else
+      panelist.email
+    end
+  end
+
   def src_array
     step_videos.first && step_videos.first.src_array
   end

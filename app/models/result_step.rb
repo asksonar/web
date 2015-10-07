@@ -8,7 +8,6 @@ class ResultStep < ActiveRecord::Base
   enum status: [:pending, :uploaded]
 
   delegate :panelist, to: :scenario_result
-  delegate :email, to: :scenario_result
   delegate :scenario, to: :scenario_result
 
   HASHIDS_SALT = '4$g&QNrACfVp'
@@ -40,20 +39,6 @@ class ResultStep < ActiveRecord::Base
 
   def transcriptions
     step_transcriptions
-  end
-
-  def transcription_at(seconds)
-    current_transcription = nil
-
-    transcriptions.select(:offset_seconds, :text).each do |transcription|
-      if transcription.offset_seconds <= seconds
-        current_transcription = transcription['text']
-      else
-        break
-      end
-    end
-
-    current_transcription
   end
 
   def notes
