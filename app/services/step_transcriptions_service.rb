@@ -11,13 +11,6 @@ class StepTranscriptionsService
 
     update_first_transcription(result_step)
 
-    # result_step = step_transcription.result_step
-    # first_transcription = result_step.step_transcriptions.first
-    # if first_transcription == step_transcription
-    #   result_step.first_transcription = first_transcription.text
-    #   result_step.save
-    # end
-
     step_transcription
   end
 
