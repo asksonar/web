@@ -9,13 +9,25 @@ class StepTranscriptionsService
     step_transcription.text = text
     step_transcription.save
 
-    result_step = step_transcription.result_step
-    first_transcription = result_step.step_transcriptions.first
-    if first_transcription == step_transcription
-      result_step.first_transcription = first_transcription.text
-      result_step.save
-    end
+    update_first_transcription(result_step)
 
     step_transcription
+  end
+
+  def create(params, result_step)
+    params.each do |transcription|
+      result_step.step_transcriptions.create(transcription)
+    end
+
+    update_first_transcription(result_step)
+
+    result_step.step_transcriptions
+  end
+
+  def update_first_transcription(result_step)
+    first_transcription = result_step.step_transcriptions.first
+    return if first_transcription.nil?
+    result_step.first_transcription = first_transcription.text
+    result_step.save
   end
 end

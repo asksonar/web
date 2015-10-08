@@ -42,7 +42,7 @@ class Scenario < ActiveRecord::Base
     scenario_highlights
   end
 
-  protected
+  private
 
   def sanitize_and_whitespace_description_title
     self.description = description.gsub(/\r/, '') if description

@@ -12,11 +12,11 @@
           Start from a template<span class="caret"></span>
         </a>
         <ul class="dropdown-menu dropdown-menu-right" role="menu">
-          <% ::Template.product_templates.each do |template| %>
+          <% ::Template.product.each do |template| %>
             <li><a href='?template=<%=template.value%>'><%=template.display%></a></li>
           <% end %>
           <li class="divider"></li>
-          <% ::Template.marketing_templates.each do |template| %>
+          <% ::Template.marketing.each do |template| %>
             <li><a href='?template=<%=template.value%>'><%=template.display%></a></li>
           <% end %>
         </ul>

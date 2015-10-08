@@ -12,6 +12,10 @@ class ScenarioPresenter < SimpleDelegator
     }
   end
 
+  def scenario_steps
+    super.map(&:prezi)
+  end
+
   def scenario_steps_array
     scenario_steps.map do |step|
       {

@@ -4,14 +4,9 @@ class StepFeeling < ActiveRecord::Base
 
   HASHIDS_SALT = '^Jt^2JQmwe3u'
 
-  def email
-    result_step.email
-  end
-
   def generate_new_sample_result(new_result_step)
     new_step_feeling = self.dup
     new_step_feeling.result_step = new_result_step
     new_step_feeling.save
   end
-
 end
