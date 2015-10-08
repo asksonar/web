@@ -32,9 +32,14 @@
       <%= render partial: 'nav/header' %>
     <% end %>
 
-    <section id="<%= controller_name + '-' + action_name %>" class="main-content-wrapper">
+    <section id="<%= controller_name + '-' + action_name %>" class="main-content-wrapper <%= content_for :main_content_wrapper_class %>">
       <%= yield %>
-      <%= render partial: 'nav/footer' %>
+
+      <% if content_for? :nav_footer %>
+        <%= content_for :nav_footer %>
+      <% else %>
+        <%= render partial: 'nav/footer' %>
+      <% end %>
     </section>
   </section>
 

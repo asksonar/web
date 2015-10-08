@@ -1,0 +1,14 @@
+<% content_for :main_wrapper_class do %>
+  logged-out
+<% end %>
+
+<% content_for :main_content_wrapper_class do %>
+  errors-wrapper
+<% end %>
+
+<% content_for :nav_footer do %>
+  <%= render partial: 'nav/footer_errors' %>
+<% end %>
+
+<h1>Sorry, the page you were looking for could not be found.</h1>
+<h2>You may have mistyped the address or the page may have moved.</h2>
