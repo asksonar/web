@@ -1,4 +1,6 @@
 class ResultStepPresenter < SimpleDelegator
+  VIDEO_BASE = Rails.configuration.properties['video_base_url']
+
   def public_json
     {
       hashid: hashid,
@@ -12,8 +14,24 @@ class ResultStepPresenter < SimpleDelegator
     }
   end
 
+  def email
+    if panelist.email.empty?
+      'anonymous'
+    else
+      panelist.email
+    end
+  end
+
   def src_array
-    step_videos.first && step_videos.first.src_array
+    return nil if step_videos.first.nil?
+
+    hashid = step_videos.first.hashid
+
+    [
+      { type: 'video/mp4', src: "#{VIDEO_BASE}/#{hashid}/video.mp4" },
+      { type: 'video/webm', src: "#{VIDEO_BASE}/#{hashid}/video.webm" }
+      # { type: "video/ogg", src: "/videos/video_" + data.id + ".ogv" }
+    ]
   end
 
   def share_link

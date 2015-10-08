@@ -8,7 +8,6 @@ class ResultStep < ActiveRecord::Base
   enum status: [:pending, :uploaded]
 
   delegate :panelist, to: :scenario_result
-  delegate :email, to: :scenario_result
   delegate :scenario, to: :scenario_result
 
   HASHIDS_SALT = '4$g&QNrACfVp'
@@ -42,29 +41,8 @@ class ResultStep < ActiveRecord::Base
     step_transcriptions
   end
 
-  def transcription_at(seconds)
-    current_transcription = nil
-
-    transcriptions.select(:offset_seconds, :text).each do |transcription|
-      if transcription.offset_seconds <= seconds
-        current_transcription = transcription['text']
-      else
-        break
-      end
-    end
-
-    current_transcription
-  end
-
   def notes
     step_notes
-  end
-
-  def link_videos
-    StepVideo.where(
-      scenario_result: scenario_result,
-      scenario_step: scenario_step
-    ).update_all(result_step_id: id)
   end
 
   def generate_new_sample_result(new_scenario_step, new_scenario_result)

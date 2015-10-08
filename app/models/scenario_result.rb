@@ -11,41 +11,7 @@ class ScenarioResult < ActiveRecord::Base
   HASHIDS_SALT = 'NCH&Yc!QWk58'
 
   def default_values
-    self.status = self.status || 0
-  end
-
-  def self.bulk_create(users, scenario)
-    user_scenarios = []
-    users.each do |user|
-      user_scenarios.push ScenarioResult
-        .create_with(status: :pending)
-        .find_or_create_by(panelist: user, scenario: scenario)
-    end
-    return user_scenarios
-  end
-
-  def email
-    if panelist.email.empty? then
-      'anonymous'
-    else
-      panelist.email
-    end
-  end
-
-  def title
-    return scenario.title
-  end
-
-  def description
-    return scenario.description
-  end
-
-  def company_name
-    return scenario.company.name
-  end
-
-  def completed_seconds
-    result_steps.sum(:completed_seconds)
+    self.status = status || 0
   end
 
   def self.generate_new_sample_result(new_scenario)
@@ -61,14 +27,11 @@ class ScenarioResult < ActiveRecord::Base
       new_scenario_steps = new_scenario.scenario_steps
 
       sample_scenario_steps.zip(new_scenario_steps) do |sample_scenario_step, new_scenario_step|
-        if sample_scenario_step.nil? or new_scenario_step.nil?
-          break
-        end
+        break if sample_scenario_step.nil? || new_scenario_step.nil?
 
         result_step = ResultStep.find_by(scenario_step: sample_scenario_step, scenario_result: sample_scenario_result)
         result_step.generate_new_sample_result(new_scenario_step, new_scenario_result)
       end
     end
   end
-
 end

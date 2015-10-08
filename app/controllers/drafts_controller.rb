@@ -2,10 +2,15 @@ class DraftsController < ApplicationController
   before_action :authenticate_researcher!
 
   attr_writer :scenarios_service
+  attr_writer :scenarios_query
   attr_writer :drafts_service
 
   def scenarios_service
     @scenarios_service ||= ScenariosService.instance
+  end
+
+  def scenarios_query
+    @scenarios_query ||= ScenariosQuery.instance
   end
 
   def drafts_service
@@ -13,7 +18,7 @@ class DraftsController < ApplicationController
   end
 
   def index
-    @scenarios = scenarios_service.drafts(current_researcher.id)
+    @scenarios = scenarios_query.drafts(current_researcher.id)
   end
 
   def new
@@ -46,13 +51,6 @@ class DraftsController < ApplicationController
     if params[:scenario][:template] == 'sample'
       response.location += '?walkthrough=share'
     end
-
-    # if we published
-    #   redirect to individual results page
-    #   flash that we are now able to share with customers
-    # if we just save the draft
-    #   redirect to draft list
-    #   flash that list
   end
 
   def show
@@ -74,17 +72,14 @@ class DraftsController < ApplicationController
       flash[:info] = '<strong>Study Published</strong> - ' \
         'Your study link is now ready to be shared with your users.'
       redirect_to result_path(@scenario)
-    elsif params[:draft]
-      flash[:info] = "<strong>Draft Saved</strong> - #{@scenario.title}"
-      redirect_to drafts_path
     elsif params[:update]
       flash[:info] = '<strong>Study Updated</strong> - ' \
         'Your study link is now ready to be shared with your users.'
       redirect_to result_path(@scenario)
+    else # if params[:draft]
+      flash[:info] = "<strong>Draft Saved</strong> - #{@scenario.title}"
+      redirect_to drafts_path
     end
-
-    # need to update in place
-    # then the resulting pathing is the same as create pretty much
   end
 
   private

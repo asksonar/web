@@ -17,20 +17,20 @@ class Researcher < ActiveRecord::Base
   HASHIDS_SALT = 'M7k&59nN$XjZ'
 
   private
-    def create_company
-      self.company = Company.create();
-    end
 
-    def track_researcher_created
-      Analytics.instance.researcher_created(self)
-    end
+  def create_company
+    self.company = Company.create
+  end
 
-    def welcome_email
-      Mailer.welcome_email(self).deliver_now
-    end
+  def track_researcher_created
+    Analytics.instance.researcher_created(self)
+  end
 
-    def subscribe_mailing_list
-      Resque.enqueue(SubscribeMailingListWorker, email, 'alpha_users')
-    end
+  def welcome_email
+    Mailer.welcome_email(self).deliver_now
+  end
 
+  def subscribe_mailing_list
+    MailchimpUtility.instance.subscribe_alpha_users(email)
+  end
 end
