@@ -28,10 +28,6 @@
     }
   }
 
-  .brand.force-center {
-    width: 100%;
-  }
-
   .nav {
     >li>a {
       padding: 0px 10px;
@@ -71,10 +67,10 @@
     }
   }
 
-  .logged-out .toggle-sidebar {
-    display: none;
-  }
+}
 
+.logged-out #toggle-sidebar {
+  display: none;
 }
 
 .sidebar nav {
@@ -130,5 +126,4 @@
       color: #FFF;
     }
   }
-
 }

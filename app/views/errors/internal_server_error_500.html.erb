@@ -1,0 +1,25 @@
+<% content_for :main_wrapper_class do %>
+  logged-out
+<% end %>
+
+<% content_for :main_content_wrapper_class do %>
+  errors-wrapper
+<% end %>
+
+<% content_for :nav_footer do %>
+  <%= render partial: 'nav/footer_errors' %>
+<% end %>
+
+<h1>We're sorry, but something went wrong.</h1>
+<h2>
+  <% if request.referrer %>
+    Click <a href='<%= request.referrer %>'>here</a> to go back.<br/>
+  <% end %>
+  If this problem persists, please contact us using the form below.
+</h2>
+
+<script type='text/javascript'>
+  zE(function() {
+    zE.activate();
+  });
+</script>

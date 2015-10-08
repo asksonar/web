@@ -6,8 +6,4 @@ class HomeController < ApplicationController
       redirect_to new_researcher_session_path
     end
   end
-
-  def maintenance
-    render layout: 'plain', status: 503
-  end
 end
