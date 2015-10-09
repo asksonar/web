@@ -91,6 +91,7 @@ input.form-control + span.input-group-btn .btn {
   &:hover, &:focus {
     background-color: darken($green, 5);
     color: $white;
+    border: 1px solid darken($green, 10);
   }
 }
 
@@ -103,6 +104,7 @@ input.form-control + span.input-group-btn .btn {
   &:hover, &:focus {
     background-color: darken($dark-blue, 5);
     color: $white;
+    border: 1px solid darken($dark-blue, 10);
   }
 }
 
@@ -115,6 +117,7 @@ input.form-control + span.input-group-btn .btn {
   &:hover, &:focus {
     background-color: darken($medium-blue, 5);
     color: $white;
+    border: 1px solid darken($medium-blue, 10);
   }
 }
 
@@ -127,6 +130,7 @@ input.form-control + span.input-group-btn .btn {
   &:hover, &:focus {
     background-color: darken($light-blue, 5);
     color: $white;
+    border: 1px solid darken($light-blue, 10);
   }
 }
 
@@ -139,6 +143,7 @@ input.form-control + span.input-group-btn .btn {
   &:hover, &:focus {
     background-color: darken($grey, 5);
     color: $white;
+    border: 1px solid darken($grey, 10);
   }
 }
 
@@ -151,12 +156,14 @@ input.form-control + span.input-group-btn .btn {
   &:hover, &:focus {
     background-color: darken($orange, 5);
     color: $white;
+    border: 1px solid darken($orange, 10);
   }
 }
 
 .btn-colorless {
   background-color: initial;
   color: initial;
+  border-color: transparent;
 }
 
 .btn-med {
