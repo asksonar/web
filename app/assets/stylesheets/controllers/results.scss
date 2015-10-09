@@ -127,9 +127,6 @@
   .panel-hero {
     z-index: 120;
     .input-group {
-      input, a {
-        height: 34px /* height doens't seem to line up otherwise */
-      }
       #input-share-link {
         cursor: text;
       }
