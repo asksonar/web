@@ -25,7 +25,7 @@ ResultsView.prototype.init = function() {
 }
 
 ResultsView.prototype.toggleArchive = function() {
-  var isOn = this.$btnArchive.find('.btn-success').hasClass('active');
+  var isOn = this.$btnArchive.find('.btn-active-on').hasClass('active');
 
   $.ajax({
     type: 'POST',

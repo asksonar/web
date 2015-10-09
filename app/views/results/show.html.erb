@@ -49,8 +49,8 @@
         <% if @scenario.live? %>title="Close the study"<% end %>
         <% if @scenario.completed? %>title="Re-open the study"<% end %>
       >
-        <a class="btn btn-success <% if @scenario.live? %>active<% end %>">On</a>
-        <a class="btn btn-failure <% if @scenario.completed? %>active<% end %>">Off</a>
+        <a class="btn btn-light-blue btn-active-on <% if @scenario.live? %>active<% end %>">On</a>
+        <a class="btn btn-grey btn-failure btn-active-off <% if @scenario.completed? %>active<% end %>">Off</a>
       </div>
 
       <div class="btn-group pull-right">
