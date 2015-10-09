@@ -27,10 +27,10 @@
       overflow-y: auto;
       position: absolute;
       right: 15px;
-      top: 31px; // effective height of transcript-header-container
+      top: 33px; // effective height of transcript-header-container
 
 
-      .editable-timeline & { bottom: 30px; } // effective height of btn-add-note
+      .editable-timeline & { bottom: 33px; } // effective height of btn-add-note
     }
 
     #btn-add-note {
@@ -54,7 +54,7 @@
   }
 
   h2 {
-    line-height: 31px; // to match that of #toggle-transcripts button
+    line-height: 33px; // to match that of #toggle-transcripts button
     margin-left: 3px; // to match that of checkbox 2px border + 1px padding
 
     @media (min-width: $screen-md-min) {
