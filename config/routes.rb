@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     resources :video, only: [:create, :update], controller: 'studies_video'
   end
   resources :drafts
+  resources :responses
   resources :results do
     resources :videos, only: [:show], controller: 'results'
   end
