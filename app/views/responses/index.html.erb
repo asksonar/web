@@ -14,7 +14,7 @@
       <div class='row'>
         <div class='col-sm-8 title-container'>
           <h1><%= result_step.scenario_step.scenario.title %></h1>
-          <p class='sub'>completed by <%= result_step.email %> <%= time_ago_in_words(result_step.created_at)%> ago</p>
+          <p class='sub'>completed by <%= result_step.email %> <%= time_ago_in_words(result_step.created_at)%> ago (<%= pp_plural_with_number(result_step.scenario_step.scenario.scenario_steps.count, 'step') %>)</p>
         </div>
         <div class='col-sm-4'>
           <div class='row counts-container'>
