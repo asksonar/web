@@ -8,6 +8,7 @@ class ResponsesQuery
       .where(scenario_steps: {step_order: 0})
       .uploaded
       .order(created_at: :desc)
+      .first(20)
       .map(&:prezi)
   end
 end
