@@ -76,4 +76,12 @@ class ResultStepPresenter < SimpleDelegator
       }
     end
   end
+
+  def scenario_title
+    scenario.title
+  end
+
+  def scenario_step_count
+    scenario.step_count
+  end
 end
