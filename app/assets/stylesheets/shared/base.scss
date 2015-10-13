@@ -1,3 +1,11 @@
+$white: #FFF;
+$green: #31B6AE;
+$dark-blue: #05647C;
+$medium-blue: #1CA5C9;
+$light-blue: #8ED2E4;
+$grey: #999;
+$orange: #F69526;
+
 body, .body {
   font-family: 'BrandonGrotesque-Regular';
   font-size: 16px;
@@ -26,7 +34,7 @@ p + p {
 
 .sub {
   font-size: 14px;
-  color: #999;
+  color: $grey;
 }
 
 p.sub {
@@ -68,47 +76,94 @@ h3, .h3 {
 
 .btn {
   border-radius: 0px;
-  border: 1px transparent;
-  opacity: .9;
 }
 
-.btn:hover {
-  opacity: 1;
+input.form-control + span.input-group-btn .btn {
+  padding-top: 7px; // the default 6px is 1px too short
 }
 
-.btn-green, .btn-green:hover {
-  background-color: #31B6AE;
-  color: #FFF;
+.btn-green {
+  & {
+    background-color: $green;
+    color: $white;
+    border: 1px solid darken($green, 10);
+  }
+  &:hover, &:focus {
+    background-color: darken($green, 5);
+    color: $white;
+    border: 1px solid darken($green, 10);
+  }
 }
 
-.btn-dark-blue, .btn-dark-blue:hover {
-  background-color: #05647C;
-  color: #FFF;
+.btn-dark-blue {
+  & {
+    background-color: $dark-blue;
+    color: $white;
+    border: 1px solid darken($dark-blue, 10);
+  }
+  &:hover, &:focus {
+    background-color: darken($dark-blue, 5);
+    color: $white;
+    border: 1px solid darken($dark-blue, 10);
+  }
 }
 
-.btn-medium-blue, .btn-medium-blue:hover {
-  background-color: #1CA5C9;
-  color: #FFF;
+.btn-medium-blue {
+  & {
+    background-color: $medium-blue;
+    color: $white;
+    border: 1px solid darken($medium-blue, 10);
+  }
+  &:hover, &:focus {
+    background-color: darken($medium-blue, 5);
+    color: $white;
+    border: 1px solid darken($medium-blue, 10);
+  }
 }
 
-.btn-light-blue, .btn-light-blue:hover {
-  background-color: #8ED2E4;
-  color: #FFF;
+.btn-light-blue {
+  & {
+    background-color: $light-blue;
+    color: $white;
+    border: 1px solid darken($light-blue, 10);
+  }
+  &:hover, &:focus {
+    background-color: darken($light-blue, 5);
+    color: $white;
+    border: 1px solid darken($light-blue, 10);
+  }
 }
 
-.btn-grey, .btn-grey:hover {
-  background-color: #999;
-  color: #FFF;
+.btn-grey {
+  & {
+    background-color: $grey;
+    color: $white;
+    border: 1px solid darken($grey, 10);
+  }
+  &:hover, &:focus {
+    background-color: darken($grey, 5);
+    color: $white;
+    border: 1px solid darken($grey, 10);
+  }
 }
 
-.btn-orange, .btn-orange:hover{
-  background-color: #F69526;
-  color: #FFF;
+.btn-orange {
+  & {
+    background-color: $orange;
+    color: $white;
+    border: 1px solid darken($orange, 10);
+  }
+  &:hover, &:focus {
+    background-color: darken($orange, 5);
+    color: $white;
+    border: 1px solid darken($orange, 10);
+  }
 }
 
 .btn-colorless {
   background-color: initial;
   color: initial;
+  border-color: transparent;
 }
 
 .btn-med {

@@ -86,40 +86,31 @@
       h2 {
         display: inline-block;
       }
+
       #btn-archive {
         margin-left: 5px;
         cursor: pointer;
         border: 1px solid #999;
-        .btn{
-          margin: 2px;
-          color: #C5C5C5;
-          padding-top: 3px;
-          padding-bottom: 3px;
+
+        .btn {
+          margin: 1px;
+          padding-top: 4px;
+          padding-bottom: 4px;
           box-shadow: none;
-          background: none;
         }
-        .btn:hover {
-          color: #999;
-        }
-        .btn-success.active {
-          background: #8DD2E4;
-          color: #FFF;
-        }
-        .btn-failure.active {
-          background: #999;
-          color: #FFF;
+
+        .btn:not(.active) {
+          background-color: inherit;
+          color: $grey;
+          border-color: transparent;
         }
       }
+
       .share-link-group {
         margin-top: 10px;
 
         input {
           cursor: text;
-        }
-
-        .btn {
-          padding-top: 8px;
-          padding-bottom: 7px;
         }
       }
     }
@@ -136,9 +127,6 @@
   .panel-hero {
     z-index: 120;
     .input-group {
-      input, a {
-        height: 34px /* height doens't seem to line up otherwise */
-      }
       #input-share-link {
         cursor: text;
       }
