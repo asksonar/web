@@ -17,7 +17,10 @@ class ScenarioPresenter < SimpleDelegator
   end
 
   def scenario_steps_array
-    scenario_steps.map do |step|
+    scenario_steps
+      .reject(&:marked_for_destruction?)
+      .sort_by(&:step_order)
+      .map do |step|
       {
         hashid: step.hashid,
         description: (step.description || '').strip,
