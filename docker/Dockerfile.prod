@@ -8,6 +8,11 @@
 
 FROM local/web
 
+ADD Gemfile Gemfile
+ADD Gemfile.lock Gemfile.lock
+
+RUN bundle install --without development test --path vendor/bundle --binstubs vendor/bundle/bin --frozen true -j4 --frozen
+
 ADD . /home/app/webapp
 
 RUN bundle install --without development test --path vendor/bundle --binstubs vendor/bundle/bin --frozen true -j4 --frozen
