@@ -45,16 +45,6 @@
       .highlights-container,
       .notes-container {
         margin-top: 20px;
-        // span.strong {
-        //   display: inline-block;
-        //   text-indent: -95px;
-        // }
-        // p {
-        //   margin-left: 95px;
-        // }
-        // span.strong + a {
-        //   margin-top: -1.1em; /* line height of the span.h3 */
-        // }
       }
 
       .summary-description {
@@ -152,20 +142,6 @@
   }
 
   .panel-heading {
-    // .summary-step-description {
-    //   margin-left: 30px;
-    //   span.h1 {
-    //     text-indent: -30px;
-    //     display: inline-block;
-    //   }
-    //   a {
-    //     display: block;
-    //     white-space: nowrap;
-    //     overflow: hidden;
-    //     text-overflow: ellipsis;
-    //   }
-    // }
-
     .moments-container {
       div + div {
         padding-left: 0px;
@@ -230,21 +206,14 @@
 
   .modal {
     .ctn-modal-header {
+
       #ctn-user-email {
         margin-left: 20px;
       }
+
       .ctn-modal-step-description {
-    //     margin-left: 80px;
         margin-top: 15px;
         margin-bottom: 30px;
-    //     span.h1 {
-    //       text-indent: -80px;
-    //       display: inline-block;
-    //       width: 0px;
-    //       span {
-    //         display: inline;
-    //       }
-    //     }
       }
     }
   }
