@@ -39,7 +39,7 @@ class DraftsController < ApplicationController
       !params[:publish].nil?
     )
 
-    if !@scenario.save
+    if !@scenario.valid?
       render :new
       return
     end
@@ -72,6 +72,12 @@ class DraftsController < ApplicationController
       current_researcher,
       !params[:publish].nil?
     )
+
+    if !@scenario.valid?
+      @scenario = @scenario.prezi
+      render :edit
+      return
+    end
 
     if params[:publish]
       flash[:info] = '<strong>Study Published</strong> - ' \

@@ -1,7 +1,7 @@
 class Scenario < ActiveRecord::Base
   belongs_to :company
   belongs_to :created_by, class_name: 'Researcher', foreign_key: :created_by
-  has_many :scenario_steps, -> { order step_order: :asc }, inverse_of: :scenario
+  has_many :scenario_steps, -> { order step_order: :asc }, inverse_of: :scenario, autosave: true
   has_many :scenario_results, inverse_of: :scenario
   has_many :result_steps, through: :scenario_results
   has_many :result_steps_pending, through: :scenario_results
