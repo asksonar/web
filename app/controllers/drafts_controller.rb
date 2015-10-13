@@ -39,6 +39,11 @@ class DraftsController < ApplicationController
       !params[:publish].nil?
     )
 
+    if !@scenario.save
+      render :new
+      return
+    end
+
     if params[:publish]
       flash[:info] = '<strong>Study Published</strong> - ' \
         'Your study link is now ready to be shared with your users.'
@@ -63,7 +68,7 @@ class DraftsController < ApplicationController
     drafts_service.update(
       @scenario,
       scenario_params,
-      scenario_steps_params,
+      scenario_steps_params_with_hashid,
       current_researcher,
       !params[:publish].nil?
     )
@@ -89,11 +94,14 @@ class DraftsController < ApplicationController
   end
 
   def scenario_steps_params
+    scenario_steps_params_with_hashid.map { |params| params.permit(:description, :url, :step_order) }
+  end
+
+  def scenario_steps_params_with_hashid
     params.require(:scenario_steps).each_with_index.map do |step, index|
       return_val = ActionController::Parameters.new(step).permit(:description, :url, :hashid)
       return_val[:step_order] = index
       return_val
     end
   end
-
 end

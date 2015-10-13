@@ -5,27 +5,34 @@ class DraftsService
     # save all the changes
     ActiveRecord::Base.transaction do
       scenario = Scenario.new(scenario_params)
-      publish!(scenario) if publishing
       scenario.created_by = researcher
       scenario.company = researcher.company
-      scenario.save
 
-      scenario.scenario_steps.create(scenario_steps_params.map { |params| params.permit(:description, :url, :step_order) })
+      scenario.scenario_steps.new(
+        ensure_at_least_one_step(
+          filter_trailing_empty_steps(
+            scenario_steps_params
+          )
+        )
+      )
 
-      track_study_created(researcher, scenario)
+      if scenario.save
+        scenario.scenario_steps.each(&:save)
+        publish!(scenario) if publishing
+        track_study_created(researcher, scenario)
+      end
 
       scenario
     end
   end
 
-  def update(scenario, scenario_params, scenario_steps_params, researcher, publishing)
+  def update(scenario, scenario_params, scenario_steps_params_with_hashid, researcher, publishing)
     ActiveRecord::Base.transaction do
-      publish!(scenario) if publishing
-      scenario.update(scenario_params)
-
-      update_steps!(scenario.scenario_steps, scenario_steps_params)
-
-      track_draft_published(researcher, scenario) if publishing
+      if scenario.update(scenario_params)
+        update_steps!(scenario.scenario_steps, filter_trailing_empty_steps(scenario_steps_params_with_hashid))
+        publish!(scenario) if publishing
+        track_draft_published(researcher, scenario) if publishing
+      end
 
       scenario
     end
@@ -34,6 +41,18 @@ class DraftsService
   def publish!(scenario)
     scenario.status = 'live'
     scenario.published_at = Time.new
+    scenario.save
+  end
+
+  def filter_trailing_empty_steps(steps_params)
+    steps_params
+      .reverse
+      .drop_while { |step| step[:description].blank? && step[:url].blank? }
+      .reverse
+  end
+
+  def ensure_at_least_one_step(steps_params)
+    steps_params.present? ? steps_params : {}
   end
 
   def update_steps!(old_steps, new_steps)

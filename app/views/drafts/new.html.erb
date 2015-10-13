@@ -2,7 +2,7 @@
   New Study
 <% end %>
 
-<%= bootstrap_form_for :scenario, url: drafts_path, html: {class: 'draft-editable-steps' } do |f| %>
+<%= bootstrap_form_for @scenario, url: drafts_path, html: {class: 'draft-editable-steps' } do |f| %>
 
   <%= f.hidden_field :template, value: params[:template] %>
 

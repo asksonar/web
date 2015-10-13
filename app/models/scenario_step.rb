@@ -7,6 +7,8 @@ class ScenarioStep < ActiveRecord::Base
 
   before_validation :sanitize_description_url
 
+  validates_presence_of :description
+
   HASHIDS_SALT = 'c@9F*bVEKWpT'
 
   def where_feeling_delighted

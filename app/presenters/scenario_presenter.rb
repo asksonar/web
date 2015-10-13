@@ -21,7 +21,8 @@ class ScenarioPresenter < SimpleDelegator
       {
         hashid: step.hashid,
         description: (step.description || '').strip,
-        url: (step.url || '').strip
+        url: (step.url || '').strip,
+        errors: step.try(:errors).try(:messages)
       }
     end
   end

@@ -10,9 +10,17 @@ class Scenario < ActiveRecord::Base
   has_many :step_notes, through: :result_steps
   enum status: [:drafts, :live, :completed]
 
+  after_initialize :default_values, unless: :persisted?
+
+  validates_presence_of :title, :description
+
   before_validation :sanitize_and_whitespace_description_title
 
   HASHIDS_SALT = '8UTnU7cJm*bP'
+
+  def default_values
+    self.status = status || 0
+  end
 
   def step_count
     scenario_steps.count
