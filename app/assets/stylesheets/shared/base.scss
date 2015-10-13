@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
 $white: #FFF;
 $green: #31B6AE;
 $dark-blue: #05647C;
@@ -7,8 +9,11 @@ $grey: #999;
 $orange: #F69526;
 
 body, .body {
-  font-family: 'BrandonGrotesque-Regular';
-  font-size: 16px;
+  // font-family: 'BrandonGrotesque-Regular';
+  // font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 a {
@@ -22,8 +27,8 @@ a:hover {
 }
 
 p {
-  font-family: 'BrandonGrotesque-Regular';
-  line-height: 18px;
+  // font-family: 'BrandonGrotesque-Regular';
+  // line-height: 18px;
   margin-top: 0px;
   margin-bottom: 0px;
 }
@@ -33,12 +38,13 @@ p + p {
 }
 
 .sub {
-  font-size: 14px;
+  // font-size: 14px;
+  font-size: 12px;
   color: $grey;
 }
 
 p.sub {
-  line-height: 15px;
+  // line-height: 15px;
 }
 
 p.sub + p.sub {
@@ -46,26 +52,43 @@ p.sub + p.sub {
 }
 
 strong, .strong {
- font-family: 'BrandonGrotesque-Medium';
+ // font-family: 'BrandonGrotesque-Medium';
+  font-weight: 600;
 }
 
 h1, .h1 {
-  font-family: 'BrandonGrotesque-Medium';
+  // font-family: 'BrandonGrotesque-Medium';
+  // font-size: 24px;
+  // font-weight: 600;
   font-size: 24px;
+  letter-spacing: -.25px;
+  line-height: 28px;
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
 h2, .h2 {
-  font-family: 'BrandonGrotesque-Regular';
-  font-size: 24px;
+  // font-family: 'BrandonGrotesque-Regular';
+  // font-size: 24px;
+  font-size: 20px;
+  line-height: 26px;
   margin-top: 0px;
   margin-bottom: 0px;
 }
 
 h3, .h3 {
-  font-family: 'BrandonGrotesque-Medium';
+  // font-family: 'BrandonGrotesque-Medium';
+  font-size: 18px;
+  line-height: 24px;
+  // font-size: 14px;
+  // font-weight: 600;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+h4, .h4 {
   font-size: 16px;
+  line-height: 22px;
   margin-top: 0px;
   margin-bottom: 0px;
 }
