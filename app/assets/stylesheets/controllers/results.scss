@@ -45,16 +45,16 @@
       .highlights-container,
       .notes-container {
         margin-top: 20px;
-        span.h3 {
-          display: inline-block;
-          text-indent: -95px;
-        }
-        p {
-          margin-left: 95px;
-        }
-        span.h3 + a {
-          margin-top: -1.1em; /* line height of the span.h3 */
-        }
+        // span.strong {
+        //   display: inline-block;
+        //   text-indent: -95px;
+        // }
+        // p {
+        //   margin-left: 95px;
+        // }
+        // span.strong + a {
+        //   margin-top: -1.1em; /* line height of the span.h3 */
+        // }
       }
 
       .summary-description {
@@ -130,6 +130,11 @@
       #input-share-link {
         cursor: text;
       }
+    }
+
+    h4 {
+      margin-top: 10px;
+      margin-bottom: 10px;
     }
   }
 
@@ -225,11 +230,7 @@
 
   .modal {
     .ctn-modal-header {
-      h3 {
-        display: inline-block;
-      }
-      p#ctn-user-email {
-        display: inline-block;
+      #ctn-user-email {
         margin-left: 20px;
       }
       .ctn-modal-step-description {
