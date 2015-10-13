@@ -1,4 +1,4 @@
-class ResponsesController < ApplicationController
+class ResponsesJsonController < ApplicationController
   before_action :authenticate_researcher!
 
   attr_writer :responses_query
@@ -10,6 +10,12 @@ class ResponsesController < ApplicationController
   def index
     responseParams = {}
     responseParams[:created_by] = current_researcher.id
-    @result_steps = responses_query.responses(responseParams)
+    responseParams[:created_since] = params[:created_since]
+
+    @result_steps = responses_query
+      .responses(responseParams)
+      .map(&:list_json)
+
+    render json: @result_steps
   end
 end
