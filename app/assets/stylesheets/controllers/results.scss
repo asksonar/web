@@ -152,19 +152,19 @@
   }
 
   .panel-heading {
-    .summary-step-description {
-      margin-left: 30px;
-      span.h1 {
-        text-indent: -30px;
-        display: inline-block;
-      }
-      a {
-        display: block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
+    // .summary-step-description {
+    //   margin-left: 30px;
+    //   span.h1 {
+    //     text-indent: -30px;
+    //     display: inline-block;
+    //   }
+    //   a {
+    //     display: block;
+    //     white-space: nowrap;
+    //     overflow: hidden;
+    //     text-overflow: ellipsis;
+    //   }
+    // }
 
     .moments-container {
       div + div {
@@ -194,7 +194,7 @@
     display: none; /* start off collapsed */
 
     .results-container {
-      margin-left: 30px;
+      margin-left: 30px; // .summary-step-description number + padding ends up at 30px
       margin-top: 20px;
 
       a {
@@ -234,17 +234,17 @@
         margin-left: 20px;
       }
       .ctn-modal-step-description {
-        margin-left: 80px;
+    //     margin-left: 80px;
         margin-top: 15px;
         margin-bottom: 30px;
-        span.h1 {
-          text-indent: -80px;
-          display: inline-block;
-          width: 0px;
-          span {
-            display: inline;
-          }
-        }
+    //     span.h1 {
+    //       text-indent: -80px;
+    //       display: inline-block;
+    //       width: 0px;
+    //       span {
+    //         display: inline;
+    //       }
+    //     }
       }
     }
   }
