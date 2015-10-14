@@ -11,7 +11,7 @@ class ResponsesQuery
 
     if !created_since.nil?
       resultStep = resultStep
-        .where('result_steps.created_at >= ?', created_since)
+        .where('result_steps.updated_at >= ?', created_since)
     end
 
     resultStep.first(limit)
