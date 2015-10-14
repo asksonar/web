@@ -89,8 +89,8 @@
     position: relative;
 
     .row {
-      padding-left: 30px;
-      padding-right: 80px;
+      padding-left: 35px;
+      padding-right: 75px;
     }
 
     @media (min-width: $screen-md-min) {
@@ -99,7 +99,7 @@
       }
 
       .col-md-4 {
-        padding-left: 5px;
+        padding-left: 0px;
       }
     }
 
