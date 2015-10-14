@@ -56,7 +56,7 @@ class DraftsService
   def filter_trailing_empty_steps(steps_params)
     steps_params
       .reverse
-      .drop_while { |step| step[:description].blank? && step[:url].blank? }
+      .drop_while { |step| step[:description].blank? && step[:url].blank? && step[:hashid].blank? }
       .reverse
   end
 
