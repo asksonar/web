@@ -5,7 +5,7 @@
 */
 
 $(function(){
-  if (sonar.request.controller !== 'drafts') {
+  if (sonar.request.controller !== 'drafts' || sonar.request.action === 'index') {
     return;
   }
 

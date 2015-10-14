@@ -9,10 +9,12 @@ Rails.application.routes.draw do
   get '/503', to: 'errors#service_unavailable_503'
 
   get '/videos.json', to: 'videos_json#show'
-  get '/create',      to: 'drafts#new' # so it doesn't highlight the left nav
-  get '/my_results',  to: 'results#my_index'
+  get '/create', to: 'drafts#new' # so it doesn't highlight the left nav
+  post '/create', to: 'drafts#create'
+  get '/my_results', to: 'results#my_index'
   get '/share/videos/:id', to: 'share_videos#show'
   get '/results/:id/edit', to: 'drafts#edit'
+  patch '/results/:id/edit', to: 'drafts#update'
   get '/my_results/:id/edit', to: 'drafts#edit'
   get '/responses.json', to: 'responses_json#index'
 

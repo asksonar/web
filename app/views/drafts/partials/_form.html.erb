@@ -37,7 +37,15 @@
     </div>
 
     <div class='clearfix buttons-container'>
-      <a href='<%=results_path%>' class='btn btn-grey pull-left btn-med'>Cancel</a>
+      <a href='<%=
+        if @scenario.new_record?
+          results_path
+        elsif @scenario.drafts?
+          drafts_path
+        else
+          result_path(@scenario)
+        end
+      %>' class='btn btn-grey pull-left btn-med'>Cancel</a>
 
       <% if @scenario.drafts? %>
         <%= f.submit 'Create the study', name: 'publish', class: 'btn btn-dark-blue pull-right btn-med strong' %>
