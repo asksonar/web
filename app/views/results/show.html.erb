@@ -118,7 +118,6 @@
   <% @scenario.scenario_steps.each do |scenario_step| %>
   <div class='panel'>
     <%= bsh_split_panel 'col-md-8' %>
-    <!-- <i class="fa fa-chevron-up panel-body-toggle hidden-xs"></i> -->
     <div class='row panel-heading'>
       <div class='col-md-8'>
         <%= ih_left_indent left_class: 'h1', left_content: "#{scenario_step.step_order + 1}.", div_class: 'summary-step-description' do %>

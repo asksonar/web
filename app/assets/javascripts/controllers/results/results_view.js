@@ -1,6 +1,5 @@
 function ResultsView(config, modal) {
   this.$divAllContent = config.divAllContent;
-  this.$divMainContent = config.divMainContent;
   this.$btnCopyShareLink = config.btnCopyShareLink;
   this.$inputShareLink = config.inputShareLink;
   this.$btnArchive = config.btnArchive;
@@ -15,14 +14,12 @@ function ResultsView(config, modal) {
 
 ResultsView.prototype.init = function() {
   this.$divAllContent.on('click', '.video-link', $.proxy(this.loadModal, this));
-  this.$divMainContent.on('click', '.fa-chevron-down', $.proxy(this.showPanel, this));
-  this.$divMainContent.on('click', '.fa-chevron-up', $.proxy(this.hidePanel, this));
   this.$btnArchive.on('click', $.proxy(this.toggleArchive, this));
   new ClipboardInput(this.$btnCopyShareLink, this.$inputShareLink);
   new ClipboardInput(this.$btnHeroCopyShareLink, this.$inputHeroShareLink);
   this.highlightHero();
   this.showAllPanelGraphs();
-}
+};
 
 ResultsView.prototype.toggleArchive = function() {
   var isOn = this.$btnArchive.find('.btn-active-on').hasClass('active');
@@ -55,7 +52,7 @@ ResultsView.prototype.toggleArchive = function() {
   }, this)).fail($.proxy(function(jqXHR){
     notify.error(jqXHR.responseText, 'There was an error setting the Live state.');
   }, this));
-}
+};
 
 ResultsView.prototype.loadModal = function(event) {
   var thisEl = $(event.currentTarget);
@@ -63,18 +60,7 @@ ResultsView.prototype.loadModal = function(event) {
   var timeSeconds = parseFloat(thisEl.attr('data-feeling-at-seconds') || 0);
 
   this.modal.load(resultStepHashId, timeSeconds);
-}
-
-ResultsView.prototype.showPanel = function(event) {
-  var chevron = $(event.currentTarget);
-  var panelBody = chevron.closest('.panel').find('.panel-body');
-
-  chevron.removeClass('fa-chevron-down').addClass('fa-chevron-up');
-
-  panelBody.slideDown(400, $.proxy(function(){
-    this.showPanelGraph(panelBody);
-  }, this));
-}
+};
 
 ResultsView.prototype.showPanelGraph = function(panelBody) {
   var timesArray = JSON.parse(panelBody.find('script').html());
@@ -88,14 +74,6 @@ ResultsView.prototype.showAllPanelGraphs = function() {
     showPanelGraph($(this));
   });
 };
-
-ResultsView.prototype.hidePanel = function(event) {
-  var chevron = $(event.currentTarget);
-  var panelBody = chevron.closest('.panel').find('.panel-body');
-
-  chevron.removeClass('fa-chevron-up').addClass('fa-chevron-down');
-  panelBody.slideUp();
-}
 
 ResultsView.prototype.setupGraph = function(timesArray, graphId) {
   var chart = AmCharts.makeChart(graphId, {
@@ -112,7 +90,7 @@ ResultsView.prototype.setupGraph = function(timesArray, graphId) {
       "lineAlphas": 0,
       "type": "column",
       "valueField": "count",
-      "columnWidth": .75,
+      "columnWidth": 0.75,
       "showBalloon": false
     }],
     categoryAxis: {
@@ -137,10 +115,10 @@ ResultsView.prototype.setupGraph = function(timesArray, graphId) {
   });
 
   chart.addListener('clickGraphItem', function(event) {
-    var details = event.item.dataContext['details'];
+    var details = event.item.dataContext.details;
   });
-}
+};
 
 ResultsView.prototype.highlightHero = function() {
   window.overlay.show(this.$panelHero, true);
-}
+};
