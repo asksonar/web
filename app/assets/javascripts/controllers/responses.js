@@ -10,7 +10,7 @@ $(function(){
   }
 
   var updateInterval = 30000;
-  var newResponses = newResponses || {responses:[{}]};
+  var newResponses = newResponses || {responses:[]};
   var newResponseTemplate = Handlebars.compile($('#new-response-template').html());
 
   var updateResponses = function() {
@@ -23,7 +23,12 @@ $(function(){
       data: { startTime: startTime }
     })
       .success(function(data){
-        newResponses.responses = data;
+        if (!newResponses.responses.length) {
+          newResponses.responses = data;
+        } else {
+          newResponses.responses = newResponses.responses.concat(data)
+        }
+
         if (data.length === 1) {
           $('.response-alert').text('Show ' + data.length + ' new response');
           $('.response-alert').slideDown();
@@ -40,6 +45,7 @@ $(function(){
   $('.response-alert').on('click', function(){
     $('.response-alert').slideUp();
     $('.response-alert').after(newResponseTemplate(newResponses));
+    newResponses = {responses:[]};
   })
 
   setInterval(updateResponses, updateInterval);
