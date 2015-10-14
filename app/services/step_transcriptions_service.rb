@@ -9,7 +9,7 @@ class StepTranscriptionsService
     step_transcription.text = text
     step_transcription.save
 
-    update_first_transcription(result_step)
+    update_first_transcription(step_transcription.result_step)
 
     step_transcription
   end
