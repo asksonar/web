@@ -19,15 +19,16 @@ $(function(){
 
     $.ajax({
       type: 'GET',
-      url: '/responses.json/' + TimeDisplay.dateToDisplayTime(startTime)
+      url: '/responses.json/',
+      data: { startTime: startTime }
     })
       .success(function(data){
         newResponses.responses = data;
         if (data.length === 1) {
           $('.response-alert').text('Show ' + data.length + ' new response');
           $('.response-alert').slideDown();
-        }else if (data.length > 1) {
-          $('.response-alert').text('Show ' + data.length + ' new response');
+        } else if (data.length > 1) {
+          $('.response-alert').text('Show ' + data.length + ' new responses');
           $('.response-alert').slideDown();
         }
        })

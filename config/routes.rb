@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get '/share/videos/:id', to: 'share_videos#show'
   get '/results/:id/edit', to: 'drafts#edit'
   get '/my_results/:id/edit', to: 'drafts#edit'
-  get '/responses.json/:created_since', to: 'responses_json#index'
+  get '/responses.json', to: 'responses_json#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
