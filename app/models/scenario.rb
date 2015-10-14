@@ -53,9 +53,7 @@ class Scenario < ActiveRecord::Base
   private
 
   def sanitize_and_whitespace_description_title
-    self.description = description.gsub(/\r/, '') if description
-    sanitizer = Rails::Html::FullSanitizer.new
-    self.description = sanitizer.sanitize(description)
-    self.title = sanitizer.sanitize(title)
+    self.description = Sanitize.fragment(description)
+    self.title = Sanitize.fragment(title)
   end
 end

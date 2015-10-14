@@ -34,10 +34,9 @@ class ScenarioStep < ActiveRecord::Base
   private
 
   def sanitize_description_url
-    sanitizer = Rails::Html::FullSanitizer.new
-    self.description = sanitizer.sanitize(self.description)
-    self.url = sanitizer.sanitize(self.url)
-    if self.url.blank?
+    self.description = Sanitize.fragment(description)
+    self.url = Sanitize.fragment(url)
+    if url.blank?
       self.url = nil
     end
   end

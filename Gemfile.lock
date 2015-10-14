@@ -61,6 +61,7 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     columnize (0.9.0)
+    crass (1.0.2)
     daemons (1.2.2)
     debug_inspector (0.0.2)
     devise (3.5.1)
@@ -100,6 +101,8 @@ GEM
     multi_json (1.11.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
+    nokogumbo (1.4.1)
+      nokogiri
     orm_adapter (0.5.0)
     pg (0.18.2)
     rack (1.6.1)
@@ -177,6 +180,10 @@ GEM
       resque
       sass-rails
       twitter-bootstrap-rails
+    sanitize (4.0.0)
+      crass (~> 1.0.2)
+      nokogiri (>= 1.4.4)
+      nokogumbo (= 1.4.1)
     sass (3.4.14)
     sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -258,6 +265,7 @@ DEPENDENCIES
   require_reloader
   resque (~> 1)
   resque-web
+  sanitize
   sass-rails
   sdoc
   spring
