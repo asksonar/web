@@ -16,6 +16,20 @@
   }
 }
 
+.indent-div {
+  display: table;
+
+  .indent-left {
+    display: table-cell;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+  .indent-content {
+    display: table-cell;
+  }
+}
+
 .alert-notification {
   background-color: #F9B05D;
   color: #000;
