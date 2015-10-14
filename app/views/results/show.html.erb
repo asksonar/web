@@ -6,31 +6,46 @@
     <div class='col-md-8 summary-highlights-container'>
       <h1><%= content_for :title %></h1>
       <p class='sub'>by <%= @scenario.created_by.full_name %> (<%= @scenario.created_by.email %>)</p>
-      <%= ih_left_indent left_class: 'strong', left_content: 'Description:', div_class: 'summary-container' do %>
-        <span class='summary-description'><%= @scenario.description %></span>
-      <% end %>
-      <%= ih_left_indent left_class: 'strong', left_content: 'Notes:', div_class: 'notes-container' do %>
-        <% @scenario.step_notes.each_with_index do |note, index| %>
+      <div class='summary-container'>
+        <div class='left-col'>
+          <span class='strong'>Description:</span>
+        </div>
+        <div class='right-col'>
+          <span class='summary-description'><%= @scenario.description %></span>
+        </div>
+      </div>
+      <div class='notes-container'>
+        <div class='left-col'>
+          <span class='strong'>Notes:</span>
+        </div>
+        <div class='right-col'>
+          <% @scenario.step_notes.each_with_index do |note, index| %>
             <a class='video-link'
               data-result-step-hashid='<%=note.result_step.hashid%>'
               data-feeling-at-seconds='<%=note.offset_seconds%>'
             ><span class='sub'><%= ppt_date(note.created_at) %></span> <%= dt_transcription(note.text) %> ...
             </a>
-        <% end %>
-        <% if @scenario.step_notes.count == 0 %>
-          <span class='sub'><i class='fa fa-question-circle'></i> no notes added yet</span>
-        <% end %>
-      <% end %>
-      <%= ih_left_indent left_class: 'strong', left_content: 'Highlights:', div_class: 'highlights-container' do %>
-        <% @scenario.highlights.each_with_index do |highlight, index| %>
-          <a href='<%= highlight_path(highlight) %>' class='highlight-link'
-          ><span class='sub'><%= ppt_date(highlight.created_at) %></span> <%= dt_transcription(highlight.title) %> ...
-          </a>
-        <% end %>
-        <% if @scenario.highlights.count == 0 %>
-          <span class='sub'><i class='fa fa-question-circle'></i> no highlights added yet</span>
-        <% end %>
-      <% end %>
+          <% end %>
+          <% if @scenario.step_notes.count == 0 %>
+            <span class='sub'><i class='fa fa-question-circle'></i> no notes added yet</span>
+          <% end %>
+        </div>
+      </div>
+      <div class='highlights-container'>
+        <div class='left-col'>
+          <span class='strong'>Highlights:</span>
+        </div>
+        <div class='right-col'>
+          <% @scenario.highlights.each_with_index do |highlight, index| %>
+            <a href='<%= highlight_path(highlight) %>' class='highlight-link'
+            ><span class='sub'><%= ppt_date(highlight.created_at) %></span> <%= dt_transcription(highlight.title) %> ...
+            </a>
+          <% end %>
+          <% if @scenario.highlights.count == 0 %>
+            <span class='sub'><i class='fa fa-question-circle'></i> no highlights added yet</span>
+          <% end %>
+        </div>
+      </div>
     </div>
     <div class='col-md-4 buttons-container'>
 

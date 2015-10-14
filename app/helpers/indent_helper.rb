@@ -9,7 +9,7 @@ module IndentHelper
     raw <<-HTML.chomp!
       <div class='#{div_class} indent-div'>
         <div class='#{left_class} indent-left'>#{left_content}</div>
-        <div style='padding-left:#{padding} indent-content'>
+        <div style='padding-left:#{padding}' class='indent-content'>
           <span class='#{left_class}'></span>
           #{capture(&block) if block_given?}
         </div>
