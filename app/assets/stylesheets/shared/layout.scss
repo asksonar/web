@@ -50,7 +50,7 @@ body {
 
 .sidebar-opened .sidebar {
   left: 0;
-  z-index: 100;
+  z-index: 150;
 }
 
 .main-content-wrapper {
@@ -84,7 +84,7 @@ body {
   .main-content {
     background: #E3E3E3;
     // .panel has its own 20px padding
-    padding: 20px 0px;
+    padding: 10px 0px;
 
     @media (min-width: $screen-sm-min) {
       padding: 20px 20px;
@@ -97,7 +97,11 @@ body {
     }
 
     .panel {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
+
+      @media (min-width: $screen-sm-min) {
+        margin-bottom: 20px;
+      }
     }
 
     a.panel[href] {
