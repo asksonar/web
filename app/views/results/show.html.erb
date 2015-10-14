@@ -7,39 +7,45 @@
       <h1><%= content_for :title %></h1>
       <p class='sub'>by <%= @scenario.created_by.full_name %> (<%= @scenario.created_by.email %>)</p>
       <div class='summary-container'>
-        <p>
-          <span class='h3'>Description:</span><span class='summary-description'><%= @scenario.description %></span>
-        </p>
+        <div class='left-col'>
+          <span class='strong'>Description:</span>
+        </div>
+        <div class='right-col'>
+          <span class='summary-description'><%= @scenario.description %></span>
+        </div>
       </div>
       <div class='notes-container'>
-        <% @scenario.step_notes.each_with_index do |note, index| %>
-          <p>
-            <% if index == 0 %><span class='h3'>Notes:</span><% end %><!--
-         --><a class='video-link'
+        <div class='left-col'>
+          <span class='strong'>Notes:</span>
+        </div>
+        <div class='right-col'>
+          <% @scenario.step_notes.each_with_index do |note, index| %>
+            <a class='video-link'
               data-result-step-hashid='<%=note.result_step.hashid%>'
               data-feeling-at-seconds='<%=note.offset_seconds%>'
             ><span class='sub'><%= ppt_date(note.created_at) %></span> <%= dt_transcription(note.text) %> ...
             </a>
-          </p>
-        <% end %>
-        <% if @scenario.step_notes.count == 0 %>
-          <p><span class='h3'>Notes:</span><span class='sub'><i class='fa fa-question-circle'></i> no notes added yet</span></p>
-        <% end %>
+          <% end %>
+          <% if @scenario.step_notes.count == 0 %>
+            <span class='sub'><i class='fa fa-question-circle'></i> no notes added yet</span>
+          <% end %>
+        </div>
       </div>
       <div class='highlights-container'>
-        <% @scenario.highlights.each_with_index do |highlight, index| %>
-          <p>
-            <% if index == 0 %><span class='h3'>Highlights:</span><% end %><!--
-         --><a href='<%= highlight_path(highlight) %>' class='highlight-link'
+        <div class='left-col'>
+          <span class='strong'>Highlights:</span>
+        </div>
+        <div class='right-col'>
+          <% @scenario.highlights.each_with_index do |highlight, index| %>
+            <a href='<%= highlight_path(highlight) %>' class='highlight-link'
             ><span class='sub'><%= ppt_date(highlight.created_at) %></span> <%= dt_transcription(highlight.title) %> ...
             </a>
-          </p>
-        <% end %>
-        <% if @scenario.highlights.count == 0 %>
-          <p><span class='h3'>Highlights:</span><span class='sub'><i class='fa fa-question-circle'></i> no highlights added yet</span></p>
-        <% end %>
+          <% end %>
+          <% if @scenario.highlights.count == 0 %>
+            <span class='sub'><i class='fa fa-question-circle'></i> no highlights added yet</span>
+          <% end %>
+        </div>
       </div>
-
     </div>
     <div class='col-md-4 buttons-container'>
 
@@ -49,8 +55,8 @@
         <% if @scenario.live? %>title="Close the study"<% end %>
         <% if @scenario.completed? %>title="Re-open the study"<% end %>
       >
-        <a class="btn btn-success <% if @scenario.live? %>active<% end %>">On</a>
-        <a class="btn btn-failure <% if @scenario.completed? %>active<% end %>">Off</a>
+        <a class="btn btn-light-blue btn-active-on <% if @scenario.live? %>active<% end %>">On</a>
+        <a class="btn btn-grey btn-failure btn-active-off <% if @scenario.completed? %>active<% end %>">Off</a>
       </div>
 
       <div class="btn-group pull-right">
@@ -115,20 +121,13 @@
     <i class="fa fa-chevron-down panel-body-toggle"></i>
     <div class='row panel-heading'>
       <div class='col-xs-8'>
-        <div>
-          <p class='summary-step-description'>
-            <span class='h1'><%= scenario_step.step_order + 1 %>.</span><span><%= scenario_step.description %>
-              <% if scenario_step.url %>
-              <br/><a target="_blank" href='<%=ppu_http(scenario_step.url)%>'><%=ppu_http(scenario_step.url)%></a>
-              <% end %>
-            </span>
-          </p>
-        </div>
-        <!--
-        <h1><ol start='<%= scenario_step.step_order + 1 %>'><li>
-          <p class='body'><%= scenario_step.description %></p>
-        </li></ol></h1>
-        -->
+        <%= ih_left_indent left_class: 'h1', left_content: "#{scenario_step.step_order + 1}.", div_class: 'summary-step-description' do %>
+          <span><%= scenario_step.description %>
+            <% if scenario_step.url %>
+            <br/><a target="_blank" href='<%=ppu_http(scenario_step.url)%>'><%=ppu_http(scenario_step.url)%></a>
+            <% end %>
+          </span>
+        <% end %>
       </div>
       <div class='col-xs-4'>
         <div class='row moments-container'>
@@ -214,12 +213,12 @@
     <div class="modal-content editable-timeline">
       <div class='ctn-modal-header'>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h3><%= @scenario.title %></h3>
-        <p id='ctn-user-email'></p>
+        <span class='strong'><%= @scenario.title %></span>
+        <span id='ctn-user-email'></span>
 
-        <p class='ctn-modal-step-description'>
-          <span class='h1'>Step&nbsp;<span id='ctn-step-order'></span>.</span><span class='h2' id='ctn-step-description'></span>
-        </p>
+        <%= ih_left_indent left_class: 'h1', left_content: "Step&nbsp;<span id='ctn-step-order'></span>.", div_class: 'ctn-modal-step-description' do %>
+          <span class='h2' id='ctn-step-description'></span>
+        <% end %>
       </div>
       <%= render partial: 'utility/video' %>
 

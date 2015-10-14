@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
   get '/ping', to: 'ping#index'
 
-  # get '(*all)', to: 'home#maintenance'
-  # get '/studies/(*all)', to: 'home#maintenance'
+  # get '(*all)', to: 'errors#service_unavailable_503'
+
+  get '/403', to: 'errors#forbidden_403'
+  get '/404', to: 'errors#not_found_404'
+  get '/500', to: 'errors#internal_server_error_500'
+  get '/503', to: 'errors#service_unavailable_503'
 
   get '/videos.json', to: 'videos_json#show'
   get '/create',      to: 'drafts#new' # so it doesn't highlight the left nav

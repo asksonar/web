@@ -34,5 +34,11 @@ module Cero
     config.log_level    = (ENV['LOG_LEVEL'] ? ENV['LOG_LEVEL'].downcase : 'debug').to_sym
 
     config.force_ssl = true
+
+    config.exceptions_app = routes
+
+    config.action_dispatch.rescue_responses.merge!(
+      'ActionController::ForbiddenError' => :forbidden
+    )
   end
 end

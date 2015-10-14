@@ -28,10 +28,6 @@
     }
   }
 
-  .brand.force-center {
-    width: 100%;
-  }
-
   .nav {
     >li>a {
       padding: 0px 10px;
@@ -71,64 +67,54 @@
     }
   }
 
-  .logged-out .toggle-sidebar {
-    display: none;
-  }
-
 }
 
-.sidebar nav {
+.logged-out #toggle-sidebar {
+  display: none;
+}
+
+.sidebar .nav {
   padding-left: 20px;
   padding-top: 20px;
-
-  li a {
-    color: #FFF;
-    font-size: 18px;
-    border-radius: 0px;
-    padding: 10px;
-    i {
-      color: #C0E6F0;
-    }
-  }
 
   li + li {
     margin-top: 5px;
   }
 
-  li a:focus,
-  li a:hover,
-  li a:active, {
-    background: #999;
+  li a {
+    border-radius: 0;
     color: #FFF;
-  }
+    font-size: 16px;
+    padding: 10px;
 
-  li.active a,
-  li.active a:focus,
-  li.active a:hover,
-  li.active a:active {
-    background: #F5F5F5;
-    color: #000;
     i {
-      color: #1CA5C9;
+      color: #C0E6F0;
+    }
+
+    &:focus, &:hover {
+      background: #999;
+      color: #FFF;
     }
   }
 
-  li.div-btn-create {
+  li.active a {
+    &, &:focus, &:hover {
+      background: #F5F5F5;
+      color: #000;
+
+      i {
+        color: #1CA5C9;
+      }
+    }
+  }
+
+  li.div-btn-create, li.div-btn-create.active {
     margin-bottom: 20px;
-    a {
-      background: #F69526;
-      color: #FFF;
+
+    a, a:focus, a:hover {
+      @extend .btn-orange;
       width: 200px;
       text-align: center;
-      opacity: .95;
-    }
-    a:focus,
-    a:hover,
-    a:active {
-      opacity: 1;
-      background: #F69526;
-      color: #FFF;
     }
   }
-
 }

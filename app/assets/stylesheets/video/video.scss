@@ -16,7 +16,7 @@
 
 .ctn-video-share-link {
   margin-top: 20px;
-  h4 {
+  h3 {
     float: left;
     line-height: 34px;
     margin: 0px;
@@ -26,10 +26,6 @@
   }
   #input-url-base {
     cursor: text;
-  }
-  .btn {
-    padding-top: 8px;
-    padding-bottom: 7px;
   }
   .btn + .btn {
     margin-left: 1px;
@@ -42,7 +38,7 @@
   display: none;
   .editable-timeline & { display: block; }
 
-  h4 {
+  h3 {
     float: left;
     line-height: 31px;
     margin: 0px;

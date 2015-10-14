@@ -296,3 +296,4 @@ scenarios
     result_videos (scenario_result_id, scenario_step_id)
       video_transcriptions (video_id)
 
+test

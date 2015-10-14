@@ -1,0 +1,18 @@
+<% content_for :main_wrapper_class do %>
+  logged-out
+<% end %>
+
+<% content_for :main_content_wrapper_class do %>
+  errors-wrapper
+<% end %>
+
+<% content_for :nav_header do %>
+  <%= render partial: 'nav/header_no_login' %>
+<% end %>
+
+<% content_for :nav_footer do %>
+  <%= render partial: 'nav/footer_errors' %>
+<% end %>
+
+<h1>The site is currently down for maintenace.</h1>
+<h2>We'll be back to your regularly scheduled programming shortly.</h2>
