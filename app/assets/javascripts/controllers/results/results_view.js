@@ -20,8 +20,8 @@ ResultsView.prototype.init = function() {
   this.$btnArchive.on('click', $.proxy(this.toggleArchive, this));
   new ClipboardInput(this.$btnCopyShareLink, this.$inputShareLink);
   new ClipboardInput(this.$btnHeroCopyShareLink, this.$inputHeroShareLink);
-  this.showAllPanels();
   this.highlightHero();
+  this.showAllPanelGraphs();
 }
 
 ResultsView.prototype.toggleArchive = function() {
@@ -71,16 +71,23 @@ ResultsView.prototype.showPanel = function(event) {
 
   chevron.removeClass('fa-chevron-down').addClass('fa-chevron-up');
 
-  var timesArray = JSON.parse(panelBody.find('script').html());
-  var graphId = panelBody.find('.graph').attr('id');
   panelBody.slideDown(400, $.proxy(function(){
-    this.setupGraph(timesArray, graphId);
+    this.showPanelGraph(panelBody);
   }, this));
 }
 
-ResultsView.prototype.showAllPanels = function() {
-  $('.fa-chevron-down').click();
-}
+ResultsView.prototype.showPanelGraph = function(panelBody) {
+  var timesArray = JSON.parse(panelBody.find('script').html());
+  var graphId = panelBody.find('.graph').attr('id');
+  this.setupGraph(timesArray, graphId);
+};
+
+ResultsView.prototype.showAllPanelGraphs = function() {
+  var showPanelGraph = $.proxy(this.showPanelGraph, this);
+  $('.panel-body').each(function() {
+    showPanelGraph($(this));
+  });
+};
 
 ResultsView.prototype.hidePanel = function(event) {
   var chevron = $(event.currentTarget);

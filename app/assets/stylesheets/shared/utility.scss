@@ -28,6 +28,19 @@
   .indent-content {
     display: table-cell;
   }
+
+  &.mobile-wrap {
+    @media (max-width: $screen-sm-min) {
+      .indent-left {
+        display: block;
+      }
+
+      .indent-content {
+        display: block;
+      }
+    }
+  }
+
 }
 
 .alert-notification {
