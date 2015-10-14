@@ -1,10 +1,11 @@
 <section class='main-content-header'>
-  <h3><a href='<%= result_path(@scenario) %>'><%= @scenario.title %></a></h3>
-  <p id='ctn-user-email'><%= @user.email %></p>
+  <a href='<%= result_path(@scenario) %>' class='strong'><%= @scenario.title %></a>
+  <span id='ctn-user-email'><%= @result_step.prezi.email %></span>
 
-  <div class='ctn-modal-step-description'>
-    <span class='h1'>Step <%= @scenario_step.step_order + 1 %>.</span><span class='h2' id='ctn-step-description'><%= @scenario_step.description %></span>
-  </div>
+  <%= ih_left_indent left_class: 'h1', left_content: "Step #{@scenario_step.step_order + 1}.", div_class: 'ctn-modal-step-description' do %>
+    <span class='h2' id='ctn-step-description'><%= @scenario_step.description %></span>
+  <% end %>
+
 </section>
 <section class="main-content">
 

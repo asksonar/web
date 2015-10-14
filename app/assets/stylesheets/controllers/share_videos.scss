@@ -5,21 +5,11 @@
 #share_videos-show {
 
   .main-content-header {
-    h3 {
-      display: inline-block;
-    }
-    p {
-      display: inline-block;
+    #ctn-user-email {
       margin-left: 20px;
     }
     .ctn-modal-step-description {
-      margin-left: 75px;
       margin-top: 15px;
-      span.h1 {
-        display: inline-block;
-        text-indent: -75px;
-        width: 0px;
-      }
     }
   }
 
