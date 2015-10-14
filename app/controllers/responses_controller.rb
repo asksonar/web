@@ -8,8 +8,8 @@ class ResponsesController < ApplicationController
   end
 
   def index
-    @result_steps = responses_query.responses(current_researcher.id)
+    @result_steps = responses_query
+      .responses(created_by: current_researcher)
+      .map(&:prezi)
   end
-
 end
-

@@ -14,6 +14,17 @@ class ResultStepPresenter < SimpleDelegator
     }
   end
 
+  def list_json
+    {
+      result_video_path: result_video_url,
+      email: email,
+      scenario_step_count: scenario_step_count,
+      scenario_title: scenario_title,
+      total_delighted: total_delighted,
+      total_confused: total_confused
+    }
+  end
+
   def email
     if panelist.email.empty?
       'anonymous'
@@ -83,5 +94,9 @@ class ResultStepPresenter < SimpleDelegator
 
   def scenario_step_count
     scenario.step_count
+  end
+
+  def result_video_url
+    Rails.application.routes.url_helpers.result_video_path(scenario, self)
   end
 end
