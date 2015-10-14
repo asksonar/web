@@ -10,10 +10,10 @@ class ResponsesJsonController < ApplicationController
   def index
     responseParams = {}
     responseParams[:created_by] = current_researcher.id
-    responseParams[:created_since] = params[:created_since]
-
+    responseParams[:created_since] = Time.zone.parse(params[:startTime])
     @result_steps = responses_query
       .responses(responseParams)
+      .map(&:prezi)
       .map(&:list_json)
 
     render json: @result_steps
