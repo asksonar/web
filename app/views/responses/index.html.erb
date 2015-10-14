@@ -7,7 +7,7 @@
 </section>
 
 <section class="main-content">
-  <div class="alert response-alert" role="alert"></div>
+  <div class="btn btn-medium-blue response-alert" role="alert"></div>
   <% @result_steps.each do |result_step| %>
     <a class='panel' href='<%=result_video_path(result_step.scenario, result_step)%>'>
       <%= bsh_split_panel 'col-sm-8' %>
