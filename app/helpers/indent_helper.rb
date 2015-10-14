@@ -3,7 +3,7 @@ module IndentHelper
     left_class: '',
     left_content: '',
     div_class: '',
-    padding: 'inherit'
+    padding: 'inherit',
     &block)
 
     raw <<-HTML.chomp!
