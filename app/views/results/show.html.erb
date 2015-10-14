@@ -117,10 +117,10 @@
 
   <% @scenario.scenario_steps.each do |scenario_step| %>
   <div class='panel'>
-    <%= bsh_split_panel 'col-sm-8' %>
+    <%= bsh_split_panel 'col-md-8' %>
     <!-- <i class="fa fa-chevron-up panel-body-toggle hidden-xs"></i> -->
     <div class='row panel-heading'>
-      <div class='col-sm-8'>
+      <div class='col-md-8'>
         <%= ih_left_indent left_class: 'h1', left_content: "#{scenario_step.step_order + 1}.", div_class: 'summary-step-description' do %>
           <span><%= scenario_step.description %>
             <% if scenario_step.url %>
@@ -129,7 +129,7 @@
           </span>
         <% end %>
       </div>
-      <div class='col-sm-4 hidden-xs'>
+      <div class='col-md-4 hidden-xs hidden-sm'>
         <div class='row moments-container'>
           <div class='col-xs-6'>
             <a class='moments-popover' tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-html="true"
@@ -161,7 +161,7 @@
       </div>
     </div>
     <div class='row panel-body'>
-      <div class='col-sm-8'>
+      <div class='col-md-8'>
         <div class='results-container'>
 
         <% scenario_step.newest_result_steps.each do |result_step| %>
@@ -188,7 +188,7 @@
 
         </div>
       </div>
-      <div class='col-sm-4 hidden-xs'>
+      <div class='col-md-4 hidden-xs hidden-sm'>
 
         <%# convert javascript converts this into nice graph %>
         <%# also links to the video for that user %>
