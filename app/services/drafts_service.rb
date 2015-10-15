@@ -72,11 +72,11 @@ class DraftsService
         old_step.description = new_step[:description]
         old_step.url = new_step[:url]
         old_step.step_order = new_step[:step_order]
-        # old_step.save
         new_steps.delete_at(new_step_index)
+        # wait for autosave to save it
       else
-        # old_step.destroy
         old_step.mark_for_destruction
+        # wait for autosave to destroy it
       end
     end
 
