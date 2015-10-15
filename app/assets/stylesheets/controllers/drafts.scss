@@ -14,16 +14,16 @@
 .draft-header {
 
   .ctn-title {
-    @extend .col-sm-12;
-    .draft-editable-steps & { @extend .col-sm-8; }
+    @extend .col-md-12;
+    .draft-editable-steps & { @extend .col-md-8; }
 
-    @media (max-width: $screen-sm-min) {
+    @media (max-width: $screen-md-min) {
       margin-bottom: 10px;
     }
   }
 
   .ctn-template {
-    @extend .col-sm-4;
+    @extend .col-md-4;
 
     display: none;
     .draft-editable-steps & { display: block; }
@@ -86,36 +86,47 @@
 
   .ctn-step {
     margin-bottom: 10px;
+    position: relative;
+
+    .row {
+      padding-left: 35px;
+      padding-right: 75px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      .col-md-8 {
+        padding-right: 5px;
+      }
+
+      .col-md-4 {
+        padding-left: 0px;
+      }
+    }
+
+    @media (max-width: $screen-md-min) {
+      .col-md-8 {
+        margin-bottom: 5px;
+      }
+    }
   }
 
   .ctn-count {
-    line-height: 33px;
-    width: 40px;
-    float: left;
-  }
+    left: 0;
+    position: absolute;
 
-  .ctn-description {
-    margin-left: 40px;
-  }
-
-  .ctn-url-btns {
-    padding-left: 5px;
-  }
-
-  .ctn-url {
-    margin-right: 90px;
   }
 
   .ctn-btns {
+    position: absolute;
+    right: 0;
     width: 70px;
-    float: right;
 
     a {
       float: left;
       font-family: sans-serif;
       height: 34px;
       margin-left: 1px;
-      padding: 0px;
+      padding: 0;
       width: 34px;
     }
 
