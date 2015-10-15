@@ -41,12 +41,14 @@
         margin-top: 10px;
       }
 
-      .left-col {
-        float: left;
-      }
+      @media (min-width: $screen-sm-min) {
+        .left-col {
+          float: left;
+        }
 
-      .right-col {
-        margin-left: 95px;
+        .right-col {
+          margin-left: 95px;
+        }
       }
 
       .summary-container,
@@ -123,7 +125,6 @@
   }
 
   .panel-hero {
-    z-index: 120;
     .input-group {
       #input-share-link {
         cursor: text;
@@ -134,19 +135,6 @@
       margin-top: 10px;
       margin-bottom: 10px;
     }
-  }
-
-  .panel {
-    .panel-body-toggle {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      z-index: 100;
-      padding: 5px;
-      background: #FAFAFA;
-      cursor: pointer;
-    }
-
   }
 
   .panel-heading {
@@ -175,7 +163,6 @@
   }
 
   .panel-body {
-    display: none; /* start off collapsed */
 
     .results-container {
       margin-left: 30px; // .summary-step-description number + padding ends up at 30px
@@ -215,8 +202,8 @@
   .modal {
     .ctn-modal-header {
 
-      #ctn-user-email {
-        margin-left: 20px;
+      .ctn-title {
+        margin-right: 20px;
       }
 
       .ctn-modal-step-description {

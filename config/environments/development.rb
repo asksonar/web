@@ -45,10 +45,14 @@ Rails.application.configure do
 
   # load custom configuration properties
   config_path = File.join(Rails.root,'config/properties/development.yml')
-  puts 'config_path: ' + config_path
   config_contents = File.read(config_path)
-  # puts 'config_contents: ' + config_contents
-  config.properties = YAML.load(config_contents)
+  config_properties = YAML.load(config_contents)
+
+  override_path = File.join(Rails.root,'config/properties/development_override.yml')
+  override_contents = File.read(override_path) if File.exist?(override_path)
+  override_properties = override_contents.nil? ? {} : YAML.load(override_contents)
+
+  config.properties = config_properties.merge(override_properties)
   puts config.properties
 
   # enable remote byebugging
