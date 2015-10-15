@@ -13,33 +13,12 @@ class ResultsController < ApplicationController
   end
 
   def index
-    hash = {}
-    hash[:company] = current_researcher.company
-
-    if @owner = params[:owner]
-      if @owner == 'me'
-        hash[:created_by] = current_researcher.id
-      else
-        hash[:created_by] = params[:owner]
-      end
-    end
-
-    @results = query.results(hash)
-  end
-
-  def my_index
-    params[:owner] = 'me'
-    index
-    render :index
+    @results = query.results(created_by: current_researcher)
   end
 
   def show
     if !params[:result_id].nil?
       @scenario = Scenario.find_by_hashid(params[:result_id]).prezi
-      @result_step = ResultStep.find_by_hashid(params[:id]).prezi
-      @scenario_step = @result_step.scenario_step.prezi
-    elsif !params[:my_result_id].nil?
-      @scenario = Scenario.find_by_hashid(params[:my_result_id]).prezi
       @result_step = ResultStep.find_by_hashid(params[:id]).prezi
       @scenario_step = @result_step.scenario_step.prezi
     else

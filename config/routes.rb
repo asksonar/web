@@ -10,10 +10,8 @@ Rails.application.routes.draw do
 
   get '/videos.json', to: 'videos_json#show'
   get '/create',      to: 'drafts#new' # so it doesn't highlight the left nav
-  get '/my_results',  to: 'results#my_index'
   get '/share/videos/:id', to: 'share_videos#show'
   get '/results/:id/edit', to: 'drafts#edit'
-  get '/my_results/:id/edit', to: 'drafts#edit'
   get '/responses.json', to: 'responses_json#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -41,9 +39,6 @@ Rails.application.routes.draw do
   resources :drafts
   resources :responses
   resources :results do
-    resources :videos, only: [:show], controller: 'results'
-  end
-  resources :my_results, controller: 'results' do
     resources :videos, only: [:show], controller: 'results'
   end
 
