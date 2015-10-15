@@ -25,3 +25,4 @@
 
 # Ignore vendor/bundle contents
 /vendor/bundle
+config/properties/development_override.yml

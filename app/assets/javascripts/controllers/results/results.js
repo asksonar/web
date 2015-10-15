@@ -51,7 +51,6 @@ $(function(){
 
   var resultsView = new ResultsView({
     divAllContent: $('.main-content-wrapper'),
-    divMainContent: $('.main-content'),
     btnCopyShareLink: $('#btn-copy-share-link'),
     inputShareLink: $('#input-share-link'),
     btnArchive: $('#btn-archive'),
