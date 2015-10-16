@@ -1,10 +1,10 @@
 class ResponsesQuery
   include Singleton
 
-  def responses(company_id:, created_since:nil, limit:20)
+  def responses(company:, created_since:nil, limit:20)
     resultStep = ResultStep
       .joins(scenario_step: :scenario)
-      .where(scenarios: {company_id: company_id})
+      .where(scenarios: {company_id: company})
       .where(scenario_steps: {step_order: 0})
       .uploaded
       .order(created_at: :desc)

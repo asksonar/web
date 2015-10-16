@@ -9,7 +9,7 @@ class ResponsesJsonController < ApplicationController
 
   def index
     responseParams = {}
-    responseParams[:company_id] = current_researcher.company
+    responseParams[:company] = current_researcher.company
     responseParams[:created_since] = Time.zone.parse(params[:startTime])
     @result_steps = responses_query
       .responses(responseParams)
