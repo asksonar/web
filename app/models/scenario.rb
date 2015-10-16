@@ -14,7 +14,7 @@ class Scenario < ActiveRecord::Base
 
   validates_presence_of :title, :description
 
-  before_validation :sanitize_and_whitespace_description_title
+  before_validation :trim_description_and_title
 
   HASHIDS_SALT = '8UTnU7cJm*bP'
 
@@ -52,8 +52,10 @@ class Scenario < ActiveRecord::Base
 
   private
 
-  def sanitize_and_whitespace_description_title
-    self.description = Sanitize.fragment(description)
-    self.title = Sanitize.fragment(title)
+  def trim_description_and_title
+    self.description = self.description.try(:strip)
+    self.description = nil if self.description.blank?
+    self.title = self.title.try(:strip)
+    self.title = nil if self.title.blank?
   end
 end
