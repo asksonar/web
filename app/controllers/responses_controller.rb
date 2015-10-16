@@ -9,7 +9,7 @@ class ResponsesController < ApplicationController
 
   def index
     @result_steps = responses_query
-      .responses(created_by: current_researcher.company)
+      .responses(company_id: current_researcher.company)
       .map(&:prezi)
   end
 end
