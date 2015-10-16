@@ -13,7 +13,7 @@ class ResultsController < ApplicationController
   end
 
   def index
-    @results = query.results(created_by: current_researcher)
+    @results = query.results(created_by: current_researcher.company)
   end
 
   def show
