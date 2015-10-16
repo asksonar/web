@@ -55,6 +55,8 @@ gem 'aws-sdk'
 gem 'mixpanel-ruby'
 # parse user agent for passing to mixpanel
 gem 'user_agent_parser'
+# sanitizer for non-markup
+gem 'sanitize'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables

@@ -5,7 +5,9 @@ class ScenarioStep < ActiveRecord::Base
   has_many :step_feelings, through: :result_steps
   has_many :step_videos, through: :result_steps
 
-  before_validation :sanitize_description_url
+  before_validation :trim_description_and_url
+
+  validates_presence_of :description
 
   HASHIDS_SALT = 'c@9F*bVEKWpT'
 
@@ -31,12 +33,10 @@ class ScenarioStep < ActiveRecord::Base
 
   private
 
-  def sanitize_description_url
-    sanitizer = Rails::Html::FullSanitizer.new
-    self.description = sanitizer.sanitize(self.description)
-    self.url = sanitizer.sanitize(self.url)
-    if self.url.blank?
-      self.url = nil
-    end
+  def trim_description_and_url
+    self.description = self.description.try(:strip)
+    self.description = nil if self.description.blank?
+    self.url = self.url.try(:strip)
+    self.url = nil if self.url.blank?
   end
 end

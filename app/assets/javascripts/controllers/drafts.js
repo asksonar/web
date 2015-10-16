@@ -5,7 +5,7 @@
 */
 
 $(function(){
-  if (!$('#drafts-new, #drafts-edit').length) {
+  if (sonar.request.controller !== 'drafts' || sonar.request.action === 'index') {
     return;
   }
 
@@ -14,6 +14,19 @@ $(function(){
       $(this).html((index + 1) + '.');
     });
     autosize($('textarea'));
+  };
+
+  var addStepErrors = function() {
+    $('.ctn-step').each(function(step_index){
+      var thisEl = $(this);
+      var errors = sonar.scenario.steps[step_index].errors;
+      $.each(Object.keys(errors), function(key_index, key) {
+        bsh.addError(
+          thisEl.find($("[name='scenario_steps[][" + key + "]']")),
+          errors[key]
+        );
+      });
+    });
   };
 
   var emptyStep = {steps:[{}]};
@@ -27,6 +40,7 @@ $(function(){
   } else if (sonar.scenario.steps.length > 0) {
     $('#ctn-step-list').html(newStepTemplate(sonar.scenario));
     recountSteps();
+    addStepErrors();
   } else {
     $('#ctn-step-list').html(
       newStepTemplate(emptyStep) +

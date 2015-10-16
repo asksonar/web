@@ -1,7 +1,7 @@
 class Scenario < ActiveRecord::Base
   belongs_to :company
   belongs_to :created_by, class_name: 'Researcher', foreign_key: :created_by
-  has_many :scenario_steps, -> { order step_order: :asc }, inverse_of: :scenario
+  has_many :scenario_steps, -> { order step_order: :asc }, inverse_of: :scenario, autosave: true
   has_many :scenario_results, inverse_of: :scenario
   has_many :result_steps, through: :scenario_results
   has_many :result_steps_pending, through: :scenario_results
@@ -10,9 +10,17 @@ class Scenario < ActiveRecord::Base
   has_many :step_notes, through: :result_steps
   enum status: [:drafts, :live, :completed]
 
-  before_validation :sanitize_and_whitespace_description_title
+  after_initialize :default_values, unless: :persisted?
+
+  validates_presence_of :title, :description
+
+  before_validation :trim_description_and_title
 
   HASHIDS_SALT = '8UTnU7cJm*bP'
+
+  def default_values
+    self.status = status || 0
+  end
 
   def step_count
     scenario_steps.count
@@ -44,10 +52,10 @@ class Scenario < ActiveRecord::Base
 
   private
 
-  def sanitize_and_whitespace_description_title
-    self.description = description.gsub(/\r/, '') if description
-    sanitizer = Rails::Html::FullSanitizer.new
-    self.description = sanitizer.sanitize(description)
-    self.title = sanitizer.sanitize(title)
+  def trim_description_and_title
+    self.description = self.description.try(:strip)
+    self.description = nil if self.description.blank?
+    self.title = self.title.try(:strip)
+    self.title = nil if self.title.blank?
   end
 end
