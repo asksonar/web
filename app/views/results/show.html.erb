@@ -123,7 +123,8 @@
         <%= ih_left_indent left_class: 'h1', left_content: "#{scenario_step.step_order + 1}.", div_class: 'summary-step-description' do %>
           <span><%= scenario_step.description %>
             <% if scenario_step.url %>
-            <br/><a target="_blank" href='<%=ppu_http(scenario_step.url)%>'><%=ppu_http(scenario_step.url)%></a>
+              <br/>
+              <a target="_blank" href='<%=ppu_http(scenario_step.url)%>'><%=scenario_step.url%></a>
             <% end %>
           </span>
         <% end %>

@@ -9,9 +9,11 @@ Rails.application.routes.draw do
   get '/503', to: 'errors#service_unavailable_503'
 
   get '/videos.json', to: 'videos_json#show'
-  get '/create',      to: 'drafts#new' # so it doesn't highlight the left nav
+  get '/create', to: 'drafts#new' # so it doesn't highlight the left nav
+  post '/create', to: 'drafts#create'
   get '/share/videos/:id', to: 'share_videos#show'
   get '/results/:id/edit', to: 'drafts#edit'
+  patch '/results/:id/edit', to: 'drafts#update'
   get '/responses.json', to: 'responses_json#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

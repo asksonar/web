@@ -5,35 +5,63 @@ class DraftsService
     # save all the changes
     ActiveRecord::Base.transaction do
       scenario = Scenario.new(scenario_params)
-      publish!(scenario) if publishing
       scenario.created_by = researcher
       scenario.company = researcher.company
-      scenario.save
 
-      scenario.scenario_steps.create(scenario_steps_params.map { |params| params.permit(:description, :url, :step_order) })
+      scenario.scenario_steps.build(
+        ensure_at_least_one_step(
+          filter_trailing_empty_steps(
+            scenario_steps_params
+          )
+        )
+      )
 
-      track_study_created(researcher, scenario)
+      if scenario.valid?
+        publish(scenario) if publishing
+        scenario.save
+        track_study_created(researcher, scenario)
+      end
 
       scenario
     end
   end
 
-  def update(scenario, scenario_params, scenario_steps_params, researcher, publishing)
+  def update(scenario, scenario_params, scenario_steps_params_with_hashid, researcher, publishing)
     ActiveRecord::Base.transaction do
-      publish!(scenario) if publishing
-      scenario.update(scenario_params)
+      scenario.assign_attributes(scenario_params)
+      update_steps!(
+        scenario.scenario_steps,
+        ensure_at_least_one_step(
+          filter_trailing_empty_steps(
+            scenario_steps_params_with_hashid
+          )
+        )
+      )
 
-      update_steps!(scenario.scenario_steps, scenario_steps_params)
-
-      track_draft_published(researcher, scenario) if publishing
+      if scenario.valid?
+        publish(scenario) if publishing
+        scenario.save
+        track_draft_published(researcher, scenario) if publishing
+      end
 
       scenario
     end
   end
 
-  def publish!(scenario)
+  def publish(scenario)
     scenario.status = 'live'
     scenario.published_at = Time.new
+  end
+
+  def filter_trailing_empty_steps(steps_params)
+    steps_params
+      .reverse
+      .drop_while { |step| step[:description].blank? && step[:url].blank? && step[:hashid].blank? }
+      .reverse
+  end
+
+  def ensure_at_least_one_step(steps_params)
+    steps_params.present? ? steps_params : {}
   end
 
   def update_steps!(old_steps, new_steps)
@@ -44,10 +72,11 @@ class DraftsService
         old_step.description = new_step[:description]
         old_step.url = new_step[:url]
         old_step.step_order = new_step[:step_order]
-        old_step.save
         new_steps.delete_at(new_step_index)
+        # wait for autosave to save it
       else
-        old_step.destroy
+        old_step.mark_for_destruction
+        # wait for autosave to destroy it
       end
     end
 
@@ -55,9 +84,9 @@ class DraftsService
       # if it has a hashid, we're trying to restore a deleted connection
       if step_params[:hashid]
         id = ScenarioStep.hashids.decode(step_params[:hashid])[0]
-        old_steps.create(step_params.permit(:description, :url, :step_order).merge(id: id))
+        old_steps.build(step_params.permit(:description, :url, :step_order).merge(id: id))
       else
-        old_steps.create(step_params.permit(:description, :url, :step_order))
+        old_steps.build(step_params.permit(:description, :url, :step_order))
       end
     end
   end
