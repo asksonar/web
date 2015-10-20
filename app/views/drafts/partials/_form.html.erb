@@ -50,8 +50,8 @@
       <% if @scenario.drafts? %>
         <a class='btn btn-light-blue pull-left btn-med strong' id="btn-delete">Delete Draft</a>
         <div class="pull-right">
-          <%= f.submit 'Create the study', name: 'publish', class: 'btn btn-dark-blue btn-med strong' %><!--
-          --><%= f.submit 'Save as a draft', name: 'draft', class: 'btn btn-medium-blue btn-med strong' %>
+          <%= f.submit 'Save as a draft', name: 'draft', class: 'btn btn-medium-blue btn-med strong' %><!--
+          --><%= f.submit 'Create the study', name: 'publish', class: 'btn btn-dark-blue btn-med strong' %>
         </div>
       <% else %>
         <%= f.submit 'Update the study', name: 'update', class: 'btn btn-dark-blue pull-right btn-med strong' %>
