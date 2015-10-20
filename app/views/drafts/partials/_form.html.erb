@@ -59,23 +59,4 @@
   </div>
 </section>
 
-<div class="modal" id='delete_confirmation_container' tabindex='-1'>
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="titlebar">
-        <div class='titlebar-buttons pull-left'>
-          <div class="btn-text" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></div>
-        </div>
-        <div class='titlebar-center'><img class="titlebar-icon" src='<%=asset_path 'SonarLogoThick_White_100x37.png' %>'></div>
-      </div>
-      <div class="confirmation-body">
-        <div>
-          <p>Are you sure you want to delete this draft?</p>
-          <br/>
-          <a id='btn-delete-yes' class='btn btn-green'><span>Yes, delete the draft</span></a>
-          <a id='btn-delete-no' class='btn btn-medium-blue'><span>No, return to draft</span></a>
-        </div>
-      </div><!-- /.confirmation-body -->
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+<%= render partial: 'utility/deleteModal', locals: {controller: 'draft'} %>
