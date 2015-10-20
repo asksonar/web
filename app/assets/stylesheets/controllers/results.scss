@@ -107,8 +107,6 @@
       }
 
       .share-link-group {
-        margin-top: 10px;
-
         input {
           cursor: text;
         }
@@ -116,6 +114,10 @@
 
       #btn-delete {
         margin-left: 1px;
+      }
+
+      .btn-group {
+        margin-bottom: 10px;
       }
     }
 

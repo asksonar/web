@@ -48,23 +48,24 @@
       </div>
     </div>
     <div class='col-md-4 buttons-container'>
+      <div class="clearfix">
+        <h2 class=''>Live</h2>
 
-      <h2 class=''>Live</h2>
-
-      <div id='btn-archive' class="btn-group" data-placement="bottom" data-toggle="tooltip"
-        <% if @scenario.live? %>title="Close the study"<% end %>
-        <% if @scenario.completed? %>title="Re-open the study"<% end %>
-      >
-        <a class="btn btn-light-blue btn-active-on <% if @scenario.live? %>active<% end %>">On</a>
-        <a class="btn btn-grey btn-failure btn-active-off <% if @scenario.completed? %>active<% end %>">Off</a>
-      </div>
-
-      <div class="btn-group pull-right">
-        <div class='btn-wrapper-tooltip' data-placement="bottom" title="Edit the study" data-toggle="tooltip">
-          <a class='btn btn-dark-blue' id='btn-edit' href='<%= edit_result_path %>'><i class='fa fa-edit'></i></a>
+        <div id='btn-archive' class="btn-group" data-placement="bottom" data-toggle="tooltip"
+          <% if @scenario.live? %>title="Close the study"<% end %>
+          <% if @scenario.completed? %>title="Re-open the study"<% end %>
+        >
+          <a class="btn btn-light-blue btn-active-on <% if @scenario.live? %>active<% end %>">On</a>
+          <a class="btn btn-grey btn-failure btn-active-off <% if @scenario.completed? %>active<% end %>">Off</a>
         </div>
-        <div class="btn-wrapper-tooltip" data-placement="bottom" title="Delete the study" data-toggle="tooltip">
-          <a class='btn btn-dark-blue' id='btn-delete'><i class='fa fa-trash-o'></i></a>
+
+        <div class="btn-group pull-right">
+          <div class='btn-wrapper-tooltip' data-placement="bottom" title="Edit the study" data-toggle="tooltip">
+            <a class='btn btn-dark-blue' id='btn-edit' href='<%= edit_result_path %>'><i class='fa fa-edit'></i></a>
+          </div>
+          <div class="btn-wrapper-tooltip" data-placement="bottom" title="Delete the study" data-toggle="tooltip">
+            <a class='btn btn-dark-blue' id='btn-delete'><i class='fa fa-trash-o'></i></a>
+          </div>
         </div>
       </div>
 
