@@ -49,7 +49,7 @@ class ResultsController < ApplicationController
     service.set_deleted(@result)
 
     flash[:info] = '<strong>Your study has been deleted.</strong>'
-    redirect_to results_path
+    render json: {redirect_url: results_path}
   end
 
 end

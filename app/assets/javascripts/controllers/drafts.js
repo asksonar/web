@@ -29,6 +29,12 @@ $(function(){
     });
   };
 
+  var deleteModal = new DeleteModal({
+    modal: $('#delete_confirmation_container'),
+    btnDeleteYes: $('#btn-delete-yes'),
+    btnDeleteNo: $('#btn-delete-no')
+  });
+
   var emptyStep = {steps:[{}]};
   var newStepTemplate = Handlebars.compile($('#new-step-template').html());
 
@@ -60,6 +66,10 @@ $(function(){
     var ctnStep = $(this).closest('.ctn-step');
     ctnStep.remove();
     recountSteps();
+  });
+
+  $('#btn-delete').on('click', function(event){
+    deleteModal.show();
   });
 
   autosize($('textarea'));

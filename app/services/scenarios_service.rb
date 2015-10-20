@@ -15,7 +15,7 @@ class ScenariosService
 
   def set_deleted(scenario)
     scenario.status = :deleted
-    scenario.save
+    scenario.save(validate:false)
   end
 
 end

@@ -93,6 +93,14 @@ class DraftsController < ApplicationController
     end
   end
 
+  def destroy
+    @result = Scenario.find_by_hashid(params[:id])
+    scenarios_service.set_deleted(@result)
+
+    flash[:info] = '<strong>Your draft has been deleted.</strong>'
+    render json: {redirect_url: drafts_path}
+  end
+
   private
 
   def scenario_params
