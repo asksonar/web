@@ -49,16 +49,22 @@ $(function(){
     divStepDescription: $('#ctn-step-description')
   }, videoController, videoTranscript, videoLink);
 
+  var deleteModal = new DeleteModal({
+    modal: $('#delete_confirmation_container'),
+    btnDeleteYes: $('#btn-delete-yes'),
+    btnDeleteNo: $('#btn-delete-no')
+  });
+
   var resultsView = new ResultsView({
     divAllContent: $('.main-content-wrapper'),
     btnCopyShareLink: $('#btn-copy-share-link'),
     inputShareLink: $('#input-share-link'),
     btnArchive: $('#btn-archive'),
+    btnDelete: $('#btn-delete'),
     btnHeroCopyShareLink: $('#btn-hero-copy-share-link'),
     inputHeroShareLink: $('#input-hero-share-link'),
-    panelHero: $('.panel-hero')
-
-  }, videoModal);
+    panelHero: $('.panel-hero'),
+  }, videoModal, deleteModal);
 
   var timeSeconds = new URI(location.href).search(true).t || 0;
   if (sonar.resultStep) {

@@ -44,4 +44,12 @@ class ResultsController < ApplicationController
     render plain: 'OK'
   end
 
+  def destroy
+    @result = Scenario.find_by_hashid(params[:id])
+    service.set_deleted(@result)
+
+    flash[:info] = '<strong>Your study has been deleted.</strong>'
+    redirect_to results_path
+  end
+
 end

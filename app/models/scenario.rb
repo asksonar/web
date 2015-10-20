@@ -8,7 +8,7 @@ class Scenario < ActiveRecord::Base
   has_many :step_feelings, through: :result_steps
   has_many :scenario_highlights
   has_many :step_notes, through: :result_steps
-  enum status: [:drafts, :live, :completed]
+  enum status: [:drafts, :live, :completed, :deleted]
 
   after_initialize :default_values, unless: :persisted?
 

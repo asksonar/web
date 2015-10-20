@@ -1,4 +1,4 @@
-#results-index, #results-my_index {
+#results-index {
 
   .panel.live {
     border-left: 10px solid #8DD2E4;
@@ -113,6 +113,10 @@
           cursor: text;
         }
       }
+
+      #btn-delete {
+        margin-left: 1px;
+      }
     }
 
     .counts-container {
@@ -211,6 +215,53 @@
         margin-bottom: 30px;
       }
     }
-  }
 
+    .confirmation-body {
+      text-align: center;
+      padding: 20px;
+      
+      input[type="submit"] {
+        background: none;
+        border: none;
+        color: inherit;
+        padding: 0px;
+      }
+    }
+
+    .titlebar {
+      height: 32px;
+      background-color: #1CA5C9;
+
+      .titlebar-buttons {
+        margin: 0px 4px;
+        cursor: pointer;
+
+        .btn-text {
+          width: 20px;
+          text-align: center;
+          line-height: 32px;
+          color: #FFF;
+          font-size: 18px;
+        } 
+      }
+      
+      .titlebar-center {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100px; /* large enough to fit most items */
+        text-align: center; /* then center children within that 100px space */
+        
+        .titlebar-icon {
+          height: 24px;
+          margin-top: 4px;
+        }
+      }
+    }
+  }  
+
+  #delete_confirmation_container {
+    .modal-content {
+      padding: 0;
+    } 
+  } 
 }
