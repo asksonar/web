@@ -9,7 +9,7 @@ DeleteModal = function(config) {
 DeleteModal.prototype.init = function() {
   this.$btnDeleteYes.on('click', $.proxy(this.deleteStudy, this));
   this.$btnDeleteNo.on('click', $.proxy(this.hide, this));
-}
+};
 
 DeleteModal.prototype.show = function(event) {
   this.$modal.modal('show');

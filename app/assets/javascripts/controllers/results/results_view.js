@@ -66,9 +66,8 @@ ResultsView.prototype.loadVideoModal = function(event) {
 };
 
 ResultsView.prototype.loadDeleteModal = function(event) {
-  var thisEl = $(event.currentTarget);
   this.deleteModal.show();
-}
+};
 
 ResultsView.prototype.showPanelGraph = function(panelBody) {
   var timesArray = JSON.parse(panelBody.find('script').html());
