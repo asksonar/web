@@ -64,7 +64,7 @@
             <a class='btn btn-dark-blue' id='btn-edit' href='<%= edit_result_path %>'><i class='fa fa-edit'></i></a>
           </div>
           <div class="btn-wrapper-tooltip" data-placement="bottom" title="Delete the study" data-toggle="tooltip">
-            <a class='btn btn-dark-blue' id='btn-delete'><i class='fa fa-trash-o'></i></a>
+            <a class='btn btn-grey' id='btn-delete'><i class='fa fa-trash-o'></i></a>
           </div>
         </div>
       </div>
@@ -230,4 +230,4 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<%= render partial: 'utility/deleteModal', locals: {controller: 'study'} %>
+<%= render partial: 'utility/delete_modal', locals: {controller: 'study'} %>
