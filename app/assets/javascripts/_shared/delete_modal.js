@@ -31,10 +31,10 @@ DeleteModal.prototype.deleteStudy = function(event) {
       authenticity_token: AUTH_TOKEN
     }
   })
-    .success(function(data){
-      window.location.replace(data.redirect_url);
-    })
-    .fail($.proxy(function(jqXHR){
-      notify.error(jqXHR.responseText);
-    }, this));
+  .success(function(data){
+    window.location.replace(data.redirect_url);
+  })
+  .fail($.proxy(function(jqXHR){
+    notify.error(jqXHR.responseText);
+  }, this));
 };
