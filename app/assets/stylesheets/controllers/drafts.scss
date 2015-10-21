@@ -11,6 +11,12 @@
   }
 }
 
+.input-title {
+  padding-bottom: 8px;
+
+  .draft-header & { padding-left: 15px; }
+}
+
 .draft-header {
 
   .ctn-title {
