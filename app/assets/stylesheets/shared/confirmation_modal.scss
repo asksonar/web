@@ -1,0 +1,26 @@
+.confirmation-modal {
+  .modal-content {
+    padding: 0px;
+  }
+
+  .modal-dialog {
+    width: 450px;
+  }
+
+  .confirmation-body {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .confirmation-header {
+    height: 32px;
+    background-color: #1CA5C9;
+
+    .close {
+      float: left;
+      color: #FFF;
+      margin: 5px 10px;
+      opacity: 1;
+    }
+  }
+}

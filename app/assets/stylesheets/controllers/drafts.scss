@@ -11,6 +11,12 @@
   }
 }
 
+.input-title {
+  padding-bottom: 8px;
+
+  .draft-header & { padding-left: 15px; }
+}
+
 .draft-header {
 
   .ctn-title {
@@ -186,6 +192,10 @@
   .buttons-container {
     .btn + .btn {
       margin-left: 3px;
+    }
+
+    .btn {
+      margin-bottom: 5px;
     }
   }
 }

@@ -1,4 +1,4 @@
-#results-index, #results-my_index {
+#results-index {
 
   .panel.live {
     border-left: 10px solid #8DD2E4;
@@ -107,11 +107,17 @@
       }
 
       .share-link-group {
-        margin-top: 10px;
-
         input {
           cursor: text;
         }
+      }
+
+      #btn-delete {
+        margin-left: 1px;
+      }
+
+      .btn-group {
+        margin-bottom: 10px; // 10px margin-bottom when the edit, and delete buttons wrap
       }
     }
 
@@ -211,6 +217,5 @@
         margin-bottom: 30px;
       }
     }
-  }
-
+  } 
 }

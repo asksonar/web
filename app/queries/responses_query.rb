@@ -5,6 +5,7 @@ class ResponsesQuery
     resultStep = ResultStep
       .joins(scenario_step: :scenario)
       .where(scenarios: {company_id: company})
+      .where(scenarios: {status: [Scenario.statuses[:live], Scenario.statuses[:completed]]})
       .where(scenario_steps: {step_order: 0})
       .uploaded
       .order(created_at: :desc)

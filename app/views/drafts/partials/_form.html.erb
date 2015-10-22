@@ -1,7 +1,8 @@
 <section class='main-content-header draft-header'>
   <div class='row'>
+    <h3 class="input-title">Title:</h3>
     <div class='ctn-title'>
-      <%= f.text_field :title, hide_label: true, placeholder: 'Title your study', class: 'input-lg' %>
+      <%= f.text_field :title, hide_label: true, placeholder: "e.g. First impression - feature XYZ", class: 'input-lg' %>
     </div>
 
     <div class='ctn-template'>
@@ -29,10 +30,12 @@
   <div class='panel'>
 
     <div class='summary-container'>
-      <%= f.text_area :description, rows: 3, hide_label: true, placeholder: 'Welcome the panelist to the study' %>
+      <h3 class="input-title">Description:</h3>
+      <%= f.text_area :description, rows: 3, hide_label: true, placeholder: "e.g. We could really use your feedback on feature XYZ which helps you XYZ. Your candid feedback is critical to making the product even better and we're very thankful of your time!" %>
     </div>
 
     <div class='steps-container'>
+      <h3 class="input-title">Steps:</h3>
       <div id='ctn-step-list'><!-- insert new steps here --></div>
     </div>
 
@@ -46,10 +49,16 @@
           result_path(@scenario)
         end
       %>' class='btn btn-grey pull-left btn-med'>Cancel</a>
+      
+      <% if @scenario.persisted? && @scenario.drafts? %>
+        <a class='btn btn-light-blue pull-left btn-med strong' id="btn-delete">Discard Draft</a>
+      <% end %>
 
       <% if @scenario.drafts? %>
-        <%= f.submit 'Create the study', name: 'publish', class: 'btn btn-dark-blue pull-right btn-med strong' %>
-        <%= f.submit 'Save as a draft', name: 'draft', class: 'btn btn-light-blue pull-right btn-med' %>
+        <div class="pull-right">
+          <%= f.submit 'Save as a draft', name: 'draft', class: 'btn btn-medium-blue btn-med strong' %><!--
+          --><%= f.submit 'Create the study', name: 'publish', class: 'btn btn-dark-blue btn-med strong' %>
+        </div>
       <% else %>
         <%= f.submit 'Update the study', name: 'update', class: 'btn btn-dark-blue pull-right btn-med strong' %>
       <% end %>
@@ -57,3 +66,5 @@
 
   </div>
 </section>
+
+<%= render partial: 'utility/delete_modal', locals: {controller: 'draft'} %>

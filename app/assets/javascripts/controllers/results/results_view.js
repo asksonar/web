@@ -1,19 +1,22 @@
-function ResultsView(config, modal) {
+function ResultsView(config, videoModal, deleteModal) {
   this.$divAllContent = config.divAllContent;
   this.$btnCopyShareLink = config.btnCopyShareLink;
   this.$inputShareLink = config.inputShareLink;
   this.$btnArchive = config.btnArchive;
+  this.$btnDelete = config.btnDelete;
   this.$btnHeroCopyShareLink = config.btnHeroCopyShareLink;
   this.$inputHeroShareLink = config.inputHeroShareLink;
   this.$panelHero = config.panelHero;
 
-  this.modal = modal;
+  this.videoModal = videoModal;
+  this.deleteModal = deleteModal;
 
   this.init();
 }
 
 ResultsView.prototype.init = function() {
-  this.$divAllContent.on('click', '.video-link', $.proxy(this.loadModal, this));
+  this.$divAllContent.on('click', '.video-link', $.proxy(this.loadVideoModal, this));
+  this.$btnDelete.on('click', $.proxy(this.loadDeleteModal, this));
   this.$btnArchive.on('click', $.proxy(this.toggleArchive, this));
   new ClipboardInput(this.$btnCopyShareLink, this.$inputShareLink);
   new ClipboardInput(this.$btnHeroCopyShareLink, this.$inputHeroShareLink);
@@ -54,12 +57,16 @@ ResultsView.prototype.toggleArchive = function() {
   }, this));
 };
 
-ResultsView.prototype.loadModal = function(event) {
+ResultsView.prototype.loadVideoModal = function(event) {
   var thisEl = $(event.currentTarget);
   var resultStepHashId = thisEl.attr('data-result-step-hashid');
   var timeSeconds = parseFloat(thisEl.attr('data-feeling-at-seconds') || 0);
 
-  this.modal.load(resultStepHashId, timeSeconds);
+  this.videoModal.load(resultStepHashId, timeSeconds);
+};
+
+ResultsView.prototype.loadDeleteModal = function(event) {
+  this.deleteModal.show();
 };
 
 ResultsView.prototype.showPanelGraph = function(panelBody) {

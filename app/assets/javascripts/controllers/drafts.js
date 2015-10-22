@@ -9,11 +9,23 @@ $(function(){
     return;
   }
 
-  var recountSteps = function(){
+  var recountSteps = function() {
     $('.ctn-count').each(function(index){
       $(this).html((index + 1) + '.');
     });
     autosize($('textarea'));
+  };
+
+  var resetPlaceholders = function() {
+    $('.ctn-description').each(function(index){
+      if (index === 0) {
+        return;
+      } else if (index % 2 === 0) {
+        $(this).find('textarea').attr('placeholder', 'Do that...');
+      } else {
+        $(this).find('textarea').attr('placeholder', 'Do this...');
+      }
+    });
   };
 
   var addStepErrors = function() {
@@ -29,6 +41,12 @@ $(function(){
     });
   };
 
+  var deleteModal = new DeleteModal({
+    modal: $('#delete_confirmation_container'),
+    btnDeleteYes: $('#btn-delete-yes'),
+    btnDeleteNo: $('#btn-delete-no')
+  });
+
   var emptyStep = {steps:[{}]};
   var newStepTemplate = Handlebars.compile($('#new-step-template').html());
 
@@ -43,16 +61,17 @@ $(function(){
     addStepErrors();
   } else {
     $('#ctn-step-list').html(
-      newStepTemplate(emptyStep) +
-      newStepTemplate(emptyStep) +
-      newStepTemplate(emptyStep)
+      newStepTemplate({steps: [{description_placeholder: 'Look here...', url_placeholder: 'www.example.com'}]}) +
+      newStepTemplate({steps: [{description_placeholder: 'Do this...', url_placeholder: 'URL (optional)'}]}) +
+      newStepTemplate({steps: [{description_placeholder: 'Do that...', url_placeholder: 'URL (optional)'}]})
     );
     recountSteps();
   }
 
   $('#ctn-step-list').on('click', '.btn-add-step', function(event){
     var ctnStep = $(this).closest('.ctn-step');
-    ctnStep.after(newStepTemplate(emptyStep));
+    ctnStep.after(newStepTemplate({steps: [{url_placeholder: 'URL (optional)'}]}));
+    resetPlaceholders();
     recountSteps();
   });
 
@@ -60,6 +79,10 @@ $(function(){
     var ctnStep = $(this).closest('.ctn-step');
     ctnStep.remove();
     recountSteps();
+  });
+
+  $('#btn-delete').on('click', function(event){
+    deleteModal.show();
   });
 
   autosize($('textarea'));

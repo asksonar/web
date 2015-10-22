@@ -22,24 +22,24 @@ $(function(){
       url: '/responses.json/',
       data: { startTime: startTime }
     })
-      .success(function(data){
-        if (!newResponses.responses.length) {
-          newResponses.responses = data;
-        } else {
-          newResponses.responses = newResponses.responses.concat(data)
-        }
+    .success(function(data){
+      if (!newResponses.responses.length) {
+        newResponses.responses = data;
+      } else {
+        newResponses.responses = newResponses.responses.concat(data)
+      }
 
-        if (data.length === 1) {
-          $('.response-alert').text('Show ' + data.length + ' new response');
-          $('.response-alert').slideDown();
-        } else if (data.length > 1) {
-          $('.response-alert').text('Show ' + data.length + ' new responses');
-          $('.response-alert').slideDown();
-        }
-       })
-      .fail(function(jqXHR){
-        notify.error(jqXHR.responseText);
-      });
+      if (data.length === 1) {
+        $('.response-alert').text('Show ' + data.length + ' new response');
+        $('.response-alert').slideDown();
+      } else if (data.length > 1) {
+        $('.response-alert').text('Show ' + data.length + ' new responses');
+        $('.response-alert').slideDown();
+      }
+     })
+    .fail(function(jqXHR){
+      notify.error(jqXHR.responseText);
+    });
   }
 
   $('.response-alert').on('click', function(){

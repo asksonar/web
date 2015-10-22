@@ -14,12 +14,12 @@
     <div class='row'>
       <div class='col-md-8'>
         <div class='ctn-description'>
-          <%= f.text_area :scenario_steps_description, hide_label: true, rows: 1, placeholder: 'Tell the panelist what to do', value: '{{description}}', name: 'scenario_steps[][description]' %>
+          <%= f.text_area :scenario_steps_description, hide_label: true, rows: 1, placeholder: '{{description_placeholder}}', value: '{{description}}', name: 'scenario_steps[][description]' %>
         </div>
       </div>
       <div class='col-md-4 ctn-url-btns'>
         <div class='ctn-url'>
-          <%= f.text_field :scenario_steps_url, hide_label: true, placeholder: 'URL (optional)', value: '{{url}}', name: 'scenario_steps[][url]' %>
+          <%= f.text_field :scenario_steps_url, hide_label: true, placeholder: '{{url_placeholder}}', value: '{{url}}', name: 'scenario_steps[][url]' %>
         </div>
       </div>
     </div>
