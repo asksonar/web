@@ -61,17 +61,11 @@ $(function(){
 
   var checkableTranscript = Object.create(modulejs.require('TranscriptElement'));
   CheckableComponent.call(checkableTranscript);
-  var checkableFeelingDelighted = Object.create(modulejs.require('FeelingDelightedElement'));
-  CheckableComponent.call(checkableFeelingDelighted);
-  var checkableFeelingConfused = Object.create(modulejs.require('FeelingConfusedElement'));
-  CheckableComponent.call(checkableFeelingConfused);
   var checkableNote = Object.create(modulejs.require('NoteElement'));
   CheckableComponent.call(checkableNote);
 
   var timelineArray = []
     .concat(checkableTranscript.buildElementArray(sonar.resultStep.transcriptionArray))
-    .concat(checkableFeelingDelighted.buildElementArray(sonar.resultStep.delightedArray))
-    .concat(checkableFeelingConfused.buildElementArray(sonar.resultStep.confusedArray))
     .concat(checkableNote.buildElementArray(sonar.resultStep.highlightedArray));
 
   videoTranscript.buildTranscript(sonar.resultStep.hashid, timelineArray);
