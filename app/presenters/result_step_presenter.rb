@@ -20,8 +20,6 @@ class ResultStepPresenter < SimpleDelegator
       email: email,
       scenario_step_count: scenario_step_count,
       scenario_title: scenario_title,
-      total_delighted: total_delighted,
-      total_confused: total_confused
     }
   end
 

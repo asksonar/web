@@ -30,22 +30,6 @@ class Scenario < ActiveRecord::Base
     scenario_results.count
   end
 
-  def where_feeling_delighted
-    step_feelings.delighted
-  end
-
-  def where_feeling_confused
-    step_feelings.confused
-  end
-
-  def total_delighted
-    where_feeling_delighted.count
-  end
-
-  def total_confused
-    where_feeling_confused.count
-  end
-
   def highlights
     scenario_highlights
   end

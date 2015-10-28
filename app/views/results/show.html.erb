@@ -77,16 +77,6 @@
       </div>
       <div id='btn-copy-share-link-tooltip'><!-- otherwise interferes with bootstrap (:not-last-child) selectors --></div>
 
-      <div class='row counts-container'>
-        <div class='col-xs-6'>
-          <h1><i class='feeling-delighted'></i><%= @scenario.total_delighted %></h1>
-          <p class='sub'><%= pp_plural(@scenario.total_delighted, 'moment') %></p>
-        </div>
-        <div class='col-xs-6'>
-          <h1><i class='feeling-confused'></i><%= @scenario.total_confused %></h1>
-          <p class='sub'><%= pp_plural(@scenario.total_confused, 'moment') %></p>
-        </div>
-      </div>
       <h2><%= @scenario.user_completed_count %> completed</h2>
       <p class='sub'><%= @scenario.user_uploading_count %> uploading</p>
     </div>
@@ -121,9 +111,8 @@
 
   <% @scenario.scenario_steps.each do |scenario_step| %>
   <div class='panel'>
-    <%= bsh_split_panel 'col-md-8' %>
-    <div class='row panel-heading'>
-      <div class='col-md-8'>
+    <div class='panel-heading'>
+      <div>
         <%= ih_left_indent left_class: 'h1', left_content: "#{scenario_step.step_order + 1}.", div_class: 'summary-step-description' do %>
           <span><%= scenario_step.description %>
             <% if scenario_step.url %>
@@ -132,36 +121,6 @@
             <% end %>
           </span>
         <% end %>
-      </div>
-      <div class='col-md-4 hidden-xs hidden-sm'>
-        <div class='row moments-container'>
-          <div class='col-xs-6'>
-            <a class='moments-popover' tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-html="true"
-              data-content="<% scenario_step.delighted_feelings.each do |feeling| %>
-                <a class='video-link'
-                data-result-step-hashid='<%=feeling.result_step.hashid%>'
-                data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
-                ><span class='sub'>[<%= ppt_seconds(feeling.feeling_at_seconds) %>]</span> <%= feeling.email %></a>
-              <% end %>"
-            >
-              <h1><i class='feeling-delighted'></i><%= scenario_step.total_delighted %></h1>
-              <p class='sub'><%= pp_plural(scenario_step.total_delighted, 'moment') %></p>
-            </a>
-          </div>
-          <div class='col-xs-6'>
-            <a class='moments-popover' tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-html="true"
-              data-content="<% scenario_step.confused_feelings.each do |feeling| %>
-                <a class='video-link'
-                data-result-step-hashid='<%=feeling.result_step.hashid%>'
-                data-feeling-at-seconds='<%=feeling.feeling_at_seconds%>'
-                ><span class='sub'>[<%= ppt_seconds(feeling.feeling_at_seconds) %>]</span> <%= feeling.email %></a>
-              <% end %>"
-            >
-              <h1><i class='feeling-confused'></i><%= scenario_step.total_confused %></h1>
-              <p class='sub'><%= pp_plural(scenario_step.total_confused, 'moment') %></p>
-            </a>
-          </div>
-        </div>
       </div>
     </div>
     <div class='row panel-body'>
@@ -172,19 +131,6 @@
           <a class='video-link'
             data-result-step-hashid='<%=result_step.hashid%>'
           >
-            <% if result_step.has_confused? and result_step.has_delighted? %>
-              <i class='feeling-confused'></i>
-              <i class='feeling-delighted'></i>
-            <% elsif result_step.has_delighted? %>
-              <i class='feeling-empty'></i>
-              <i class='feeling-delighted'></i>
-            <% elsif result_step.has_confused? %>
-              <i class='feeling-empty'></i>
-              <i class='feeling-confused'></i>
-            <% else %>
-              <i class='feeling-empty'></i>
-              <i class='feeling-empty'></i>
-            <% end %>
             <span class='sub'><%= ppt_date(result_step.created_at) %> - [<%= result_step.email %>]</span>
             <%= dt_transcription(result_step.first_transcription) %> ...
           </a>

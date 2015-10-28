@@ -12,14 +12,6 @@ class ScenarioStepPresenter < SimpleDelegator
     __getobj__.result_steps.order(created_at: :desc).map(&:prezi)
   end
 
-  def delighted_feelings
-    where_feeling_delighted.map(&:prezi)
-  end
-
-  def confused_feelings
-    where_feeling_confused.map(&:prezi)
-  end
-
   def average_completed_minutes
     Time.at(result_steps.average(:completed_seconds) || 0).strftime("%-Mm %-Ss")
   end

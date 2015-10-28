@@ -5,7 +5,6 @@ $(function(){
   }
 
   $('[data-toggle="tooltip"]').tooltip();
-  $('[data-toggle="popover"]').popover();
 
   var videoController = new VideoController({
     videoId: 'example_video_1'
