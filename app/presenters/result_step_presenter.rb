@@ -8,8 +8,6 @@ class ResultStepPresenter < SimpleDelegator
       shareLink: share_link,
       email: email,
       transcriptionArray: transcription_array,
-      delightedArray: delighted_array,
-      confusedArray: confused_array,
       highlightedArray: highlighted_array
     }
   end
@@ -45,24 +43,6 @@ class ResultStepPresenter < SimpleDelegator
 
   def share_link
     Rails.configuration.properties['web_base_url'] + '/share/videos/' + hashid
-  end
-
-  def delighted_array
-    feelings_delighted.select(:id, :feeling_at_seconds).map do |feeling|
-      {
-        hashid: feeling.hashid,
-        time: feeling.feeling_at_seconds
-      }
-    end
-  end
-
-  def confused_array
-    feelings_confused.select(:id, :feeling_at_seconds).map do |feeling|
-      {
-        hashid: feeling.hashid,
-        time: feeling.feeling_at_seconds
-      }
-    end
   end
 
   def highlighted_array

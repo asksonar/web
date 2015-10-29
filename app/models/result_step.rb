@@ -17,26 +17,6 @@ class ResultStep < ActiveRecord::Base
     step_videos.first
   end
 
-  def feelings
-    step_feelings
-  end
-
-  def feelings_delighted
-    feelings.delighted
-  end
-
-  def has_delighted?
-    total_delighted > 0
-  end
-
-  def feelings_confused
-    feelings.confused
-  end
-
-  def has_confused?
-    total_confused > 0
-  end
-
   def transcriptions
     step_transcriptions
   end

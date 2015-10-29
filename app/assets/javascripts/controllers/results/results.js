@@ -69,8 +69,6 @@ $(function(){
   if (sonar.resultStep) {
     videoModal.loaded(timeSeconds, {
       hashid: sonar.resultStep.hashid,
-      delightedArray: sonar.resultStep.delightedArray,
-      confusedArray: sonar.resultStep.confusedArray,
       highlightedArray: sonar.resultStep.highlightedArray,
       srcArray: sonar.resultStep.srcArray,
       transcriptionArray: sonar.resultStep.transcriptionArray,
