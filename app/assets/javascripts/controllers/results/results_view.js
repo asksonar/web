@@ -21,7 +21,6 @@ ResultsView.prototype.init = function() {
   new ClipboardInput(this.$btnCopyShareLink, this.$inputShareLink);
   new ClipboardInput(this.$btnHeroCopyShareLink, this.$inputHeroShareLink);
   this.highlightHero();
-  this.showAllPanelGraphs();
 };
 
 ResultsView.prototype.toggleArchive = function() {
@@ -67,63 +66,6 @@ ResultsView.prototype.loadVideoModal = function(event) {
 
 ResultsView.prototype.loadDeleteModal = function(event) {
   this.deleteModal.show();
-};
-
-ResultsView.prototype.showPanelGraph = function(panelBody) {
-  var timesArray = JSON.parse(panelBody.find('script').html());
-  var graphId = panelBody.find('.graph').attr('id');
-  this.setupGraph(timesArray, graphId);
-};
-
-ResultsView.prototype.showAllPanelGraphs = function() {
-  var showPanelGraph = $.proxy(this.showPanelGraph, this);
-  $('.panel-body').each(function() {
-    showPanelGraph($(this));
-  });
-};
-
-ResultsView.prototype.setupGraph = function(timesArray, graphId) {
-  var chart = AmCharts.makeChart(graphId, {
-    "type": "serial",
-    "theme": "light",
-    "creditsPosition": "top-right",
-    "hideBalloonTime": 2000,
-    "categoryField": "display",
-    "gridAboveGraphs": true,
-    "backgroundColor": '#FAFAFA',
-    "backgroundAlpha": 1,
-    "graphs": [{
-      "fillAlphas": 1,
-      "lineAlphas": 0,
-      "type": "column",
-      "valueField": "count",
-      "columnWidth": 0.75,
-      "showBalloon": false
-    }],
-    categoryAxis: {
-      "title": "time",
-      "titleBold": false,
-      "gridAlpha": 0,
-      "tickLength": 0,
-      "gridCount": 0,
-      "autoGridCount": false
-    },
-    "valueAxes": [{
-      "title": "users",
-      "titleBold": false,
-      "gridAlpha": 0,
-      "tickLength": 0,
-      "labelsEnabled": false
-    }],
-    "balloon": {
-      "fixedPosition": true
-    },
-    "dataProvider": timesArray
-  });
-
-  chart.addListener('clickGraphItem', function(event) {
-    var details = event.item.dataContext.details;
-  });
 };
 
 ResultsView.prototype.highlightHero = function() {

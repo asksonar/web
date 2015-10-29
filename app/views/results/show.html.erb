@@ -123,33 +123,17 @@
         <% end %>
       </div>
     </div>
-    <div class='row panel-body'>
-      <div class='col-md-8'>
-        <div class='results-container'>
+    <div class='panel-body'>
+      <div class='results-container'>
 
-        <% scenario_step.newest_result_steps.each do |result_step| %>
-          <a class='video-link'
-            data-result-step-hashid='<%=result_step.hashid%>'
-          >
-            <span class='sub'><%= ppt_date(result_step.created_at) %> - [<%= result_step.email %>]</span>
-            <%= dt_transcription(result_step.first_transcription) %> ...
-          </a>
-        <% end %>
-
-        </div>
-      </div>
-      <div class='col-md-4 hidden-xs hidden-sm'>
-
-        <%# convert javascript converts this into nice graph %>
-        <%# also links to the video for that user %>
-        <div class='summary_time_graph'>
-          <script type='application/json'>
-            <%= raw scenario_step.result_time_bucket_hash.values.to_json %>
-          </script>
-          <div id='graph<%= scenario_step.step_order%>' class='graph'></div>
-        </div>
-        <div class='average-time pull-left'><%= scenario_step.average_completed_minutes %> average</div>
-        <p class='sub pull-right'><%= pp_plural_with_number(scenario_step.completed_users, 'user') %></p>
+      <% scenario_step.newest_result_steps.each do |result_step| %>
+        <a class='video-link'
+          data-result-step-hashid='<%=result_step.hashid%>'
+        >
+          <span class='sub'><%= ppt_date(result_step.created_at) %> - [<%= result_step.email %>]</span>
+          <%= dt_transcription(result_step.first_transcription) %> ...
+        </a>
+      <% end %>
 
       </div>
     </div>

@@ -11,10 +11,6 @@ class ScenarioStep < ActiveRecord::Base
 
   HASHIDS_SALT = 'c@9F*bVEKWpT'
 
-  def completed_users
-    result_steps.count
-  end
-
   private
 
   def trim_description_and_url
