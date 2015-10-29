@@ -11,26 +11,6 @@ class ScenarioStep < ActiveRecord::Base
 
   HASHIDS_SALT = 'c@9F*bVEKWpT'
 
-  def where_feeling_delighted
-    step_feelings.delighted
-  end
-
-  def where_feeling_confused
-    step_feelings.confused
-  end
-
-  def completed_users
-    result_steps.count
-  end
-
-  def total_delighted
-    where_feeling_delighted.count
-  end
-
-  def total_confused
-    where_feeling_confused.count
-  end
-
   private
 
   def trim_description_and_url

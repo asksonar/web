@@ -38,14 +38,10 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
   this.video.src(data.srcArray);
 
   var transcriptElement = modulejs.require('TranscriptElement');
-  var feelingDelightedElement = modulejs.require('FeelingDelightedElement');
-  var feelingConfusedElement = modulejs.require('FeelingConfusedElement');
   var noteElement = modulejs.require('NoteElement');
 
   var timelineArray = []
     .concat(transcriptElement.buildElementArray(data.transcriptionArray))
-    .concat(feelingDelightedElement.buildElementArray(data.delightedArray))
-    .concat(feelingConfusedElement.buildElementArray(data.confusedArray))
     .concat(noteElement.buildElementArray(data.highlightedArray));
 
   this.transcript.buildTranscript(data.hashid, timelineArray);

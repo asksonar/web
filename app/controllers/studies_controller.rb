@@ -12,7 +12,7 @@ class StudiesController < ApplicationController
   end
 
   def show
-    @scenario = Scenario.find_by_hashid(params[:id])
+    @scenario = Scenario.find_by_hashid(params[:id]).prezi
   end
 
   def create

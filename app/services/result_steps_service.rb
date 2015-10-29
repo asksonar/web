@@ -39,11 +39,4 @@ class ResultStepsService
       )
     )
   end
-
-  def update_feeling_count(result_step)
-    result_step.total_delighted = result_step.feelings_delighted.count
-    result_step.total_confused = result_step.feelings_confused.count
-    result_step.save
-  end
-
 end

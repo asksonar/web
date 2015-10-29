@@ -10,24 +10,9 @@
   <div class="btn btn-medium-blue response-alert" role="alert"></div>
   <% @result_steps.each do |result_step| %>
     <a class='panel' href='<%=result_video_path(result_step.scenario, result_step)%>'>
-      <%= bsh_split_panel 'col-sm-8' %>
-      <div class='row'>
-        <div class='col-sm-8 title-container'>
-          <h1><%= result_step.scenario_title %></h1>
-          <p class='sub'>completed by <%= result_step.email %> <%= time_ago_in_words(result_step.created_at)%> ago (<%= pp_plural_with_number(result_step.scenario_step_count, 'step') %>)</p>
-        </div>
-        <div class='col-sm-4'>
-          <div class='row counts-container'>
-            <div class='col-xs-6'>
-              <h1><i class='feeling-delighted'></i><%= result_step.total_delighted %></h1>
-              <p class='sub'><%= pp_plural(result_step.total_delighted, 'moment') %></p>
-            </div>
-            <div class='col-xs-6'>
-              <h1><i class='feeling-confused'></i><%= result_step.total_confused %></h1>
-              <p class='sub'><%= pp_plural(result_step.total_confused, 'moment') %></p>
-            </div>
-          </div>
-        </div>
+      <div class='title-container'>
+        <h1><%= result_step.scenario_title %></h1>
+        <p class='sub'>completed by <%= result_step.email %> <%= time_ago_in_words(result_step.created_at)%> ago (<%= pp_plural_with_number(result_step.scenario_step_count, 'step') %>)</p>
       </div>
     </a>
   <% end %>

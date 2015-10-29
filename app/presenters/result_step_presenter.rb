@@ -8,8 +8,6 @@ class ResultStepPresenter < SimpleDelegator
       shareLink: share_link,
       email: email,
       transcriptionArray: transcription_array,
-      delightedArray: delighted_array,
-      confusedArray: confused_array,
       highlightedArray: highlighted_array
     }
   end
@@ -20,8 +18,6 @@ class ResultStepPresenter < SimpleDelegator
       email: email,
       scenario_step_count: scenario_step_count,
       scenario_title: scenario_title,
-      total_delighted: total_delighted,
-      total_confused: total_confused
     }
   end
 
@@ -49,43 +45,29 @@ class ResultStepPresenter < SimpleDelegator
     Rails.configuration.properties['web_base_url'] + '/share/videos/' + hashid
   end
 
-  def delighted_array
-    feelings_delighted.select(:id, :feeling_at_seconds).map do |feeling|
-      {
-        hashid: feeling.hashid,
-        time: feeling.feeling_at_seconds
-      }
-    end
-  end
-
-  def confused_array
-    feelings_confused.select(:id, :feeling_at_seconds).map do |feeling|
-      {
-        hashid: feeling.hashid,
-        time: feeling.feeling_at_seconds
-      }
-    end
-  end
-
   def highlighted_array
-    notes.select(:id, :offset_seconds, :text).map do |note|
+    step_notes.select(:id, :offset_seconds, :text).map do |step_note|
       {
-        hashid: note.hashid,
-        time: note.offset_seconds,
-        text: note.text
+        hashid: step_note.hashid,
+        time: step_note.offset_seconds,
+        text: step_note.text
       }
     end
     # highlights.map { |highlight| highlight.offset_seconds }
   end
 
   def transcription_array
-    transcriptions.select(:id, :offset_seconds, :text).map do |transcription|
+    step_transcriptions.select(:id, :offset_seconds, :text).map do |step_transcription|
       {
-        hashid: transcription.hashid,
-        time: transcription.offset_seconds,
-        text: transcription.text
+        hashid: step_transcription.hashid,
+        time: step_transcription.offset_seconds,
+        text: step_transcription.text
       }
     end
+  end
+
+  def scenario
+    super.prezi
   end
 
   def scenario_title

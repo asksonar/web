@@ -51,14 +51,10 @@ $(function(){
   videoController.play(timeSeconds);
 
   var transcriptElement = modulejs.require('TranscriptElement');
-  var feelingDelightedElement = modulejs.require('FeelingDelightedElement');
-  var feelingConfusedElement = modulejs.require('FeelingConfusedElement');
   var noteElement = modulejs.require('NoteElement');
 
   var timelineArray = []
     .concat(transcriptElement.buildElementArray(sonar.resultStep.transcriptionArray))
-    .concat(feelingDelightedElement.buildElementArray(sonar.resultStep.delightedArray))
-    .concat(feelingConfusedElement.buildElementArray(sonar.resultStep.confusedArray))
     .concat(noteElement.buildElementArray(sonar.resultStep.highlightedArray));
 
   videoTranscript.buildTranscript(sonar.resultStep.hashid, timelineArray);
