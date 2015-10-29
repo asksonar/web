@@ -26,14 +26,6 @@ class Scenario < ActiveRecord::Base
     scenario_steps.count
   end
 
-  def user_count
-    scenario_results.count
-  end
-
-  def highlights
-    scenario_highlights
-  end
-
   private
 
   def trim_description_and_title

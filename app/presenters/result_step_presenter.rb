@@ -46,22 +46,22 @@ class ResultStepPresenter < SimpleDelegator
   end
 
   def highlighted_array
-    notes.select(:id, :offset_seconds, :text).map do |note|
+    step_notes.select(:id, :offset_seconds, :text).map do |step_note|
       {
-        hashid: note.hashid,
-        time: note.offset_seconds,
-        text: note.text
+        hashid: step_note.hashid,
+        time: step_note.offset_seconds,
+        text: step_note.text
       }
     end
     # highlights.map { |highlight| highlight.offset_seconds }
   end
 
   def transcription_array
-    transcriptions.select(:id, :offset_seconds, :text).map do |transcription|
+    step_transcriptions.select(:id, :offset_seconds, :text).map do |step_transcription|
       {
-        hashid: transcription.hashid,
-        time: transcription.offset_seconds,
-        text: transcription.text
+        hashid: step_transcription.hashid,
+        time: step_transcription.offset_seconds,
+        text: step_transcription.text
       }
     end
   end

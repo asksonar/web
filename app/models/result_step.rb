@@ -17,14 +17,6 @@ class ResultStep < ActiveRecord::Base
     step_videos.first
   end
 
-  def transcriptions
-    step_transcriptions
-  end
-
-  def notes
-    step_notes
-  end
-
   def generate_new_sample_result(new_scenario_step, new_scenario_result)
     new_result_step = dup
     new_result_step.scenario_step = new_scenario_step

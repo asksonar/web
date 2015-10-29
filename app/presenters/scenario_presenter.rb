@@ -35,7 +35,7 @@ class ScenarioPresenter < SimpleDelegator
   end
 
   def can_add_steps?
-    user_count == 0
+    scenario_results.count == 0
   end
 
   def user_completed_count
