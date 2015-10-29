@@ -12,11 +12,6 @@ class ResultStep < ActiveRecord::Base
 
   HASHIDS_SALT = '4$g&QNrACfVp'
 
-  def video
-    # TODO: handle case where we have multiple videos for a result_step
-    step_videos.first
-  end
-
   def generate_new_sample_result(new_scenario_step, new_scenario_result)
     new_result_step = dup
     new_result_step.scenario_step = new_scenario_step

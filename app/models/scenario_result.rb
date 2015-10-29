@@ -10,10 +10,6 @@ class ScenarioResult < ActiveRecord::Base
 
   HASHIDS_SALT = 'NCH&Yc!QWk58'
 
-  def default_values
-    self.status = status || 0
-  end
-
   def self.generate_new_sample_result(new_scenario)
     ActiveRecord::Base.transaction do
 
@@ -33,5 +29,11 @@ class ScenarioResult < ActiveRecord::Base
         result_step.generate_new_sample_result(new_scenario_step, new_scenario_result)
       end
     end
+  end
+
+  private
+
+  def default_values
+    self.status = status || 0
   end
 end

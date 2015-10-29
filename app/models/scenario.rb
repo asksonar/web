@@ -18,15 +18,11 @@ class Scenario < ActiveRecord::Base
 
   HASHIDS_SALT = '8UTnU7cJm*bP'
 
+  private
+  
   def default_values
     self.status = status || 0
   end
-
-  def step_count
-    scenario_steps.count
-  end
-
-  private
 
   def trim_description_and_title
     self.description = self.description.try(:strip)

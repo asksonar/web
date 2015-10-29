@@ -71,7 +71,7 @@ class ResultStepPresenter < SimpleDelegator
   end
 
   def scenario_step_count
-    scenario.step_count
+    scenario.scenario_steps.count
   end
 
   def result_video_url
