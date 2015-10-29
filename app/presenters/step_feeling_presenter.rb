@@ -1,3 +1,0 @@
-class StepFeelingPresenter < SimpleDelegator
-
-end
