@@ -15,7 +15,6 @@ class StudiesStepController < ApplicationController
 
     @result_step = result_steps_service.create_with_feelings_transcriptions(
       step_params,
-      feelings_params,
       transcriptions_params,
       @scenario_result,
       @scenario_step
@@ -51,15 +50,6 @@ class StudiesStepController < ApplicationController
       completed_at: Time.at(params_step['finish'] / 1000.0).iso8601(3),
       completed_seconds: params_step['length'] / 1000.0
     }
-  end
-
-  def feelings_params
-    params_step['feelings'].map do |feeling|
-      {
-        feeling: feeling['type'],
-        feeling_at_seconds: feeling['offset'] / 1000.0
-      }
-    end
   end
 
   def transcriptions_params

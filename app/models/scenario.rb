@@ -5,7 +5,6 @@ class Scenario < ActiveRecord::Base
   has_many :scenario_results, inverse_of: :scenario
   has_many :result_steps, through: :scenario_results
   has_many :result_steps_pending, through: :scenario_results
-  has_many :step_feelings, through: :result_steps
   has_many :scenario_highlights
   has_many :step_notes, through: :result_steps
   enum status: [:drafts, :live, :completed, :deleted]

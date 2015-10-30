@@ -79,7 +79,6 @@
     .buttons-container {
       h2 {
         display: inline-block;
-        margin-top: 15px;
       }
 
       #btn-archive {
@@ -102,6 +101,8 @@
       }
 
       .share-link-group {
+        margin-bottom: 15px;
+
         input {
           cursor: text;
         }

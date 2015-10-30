@@ -1,13 +1,8 @@
 class ResultStepsService
   include Singleton
 
-  attr_writer :step_feelings_service
   attr_writer :step_transcriptions_service
   attr_writer :step_videos_service
-
-  def step_feelings_service
-    @step_feelings_service ||= StepFeelingsService.instance
-  end
 
   def step_transcriptions_service
     @step_transcriptions_service ||= StepTranscriptionsService.instance
@@ -17,11 +12,10 @@ class ResultStepsService
     @step_videos_service ||= StepVideosService.instance
   end
 
-  def create_with_feelings_transcriptions(step_params, feelings_params, transcriptions_params, scenario_result, scenario_step)
+  def create_with_feelings_transcriptions(step_params, transcriptions_params, scenario_result, scenario_step)
     ActiveRecord::Base.transaction do
       result_step = create(step_params, scenario_result, scenario_step)
 
-      step_feelings_service.create(feelings_params, result_step)
       step_transcriptions_service.create(transcriptions_params, result_step)
 
       step_videos_service.link_videos(scenario_result, scenario_step, result_step.id)
