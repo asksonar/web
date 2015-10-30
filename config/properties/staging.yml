@@ -1,0 +1,18 @@
+web_base_url: https://my-staging.asksonar.com
+video_base_url: https://s3-us-west-1.amazonaws.com/videos.staging.engsonar.com
+sign_up_url: https://www.asksonar.com/sign-up
+external_url: https://www.asksonar.com/
+chrome_app_id: lpfpminhdepambpbepajinmnpipofgfo
+sample_scenario_result_id: 1036380636
+
+s3_access_key: AKIAIDV73X4CPAJBUCRA
+s3_secret_key: ZTZPZxwV1XA89XscmzDgqiLFnqee6sOUSYvmpo5r
+s3_region: us-west-1
+s3_upload_bucket: upload.staging.engsonar.com
+s3_videos_bucket: videos.staging.engsonar.com
+s3_backup_bucket: backup.staging.engsonar.com
+
+mixpanel_token: 7350e097bc4c5b596332f1d10e35aec5
+
+mandrill_username: jonathan@asksonar.com
+mandrill_api_key: 2u5GYOHCZC47GmQprLDVxA
