@@ -1,7 +1,5 @@
 $(function(){
 
-  var APP_ID = '<%= Rails.configuration.properties['chrome_app_id'] %>';
-
   if (!$('#studies-show').length) {
     return;
   }
@@ -13,7 +11,7 @@ $(function(){
     'ctnStartFeedback': $('#ctn-start-feedback'),
     'ctnRestartFeedback': $('#ctn-restart-feedback')
   });
-  window.controller = new StudiesController(view, APP_ID, {
+  window.controller = new StudiesController(view, sonar.chrome_app_id, {
     'btnInstallExtension': $('#btn-install-extension'),
     'btnStartFeedback': $('#btn-start-feedback'),
     'form': $('form')
