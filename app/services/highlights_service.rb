@@ -2,7 +2,7 @@ class HighlightsService
   include Singleton
 
   # expecting highlight_params of the form something like
-  # {"title"=>"", "video_time_start"=>"0:00", "video_time_end"=>"0:06", "note"=>{"M0JEPob7"=>"on", "nP2x424Q"=>"on"}, "feeling"=>{"o59D09ND"=>"on"}}
+  # {"title"=>"", "video_time_start"=>"0:00", "video_time_end"=>"0:06", "note"=>{"M0JEPob7"=>"on", "nP2x424Q"=>"on"}}
   def create(highlight_params, scenario, result_step)
     ScenarioHighlight.create(
       title: highlight_params[:title],
