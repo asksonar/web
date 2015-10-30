@@ -17,4 +17,4 @@ ADD . /home/app/webapp
 
 RUN bundle install --without development test --path vendor/bundle --binstubs vendor/bundle/bin --frozen true -j4 --frozen
 
-RUN RAILS_ENV=production vendor/bundle/bin/rake assets:precompile
+RUN SONAR_ENV=production RAILS_ENV=production vendor/bundle/bin/rake assets:precompile
