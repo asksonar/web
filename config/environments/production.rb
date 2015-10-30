@@ -78,23 +78,4 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-
-  # add mail configurations for use by devise to send forgot password mails
-  config.action_mailer.default_url_options = { host: 'my.asksonar.com' }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              'smtp.mandrillapp.com',
-    port:                 587,
-    domain:               'my.asksonar.com',
-    user_name:            ENV['MANDRILL_USERNAME'],
-    password:             ENV['MANDRILL_PASSWORD'],
-    authentication:       'plain'
-  }
-
-  config_path = File.join(Rails.root,'config/properties/production.yml')
-  puts 'config_path: ' + config_path
-  config_contents = File.read(config_path)
-  # puts 'config_contents: ' + config_contents
-  config.properties = YAML.load(config_contents)
-  puts config.properties
 end
