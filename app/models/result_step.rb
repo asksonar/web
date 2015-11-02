@@ -3,7 +3,6 @@ class ResultStep < ActiveRecord::Base
   belongs_to :scenario_result
   has_many :step_notes, -> { order offset_seconds: :asc }, inverse_of: :result_step
   has_many :step_videos, -> { order offset_seconds: :asc }, inverse_of: :result_step
-  has_many :step_transcriptions, -> { order offset_seconds: :asc }, inverse_of: :result_step
   enum status: [:pending, :uploaded]
 
   delegate :panelist, to: :scenario_result
