@@ -27,7 +27,7 @@ class StudiesStepController < ApplicationController
 
     result_transcriptions_service.create(transcriptions_params, @scenario_result)
 
-    Resque.enqueue(ProcessTranscriptionWorker, @result_step.id)
+    Resque.enqueue(ProcessTranscriptionWorker, @scenario_result.id)
 
     render plain: 'OK'
   end
