@@ -67,8 +67,8 @@ VideoTranscript.prototype.toggleTranscripts = function(event) {
   this.$container.toggleClass('show-transcripts');
 };
 
-VideoTranscript.prototype.buildTranscript = function(resultStepHashId, timelineArray) {
-  this.resultStepHashId = resultStepHashId;
+VideoTranscript.prototype.buildTranscript = function(scenarioResultHashId, timelineArray) {
+  this.scenarioResultHashId = scenarioResultHashId;
 
   this.clearView();
   this.timelineArray = timelineArray;
@@ -231,7 +231,7 @@ VideoTranscript.prototype.createNote = function() {
   var newElement = checkableNoteElement.create({
     time: timeSeconds,
     text: '',
-    resultStepHashId: this.resultStepHashId
+    scenarioResultHashId: this.scenarioResultHashId
   });
 
   this.timelineArray.push(newElement);
@@ -248,7 +248,7 @@ VideoTranscript.prototype.restoreNote = function(timeSeconds, text) {
   var newElement = modulejs.require('NoteElement').create({
     time: timeSeconds,
     text: text,
-    resultStepHashId: this.resultStepHashId
+    scenarioResultHashId: this.scenarioResultHashId
   });
 
   var insertBefore = this.findTextLinkAfter(timeSeconds);

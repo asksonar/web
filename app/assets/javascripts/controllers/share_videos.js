@@ -57,7 +57,7 @@ $(function(){
     .concat(transcriptElement.buildElementArray(sonar.resultStep.transcriptionArray))
     .concat(noteElement.buildElementArray(sonar.resultStep.highlightedArray));
 
-  videoTranscript.buildTranscript(sonar.resultStep.hashid, timelineArray);
+  videoTranscript.buildTranscript(sonar.resultStep.scenarioResultHashid, timelineArray);
 
   videoTranscript.refreshView();
 

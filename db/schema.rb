@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151102143600) do
+ActiveRecord::Schema.define(version: 20151103141500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,16 @@ ActiveRecord::Schema.define(version: 20151102143600) do
 
   add_index "researchers", ["email"], name: "index_researchers_on_email", unique: true, using: :btree
   add_index "researchers", ["reset_password_token"], name: "index_researchers_on_reset_password_token", unique: true, using: :btree
+
+  create_table "result_notes", force: :cascade do |t|
+    t.integer  "result_step_id_backup"
+    t.float    "offset_seconds"
+    t.text     "text"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "scenario_result_id"
+    t.float    "offset_seconds_backup"
+  end
 
   create_table "result_steps", force: :cascade do |t|
     t.integer  "scenario_step_id"
@@ -123,14 +133,6 @@ ActiveRecord::Schema.define(version: 20151102143600) do
     t.text     "context_transcription"
     t.integer  "result_step_id"
     t.text     "text"
-  end
-
-  create_table "step_notes", force: :cascade do |t|
-    t.integer  "result_step_id"
-    t.float    "offset_seconds"
-    t.text     "text"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
   end
 
   create_table "step_videos", force: :cascade do |t|

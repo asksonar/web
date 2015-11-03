@@ -12,7 +12,7 @@ modulejs.define('NoteElement', ['TimelineElement'], function(timelineElement) {
     this.timeSeconds = config.time;
     this.displayText = config.text;
     this.hashid = config.hashid;
-    this.resultStepHashId = config.resultStepHashId;
+    this.scenarioResultHashId = config.scenarioResultHashId;
   });
 
   noteElement.save = function() {
@@ -42,7 +42,7 @@ modulejs.define('NoteElement', ['TimelineElement'], function(timelineElement) {
         _method: method,
         time: time,
         text: text,
-        result_step_hashid: this.resultStepHashId,
+        scenario_result_hashid: this.scenarioResultHashId,
         authenticity_token: AUTH_TOKEN
       }
     }).success($.proxy(function(response) {
