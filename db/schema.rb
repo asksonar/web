@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103141500) do
+ActiveRecord::Schema.define(version: 20151104141100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,17 @@ ActiveRecord::Schema.define(version: 20151103141500) do
     t.float    "offset_seconds_backup"
   end
 
+  create_table "result_videos", force: :cascade do |t|
+    t.integer  "scenario_step_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "scenario_result_id"
+    t.string   "uuid"
+    t.float    "offset_seconds"
+    t.float    "length_seconds"
+    t.integer  "result_step_id"
+  end
+
   create_table "scenario_highlights", force: :cascade do |t|
     t.string   "title"
     t.integer  "result_step_id"
@@ -133,17 +144,6 @@ ActiveRecord::Schema.define(version: 20151103141500) do
     t.text     "context_transcription"
     t.integer  "result_step_id"
     t.text     "text"
-  end
-
-  create_table "step_videos", force: :cascade do |t|
-    t.integer  "scenario_step_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "scenario_result_id"
-    t.string   "uuid"
-    t.float    "offset_seconds"
-    t.float    "length_seconds"
-    t.integer  "result_step_id"
   end
 
   create_table "template_steps", force: :cascade do |t|

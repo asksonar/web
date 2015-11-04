@@ -1,16 +1,16 @@
 class ResultStepsService
   include Singleton
 
-  attr_writer :step_videos_service
+  attr_writer :result_videos_service
 
-  def step_videos_service
-    @step_videos_service ||= StepVideosService.instance
+  def result_videos_service
+    @result_videos_service ||= ResultVideosService.instance
   end
 
   def create_with_feelings_transcriptions(step_params, scenario_result, scenario_step)    ActiveRecord::Base.transaction do
       result_step = create(step_params, scenario_result, scenario_step)
 
-      step_videos_service.link_videos(scenario_result, scenario_step, result_step.id)
+      result_videos_service.link_videos(scenario_result, scenario_step, result_step.id)
 
       result_step
     end

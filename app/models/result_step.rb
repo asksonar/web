@@ -1,7 +1,7 @@
 class ResultStep < ActiveRecord::Base
   belongs_to :scenario_step
   belongs_to :scenario_result
-  has_many :step_videos, -> { order offset_seconds: :asc }, inverse_of: :result_step
+  has_many :result_videos, -> { order offset_seconds: :asc }, inverse_of: :result_step
   enum status: [:pending, :uploaded]
 
   delegate :panelist, to: :scenario_result
@@ -15,11 +15,11 @@ class ResultStep < ActiveRecord::Base
     new_result_step.scenario_result = new_scenario_result
     new_result_step.save
 
-    step_videos.each do |step_video|
-      step_video.generate_new_sample_result(new_result_step)
+    result_videos.each do |result_video|
+      result_video.generate_new_sample_result(new_result_step)
     end
-    step_transcriptions.each do |step_transcription|
-      step_transcription.generate_new_sample_result(new_result_step)
+    result_transcriptions.each do |result_transcription|
+      result_transcription.generate_new_sample_result(new_result_step)
     end
   end
 end

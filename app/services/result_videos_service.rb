@@ -1,8 +1,8 @@
-class StepVideosService
+class ResultVideosService
   include Singleton
 
   def link_videos(scenario_result, scenario_step, id)
-    StepVideo.where(
+    ResultVideo.where(
       scenario_result: scenario_result,
       scenario_step: scenario_step
     ).update_all(result_step_id: id)
@@ -15,7 +15,7 @@ class StepVideosService
   end
 
   def create_from_scenario_result_step_id(params, scenario_result_id, scenario_step_id)
-    step_video = StepVideo.create(
+    result_video = ResultVideo.create(
       params.merge(
         scenario_result_id: scenario_result_id,
         scenario_step_id: scenario_step_id
@@ -24,10 +24,10 @@ class StepVideosService
 
     result_step = ResultStep.find_by(scenario_result_id: scenario_result_id, scenario_step_id: scenario_step_id)
     if !result_step.nil?
-      step_video.result_step = result_step
-      step_video.save
+      result_video.result_step = result_step
+      result_video.save
     end
 
-    step_video
+    result_video
   end
 end
