@@ -31,9 +31,9 @@ class ResultStepPresenter < SimpleDelegator
   end
 
   def src_array
-    return nil if result_videos.first.nil?
+    return nil if scenario_result.result_videos.first.nil?
 
-    hashid = result_videos.first.hashid
+    hashid = scenario_result.result_videos.first.hashid
 
     [
       { type: 'video/mp4', src: "#{VIDEO_BASE}/#{hashid}/video.mp4" },

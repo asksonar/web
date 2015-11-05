@@ -1,7 +1,6 @@
 class ResultVideo < ActiveRecord::Base
-  belongs_to :result_step
   belongs_to :scenario_result
-  belongs_to :scenario_step
+  enum status: [:pending, :uploaded]
 
   HASHIDS_SALT = 'Akn94V3&%9Tu'
 

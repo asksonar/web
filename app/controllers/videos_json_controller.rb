@@ -7,9 +7,7 @@ class VideosJsonController < ApplicationController
       return render status: 500, plain: '<strong>Error Loading Video</strong> - The video could not be found.'
     end
 
-    result_step_json = @result_step.prezi.public_json
-    scenario_step_json = @result_step.scenario_step.prezi.public_json
-    json = result_step_json.merge(scenario_step_json)
+    json = @result_step.prezi.public_json
     render json: json
   end
 

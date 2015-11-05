@@ -11,17 +11,7 @@ class StudiesVideoController < ApplicationController
     scenario_result_hashid = params[:study_id]
     uuid = SecureRandom.uuid
 
-    params_step.each do |step|
-      result_videos_service.create_from_scenario_result_step_hashid(
-        {
-          uuid: uuid,
-          offset_seconds: step['offset'] / 1000.0,
-          length_seconds: step['length'] / 1000.0
-        },
-        scenario_result_hashid,
-        step['scenarioStepHashId']
-      )
-    end
+    result_videos_service.create_from_scenario_result_hashid(uuid, scenario_result_hashid)
 
     render plain: uuid
   end

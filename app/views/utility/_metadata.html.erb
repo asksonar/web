@@ -28,10 +28,6 @@
   sonar.scenarioResult = <%= raw @result_step.prezi.public_json.to_json %>;
   <% end %>
 
-  <% if @scenario_step %>
-  sonar.scenarioStep = <%= raw @scenario_step.prezi.public_json.to_json %>;
-  <% end %>
-
   <% if protect_against_forgery? %>
     window.AUTH_TOKEN = '<%= form_authenticity_token %>';
   <% end %>

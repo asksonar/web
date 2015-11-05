@@ -1,11 +1,6 @@
 <section class='main-content-header'>
   <a href='<%= result_path(@scenario) %>' class='strong ctn-title'><%= @scenario.title %></a>
   <span id='ctn-user-email'><%= @result_step.prezi.email %></span>
-
-  <%= ih_left_indent left_class: 'h1', left_content: "<span class='hidden-xs'>Step </span>#{@scenario_step.step_order + 1}.", div_class: 'ctn-modal-step-description' do %>
-    <span class='h2' id='ctn-step-description'><%= @scenario_step.description %></span>
-  <% end %>
-
 </section>
 <section class="main-content">
 

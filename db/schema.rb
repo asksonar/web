@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151104141100) do
+ActiveRecord::Schema.define(version: 20151104183000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,14 +85,15 @@ ActiveRecord::Schema.define(version: 20151104141100) do
   end
 
   create_table "result_videos", force: :cascade do |t|
-    t.integer  "scenario_step_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.integer  "scenario_step_id_backup"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "scenario_result_id"
     t.string   "uuid"
     t.float    "offset_seconds"
     t.float    "length_seconds"
-    t.integer  "result_step_id"
+    t.integer  "result_step_id_backup"
+    t.integer  "status"
   end
 
   create_table "scenario_highlights", force: :cascade do |t|

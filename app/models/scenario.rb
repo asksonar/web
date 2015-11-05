@@ -4,7 +4,8 @@ class Scenario < ActiveRecord::Base
   has_many :scenario_steps, -> { order step_order: :asc }, inverse_of: :scenario, autosave: true
   has_many :scenario_results, inverse_of: :scenario
   has_many :result_steps, through: :scenario_results
-  has_many :result_steps_pending, through: :scenario_results
+  has_many :result_videos, through: :scenario_results
+  has_many :result_videos_pending, through: :scenario_results
   has_many :scenario_highlights
   has_many :result_notes, through: :scenario_results
   enum status: [:drafts, :live, :completed, :deleted]
