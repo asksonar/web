@@ -19,6 +19,7 @@ class ResultsController < ApplicationController
   def show
     if !params[:result_id].nil?
       @scenario = Scenario.find_by_hashid(params[:result_id]).prezi
+      @scenario_result = ScenarioResult.find_by_hashid(params[:id]).prezi
     else
       @scenario = Scenario.find_by_hashid(params[:id]).prezi
     end
