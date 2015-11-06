@@ -6,6 +6,7 @@ class ScenarioResult < ActiveRecord::Base
   has_many :result_videos_pending, -> { pending }, inverse_of: :scenario_result, class_name: 'ResultVideo'
   has_many :result_transcriptions, -> { order offset_seconds: :asc }, inverse_of: :scenario_result
   has_many :result_notes, -> { order offset_seconds: :asc }, inverse_of: :scenario_result
+  has_many :scenario_highlights, inverse_of: :scenario_result
 
   enum status: [:pending, :inprogress, :completed, :aborted]
 

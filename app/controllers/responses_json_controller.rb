@@ -11,11 +11,11 @@ class ResponsesJsonController < ApplicationController
     responseParams = {}
     responseParams[:company] = current_researcher.company
     responseParams[:created_since] = Time.zone.parse(params[:startTime])
-    @result_steps = responses_query
+    @scenario_results = responses_query
       .responses(responseParams)
       .map(&:prezi)
       .map(&:list_json)
 
-    render json: @result_steps
+    render json: @scenario_results
   end
 end

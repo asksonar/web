@@ -1,6 +1,5 @@
 class ScenarioHighlight < ActiveRecord::Base
-  belongs_to :scenario
-  belongs_to :result_step
+  belongs_to :scenario_result
 
   HASHIDS_SALT = 'd4cBT*YTY@9n'
 end

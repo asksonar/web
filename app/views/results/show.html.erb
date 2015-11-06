@@ -109,11 +109,11 @@
     <div class='panel-body'>
       <div class='results-container'>
 
-      <% scenario_step.newest_result_steps.each do |result_step| %>
+      <% @scenario.newest_scenario_results.each do |scenario_result| %>
         <a class='video-link'
-          data-result-step-hashid='<%=result_step.hashid%>'
+          data-scenario-result-hashid='<%=scenario_result.hashid%>'
         >
-          <span class='sub'><%= ppt_date(result_step.created_at) %> - [<%= result_step.email %>]</span>
+          <span class='sub'><%= ppt_date(scenario_result.created_at) %> - [<%= scenario_result.email %>]</span>
         </a>
       <% end %>
 

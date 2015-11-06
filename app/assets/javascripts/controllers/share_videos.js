@@ -47,21 +47,21 @@ $(function(){
 
   var timeSeconds = new URI(location.href).search(true).t || 0;
 
-  videoController.src(sonar.resultStep.srcArray);
+  videoController.src(sonar.scenarioResult.srcArray);
   videoController.play(timeSeconds);
 
   var transcriptElement = modulejs.require('TranscriptElement');
   var noteElement = modulejs.require('NoteElement');
 
   var timelineArray = []
-    .concat(transcriptElement.buildElementArray(sonar.resultStep.transcriptionArray))
-    .concat(noteElement.buildElementArray(sonar.resultStep.highlightedArray));
+    .concat(transcriptElement.buildElementArray(sonar.scenarioResult.transcriptionArray))
+    .concat(noteElement.buildElementArray(sonar.scenarioResult.highlightedArray));
 
-  videoTranscript.buildTranscript(sonar.resultStep.scenarioResultHashid, timelineArray);
+  videoTranscript.buildTranscript(sonar.scenarioResult.hashid, timelineArray);
 
   videoTranscript.refreshView();
 
-  videoLink.updateShareLink(sonar.resultStep.shareLink);
+  videoLink.updateShareLink(sonar.scenarioResult.shareLink);
 
   $(window).load(function() {
     videoTranscript.focusLink(timeSeconds);

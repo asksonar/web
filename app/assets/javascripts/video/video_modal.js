@@ -15,12 +15,12 @@ VideoModal.prototype.init = function() {
   this.$modal.on('hide.bs.modal', $.proxy(this.hidden, this));
 };
 
-VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {
+VideoModal.prototype.load = function(scenarioResultHashId, timeSeconds) {
 
   $.ajax({
     url:"/videos.json",
     data: {
-      result_step_hashid: resultStepHashId
+      scenario_result_hashid: scenarioResultHashId
     },
     dataType: 'json'
   }).done($.proxy(this.loaded, this, timeSeconds
@@ -31,7 +31,7 @@ VideoModal.prototype.load = function(resultStepHashId, timeSeconds) {
 
 // timeSeconds comes first because $.proxy inserts it first
 VideoModal.prototype.loaded = function(timeSeconds, data) {
-  this.resultStepHashId = data.hashid;
+  this.scenarioResultHashId = data.hashid;
 
   this.video.src(data.srcArray);
 
@@ -42,7 +42,7 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
     .concat(transcriptElement.buildElementArray(data.transcriptionArray))
     .concat(noteElement.buildElementArray(data.highlightedArray));
 
-  this.transcript.buildTranscript(data.scenarioResultHashid, timelineArray);
+  this.transcript.buildTranscript(data.hashid, timelineArray);
 
   $('#btn-create-highlight').attr('data-base-url', '/highlights/new?video=' + data.hashid);
 
@@ -61,7 +61,7 @@ VideoModal.prototype.show = function() {
 
 VideoModal.prototype.shown = function() {
   this.video.play();
-  new VideoHistory().loadVideo(this.resultStepHashId);
+  new VideoHistory().loadVideo(this.scenarioResultHashId);
   this.transcript.refreshView();
 };
 

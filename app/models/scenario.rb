@@ -6,7 +6,7 @@ class Scenario < ActiveRecord::Base
   has_many :result_steps, through: :scenario_results
   has_many :result_videos, through: :scenario_results
   has_many :result_videos_pending, through: :scenario_results
-  has_many :scenario_highlights
+  has_many :scenario_highlights, through: :scenario_results
   has_many :result_notes, through: :scenario_results
   enum status: [:drafts, :live, :completed, :deleted]
 

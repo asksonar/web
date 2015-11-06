@@ -2,9 +2,6 @@ class ResultStep < ActiveRecord::Base
   belongs_to :scenario_step
   belongs_to :scenario_result
 
-  delegate :panelist, to: :scenario_result
-  delegate :scenario, to: :scenario_result
-
   HASHIDS_SALT = '4$g&QNrACfVp'
 
   def generate_new_sample_result(new_scenario_step, new_scenario_result)

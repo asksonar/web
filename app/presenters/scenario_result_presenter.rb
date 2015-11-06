@@ -1,12 +1,44 @@
 class ScenarioResultPresenter < SimpleDelegator
   VIDEO_BASE = Rails.configuration.properties['video_base_url']
 
+  def public_json
+    {
+      hashid: hashid,
+      srcArray: src_array,
+      shareLink: share_link,
+      email: email,
+      transcriptionArray: transcription_array,
+      highlightedArray: highlighted_array
+    }
+  end
+
+  def list_json
+    {
+      result_video_path: result_video_url,
+      email: email,
+      scenario_step_count: scenario_step_count,
+      scenario_title: scenario_title,
+    }
+  end
+
   def email
     if panelist.email.empty?
       'anonymous'
     else
       panelist.email
     end
+  end
+
+  def src_array
+    return nil if result_videos.first.nil?
+
+    hashid = result_videos.first.hashid
+
+    [
+      { type: 'video/mp4', src: "#{VIDEO_BASE}/#{hashid}/video.mp4" },
+      { type: 'video/webm', src: "#{VIDEO_BASE}/#{hashid}/video.webm" }
+      # { type: "video/ogg", src: "/videos/video_" + data.id + ".ogv" }
+    ]
   end
 
   def share_link
@@ -32,6 +64,22 @@ class ScenarioResultPresenter < SimpleDelegator
         text: result_transcription.text
       }
     end
+  end
+
+  def scenario
+    super.prezi
+  end
+
+  def scenario_title
+    scenario.title
+  end
+
+  def scenario_step_count
+    scenario.step_count
+  end
+
+  def result_video_url
+    Rails.application.routes.url_helpers.result_video_path(scenario, self)
   end
 
 end

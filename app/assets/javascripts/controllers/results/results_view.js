@@ -58,10 +58,10 @@ ResultsView.prototype.toggleArchive = function() {
 
 ResultsView.prototype.loadVideoModal = function(event) {
   var thisEl = $(event.currentTarget);
-  var resultStepHashId = thisEl.attr('data-result-step-hashid');
+  var scenarioResultHashId = thisEl.attr('data-scenario-result-hashid');
   var timeSeconds = parseFloat(thisEl.attr('data-feeling-at-seconds') || 0);
 
-  this.videoModal.load(resultStepHashId, timeSeconds);
+  this.videoModal.load(scenarioResultHashId, timeSeconds);
 };
 
 ResultsView.prototype.loadDeleteModal = function(event) {

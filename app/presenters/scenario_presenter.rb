@@ -12,6 +12,10 @@ class ScenarioPresenter < SimpleDelegator
     }
   end
 
+  def newest_scenario_results
+    __getobj__.scenario_results.order(created_at: :desc).map(&:prezi)
+  end
+
   def step_count
     scenario_steps.count
   end

@@ -11,19 +11,19 @@ class HighlightsController < ApplicationController
   end
 
   def new
-    @result_step = ResultStep.find_by_hashid(params[:video])
+    @scenario_result = ScenarioResult.find_by_hashid(params[:video])
   end
 
   def create
-    result_step = ResultStep.find_by_hashid(params[:scenario_highlight][:result_step_hashid])
-    scenario = result_step.scenario
-    @scenario_highlight = service.create(highlight_params, scenario, result_step)
+    scenario_result = ScenarioResult.find_by_hashid(params[:scenario_highlight][:scenario_result_hashid])
+    scenario = scenario_result.scenario
+    @scenario_highlight = service.create(highlight_params, scenario, scenario_result)
     redirect_to highlight_path(@scenario_highlight)
   end
 
   def edit
     @scenario_highlight = query.find_by_hashid(params[:id])
-    @result_step = @scenario_highlight.result_step
+    @scenario_result = @scenario_highlight.scenario_result
   end
 
   def update
@@ -34,8 +34,8 @@ class HighlightsController < ApplicationController
 
   def show
     @scenario_highlight = query.find_by_hashid(params[:id])
-    @result_step = @scenario_highlight.result_step
-    @scenario = @result_step.scenario
+    @scenario_result = @scenario_highlight.scenario_result
+    @scenario = @scenario_result.scenario
   end
 
   def destroy

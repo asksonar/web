@@ -3,7 +3,7 @@
 <% end %>
 
 <%= bootstrap_form_for :scenario_highlight, url: highlights_path do |f| %>
-  <%= f.hidden_field :result_step_hashid, value: params[:video] %>
+  <%= f.hidden_field :scenario_result_hashid, value: params[:video] %>
   <section class='main-content-header'>
     <%= f.text_field :title, hide_label: true, placeholder: 'Title your highlight', class: 'input-lg' %>
   </section>

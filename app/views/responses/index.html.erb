@@ -8,11 +8,11 @@
 
 <section class="main-content">
   <div class="btn btn-medium-blue response-alert" role="alert"></div>
-  <% @result_steps.each do |result_step| %>
-    <a class='panel' href='<%=result_video_path(result_step.scenario, result_step)%>'>
+  <% @scenario_results.each do |scenario_result| %>
+    <a class='panel' href='<%=result_video_path(scenario_result.scenario, scenario_result)%>'>
       <div class='title-container'>
-        <h1><%= result_step.scenario_title %></h1>
-        <p class='sub'>completed by <%= result_step.email %> <%= time_ago_in_words(result_step.created_at)%> ago (<%= pp_plural_with_number(result_step.scenario_step_count, 'step') %>)</p>
+        <h1><%= scenario_result.scenario_title %></h1>
+        <p class='sub'>completed by <%= scenario_result.email %> <%= time_ago_in_words(scenario_result.created_at)%> ago (<%= pp_plural_with_number(scenario_result.scenario_step_count, 'step') %>)</p>
       </div>
     </a>
   <% end %>
