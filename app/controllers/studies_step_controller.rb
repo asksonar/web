@@ -4,10 +4,16 @@ class StudiesStepController < ApplicationController
   after_action :track_respondent_stepped, only: :create
 
   attr_writer :result_steps_service
+  attr_writer :result_transcriptions_service
 
   def result_steps_service
     @result_steps_service ||= ResultStepsService.instance
   end
+
+  def result_transcriptions_service
+    @result_transcriptions_service ||= ResultTranscriptionsService.instance
+  end
+
 
   def create
     @scenario_result = ScenarioResult.find_by_hashid(params_study_hashid)
@@ -15,12 +21,13 @@ class StudiesStepController < ApplicationController
 
     @result_step = result_steps_service.create_with_feelings_transcriptions(
       step_params,
-      transcriptions_params,
       @scenario_result,
       @scenario_step
     )
 
-    Resque.enqueue(ProcessTranscriptionWorker, @result_step.id)
+    result_transcriptions_service.create(transcriptions_params, @scenario_result)
+
+    Resque.enqueue(ProcessTranscriptionWorker, @scenario_result.id)
 
     render plain: 'OK'
   end

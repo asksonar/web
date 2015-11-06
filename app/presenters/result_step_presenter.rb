@@ -57,11 +57,11 @@ class ResultStepPresenter < SimpleDelegator
   end
 
   def transcription_array
-    step_transcriptions.select(:id, :offset_seconds, :text).map do |step_transcription|
+    scenario_result.result_transcriptions.select(:id, :offset_seconds, :text).map do |result_transcription|
       {
-        hashid: step_transcription.hashid,
-        time: step_transcription.offset_seconds,
-        text: step_transcription.text
+        hashid: result_transcription.hashid,
+        time: result_transcription.offset_seconds,
+        text: result_transcription.text
       }
     end
   end

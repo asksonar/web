@@ -3,6 +3,7 @@ class ScenarioResult < ActiveRecord::Base
   belongs_to :panelist
   has_many :result_steps_pending, -> { pending }, inverse_of: :scenario_step, class_name: 'ResultStep'
   has_many :result_steps, -> { uploaded }, inverse_of: :scenario_step
+  has_many :result_transcriptions, -> { order offset_seconds: :asc }, inverse_of: :scenario_result
 
   enum status: [:pending, :inprogress, :completed, :aborted]
 
