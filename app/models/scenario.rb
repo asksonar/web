@@ -6,7 +6,7 @@ class Scenario < ActiveRecord::Base
   has_many :result_steps, through: :scenario_results
   has_many :result_steps_pending, through: :scenario_results
   has_many :scenario_highlights
-  has_many :step_notes, through: :result_steps
+  has_many :result_notes, through: :scenario_results
   enum status: [:drafts, :live, :completed, :deleted]
 
   after_initialize :default_values, unless: :persisted?

@@ -14,23 +14,6 @@
           <span class='summary-description'><%= @scenario.description %></span>
         </div>
       </div>
-      <div class='notes-container'>
-        <div class='left-col'>
-          <span class='strong'>Notes:</span>
-        </div>
-        <div class='right-col'>
-          <% @scenario.step_notes.each_with_index do |note, index| %>
-            <a class='video-link'
-              data-result-step-hashid='<%=note.result_step.hashid%>'
-              data-feeling-at-seconds='<%=note.offset_seconds%>'
-            ><span class='sub'><%= ppt_date(note.created_at) %></span> <%= dt_transcription(note.text) %> ...
-            </a>
-          <% end %>
-          <% if @scenario.step_notes.count == 0 %>
-            <span class='sub'><i class='fa fa-question-circle'></i> no notes added yet</span>
-          <% end %>
-        </div>
-      </div>
       <div class='highlights-container'>
         <div class='left-col'>
           <span class='strong'>Highlights:</span>

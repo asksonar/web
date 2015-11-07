@@ -44,7 +44,7 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
     .concat(transcriptElement.buildElementArray(data.transcriptionArray))
     .concat(noteElement.buildElementArray(data.highlightedArray));
 
-  this.transcript.buildTranscript(data.hashid, timelineArray);
+  this.transcript.buildTranscript(data.scenarioResultHashid, timelineArray);
 
   $('#btn-create-highlight').attr('data-base-url', '/highlights/new?video=' + data.hashid);
 

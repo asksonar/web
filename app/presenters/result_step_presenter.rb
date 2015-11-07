@@ -4,6 +4,7 @@ class ResultStepPresenter < SimpleDelegator
   def public_json
     {
       hashid: hashid,
+      scenarioResultHashid: scenario_result.hashid,
       srcArray: src_array,
       shareLink: share_link,
       email: email,
@@ -46,11 +47,11 @@ class ResultStepPresenter < SimpleDelegator
   end
 
   def highlighted_array
-    step_notes.select(:id, :offset_seconds, :text).map do |step_note|
+    scenario_result.result_notes.select(:id, :offset_seconds, :text).map do |result_note|
       {
-        hashid: step_note.hashid,
-        time: step_note.offset_seconds,
-        text: step_note.text
+        hashid: result_note.hashid,
+        time: result_note.offset_seconds,
+        text: result_note.text
       }
     end
     # highlights.map { |highlight| highlight.offset_seconds }
