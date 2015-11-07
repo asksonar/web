@@ -33,6 +33,7 @@ docker run -d --name web \
   -p 80:80 -p 443:443 \
   --link db:db \
   --link redis:redis \
+  -e "SONAR_ENV=development" \
   -e "DATABASE_URL=postgres://postgres@db:5432/postgres" \
   -e "SECRET_KEY_BASE=bd75f41c7a4684b94f4ef0cafceb0966293a5b43c2dcf3bed76bbe085c0ec0ea58392ecfdd72f341ef3ea558d8fe3b86bd61bb15955302c675acc8b5fa073823" \
   -e "RAILS_RESQUE_REDIS=redis://redis:6379/0" \

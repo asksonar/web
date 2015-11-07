@@ -1,6 +1,8 @@
 <script type='text/javascript'>
   window.sonar = {};
 
+  sonar.chrome_app_id = '<%= Rails.configuration.properties['chrome_app_id'] %>';
+
   sonar.request = {
     controller: '<%= request.params[:controller] %>',
     action: '<%= request.params[:action] %>'

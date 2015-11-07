@@ -18,7 +18,7 @@ class DraftsController < ApplicationController
   end
 
   def index
-    @scenarios = scenarios_query.drafts(current_researcher.id)
+    @scenarios = scenarios_query.drafts(current_researcher.id).map(&:prezi)
   end
 
   def new

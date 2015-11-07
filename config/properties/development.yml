@@ -2,13 +2,17 @@ web_base_url: https://my-local.asksonar.com
 video_base_url: https://s3-us-west-1.amazonaws.com/videos.dev.engsonar.com
 sign_up_url: https://www.asksonar.com/sign-up
 external_url: https://www.asksonar.com/
-sample_scenario_result_id: 1
+#chrome_app_id: <add to development_override.yml>
+#sample_scenario_result_id: <add to development_override.yml>
 
-s3_access_key: 'AKIAJ7KCGXATBCIQWREQ'
-s3_secret_key: 'ITzUCoL4Wq3ToQMKCc47VCetKE1hvApyyjqnhlD7'
-s3_region: 'us-west-1'
-s3_upload_bucket: 'upload.dev.engsonar.com'
-s3_videos_bucket: 'videos.dev.engsonar.com'
-s3_backup_bucket: 'backup.dev.engsonar.com'
+s3_access_key: AKIAJ7KCGXATBCIQWREQ
+s3_secret_key: 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
+s3_region: us-west-1
+s3_upload_bucket: upload.dev.engsonar.com
+s3_videos_bucket: videos.dev.engsonar.com
+s3_backup_bucket: backup.dev.engsonar.com
 
 mixpanel_token: 288067b052c38b64cc6cce9374d93339
+
+mandrill_username: jonathan@asksonar.com
+mandrill_api_key: 2u5GYOHCZC47GmQprLDVxA
