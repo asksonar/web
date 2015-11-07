@@ -13,7 +13,7 @@ class ScenarioPresenter < SimpleDelegator
   end
 
   def newest_scenario_results
-    __getobj__.scenario_results.order(created_at: :desc).map(&:prezi)
+    __getobj__.scenario_results.joins(:result_videos).order(created_at: :desc).map(&:prezi)
   end
 
   def step_count
