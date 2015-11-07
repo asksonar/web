@@ -44,20 +44,10 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # load custom configuration properties
-  config_path = File.join(Rails.root,'config/properties/development.yml')
-  config_contents = File.read(config_path)
-  config_properties = YAML.load(config_contents)
-
   override_path = File.join(Rails.root,'config/properties/development_override.yml')
   override_contents = File.read(override_path) if File.exist?(override_path)
-  override_properties = override_contents.nil? ? {} : YAML.load(override_contents)
-
-  config.properties = config_properties.merge(override_properties)
+  config.properties.merge!(override_contents.nil? ? {} : YAML.load(override_contents))
   puts config.properties
-
-  # enable remote byebugging
-  #Byebug.wait_connection = true
-  #Byebug.start_server('localhost', 9876)
 
   # https://github.com/teohm/require_reloader
   # auto-reload gems that we reference via path:

@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
-
 $white: #FFF;
 $green: #31B6AE;
 $dark-blue: #05647C;
@@ -12,6 +10,7 @@ body, .body {
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   line-height: 20px;
+  word-break: break-word; // sadly unsupported on Firefox
 }
 
 a {

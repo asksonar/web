@@ -1,6 +1,8 @@
 class ResultsController < ApplicationController
   before_action :authenticate_researcher!
 
+  PAGE_SIZE = 20
+
   attr_writer :service
   attr_writer :query
 
@@ -13,7 +15,7 @@ class ResultsController < ApplicationController
   end
 
   def index
-    @results = query.results(company: current_researcher.company)
+    @results = query.results_paged(params[:page].to_i, PAGE_SIZE, company: current_researcher.company).map(&:prezi)
   end
 
   def show
