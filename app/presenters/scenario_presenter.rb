@@ -44,7 +44,7 @@ class ScenarioPresenter < SimpleDelegator
 
   def user_completed_count
     completed_ids = scenario_results.completed.select(:id).collect(&:id)
-    uploaded_ids = result_videos.select(:scenario_result_id).collect(&:scenario_result_id)
+    uploaded_ids = result_videos_uploaded.select(:scenario_result_id).collect(&:scenario_result_id)
 
     (completed_ids & uploaded_ids).count
   end
