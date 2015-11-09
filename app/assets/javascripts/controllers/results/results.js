@@ -44,8 +44,6 @@ $(function(){
   var videoModal = new VideoModal({
     modal: $('#summary_video_container'),
     divUserEmail: $('#ctn-user-email'),
-    divStepOrder: $('#ctn-step-order'),
-    divStepDescription: $('#ctn-step-description')
   }, videoController, videoTranscript, videoLink);
 
   var deleteModal = new DeleteModal({
@@ -74,8 +72,6 @@ $(function(){
       srcArray: sonar.resultStep.srcArray,
       transcriptionArray: sonar.resultStep.transcriptionArray,
       email: sonar.resultStep.email,
-      stepOrder: sonar.scenarioStep.stepOrder,
-      stepDescription: sonar.scenarioStep.stepDescription,
       shareLink: sonar.resultStep.shareLink
     });
   }

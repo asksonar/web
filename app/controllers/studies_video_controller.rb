@@ -3,25 +3,15 @@ class StudiesVideoController < ApplicationController
 
   after_action :track_respondent_uploaded, only: :update
 
-  def step_videos_service
-    @step_videos_service ||= StepVideosService.instance
+  def result_videos_service
+    @result_videos_service ||= ResultVideosService.instance
   end
 
   def create
     scenario_result_hashid = params[:study_id]
     uuid = SecureRandom.uuid
 
-    params_step.each do |step|
-      step_videos_service.create_from_scenario_result_step_hashid(
-        {
-          uuid: uuid,
-          offset_seconds: step['offset'] / 1000.0,
-          length_seconds: step['length'] / 1000.0
-        },
-        scenario_result_hashid,
-        step['scenarioStepHashId']
-      )
-    end
+    result_videos_service.create_from_scenario_result_hashid(uuid, scenario_result_hashid)
 
     render plain: uuid
   end

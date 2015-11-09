@@ -44,7 +44,7 @@
 
         <div class="btn-group pull-right">
           <div class='btn-wrapper-tooltip' data-placement="bottom" title="Edit the study" data-toggle="tooltip">
-            <a class='btn btn-dark-blue' id='btn-edit' href='<%= edit_result_path %>'><i class='fa fa-edit'></i></a>
+            <a class='btn btn-dark-blue' id='btn-edit' href='<%= edit_result_path(@scenario) %>'><i class='fa fa-edit'></i></a>
           </div>
           <div class="btn-wrapper-tooltip" data-placement="bottom" title="Delete the study" data-toggle="tooltip">
             <a class='btn btn-grey' id='btn-delete'><i class='fa fa-trash-o'></i></a>
@@ -131,10 +131,6 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <span class='strong ctn-title'><%= @scenario.title %></span>
         <span id='ctn-user-email'></span>
-
-        <%= ih_left_indent left_class: 'h1', left_content: "<span class='hidden-xs'>Step&nbsp;</span><span id='ctn-step-order'></span>.", div_class: 'ctn-modal-step-description' do %>
-          <span class='h2' id='ctn-step-description'></span>
-        <% end %>
       </div>
       <%= render partial: 'utility/video' %>
 

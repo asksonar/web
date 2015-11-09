@@ -3,8 +3,7 @@ class ShareVideosController < ApplicationController
 
   def show
     @result_step = ResultStep.find_by_hashid(params[:id])
-    @scenario_step = @result_step.scenario_step
-    @scenario = @scenario_step.scenario
+    @scenario = @result_step.scenario
   end
 
   def track_video_viewed

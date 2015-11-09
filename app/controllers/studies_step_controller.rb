@@ -19,7 +19,7 @@ class StudiesStepController < ApplicationController
     @scenario_result = ScenarioResult.find_by_hashid(params_study_hashid)
     @scenario_step = ScenarioStep.find_by_hashid(params_scenario_step_hashid)
 
-    @result_step = result_steps_service.create_with_feelings_transcriptions(
+    @result_step = result_steps_service.create(
       step_params,
       @scenario_result,
       @scenario_step
