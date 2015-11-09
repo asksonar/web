@@ -2,7 +2,12 @@ class ShareVideosController < ApplicationController
   after_action :track_video_viewed, only: :show
 
   def show
-    @scenario_result = ScenarioResult.find_by_hashid(params[:id])
+    if !ScenarioResult.hashids.decode(params[:id])[0].nil?
+      @scenario_result = ScenarioResult.find_by_hashid(params[:id])
+    else
+      result_step = ResultStep.find_by_hashid(params[:id])
+      @scenario_result = result_step.scenario_result
+    end
     @scenario = @scenario_result.scenario
   end
 
