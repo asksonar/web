@@ -46,23 +46,33 @@ class Analytics
     @tracker.people.plus_one(researcher.hashid, 'Total published draft', 0)
   end
 
-  def modal_video_viewed(researcher, ip_address, result_step)
-    scenario = result_step.scenario_result.scenario
+  def modal_video_viewed(researcher, ip_address, scenario_result)
+    scenario = scenario_result.scenario
     created_by_id = scenario.created_by.id
     if researcher.nil? || researcher.id != created_by_id
-      share_video_viewed(researcher, ip_address, scenario.created_by, scenario, result_step, true)
+      share_video_viewed(researcher, ip_address, scenario.created_by, scenario, scenario_result, true)
     else
-      Analytics.instance.result_video_viewed(researcher, scenario, result_step, true)
+      Analytics.instance.result_video_viewed(researcher, scenario, scenario_result, true)
     end
   end
 
-  def result_video_viewed(researcher, scenario, result_step, is_modal)
+  def video_seconds(scenario_result)
+    video_seconds = 0
+
+    scenario_result.result_steps.each do |result_step|
+      video_seconds += result_step.completed_seconds
+    end
+
+    video_seconds
+  end
+
+  def result_video_viewed(researcher, scenario, scenario_result, is_modal)
     @tracker.track(researcher.hashid, 'Researcher viewed video', {
       'time' => Time.new,
       'is modal' => is_modal,
       'scenario hashid' => scenario.hashid,
-      'video hashid' => result_step.hashid,
-      'video seconds' => result_step.completed_seconds
+      'video hashid' => scenario_result.hashid,
+      'video seconds' => video_seconds(scenario_result)
     })
     @tracker.people.set(researcher.hashid, {
       'Last viewed video' => Time.new
@@ -70,22 +80,22 @@ class Analytics
     @tracker.people.plus_one(researcher.hashid, 'Total viewed video', 0)
   end
 
-  def share_video_viewed(colleague, ip_address, researcher, scenario, result_step, is_modal)
+  def share_video_viewed(colleague, ip_address, researcher, scenario, scenario_result, is_modal)
     @tracker.track(researcher.hashid, "Researcher's colleague viewed video", {
       'time' => Time.new,
       'is modal' => is_modal,
       'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
-      'video hashid' => result_step.hashid,
-      'video seconds' => result_step.completed_seconds
+      'video hashid' => scenario_result.hashid,
+      'video seconds' => video_seconds(scenario_result)
     })
     @tracker.track(!colleague.nil? ? colleague.hashid : ip_address, 'Colleague viewed video', {
       'time' => Time.new,
       'is modal' => is_modal,
       'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
-      'video hashid' => result_step.hashid,
-      'video seconds' => result_step.completed_seconds
+      'video hashid' => scenario_result.hashid,
+      'video seconds' => video_seconds(scenario_result)
     })
     @tracker.people.set(researcher.hashid, {
       'Last colleague viewed video' => Time.new

@@ -8,7 +8,7 @@ class ResponsesController < ApplicationController
   end
 
   def index
-    @result_steps = responses_query
+    @scenario_results = responses_query
       .responses(company: current_researcher.company)
       .map(&:prezi)
   end

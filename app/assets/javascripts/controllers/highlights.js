@@ -56,7 +56,7 @@ $(function(){
 
   var timeSeconds = new URI(location.href).search(true).t || 0;
 
-  videoController.src(sonar.resultStep.srcArray);
+  videoController.src(sonar.scenarioResult.srcArray);
   // videoController.play(timeSeconds);
 
   var checkableTranscript = Object.create(modulejs.require('TranscriptElement'));
@@ -65,10 +65,10 @@ $(function(){
   CheckableComponent.call(checkableNote);
 
   var timelineArray = []
-    .concat(checkableTranscript.buildElementArray(sonar.resultStep.transcriptionArray))
-    .concat(checkableNote.buildElementArray(sonar.resultStep.highlightedArray));
+    .concat(checkableTranscript.buildElementArray(sonar.scenarioResult.transcriptionArray))
+    .concat(checkableNote.buildElementArray(sonar.scenarioResult.highlightedArray));
 
-  videoTranscript.buildTranscript(sonar.resultStep.scenarioResultHashid, timelineArray);
+  videoTranscript.buildTranscript(sonar.scenarioResult.hashid, timelineArray);
   videoTranscript.refreshView();
 
   var videoRange = new VideoRange({
@@ -104,7 +104,7 @@ $(function(){
     videoTranscript.focusLink(timeSeconds);
   });
 
-  // videoLink.updateShareLink(sonar.resultStep.shareLink);
+  // videoLink.updateShareLink(sonar.scenarioResult.shareLink);
 
   // $(window).load(function() {
     // videoTranscript.focusLink(timeSeconds);

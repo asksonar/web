@@ -64,15 +64,14 @@ $(function(){
   }, videoModal, deleteModal);
 
   var timeSeconds = new URI(location.href).search(true).t || 0;
-  if (sonar.resultStep) {
+  if (sonar.scenarioResult) {
     videoModal.loaded(timeSeconds, {
-      hashid: sonar.resultStep.hashid,
-      scenarioResultHashid: sonar.resultStep.scenarioResultHashid,
-      highlightedArray: sonar.resultStep.highlightedArray,
-      srcArray: sonar.resultStep.srcArray,
-      transcriptionArray: sonar.resultStep.transcriptionArray,
-      email: sonar.resultStep.email,
-      shareLink: sonar.resultStep.shareLink
+      hashid: sonar.scenarioResult.hashid,
+      highlightedArray: sonar.scenarioResult.highlightedArray,
+      srcArray: sonar.scenarioResult.srcArray,
+      transcriptionArray: sonar.scenarioResult.transcriptionArray,
+      email: sonar.scenarioResult.email,
+      shareLink: sonar.scenarioResult.shareLink
     });
   }
 

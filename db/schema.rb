@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151104183000) do
+ActiveRecord::Schema.define(version: 20151106135300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,13 +64,13 @@ ActiveRecord::Schema.define(version: 20151104183000) do
     t.datetime "started_at"
     t.datetime "completed_at"
     t.float    "completed_seconds"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "scenario_result_id"
-    t.integer  "status"
-    t.text     "first_transcription"
-    t.integer  "total_delighted"
-    t.integer  "total_confused"
+    t.integer  "status_backup"
+    t.text     "first_transcription_backup"
+    t.integer  "total_delighted_backup"
+    t.integer  "total_confused_backup"
   end
 
   create_table "result_transcriptions", force: :cascade do |t|
@@ -98,13 +98,14 @@ ActiveRecord::Schema.define(version: 20151104183000) do
 
   create_table "scenario_highlights", force: :cascade do |t|
     t.string   "title"
-    t.integer  "result_step_id"
+    t.integer  "result_step_id_backup"
     t.float    "start_seconds"
     t.float    "end_seconds"
     t.text     "timeline_elements"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.integer  "scenario_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "scenario_id_backup"
+    t.integer  "scenario_result_id"
   end
 
   create_table "scenario_results", force: :cascade do |t|

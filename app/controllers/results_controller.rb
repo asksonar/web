@@ -4,10 +4,15 @@ class ResultsController < ApplicationController
   PAGE_SIZE = 20
 
   attr_writer :service
+  attr_writer :scenario_results_service
   attr_writer :query
 
   def service
     @service ||= ScenariosService.instance
+  end
+
+  def scenario_results_service
+    @scenario_results_service ||= ScenarioResultsService.instance
   end
 
   def query
@@ -21,8 +26,7 @@ class ResultsController < ApplicationController
   def show
     if !params[:result_id].nil?
       @scenario = Scenario.find_by_hashid(params[:result_id]).prezi
-      @result_step = ResultStep.find_by_hashid(params[:id]).prezi
-      @scenario_step = @result_step.scenario_step.prezi
+      @scenario_result = ScenarioResult.find_by_hashid(params[:id]).prezi
     else
       @scenario = Scenario.find_by_hashid(params[:id]).prezi
     end
@@ -40,7 +44,7 @@ class ResultsController < ApplicationController
 
     # we need to generate sample data for the study
     if params[:walkthrough]=='true'
-      ScenarioResult.generate_new_sample_result(@result)
+      scenario_results_service.generate_new_sample_result(@result)
     end
 
     render plain: 'OK'
