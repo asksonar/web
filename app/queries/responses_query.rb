@@ -3,10 +3,9 @@ class ResponsesQuery
 
   def responses(company:, created_since:nil, limit:20)
     scenarioResult = ScenarioResult
-      .joins(:scenario, :result_videos)
+      .joins(:scenario, :result_videos_uploaded)
       .where(scenarios: {company_id: company})
       .where(scenarios: {status: [Scenario.statuses[:live], Scenario.statuses[:completed]]})
-      .where(result_videos: {status: ResultVideo.statuses[:uploaded]})
       .order(created_at: :desc)
 
     if !created_since.nil?
