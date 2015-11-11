@@ -55,7 +55,8 @@ class StudiesStepController < ApplicationController
     {
       started_at: Time.at(params_step['start'] / 1000.0).iso8601(3),
       completed_at: Time.at(params_step['finish'] / 1000.0).iso8601(3),
-      completed_seconds: params_step['length'] / 1000.0
+      completed_seconds: params_step['length'] / 1000.0,
+      offset_seconds: params_step['offset'] / 1000.0
     }
   end
 
