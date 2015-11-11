@@ -22,11 +22,8 @@ class ScenarioResultPresenter < SimpleDelegator
   end
 
   def result_step_offset_seconds(scenario_step)
-    result_steps = result_steps
-      .joins(:scenario_result, :scenario_step)
-      .where(scenario_step: scenario_step)
-
-    result_steps[0].offset_seconds
+    result_step = self.result_steps.find_by_scenario_step_id(scenario_step)
+    result_step.offset_seconds
   end
 
   def email
