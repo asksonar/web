@@ -112,6 +112,7 @@
       <% @scenario.newest_scenario_results.each do |scenario_result| %>
         <a class='video-link'
           data-scenario-result-hashid='<%=scenario_result.hashid%>'
+          data-result-step-offset-seconds='<%=scenario_result.result_step_offset_seconds(scenario_step)%>'
         >
           <span class='sub'><%= ppt_date(scenario_result.created_at) %> - [<%= scenario_result.email %>]</span>
         </a>

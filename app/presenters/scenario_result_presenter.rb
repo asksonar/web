@@ -21,6 +21,11 @@ class ScenarioResultPresenter < SimpleDelegator
     }
   end
 
+  def result_step_offset_seconds(scenario_step)
+    result_step = result_steps.find_by_scenario_step_id(scenario_step)
+    result_step.offset_seconds
+  end
+
   def email
     if panelist.email.empty?
       'anonymous'

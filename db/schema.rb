@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106135300) do
+ActiveRecord::Schema.define(version: 20151110234500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20151106135300) do
     t.text     "first_transcription_backup"
     t.integer  "total_delighted_backup"
     t.integer  "total_confused_backup"
+    t.float    "offset_seconds"
   end
 
   create_table "result_transcriptions", force: :cascade do |t|
