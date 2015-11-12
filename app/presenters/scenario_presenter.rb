@@ -12,10 +12,11 @@ class ScenarioPresenter < SimpleDelegator
     }
   end
 
-  def newest_scenario_results
+  def newest_scenario_results(scenario_step)
     scenario_results
-      .joins(:result_videos_uploaded)
+      .joins(:result_videos_uploaded, :result_steps)
       .distinct
+      .where(result_steps: {scenario_step_id: scenario_step})
       .order(created_at: :desc)
       .map(&:prezi)
   end

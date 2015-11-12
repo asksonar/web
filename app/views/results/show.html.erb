@@ -109,7 +109,7 @@
     <div class='panel-body'>
       <div class='results-container'>
 
-      <% @scenario.newest_scenario_results.each do |scenario_result| %>
+      <% @scenario.newest_scenario_results(scenario_step).each do |scenario_result| %>
         <a class='video-link'
           data-scenario-result-hashid='<%=scenario_result.hashid%>'
           data-result-step-offset-seconds='<%=scenario_result.result_step_offset_seconds(scenario_step)%>'
