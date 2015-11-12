@@ -43,12 +43,13 @@
         </div>
 
         <div class="btn-group pull-right">
-          <div class='btn-wrapper-tooltip' data-placement="bottom" title="Edit the study" data-toggle="tooltip">
-            <a class='btn btn-dark-blue' id='btn-edit' href='<%= edit_result_path(@scenario) %>'><i class='fa fa-edit'></i></a>
-          </div>
-          <div class="btn-wrapper-tooltip" data-placement="bottom" title="Delete the study" data-toggle="tooltip">
-            <a class='btn btn-grey' id='btn-delete'><i class='fa fa-trash-o'></i></a>
-          </div>
+          <a class="btn btn-dark-blue dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            More <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right" role="menu">
+            <li><a id="btn-edit" href='<%= edit_result_path(@scenario) %>'>Edit the study</a></li>
+            <li><a id="btn-delete">Delete the study</a></li>
+          </ul>
         </div>
       </div>
 
