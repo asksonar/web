@@ -7,10 +7,13 @@
   <div class='panel'>
 
     <%= bootstrap_form_for resource, as: resource_name, url: session_path(resource_name), layout: :horizontal, inline_errors: false do |f| %>
-      <%= f.email_field :email, autofocus: true, value: params[:email] or '' %>
-      <%= f.password_field :password, autocomplete: "off" %>
+      <%= f.email_field :email, autofocus: true, value: (params[:email] or ''),
+        label_col: 'col-sm-3', control_col: 'col-sm-9' %>
+      <%= f.password_field :password, autocomplete: "off",
+        label_col: 'col-sm-3', control_col: 'col-sm-9' %>
       <% if devise_mapping.rememberable? -%>
-        <%= f.form_group :remember_me, class: 'ctn-remember-forgot' do %>
+        <%= f.form_group :remember_me, class: 'ctn-remember-forgot',
+          label_col: 'col-sm-3', control_col: 'col-sm-9' do %>
           <%= f.check_box :remember_me %>
           <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
             <%= link_to "Forgot your password?", new_password_path(resource_name), class: 'pull-right' %>
