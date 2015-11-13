@@ -24,13 +24,12 @@
   }
 }
 
-#results-show {
+#results-show { 
 
   .main-content-header {
     position: relative; // for the split_panel
 
     .summary-highlights-container {
-      margin-bottom: 20px;
       p.sub {
         margin-top: 10px;
       }
@@ -46,12 +45,17 @@
       }
 
       .summary-container,
-      .highlights-container {
+      .summary-steps-container {
         margin-top: 20px;
       }
 
       .summary-description {
         white-space: pre-line;
+      }
+
+      .summary-description,
+      .summary-step-description {
+        font-size: 13px;
       }
 
       .highlights-container {
@@ -67,15 +71,14 @@
         //max-height: 4em;
         //overflow: hidden;
       }
+
       .summary-container:hover {
         max-height: inherit;
       }
-
-
     }
 
     .buttons-container {
-      h2 {
+      h3 {
         display: inline-block;
       }
 
@@ -106,12 +109,8 @@
         }
       }
 
-      #btn-delete {
-        margin-left: 1px;
-      }
-
       .btn-group {
-        margin-bottom: 10px; // 10px margin-bottom when the edit, and delete buttons wrap
+        margin-bottom: 10px; // 10px margin-bottom when the dropdown button wrap
       }
     }
   }
@@ -129,29 +128,43 @@
     }
   }
 
-  .panel-body {
+  .scenario-results-panel {
+    
+    .result-panel-left {
 
-    .results-container {
-      margin-left: 30px; // .summary-step-description number + padding ends up at 30px
-      margin-top: 20px;
-
-      a {
-        display: block;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+      h1 {
+        margin-bottom: 5px;
+        cursor: pointer;
       }
 
-      i {
-        float: left;
-        margin-right: 5px;
-        margin-left: 3px;
-        margin-top: 3px;
+      .btn {
+        padding: 0; 
       }
 
-      i + i {
-        margin-left: -18px + -3px + -5px; /* icon width + margin-left + margin-right */
-        margin-top: 0px;
+      .btn:active,
+      .btn.active {
+        box-shadow: none;
+      }
+
+      .btn + .btn {
+        margin-left: 10px;
+      }
+
+      .collapsed-content {
+        margin: 10px 0 0 10px;
+        font-size: 13px;
+
+        a {
+          display: block;
+        }
+      }
+    }
+
+    .result-panel-right {
+      padding-top: 10px;
+
+      div + div {
+        margin-top: 5px;
       }
     }
   }

@@ -9,6 +9,10 @@ module PrettyPrintTimeHelper
   end
 
   def ppt_date(date)
+    date.strftime("%B %d, %Y")
+  end
+
+  def ppt_date_abbr(date)
     date.strftime("%b %d")
   end
 end

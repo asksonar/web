@@ -71,6 +71,16 @@ class ScenarioResultPresenter < SimpleDelegator
     end
   end
 
+  def completed_seconds
+    completed_seconds = 0
+
+    result_steps.each do |result_step|
+      completed_seconds += result_step.completed_seconds
+    end
+
+    completed_seconds
+  end
+
   def scenario
     super.prezi
   end

@@ -14,25 +14,22 @@
           <span class='summary-description'><%= @scenario.description %></span>
         </div>
       </div>
-      <div class='highlights-container'>
+      <div class='summary-steps-container'>
         <div class='left-col'>
-          <span class='strong'>Highlights:</span>
+          <span class='strong'>Steps:</span>
         </div>
         <div class='right-col'>
-          <% @scenario.scenario_highlights.each_with_index do |highlight, index| %>
-            <a href='<%= highlight_path(highlight) %>' class='highlight-link'
-            ><span class='sub'><%= ppt_date(highlight.created_at) %></span> <%= dt_transcription(highlight.title) %> ...
-            </a>
-          <% end %>
-          <% if @scenario.scenario_highlights.count == 0 %>
-            <span class='sub'><i class='fa fa-question-circle'></i> no highlights added yet</span>
+          <% @scenario.scenario_steps.each do |scenario_step| %>
+            <%= ih_left_indent left_class: '', left_content: "#{scenario_step.step_order + 1}.", div_class: 'summary-step-description' do %>
+              <span><%= scenario_step.description %></span>  
+            <% end %>
           <% end %>
         </div>
       </div>
     </div>
     <div class='col-md-4 buttons-container'>
       <div class="clearfix">
-        <h2 class=''>Live</h2>
+        <h3 class=''>Live</h3>
 
         <div id='btn-archive' class="btn-group" data-placement="bottom" data-toggle="tooltip"
           <% if @scenario.live? %>title="Close the study"<% end %>
@@ -60,9 +57,7 @@
         </span>
       </div>
       <div id='btn-copy-share-link-tooltip'><!-- otherwise interferes with bootstrap (:not-last-child) selectors --></div>
-
-      <h2><%= @scenario.user_completed_count %> completed</h2>
-      <p class='sub'><%= @scenario.user_uploading_count %> uploading</p>
+      <div><i class="fa fa-check-square-o"></i>  <%= @scenario.user_completed_count %> completed</div>
     </div>
   </div>
 </section>
@@ -93,37 +88,73 @@
 
   <% end %>
 
-  <% @scenario.scenario_steps.each do |scenario_step| %>
-  <div class='panel'>
-    <div class='panel-heading'>
-      <div>
-        <%= ih_left_indent left_class: 'h1', left_content: "#{scenario_step.step_order + 1}.", div_class: 'summary-step-description' do %>
-          <span><%= scenario_step.description %>
-            <% if scenario_step.url %>
-              <br/>
-              <a target="_blank" href='<%=ppu_http(scenario_step.url)%>'><%=scenario_step.url%></a>
-            <% end %>
+  <% @scenario.newest_scenario_results.each do |scenario_result| %>
+
+    <div class='panel scenario-results-panel'>
+      <%= bsh_split_panel 'col-sm-8' %>
+      <div class="row">
+        <div class='col-sm-8 result-panel-left'>
+          <h1 class="video-link" data-scenario-result-hashid='<%= scenario_result.hashid %>'><%= scenario_result.email %></h1>
+
+          <span class='sub btn' type="button" data-toggle="collapse" data-target="#result-steps-container-<%= scenario_result.hashid %>" aria-expanded="false">
+            <i class="fa fa-list-ul"></i>   <%= pp_plural_with_number(@scenario.scenario_result_scenario_steps_count(scenario_result), 'Step') %>   <span class="caret"></span>
           </span>
-        <% end %>
+
+          <span class='sub btn' type="button" data-toggle="collapse" data-target="#result-highlights-container-<%= scenario_result.hashid %>" aria-expanded="false">
+            <i class="fa fa-bookmark"></i>   <%= pp_plural_with_number(scenario_result.scenario_highlights.count, 'Highlight') %>   <span class="caret"></span>
+          </span>
+
+          <span class='sub btn' type="button" data-toggle="collapse" data-target="#result-notes-container-<%= scenario_result.hashid %>" aria-expanded="false">
+            <i class="fa fa-comment"></i>   <%= pp_plural_with_number(scenario_result.result_notes.count, 'Note') %>   <span class="caret"></span>
+          </span>
+
+          <div class="collapse collapsed-content" id='result-steps-container-<%= scenario_result.hashid %>'>
+            <% @scenario.scenario_result_scenario_steps(scenario_result).each do |scenario_step| %>
+              <%= ih_left_indent left_class: '', left_content: "#{scenario_step.step_order + 1}.", div_class: 'summary-step-description' do %>
+                <a class='video-link'
+                  data-scenario-result-hashid='<%= scenario_result.hashid %>'
+                  data-result-step-offset-seconds='<%= scenario_result.result_step_offset_seconds(scenario_step) %>'
+                >
+                  <%= scenario_step.description %>
+                </a>  
+              <% end %>
+            <% end %>
+          </div>
+
+          <div class="collapse collapsed-content" id='result-highlights-container-<%= scenario_result.hashid %>'>
+            <% scenario_result.scenario_highlights.each_with_index do |highlight, index| %>
+              <a href='<%= highlight_path(highlight) %>'>
+                <span class='sub'><%= ppt_date_abbr(highlight.created_at) %> - </span><%= dt_transcription(highlight.title) %>
+              </a>
+            <% end %>
+            <% if scenario_result.scenario_highlights.count == 0 %>
+              <span class='sub'><i class='fa fa-question-circle'></i> no highlights added yet</span>
+            <% end %>
+          </div>
+
+          <div class="collapse collapsed-content" id='result-notes-container-<%= scenario_result.hashid %>'>
+            <% scenario_result.result_notes.each_with_index do |note, index| %>
+              <a class='video-link'
+                data-scenario-result-hashid='<%= scenario_result.hashid %>'
+                data-result-step-offset-seconds='<%= note.offset_seconds %>'
+              >
+                <span class='sub'><%= ppt_date_abbr(note.created_at) %> - </span><%= dt_transcription(note.text) %>
+              </a>
+            <% end %>
+            <% if scenario_result.result_notes.count == 0 %>
+              <span class='sub'><i class='fa fa-question-circle'></i> no notes added yet</span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col-sm-4 result-panel-right">
+          <div class='result-date'><i class="fa fa-calendar-o"></i>   <%= ppt_date(scenario_result.created_at) %></div>
+          <div class='result-duration'><i class="fa fa-clock-o"></i>   <%= ppt_seconds(scenario_result.completed_seconds) %></div>
+        </div>
       </div>
     </div>
-    <div class='panel-body'>
-      <div class='results-container'>
 
-      <% @scenario.newest_scenario_results(scenario_step).each do |scenario_result| %>
-        <a class='video-link'
-          data-scenario-result-hashid='<%=scenario_result.hashid%>'
-          data-result-step-offset-seconds='<%=scenario_result.result_step_offset_seconds(scenario_step)%>'
-        >
-          <span class='sub'><%= ppt_date(scenario_result.created_at) %> - [<%= scenario_result.email %>]</span>
-        </a>
-      <% end %>
-
-      </div>
-    </div>
-  </div>
   <% end %>
-
 </section>
 
 <div class="modal" id='summary_video_container' tabindex='-1'>
