@@ -115,7 +115,7 @@
                   data-scenario-result-hashid='<%= scenario_result.hashid %>'
                   data-result-step-offset-seconds='<%= scenario_result.result_step_offset_seconds(scenario_step) %>'
                 >
-                  <%= scenario_step.description %>
+                  <%= scenario_step.description %>  <span class="sub">(<%= ppt_seconds(scenario_result.result_step_completed_seconds(scenario_step)) %>)</span>
                 </a>  
               <% end %>
             <% end %>
