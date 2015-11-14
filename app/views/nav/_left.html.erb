@@ -8,7 +8,8 @@
 
         <%= navbar_item "<i class='fa fa-fw fa-bar-chart'></i> All Results", '/results' %>
         <%= navbar_item "<i class='fa fa-fw fa-bullhorn'></i> Recent Responses", '/responses' %>
-        <%= navbar_item "<i class='fa fa-fw fa-edit'></i> Drafts (" + drafts_count.to_s + ')', '/drafts' %>
+        <%= navbar_item "<i class='fa fa-fw fa-edit'></i> Drafts" + (drafts_count > 0 ? " (#{drafts_count.to_s})" : ''), '/drafts' %>
+        <%= navbar_item "<i class='fa fa-fw fa-comments-o'></i> My Feedback", '/feedback' %>
       <% end %>
     </ul>
   </nav>

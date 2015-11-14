@@ -1,0 +1,22 @@
+<% content_for :title do %>
+  My Feedback
+<% end %>
+
+<section class='main-content-header clearfix'>
+  <a id='btn-record-feedback' class='btn btn-med btn-dark-blue pull-right'><i class='fa fa-plus'></i> Start recording feedback</a>
+  <h1><%= content_for :title %></h1>
+</section>
+<section class="main-content">
+  <% @scenario_results.each do |scenario_result| %>
+    <a class='panel' href='<%= scenario_result_path(scenario_result) %>'>
+      <%= bsh_split_panel 'col-sm-8' %>
+      <div class='row'>
+        <div class='title-container'>
+          <h1><%= scenario_result.title %></h1>
+          <p class='sub'>created by <%= scenario_result.created_by.full_name %> (<%= scenario_result.created_by.email %>) <%= time_ago_in_words(scenario_result.created_at)%> ago</p>
+        </div>
+      </div>
+    </a>
+
+  <% end %>
+</section>

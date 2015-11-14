@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   resources :results do
     resources :videos, only: [:show], controller: 'results'
   end
+  resources :feedback, controller: 'feedback'
 
   devise_for :researchers,
     path: 'accounts',
