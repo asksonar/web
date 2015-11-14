@@ -4,6 +4,7 @@ $(function(){
     return;
   }
 
+  window.extension = new ExtensionController(sonar.chrome_app_id);
   window.view = new StudiesView({
     'ctnInstallChrome': $('#ctn-install-chrome'),
     'ctnInstallExtension': $('#ctn-install-extension'),
@@ -11,7 +12,7 @@ $(function(){
     'ctnStartFeedback': $('#ctn-start-feedback'),
     'ctnRestartFeedback': $('#ctn-restart-feedback')
   });
-  window.controller = new StudiesController(view, sonar.chrome_app_id, {
+  window.controller = new StudiesController(extension, view, {
     'btnInstallExtension': $('#btn-install-extension'),
     'btnStartFeedback': $('#btn-start-feedback'),
     'form': $('form')
