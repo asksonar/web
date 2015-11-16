@@ -24,12 +24,12 @@
   }
 }
 
-#results-show { 
+#results-show {
 
   .main-content-header {
     position: relative; // for the split_panel
 
-    .summary-highlights-container {
+    .summary-container {
       p.sub {
         margin-top: 10px;
       }
@@ -44,7 +44,7 @@
         }
       }
 
-      .summary-container,
+      .summary-description-container,
       .summary-steps-container {
         margin-top: 20px;
       }
@@ -56,15 +56,6 @@
       .summary-description,
       .summary-step-description {
         font-size: 13px;
-      }
-
-      .highlights-container {
-        a {
-          display: block;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-        }
       }
 
       .summary-container {
