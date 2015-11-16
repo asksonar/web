@@ -2,11 +2,14 @@ module PrettyPrintTimeHelper
   # pretty print seconds
   def ppt_seconds(seconds)
     if seconds > 60 * 60
-      Time.at(seconds).strftime('%H:%M:%S')
+      Time.at(seconds).strftime('%-Hh %-Mm %-Ss')
+    elsif seconds > 60
+      Time.at(seconds).strftime('%-Mm %-Ss')
     else
-      Time.at(seconds).strftime('%M:%S')
+      Time.at(seconds).strftime('%-Ss')
     end
   end
+
 
   def ppt_date(date)
     date.strftime("%B %d, %Y")
