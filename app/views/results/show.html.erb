@@ -44,8 +44,8 @@
             More <span class="caret"></span>
           </a>
           <ul class="dropdown-menu dropdown-menu-right" role="menu">
-            <li><a id="btn-edit" href='<%= edit_result_path(@scenario) %>'>Edit the study</a></li>
-            <li><a id="btn-delete">Delete the study</a></li>
+            <li><a id="btn-edit" href='<%= edit_result_path(@scenario) %>'><i class='fa fa-edit'></i>Edit the study</a></li>
+            <li><a id="btn-delete"><i class='fa fa-trash-o'></i>Delete the study</a></li>
           </ul>
         </div>
       </div>
@@ -100,17 +100,17 @@
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="sub btn">
                 <span href="#result-steps-container-<%= scenario_result.hashid %>" aria-controls="home" role="tab" data-toggle="tab">
-                  <i class="fa fa-list-ul"></i>   <%= pp_plural_with_number(@scenario.scenario_result_scenario_steps_count(scenario_result), 'Step') %>   <span class="caret"></span>
+                  <i class="fa fa-list-ul"></i><%= pp_plural_with_number(scenario_result.result_step_count, 'Step') %>   <span class="caret"></span>
                 </span class="sub btn">
               </li>
               <li role="presentation" class="sub btn">
                 <span href="#result-highlights-container-<%= scenario_result.hashid %>" aria-controls="profile" role="tab" data-toggle="tab">
-                  <i class="fa fa-bookmark"></i>   <%= pp_plural_with_number(scenario_result.scenario_highlights.count, 'Highlight') %>   <span class="caret"></span>
+                  <i class="fa fa-bookmark"></i><%= pp_plural_with_number(scenario_result.scenario_highlights.count, 'Highlight') %>   <span class="caret"></span>
                 </span class="sub btn">
               </li>
               <li role="presentation" class="sub btn">
                 <span href="#result-notes-container-<%= scenario_result.hashid %>" aria-controls="messages" role="tab" data-toggle="tab">
-                  <i class="fa fa-comment"></i>   <%= pp_plural_with_number(scenario_result.result_notes.count, 'Note') %>   <span class="caret"></span>
+                  <i class="fa fa-comment"></i><%= pp_plural_with_number(scenario_result.result_notes.count, 'Note') %>   <span class="caret"></span>
                 </span class="sub btn">
               </li>
             </ul>
@@ -157,8 +157,8 @@
         </div>
 
         <div class="col-sm-4 result-panel-right">
-          <div class='sub result-date'><i class="fa fa-calendar-o"></i>   <%= ppt_date(scenario_result.created_at) %></div>
-          <div class='sub result-duration'><i class="fa fa-clock-o"></i>   <%= ppt_duration(scenario_result.completed_seconds) %></div>
+          <div class='sub result-date'><i class="fa fa-calendar-o"></i><%= ppt_date(scenario_result.created_at) %></div>
+          <div class='sub result-duration'><i class="fa fa-clock-o"></i><%= ppt_duration(scenario_result.completed_seconds) %></div>
         </div>
       </div>
     </div>
