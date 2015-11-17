@@ -17,13 +17,27 @@ class ScenarioResultPresenter < SimpleDelegator
       result_video_path: result_video_url,
       email: email,
       scenario_step_count: scenario_step_count,
-      scenario_title: scenario_title,
+      scenario_title: scenario_title
     }
   end
 
   def result_step_offset_seconds(scenario_step)
     result_step = result_steps.find_by_scenario_step_id(scenario_step)
     result_step.offset_seconds
+  end
+
+  def my_feedback?
+    scenario.nil?
+  end
+
+  def title
+    if scenario
+      scenario.title
+    elsif super.blank?
+      'untitled feedback'
+    else
+      super
+    end
   end
 
   def email
@@ -86,5 +100,4 @@ class ScenarioResultPresenter < SimpleDelegator
   def result_video_url
     Rails.application.routes.url_helpers.result_video_path(scenario, self)
   end
-
 end

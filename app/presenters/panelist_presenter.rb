@@ -1,6 +1,6 @@
 class PanelistPresenter < SimpleDelegator
   def email
-    if super.empty?
+    if super.blank?
       'anonymous'
     else
       super
