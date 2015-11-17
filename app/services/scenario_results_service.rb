@@ -10,6 +10,10 @@ class ScenarioResultsService
     ScenarioResult.create(scenario: scenario, panelist: panelist)
   end
 
+  def create_result(created_by)
+    ScenarioResult.create(created_by: created_by)
+  end
+
   def update_result_status(scenario_result, status)
     scenario_result.status = status
     scenario_result.save

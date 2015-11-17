@@ -57,7 +57,7 @@ ExtensionController.prototype.installExtension = function() {
   return deferred;
 }
 
-ExtensionController.prototype.startFeedback = function(data) {
+ExtensionController.prototype.startFeedback = function(data, flowType) {
   var deferred = $.Deferred();
 
   var launchedAppResponse = function(response) {
@@ -73,15 +73,17 @@ ExtensionController.prototype.startFeedback = function(data) {
   }
 
   var ajaxDone = function(response) {
-    var launchAppParams = {};
-    launchAppParams['scenario'] = sonar.scenario;
-    launchAppParams['scenarioResultHashId'] = response.hashid;
-    launchAppParams['screen'] = {
-      availLeft: screen.availLeft,
-      availTop: screen.availTop,
-      availWidth: screen.availWidth,
-      availHeight: screen.availHeight
-    }
+    var launchAppParams = {
+      'scenario': sonar.scenario,
+      'scenarioResultHashId': response.hashid,
+      'screen': {
+        availLeft: screen.availLeft,
+        availTop: screen.availTop,
+        availWidth: screen.availWidth,
+        availHeight: screen.availHeight
+      },
+      'flowType': flowType
+    };
 
     chrome.runtime.sendMessage(this.appId, {launchApp: launchAppParams}, $.proxy(launchedAppResponse, this));
   }
@@ -93,6 +95,7 @@ ExtensionController.prototype.startFeedback = function(data) {
     dataType: 'json'
   }).done($.proxy(ajaxDone, this)).fail(function(jqXHR) {
     notify.error(jqXHR.responseText, 'There was an error starting your study.');
+    deferred.reject();
   });
 
   return deferred;
