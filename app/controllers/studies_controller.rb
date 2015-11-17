@@ -4,7 +4,7 @@ class StudiesController < ApplicationController
   attr_writer :service
 
   def show
-    @scenario = Scenario.find_by_hashid(params[:id]).prezi
+    @scenario = Scenario.find_by_hashid!(params[:id]).prezi
     track_respondent_landed
   end
 
@@ -25,7 +25,7 @@ class StudiesController < ApplicationController
   end
 
   def update
-    @scenario_result = ScenarioResult.find_by_hashid(params[:id])
+    @scenario_result = ScenarioResult.find_by_hashid!(params[:id])
     service.update_result_status(@scenario_result, params[:status])
     track_action(@scenario_result.scenario)
     render plain: 'OK'

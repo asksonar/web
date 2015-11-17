@@ -2,9 +2,9 @@ class ShareVideosController < ApplicationController
 
   def show
     if !ScenarioResult.hashids.decode(params[:id])[0].nil?
-      @scenario_result = ScenarioResult.find_by_hashid(params[:id])
+      @scenario_result = ScenarioResult.find_by_hashid!(params[:id])
     else
-      result_step = ResultStep.find_by_hashid(params[:id])
+      result_step = ResultStep.find_by_hashid!(params[:id])
       @scenario_result = result_step.scenario_result
     end
     track_video_viewed

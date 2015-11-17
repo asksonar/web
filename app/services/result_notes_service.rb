@@ -13,7 +13,7 @@ class ResultNotesService
   end
 
   def update_from_hashid(hashid:, offset_seconds:, text:)
-    result_note = ResultNote.find_by_hashid(hashid)
+    result_note = ResultNote.find_by_hashid!(hashid)
     result_note.update(
       offset_seconds: offset_seconds,
       text: text
@@ -23,7 +23,7 @@ class ResultNotesService
   end
 
   def destroy_from_hashid(hashid)
-    result_note = ResultNote.find_by_hashid(hashid)
+    result_note = ResultNote.find_by_hashid!(hashid)
     result_note.destroy
   end
 end

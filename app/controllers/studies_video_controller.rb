@@ -11,7 +11,7 @@ class StudiesVideoController < ApplicationController
   end
 
   def update
-    @scenario_result = ScenarioResult.find_by_hashid(params[:study_id])
+    @scenario_result = ScenarioResult.find_by_hashid!(params[:study_id])
     uuid = params[:id]
     Resque.enqueue(ProcessUploadedS3VideoWorker, uuid)
     track_uploaded(@scenario_result.scenario)

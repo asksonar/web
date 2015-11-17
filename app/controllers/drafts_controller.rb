@@ -27,7 +27,7 @@ class DraftsController < ApplicationController
   end
 
   def edit
-    @scenario = Scenario.find_by_hashid(params[:id]).prezi
+    @scenario = Scenario.find_by_hashid!(params[:id]).prezi
     @template = Template.find_by(value: params[:template])
   end
 
@@ -63,7 +63,7 @@ class DraftsController < ApplicationController
   end
 
   def update
-    @scenario = Scenario.find_by_hashid(params[:id])
+    @scenario = Scenario.find_by_hashid!(params[:id])
 
     drafts_service.update(
       @scenario,
@@ -94,7 +94,7 @@ class DraftsController < ApplicationController
   end
 
   def destroy
-    @result = Scenario.find_by_hashid(params[:id])
+    @result = Scenario.find_by_hashid!(params[:id])
     scenarios_service.set_deleted(@result)
 
     flash[:info] = '<strong>Your draft has been deleted.</strong>'

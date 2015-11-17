@@ -25,15 +25,15 @@ class ResultsController < ApplicationController
 
   def show
     if !params[:result_id].nil?
-      @scenario = Scenario.find_by_hashid(params[:result_id]).prezi
-      @scenario_result = ScenarioResult.find_by_hashid(params[:id]).prezi
+      @scenario = Scenario.find_by_hashid!(params[:result_id]).prezi
+      @scenario_result = ScenarioResult.find_by_hashid!(params[:id]).prezi
     else
-      @scenario = Scenario.find_by_hashid(params[:id]).prezi
+      @scenario = Scenario.find_by_hashid!(params[:id]).prezi
     end
   end
 
   def update
-    @result = Scenario.find_by_hashid(params[:id])
+    @result = Scenario.find_by_hashid!(params[:id])
 
     # we are toggling, so set it to the reverse of whatever it currently is
     if params[:is_on] == 'true'
@@ -51,7 +51,7 @@ class ResultsController < ApplicationController
   end
 
   def destroy
-    @result = Scenario.find_by_hashid(params[:id])
+    @result = Scenario.find_by_hashid!(params[:id])
     service.set_deleted(@result)
 
     flash[:info] = '<strong>Your study has been deleted.</strong>'

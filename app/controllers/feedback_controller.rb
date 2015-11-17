@@ -10,6 +10,6 @@ class FeedbackController < ApplicationController
   end
 
   def show
-    @scenario_result = ScenarioResult.find_by_hashid(params[:id])
+    @scenario_result = ScenarioResult.find_by_hashid!(params[:id])
   end
 end

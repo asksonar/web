@@ -2,7 +2,7 @@ class ResultTranscriptionsService
   include Singleton
 
   def update_from_hashid(hashid:, offset_seconds:, text:)
-    result_transcription = ResultTranscription.find_by_hashid(hashid)
+    result_transcription = ResultTranscription.find_by_hashid!(hashid)
 
     result_transcription.original_text ||= result_transcription.text
     result_transcription.offset_seconds = offset_seconds
