@@ -1,8 +1,6 @@
 class StudiesStepController < ApplicationController
   protect_from_forgery with: :null_session
 
-  after_action :track_respondent_stepped, only: :create
-
   attr_writer :result_steps_service
   attr_writer :result_transcriptions_service
 
@@ -16,14 +14,17 @@ class StudiesStepController < ApplicationController
 
 
   def create
-    @scenario_result = ScenarioResult.find_by_hashid(params_study_hashid)
+    @scenario_result = ScenarioResult.find_by_hashid!(params_study_hashid)
     @scenario_step = ScenarioStep.find_by_hashid(params_scenario_step_hashid)
 
-    @result_step = result_steps_service.create(
-      step_params,
-      @scenario_result,
-      @scenario_step
-    )
+    if @scenario_step
+      @result_step = result_steps_service.create(
+        step_params,
+        @scenario_result,
+        @scenario_step
+      )
+      track_respondent_stepped(@scenario_result.scenario)
+    end
 
     result_transcriptions_service.create(transcriptions_params, @scenario_result)
 
@@ -32,8 +33,7 @@ class StudiesStepController < ApplicationController
     render plain: 'OK'
   end
 
-  def track_respondent_stepped
-    scenario = @scenario_result.scenario
+  def track_respondent_stepped(scenario)
     Analytics.instance.respondent_stepped(request.remote_ip, scenario.created_by, scenario, @scenario_result, @scenario_step, @result_step)
   end
 

@@ -19,8 +19,11 @@ module ActiveRecordHashids
     end
 
     def find_by_hashid(hashid)
+      find_by_id(hashids.decode(hashid)[0])
+    end
+
+    def find_by_hashid!(hashid)
       find(hashids.decode(hashid)[0])
     end
   end
-
 end

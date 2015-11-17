@@ -1,5 +1,4 @@
 class ShareVideosController < ApplicationController
-  after_action :track_video_viewed, only: :show
 
   def show
     if !ScenarioResult.hashids.decode(params[:id])[0].nil?
@@ -8,15 +7,30 @@ class ShareVideosController < ApplicationController
       result_step = ResultStep.find_by_hashid(params[:id])
       @scenario_result = result_step.scenario_result
     end
-    @scenario = @scenario_result.scenario
+    track_video_viewed
+  end
+
+  private
+
+  def analytics
+    @analytics ||= Analytics.instance
   end
 
   def track_video_viewed
-    created_by_id = @scenario.created_by.id
-    if current_researcher.nil? || current_researcher.id != created_by_id
-      Analytics.instance.share_video_viewed(current_researcher, request.remote_ip, @scenario.created_by, @scenario, @scenario_result, false)
+    scenario = @scenario_result.scenario
+    created_by = (scenario || @scenario_result).created_by
+    if current_researcher.nil? || current_researcher.id != created_by.id
+      share_video_viewed(created_by, scenario)
     else
-      Analytics.instance.result_video_viewed(current_researcher, @scenario, @scenario_result, false)
+      result_video_viewed(scenario)
     end
+  end
+
+  def share_video_viewed(created_by, scenario)
+    analytics.share_video_viewed(current_researcher, request.remote_ip, created_by, scenario, @scenario_result, false)
+  end
+
+  def result_video_viewed(scenario)
+    analytics.result_video_viewed(current_researcher, scenario, @scenario_result, false)
   end
 end

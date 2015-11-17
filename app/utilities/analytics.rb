@@ -52,7 +52,7 @@ class Analytics
     if researcher.nil? || researcher.id != created_by_id
       share_video_viewed(researcher, ip_address, scenario.created_by, scenario, scenario_result, true)
     else
-      Analytics.instance.result_video_viewed(researcher, scenario, scenario_result, true)
+      result_video_viewed(researcher, scenario, scenario_result, true)
     end
   end
 
@@ -70,7 +70,7 @@ class Analytics
     @tracker.track(researcher.hashid, 'Researcher viewed video', {
       'time' => Time.new,
       'is modal' => is_modal,
-      'scenario hashid' => scenario.hashid,
+      'scenario hashid' => scenario.try(:hashid),
       'video hashid' => scenario_result.hashid,
       'video seconds' => video_seconds(scenario_result)
     })
@@ -85,7 +85,7 @@ class Analytics
       'time' => Time.new,
       'is modal' => is_modal,
       'ip_address' => ip_address,
-      'scenario hashid' => scenario.hashid,
+      'scenario hashid' => scenario.try(:hashid),
       'video hashid' => scenario_result.hashid,
       'video seconds' => video_seconds(scenario_result)
     })
@@ -93,7 +93,7 @@ class Analytics
       'time' => Time.new,
       'is modal' => is_modal,
       'ip_address' => ip_address,
-      'scenario hashid' => scenario.hashid,
+      'scenario hashid' => scenario.try(:hashid),
       'video hashid' => scenario_result.hashid,
       'video seconds' => video_seconds(scenario_result)
     })
@@ -240,4 +240,58 @@ class Analytics
     @tracker.people.plus_one(researcher.hashid, 'Total respondent uploaded', 0)
   end
 
+  def my_feedback_launched(ip_address, researcher, scenario_result)
+    @tracker.track(researcher.hashid, 'My feedback launched', {
+      'time' => Time.new,
+      'result hashid' => scenario_result.hashid
+    })
+    @tracker.people.set(researcher.hashid, {
+      'Last my feedback launched' => Time.new
+    }, 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total my feedback launched', 0)
+  end
+
+  def my_feedback_started(ip_address, researcher, scenario_result)
+    @tracker.track(researcher.hashid, 'My feedback started', {
+      'time' => Time.new,
+      'result hashid' => scenario_result.hashid
+    })
+    @tracker.people.set(researcher.hashid, {
+      'Last my feedback started' => Time.new
+    }, 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total my feedback started', 0)
+  end
+
+  def my_feedback_completed(ip_address, researcher, scenario_result)
+    @tracker.track(researcher.hashid, 'My feedback completed', {
+      'time' => Time.new,
+      'result hashid' => scenario_result.hashid
+    })
+    @tracker.people.set(researcher.hashid, {
+      'Last my feedback completed' => Time.new
+    }, 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total my feedback completed', 0)
+  end
+
+  def my_feedback_aborted(ip_address, researcher, scenario_result)
+    @tracker.track(researcher.hashid, 'My feedback aborted', {
+      'time' => Time.new,
+      'result hashid' => scenario_result.hashid
+    })
+    @tracker.people.set(researcher.hashid, {
+      'Last my feedback aborted' => Time.new
+    }, 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total my feedback aborted', 0)
+  end
+
+  def my_feedback_uploaded(ip_address, researcher, scenario_result)
+    @tracker.track(researcher.hashid, 'My feedback uploaded', {
+      'time' => Time.new,
+      'result hashid' => scenario_result.hashid
+    })
+    @tracker.people.set(researcher.hashid, {
+      'Last my feedback uploaded' => Time.new
+    }, 0)
+    @tracker.people.plus_one(researcher.hashid, 'Total my feedback uploaded', 0)
+  end
 end
