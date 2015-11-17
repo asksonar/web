@@ -124,7 +124,7 @@
                       data-scenario-result-hashid='<%= scenario_result.hashid %>'
                       data-result-step-offset-seconds='<%= scenario_result.result_step_offset_seconds(scenario_step) %>'
                     >
-                      <%= scenario_step.description %>  <span class="sub">(<%= ppt_seconds(scenario_result.result_step_completed_seconds(scenario_step)) %>)</span>
+                      <%= scenario_step.description %>  <span class="sub">(<%= ppt_duration(scenario_result.result_step_completed_seconds(scenario_step)) %>)</span>
                     </a>
                   <% end %>
                 <% end %>
@@ -145,7 +145,7 @@
                     data-scenario-result-hashid='<%= scenario_result.hashid %>'
                     data-result-step-offset-seconds='<%= note.offset_seconds %>'
                   >
-                    <span class='sub'><%= ppt_date_abbr(note.created_at) %> - </span><%= dt_transcription(note.text) %>
+                    <span class='sub'><%= ppt_seconds(note.offset_seconds) %> - </span><%= dt_transcription(note.text) %>
                   </a>
                 <% end %>
                 <% if scenario_result.result_notes.count == 0 %>
@@ -158,7 +158,7 @@
 
         <div class="col-sm-4 result-panel-right">
           <div class='sub result-date'><i class="fa fa-calendar-o"></i>   <%= ppt_date(scenario_result.created_at) %></div>
-          <div class='sub result-duration'><i class="fa fa-clock-o"></i>   <%= ppt_seconds(scenario_result.completed_seconds) %></div>
+          <div class='sub result-duration'><i class="fa fa-clock-o"></i>   <%= ppt_duration(scenario_result.completed_seconds) %></div>
         </div>
       </div>
     </div>
