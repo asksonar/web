@@ -53,11 +53,6 @@
         white-space: pre-line;
       }
 
-      .summary-description,
-      .summary-step-description {
-        font-size: 13px;
-      }
-
       .summary-container {
         //max-height: 4em;
         //overflow: hidden;
@@ -120,7 +115,7 @@
   }
 
   .scenario-results-panel {
-    
+
     .result-panel-left {
 
       h1 {
@@ -128,25 +123,35 @@
         cursor: pointer;
       }
 
-      .btn {
-        padding: 0; 
-      }
+      .result-panel-toggle {
 
-      .btn:active,
-      .btn.active {
-        box-shadow: none;
-      }
+        .nav-tabs {
+          border: none;
+        }
 
-      .btn + .btn {
-        margin-left: 10px;
-      }
+        li + li {
+          margin-left: 10px;
+        }
 
-      .collapsed-content {
-        margin: 10px 0 0 10px;
-        font-size: 13px;
+        .btn {
+          padding: 0;
+        }
 
-        a {
-          display: block;
+        .btn.active {
+          color: black;
+        }
+
+        .btn:active,
+        .btn.active {
+          box-shadow: none;
+        }
+
+        .collapsed-content {
+          margin: 10px 0 0 10px;
+
+          a {
+            display: block;
+          }
         }
       }
     }
@@ -167,5 +172,5 @@
         margin-right: 20px;
       }
     }
-  } 
+  }
 }

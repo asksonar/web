@@ -7,6 +7,7 @@ function ResultsView(config, videoModal, deleteModal) {
   this.$btnHeroCopyShareLink = config.btnHeroCopyShareLink;
   this.$inputHeroShareLink = config.inputHeroShareLink;
   this.$panelHero = config.panelHero;
+  this.$resultPanelToggle = config.resultPanelToggle;
 
   this.videoModal = videoModal;
   this.deleteModal = deleteModal;
@@ -18,9 +19,21 @@ ResultsView.prototype.init = function() {
   this.$divAllContent.on('click', '.video-link', $.proxy(this.loadVideoModal, this));
   this.$btnDelete.on('click', $.proxy(this.loadDeleteModal, this));
   this.$btnArchive.on('click', $.proxy(this.toggleArchive, this));
+  this.$resultPanelToggle.on('click', 'li.active', $.proxy(this.collapseTab, this));
   new ClipboardInput(this.$btnCopyShareLink, this.$inputShareLink);
   new ClipboardInput(this.$btnHeroCopyShareLink, this.$inputHeroShareLink);
   this.highlightHero();
+};
+
+ResultsView.prototype.collapseTab = function(event) {
+  event.stopPropagation();
+
+  var $activeTab = this.$resultPanelToggle.find('li.active');
+  $activeTab.removeClass('active');
+  $activeTab.children().attr('aria-expanded', 'false');
+
+  var $href = $activeTab.children().attr('href');
+  this.$resultPanelToggle.find($href).toggleClass('active');
 };
 
 ResultsView.prototype.toggleArchive = function() {

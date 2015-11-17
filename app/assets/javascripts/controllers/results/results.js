@@ -61,6 +61,7 @@ $(function(){
     btnHeroCopyShareLink: $('#btn-hero-copy-share-link'),
     inputHeroShareLink: $('#input-hero-share-link'),
     panelHero: $('.panel-hero'),
+    resultPanelToggle: $('.result-panel-toggle')
   }, videoModal, deleteModal);
 
   var timeSeconds = new URI(location.href).search(true).t || 0;
