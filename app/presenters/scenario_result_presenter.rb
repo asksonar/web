@@ -27,10 +27,10 @@ class ScenarioResultPresenter < SimpleDelegator
   end
 
   def email
-    if panelist.email.empty?
-      'anonymous'
+    if scenario
+      panelist.prezi.email
     else
-      panelist.email
+      created_by.email
     end
   end
 
@@ -72,7 +72,7 @@ class ScenarioResultPresenter < SimpleDelegator
   end
 
   def scenario
-    super.prezi
+    super.try(:prezi)
   end
 
   def scenario_title

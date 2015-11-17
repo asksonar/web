@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/videos.json', to: 'videos_json#show'
   get '/create', to: 'drafts#new' # so it doesn't highlight the left nav
   post '/create', to: 'drafts#create'
-  get '/share/videos/:id', to: 'share_videos#show'
+  get '/share/videos/:id', to: 'share_videos#show', as: 'share_videos'
   get '/results/:id/edit', to: 'drafts#edit'
   patch '/results/:id/edit', to: 'drafts#update'
   get '/responses.json', to: 'responses_json#index'

@@ -8,7 +8,7 @@
 </section>
 <section class="main-content">
   <% @scenario_results.each do |scenario_result| %>
-    <a class='panel' href='<%= scenario_result_path(scenario_result) %>'>
+    <a class='panel' href='<%= share_videos_path(scenario_result) %>'>
       <%= bsh_split_panel 'col-sm-8' %>
       <div class='row'>
         <div class='title-container'>
