@@ -8,7 +8,8 @@ class ScenarioResultPresenter < SimpleDelegator
       shareLink: share_link,
       email: email,
       transcriptionArray: transcription_array,
-      highlightedArray: highlighted_array
+      highlightedArray: highlighted_array,
+      title: title
     }
   end
 

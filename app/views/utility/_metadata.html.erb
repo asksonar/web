@@ -5,13 +5,18 @@
 
   sonar.request = {
     controller: '<%= request.params[:controller] %>',
-    action: '<%= request.params[:action] %>'
+    action: '<%= request.params[:action] %>',
+    page: <%= @page || request.params[:page] || 0 %>
   };
 
+  <% if protect_against_forgery? %>
+    window.AUTH_TOKEN = '<%= form_authenticity_token %>';
+  <% end %>
+
   <% if current_researcher %>
-  sonar.user = {
-    hashid: '<%= current_researcher.hashid %>'
-  };
+    sonar.user = {
+      hashid: '<%= current_researcher.hashid %>'
+    };
   <% end %>
 
   <% if @scenario %>
@@ -23,15 +28,11 @@
   <% end %>
 
   <% if @scenario_result %>
-  sonar.scenarioResult = <%= raw @scenario_result.prezi.public_json.to_json %>;
-  <% end %>
-
-  <% if protect_against_forgery? %>
-    window.AUTH_TOKEN = '<%= form_authenticity_token %>';
+    sonar.scenarioResult = <%= raw @scenario_result.prezi.public_json.to_json %>;
   <% end %>
 
   <% if @scenario_highlight %>
-  sonar.scenarioHighlight = <%= raw @scenario_highlight.prezi.public_json.to_json %>
+    sonar.scenarioHighlight = <%= raw @scenario_highlight.prezi.public_json.to_json %>
   <% end %>
 
 </script>

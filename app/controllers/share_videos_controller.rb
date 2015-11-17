@@ -18,20 +18,11 @@ class ShareVideosController < ApplicationController
   end
 
   def track_video_viewed
-    scenario = @scenario_result.scenario
-    created_by = (scenario || @scenario_result).created_by
-    if current_researcher.nil? || current_researcher.id != created_by.id
-      share_video_viewed(created_by, scenario)
-    else
-      result_video_viewed(scenario)
-    end
-  end
-
-  def share_video_viewed(created_by, scenario)
-    analytics.share_video_viewed(current_researcher, request.remote_ip, created_by, scenario, @scenario_result, false)
-  end
-
-  def result_video_viewed(scenario)
-    analytics.result_video_viewed(current_researcher, scenario, @scenario_result, false)
+    analytics.video_viewed(current_researcher,
+      request.remote_ip,
+      @scenario_result.scenario,
+      @scenario_result,
+      false
+    )
   end
 end

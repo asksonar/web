@@ -10,6 +10,7 @@ VideoHistory.prototype.loadVideo = function(videoHashId) {
 };
 
 VideoHistory.prototype.unloadVideo = function() {
-  var newUrl = '/' + URI(location.href).segment(0) + '/' + URI(location.href).segment(1);
+  var newUrl = URI(location.href).path();
+  newUrl = newUrl.substring(0, newUrl.indexOf('/videos/'));
   history.replaceState({}, '', newUrl);
 };

@@ -8,7 +8,7 @@
 </section>
 <section class="main-content">
   <% @scenario_results.map(&:prezi).each do |scenario_result| %>
-    <a class='panel' href='<%= share_videos_path(scenario_result) %>'>
+    <a class='panel' href='<%= feedback_videos_path(scenario_result) %>' data-scenario-result-hashid='<%= scenario_result.hashid %>'>
       <div class='title-container'>
         <h1><%= scenario_result.title %></h1>
         <p class='sub'>created by <%= scenario_result.created_by.full_name %> (<%= scenario_result.created_by.email %>) <%= time_ago_in_words(scenario_result.created_at)%> ago</p>
@@ -16,4 +16,20 @@
     </a>
 
   <% end %>
+
+  <% render partial: 'utility/pager', locals: {params: params, has_next: @scenario_results.length == FeedbackController::PAGE_SIZE} %>
 </section>
+
+<div class="modal" id='summary_video_container' tabindex='-1'>
+  <div class="modal-dialog modal-lg modal-full">
+    <div class="modal-content editable-timeline">
+      <div class='ctn-modal-header'>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <span class='h3 strong ctn-title'></span>
+        <span id='ctn-user-email'></span>
+      </div>
+      <%= render partial: 'utility/video' %>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

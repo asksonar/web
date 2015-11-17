@@ -1,5 +1,6 @@
 VideoModal = function(config, video, transcript, videoLink) {
   this.$modal = config.modal;
+  this.$divTitle = config.divTitle;
   this.$divUserEmail = config.divUserEmail;
   this.$btnToggleViewMode = config.btnToggleViewMode;
 
@@ -49,6 +50,9 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
   this.videoLink.updateShareLink(data.shareLink);
 
   this.$divUserEmail.html(data.email);
+  if (data.title) {
+    this.$divTitle.html(data.title);
+  }
 
   this.video.currentTime(timeSeconds);
   this.show();

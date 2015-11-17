@@ -46,13 +46,13 @@ class Analytics
     @tracker.people.plus_one(researcher.hashid, 'Total published draft', 0)
   end
 
-  def modal_video_viewed(researcher, ip_address, scenario_result)
+  def video_viewed(researcher, ip_address, scenario, scenario_result, is_modal)
     scenario = scenario_result.scenario
-    created_by_id = scenario.created_by.id
-    if researcher.nil? || researcher.id != created_by_id
-      share_video_viewed(researcher, ip_address, scenario.created_by, scenario, scenario_result, true)
+    created_by = (scenario || scenario_result).created_by
+    if researcher.nil? || researcher.id != created_by.id
+      share_video_viewed(researcher, ip_address, created_by, scenario, scenario_result, is_modal)
     else
-      result_video_viewed(researcher, scenario, scenario_result, true)
+      result_video_viewed(researcher, scenario, scenario_result, is_modal)
     end
   end
 

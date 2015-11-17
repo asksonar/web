@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/results/:id/edit', to: 'drafts#edit'
   patch '/results/:id/edit', to: 'drafts#update'
   get '/responses.json', to: 'responses_json#index'
+  get '/feedback/videos/:id', to: 'feedback#show', as: 'feedback_videos'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

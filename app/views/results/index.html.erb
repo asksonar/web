@@ -29,15 +29,5 @@
     </a>
   <% end %>
 
-  <nav>
-    <ul class="pager">
-      <% if params[:page].to_i > 0 %>
-        <li class="previous"><a href="?page=<%= params[:page].to_i - 1 %>"><span aria-hidden="true">&larr;</span> Newer</a></li>
-      <% end %>
-      <% if @results.length == ResultsController::PAGE_SIZE %>
-      <li class="next"><a href="?page=<%= params[:page].to_i + 1 %>">Older <span aria-hidden="true">&rarr;</span></a></li>
-      <% end %>
-    </ul>
-  </nav>
-
+  <% render partial: 'utility/pager', locals: {has_next: @results.length == ResultsController::PAGE_SIZE} %>
 </section>
