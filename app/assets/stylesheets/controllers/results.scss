@@ -124,7 +124,6 @@
 
       h1 {
         margin-bottom: 5px;
-        cursor: pointer;
       }
 
       .result-panel-toggle {
@@ -155,6 +154,9 @@
 
           a {
             display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
           }
         }
       }
