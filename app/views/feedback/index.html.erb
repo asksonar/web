@@ -17,7 +17,7 @@
 
   <% end %>
 
-  <% render partial: 'utility/pager', locals: {params: params, has_next: @scenario_results.length == FeedbackController::PAGE_SIZE} %>
+  <%= render partial: 'utility/pager', locals: {has_next: @scenario_results.length == FeedbackController::PAGE_SIZE} %>
 </section>
 
 <div class="modal" id='summary_video_container' tabindex='-1'>
