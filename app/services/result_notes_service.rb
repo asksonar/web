@@ -26,4 +26,11 @@ class ResultNotesService
     result_note = ResultNote.find_by_hashid!(hashid)
     result_note.destroy
   end
+
+  def create_from_params(params, scenario_result)
+    params.each do |note|
+      scenario_result.result_notes.create(note)
+    end
+    scenario_result.result_notes
+  end
 end

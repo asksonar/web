@@ -3,6 +3,7 @@ class StudiesStepController < ApplicationController
 
   attr_writer :result_steps_service
   attr_writer :result_transcriptions_service
+  attr_writer :result_notes_service
 
   def result_steps_service
     @result_steps_service ||= ResultStepsService.instance
@@ -12,6 +13,9 @@ class StudiesStepController < ApplicationController
     @result_transcriptions_service ||= ResultTranscriptionsService.instance
   end
 
+  def result_notes_service
+    @result_notes_service ||= ResultNotesService.instance
+  end
 
   def create
     @scenario_result = ScenarioResult.find_by_hashid!(params_study_hashid)
@@ -27,6 +31,7 @@ class StudiesStepController < ApplicationController
     end
 
     result_transcriptions_service.create(transcriptions_params, @scenario_result)
+    result_notes_service.create_from_params(notes_params, @scenario_result)
 
     Resque.enqueue(ProcessTranscriptionWorker, @scenario_result.id)
 
@@ -65,6 +70,15 @@ class StudiesStepController < ApplicationController
       {
         offset_seconds: transcription['offset'] / 1000.0,
         text: transcription['text']
+      }
+    end
+  end
+
+  def notes_params
+    params_step['notes'].map do |note|
+      {
+        offset_seconds: note['offset'] / 1000.0,
+        text: note['text']
       }
     end
   end
