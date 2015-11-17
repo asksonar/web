@@ -118,13 +118,13 @@
             <!-- Tab panes -->
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane collapsed-content" id="result-steps-container-<%= scenario_result.hashid %>">
-                <% @scenario.scenario_result_scenario_steps(scenario_result).each do |scenario_step| %>
-                  <%= ih_left_indent left_class: '', left_content: "#{scenario_step.step_order + 1}.", div_class: 'summary-step-description' do %>
+                <% scenario_result.ordered_result_steps.each do |result_step| %>
+                  <%= ih_left_indent left_class: '', left_content: "#{result_step.scenario_step_order + 1}.", div_class: 'summary-step-description' do %>
                     <a class='video-link'
                       data-scenario-result-hashid='<%= scenario_result.hashid %>'
-                      data-result-step-offset-seconds='<%= scenario_result.result_step_offset_seconds(scenario_step) %>'
+                      data-result-step-offset-seconds='<%= result_step.offset_seconds %>'
                     >
-                      <%= scenario_step.description %>  <span class="sub">(<%= ppt_duration(scenario_result.result_step_completed_seconds(scenario_step)) %>)</span>
+                      <%= result_step.scenario_step_description %>  <span class="sub">(<%= ppt_duration(result_step.completed_seconds) %>)</span>
                     </a>
                   <% end %>
                 <% end %>
