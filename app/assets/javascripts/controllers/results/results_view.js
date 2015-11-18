@@ -28,11 +28,11 @@ ResultsView.prototype.init = function() {
 ResultsView.prototype.collapseTab = function(event) {
   event.stopPropagation();
 
-  var $activeTab = this.$resultPanelToggle.find('li.active');
-  $activeTab.removeClass('active');
-  $activeTab.children().attr('aria-expanded', 'false');
+  var thisEl = $(event.currentTarget);
+  thisEl.removeClass('active');
+  thisEl.children().attr('aria-expanded', 'false');
 
-  var $href = $activeTab.children().attr('href');
+  var $href = thisEl.children().attr('href');
   this.$resultPanelToggle.find($href).toggleClass('active');
 };
 
