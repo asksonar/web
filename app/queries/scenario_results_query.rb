@@ -3,6 +3,8 @@ class ScenarioResultsQuery
 
   def my_feedback(extra_where = {})
     ScenarioResult
+      .joins(:result_videos_uploaded)
+      .distinct
       .where(extra_where)
       .order(created_at: :desc)
   end

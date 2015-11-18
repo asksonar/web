@@ -35,7 +35,7 @@ class ScenarioResultPresenter < SimpleDelegator
     if scenario
       scenario.title
     elsif super.blank?
-      'untitled feedback'
+      'My untitled feedback'
     else
       super
     end
