@@ -163,7 +163,7 @@
     }
 
     .result-panel-right {
-      padding-top: 5px;
+      padding-top: 5px; // align with the h1 line-height in .result-panel-left
 
       div + div {
         margin-top: 2px;
