@@ -70,6 +70,7 @@ ResultsView.prototype.toggleArchive = function() {
 };
 
 ResultsView.prototype.loadVideoModal = function(event) {
+  event.preventDefault();
   var thisEl = $(event.currentTarget);
   var scenarioResultHashId = thisEl.attr('data-scenario-result-hashid');
   var timeSeconds = parseFloat(thisEl.attr('data-result-step-offset-seconds') || 0);
