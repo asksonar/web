@@ -50,9 +50,7 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
   this.videoLink.updateShareLink(data.shareLink);
 
   this.$divUserEmail.html(data.email);
-  if (data.title) {
-    this.$divTitle.html(data.title);
-  }
+  this.$divTitle.html(data.title);
 
   this.video.currentTime(timeSeconds);
   this.show();

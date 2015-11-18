@@ -26,12 +26,18 @@ class StudiesController < ApplicationController
 
   def update
     @scenario_result = ScenarioResult.find_by_hashid!(params[:id])
-    service.update_result_status(@scenario_result, params[:status])
-    track_action(@scenario_result.scenario)
+    service.update(@scenario_result, update_params)
+    if params[:status]
+      track_action(@scenario_result.scenario)
+    end
     render plain: 'OK'
   end
 
   private
+
+  def update_params
+    params.permit(:status, :title)
+  end
 
   def service
     @service ||= ScenarioResultsService.instance
