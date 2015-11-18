@@ -39,7 +39,7 @@
           <a class="btn btn-grey btn-failure btn-active-off <% if @scenario.completed? %>active<% end %>">Off</a>
         </div>
 
-        <div class="btn-group pull-right">
+        <div class="btn-group pull-right dropdown">
           <a class="btn btn-dark-blue dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
             More <span class="caret"></span>
           </a>
@@ -175,8 +175,8 @@
     <div class="modal-content editable-timeline">
       <div class='ctn-modal-header'>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <span class='strong ctn-title'><%= @scenario.title %></span>
-        <span id='ctn-user-email'></span>
+        <h2 class='ctn-title'><%= @scenario.title %></h2>
+        <span class="sub" id='ctn-user-email'></span>
       </div>
       <%= render partial: 'utility/video' %>
 

@@ -27,7 +27,8 @@
 #results-show {
 
   i {
-    width: 18px;
+    width: 16px;
+    text-align: left;
   }
 
   .main-content-header {
@@ -147,7 +148,7 @@
         }
 
         .collapsed-content {
-          margin: 10px 0 0 10px;
+          margin: 10px 10px 0 10px;
 
           a,
           .result-step-description {
@@ -180,10 +181,7 @@
 
   .modal {
     .ctn-modal-header {
-
-      .ctn-title {
-        margin-right: 20px;
-      }
+      margin-bottom: 5px;
     }
   }
 }

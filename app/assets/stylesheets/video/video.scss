@@ -32,23 +32,6 @@
   }
 }
 
-.ctn-video-share-highlight {
-  margin-top: 10px;
-
-  display: none;
-  .editable-timeline & { display: block; }
-
-  h3 {
-    float: left;
-    line-height: 31px;
-    margin: 0px;
-  }
-
-  #btn-create-highlight {
-    margin-left: 10px;
-  }
-}
-
 .video-js {
   padding-top: 75%; // fits 4:3 aspect ratio
 
