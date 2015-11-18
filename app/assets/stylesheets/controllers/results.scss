@@ -125,6 +125,10 @@
 
       h1 {
         margin-bottom: 5px;
+
+        a {
+          color: black;
+        }
       }
 
       .result-panel-toggle {
@@ -161,10 +165,11 @@
           .result-step-description {
             float: left;
             max-width: 85%;
+            text-decoration: inherit;
           }
 
           .result-step-duration {
-            margin-left: 5px;
+            white-space: pre-wrap;
           }
         }
       }
