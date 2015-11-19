@@ -41,9 +41,13 @@ class StudiesController < ApplicationController
     @service ||= ScenarioResultsService.instance
   end
 
+  def analytics
+    @analytics ||= Analytics.instance
+  end
+
   def track_respondent_landed
     return if !current_researcher.nil?
-    Analytics.instance.respondent_landed(request.remote_ip, @scenario.created_by, @scenario)
+    analytics.respondent_landed(request.remote_ip, @scenario.created_by, @scenario)
   end
 
   def track_launched(scenario)
@@ -55,11 +59,11 @@ class StudiesController < ApplicationController
   end
 
   def track_respondent_launched(scenario)
-    Analytics.instance.respondent_launched(request.remote_ip, scenario.created_by, scenario, @scenario_result)
+    analytics.respondent_launched(request.remote_ip, scenario.created_by, scenario, @scenario_result)
   end
 
   def track_my_feedback_launched
-    Analytics.instance.my_feedback_launched(request.remote_ip, current_researcher, @scenario_result)
+    analytics.my_feedback_launched(request.remote_ip, current_researcher, @scenario_result)
   end
 
   def track_action(scenario)
@@ -72,21 +76,21 @@ class StudiesController < ApplicationController
 
   def track_respondent_action(scenario)
     if @scenario_result.inprogress?
-      Analytics.instance.respondent_started(request.remote_ip, scenario.created_by, scenario, @scenario_result)
+      analytics.respondent_started(request.remote_ip, scenario.created_by, scenario, @scenario_result)
     elsif @scenario_result.completed?
-      Analytics.instance.respondent_completed(request.remote_ip, scenario.created_by, scenario, @scenario_result)
+      analytics.respondent_completed(request.remote_ip, scenario.created_by, scenario, @scenario_result)
     elsif @scenario_result.aborted?
-      Analytics.instance.respondent_aborted(request.remote_ip, scenario.created_by, scenario, @scenario_result)
+      analytics.respondent_aborted(request.remote_ip, scenario.created_by, scenario, @scenario_result)
     end
   end
 
   def track_my_feedback_action
     if @scenario_result.inprogress?
-      Analytics.instance.my_feedback_started(request.remote_ip, @scenario_result.created_by, @scenario_result)
+      analytics.my_feedback_started(request.remote_ip, @scenario_result.created_by, @scenario_result)
     elsif @scenario_result.completed?
-      Analytics.instance.my_feedback_completed(request.remote_ip, @scenario_result.created_by, @scenario_result)
+      analytics.my_feedback_completed(request.remote_ip, @scenario_result.created_by, @scenario_result)
     elsif @scenario_result.aborted?
-      Analytics.instance.my_feedback_aborted(request.remote_ip, @scenario_result.created_by, @scenario_result)
+      analytics.my_feedback_aborted(request.remote_ip, @scenario_result.created_by, @scenario_result)
     end
   end
 

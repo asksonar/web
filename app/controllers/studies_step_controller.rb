@@ -36,6 +36,10 @@ class StudiesStepController < ApplicationController
     @result_notes_service ||= ResultNotesService.instance
   end
 
+  def analytics
+    @analytics ||= Analytics.instance
+  end
+
   def params_study_hashid
     params[:study_id]
   end
@@ -76,6 +80,6 @@ class StudiesStepController < ApplicationController
   end
 
   def track_respondent_stepped(scenario)
-    Analytics.instance.respondent_stepped(request.remote_ip, scenario.created_by, scenario, @scenario_result, @scenario_step, @result_step)
+    analytics.respondent_stepped(request.remote_ip, scenario.created_by, scenario, @scenario_result, @scenario_step, @result_step)
   end
 end
