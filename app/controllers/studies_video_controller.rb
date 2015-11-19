@@ -25,12 +25,13 @@ class StudiesVideoController < ApplicationController
   end
 
   def params_step
-    JSON.parse(params[:steps_json])
+    return nil if params[:steps_json].nil?
+    @params_step ||= JSON.parse(params[:steps_json])[0]
   end
 
   def params_mute
-    return nil if params[:mute].blank?
-    JSON.parse(params[:mute]).map do |section|
+    return nil if params_step.nil? || params_step['mute'].nil?
+    params_step['mute'].map do |section|
       {
         start: section['start'] / 1000.0,
         end: section['end'] / 1000.0
