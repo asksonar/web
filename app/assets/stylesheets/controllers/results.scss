@@ -26,11 +26,15 @@
 
 #results-show {
 
+  i {
+    width: 16px;
+    text-align: left;
+  }
+
   .main-content-header {
     position: relative; // for the split_panel
 
-    .summary-highlights-container {
-      margin-bottom: 20px;
+    .summary-container {
       p.sub {
         margin-top: 10px;
       }
@@ -45,8 +49,8 @@
         }
       }
 
-      .summary-container,
-      .highlights-container {
+      .summary-description-container,
+      .summary-steps-container {
         margin-top: 20px;
       }
 
@@ -54,28 +58,18 @@
         white-space: pre-line;
       }
 
-      .highlights-container {
-        a {
-          display: block;
-          overflow: hidden;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-        }
-      }
-
       .summary-container {
         //max-height: 4em;
         //overflow: hidden;
       }
+
       .summary-container:hover {
         max-height: inherit;
       }
-
-
     }
 
     .buttons-container {
-      h2 {
+      h3 {
         display: inline-block;
       }
 
@@ -106,12 +100,8 @@
         }
       }
 
-      #btn-delete {
-        margin-left: 1px;
-      }
-
       .btn-group {
-        margin-bottom: 10px; // 10px margin-bottom when the edit, and delete buttons wrap
+        margin-bottom: 10px; // 10px margin-bottom when the dropdown button wrap
       }
     }
   }
@@ -129,39 +119,74 @@
     }
   }
 
-  .panel-body {
+  .scenario-results-panel {
 
-    .results-container {
-      margin-left: 30px; // .summary-step-description number + padding ends up at 30px
-      margin-top: 20px;
+    .result-panel-left {
 
-      a {
-        display: block;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+      h1 {
+        margin-bottom: 5px;
+
+        a {
+          color: black;
+        }
       }
 
-      i {
-        float: left;
-        margin-right: 5px;
-        margin-left: 3px;
-        margin-top: 3px;
-      }
+      .result-panel-toggle {
 
-      i + i {
-        margin-left: -18px + -3px + -5px; /* icon width + margin-left + margin-right */
-        margin-top: 0px;
+        .nav-tabs {
+          border: none;
+        }
+
+        li + li {
+          margin-left: 10px;
+        }
+
+        .btn {
+          padding: 0;
+
+          &.active,
+          &:active {
+            color: black;
+            box-shadow: none;
+          }
+        }
+
+        .collapsed-content {
+          margin: 10px 10px 0 10px;
+
+          a,
+          .result-step-description {
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+
+          .result-step-description {
+            float: left;
+            max-width: 85%;
+            text-decoration: inherit;
+          }
+
+          .result-step-duration {
+            white-space: pre-wrap;
+          }
+        }
+      }
+    }
+
+    .result-panel-right {
+      padding-top: 5px; // align with the h1 line-height in .result-panel-left
+
+      div + div {
+        margin-top: 2px;
       }
     }
   }
 
   .modal {
     .ctn-modal-header {
-
-      .ctn-title {
-        margin-right: 20px;
-      }
+      margin-bottom: 5px;
     }
-  } 
+  }
 }

@@ -15,14 +15,19 @@
       </div>
       <div id='btn-copy-video-link-tooltip'></div>
     </div>
-    <div class='ctn-video-share-highlight'>
-      <h3>Share a highlight</h3><a id='btn-create-highlight' class='btn btn-dark-blue'><i class='fa fa-arrow-right'></i></a>
-    </div>
   </div>
   <div class='transcript-container show-transcripts'>
-    <div class='transcript-header-container'>
-      <button id='toggle-transcripts' type="button" class="btn btn-default"><i class='fa fa-align-left'></i> Transcripts</button>
-      <h2>Timeline</h2>
+    <div class='transcript-header-container dropdown clearfix'>
+
+      <a class="btn btn-dark-blue dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+        More <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-right" role="menu">
+        <li><a id='toggle-transcripts'><i class='fa fa-align-left'></i>Transcripts</a></li>
+        <li><a id='btn-create-highlight'><i class='fa fa-bookmark'></i>Share a highlight</a></li>
+      </ul>
+
+      <h3>Timeline</h3>
     </div>
     <div id='videoText'>
       <div class='ctn-timeline-beginning'></div>
