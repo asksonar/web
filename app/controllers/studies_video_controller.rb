@@ -13,7 +13,7 @@ class StudiesVideoController < ApplicationController
   def update
     @scenario_result = ScenarioResult.find_by_hashid!(params[:study_id])
     uuid = params[:id]
-    Resque.enqueue(ProcessUploadedS3VideoWorker, uuid)
+    Resque.enqueue(ProcessUploadedS3VideoWorker, uuid, params_mute)
     track_uploaded(@scenario_result.scenario)
     render plain: 'OK'
   end
@@ -26,6 +26,16 @@ class StudiesVideoController < ApplicationController
 
   def params_step
     JSON.parse(params[:steps_json])
+  end
+
+  def params_mute
+    return nil if params[:mute].blank?
+    JSON.parse(params[:mute]).map do |section|
+      {
+        start: section['start'] / 1000.0,
+        end: section['end'] / 1000.0
+      }
+    end
   end
 
   def analytics
