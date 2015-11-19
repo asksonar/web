@@ -56,6 +56,6 @@ StudiesController.prototype.startFeedback = function() {
     .done(
       function() {
         this.view.startStudy();
-      }
+      }.bind(this)
     );
 };
