@@ -4,7 +4,7 @@ function ExtensionController(appId) {
 
 ExtensionController.prototype.hasChrome = function() {
   return window.chrome && chrome.webstore && chrome.webstore.install;
-}
+};
 
 ExtensionController.prototype.checkForExtension = function() {
   var deferred = $.Deferred();
@@ -20,7 +20,7 @@ ExtensionController.prototype.checkForExtension = function() {
   chrome.runtime.sendMessage(this.appId, 'isInstalledApp?', $.proxy(responseCallback, this));
 
   return deferred;
-}
+};
 
 ExtensionController.prototype.checkForExtensionUpdate = function() {
   var deferred = $.Deferred();
@@ -32,11 +32,11 @@ ExtensionController.prototype.checkForExtensionUpdate = function() {
     } else {
       deferred.resolve();
     }
-  }
+  };
   chrome.runtime.sendMessage(this.appId, 'update!', $.proxy(responseCallback, this));
 
   return deferred;
-}
+};
 
 ExtensionController.prototype.installExtension = function() {
   var deferred = $.Deferred();
@@ -55,7 +55,7 @@ ExtensionController.prototype.installExtension = function() {
     $.proxy(successCallback, this), $.proxy(failureCallback, this));
 
   return deferred;
-}
+};
 
 ExtensionController.prototype.startFeedback = function(data, flowType) {
   var deferred = $.Deferred();
@@ -70,7 +70,7 @@ ExtensionController.prototype.startFeedback = function(data, flowType) {
       notify.warn('There was an error launching the study.');
       deferred.reject();
     }
-  }
+  };
 
   var ajaxDone = function(response) {
     var launchAppParams = {
@@ -86,17 +86,19 @@ ExtensionController.prototype.startFeedback = function(data, flowType) {
     };
 
     chrome.runtime.sendMessage(this.appId, {launchApp: launchAppParams}, $.proxy(launchedAppResponse, this));
-  }
+  };
 
   $.ajax({
     url: '/studies',
     method: 'POST',
     data: data,
-    dataType: 'json'
-  }).done($.proxy(ajaxDone, this)).fail(function(jqXHR) {
-    notify.error(jqXHR.responseText, 'There was an error starting your study.');
-    deferred.reject();
+    dataType: 'json',
+    success: ajaxDone.bind(this),
+    error: function(jqXHR) {
+      notify.error(jqXHR.responseText, 'There was an error starting your study.');
+      deferred.reject();
+    }
   });
 
   return deferred;
-}
+};

@@ -23,11 +23,12 @@ VideoModal.prototype.load = function(scenarioResultHashId, timeSeconds) {
     data: {
       scenario_result_hashid: scenarioResultHashId
     },
-    dataType: 'json'
-  }).done($.proxy(this.loaded, this, timeSeconds
-  )).fail($.proxy(function(jqXHR, textStatus, errorThrown) {
-    notify.warn(jqXHR.responseText);
-  }, this));
+    dataType: 'json',
+    success: this.loaded.bind(this, timeSeconds),
+    error: function(jqXHR) {
+      notify.warn(jqXHR.responseText);
+    }
+  });
 };
 
 // timeSeconds comes first because $.proxy inserts it first

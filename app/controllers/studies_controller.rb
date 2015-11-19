@@ -12,7 +12,7 @@ class StudiesController < ApplicationController
     if params.try(:[], :study).try(:[], :scenario_hashid)
       @scenario = Scenario.find_by_hashid(params[:study][:scenario_hashid])
       if !@scenario.live?
-        render status: 500, plain: 'This study is no longer active.'
+        render status: 500, plain: 'Sorry, this study is no longer active.'
         return
       end
 
