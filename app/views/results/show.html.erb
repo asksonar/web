@@ -3,10 +3,10 @@
 <section class='main-content-header'>
   <%= bsh_split_panel 'col-md-8' %>
   <div class='row'>
-    <div class='col-md-8 summary-highlights-container'>
+    <div class='col-md-8 summary-container'>
       <h1><%= content_for :title %></h1>
       <p class='sub'>by <%= @scenario.created_by.full_name %> (<%= @scenario.created_by.email %>)</p>
-      <div class='summary-container'>
+      <div class='summary-description-container'>
         <div class='left-col'>
           <span class='strong'>Description:</span>
         </div>
@@ -14,25 +14,22 @@
           <span class='summary-description'><%= @scenario.description %></span>
         </div>
       </div>
-      <div class='highlights-container'>
+      <div class='summary-steps-container'>
         <div class='left-col'>
-          <span class='strong'>Highlights:</span>
+          <span class='strong'>Steps:</span>
         </div>
         <div class='right-col'>
-          <% @scenario.scenario_highlights.each_with_index do |highlight, index| %>
-            <a href='<%= highlight_path(highlight) %>' class='highlight-link'
-            ><span class='sub'><%= ppt_date(highlight.created_at) %></span> <%= dt_transcription(highlight.title) %> ...
-            </a>
-          <% end %>
-          <% if @scenario.scenario_highlights.count == 0 %>
-            <span class='sub'><i class='fa fa-question-circle'></i> no highlights added yet</span>
+          <% @scenario.scenario_steps.each do |scenario_step| %>
+            <%= ih_left_indent left_class: '', left_content: "#{scenario_step.step_order + 1}.", div_class: 'summary-step-description' do %>
+              <span><%= scenario_step.description %></span>
+            <% end %>
           <% end %>
         </div>
       </div>
     </div>
     <div class='col-md-4 buttons-container'>
       <div class="clearfix">
-        <h2 class=''>Live</h2>
+        <h3 class=''>Live</h3>
 
         <div id='btn-archive' class="btn-group" data-placement="bottom" data-toggle="tooltip"
           <% if @scenario.live? %>title="Close the study"<% end %>
@@ -42,13 +39,14 @@
           <a class="btn btn-grey btn-failure btn-active-off <% if @scenario.completed? %>active<% end %>">Off</a>
         </div>
 
-        <div class="btn-group pull-right">
-          <div class='btn-wrapper-tooltip' data-placement="bottom" title="Edit the study" data-toggle="tooltip">
-            <a class='btn btn-dark-blue' id='btn-edit' href='<%= edit_result_path(@scenario) %>'><i class='fa fa-edit'></i></a>
-          </div>
-          <div class="btn-wrapper-tooltip" data-placement="bottom" title="Delete the study" data-toggle="tooltip">
-            <a class='btn btn-grey' id='btn-delete'><i class='fa fa-trash-o'></i></a>
-          </div>
+        <div class="btn-group pull-right dropdown">
+          <a class="btn btn-dark-blue dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            More <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right" role="menu">
+            <li><a id="btn-edit" href='<%= edit_result_path(@scenario) %>'><i class='fa fa-edit'></i>Edit the study</a></li>
+            <li><a id="btn-delete"><i class='fa fa-trash-o'></i>Delete the study</a></li>
+          </ul>
         </div>
       </div>
 
@@ -59,9 +57,7 @@
         </span>
       </div>
       <div id='btn-copy-share-link-tooltip'><!-- otherwise interferes with bootstrap (:not-last-child) selectors --></div>
-
-      <h2><%= @scenario.user_completed_count %> completed</h2>
-      <p class='sub'><%= @scenario.user_uploading_count %> uploading</p>
+      <h3><i class="fa fa-check"></i>  <%= @scenario.user_completed_count %> completed</h3>
     </div>
   </div>
 </section>
@@ -92,37 +88,86 @@
 
   <% end %>
 
-  <% @scenario.scenario_steps.each do |scenario_step| %>
-  <div class='panel'>
-    <div class='panel-heading'>
-      <div>
-        <%= ih_left_indent left_class: 'h1', left_content: "#{scenario_step.step_order + 1}.", div_class: 'summary-step-description' do %>
-          <span><%= scenario_step.description %>
-            <% if scenario_step.url %>
-              <br/>
-              <a target="_blank" href='<%=ppu_http(scenario_step.url)%>'><%=scenario_step.url%></a>
-            <% end %>
-          </span>
-        <% end %>
+  <% @scenario.newest_scenario_results.each do |scenario_result| %>
+
+    <div class='panel scenario-results-panel'>
+      <%= bsh_split_panel 'col-sm-8' %>
+      <div class="row">
+        <div class='col-sm-8 result-panel-left'>
+          <h1>
+            <a class="video-link" href="<%=result_video_path(@scenario, scenario_result)%>" data-scenario-result-hashid='<%= scenario_result.hashid %>'><%= scenario_result.email %>
+            </a>
+          </h1>
+          <div class="result-panel-toggle">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="sub btn">
+                <span href="#result-steps-container-<%= scenario_result.hashid %>" aria-controls="home" role="tab" data-toggle="tab">
+                  <i class="fa fa-list-ul"></i><%= pp_plural_with_number(scenario_result.result_step_count, 'Step') %>   <span class="caret"></span>
+                </span class="sub btn">
+              </li>
+              <li role="presentation" class="sub btn">
+                <span href="#result-highlights-container-<%= scenario_result.hashid %>" aria-controls="profile" role="tab" data-toggle="tab">
+                  <i class="fa fa-bookmark"></i><%= pp_plural_with_number(scenario_result.scenario_highlights.count, 'Highlight') %>   <span class="caret"></span>
+                </span class="sub btn">
+              </li>
+              <li role="presentation" class="sub btn">
+                <span href="#result-notes-container-<%= scenario_result.hashid %>" aria-controls="messages" role="tab" data-toggle="tab">
+                  <i class="fa fa-comment"></i><%= pp_plural_with_number(scenario_result.result_notes.count, 'Note') %>   <span class="caret"></span>
+                </span class="sub btn">
+              </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane collapsed-content" id="result-steps-container-<%= scenario_result.hashid %>">
+                <% scenario_result.ordered_result_steps.each do |result_step| %>
+                    <a class='video-link'
+                      href="<%=result_video_path(@scenario, scenario_result)%>?t=<%= result_step.offset_seconds %>"
+                      data-scenario-result-hashid='<%= scenario_result.hashid %>'
+                      data-result-step-offset-seconds='<%= result_step.offset_seconds %>'
+                    >
+                      <div class="result-step-description"><%= result_step.scenario_step_order + 1 %>. <%= result_step.scenario_step_description %></div>
+                      <span class="sub result-step-duration">  (<%= ppt_duration(result_step.completed_seconds) %>)</span>
+                    </a>
+                <% end %>
+              </div>
+              <div role="tabpanel" class="tab-pane collapsed-content" id="result-highlights-container-<%= scenario_result.hashid %>">
+                <% scenario_result.scenario_highlights.each_with_index do |highlight, index| %>
+                  <a href='<%= highlight_path(highlight) %>'>
+                    <span class='sub'><%= ppt_date_abbr(highlight.created_at) %> - </span><%= dt_transcription(highlight.title) %>
+                  </a>
+                <% end %>
+                <% if scenario_result.scenario_highlights.count == 0 %>
+                  <span class='sub'><i class='fa fa-question-circle'></i>no highlights added yet</span>
+                <% end %>
+              </div>
+              <div role="tabpanel" class="tab-pane collapsed-content" id="result-notes-container-<%= scenario_result.hashid %>">
+                <% scenario_result.result_notes.each_with_index do |note, index| %>
+                  <a class='video-link'
+                    href="<%=result_video_path(@scenario, scenario_result)%>?t=<%= note.offset_seconds %>"
+                    data-scenario-result-hashid='<%= scenario_result.hashid %>'
+                    data-result-step-offset-seconds='<%= note.offset_seconds %>'
+                  >
+                    <span class='sub'><%= ppt_seconds(note.offset_seconds) %> - </span><%= dt_transcription(note.text) %>
+                  </a>
+                <% end %>
+                <% if scenario_result.result_notes.count == 0 %>
+                  <span class='sub'><i class='fa fa-question-circle'></i>no notes added yet</span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4 result-panel-right">
+          <div class='sub result-date'><i class="fa fa-calendar-o"></i><%= ppt_date(scenario_result.created_at) %></div>
+          <div class='sub result-duration'><i class="fa fa-clock-o"></i><%= ppt_duration(scenario_result.completed_seconds) %></div>
+        </div>
       </div>
     </div>
-    <div class='panel-body'>
-      <div class='results-container'>
 
-      <% @scenario.newest_scenario_results(scenario_step).each do |scenario_result| %>
-        <a class='video-link'
-          data-scenario-result-hashid='<%=scenario_result.hashid%>'
-          data-result-step-offset-seconds='<%=scenario_result.result_step_offset_seconds(scenario_step)%>'
-        >
-          <span class='sub'><%= ppt_date(scenario_result.created_at) %> - [<%= scenario_result.email %>]</span>
-        </a>
-      <% end %>
-
-      </div>
-    </div>
-  </div>
   <% end %>
-
 </section>
 
 <div class="modal" id='summary_video_container' tabindex='-1'>
@@ -130,8 +175,8 @@
     <div class="modal-content editable-timeline">
       <div class='ctn-modal-header'>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <span class='strong ctn-title'><%= @scenario.title %></span>
-        <span id='ctn-user-email'></span>
+        <h2 class='ctn-title'><%= @scenario.title %></h2>
+        <span class="sub" id='ctn-user-email'></span>
       </div>
       <%= render partial: 'utility/video' %>
 

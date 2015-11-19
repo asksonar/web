@@ -21,11 +21,6 @@ class ScenarioResultPresenter < SimpleDelegator
     }
   end
 
-  def result_step_offset_seconds(scenario_step)
-    result_step = result_steps.find_by_scenario_step_id(scenario_step)
-    result_step.offset_seconds
-  end
-
   def email
     if panelist.email.empty?
       'anonymous'
@@ -69,6 +64,20 @@ class ScenarioResultPresenter < SimpleDelegator
         text: result_transcription.text
       }
     end
+  end
+
+  def completed_seconds
+    result_steps.sum(:completed_seconds)
+  end
+
+  def ordered_result_steps
+    result_steps
+      .order(:started_at)
+      .map(&:prezi)
+  end
+
+  def result_step_count
+    result_steps.count
   end
 
   def scenario

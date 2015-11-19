@@ -29,7 +29,6 @@
       right: 15px;
       top: 33px; // effective height of transcript-header-container
 
-
       .editable-timeline & { bottom: 33px; } // effective height of btn-add-note
     }
 
@@ -43,17 +42,16 @@
 }
 
 .transcript-header-container {
-  #toggle-transcripts {
+  .dropdown-toggle {
     outline: none !important; // need to fight with focus, active, etc.
     float: right;
-    background-color: #FAFAFA;
 
     .show-transcripts & {
       @extend .active;
     }
   }
 
-  h2 {
+  h3 {
     line-height: 33px; // to match that of #toggle-transcripts button
     margin-left: 3px; // to match that of checkbox 2px border + 1px padding
 

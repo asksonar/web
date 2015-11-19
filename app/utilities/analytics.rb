@@ -56,23 +56,13 @@ class Analytics
     end
   end
 
-  def video_seconds(scenario_result)
-    video_seconds = 0
-
-    scenario_result.result_steps.each do |result_step|
-      video_seconds += result_step.completed_seconds
-    end
-
-    video_seconds
-  end
-
   def result_video_viewed(researcher, scenario, scenario_result, is_modal)
     @tracker.track(researcher.hashid, 'Researcher viewed video', {
       'time' => Time.new,
       'is modal' => is_modal,
       'scenario hashid' => scenario.hashid,
       'video hashid' => scenario_result.hashid,
-      'video seconds' => video_seconds(scenario_result)
+      'video seconds' => scenario_result.prezi.completed_seconds
     })
     @tracker.people.set(researcher.hashid, {
       'Last viewed video' => Time.new
@@ -87,7 +77,7 @@ class Analytics
       'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
       'video hashid' => scenario_result.hashid,
-      'video seconds' => video_seconds(scenario_result)
+      'video seconds' => scenario_result.prezi.completed_seconds
     })
     @tracker.track(!colleague.nil? ? colleague.hashid : ip_address, 'Colleague viewed video', {
       'time' => Time.new,
@@ -95,7 +85,7 @@ class Analytics
       'ip_address' => ip_address,
       'scenario hashid' => scenario.hashid,
       'video hashid' => scenario_result.hashid,
-      'video seconds' => video_seconds(scenario_result)
+      'video seconds' => scenario_result.prezi.completed_seconds
     })
     @tracker.people.set(researcher.hashid, {
       'Last colleague viewed video' => Time.new

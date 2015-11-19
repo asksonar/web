@@ -26,7 +26,7 @@ $(function(){
       if (!newResponses.responses.length) {
         newResponses.responses = data;
       } else {
-        newResponses.responses = newResponses.responses.concat(data)
+        newResponses.responses = newResponses.responses.concat(data);
       }
 
       if (data.length === 1) {
@@ -40,13 +40,13 @@ $(function(){
     .fail(function(jqXHR){
       notify.error(jqXHR.responseText);
     });
-  }
+  };
 
   $('.response-alert').on('click', function(){
     $('.response-alert').slideUp();
     $('.response-alert').after(newResponseTemplate(newResponses));
     newResponses = {responses:[]};
-  })
+  });
 
   setInterval(updateResponses, updateInterval);
 });
