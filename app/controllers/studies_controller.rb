@@ -1,8 +1,6 @@
 class StudiesController < ApplicationController
   protect_from_forgery with: :null_session
 
-  attr_writer :service
-
   def show
     @scenario = Scenario.find_by_hashid!(params[:id]).prezi
     track_respondent_landed

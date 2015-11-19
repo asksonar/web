@@ -1,22 +1,6 @@
 class DraftsController < ApplicationController
   before_action :authenticate_researcher!
 
-  attr_writer :scenarios_service
-  attr_writer :scenarios_query
-  attr_writer :drafts_service
-
-  def scenarios_service
-    @scenarios_service ||= ScenariosService.instance
-  end
-
-  def scenarios_query
-    @scenarios_query ||= ScenariosQuery.instance
-  end
-
-  def drafts_service
-    @drafts_service ||= DraftsService.instance
-  end
-
   def index
     @scenarios = scenarios_query.drafts(current_researcher.id).map(&:prezi)
   end
@@ -102,6 +86,18 @@ class DraftsController < ApplicationController
   end
 
   private
+
+  def scenarios_service
+    @scenarios_service ||= ScenariosService.instance
+  end
+
+  def scenarios_query
+    @scenarios_query ||= ScenariosQuery.instance
+  end
+
+  def drafts_service
+    @drafts_service ||= DraftsService.instance
+  end
 
   def scenario_params
     params.require(:scenario).permit(:title, :description)

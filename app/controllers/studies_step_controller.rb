@@ -1,22 +1,6 @@
 class StudiesStepController < ApplicationController
   protect_from_forgery with: :null_session
 
-  attr_writer :result_steps_service
-  attr_writer :result_transcriptions_service
-  attr_writer :result_notes_service
-
-  def result_steps_service
-    @result_steps_service ||= ResultStepsService.instance
-  end
-
-  def result_transcriptions_service
-    @result_transcriptions_service ||= ResultTranscriptionsService.instance
-  end
-
-  def result_notes_service
-    @result_notes_service ||= ResultNotesService.instance
-  end
-
   def create
     @scenario_result = ScenarioResult.find_by_hashid!(params_study_hashid)
     @scenario_step = ScenarioStep.find_by_hashid(params_scenario_step_hashid)
@@ -38,11 +22,19 @@ class StudiesStepController < ApplicationController
     render plain: 'OK'
   end
 
-  def track_respondent_stepped(scenario)
-    Analytics.instance.respondent_stepped(request.remote_ip, scenario.created_by, scenario, @scenario_result, @scenario_step, @result_step)
+  private
+
+  def result_steps_service
+    @result_steps_service ||= ResultStepsService.instance
   end
 
-  private
+  def result_transcriptions_service
+    @result_transcriptions_service ||= ResultTranscriptionsService.instance
+  end
+
+  def result_notes_service
+    @result_notes_service ||= ResultNotesService.instance
+  end
 
   def params_study_hashid
     params[:study_id]
@@ -81,5 +73,9 @@ class StudiesStepController < ApplicationController
         text: note['text']
       }
     end
+  end
+
+  def track_respondent_stepped(scenario)
+    Analytics.instance.respondent_stepped(request.remote_ip, scenario.created_by, scenario, @scenario_result, @scenario_step, @result_step)
   end
 end

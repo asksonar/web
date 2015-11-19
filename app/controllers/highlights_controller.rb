@@ -1,10 +1,4 @@
 class HighlightsController < ApplicationController
-  attr_writer :service
-
-  def service
-    @service ||= HighlightsService.instance
-  end
-
   def new
     @scenario_result = ScenarioResult.find_by_hashid(params[:video])
   end
@@ -39,6 +33,10 @@ class HighlightsController < ApplicationController
   end
 
   private
+
+  def service
+    @service ||= HighlightsService.instance
+  end
 
   def highlight_params
     # try(:keys), as opposed to just .keys, lets us compensate for a completely missing hash

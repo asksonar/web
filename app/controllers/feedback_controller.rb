@@ -1,6 +1,4 @@
 class FeedbackController < ApplicationController
-  attr_writer :query
-
   PAGE_SIZE = 20
 
   def index

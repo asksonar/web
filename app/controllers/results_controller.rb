@@ -3,22 +3,6 @@ class ResultsController < ApplicationController
 
   PAGE_SIZE = 20
 
-  attr_writer :service
-  attr_writer :scenario_results_service
-  attr_writer :query
-
-  def service
-    @service ||= ScenariosService.instance
-  end
-
-  def scenario_results_service
-    @scenario_results_service ||= ScenarioResultsService.instance
-  end
-
-  def query
-    @query ||= ScenariosQuery.instance
-  end
-
   def index
     @results = query.results_paged(params[:page].to_i, PAGE_SIZE, company: current_researcher.company).map(&:prezi)
   end
@@ -43,7 +27,7 @@ class ResultsController < ApplicationController
     end
 
     # we need to generate sample data for the study
-    if params[:walkthrough]=='true'
+    if params[:walkthrough] == 'true'
       scenario_results_service.generate_new_sample_result(@result)
     end
 
@@ -55,7 +39,20 @@ class ResultsController < ApplicationController
     service.set_deleted(@result)
 
     flash[:info] = '<strong>Your study has been deleted.</strong>'
-    render json: {redirect_url: results_path}
+    render json: { redirect_url: results_path }
   end
 
+  private
+
+  def service
+    @service ||= ScenariosService.instance
+  end
+
+  def scenario_results_service
+    @scenario_results_service ||= ScenarioResultsService.instance
+  end
+
+  def query
+    @query ||= ScenariosQuery.instance
+  end
 end
