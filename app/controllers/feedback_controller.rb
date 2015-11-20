@@ -1,4 +1,5 @@
 class FeedbackController < ApplicationController
+  before_action :authenticate_researcher!
   PAGE_SIZE = 20
 
   def index
