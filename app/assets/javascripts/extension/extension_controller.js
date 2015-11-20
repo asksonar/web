@@ -51,8 +51,14 @@ ExtensionController.prototype.installExtension = function() {
     deferred.reject();
   };
 
-  chrome.webstore.install("https://chrome.google.com/webstore/detail/" + this.appId,
-    $.proxy(successCallback, this), $.proxy(failureCallback, this));
+  try {
+    chrome.webstore.install("https://chrome.google.com/webstore/detail/" + this.appId,
+      $.proxy(successCallback, this), $.proxy(failureCallback, this));
+  } catch (e) {
+    notify.warn('There was an error contacting the webstore.');
+    deferred.reject();
+    throw e;
+  }
 
   return deferred;
 };

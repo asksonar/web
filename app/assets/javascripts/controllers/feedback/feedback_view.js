@@ -14,17 +14,24 @@ FeedbackView.prototype.initHandlers = function() {
 
 FeedbackView.prototype.recordFeedback = function() {
   if (!this.extension.hasChrome()) {
-    notify.error('Get Chrome to record your screen and voice.');
+    notify.error("Get Chrome to start recording. <a href='https://www.google.com/chrome/browser/desktop/index.html' target='_blank'>Install Chrome.</a>");
   } else {
     this.extension.checkForExtension()
       .done(this.startFeedback.bind(this))
       .fail(
         function() {
-          this.extension.installExtension()
-            .done(this.startFeedback.bind(this));
-        }
+          notify.error('The extension needs to be added first. <a>Add the extension.</a>', null, this.addExtension.bind(this));
+        }.bind(this)
       );
   }
+};
+
+FeedbackView.prototype.addExtension = function() {
+  this.extension
+    .installExtension()
+    .done(
+      this.startFeedback.bind(this)
+    );
 };
 
 FeedbackView.prototype.startFeedback = function() {

@@ -32,13 +32,14 @@ NotificationController.prototype.warn = function(message, defaultMessage) {
   $.notify(message, { delay: 5000 });
 }
 
-NotificationController.prototype.error = function(message, defaultMessage) {
+NotificationController.prototype.error = function(message, defaultMessage, handler) {
   // hack for error-catching
   if (message && message.length > 300) {
     message = defaultMessage || 'There was an error processing your request.'
   }
 
-  $.notify(message);
+  var notify = $.notify(message);
+  notify.$ele.find('a').on('click', handler);
 }
 
 window.notify = new NotificationController();
