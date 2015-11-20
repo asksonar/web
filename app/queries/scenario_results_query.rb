@@ -15,7 +15,7 @@ class ScenarioResultsQuery
       .offset(page * page_size)
   end
 
-  def count_newer_than(result)
-    ScenarioResult.where('created_at > ?', result.created_at).count
+  def count_newer_than(result, extra_where = {})
+    my_feedback(extra_where).where('scenario_results.created_at > ?', result.created_at).count
   end
 end

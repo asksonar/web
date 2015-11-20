@@ -1,14 +1,14 @@
 class FeedbackController < ApplicationController
-  PAGE_SIZE = 11
+  PAGE_SIZE = 20
 
   def index
-    @scenario_results, @has_next = paged_results(params[:page].to_i)
+    @page = params[:page].to_i
+    @scenario_results, @has_next = paged_results(@page)
   end
 
   def show
     @scenario_result = ScenarioResult.find_by_hashid!(params[:id])
-
-    @page = query.count_newer_than(@scenario_result) / PAGE_SIZE
+    @page = query.count_newer_than(@scenario_result, created_by: current_researcher) / PAGE_SIZE
     @scenario_results, @has_next = paged_results(@page)
 
     render :index

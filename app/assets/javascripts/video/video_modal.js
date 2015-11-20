@@ -1,4 +1,4 @@
-VideoModal = function(config, video, transcript, videoLink) {
+VideoModal = function(config, video, transcript, videoLink, videoHistory) {
   this.$modal = config.modal;
   this.$divTitle = config.divTitle;
   this.$divUserEmail = config.divUserEmail;
@@ -7,6 +7,7 @@ VideoModal = function(config, video, transcript, videoLink) {
   this.video = video;
   this.transcript = transcript;
   this.videoLink = videoLink;
+  this.videoHistory = videoHistory;
 
   this.init();
 };
@@ -64,12 +65,12 @@ VideoModal.prototype.show = function() {
 
 VideoModal.prototype.shown = function() {
   this.video.play();
-  new VideoHistory().loadVideo(this.scenarioResultHashId);
+  this.videoHistory.loadVideo(this.scenarioResultHashId);
   this.transcript.refreshView();
 };
 
 VideoModal.prototype.hidden = function() {
   this.video.pause();
-  new VideoHistory().unloadVideo();
+  this.videoHistory.unloadVideo();
   this.transcript.clearView();
 };

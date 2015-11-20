@@ -6,7 +6,7 @@
   sonar.request = {
     controller: '<%= request.params[:controller] %>',
     action: '<%= request.params[:action] %>',
-    page: <%= @page || request.params[:page] || 0 %>
+    page: <%= @page || 0 %>
   };
 
   <% if protect_against_forgery? %>

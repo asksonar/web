@@ -4,7 +4,8 @@ class ResultsController < ApplicationController
   PAGE_SIZE = 20
 
   def index
-    results = query.results_paged(params[:page].to_i, PAGE_SIZE, true, company: current_researcher.company)
+    @page = params[:page].to_i
+    results = query.results_paged(@page, PAGE_SIZE, true, company: current_researcher.company)
     @results = results[0, PAGE_SIZE].map(&:prezi)
     @has_next = results.length > PAGE_SIZE
   end

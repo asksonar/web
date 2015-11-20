@@ -45,7 +45,7 @@ $(function(){
     modal: $('#summary_video_container'),
     divUserEmail: $('#ctn-user-email'),
     divTitle: $('.ctn-title')
-  }, videoController, videoTranscript, videoLink);
+  }, videoController, videoTranscript, videoLink, new VideoResultsHistory());
 
   var deleteModal = new DeleteModal({
     modal: $('#delete_confirmation_container'),

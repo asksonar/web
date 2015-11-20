@@ -43,7 +43,7 @@ $(function(){
     modal: $('#summary_video_container'),
     divUserEmail: $('#ctn-user-email'),
     divTitle: $('.ctn-title')
-  }, videoController, videoTranscript, videoLink);
+  }, videoController, videoTranscript, videoLink, new VideoFeedbackHistory());
 
   var timeSeconds = new URI(location.href).search(true).t || 0;
   if (sonar.scenarioResult) {
