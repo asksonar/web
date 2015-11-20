@@ -209,3 +209,17 @@ input.form-control + span.input-group-btn .btn {
     padding: 0px;
   }
 }
+
+.fa-ft { /* ft for text */
+  padding-right: .26em; /* roughly equivalent to a &nbsp; */
+}
+
+.fa-fl { /* fl for list */
+  @extend .fa-fw;
+  text-align: left;
+}
+
+.fa-ftl { /* ftl for text list */
+  @extend .fa-ft;
+  @extend .fa-fl;
+}

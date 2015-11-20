@@ -3,7 +3,7 @@
 <% end %>
 
 <section class='main-content-header'>
-  <a id='btn-record-feedback' class='btn btn-med btn-dark-blue pull-right'><i class='fa fa-plus'></i> Start recording feedback</a>
+  <a id='btn-record-feedback' class='btn btn-med btn-dark-blue pull-right'><i class='fa fa-ft fa-plus'></i>Start recording feedback</a>
   <h1><%= content_for :title %></h1>
 </section>
 <section class="main-content">
@@ -25,8 +25,8 @@
     <div class="modal-content editable-timeline">
       <div class='ctn-modal-header'>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <span class='h3 strong ctn-title'></span>
-        <span id='ctn-user-email'></span>
+        <h2 class='ctn-title'></h2>
+        <span class="sub" id='ctn-user-email'></span>
       </div>
       <%= render partial: 'utility/video' %>
 

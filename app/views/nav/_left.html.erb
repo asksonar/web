@@ -6,10 +6,10 @@
       <% if researcher_signed_in? %>
         <%= navbar_item "New Study", '/create', class: 'div-btn-create' %>
 
-        <%= navbar_item "<i class='fa fa-fw fa-bar-chart'></i> All Results", '/results' %>
-        <%= navbar_item "<i class='fa fa-fw fa-bullhorn'></i> Recent Responses", '/responses' %>
-        <%= navbar_item "<i class='fa fa-fw fa-edit'></i> Drafts" + (drafts_count > 0 ? " (#{drafts_count.to_s})" : ''), '/drafts' %>
-        <%= navbar_item "<i class='fa fa-fw fa-comments-o'></i> My Feedback", '/feedback' %>
+        <%= navbar_item "<i class='fa fa-ftl fa-bar-chart'></i>All Results", '/results' %>
+        <%= navbar_item "<i class='fa fa-ftl fa-bullhorn'></i>Recent Responses", '/responses' %>
+        <%= navbar_item "<i class='fa fa-ftl fa-edit'></i>Drafts" + (drafts_count > 0 ? " (#{drafts_count.to_s})" : ''), '/drafts' %>
+        <%= navbar_item "<i class='fa fa-ftl fa-comments-o'></i>My Feedback", '/feedback' %>
       <% end %>
     </ul>
   </nav>
