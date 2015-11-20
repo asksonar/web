@@ -1,22 +1,6 @@
 class DraftsController < ApplicationController
   before_action :authenticate_researcher!
 
-  attr_writer :scenarios_service
-  attr_writer :scenarios_query
-  attr_writer :drafts_service
-
-  def scenarios_service
-    @scenarios_service ||= ScenariosService.instance
-  end
-
-  def scenarios_query
-    @scenarios_query ||= ScenariosQuery.instance
-  end
-
-  def drafts_service
-    @drafts_service ||= DraftsService.instance
-  end
-
   def index
     @scenarios = scenarios_query.drafts(current_researcher.id).map(&:prezi)
   end
@@ -27,7 +11,7 @@ class DraftsController < ApplicationController
   end
 
   def edit
-    @scenario = Scenario.find_by_hashid(params[:id]).prezi
+    @scenario = Scenario.find_by_hashid!(params[:id]).prezi
     @template = Template.find_by(value: params[:template])
   end
 
@@ -63,7 +47,7 @@ class DraftsController < ApplicationController
   end
 
   def update
-    @scenario = Scenario.find_by_hashid(params[:id])
+    @scenario = Scenario.find_by_hashid!(params[:id])
 
     drafts_service.update(
       @scenario,
@@ -94,7 +78,7 @@ class DraftsController < ApplicationController
   end
 
   def destroy
-    @result = Scenario.find_by_hashid(params[:id])
+    @result = Scenario.find_by_hashid!(params[:id])
     scenarios_service.set_deleted(@result)
 
     flash[:info] = '<strong>Your draft has been deleted.</strong>'
@@ -102,6 +86,18 @@ class DraftsController < ApplicationController
   end
 
   private
+
+  def scenarios_service
+    @scenarios_service ||= ScenariosService.instance
+  end
+
+  def scenarios_query
+    @scenarios_query ||= ScenariosQuery.instance
+  end
+
+  def drafts_service
+    @drafts_service ||= DraftsService.instance
+  end
 
   def scenario_params
     params.require(:scenario).permit(:title, :description)

@@ -186,6 +186,13 @@ input.form-control + span.input-group-btn .btn {
   background-color: #FAFAFA;
 }
 
+@media (min-width: $screen-sm-min) {
+  .modal-full {
+    width: auto;
+    margin-left: 30px;
+    margin-right: 15px;
+  }
+}
 
 .panel {
   position: relative;
@@ -201,4 +208,18 @@ input.form-control + span.input-group-btn .btn {
   .panel-body {
     padding: 0px;
   }
+}
+
+.fa-ft { /* ft for text */
+  padding-right: .26em; /* roughly equivalent to a &nbsp; */
+}
+
+.fa-fl { /* fl for list */
+  @extend .fa-fw;
+  text-align: left;
+}
+
+.fa-ftl { /* ftl for text list */
+  @extend .fa-ft;
+  @extend .fa-fl;
 }

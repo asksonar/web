@@ -35,14 +35,16 @@ modulejs.define('TranscriptElement', ['TimelineElement'], function(timelineEleme
         time: time,
         text: text,
         authenticity_token: AUTH_TOKEN
-      }
-    }).success($.proxy(function(response) {
-      this.setTime(response.time);
-      this.setText(response.text);
-      this.saveSuccess();
-    }, this)).fail($.proxy(function() {
-      this.saveFail();
-    }, this));
+      },
+      success: function(response) {
+        this.setTime(response.time);
+        this.setText(response.text);
+        this.saveSuccess();
+      }.bind(this),
+      error: function() {
+        this.saveFail();
+      }.bind(this)
+    });
   };
 
   return transcriptElement;

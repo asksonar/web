@@ -1,6 +1,10 @@
 <section class='main-content-header'>
-  <a href='<%= result_path(@scenario) %>' class='strong ctn-title'><%= @scenario.title %></a>
-  <span id='ctn-user-email'><%= @scenario_result.prezi.email %></span>
+  <% if @scenario_result.my_feedback? %>
+    <span class='strong ctn-title'><%= @scenario_result.title %></span>
+  <% else %>
+    <a href='<%= result_path(@scenario_result.scenario) %>' class='strong ctn-title'><%= @scenario_result.title %></a>
+  <% end %>
+  <span id='ctn-user-email'><%= @scenario_result.email %></span>
 </section>
 <section class="main-content">
 

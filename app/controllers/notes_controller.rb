@@ -1,10 +1,4 @@
 class NotesController < ApplicationController
-  attr_writer :service
-
-  def service
-    @service ||= ResultNotesService.instance
-  end
-
   def create
     result_note = service.create_from_scenario_result_hashid(
       scenario_result_hashid: params[:scenario_result_hashid],
@@ -29,5 +23,11 @@ class NotesController < ApplicationController
   def destroy
     service.destroy_from_hashid(params[:id])
     render plain: 'OK'
+  end
+
+  private
+
+  def service
+    @service ||= ResultNotesService.instance
   end
 end

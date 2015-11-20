@@ -20,25 +20,25 @@ $(function(){
     $.ajax({
       type: 'GET',
       url: '/responses.json/',
-      data: { startTime: startTime }
-    })
-    .success(function(data){
-      if (!newResponses.responses.length) {
-        newResponses.responses = data;
-      } else {
-        newResponses.responses = newResponses.responses.concat(data);
-      }
+      data: { startTime: startTime },
+      success: function(data){
+        if (!newResponses.responses.length) {
+          newResponses.responses = data;
+        } else {
+          newResponses.responses = newResponses.responses.concat(data);
+        }
 
-      if (data.length === 1) {
-        $('.response-alert').text('Show ' + data.length + ' new response');
-        $('.response-alert').slideDown();
-      } else if (data.length > 1) {
-        $('.response-alert').text('Show ' + data.length + ' new responses');
-        $('.response-alert').slideDown();
+        if (data.length === 1) {
+          $('.response-alert').text('Show ' + data.length + ' new response');
+          $('.response-alert').slideDown();
+        } else if (data.length > 1) {
+          $('.response-alert').text('Show ' + data.length + ' new responses');
+          $('.response-alert').slideDown();
+        }
+      },
+      error: function(jqXHR){
+        notify.error(jqXHR.responseText);
       }
-     })
-    .fail(function(jqXHR){
-      notify.error(jqXHR.responseText);
     });
   };
 

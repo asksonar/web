@@ -4,6 +4,9 @@
 # make sure it's up and running
 vagrant up
 
+# reset the date
+vagrant ssh -c "sudo date -s $(date -u '+%H:%M:%S')"
+
 # start up db from base postgres image
 docker run -d --name db \
   -v "/etc/postgresql" \
@@ -44,5 +47,4 @@ docker run -d --name web \
 docker exec web bundle install
 # fire up bash
 docker exec -it web bash -l
-# /etc/my_startup/start_bundle.sh
-# /etc/my_startup/start_thin.sh
+# ./thin

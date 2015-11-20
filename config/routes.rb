@@ -11,10 +11,11 @@ Rails.application.routes.draw do
   get '/videos.json', to: 'videos_json#show'
   get '/create', to: 'drafts#new' # so it doesn't highlight the left nav
   post '/create', to: 'drafts#create'
-  get '/share/videos/:id', to: 'share_videos#show'
+  get '/share/videos/:id', to: 'share_videos#show', as: 'share_videos'
   get '/results/:id/edit', to: 'drafts#edit'
   patch '/results/:id/edit', to: 'drafts#update'
   get '/responses.json', to: 'responses_json#index'
+  get '/feedback/videos/:id', to: 'feedback#show', as: 'feedback_videos'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -43,6 +44,7 @@ Rails.application.routes.draw do
   resources :results do
     resources :videos, only: [:show], controller: 'results'
   end
+  resources :feedback, controller: 'feedback'
 
   devise_for :researchers,
     path: 'accounts',

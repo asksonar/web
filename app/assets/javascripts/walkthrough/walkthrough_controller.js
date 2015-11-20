@@ -16,7 +16,7 @@ function WalkthroughController(config, overlay, view, arrow) {
 
 WalkthroughController.prototype.init = function() {
 
-}
+};
 
 WalkthroughController.prototype.show = function() {
 
@@ -42,7 +42,7 @@ WalkthroughController.prototype.show = function() {
       $(window).on('load', $.proxy(this.showResults, this));
       break;
   }
-}
+};
 
 WalkthroughController.prototype.showStart = function() {
   var target = this.overlay.showCreate();
@@ -60,7 +60,7 @@ WalkthroughController.prototype.showStart = function() {
 
   var btnCreateHref = this.$btnCreate.attr('href');
   this.$btnCreate.attr('href', btnCreateHref + '?walkthrough=template');
-}
+};
 
 WalkthroughController.prototype.showTemplate = function() {
   var target = this.overlay.showTemplate();
@@ -79,7 +79,7 @@ WalkthroughController.prototype.showTemplate = function() {
   this.$btnTemplate.on('shown.bs.dropdown', $.proxy(this.showDropdown, this, popup));
   this.$btnTemplate.find('.dropdown-menu li').addClass('disabled');
   this.$btnTemplate.find('.dropdown-menu').prepend("<li><a href='?template=sample&walkthrough=create'>Sample study</a></li>");
-}
+};
 
 WalkthroughController.prototype.showDropdown = function(popup) {
   var target = this.overlay.showDropdown();
@@ -103,7 +103,7 @@ WalkthroughController.prototype.showDropdown = function(popup) {
     );
     this.arrow.show();
   }, this));
-}
+};
 
 WalkthroughController.prototype.showCreate = function() {
   var target = this.overlay.showPublish();
@@ -119,7 +119,7 @@ WalkthroughController.prototype.showCreate = function() {
     'horizontal'
   );
   this.arrow.show();
-}
+};
 
 WalkthroughController.prototype.showShareHero = function() {
   var target = this.overlay.showHero();
@@ -143,7 +143,7 @@ WalkthroughController.prototype.showShareHero = function() {
   this.$btnCopyHero.on('click', $.proxy(this.createSampleResponse, this));
   // shouldn't trigger is flash isn't available
   //new ZeroClipboard(this.$btnCopyHero.get()).on("copy", $.proxy(this.createSampleResponse, this));
-}
+};
 
 WalkthroughController.prototype.showShareCopyLink = function() {
   var target = this.overlay.showCopyLink();
@@ -162,14 +162,14 @@ WalkthroughController.prototype.showShareCopyLink = function() {
 
   var linkToResults = function() {
     location = new URL(location.href).pathname + '?walkthrough=results';
-  }
+  };
 
   // shouldn't trigger if zeroclipboard is available
   this.$btnCopyLink.on('click', linkToResults);
   // shouldn't trigger is flash isn't available
   //new ZeroClipboard(this.$btnCopyLink.get()).on("copy", linkToResults);
 
-}
+};
 
 WalkthroughController.prototype.createSampleResponse = function() {
   $.ajax({
@@ -179,13 +179,15 @@ WalkthroughController.prototype.createSampleResponse = function() {
       _method: 'PATCH',
       walkthrough: true,
       authenticity_token: AUTH_TOKEN
+    },
+    success: function() {
+      location = new URL(location.href).pathname + '?walkthrough=results';
+    },
+    error: function(jqXHR) {
+      notify.error(jqXHR.responseText, 'There was an error retrieving the sample response.');
     }
-  }).success(function() {
-    location = new URL(location.href).pathname + '?walkthrough=results';
-  }).fail(function(jqXHR) {
-    notify.error(jqXHR.responseText, 'There was an error retrieving the sample response.');
   });
-}
+};
 
 WalkthroughController.prototype.showResults = function() {
   var target = this.overlay.showResults();
@@ -203,7 +205,7 @@ WalkthroughController.prototype.showResults = function() {
   this.arrow.show();
 
   this.$linkFirstResult.on('click', $.proxy(this.showModal, this));
-}
+};
 
 WalkthroughController.prototype.showModal = function() {
   this.overlay.showNone();
@@ -227,10 +229,10 @@ WalkthroughController.prototype.showModal = function() {
 
   this.$modal.on('hide.bs.modal', $.proxy(this.arrow.hide, this.arrow));
   this.$modal.on('hidden.bs.modal', $.proxy(this.showFinish, this));
-}
+};
 
 WalkthroughController.prototype.showFinish = function() {
   this.view.showFinish();
 
   this.arrow.hide();
-}
+};

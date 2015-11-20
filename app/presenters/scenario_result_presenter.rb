@@ -8,7 +8,8 @@ class ScenarioResultPresenter < SimpleDelegator
       shareLink: share_link,
       email: email,
       transcriptionArray: transcription_array,
-      highlightedArray: highlighted_array
+      highlightedArray: highlighted_array,
+      title: title
     }
   end
 
@@ -17,15 +18,29 @@ class ScenarioResultPresenter < SimpleDelegator
       result_video_path: result_video_url,
       email: email,
       scenario_step_count: scenario_step_count,
-      scenario_title: scenario_title,
+      scenario_title: scenario_title
     }
   end
 
-  def email
-    if panelist.email.empty?
-      'anonymous'
+  def my_feedback?
+    scenario.nil?
+  end
+
+  def title
+    if scenario
+      scenario.title
+    elsif super.blank?
+      'My untitled feedback'
     else
-      panelist.email
+      super
+    end
+  end
+
+  def email
+    if scenario
+      panelist.prezi.email
+    else
+      created_by.email
     end
   end
 
@@ -81,7 +96,7 @@ class ScenarioResultPresenter < SimpleDelegator
   end
 
   def scenario
-    super.prezi
+    super.try(:prezi)
   end
 
   def scenario_title
@@ -95,5 +110,4 @@ class ScenarioResultPresenter < SimpleDelegator
   def result_video_url
     Rails.application.routes.url_helpers.result_video_path(scenario, self)
   end
-
 end

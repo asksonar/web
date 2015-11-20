@@ -29,12 +29,12 @@ DeleteModal.prototype.deleteStudy = function(event) {
     data: {
       _method: 'DELETE',
       authenticity_token: AUTH_TOKEN
+    },
+    success: function(data){
+      window.location.replace(data.redirect_url);
+    },
+    error: function(jqXHR){
+      notify.error(jqXHR.responseText);
     }
-  })
-  .success(function(data){
-    window.location.replace(data.redirect_url);
-  })
-  .fail($.proxy(function(jqXHR){
-    notify.error(jqXHR.responseText);
-  }, this));
+  });
 };
