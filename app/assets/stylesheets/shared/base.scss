@@ -210,13 +210,17 @@ input.form-control + span.input-group-btn .btn {
   }
 }
 
+.fa {
+  min-width: 1.05em; /* icons such as fa-comment get cut off if width is 1em */
+  text-align: left;
+}
+
 .fa-ft { /* ft for text */
-  padding-right: .26em; /* roughly equivalent to a &nbsp; */
+  margin-right: .26em; /* roughly equivalent to a &nbsp; */
 }
 
 .fa-fl { /* fl for list */
-  @extend .fa-fw;
-  text-align: left;
+  width: 1.28571429em; /* from fa-fw */
 }
 
 .fa-ftl { /* ftl for text list */

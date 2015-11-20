@@ -14,7 +14,7 @@ FeedbackView.prototype.initHandlers = function() {
 
 FeedbackView.prototype.recordFeedback = function() {
   if (!this.extension.hasChrome()) {
-    notify.error("Get Chrome to start recording. <a href='https://www.google.com/chrome/browser/desktop/index.html' target='_blank'>Install Chrome.</a>");
+    notify.error("Get Google Chrome to start recording. <a href='https://www.google.com/chrome/browser/desktop/index.html' target='_blank'>Install Chrome.</a>");
   } else {
     this.extension.checkForExtension()
       .done(this.startFeedback.bind(this))
