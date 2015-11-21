@@ -1,10 +1,4 @@
 class TranscriptsController < ApplicationController
-  attr_writer :service
-
-  def service
-    @service ||= ResultTranscriptionsService.instance
-  end
-
   def update
     result_transcription = service.update_from_hashid(
       hashid: params[:id],
@@ -14,5 +8,11 @@ class TranscriptsController < ApplicationController
 
     json = result_transcription.prezi.public_json
     render json: json
+  end
+
+  private
+
+  def service
+    @service ||= ResultTranscriptionsService.instance
   end
 end

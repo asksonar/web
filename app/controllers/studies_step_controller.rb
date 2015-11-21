@@ -1,10 +1,28 @@
 class StudiesStepController < ApplicationController
   protect_from_forgery with: :null_session
 
-  after_action :track_respondent_stepped, only: :create
+  def create
+    @scenario_result = ScenarioResult.find_by_hashid!(params_study_hashid)
+    @scenario_step = ScenarioStep.find_by_hashid(params_scenario_step_hashid)
 
-  attr_writer :result_steps_service
-  attr_writer :result_transcriptions_service
+    if @scenario_step
+      @result_step = result_steps_service.create(
+        step_params,
+        @scenario_result,
+        @scenario_step
+      )
+      track_respondent_stepped(@scenario_result.scenario)
+    end
+
+    result_transcriptions_service.create(transcriptions_params, @scenario_result)
+    result_notes_service.create_from_params(notes_params, @scenario_result)
+
+    Resque.enqueue(ProcessTranscriptionWorker, @scenario_result.id)
+
+    render plain: 'OK'
+  end
+
+  private
 
   def result_steps_service
     @result_steps_service ||= ResultStepsService.instance
@@ -14,30 +32,13 @@ class StudiesStepController < ApplicationController
     @result_transcriptions_service ||= ResultTranscriptionsService.instance
   end
 
-
-  def create
-    @scenario_result = ScenarioResult.find_by_hashid(params_study_hashid)
-    @scenario_step = ScenarioStep.find_by_hashid(params_scenario_step_hashid)
-
-    @result_step = result_steps_service.create(
-      step_params,
-      @scenario_result,
-      @scenario_step
-    )
-
-    result_transcriptions_service.create(transcriptions_params, @scenario_result)
-
-    Resque.enqueue(ProcessTranscriptionWorker, @scenario_result.id)
-
-    render plain: 'OK'
+  def result_notes_service
+    @result_notes_service ||= ResultNotesService.instance
   end
 
-  def track_respondent_stepped
-    scenario = @scenario_result.scenario
-    Analytics.instance.respondent_stepped(request.remote_ip, scenario.created_by, scenario, @scenario_result, @scenario_step, @result_step)
+  def analytics
+    @analytics ||= Analytics.instance
   end
-
-  private
 
   def params_study_hashid
     params[:study_id]
@@ -67,5 +68,18 @@ class StudiesStepController < ApplicationController
         text: transcription['text']
       }
     end
+  end
+
+  def notes_params
+    params_step['notes'].map do |note|
+      {
+        offset_seconds: note['offset'] / 1000.0,
+        text: note['text']
+      }
+    end
+  end
+
+  def track_respondent_stepped(scenario)
+    analytics.respondent_stepped(request.remote_ip, scenario.created_by, scenario, @scenario_result, @scenario_step, @result_step)
   end
 end

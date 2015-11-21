@@ -16,9 +16,9 @@ class ScenariosQuery
   end
 
   # page index is 0-based
-  def results_paged(page, page_size, extra_where = {})
+  def results_paged(page, page_size, extra_one = false, extra_where = {})
     results(extra_where)
-      .limit(page_size)
+      .limit(page_size + (extra_one ? 1 : 0))
       .offset(page * page_size)
   end
 end

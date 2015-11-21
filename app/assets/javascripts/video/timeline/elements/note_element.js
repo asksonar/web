@@ -44,20 +44,17 @@ modulejs.define('NoteElement', ['TimelineElement'], function(timelineElement) {
         text: text,
         scenario_result_hashid: this.scenarioResultHashId,
         authenticity_token: AUTH_TOKEN
-      }
-    }).success($.proxy(function(response) {
-      this.trigger('saveSuccess', response);
-    }, this)).fail($.proxy(function() {
-      this.trigger('saveFail', response);
-    }, this));
-  };
-
-  var _saveSuccess = noteElement.saveSuccess || $.noop;
-  noteElement.saveSuccess = function(event, response) {
-    _saveSuccess.apply(this, arguments);
-    this.hashid = response.hashid;
-    this.setTime(response.time);
-    this.setText(response.text);
+      },
+      success: function(response) {
+        this.hashid = response.hashid;
+        this.setTime(response.time);
+        this.setText(response.text);
+        this.saveSuccess();
+      }.bind(this),
+      error: function(jqXHR) {
+        this.saveFail(jqXHR.responseText);
+      }.bind(this)
+    });
   };
 
   noteElement.trash = function() {

@@ -1,6 +1,4 @@
 class VideosJsonController < ApplicationController
-  after_action :track_modal_video_viewed, only: :show
-
   def show
     @scenario_result = ScenarioResult.find_by_hashid(params[:scenario_result_hashid])
     if @scenario_result.nil?
@@ -9,9 +7,22 @@ class VideosJsonController < ApplicationController
 
     json = @scenario_result.prezi.public_json
     render json: json
+
+    track_video_viewed
   end
 
-  def track_modal_video_viewed
-    Analytics.instance.modal_video_viewed(current_researcher, request.remote_ip, @scenario_result)
+  private
+
+  def analytics
+    @analytics ||= Analytics.instance
+  end
+
+  def track_video_viewed
+    analytics.video_viewed(current_researcher,
+      request.remote_ip,
+      @scenario_result.scenario,
+      @scenario_result,
+      true
+    )
   end
 end

@@ -1,11 +1,13 @@
-VideoModal = function(config, video, transcript, videoLink) {
+VideoModal = function(config, video, transcript, videoLink, videoHistory) {
   this.$modal = config.modal;
+  this.$divTitle = config.divTitle;
   this.$divUserEmail = config.divUserEmail;
   this.$btnToggleViewMode = config.btnToggleViewMode;
 
   this.video = video;
   this.transcript = transcript;
   this.videoLink = videoLink;
+  this.videoHistory = videoHistory;
 
   this.init();
 };
@@ -22,11 +24,12 @@ VideoModal.prototype.load = function(scenarioResultHashId, timeSeconds) {
     data: {
       scenario_result_hashid: scenarioResultHashId
     },
-    dataType: 'json'
-  }).done($.proxy(this.loaded, this, timeSeconds
-  )).fail($.proxy(function(jqXHR, textStatus, errorThrown) {
-    notify.warn(jqXHR.responseText);
-  }, this));
+    dataType: 'json',
+    success: this.loaded.bind(this, timeSeconds),
+    error: function(jqXHR) {
+      notify.warn(jqXHR.responseText);
+    }
+  });
 };
 
 // timeSeconds comes first because $.proxy inserts it first
@@ -51,6 +54,7 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
   this.videoLink.updateShareLink(data.shareLink);
 
   this.$divUserEmail.html(data.email);
+  this.$divTitle.html(data.title);
 
   this.video.currentTime(timeSeconds);
   this.show();
@@ -63,12 +67,12 @@ VideoModal.prototype.show = function() {
 
 VideoModal.prototype.shown = function() {
   this.video.play();
-  new VideoHistory().loadVideo(this.scenarioResultHashId);
+  this.videoHistory.loadVideo(this.scenarioResultHashId);
   this.transcript.refreshView();
 };
 
 VideoModal.prototype.hidden = function() {
   this.video.pause();
-  new VideoHistory().unloadVideo();
+  this.videoHistory.unloadVideo();
   this.transcript.clearView();
 };

@@ -1,10 +1,8 @@
 $(function(){
 
-  if (!$('#results-show').length) {
+  if (sonar.request.controller !== 'feedback') {
     return;
   }
-
-  $('[data-toggle="tooltip"]').tooltip();
 
   var videoController = new VideoController({
     videoId: 'example_video_1'
@@ -45,25 +43,7 @@ $(function(){
     modal: $('#summary_video_container'),
     divUserEmail: $('#ctn-user-email'),
     divTitle: $('.ctn-title')
-  }, videoController, videoTranscript, videoLink, new VideoResultsHistory());
-
-  var deleteModal = new DeleteModal({
-    modal: $('#delete_confirmation_container'),
-    btnDeleteYes: $('#btn-delete-yes'),
-    btnDeleteNo: $('#btn-delete-no')
-  });
-
-  var resultsView = new ResultsView({
-    divAllContent: $('.main-content-wrapper'),
-    btnCopyShareLink: $('#btn-copy-share-link'),
-    inputShareLink: $('#input-share-link'),
-    btnArchive: $('#btn-archive'),
-    btnDelete: $('#btn-delete'),
-    btnHeroCopyShareLink: $('#btn-hero-copy-share-link'),
-    inputHeroShareLink: $('#input-hero-share-link'),
-    panelHero: $('.panel-hero'),
-    resultPanelToggle: $('.result-panel-toggle')
-  }, videoModal, deleteModal);
+  }, videoController, videoTranscript, videoLink, new VideoFeedbackHistory());
 
   var timeSeconds = new URI(location.href).search(true).t || 0;
   if (sonar.scenarioResult) {
@@ -77,5 +57,10 @@ $(function(){
       shareLink: sonar.scenarioResult.shareLink
     });
   }
+
+  window.extension = new ExtensionController(sonar.chrome_app_id);
+  window.view = new FeedbackView({
+    btnRecordFeedback: $('#btn-record-feedback'),
+  }, extension, videoModal);
 
 });

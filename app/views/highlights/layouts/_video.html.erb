@@ -10,12 +10,9 @@
   </div>
   <div class='transcript-container show-transcripts'>
     <div class='transcript-header-container'>
-      <!-- <button id='toggle-transcripts' type="button" class="btn btn-default"><i class='fa fa-align-left'></i> Transcripts</button> -->
-
-      <!--<h2>Timeline</h2>-->
       <input type='checkbox' id='btn-check-show-all' checked></input>
       <h2>Timeline</h2>
-      <a id='btn-add-note' class='btn'><i class='fa fa-plus'></i> Add a Note</a>
+      <a id='btn-add-note' class='btn'><i class='fa fa-ft fa-plus'></i>Add a Note</a>
     </div>
     <div id='videoText'>
       <div class='ctn-highlight-start sub'>
@@ -52,13 +49,13 @@
         {{/if}}
       </div>
       {{#if editable}}
-        <a class='video-btn-edit sub'><i class='fa fa-edit'></i> Edit</a>
+        <a class='video-btn-edit sub'><i class='fa fa-ft fa-edit'></i>Edit</a>
       {{/if}}
     </div>
     {{#if editable}}
       <div class='video-text-buttons'>
-        <span class='video-btn-save btn btn-success btn-colorless'><i class='fa fa-check'></i> Save</span>
-        <span class='video-btn-cancel btn btn-danger btn-colorless'><i class='fa fa-times'></i> Cancel</span>
+        <span class='video-btn-save btn btn-success btn-colorless'><i class='fa fa-ft fa-check'></i>Save</span>
+        <span class='video-btn-cancel btn btn-danger btn-colorless'><i class='fa fa-ft fa-times'></i>Cancel</span>
         {{#if trashable}}
           <span class='video-btn-trash btn btn-grey btn-colorless'><i class='fa fa-trash'></i></span>
         {{/if}}

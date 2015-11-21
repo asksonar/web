@@ -48,6 +48,12 @@ class DraftsService
     end
   end
 
+  private
+
+  def analytics
+    @analytics ||= Analytics.instance
+  end
+
   def publish(scenario)
     scenario.status = 'live'
     scenario.published_at = Time.new
@@ -92,10 +98,10 @@ class DraftsService
   end
 
   def track_study_created(researcher, scenario)
-    Analytics.instance.study_created(researcher, scenario)
+    analytics.study_created(researcher, scenario)
   end
 
   def track_draft_published(researcher, scenario)
-    Analytics.instance.draft_published(researcher, scenario)
+    analytics.draft_published(researcher, scenario)
   end
 end

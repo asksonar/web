@@ -186,6 +186,13 @@ input.form-control + span.input-group-btn .btn {
   background-color: #FAFAFA;
 }
 
+@media (min-width: $screen-sm-min) {
+  .modal-full {
+    width: auto;
+    margin-left: 30px;
+    margin-right: 15px;
+  }
+}
 
 .panel {
   position: relative;
@@ -201,4 +208,22 @@ input.form-control + span.input-group-btn .btn {
   .panel-body {
     padding: 0px;
   }
+}
+
+.fa {
+  min-width: 1.05em; /* icons such as fa-comment get cut off if width is 1em */
+  text-align: left;
+}
+
+.fa-ft { /* ft for text */
+  margin-right: .26em; /* roughly equivalent to a &nbsp; */
+}
+
+.fa-fl { /* fl for list */
+  width: 1.28571429em; /* from fa-fw */
+}
+
+.fa-ftl { /* ftl for text list */
+  @extend .fa-ft;
+  @extend .fa-fl;
 }
