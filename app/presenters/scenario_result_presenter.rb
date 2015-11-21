@@ -8,7 +8,8 @@ class ScenarioResultPresenter < SimpleDelegator
       shareLink: share_link,
       email: email,
       transcriptionArray: transcription_array,
-      highlightedArray: highlighted_array
+      highlightedArray: highlighted_array,
+      stepArray: step_array
     }
   end
 
@@ -62,6 +63,17 @@ class ScenarioResultPresenter < SimpleDelegator
         hashid: result_transcription.hashid,
         time: result_transcription.offset_seconds,
         text: result_transcription.text
+      }
+    end
+  end
+
+  def step_array
+    ordered_result_steps.map do |result_step|
+      {
+        hashid: result_step.hashid,
+        time: result_step.offset_seconds,
+        text: result_step.scenario_step_description,
+        order: result_step.scenario_step_order + 1
       }
     end
   end

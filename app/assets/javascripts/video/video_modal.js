@@ -37,8 +37,10 @@ VideoModal.prototype.loaded = function(timeSeconds, data) {
 
   var transcriptElement = modulejs.require('TranscriptElement');
   var noteElement = modulejs.require('NoteElement');
+  var stepElement = modulejs.require('StepElement');
 
   var timelineArray = []
+    .concat(stepElement.buildElementArray(data.stepArray))
     .concat(transcriptElement.buildElementArray(data.transcriptionArray))
     .concat(noteElement.buildElementArray(data.highlightedArray));
 
