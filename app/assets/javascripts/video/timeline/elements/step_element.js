@@ -1,6 +1,6 @@
 modulejs.define('StepElement', ['TimelineElement'], function(timelineElement) {
   var stepElement = Object.create(timelineElement, {
-    modulez: { value: 'stepElement' }
+    modulez: { value: 'StepElement' }
   });
 
   stepElement.onCreate(function(config) {
