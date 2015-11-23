@@ -63,8 +63,11 @@ $(function(){
   CheckableComponent.call(checkableTranscript);
   var checkableNote = Object.create(modulejs.require('NoteElement'));
   CheckableComponent.call(checkableNote);
+  var checkableStep = Object.create(modulejs.require('StepElement'));
+  CheckableComponent.call(checkableStep);
 
   var timelineArray = []
+    .concat(checkableStep.buildElementArray(sonar.scenarioResult.stepArray))
     .concat(checkableTranscript.buildElementArray(sonar.scenarioResult.transcriptionArray))
     .concat(checkableNote.buildElementArray(sonar.scenarioResult.highlightedArray));
 

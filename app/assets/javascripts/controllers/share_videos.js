@@ -52,8 +52,10 @@ $(function(){
 
   var transcriptElement = modulejs.require('TranscriptElement');
   var noteElement = modulejs.require('NoteElement');
+  var stepElement = modulejs.require('StepElement');
 
   var timelineArray = []
+    .concat(stepElement.buildElementArray(sonar.scenarioResult.stepArray))
     .concat(transcriptElement.buildElementArray(sonar.scenarioResult.transcriptionArray))
     .concat(noteElement.buildElementArray(sonar.scenarioResult.highlightedArray));
 
