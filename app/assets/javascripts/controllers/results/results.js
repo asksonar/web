@@ -72,6 +72,7 @@ $(function(){
       highlightedArray: sonar.scenarioResult.highlightedArray,
       srcArray: sonar.scenarioResult.srcArray,
       transcriptionArray: sonar.scenarioResult.transcriptionArray,
+      stepArray: sonar.scenarioResult.stepArray,
       email: sonar.scenarioResult.email,
       title: sonar.scenarioResult.title,
       shareLink: sonar.scenarioResult.shareLink
