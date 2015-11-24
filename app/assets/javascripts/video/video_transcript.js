@@ -93,7 +93,7 @@ VideoTranscript.prototype.clickVideoText = function(event) {
 };
 
 VideoTranscript.prototype.focusLink = function(timeSeconds) {
-  if (timeSeconds <= 0) {
+  if (timeSeconds < 0) {
     return;
   }
   var link = this.findTextLinkBeforeOrEqual(timeSeconds);
@@ -172,11 +172,11 @@ VideoTranscript.prototype.findTextLinkBeforeOrEqual = function(timeSeconds) {
   var textLink;
 
   textLinks.each(function(){
-    if (parseInt($(this).attr('data-timestamp')) < parseInt(timeSeconds)) {
-      textLink = this;
-    } else if (parseInt($(this).attr('data-timestamp')) == parseInt(timeSeconds)) {
+    if (parseFloat($(this).attr('data-timestamp')) == parseFloat(timeSeconds)) {
       textLink = this;
       return false;
+    } else if (parseInt($(this).attr('data-timestamp')) <= parseInt(timeSeconds)) {
+      textLink = this;
     } else {
       return false;
     }

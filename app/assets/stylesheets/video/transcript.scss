@@ -53,7 +53,6 @@
 
   h3 {
     line-height: 33px; // to match that of #toggle-transcripts button
-    margin-left: 3px; // to match that of checkbox 2px border + 1px padding
 
     @media (min-width: $screen-md-min) {
       .icon-mode & { display: none; }
@@ -75,6 +74,14 @@
 
       .video-text-time {
         text-decoration: underline;
+      }
+    }
+
+    &.step .videoTextLink {
+      background-color: #E1E1E1;
+
+      .video-text-display {
+        padding: 3px;
       }
     }
 

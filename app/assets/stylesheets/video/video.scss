@@ -32,6 +32,12 @@
   }
 }
 
+.ctn-video-share-highlight {
+  display: none;
+
+  .editable-timeline & { display: list-item; }
+}
+
 .video-js {
   padding-top: 75%; // fits 4:3 aspect ratio
 
