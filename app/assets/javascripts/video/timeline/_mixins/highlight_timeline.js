@@ -37,7 +37,7 @@ HighlightTimeline = function(config) {
     this.findTextLinksAfter(finishTime)
       .addClass('ctn-highlight-disabled')
       .find("input[type='checkbox']")
-      .prop('disabled', true);;
+      .prop('disabled', true);
   };
 
   this.updateCheckAll = function() {
@@ -64,10 +64,13 @@ HighlightTimeline = function(config) {
     visibleCheckboxes.prop('checked', checked);
   };
 
-  this.setChecked = function(noteHashids, transcriptHashids) {
+  this.setChecked = function(stepHashids, noteHashids, transcriptHashids) {
     $(this.checkboxSelector).prop('checked', false);
 
     var selector = this.checkboxSelector + "[name='scenario_highlight[{type}][{hashid}]']";
+    (stepHashids || []).forEach(function(hashid) {
+      $(selector.replace('{type}', 'step').replace('{hashid}', hashid)).prop('checked', true);
+    });
     (noteHashids || []).forEach(function(hashid) {
       $(selector.replace('{type}', 'note').replace('{hashid}', hashid)).prop('checked', true);
     });

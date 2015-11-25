@@ -95,6 +95,7 @@ $(function(){
 
   if (sonar.scenarioHighlight) {
     videoTranscript.setChecked(
+      sonar.scenarioHighlight.timeline_elements.steps,
       sonar.scenarioHighlight.timeline_elements.notes,
       sonar.scenarioHighlight.timeline_elements.transcripts
     );
