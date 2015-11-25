@@ -43,6 +43,7 @@ class HighlightsController < ApplicationController
     # arrays/objects need to come last, after named keys
     params.require(:scenario_highlight).permit(
       :title, :start_seconds, :end_seconds,
+      step: params[:scenario_highlight][:step].try(:keys),
       note: params[:scenario_highlight][:note].try(:keys),
       transcript: params[:scenario_highlight][:transcript].try(:keys)
     )
