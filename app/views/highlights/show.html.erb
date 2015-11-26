@@ -7,7 +7,7 @@
     <div class='row ctn-title-buttons'>
       <div class='col-md-10 ctn-title'>
         <h2><%= @scenario_highlight.title %></h2>
-        <a href='<%= result_video_path(@scenario, @scenario_result) %>' class='sub'><i class='fa fa-ft fa-long-arrow-left'></i>Back to the full video</a>
+        <a href='<%= @scenario_result.result_video_url %>' class='sub'><i class='fa fa-ft fa-long-arrow-left'></i>Back to the full video</a>
       </div>
       <div class='col-md-2 ctn-buttons'>
         <a class='btn btn-dark-blue btn-med strong' href='<%= edit_highlight_path %>' id='btn-edit-highlight'><i class='fa fa-ft fa-edit'></i>Edit</a>

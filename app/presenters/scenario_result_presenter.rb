@@ -120,6 +120,10 @@ class ScenarioResultPresenter < SimpleDelegator
   end
 
   def result_video_url
-    Rails.application.routes.url_helpers.result_video_path(scenario, self)
+    if my_feedback?
+      Rails.application.routes.url_helpers.feedback_videos_path(self)
+    else
+      Rails.application.routes.url_helpers.result_video_path(scenario, self)
+    end
   end
 end
