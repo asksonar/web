@@ -52,7 +52,6 @@ $(function(){
       highlightedArray: sonar.scenarioResult.highlightedArray,
       srcArray: sonar.scenarioResult.srcArray,
       transcriptionArray: sonar.scenarioResult.transcriptionArray,
-      stepArray: sonar.scenarioResult.stepArray,
       email: sonar.scenarioResult.email,
       title: sonar.scenarioResult.title,
       shareLink: sonar.scenarioResult.shareLink
@@ -61,7 +60,9 @@ $(function(){
 
   window.extension = new ExtensionController(sonar.chrome_app_id);
   window.view = new FeedbackView({
+    divAllContent: $('.main-content-wrapper'),
     btnRecordFeedback: $('#btn-record-feedback'),
+    resultPanelToggle: $('.result-panel-toggle')
   }, extension, videoModal);
 
 });
