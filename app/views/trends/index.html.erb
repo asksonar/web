@@ -1,0 +1,43 @@
+<% content_for :main_wrapper_class do %>
+  logged-out
+<% end %>
+
+<% content_for :title do %>NPS Trends over time<% end %>
+
+<script type="text/javascript">
+  var data = <%= raw @prezi.data_json %>;
+</script>
+
+<section class='main-content-header'>
+  <h1>NPS Trends over time</h1>
+</section>
+
+<section class='main-content'>
+  <div class='row'>
+    <div class='col-md-4'>
+      <div class='panel filters'>
+        <%= bootstrap_form_for :filters do |f| %>
+          <h3>Filters</h3>
+
+          <div class='sub'>REGION</div>
+          <% @prezi.regions.each do |region| %>
+            <%= f.check_box region %>
+          <% end %>
+
+          <div class='sub'>COUNTRY</div>
+
+          <% @prezi.countries.each do |country| %>
+            <%= f.check_box country %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class='col-md-8'>
+      <div class='panel'>
+        <div id='chart'>
+          <!-- insert chart here with AmCharts.makeChart("chart", {...})-->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

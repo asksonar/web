@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
+  # for nps only
+  get '/trends', to: 'trends#index'
+
   resources :transcripts
   resources :notes
   resources :highlights

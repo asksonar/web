@@ -1,0 +1,17 @@
+#trends-index {
+
+  #chart {
+    height: 500px;
+
+    a[title='JavaScript charts'] {
+      display: none !important;
+    }
+  }
+
+  .filters {
+    h3 {
+      margin-bottom: 20px;
+    }
+  }
+
+}

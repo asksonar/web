@@ -66,7 +66,7 @@ source 'https://rails-assets.org' do
   # amcharts chart library
   gem 'rails-assets-handlebars'
   # makes our textarea elements dynamically resize as people type
-  gem 'rails-assets-amcharts'
+  gem 'rails-assets-amcharts3'
   # videojs html5 video library
   gem 'rails-assets-videojs', '~> 4' # version 5 is too new, can't load the js/css files correctly
   # videojs plugin for markers
