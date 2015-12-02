@@ -11,7 +11,7 @@ class ResponsesQuery
   end
 
   def group_avg_rating(column, filter_hash = {})
-    Response.joins(:responder).where(*where_clause(filter_hash)).group(column).average(:rating)
+    data(filter_hash).group(column).order(column.to_s).average(:rating)
   end
 
   def where_clause(filter_hash)
