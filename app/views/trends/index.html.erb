@@ -20,15 +20,18 @@
           <h3>Filters</h3>
 
           <div class='sub'>REGION</div>
-          <% @prezi.regions.each do |region| %>
-            <%= f.check_box region %>
-          <% end %>
+          <div class='filter' data-field='region'>
+            <% @prezi.regions.each do |region| %>
+              <%= f.check_box region, {name: 'region[]', checked: @prezi.checked(:region, region)}, region %>
+            <% end %>
+          </div>
 
           <div class='sub'>COUNTRY</div>
-
-          <% @prezi.countries.each do |country| %>
-            <%= f.check_box country %>
-          <% end %>
+          <div class='filter' data-field='country'>
+            <% @prezi.countries.each do |country| %>
+              <%= f.check_box country, {name: 'country[]', checked: @prezi.checked(:country, country)}, country %>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>

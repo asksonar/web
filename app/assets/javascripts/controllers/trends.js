@@ -90,4 +90,17 @@ $(function(){
   //     }
   //     return chartData;
   // }
+
+  $('.checkbox').on('click', function() {
+    var thisEl = $(this);
+    var checkbox = thisEl.find("input[type='checkbox']");
+    var field = checkbox.attr('name');
+    var value = checkbox.attr('value');
+    var checked = checkbox.prop('checked');
+    if (checked) {
+      window.location.href = URI(window.location.href).addSearch(field, value);
+    } else {
+      window.location.href = URI(window.location.href).removeSearch(field, value);
+    }
+  });
 });

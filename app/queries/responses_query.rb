@@ -2,8 +2,8 @@ class ResponsesQuery
   include Singleton
 
   # beware sql injection with the column
-  def distinct(column, filter_hash = {})
-    data(filter_hash).pluck("DISTINCT #{column}")
+  def distinct(column)
+    Responder.pluck("DISTINCT #{column}")
   end
 
   def data(filter_hash = {})
