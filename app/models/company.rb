@@ -7,6 +7,6 @@ class Company < ActiveRecord::Base
   HASHIDS_SALT = '&8cCkHr#gHYk'
 
   def default_values
-    self.uuid = SecureRandom.uuid
+    self.uuid = SecureRandom.uuid if uuid.nil?
   end
 end

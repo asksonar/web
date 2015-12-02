@@ -11,6 +11,6 @@ class Response < ActiveRecord::Base
   HASHIDS_SALT = 'Jz$9GFUFqk2z'
 
   def default_values
-    self.status = status || 'unanswered'
+    self.status = 'unanswered' if status.nil?
   end
 end
