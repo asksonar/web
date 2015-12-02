@@ -27,6 +27,7 @@
 //= require history
 //= require URIjs
 //= require modulejs
+//= require bootstrap-select
 
 // insert 3rd party packages above this line
 

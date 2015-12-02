@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   # for nps only
   get '/trends', to: 'trends#index'
+  get '/comparisons', to: 'comparisons#index'
 
   resources :transcripts
   resources :notes

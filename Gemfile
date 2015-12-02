@@ -89,6 +89,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jqueryui'
   # add modulejs so we don't need to reorder javascript files
   gem 'rails-assets-modulejs'
+  # much nicer looking selects by turning them into button dropdowns
+  gem 'rails-assets-bootstrap-select'
 end
 
 group :development, :test do

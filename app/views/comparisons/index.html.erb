@@ -1,0 +1,46 @@
+<% content_for :main_wrapper_class do %>
+  logged-out
+<% end %>
+
+<% content_for :title do %>NPS Comparisons by category<% end %>
+
+<script type="text/javascript">
+  var data = <%= raw @prezi.data_json %>;
+  var group_avg_rating = <%= raw @prezi.group_avg_rating_json %>;
+</script>
+
+<section class='main-content-header'>
+  <h1>NPS Comparisons by category</h1>
+</section>
+
+<section class='main-content'>
+  <div class='row'>
+    <div class='col-md-4'>
+      <div class='panel comparison'>
+        <h3>Comparison</h3>
+        <select class="selectpicker">
+          <option>Region</option>
+        </select>
+      </div>
+      <div class='panel filters'>
+        <%= bootstrap_form_for :filters do |f| %>
+          <h3>Filters</h3>
+
+          <div class='sub'>COUNTRY</div>
+          <div class='filter' data-field='country'>
+            <% @prezi.countries.each do |country| %>
+              <%= f.check_box country, {name: 'country[]', checked: @prezi.checked(:country, country)}, country %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class='col-md-8'>
+      <div class='panel'>
+        <div id='chart'>
+          <!-- insert chart here with AmCharts.makeChart("chart", {...})-->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
