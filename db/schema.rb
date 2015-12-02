@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151201195624) do
+ActiveRecord::Schema.define(version: 20151202232111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20151201195624) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "uuid"
   end
 
   create_table "panelists", force: :cascade do |t|
@@ -52,11 +53,13 @@ ActiveRecord::Schema.define(version: 20151201195624) do
   create_table "responders", force: :cascade do |t|
     t.datetime "first_touch"
     t.datetime "last_touch"
-    t.string   "ip_address"
+    t.string   "ip_addresses"
     t.string   "region"
     t.string   "country"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "company_id"
+    t.string   "email"
   end
 
   create_table "responses", force: :cascade do |t|
@@ -65,6 +68,9 @@ ActiveRecord::Schema.define(version: 20151201195624) do
     t.text     "text"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "uuid"
+    t.string   "ip_address"
+    t.integer  "status"
   end
 
   create_table "result_notes", force: :cascade do |t|
@@ -186,6 +192,13 @@ ActiveRecord::Schema.define(version: 20151201195624) do
     t.integer  "category"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+  end
+
+  create_table "touches", force: :cascade do |t|
+    t.integer  "responder_id"
+    t.string   "date_yyyymmdd"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
 end

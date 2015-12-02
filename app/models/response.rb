@@ -4,5 +4,13 @@ class Response < ActiveRecord::Base
   delegate :region, to: :responder
   delegate :country, to: :responder
 
+  enum status: [:unanswered, :answered, :dismissed]
+
+  after_initialize :default_values, unless: :persisted?
+
   HASHIDS_SALT = 'Jz$9GFUFqk2z'
+
+  def default_values
+    self.status = status || 'unanswered'
+  end
 end
