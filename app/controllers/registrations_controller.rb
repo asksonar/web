@@ -4,4 +4,12 @@ class RegistrationsController < Devise::RegistrationsController
   def after_sign_up_path_for(resource)
     '/results?walkthrough=start'
   end
+
+  def update_resource(resource, params)
+    if params[:password].blank? && params[:password_confirmation].blank?
+      resource.update_without_password(params)
+    else
+     super
+    end
+  end
 end

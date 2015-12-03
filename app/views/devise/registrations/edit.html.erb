@@ -3,36 +3,37 @@
 </section>
 <section class='main-content'>
   <div class='panel'>
-    <%= bootstrap_form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put } do |f| %>
-      <%= devise_error_messages! %>
+    <%= bootstrap_form_for resource, as: resource_name, url: registration_path(resource_name), inline_errors: false, html: { method: :put } do |f| %>
 
-      <%= f.text_field :full_name, autofocus: true, autocomplete: "off",
-        label_col: 'col-sm-3', control_col: 'col-sm-9' %>
+      <div class="panel-section">
+        <%= f.text_field :full_name, autofocus: true, autocomplete: "off",
+          label_col: 'col-sm-6', control_col: 'col-sm-6' %>
 
-      <%= f.email_field :email, autocomplete: "off",
-        label_col: 'col-sm-3', control_col: 'col-sm-9' %>
-
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
-
-      <%= f.password_field :password, autocomplete: "off",
-        label_col: 'col-sm-3', control_col: 'col-sm-9' %>
-
-      <%= f.password_field :password_confirmation, autocomplete: "off",
-        label_col: 'col-sm-3', control_col: 'col-sm-9' %>
-
-      <div class="well">
-        <%= f.password_field :current_password, autocomplete: "off",
-          label: 'Please enter your current password to confirm changes:',
-          label_col: 'col-sm-3', control_col: 'col-sm-9' %>
+        <%= f.email_field :email, autocomplete: "off",
+          label_col: 'col-sm-6', control_col: 'col-sm-6' %>
       </div>
 
-      <%= f.submit "Save Changes", class: 'btn btn-dark-blue btn-med strong' %>
+      <div class="panel-section">
+        <%= f.password_field :current_password, autocomplete: "off",
+          label: 'Current Password',
+          label_col: 'col-sm-6', control_col: 'col-sm-6' %>
+
+        <%= f.password_field :password, autocomplete: "off",
+          label: 'New password',
+          label_col: 'col-sm-6', control_col: 'col-sm-6' %>
+
+        <%= f.password_field :password_confirmation, autocomplete: "off",
+          label: 'Verify password',
+          label_col: 'col-sm-6', control_col: 'col-sm-6' %>
+      </div>
+
+      <div class="panel-section">
+        <a href='<%= results_path %>' class='btn btn-grey btn-med'>Cancel</a>
+        <%= f.submit "Save Changes", class: 'btn btn-dark-blue btn-med strong' %>
+      </div>
     <% end %>
 
     <%= button_to "Delete my account", registration_path(resource_name),
       method: :delete, :class => :destroy %>
-
   </div>
 </section>

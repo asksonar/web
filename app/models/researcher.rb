@@ -16,6 +16,8 @@ class Researcher < ActiveRecord::Base
 
   HASHIDS_SALT = 'M7k&59nN$XjZ'
 
+  attr_accessor :current_password
+
   private
 
   def create_company

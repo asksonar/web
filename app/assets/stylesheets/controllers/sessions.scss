@@ -61,24 +61,48 @@
   }
 }
 
-#registrations-edit {
+#registrations-edit,
+#registrations-update {
+  .panel {
+    max-width: 50%;
+  }
+
   .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
   }
 
-  .well {
-    margin-bottom: 0px;
+  .panel-section {
+    padding-top: 5px;
   }
 
-  .btn-dark-blue {
-    margin: 20px 0 15px 0;
+  .panel-section + .panel-section {
+    position: relative;
+    padding-top: 25px;
+
+    &:before {
+      background: #E2E8E9;
+      content: '';
+      height: 1px;
+      top: 0px;
+      left: -20px;
+      right: -20px;
+      position: absolute;
+    }
+  }
+
+  .btn {
+    margin-bottom: 10px;
+
+    & + & {
+      margin-left: 5px;
+    }
   }
 
   .destroy {
     background: none;
-    border: none;
-    padding: 0;
     color: #05647C;
     cursor: pointer;
+    border: 0;
+    padding: 0;
   }
 }
