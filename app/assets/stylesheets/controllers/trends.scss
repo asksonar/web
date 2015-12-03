@@ -14,4 +14,27 @@
     }
   }
 
+  .amcharts-graph-g1 .amcharts-graph-stroke {
+    stroke-dasharray: 500%;
+    -webkit-animation: css-effect 5s ease-out forwards;
+    animation: css-effect 5s ease-out forwards;
+  }
+
+  @-webkit-keyframes css-effect {
+    0% {
+      stroke-dashoffset: 500%;
+    }
+    100% {
+      stroke-dashoffset: 0%;
+    }
+  }
+  @keyframes css-effect {
+    0% {
+      stroke-dashoffset: 500%;
+    }
+    100% {
+      stroke-dashoffset: 0%;
+    }
+  }
+
 }

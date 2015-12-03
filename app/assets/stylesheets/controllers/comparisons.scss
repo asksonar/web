@@ -23,4 +23,15 @@
     }
   }
 
+  .amcharts-graph-g1 .amcharts-graph-column-element {
+    -webkit-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+  }
+  .amcharts-graph-g1 .amcharts-graph-column-element {
+    opacity: .85;
+  }
+  .amcharts-graph-g1 .amcharts-graph-column-element:hover {
+    opacity: 1;
+  }
+
 }

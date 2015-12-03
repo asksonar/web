@@ -7,6 +7,7 @@ $(function(){
   var chartData = nps_by_date_json; // need to be sort chronologically to begin with
   var chart = AmCharts.makeChart("chart", {
       "pathToImages": "assets/amcharts3/amcharts/images/",
+      "addClassNames": true,
       "type": "serial",
       "theme": "light",
       "marginRight": 80,
@@ -67,11 +68,11 @@ $(function(){
   // chart.addListener("rendered", zoomChart);
   // zoomChart();
 
-  // this method is called when chart is first inited as we listen for "rendered" event
-  function zoomChart() {
-      // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
-      chart.zoomToIndexes(chartData.length - 40, chartData.length - 1);
-  }
+  // // this method is called when chart is first inited as we listen for "rendered" event
+  // function zoomChart() {
+  //     // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
+  //     chart.zoomToIndexes(chartData.length - 40, chartData.length - 1);
+  // }
 
 
   // // generate some random data, quite different range

@@ -6,6 +6,7 @@ $(function(){
   var comparisonField = 'region';
   var chartData = nps_by_category;
   var chart = AmCharts.makeChart("chart", {
+    "addClassNames": true,
     "type": "serial",
     "theme": "light",
     "marginRight": 70,
@@ -24,12 +25,16 @@ $(function(){
     }],
     "startDuration": 1,
     "graphs": [{
+      "id": "g1",
       "balloonText": "<b>[[category]]: [[value]]</b>",
       // "fillColorsField": "color",
       "fillAlphas": 0.9,
       "lineAlpha": 0.2,
       "type": "column",
-      "valueField": "nps"
+      "valueField": "nps",
+      "lineColor": "#637bb6",
+      "negativeLineColor": "#d1655d",
+      "negativeFillColors": "#d1655d"
     }],
     "chartCursor": {
       "categoryBalloonEnabled": false,

@@ -11,9 +11,9 @@
 
   <ul class="nav nav-pills nav-left hidden-xs">
     <% if researcher_signed_in? && current_researcher.has_v2? %>
-      <%= navbar_item "<i class='fa fa-ftl fa-bar-chart'></i>Dashboard", '/dashboard' %>
-      <%= navbar_item "<i class='fa fa-ftl fa-bar-chart'></i>Trends", '/trends' %>
-      <%= navbar_item "<i class='fa fa-ftl fa-bar-chart'></i>Comparisons", '/comparisons' %>
+      <%= navbar_item "<i class='fa fa-ft fa-home'></i>Dashboard", '/dashboard' %>
+      <%= navbar_item "<i class='fa fa-ft fa-line-chart'></i>Trends", '/trends' %>
+      <%= navbar_item "<i class='fa fa-ft fa-bar-chart'></i>Comparisons", '/comparisons' %>
     <% end %>
   </ul>
   <ul class="nav nav-right">
