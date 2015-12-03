@@ -2,10 +2,19 @@
   <div class="brand">
     <a href="/" class="logo"><img src='<%=asset_path 'SonarLogo_White-02.svg' %>'></a>
   </div>
-  <ul class="nav nav-left">
-    <li class='visible-xs'>
+
+  <ul class='nav nav-pills nav-left visible-xs'>
+    <li>
       <a id='toggle-sidebar' href="#"><i class="fa fa-bars"></i></a>
     </li>
+  </ul>
+
+  <ul class="nav nav-pills nav-left hidden-xs">
+    <% if researcher_signed_in? && current_researcher.has_v2? %>
+      <%= navbar_item "<i class='fa fa-ftl fa-bar-chart'></i>Dashboard", '/dashboard' %>
+      <%= navbar_item "<i class='fa fa-ftl fa-bar-chart'></i>Trends", '/trends' %>
+      <%= navbar_item "<i class='fa fa-ftl fa-bar-chart'></i>Comparisons", '/comparisons' %>
+    <% end %>
   </ul>
   <ul class="nav nav-right">
     <% if researcher_signed_in? %>
@@ -13,7 +22,9 @@
         <%= navbar_item "Logout", destroy_researcher_session_path %>
       <% end %>
     <% else %>
-      <%= navbar_item "Login", new_researcher_session_path %>
+      <li>
+        <a href='<%=new_researcher_session_path%>'>Login</a>
+      </li>
     <% end %>
   </ul>
  </header>
