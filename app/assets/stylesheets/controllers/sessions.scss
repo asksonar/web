@@ -64,15 +64,17 @@
 #registrations-edit,
 #registrations-update {
   .panel {
-    max-width: 50%;
+    max-width: 75%;
+
+    h2 {
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+      border-bottom: solid 1px #E2E8E9;
+    }
   }
 
   .form-group {
     margin-bottom: 25px;
-  }
-
-  .panel-section {
-    padding-top: 5px;
   }
 
   .panel-section + .panel-section {
