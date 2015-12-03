@@ -4,7 +4,7 @@ $(function(){
   }
 
   var comparisonField = 'region';
-  var chartData = group_avg_rating;
+  var chartData = nps_by_category;
   var chart = AmCharts.makeChart("chart", {
     "type": "serial",
     "theme": "light",
@@ -19,8 +19,8 @@ $(function(){
       "axisAlpha": 0.2,
       "dashLength": 1,
       "position": "left",
-      "minimum": 0,
-      "maximum": 10
+      "minimum": -100,
+      "maximum": 100
     }],
     "startDuration": 1,
     "graphs": [{
@@ -29,7 +29,7 @@ $(function(){
       "fillAlphas": 0.9,
       "lineAlpha": 0.2,
       "type": "column",
-      "valueField": "rating"
+      "valueField": "nps"
     }],
     "chartCursor": {
       "categoryBalloonEnabled": false,

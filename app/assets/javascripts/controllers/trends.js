@@ -4,7 +4,7 @@ $(function(){
   }
 
   // var chartData = generateChartData();
-  var chartData = data;
+  var chartData = nps_by_date_json; // need to be sort chronologically to begin with
   var chart = AmCharts.makeChart("chart", {
       "pathToImages": "assets/amcharts3/amcharts/images/",
       "type": "serial",
@@ -17,8 +17,8 @@ $(function(){
           "axisAlpha": 0.2,
           "dashLength": 1,
           "position": "left",
-          "minimum": 0,
-          "maximum": 10
+          "minimum": -100,
+          "maximum": 100
       }],
       "mouseWheelZoomEnabled": true,
       "graphs": [{
@@ -30,23 +30,29 @@ $(function(){
           "hideBulletsCount": 50,
           "title": "red line",
           // "valueField": "visits",
-          "valueField": "rating",
-          "useLineColorForBulletBorder": true
+          "valueField": "nps",
+          "useLineColorForBulletBorder": true,
+          "type": "smoothedLine",
+          "lineColor": "#637bb6",
+          "negativeLineColor": "#d1655d"
       }],
       "chartScrollbar": {
           "autoGridCount": true,
           "graph": "g1",
           "scrollbarHeight": 40,
-          "hideResizeGrips": true,
+          // "hideResizeGrips": true,
           "dragIcon": 'dragIconRoundSmall',
           'dragIconHeight': 25,
-          'dragIconWidth': 25
+          'dragIconWidth': 25,
+          'graphFillAlpha': 0.3,
+          'selectedGraphFillAlpha': 0.2
       },
       "chartCursor": {
 
       },
+      "dataDateFormat": 'YYYYMMDD',
       // "categoryField": "date",
-      "categoryField": "created_at",
+      "categoryField": "date_yyyymmdd",
       "categoryAxis": {
           "parseDates": true,
           "axisColor": "#DADADA",
@@ -58,8 +64,8 @@ $(function(){
       }
   });
 
-  chart.addListener("rendered", zoomChart);
-  zoomChart();
+  // chart.addListener("rendered", zoomChart);
+  // zoomChart();
 
   // this method is called when chart is first inited as we listen for "rendered" event
   function zoomChart() {

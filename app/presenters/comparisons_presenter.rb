@@ -17,16 +17,11 @@ class ComparisonsPresenter
   end
 
   def data_json
-    responses_query.data(@filter_hash).select(:rating, :text, :created_at, :region, :country, :responder_id).to_json
+    responses_query.responses(@filter_hash).to_json
   end
 
-  def group_avg_rating_json
-    responses_query.group_avg_rating(@comparison_field, @filter_hash).map do |key, value|
-      {
-        @comparison_field => key,
-        rating: value
-      }
-    end.to_json
+  def nps_by_category_json
+    responses_query.nps_by_category(@comparison_field, @filter_hash).to_json
   end
 
   def checked(field, value)

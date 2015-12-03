@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151202234622) do
+ActiveRecord::Schema.define(version: 20151203030917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,11 +68,13 @@ ActiveRecord::Schema.define(version: 20151202234622) do
     t.integer  "responder_id"
     t.integer  "rating"
     t.text     "text"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.string   "uuid"
     t.string   "ip_address"
     t.integer  "status"
+    t.integer  "nps"
+    t.integer  "date_yyyymmdd"
   end
 
   create_table "result_notes", force: :cascade do |t|
@@ -198,9 +200,9 @@ ActiveRecord::Schema.define(version: 20151202234622) do
 
   create_table "touches", force: :cascade do |t|
     t.integer  "responder_id"
-    t.string   "date_yyyymmdd"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "date_yyyymmdd"
   end
 
 end
