@@ -29,7 +29,7 @@
           <div class='sub'>COUNTRY</div>
           <div class='filter' data-field='country'>
             <% @prezi.countries.each do |country| %>
-              <%= f.check_box country, {name: 'country[]', checked: @prezi.checked(:country, country)}, country %>
+              <%= f.check_box country, {name: 'country[]', checked: @prezi.checked(:country, country), label: country}, country %>
             <% end %>
           </div>
         <% end %>

@@ -4,7 +4,7 @@ class TrendsController < ApplicationController
   end
 
   def prezi(query_params)
-    TrendsPresenter.new(query_params)
+    TrendsPresenter.new(current_researcher.company_id, query_params)
   end
 
   # can handle a query like

@@ -57,6 +57,8 @@ gem 'mixpanel-ruby'
 gem 'user_agent_parser'
 # sanitizer for non-markup
 gem 'sanitize'
+# accessor for MaxMind geoip local database
+gem 'maxminddb'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables

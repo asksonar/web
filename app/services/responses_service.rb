@@ -86,7 +86,8 @@ class ResponsesService
     responder.save
 
     if most_recent_ip_address != ip_address
-      Resque.enqueue(ProcessGeoIpWorker, responder.id)
+      responder.region, responder.country = GeoIpUtility.instance.lookup_ip_address(ip_address)
+      responder.save
     end
   end
 end

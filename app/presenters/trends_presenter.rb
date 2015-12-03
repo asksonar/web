@@ -1,5 +1,6 @@
 class TrendsPresenter
-  def initialize(filter_hash)
+  def initialize(company_id, filter_hash)
+    @company_id = company_id
     @filter_hash = filter_hash
   end
 
@@ -8,19 +9,19 @@ class TrendsPresenter
   end
 
   def regions
-    responses_query.distinct(:region)
+    responses_query.distinct(@company_id, :region)
   end
 
   def countries
-    responses_query.distinct(:country)
+    responses_query.distinct(@company_id, :country)
   end
 
   def data_json
-    responses_query.responses(@filter_hash).to_json
+    responses_query.responses(@company_id, @filter_hash).to_json
   end
 
   def nps_by_date_json
-    responses_query.nps_by_day(@filter_hash).to_json
+    responses_query.nps_by_day(@company_id, @filter_hash).to_json
   end
 
   def checked(field, value)
