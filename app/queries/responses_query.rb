@@ -1,9 +1,9 @@
 class ResponsesQuery
   include Singleton
 
-  # beware sql injection with the column
+  # strips out nil values
   def distinct(column)
-    Responder.pluck("DISTINCT #{column}")
+    Responder.order(column).where.not(column => nil).distinct(column).pluck(column)
   end
 
   def data(filter_hash = {})
