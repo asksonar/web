@@ -60,3 +60,25 @@
     }
   }
 }
+
+#registrations-edit {
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .well {
+    margin-bottom: 0px;
+  }
+
+  .btn-dark-blue {
+    margin: 20px 0 15px 0;
+  }
+
+  .destroy {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #05647C;
+    cursor: pointer;
+  }
+}
