@@ -12,7 +12,7 @@ class ComparisonsController < ApplicationController
   end
 
   def prezi(query_params)
-    ComparisonsPresenter.new(current_researcher.company_id, category, query_params)
+    ComparisonsPresenter.new(current_researcher.company_id, category, params[:date], query_params)
   end
 
   # can handle a query like

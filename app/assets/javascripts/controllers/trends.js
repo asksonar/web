@@ -171,4 +171,9 @@ $(function(){
       }
     }
   });
+
+  $('#select-date').on('change', function(){
+    var value = $(this).find("option:selected").val();
+    window.location.href = URI(window.location.href).setSearch('date', value);
+  });
 });
