@@ -14,7 +14,8 @@ $(function(){
         "periodValueText": "[[value.sum]]",
         "valueAlign": "left",
         "valueText": "[[value]] ([[percents]]%)",
-        'reversedOrder': true
+        'reversedOrder': true,
+        'maxColumns': 1
     },
     "dataProvider": chartData,
     "valueAxes": [{

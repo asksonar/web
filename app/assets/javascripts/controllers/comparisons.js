@@ -26,15 +26,15 @@ $(function(){
     "startDuration": 1,
     "graphs": [{
       "id": "g1",
-      "balloonText": "<b>[[category]]: [[value]]</b>",
+      "balloonText": "[[category]]<br/><b><span style='font-size:14px;'>NPS: [[value]]</span></b>",
       // "fillColorsField": "color",
       "fillAlphas": 0.9,
       "lineAlpha": 0.2,
       "type": "column",
       "valueField": "nps",
-      "lineColor": "#637bb6",
-      "negativeLineColor": "#d1655d",
-      "negativeFillColors": "#d1655d"
+      "lineColor": "#27AE60",
+      "negativeLineColor": "#C0392B",
+      "negativeFillColors": "#C0392B"
     }],
     "chartCursor": {
       "categoryBalloonEnabled": false,
