@@ -3,7 +3,6 @@ $(function(){
     return;
   }
 
-  var comparisonField = 'region';
   var chartData = nps_by_category;
   var chart = AmCharts.makeChart("chart", {
     "addClassNames": true,
@@ -87,7 +86,7 @@ $(function(){
       "cursorAlpha": 0,
       "zoomable": false
     },
-    "categoryField": comparisonField,
+    "categoryField": category,
     "categoryAxis": {
       "gridPosition": "start",
       "labelRotation": 45
@@ -128,6 +127,11 @@ $(function(){
         chart.hideGraph(chart.getGraphById('detractors'));
       }
     }
+  });
+
+  $('#select-category').on('change', function(){
+    var value = $(this).find("option:selected").val();
+    window.location.href = URI(window.location.href).search('').setSearch('category', value);
   });
 
 });

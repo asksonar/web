@@ -7,6 +7,7 @@
 <script type="text/javascript">
   var data = <%= raw @prezi.data_json %>;
   var nps_by_category = <%= raw @prezi.nps_by_category_json %>;
+  var category = '<%=  @prezi.category %>';
 </script>
 
 <section class='main-content-header'>
@@ -18,20 +19,31 @@
     <div class='col-sm-3'>
       <div class='panel comparison'>
         <h3>Category</h3>
-        <select class="selectpicker form-control">
-          <option>Region</option>
+        <select class="selectpicker form-control" id='select-category'>
+          <option <%= 'selected' if @prezi.category == 'region' %> value='region'>Region</option>
+          <option <%= 'selected' if @prezi.category == 'country' %> value='country'>Country</option>
         </select>
       </div>
       <div class='panel filters'>
         <%= bootstrap_form_for :filters do |f| %>
           <h3>Filters</h3>
 
-          <div class='sub'>COUNTRY</div>
-          <div class='filter' data-field='country'>
-            <% @prezi.countries.each do |country| %>
-              <%= f.check_box country, {name: 'country[]', checked: @prezi.checked(:country, country), label: country}, country %>
-            <% end %>
-          </div>
+          <% if @prezi.category != 'region' %>
+            <div class='sub'>REGION</div>
+            <div class='filter' data-field='region'>
+              <% @prezi.regions.each do |region| %>
+                <%= f.check_box region, {name: 'region[]', checked: @prezi.checked(:region, region), label: region}, region %>
+              <% end %>
+            </div>
+          <% end %>
+          <% if @prezi.category != 'country' %>
+            <div class='sub'>COUNTRY</div>
+            <div class='filter' data-field='country'>
+              <% @prezi.countries.each do |country| %>
+                <%= f.check_box country, {name: 'country[]', checked: @prezi.checked(:country, country), label: country}, country %>
+              <% end %>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </div>
