@@ -30,19 +30,22 @@ $(function(){
         "fillAlphas": 0.5,
         "lineAlpha": 0.5,
         "title": "Detractors",
-        "valueField": "-1"
+        "valueField": "-1",
+        'lineColor': '#C0392B'
     }, {
         "balloonText": "Passives: <span style='font-size:14px; color:#000000;'><b>[[value]]</b></span>",
         "fillAlphas": 0.5,
         "lineAlpha": 0.5,
         "title": "Passives",
-        "valueField": "0"
+        "valueField": "0",
+        'lineColor': '#F1C40F'
     }, {
         "balloonText": "Promoters: <span style='font-size:14px; color:#000000;'><b>[[value]]</b></span>",
         "fillAlphas": 0.5,
         "lineAlpha": 0.5,
         "title": "Promoters",
-        "valueField": "1"
+        "valueField": "1",
+        'lineColor': '#27AE60'
     }],
     "plotAreaBorderAlpha": 0,
     // "marginLeft": 0,
