@@ -24,7 +24,7 @@ $(function(){
       "mouseWheelZoomEnabled": true,
       "graphs": [{
           "id": "g1",
-          "balloonText": "[[category]]<br/><b><span style='font-size:14px;'>Avg Rating: [[value]]</span></b>",
+          "balloonText": "[[category]]<br/><b><span style='font-size:14px;'>NPS: [[value]]</span></b>",
           "bullet": "round",
           "bulletBorderAlpha": 1,
           "bulletColor": "#FFFFFF",
