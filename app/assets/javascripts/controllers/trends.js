@@ -155,6 +155,7 @@ $(function(){
   $("#toggle-breakdown").bootstrapSwitch({
     labelText: 'Show breakdown',
     labelWidth: 150,
+    handleWidth: 50,
     animate: false,
     onSwitchChange: function(event, checked) {
       if (checked) {

@@ -8,15 +8,6 @@ $(function(){
   var chart = AmCharts.makeChart("chart", {
     "type": "serial",
     "theme": "light",
-    "legend": {
-        "align": "center",
-        "equalWidths": false,
-        "periodValueText": "[[value.sum]]",
-        "valueAlign": "left",
-        "valueText": "[[value]] ([[percents]]%)",
-        'reversedOrder': true,
-        'maxColumns': 1
-    },
     "dataProvider": chartData,
     "valueAxes": [{
         "stackType": "100%",
@@ -27,21 +18,21 @@ $(function(){
         'tickLength': 0
     }],
     "graphs": [{
-        "balloonText": "Detractors: <span style='font-size:14px; color:#000000;'><b>[[value]]</b></span>",
+        "balloonText": "Detractors: <span style='font-size:14px; color:#000000;'><b>[[value]]</b> ([[percents]]%)</span>",
         "fillAlphas": 0.5,
         "lineAlpha": 0.5,
         "title": "Detractors",
         "valueField": "-1",
         'lineColor': '#C0392B'
     }, {
-        "balloonText": "Passives: <span style='font-size:14px; color:#000000;'><b>[[value]]</b></span>",
+        "balloonText": "Passives: <span style='font-size:14px; color:#000000;'><b>[[value]]</b> ([[percents]]%)</span>",
         "fillAlphas": 0.5,
         "lineAlpha": 0.5,
         "title": "Passives",
         "valueField": "0",
         'lineColor': '#F1C40F'
     }, {
-        "balloonText": "Promoters: <span style='font-size:14px; color:#000000;'><b>[[value]]</b></span>",
+        "balloonText": "Promoters: <span style='font-size:14px; color:#000000;'><b>[[value]]</b> ([[percents]]%)</span>",
         "fillAlphas": 0.5,
         "lineAlpha": 0.5,
         "title": "Promoters",
