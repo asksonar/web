@@ -4,15 +4,15 @@ class DashboardPresenter
   end
 
   def nps_2_weeks_split
-    responses_query.nps_split_since(@company_id, 2.weeks.ago)
+    responses_query.nps_by_day(@company_id, from: 2.weeks.ago)
   end
 
   def nps_2_weeks_total
-    responses_query.nps_total_since(@company_id, 2.weeks.ago)
+    responses_query.nps_total(@company_id, from: 2.weeks.ago)
   end
 
   def latest_comments
-    responses_query.comments(@company_id, from: 2.weeks.ago, filter: @filter_hash).order(created_at: :desc)
+    responses_query.comments(@company_id, from: 2.weeks.ago).order(created_at: :desc)
   end
 
   private

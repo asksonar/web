@@ -6,7 +6,7 @@
 
 <script type="text/javascript">
   var data = <%= raw @prezi.data_json %>;
-  var nps_by_date_json = <%= raw @prezi.nps_by_date_json %>;
+  var nps_by_day_json = <%= raw @prezi.nps_by_day_json %>;
 </script>
 
 <section class='main-content-header'>
@@ -38,6 +38,9 @@
     </div>
     <div class='col-sm-9'>
       <div class='panel'>
+        <div class='chart-toggle-btns'>
+          <input id='toggle-breakdown' type="checkbox"></input>
+        </div>
         <div id='chart'>
           <!-- insert chart here with AmCharts.makeChart("chart", {...})-->
         </div>

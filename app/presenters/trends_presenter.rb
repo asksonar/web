@@ -13,11 +13,11 @@ class TrendsPresenter
   end
 
   def data_json
-    responses_query.responses(@company_id, @filter_hash).to_json
+    responses_query.responses(@company_id, filter: @filter_hash).to_json
   end
 
-  def nps_by_date_json
-    responses_query.nps_by_day(@company_id, @filter_hash).to_json
+  def nps_by_day_json
+    responses_query.nps_by_day(@company_id, filter: @filter_hash).to_json
   end
 
   def checked(field, value)

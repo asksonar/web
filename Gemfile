@@ -93,6 +93,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-modulejs'
   # much nicer looking selects by turning them into button dropdowns
   gem 'rails-assets-bootstrap-select'
+  # nicer looking switches
+  gem 'rails-assets-bootstrap-switch'
 end
 
 group :development, :test do

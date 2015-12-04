@@ -28,6 +28,7 @@
 //= require URIjs
 //= require modulejs
 //= require bootstrap-select
+//= require bootstrap-switch
 
 // insert 3rd party packages above this line
 

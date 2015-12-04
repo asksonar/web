@@ -18,11 +18,11 @@ class ComparisonsPresenter
   end
 
   def data_json
-    responses_query.responses(@company_id, @filter_hash).to_json
+    responses_query.responses(@company_id, filter: @filter_hash).to_json
   end
 
   def nps_by_category_json
-    responses_query.nps_by_category(@company_id, @comparison_field, @filter_hash)
+    responses_query.nps_by_category(@company_id, @comparison_field, filter: @filter_hash)
       .map { |val| val['region'].nil? ? val.merge(region: 'UNKNOWN') : val }
       .to_json
   end
