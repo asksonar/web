@@ -100,11 +100,8 @@
     }
   }
 
-  .destroy {
-    background: none;
-    color: #05647C;
-    cursor: pointer;
-    border: 0;
-    padding: 0;
+  .button_to,
+  .button_to div {
+    display: inline;
   }
 }

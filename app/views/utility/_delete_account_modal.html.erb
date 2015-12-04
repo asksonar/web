@@ -1,0 +1,17 @@
+<div class="modal confirmation-modal" id='delete_account_confirmation_container' tabindex='-1'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="confirmation-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="confirmation-body">
+        <h4>Sorry to see you go! Deleting your account means you won't be able to get your studies and videos back. Are you sure you want to delete your account?</h4>
+        <br/>
+        <%= button_to "Yes, delete my account", registration_path(resource_name),
+          method: :delete, :class => 'btn btn-green', id: 'btn-delete-yes' %>
+        <a id='btn-delete-no' class='btn btn-medium-blue'><span>Cancel</span></a>
+      </div><!-- /.confirmation-body -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
