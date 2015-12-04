@@ -1,7 +1,11 @@
 class ComparisonsController < ApplicationController
+  before_action :authenticate_researcher!
+
   def index
     @prezi = prezi(query_params)
   end
+
+  private
 
   def prezi(query_params)
     ComparisonsPresenter.new(current_researcher.company_id, 'region', query_params)

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   # sonar v2 #
   ############
 
+  get '/dashboard', to: 'dashboard#index'
   get '/trends', to: 'trends#index'
   get '/comparisons', to: 'comparisons#index'
 

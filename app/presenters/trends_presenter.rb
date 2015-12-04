@@ -4,10 +4,6 @@ class TrendsPresenter
     @filter_hash = filter_hash
   end
 
-  def responses_query
-    @responses_query ||= ResponsesQuery.instance
-  end
-
   def regions
     responses_query.distinct(@company_id, :region)
   end
@@ -26,5 +22,11 @@ class TrendsPresenter
 
   def checked(field, value)
     [*(@filter_hash[field])].include?(value)
+  end
+
+  private
+
+  def responses_query
+    @responses_query ||= ResponsesQuery.instance
   end
 end
