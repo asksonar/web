@@ -1,0 +1,2 @@
+#!/bin/sh
+docker exec -i db psql -U postgres < ~/sonar/web/docker/db/postgres_backup.sql
