@@ -13,6 +13,7 @@ class DraftsController < ApplicationController
   def edit
     @scenario = Scenario.find_by_hashid!(params[:id]).prezi
     @template = Template.find_by(value: params[:template])
+    authorize @scenario
   end
 
   def create

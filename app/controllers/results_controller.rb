@@ -17,6 +17,7 @@ class ResultsController < ApplicationController
     else
       @scenario = Scenario.find_by_hashid!(params[:id]).prezi
     end
+    authorize @scenario
   end
 
   def update
