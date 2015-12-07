@@ -36,11 +36,11 @@ class ResponsesService
   def calculate_nps(rating)
     case rating.to_i
     when 9..10
-      response.nps = 1
+      1
     when 7..8
-      response.nps = 0
+      0
     when 0..6
-      response.nps = -1
+      -1
     end
   end
 
