@@ -184,7 +184,6 @@ def do_sample_scenario_result
 
   scenario_result.result_steps.create!([{
     scenario_step: scenario_step,
-    scenario_result: scenario_result,
     completed_seconds: 100.846,
     offset_seconds: 0
   }])
