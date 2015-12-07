@@ -34,7 +34,7 @@ class ResponsesService
   private
 
   def calculate_nps(rating)
-    case rating
+    case rating.to_i
     when 9..10
       response.nps = 1
     when 7..8

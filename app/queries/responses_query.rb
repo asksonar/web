@@ -50,7 +50,7 @@ class ResponsesQuery
   private
 
   def data(company_id, from, to, filter)
-    query = Response.joins(:responder).where('company_id = ?', company_id)
+    query = Response.joins(:responder).where('company_id = ?', company_id).where.not(nps: nil)
     query = query.where(*where_clause(filter)) if !filter.nil?
     query = query.where('responses.created_at > ?', from) if from
     query = query.where('responses.created_at < ?', to) if to
