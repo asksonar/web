@@ -23,7 +23,7 @@ class HighlightsController < ApplicationController
 
   def show
     @scenario_highlight = ScenarioHighlight.find_by_hashid!(params[:id])
-    @scenario_result = @scenario_highlight.scenario_result
+    @scenario_result = @scenario_highlight.scenario_result.prezi
     @scenario = @scenario_result.scenario
   end
 

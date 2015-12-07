@@ -8,13 +8,64 @@
 </section>
 <section class="main-content">
   <% @scenario_results.map(&:prezi).each do |scenario_result| %>
-    <a class='panel' href='<%= feedback_videos_path(scenario_result) %>' data-scenario-result-hashid='<%= scenario_result.hashid %>'>
-      <div class='title-container'>
-        <h1><%= scenario_result.title %></h1>
-        <p class='sub'>created by <%= scenario_result.created_by.full_name %> (<%= scenario_result.created_by.email %>) <%= time_ago_in_words(scenario_result.created_at)%> ago</p>
-      </div>
-    </a>
+    <div class='panel scenario-results-panel'>
+      <%= bsh_split_panel 'col-sm-8' %>
+      <div class="row">
+        <div class='col-sm-8 result-panel-left'>
+          <h1>
+            <a class="video-link" href='<%= feedback_videos_path(scenario_result) %>' data-scenario-result-hashid='<%= scenario_result.hashid %>'><%= scenario_result.title %>
+            </a>
+          </h1>
+          <div class="result-panel-toggle">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="sub btn">
+                <span href="#result-highlights-container-<%= scenario_result.hashid %>" aria-controls="profile" role="tab" data-toggle="tab">
+                  <i class="fa fa-ft fa-bookmark"></i><%= pp_plural_with_number(scenario_result.scenario_highlights.count, 'Highlight') %>&nbsp;<span class="caret"></span>
+                </span class="sub btn">
+              </li>
+              <li role="presentation" class="sub btn">
+                <span href="#result-notes-container-<%= scenario_result.hashid %>" aria-controls="messages" role="tab" data-toggle="tab">
+                  <i class="fa fa-ft fa-comment"></i><%= pp_plural_with_number(scenario_result.result_notes.count, 'Note') %>&nbsp;<span class="caret"></span>
+                </span class="sub btn">
+              </li>
+            </ul>
 
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane collapsed-content" id="result-highlights-container-<%= scenario_result.hashid %>">
+                <% scenario_result.scenario_highlights.each_with_index do |highlight, index| %>
+                  <a href='<%= highlight_path(highlight) %>'>
+                    <span class='sub'><%= ppt_date_abbr(highlight.created_at) %> - </span><%= dt_transcription(highlight.title) %>
+                  </a>
+                <% end %>
+                <% if scenario_result.scenario_highlights.count == 0 %>
+                  <span class='sub'><i class='fa fa-ft fa-question-circle'></i>no highlights added yet</span>
+                <% end %>
+              </div>
+              <div role="tabpanel" class="tab-pane collapsed-content" id="result-notes-container-<%= scenario_result.hashid %>">
+                <% scenario_result.result_notes.each_with_index do |note, index| %>
+                  <a class='video-link'
+                    href="<%=feedback_videos_path(scenario_result)%>?t=<%= note.offset_seconds %>"
+                    data-scenario-result-hashid='<%= scenario_result.hashid %>'
+                    data-result-step-offset-seconds='<%= note.offset_seconds %>'
+                  >
+                    <span class='sub'><%= ppt_seconds(note.offset_seconds) %> - </span><%= dt_transcription(note.text) %>
+                  </a>
+                <% end %>
+                <% if scenario_result.result_notes.count == 0 %>
+                  <span class='sub'><i class='fa fa-ft fa-question-circle'></i>no notes added yet</span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4 result-panel-right">
+          <div class='sub result-date'><i class="fa fa-fl fa-calendar-o"></i><%= ppt_date(scenario_result.created_at) %></div>
+        </div>
+      </div>
+    </div>
   <% end %>
 
   <%= render partial: 'utility/pager' %>
