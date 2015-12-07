@@ -10,7 +10,7 @@ class Researcher < ActiveRecord::Base
   after_create :welcome_email
   after_create :subscribe_mailing_list
 
-  validates_presence_of :full_name
+  validates_presence_of :full_name, on: :create
 
   enum role: [:user, :admin, :super_admin]
 
