@@ -10,13 +10,11 @@ class Researcher < ActiveRecord::Base
   after_create :welcome_email
   after_create :subscribe_mailing_list
 
-  validates_presence_of :full_name, on: :create
+  validates_presence_of :full_name
 
   enum role: [:user, :admin, :super_admin]
 
   HASHIDS_SALT = 'M7k&59nN$XjZ'
-
-  attr_accessor :current_password
 
   private
 
