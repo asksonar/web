@@ -95,6 +95,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-select'
   # nicer looking switches
   gem 'rails-assets-bootstrap-switch'
+  # syntax-coloring for js snippet
+  gem 'rails-assets-prism'
 end
 
 group :development, :test do

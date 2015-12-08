@@ -1,0 +1,48 @@
+<% content_for :main_wrapper_class do %>
+  sidebar-collapsed
+<% end %>
+
+<% content_for :title do %>Embed NPS widget<% end %>
+
+<section class='main-content-header'>
+  <h1>Embed NPS widget</h1>
+</section>
+
+<section class='main-content'>
+
+  <div class='row'>
+    <div class='col-sm-3'>
+      <div class='panel'>
+        <ul class="nav nav-pills nav-stacked">
+          <li class='active'><a href='#'>Snippet</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class='col-sm-8'>
+
+      <div class='panel'>
+        <h4>Copy the following code snippet to any page where the user is logged in.</h4>
+
+        <pre class='snippet minified'><code class='language-javascript'><%=
+          @prezi.load_js_snippet(true) + "\n\n" +
+          "asksonar.load({email: '<<< insert the user email here>>>'});"
+        %></code></pre>
+
+        <pre class='snippet unminified'><code class='language-javascript'><%=
+          @prezi.load_js_snippet + "\n\n" +
+          "asksonar.load({email: '<<< insert the user email here>>>'});"
+        %></code></pre>
+
+        <a class='btn btn-default pull-left' id='btn-toggle-minified'>{ }</a>
+        <a class='btn btn-dark-blue pull-right' id='btn-copy-snippet'
+          data-placement='bottom' title='Copied!' data-toggle='tooltip' data-trigger='manual'>Copy</a>
+        <div class='btns-bar'></div>
+
+        <p>The first line will set up the Sonar NPS API for you.</p>
+        <p>The second line is where you call the API.  Pass in the user's email to the function call <code>asksonar.load()</code>.  This is how we know whether or not the user is due for being shown a NPS survey.</p>
+
+      </div>
+    </div>
+  </div>
+
+</section>

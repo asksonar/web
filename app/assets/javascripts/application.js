@@ -29,6 +29,7 @@
 //= require modulejs
 //= require bootstrap-select
 //= require bootstrap-switch
+//= require prism
 
 // insert 3rd party packages above this line
 

@@ -5,16 +5,7 @@ $(function(){
   var survey_uuid;
 
   var resizeIframe = function() {
-    if($(document.iframeDiv).css('display') === 'none') {
-      $(document.iframeDiv)
-        .css({'visibility': 'hidden'})
-        .show()
-        .height($('.survey').outerHeight())
-        .hide()
-        .css({'visibility':'visible'});
-    } else {
-      $(document.iframeDiv).height($('.survey').outerHeight());
-    }
+    $(document.iframeDiv).height($('.survey').outerHeight());
   };
 
   var slideInIframe = function(delay, speed, callback) {
@@ -36,7 +27,8 @@ $(function(){
       'max-width': '100%',
       'position': 'fixed',
       'bottom': 0,
-      'right': 0
+      'right': 0,
+      'height': '135px' // start off with it hardcoded (since is hidden), and then use resizeIframe afterwards
     });
 
     $(document.iframeDiv).children('iframe').css({
@@ -80,7 +72,6 @@ $(function(){
           </div>\
       ");
     styleIframe();
-    resizeIframe();
     slideInIframe(1000, 'slow');
 
     initHandlers();
