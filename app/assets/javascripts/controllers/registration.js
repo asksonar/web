@@ -1,6 +1,6 @@
 $(function(){
 
-  if (!$('#registrations-edit').length || !$('#registrations-update')) {
+  if (sonar.request.controller !== 'registrations') {
     return;
   }
   var deleteModal = new DeleteModal({
