@@ -50,7 +50,7 @@ class ResponsesService
       create_new_empty_response(responder, ip_address).uuid
     elsif latest_response.unanswered?
       latest_response.uuid
-    elsif latest_response.created_at < 30.days.ago
+    elsif latest_response.created_at.before?(30.days.ago)
       create_new_empty_response(responder, ip_address).uuid
     end
   end
