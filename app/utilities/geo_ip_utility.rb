@@ -17,6 +17,10 @@ class GeoIpUtility
   # }
   def lookup_ip_address(ip_address)
     ret = db.lookup(ip_address)
-    return ret.subdivisions[-1].try(:name), ret.country.name
+    # ret.subdivisions gives back an array, which might have 0 or more elements, so we need to try for the name property
+    region_name = ret.subdivisions[-1].try(:name)
+    # maxminddb gem has built-in nil trys for objects, though, so we don't need to try for the name property
+    country_name = ret.country.name
+    [region_name, country_name]
   end
 end
