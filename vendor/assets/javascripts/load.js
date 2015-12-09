@@ -12,12 +12,12 @@
 
   css = document.createElement('link');
   css.rel='stylesheet';
-  css.href='https://d2jgtka0q6ki1b.cloudfront.net/survey.css';
+  css.href='https://assets.asksonar.com/survey.css';
   css.id='survey-css';
   document.head.appendChild(css);
 
   script = document.createElement('script');
-  script.src='https://d2jgtka0q6ki1b.cloudfront.net/widget.js';
+  script.src='https://assets.asksonar.com/widget.js';
   script.id='widget-js';
   document.body.appendChild(script);
 }());

@@ -91,7 +91,7 @@ $(function(){
 
     $.ajax({
       type: 'POST',
-      url: 'https://my-local.asksonar.com/responses/',
+      url: 'https://my.asksonar.com/responses/',
       data: {
         company_uuid: company_id,
         email: email,
@@ -112,7 +112,7 @@ $(function(){
 
     $.ajax({
       type: 'POST',
-      url: 'https://my-local.asksonar.com/responses/' + survey_uuid,
+      url: 'https://my.asksonar.com/responses/' + survey_uuid,
       data: {
         _method: 'PATCH',
         rating: rating
@@ -125,7 +125,7 @@ $(function(){
 
     $.ajax({
       type: 'POST',
-      url: 'https://my-local.asksonar.com/responses/' + survey_uuid,
+      url: 'https://my.asksonar.com/responses/' + survey_uuid,
       data: {
         _method: 'PATCH',
         text: why
@@ -138,7 +138,7 @@ $(function(){
 
     $.ajax({
       type: 'POST',
-      url: 'https://my-local.asksonar.com/responses/' + survey_uuid,
+      url: 'https://my.asksonar.com/responses/' + survey_uuid,
       data: { _method: 'DELETE' }
     });
   };
