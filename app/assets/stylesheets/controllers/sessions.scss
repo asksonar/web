@@ -63,9 +63,11 @@
 
 #registrations-edit,
 #registrations-update {
-  .panel {
-    max-width: 75%;
+  .row {
+    margin: 0
+  }
 
+  .panel {
     h2 {
       padding-bottom: 5px;
       margin-bottom: 15px;
@@ -98,10 +100,5 @@
     & + & {
       margin-left: 5px;
     }
-  }
-
-  .button_to,
-  .button_to div {
-    display: inline;
   }
 }
