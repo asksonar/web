@@ -15,21 +15,26 @@
     }
 
     // aligned with .main-content-header
-    .logged-out & {
+    .sidebar-collapsed & {
       @media (min-width: $screen-sm-min) {
         text-align: left;
         margin-left: 40px;
+        width: auto;
+        margin-right: 10px;
       }
 
       @media (min-width: $screen-lg-min) {
         text-align: left;
         margin-left: 100px;
+        width: auto;
+        margin-right: 20px;
       }
     }
   }
 
   .nav {
     >li>a {
+      border-radius: 0px;
       padding: 0px 10px;
       height: 44px;
       line-height: 44px;
@@ -38,19 +43,22 @@
         font-size: 18px;
       }
     }
-    >li>a:focus
+    >li>a:focus,
     >li>a:hover,
-    >li>a:active {
-      color: #1CA5C9;
+    >li>a:active,
+    >li.active>a {
+      color: $dark-blue;
+      background-color: #eeeeee;
     }
   }
 
   .nav-left {
-    position: absolute;
-    left: 0;
-
-    @media (min-width: $screen-sm-min) {
+    @media (min-width: $screen-xs-min) {
       float: left;
+    }
+    @media (max-width: $screen-xs-max) {
+      position: absolute;
+      left: 0;
     }
   }
 
@@ -62,15 +70,11 @@
       right: 0;
     }
 
-    @media (min-width: $screen-sm-min) {
+    @media (min-width: $screen-xs-min) {
       float: right;
     }
   }
 
-}
-
-.logged-out #toggle-sidebar {
-  display: none;
 }
 
 .sidebar .nav {

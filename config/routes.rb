@@ -3,19 +3,14 @@ Rails.application.routes.draw do
 
   # get '(*all)', to: 'errors#service_unavailable_503'
 
+  ###############
+  # error pages #
+  ###############
+
   get '/403', to: 'errors#forbidden_403'
   get '/404', to: 'errors#not_found_404'
   get '/500', to: 'errors#internal_server_error_500'
   get '/503', to: 'errors#service_unavailable_503'
-
-  get '/videos.json', to: 'videos_json#show'
-  get '/create', to: 'drafts#new' # so it doesn't highlight the left nav
-  post '/create', to: 'drafts#create'
-  get '/share/videos/:id', to: 'share_videos#show', as: 'share_videos'
-  get '/results/:id/edit', to: 'drafts#edit'
-  patch '/results/:id/edit', to: 'drafts#update'
-  get '/responses.json', to: 'responses_json#index'
-  get '/feedback/videos/:id', to: 'feedback#show', as: 'feedback_videos'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -32,6 +27,28 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
+  ############
+  # sonar v2 #
+  ############
+
+  get '/dashboard', to: 'dashboard#index', as: 'dashboard'
+  get '/trends', to: 'trends#index', as: 'trends'
+  get '/comparisons', to: 'comparisons#index', as: 'comparisons'
+  get '/embed', to: 'embed#index', as: 'embed'
+
+  ############
+  # sonar v1 #
+  ############
+
+  get '/videos.json', to: 'videos_json#show'
+  get '/create', to: 'drafts#new' # so it doesn't highlight the left nav
+  post '/create', to: 'drafts#create'
+  get '/share/videos/:id', to: 'share_videos#show', as: 'share_videos'
+  get '/results/:id/edit', to: 'drafts#edit'
+  patch '/results/:id/edit', to: 'drafts#update'
+  get '/responses.json', to: 'responses_json#index'
+  get '/feedback/videos/:id', to: 'feedback#show', as: 'feedback_videos'
+
   resources :transcripts
   resources :notes
   resources :highlights
@@ -45,6 +62,10 @@ Rails.application.routes.draw do
     resources :videos, only: [:show], controller: 'results'
   end
   resources :feedback, controller: 'feedback'
+
+  ################
+  # shared login #
+  ################
 
   devise_for :researchers,
     path: 'accounts',

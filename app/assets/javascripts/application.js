@@ -14,9 +14,9 @@
 //= require jqueryui
 // bootstrap.tooltip needs to override jqueryui.tooltip, so comes after
 //= require bootstrap
-//= require amcharts
-//= require amcharts/serial
-//= require amcharts/themes/light
+//= require amcharts3
+//= require amcharts3/serial
+//= require amcharts3/themes/light
 //= require videojs
 //= require videojs-markers
 //= require handlebars
@@ -27,6 +27,9 @@
 //= require history
 //= require URIjs
 //= require modulejs
+//= require bootstrap-select
+//= require bootstrap-switch
+//= require prism
 
 // insert 3rd party packages above this line
 

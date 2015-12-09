@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151113195054) do
+ActiveRecord::Schema.define(version: 20151203030917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20151113195054) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "uuid"
   end
 
   create_table "panelists", force: :cascade do |t|
@@ -44,10 +45,37 @@ ActiveRecord::Schema.define(version: 20151113195054) do
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.integer  "role"
+    t.boolean  "has_v1"
+    t.boolean  "has_v2"
   end
 
   add_index "researchers", ["email"], name: "index_researchers_on_email", unique: true, using: :btree
   add_index "researchers", ["reset_password_token"], name: "index_researchers_on_reset_password_token", unique: true, using: :btree
+
+  create_table "responders", force: :cascade do |t|
+    t.datetime "first_touch"
+    t.datetime "last_touch"
+    t.string   "ip_addresses"
+    t.string   "region"
+    t.string   "country"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "company_id"
+    t.string   "email"
+  end
+
+  create_table "responses", force: :cascade do |t|
+    t.integer  "responder_id"
+    t.integer  "rating"
+    t.text     "text"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "uuid"
+    t.string   "ip_address"
+    t.integer  "status"
+    t.integer  "nps"
+    t.integer  "date_yyyymmdd"
+  end
 
   create_table "result_notes", force: :cascade do |t|
     t.integer  "result_step_id_backup"
@@ -168,6 +196,13 @@ ActiveRecord::Schema.define(version: 20151113195054) do
     t.integer  "category"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+  end
+
+  create_table "touches", force: :cascade do |t|
+    t.integer  "responder_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "date_yyyymmdd"
   end
 
 end

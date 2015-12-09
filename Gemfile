@@ -57,6 +57,8 @@ gem 'mixpanel-ruby'
 gem 'user_agent_parser'
 # sanitizer for non-markup
 gem 'sanitize'
+# accessor for MaxMind geoip local database
+gem 'maxminddb'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables
@@ -66,7 +68,7 @@ source 'https://rails-assets.org' do
   # amcharts chart library
   gem 'rails-assets-handlebars'
   # makes our textarea elements dynamically resize as people type
-  gem 'rails-assets-amcharts'
+  gem 'rails-assets-amcharts3'
   # videojs html5 video library
   gem 'rails-assets-videojs', '~> 4' # version 5 is too new, can't load the js/css files correctly
   # videojs plugin for markers
@@ -89,6 +91,12 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jqueryui'
   # add modulejs so we don't need to reorder javascript files
   gem 'rails-assets-modulejs'
+  # much nicer looking selects by turning them into button dropdowns
+  gem 'rails-assets-bootstrap-select'
+  # nicer looking switches
+  gem 'rails-assets-bootstrap-switch'
+  # syntax-coloring for js snippet
+  gem 'rails-assets-prism'
 end
 
 group :development, :test do

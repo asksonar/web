@@ -19,9 +19,9 @@ class Scenario < ActiveRecord::Base
   HASHIDS_SALT = '8UTnU7cJm*bP'
 
   private
-  
+
   def default_values
-    self.status = status || 0
+    self.status = 0 if status.nil?
   end
 
   def trim_description_and_title

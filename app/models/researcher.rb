@@ -14,9 +14,16 @@ class Researcher < ActiveRecord::Base
 
   enum role: [:user, :admin, :super_admin]
 
+  after_initialize :default_values, unless: :persisted?
+
   HASHIDS_SALT = 'M7k&59nN$XjZ'
 
   private
+
+  def default_values
+    self.has_v1 = false if has_v1.nil?
+    self.has_v2 = true if has_v2.nil?
+  end
 
   def create_company
     self.company = Company.create
