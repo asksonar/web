@@ -17,7 +17,7 @@ class ResponsesQuery
 
   def nps_total(company_id, from: nil, to: nil, filter: {})
     data(company_id, from, to, filter)
-      .pluck('100.0 * sum(nps) / count(nps)')[0].round
+      .pluck('100.0 * sum(nps) / count(nps)')[0].try(:round)
   end
 
   def nps_by_day(company_id, from: nil, to: nil, filter: {})

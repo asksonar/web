@@ -34,7 +34,8 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'dashboard#index', as: 'dashboard'
   get '/trends', to: 'trends#index', as: 'trends'
   get '/comparisons', to: 'comparisons#index', as: 'comparisons'
-  get '/embed', to: 'embed#index', as: 'embed'
+  get '/embed/snippet', to: 'embed#index', as: 'embed_snippet'
+  get '/embed/demo', to: 'demo#index', as: 'embed_demo'
 
   ############
   # sonar v1 #
