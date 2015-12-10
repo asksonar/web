@@ -36,9 +36,9 @@
         </div>
       <% end %>
 
-      <a id='btn-delete'>Delete my account</a>
+      <a data-toggle='modal' data-target='#delete_with_form'>Delete my account</a>
     </div>
   </div>
 </section>
 
-<%= render partial: 'utility/delete_account_modal' %>
+<%= render partial: 'utility/delete_with_form_modal', locals: {delete_item: 'account', path: registration_path(resource_name)} %>

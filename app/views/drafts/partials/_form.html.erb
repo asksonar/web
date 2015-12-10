@@ -49,9 +49,9 @@
           result_path(@scenario)
         end
       %>' class='btn btn-grey pull-left btn-med'>Cancel</a>
-      
+
       <% if @scenario.persisted? && @scenario.drafts? %>
-        <a class='btn btn-light-blue pull-left btn-med strong' id="btn-delete">Discard Draft</a>
+        <a class='btn btn-light-blue pull-left btn-med strong' data-toggle="modal" data-target="#delete_with_ajax">Discard Draft</a>
       <% end %>
 
       <% if @scenario.drafts? %>
@@ -67,4 +67,4 @@
   </div>
 </section>
 
-<%= render partial: 'utility/delete_modal', locals: {controller: 'draft'} %>
+<%= render partial: 'utility/delete_with_ajax_modal', locals: {delete_item: 'draft'} %>

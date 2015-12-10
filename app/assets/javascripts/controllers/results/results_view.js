@@ -3,7 +3,6 @@ function ResultsView(config, videoModal, deleteModal) {
   this.$btnCopyShareLink = config.btnCopyShareLink;
   this.$inputShareLink = config.inputShareLink;
   this.$btnArchive = config.btnArchive;
-  this.$btnDelete = config.btnDelete;
   this.$btnHeroCopyShareLink = config.btnHeroCopyShareLink;
   this.$inputHeroShareLink = config.inputHeroShareLink;
   this.$panelHero = config.panelHero;
@@ -17,7 +16,6 @@ function ResultsView(config, videoModal, deleteModal) {
 
 ResultsView.prototype.init = function() {
   this.$divAllContent.on('click', '.video-link', $.proxy(this.loadVideoModal, this));
-  this.$btnDelete.on('click', $.proxy(this.loadDeleteModal, this));
   this.$btnArchive.on('click', $.proxy(this.toggleArchive, this));
   this.$resultPanelToggle.on('click', 'li.active', $.proxy(this.collapseTab, this));
   new ClipboardInput(this.$btnCopyShareLink, this.$inputShareLink);
@@ -76,10 +74,6 @@ ResultsView.prototype.loadVideoModal = function(event) {
   var timeSeconds = parseFloat(thisEl.attr('data-result-step-offset-seconds') || 0);
 
   this.videoModal.load(scenarioResultHashId, timeSeconds);
-};
-
-ResultsView.prototype.loadDeleteModal = function(event) {
-  this.deleteModal.show();
 };
 
 ResultsView.prototype.highlightHero = function() {
