@@ -6,16 +6,12 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def update_resource(resource, params)
-    params.each do |key, value|
-      if value.blank?
-        params.delete(key)
-      end
-    end
+    params_stripped = params.select { |key, value| !value.blank? }
 
-    if params[:password].nil? && params[:password_confirmation].nil?
-      resource.update_without_password(params)
+    if params[:password].blank? && params[:password_confirmation].blank?
+      resource.update_without_password(params_stripped)
     else
-      super
+      super(resource, params_stripped)
     end
   end
 end
