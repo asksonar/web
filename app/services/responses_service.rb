@@ -58,7 +58,10 @@ class ResponsesService
   # ip_address is set only on the creation of the row, not subsequent calls
   # we know that ip_address is correct for subsequent calls because we get passed the uuid
   def create_new_empty_response(responder, ip_address)
-    responder.responses.create(
+    # responder.responses.create failed sometimes with ActiveRecord::RecordNotUnique (PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "responses_pkey"
+    # TODO: maybe this magically makes a difference? maybe something strange in scoping?
+    Response.create(
+      responder: responder,
       uuid: SecureRandom.uuid,
       ip_address: ip_address
     )
