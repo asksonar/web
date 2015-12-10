@@ -1,0 +1,42 @@
+#comparisons-index {
+
+  #chart {
+    height: 500px;
+  }
+
+  .filters {
+    h3 {
+      margin-bottom: 20px;
+    }
+
+    .bootstrap-select {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .comparison {
+    h3 {
+      margin-bottom: 10px;
+    }
+    .bootstrap-select {
+      max-width: 220px;
+    }
+  }
+
+  .chart-toggle-btns {
+    text-align: right;
+  }
+
+  .amcharts-graph-g1 .amcharts-graph-column-element {
+    -webkit-transition: all .3s ease-out;
+    transition: all .3s ease-out;
+  }
+  .amcharts-graph-g1 .amcharts-graph-column-element {
+    opacity: .85;
+  }
+  .amcharts-graph-g1 .amcharts-graph-column-element:hover {
+    opacity: 1;
+  }
+
+}

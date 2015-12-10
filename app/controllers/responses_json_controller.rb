@@ -5,7 +5,7 @@ class ResponsesJsonController < ApplicationController
     responseParams = {}
     responseParams[:company] = current_researcher.company
     responseParams[:created_since] = Time.zone.parse(params[:startTime])
-    @scenario_results = responses_query
+    @scenario_results = query
       .responses(responseParams)
       .map(&:prezi)
       .map(&:list_json)
@@ -15,7 +15,7 @@ class ResponsesJsonController < ApplicationController
 
   private
 
-  def responses_query
-    @responses_query ||= ResponsesQuery.instance
+  def query
+    @query ||= ScenarioResultsQuery.instance
   end
 end
