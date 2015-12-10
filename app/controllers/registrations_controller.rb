@@ -12,21 +12,10 @@ class RegistrationsController < Devise::RegistrationsController
       end
     end
 
-    if !params[:password].blank? && !params[:password_confirmation].blank?
-      current_password = params.delete(:current_password)
-      result = if resource.valid_password?(current_password)
-        resource.update_attributes(params)
-      else
-        resource.assign_attributes(params)
-        resource.valid?
-        resource.errors.add(:current_password, current_password.blank? ? :blank : :invalid)
-        false
-      end
+    if params[:password].nil? && params[:password_confirmation].nil?
+      resource.update_without_password(params)
     else
-      result = resource.update_attributes(params)
+      super
     end
-
-    resource.clean_up_passwords
-    result
   end
 end

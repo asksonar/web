@@ -1,9 +1,14 @@
+<% content_for :main_wrapper_class do %>
+  sidebar-collapsed
+<% end %>
+
 <section class='main-content-header'>
   <h1>Edit Profile</h1>
 </section>
+
 <section class='main-content'>
   <div class="row">
-    <div class='panel col-sm-9'>
+    <div class='panel col-sm-6'>
       <%= bootstrap_form_for resource, as: resource_name, url: registration_path(resource_name), inline_errors: false, html: { method: :put } do |f| %>
 
         <div class="panel-section">
