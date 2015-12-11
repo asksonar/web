@@ -15,7 +15,7 @@ $(function(){
     btnPublish: $('.btn[name="publish"]'),
     panelHero: $('.panel-hero'),
     btnCopyLink: $('#btn-copy-share-link'),
-    linkFirstResult: $('.results-container .video-link').first()
+    linkFirstResult: $('.scenario-results-panel .video-link').first()
   }, window.overlay);
 
   var walkthroughView = new WalkthroughView({
@@ -40,7 +40,7 @@ $(function(){
     panelHero: $('.panel-hero'),
     btnCopyHero: $('#btn-hero-copy-share-link'),
     btnCopyLink: $('#btn-copy-share-link'),
-    linkFirstResult: $('.results-container .video-link').first(),
+    linkFirstResult: $('.scenario-results-panel .video-link').first(),
     modal: $('#summary_video_container')
   }, walkthroughOverlay, walkthroughView, walkthroughArrow);
 

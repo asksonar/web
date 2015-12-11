@@ -199,7 +199,7 @@ WalkthroughController.prototype.showResults = function() {
 
   this.arrow.draw(
     popup.offset().left + popup.outerWidth() / 2, popup.offset().top + popup.outerHeight() - 10,
-    target.offset().left + target.outerWidth() / 2, target.offset().top - 30,
+    target.offset().left + target.outerWidth() + 30, target.offset().top + target.outerHeight() / 2,
     'vertical'
   );
   this.arrow.show();

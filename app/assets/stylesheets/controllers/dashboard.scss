@@ -1,0 +1,63 @@
+#dashboard-index {
+
+  .nps1 {
+    color: #27AE60;
+  }
+
+  .nps0 {
+    color: #F1C40F;
+  }
+
+  .nps-1 {
+    color: #C0392B;
+  }
+
+  .totals {
+    .nps-total {
+      font-size: 100px;
+      line-height: 1em;
+      text-align: center;
+      margin-left: 20px;
+      margin-right: 20px;
+
+      @media (min-width: $screen-sm-min) {
+        margin-top: 35px;
+        float: left;
+      }
+    }
+
+    #chart {
+      height: 200px;
+    }
+  }
+
+  .comments {
+    h2 {
+      margin-bottom: 10px;
+    }
+  }
+
+  .comment {
+    @media (min-width: $screen-sm-min) {
+      min-width: 350px;
+    }
+    .rating {
+      @extend .strong;
+      float: left;
+      font-size: 24px;
+      line-height: 33px; // lines up with bottom of first line of text
+    }
+    .text {
+      background-color: #f7f7f9;
+      border: 1px solid #e1e1e8;
+      padding: 10px;
+      border-radius: 10px;
+      margin-left: 30px;
+      margin-bottom: 3px;
+    }
+    .date {
+      text-align: right;
+      margin-bottom: 10px;
+    }
+  }
+}

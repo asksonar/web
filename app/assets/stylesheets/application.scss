@@ -22,6 +22,9 @@ $icon-font-path: 'bootstrap/';
 @import 'videojs-markers/dist/videojs.markers';
 @import 'videojs-youtube-progress';
 @import 'animate.css/animate';
+@import 'bootstrap-select';
+@import 'bootstrap-switch';
+@import 'prism';
 
 // base package
 @import 'shared/*';

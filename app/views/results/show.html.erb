@@ -45,7 +45,7 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-right" role="menu">
             <li><a id="btn-edit" href='<%= edit_result_path(@scenario) %>'><i class='fa fa-ftl fa-edit'></i>Edit the study</a></li>
-            <li><a id="btn-delete"><i class='fa fa-ftl fa-trash-o'></i>Delete the study</a></li>
+            <li><a data-toggle="modal" data-target="#delete_with_ajax"><i class='fa fa-ftl fa-trash-o'></i>Delete the study</a></li>
           </ul>
         </div>
       </div>
@@ -184,4 +184,4 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<%= render partial: 'utility/delete_modal', locals: {controller: 'study'} %>
+<%= render partial: 'utility/delete_with_ajax_modal', locals: {delete_item: 'study'} %>

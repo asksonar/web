@@ -18,6 +18,6 @@ class ScenarioResult < ActiveRecord::Base
   private
 
   def default_values
-    self.status = status || 0
+    self.status = 0 if status.nil?
   end
 end

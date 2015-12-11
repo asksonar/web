@@ -15,7 +15,8 @@
 
   <% if current_researcher %>
     sonar.user = {
-      hashid: '<%= current_researcher.hashid %>'
+      hashid: '<%= current_researcher.hashid %>',
+      email: '<%= current_researcher.email %>'
     };
   <% end %>
 
