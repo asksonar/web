@@ -42,9 +42,8 @@ $(function(){
   };
 
   var deleteModal = new DeleteModal({
-    modal: $('#delete_confirmation_container'),
-    btnDeleteYes: $('#btn-delete-yes'),
-    btnDeleteNo: $('#btn-delete-no')
+    modal: $('#delete_with_ajax'),
+    btnDeleteYes: $('#btn-delete-yes')
   });
 
   var emptyStep = {steps:[{}]};
@@ -79,10 +78,6 @@ $(function(){
     var ctnStep = $(this).closest('.ctn-step');
     ctnStep.remove();
     recountSteps();
-  });
-
-  $('#btn-delete').on('click', function(event){
-    deleteModal.show();
   });
 
   autosize($('textarea'));

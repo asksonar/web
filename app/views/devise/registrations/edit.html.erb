@@ -1,39 +1,44 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
+<% content_for :main_wrapper_class do %>
+  sidebar-collapsed
 <% end %>
 
-<h3>Cancel my account</h3>
+<section class='main-content-header'>
+  <h1>Edit Profile</h1>
+</section>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<section class='main-content'>
+  <div class="row">
+    <div class='panel col-sm-6'>
+      <%= bootstrap_form_for resource, as: resource_name, url: registration_path(resource_name), inline_errors: false, html: { method: :put } do |f| %>
 
-<%= link_to "Back", :back %>
+        <div class="panel-section">
+          <h2>Account</h2>
+          <%= f.text_field :full_name, autofocus: true, autocomplete: "off" %>
+
+          <%= f.email_field :email, autocomplete: "off" %>
+        </div>
+
+        <div class="panel-section">
+          <h2>Password</h2>
+          <%= f.password_field :current_password, autocomplete: "off",
+            label: 'Current Password' %>
+
+          <%= f.password_field :password, autocomplete: "off",
+            label: 'New password' %>
+
+          <%= f.password_field :password_confirmation, autocomplete: "off",
+            label: 'Verify password' %>
+        </div>
+
+        <div class="panel-section">
+          <a href='<%= results_path %>' class='btn btn-grey btn-med'>Cancel</a>
+          <%= f.submit "Save Changes", class: 'btn btn-dark-blue btn-med strong' %>
+        </div>
+      <% end %>
+
+      <a data-toggle='modal' data-target='#delete_with_form'>Delete my account</a>
+    </div>
+  </div>
+</section>
+
+<%= render partial: 'utility/delete_with_form_modal', locals: {delete_item: 'account', path: registration_path(resource_name)} %>

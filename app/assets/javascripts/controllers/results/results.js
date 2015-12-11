@@ -48,9 +48,8 @@ $(function(){
   }, videoController, videoTranscript, videoLink, new VideoResultsHistory());
 
   var deleteModal = new DeleteModal({
-    modal: $('#delete_confirmation_container'),
-    btnDeleteYes: $('#btn-delete-yes'),
-    btnDeleteNo: $('#btn-delete-no')
+    modal: $('#delete_with_ajax'),
+    btnDeleteYes: $('#btn-delete-yes')
   });
 
   var resultsView = new ResultsView({
@@ -58,7 +57,6 @@ $(function(){
     btnCopyShareLink: $('#btn-copy-share-link'),
     inputShareLink: $('#input-share-link'),
     btnArchive: $('#btn-archive'),
-    btnDelete: $('#btn-delete'),
     btnHeroCopyShareLink: $('#btn-hero-copy-share-link'),
     inputHeroShareLink: $('#input-hero-share-link'),
     panelHero: $('.panel-hero'),
