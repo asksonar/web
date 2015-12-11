@@ -18,12 +18,11 @@ module PrettyPrintTimeHelper
     end
   end
 
-
   def ppt_date(date)
-    date.strftime("%B %d, %Y")
+    local_time(date, '%B %d, %Y')
   end
 
   def ppt_date_abbr(date)
-    date.strftime("%b %d")
+    local_time(date, '%b %d')
   end
 end
