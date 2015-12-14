@@ -59,9 +59,8 @@ gem 'user_agent_parser'
 gem 'sanitize'
 # accessor for MaxMind geoip local database
 gem 'maxminddb'
-# whitelist assets so that pipeline will also create a non-digested version
-# (used for amcharts, who dynamically generates image names in javascript)
-gem "non-stupid-digest-assets"
+# gives us local_time and local_time_ago to handle timezones via javascript
+gem 'local_time'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables
