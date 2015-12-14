@@ -89,6 +89,8 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
+    local_time (1.0.3)
+      coffee-rails
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -254,6 +256,7 @@ DEPENDENCIES
   devise
   hashids
   jbuilder
+  local_time
   maxminddb
   mixpanel-ruby
   non-stupid-digest-assets

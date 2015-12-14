@@ -30,6 +30,7 @@
 //= require bootstrap-select
 //= require bootstrap-switch
 //= require prism
+//= require local_time
 
 // insert 3rd party packages above this line
 

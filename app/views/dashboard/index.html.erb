@@ -34,7 +34,7 @@
               <div class='comment'>
                 <div class='rating nps<%= comment.nps %>'><%= comment.rating %></div>
                 <div class='text'><%= comment.text %></div>
-                <div class='date sub'><%= time_ago_in_words(comment.created_at) %> ago</div>
+                <div class='date sub'><%= local_time_ago(comment.created_at) %></div>
               </div>
             <% end %>
 
