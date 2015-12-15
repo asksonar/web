@@ -7,19 +7,21 @@ class ResultNotePolicy < ApplicationPolicy
   end
 
   def update?
-    if researcher.super_admin?
-      true
-    elsif result_note.scenario_result.scenario.nil?
-      researcher == result_note.scenario_result.created_by
-    else
-      researcher == result_note.scenario_result.scenario.created_by
-    end
+    is_super_admin? or is_owner?
   end
 
   def destroy?
-    if researcher.super_admin?
-      true
-    elsif result_note.scenario_result.scenario.nil?
+    is_super_admin? or is_owner?
+  end
+
+  private
+
+  def is_super_admin?
+    researcher.super_admin?
+  end
+
+  def is_owner?
+    if result_note.scenario_result.scenario.nil?
       researcher == result_note.scenario_result.created_by
     else
       researcher == result_note.scenario_result.scenario.created_by

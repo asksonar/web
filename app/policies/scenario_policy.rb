@@ -7,18 +7,28 @@ class ScenarioPolicy < ApplicationPolicy
   end
 
   def show?
-    researcher.super_admin? or researcher == scenario.created_by
+    is_super_admin? or is_owner?
   end
 
   def edit?
-    researcher.super_admin? or researcher == scenario.created_by
+    is_super_admin? or is_owner?
   end
 
   def update?
-    researcher.super_admin? or researcher == scenario.created_by
+    is_super_admin? or is_owner?
   end
 
   def destroy?
-    researcher.super_admin? or researcher == scenario.created_by
+    is_super_admin? or is_owner?
+  end
+
+  private
+
+  def is_super_admin?
+    researcher.super_admin?
+  end
+
+  def is_owner?
+    researcher == scenario.created_by
   end
 end
