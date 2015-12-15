@@ -76,20 +76,20 @@ modulejs.define('NoteElement', ['TimelineElement'], function(timelineElement) {
         authenticity_token: AUTH_TOKEN
       }
     })
-    .success(
-      function(response) {
-        this.trashSuccess();
-      }.bind(this)
-    )
-    .fail(
-      function(jqXHR) {
-        if (jqXHR.status == 403) {
-          this.trashFail("Sorry, you're not authorized to perform this action.");
-        } else {
-          this.trashFail();
-        }
-      }.bind(this)
-    );
+      .done(
+        function(response) {
+          this.trashSuccess();
+        }.bind(this)
+      )
+      .fail(
+        function(jqXHR) {
+          if (jqXHR.status == 403) {
+            this.trashFail("Sorry, you're not authorized to perform this action.");
+          } else {
+            this.trashFail();
+          }
+        }.bind(this)
+      );
   };
 
   return noteElement;
