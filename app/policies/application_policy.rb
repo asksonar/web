@@ -6,48 +6,15 @@ class ApplicationPolicy
     @record = record
   end
 
-  def index?
-    false
+  def default?
+    is_super_admin? or is_owner?
   end
 
-  def show?
-    scope.where(:id => record.id).exists?
+  def is_super_admin?
+    researcher.super_admin?
   end
 
-  def create?
-    false
-  end
-
-  def new?
-    create?
-  end
-
-  def update?
-    false
-  end
-
-  def edit?
-    update?
-  end
-
-  def destroy?
-    false
-  end
-
-  def scope
-    Pundit.policy_scope!(researcher, record.class)
-  end
-
-  class Scope
-    attr_reader :researcher, :scope
-
-    def initialize(researcher, scope)
-      @researcher = researcher
-      @scope = scope
-    end
-
-    def resolve
-      scope
-    end
+  def is_owner?
+    researcher == record.prezi.created_by
   end
 end
