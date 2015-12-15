@@ -44,6 +44,8 @@ gem 'rails_bootstrap_navbar'
 gem 'hashids'
 # user login framework
 gem 'devise'
+# user authorization framework
+gem 'pundit'
 # better server than webrick
 gem 'thin'
 # needs to declared here as well as gemspec for resque-web to work

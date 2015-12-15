@@ -20,6 +20,10 @@ class ScenarioPresenter < SimpleDelegator
       .map(&:prezi)
   end
 
+  def created_by
+    super
+  end
+
   def step_count
     scenario_steps.count
   end

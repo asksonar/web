@@ -110,6 +110,8 @@ GEM
       sprockets (>= 2.0)
     orm_adapter (0.5.0)
     pg (0.18.2)
+    pundit (1.0.1)
+      activesupport (>= 3.0.0)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -259,6 +261,7 @@ DEPENDENCIES
   mixpanel-ruby
   non-stupid-digest-assets
   pg
+  pundit
   rails
   rails-assets-URIjs!
   rails-assets-amcharts3!

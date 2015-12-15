@@ -62,7 +62,11 @@ ResultsView.prototype.toggleArchive = function() {
       }
     }.bind(this),
     error: function(jqXHR){
-      notify.error(jqXHR.responseText, 'There was an error setting the Live state.');
+      if (jqXHR.status == 403) {
+        notify.warn("Sorry, you're not authorized to set the Live state.");
+      } else {
+        notify.error(jqXHR.responseText, 'There was an error setting the Live state.');
+      }
     }
   });
 };

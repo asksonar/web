@@ -52,7 +52,11 @@ modulejs.define('NoteElement', ['TimelineElement'], function(timelineElement) {
         this.saveSuccess();
       }.bind(this),
       error: function(jqXHR) {
-        this.saveFail(jqXHR.responseText);
+        if (jqXHR.status == 403) {
+          this.saveFail("Sorry, you're not authorized to perform this action.");
+        } else {
+          this.saveFail(jqXHR.responseText);
+        }
       }.bind(this)
     });
   };
@@ -71,11 +75,21 @@ modulejs.define('NoteElement', ['TimelineElement'], function(timelineElement) {
         _method: 'DELETE',
         authenticity_token: AUTH_TOKEN
       }
-    }).success($.proxy(function(response) {
-      this.trashSuccess();
-    }, this)).fail($.proxy(function() {
-      this.trashFail();
-    }, this));
+    })
+      .done(
+        function(response) {
+          this.trashSuccess();
+        }.bind(this)
+      )
+      .fail(
+        function(jqXHR) {
+          if (jqXHR.status == 403) {
+            this.trashFail("Sorry, you're not authorized to perform this action.");
+          } else {
+            this.trashFail();
+          }
+        }.bind(this)
+      );
   };
 
   return noteElement;

@@ -23,6 +23,14 @@ class ScenarioResultPresenter < SimpleDelegator
     }
   end
 
+  def created_by
+    if scenario.nil?
+      super
+    else
+      scenario.created_by
+    end
+  end
+
   def my_feedback?
     scenario.nil?
   end

@@ -13,8 +13,12 @@ TrashableComponent = function() {
     notify.info('Your ' + this.displayClass + ' has been removed.');
   };
 
-  this.trashFail = function() {
-    notify.warn('There was an error removing your  ' + this.displayClass + '.');
+  this.trashFail = function(customMsg) {
+    if (typeof customMsg === 'string') {
+      notify.warn(customMsg);
+    } else {
+      notify.warn('There was an error removing your  ' + this.displayClass + '.');
+    }
   };
 
 };

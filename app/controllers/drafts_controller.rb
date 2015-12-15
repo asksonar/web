@@ -13,6 +13,7 @@ class DraftsController < ApplicationController
   def edit
     @scenario = Scenario.find_by_hashid!(params[:id]).prezi
     @template = Template.find_by(value: params[:template])
+    authorize @scenario
   end
 
   def create
@@ -48,6 +49,7 @@ class DraftsController < ApplicationController
 
   def update
     @scenario = Scenario.find_by_hashid!(params[:id])
+    authorize @scenario
 
     drafts_service.update(
       @scenario,
@@ -78,8 +80,9 @@ class DraftsController < ApplicationController
   end
 
   def destroy
-    @result = Scenario.find_by_hashid!(params[:id])
-    scenarios_service.set_deleted(@result)
+    @scenario = Scenario.find_by_hashid!(params[:id])
+    authorize @scenario
+    scenarios_service.set_deleted(@scenario)
 
     flash[:info] = '<strong>Your draft has been deleted.</strong>'
     render json: {redirect_url: drafts_path}
