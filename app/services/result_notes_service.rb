@@ -1,20 +1,20 @@
 class ResultNotesService
   include Singleton
 
-  def create(scenario_result, note_params)
+  def create(scenario_result, offset_seconds:, text:)
     result_note = ResultNote.create(
       scenario_result: scenario_result,
-      offset_seconds: note_params[:offset_seconds],
-      text: note_params[:text]
+      offset_seconds: offset_seconds,
+      text: text
     )
 
     result_note
   end
 
-  def update(result_note, note_params)
+  def update(result_note, offset_seconds:, text:)
     result_note.update(
-      offset_seconds: note_params[:offset_seconds],
-      text: note_params[:text]
+      offset_seconds: offset_seconds,
+      text: text
     )
 
     result_note
