@@ -38,7 +38,8 @@ module Cero
     config.exceptions_app = routes
 
     config.action_dispatch.rescue_responses.merge!(
-      'ActionController::ForbiddenError' => :forbidden
+      'ActionController::ForbiddenError' => :forbidden,
+      'Pundit::NotAuthorizedError' => :forbidden
     )
 
     config_path = File.join(Rails.root, "config/properties/#{ENV['SONAR_ENV']}.yml")
