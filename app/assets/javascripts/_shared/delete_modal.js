@@ -23,7 +23,11 @@ DeleteModal.prototype.deleteWithAjax = function(event) {
       window.location.replace(data.redirect_url);
     },
     error: function(jqXHR){
-      notify.error(jqXHR.responseText);
+      if (jqXHR.status == 403) {
+        window.location.replace("/403");
+      } else {
+        notify.error(jqXHR.responseText);
+      }
     }
   });
 };

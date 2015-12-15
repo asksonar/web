@@ -9,4 +9,16 @@ class ScenarioPolicy < ApplicationPolicy
   def show?
     researcher.super_admin? or researcher == scenario.created_by
   end
+
+  def edit?
+    researcher.super_admin? or researcher == scenario.created_by
+  end
+
+  def update?
+    researcher.super_admin? or researcher == scenario.created_by
+  end
+
+  def destroy?
+    researcher.super_admin? or researcher == scenario.created_by
+  end
 end

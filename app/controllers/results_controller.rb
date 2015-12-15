@@ -17,30 +17,34 @@ class ResultsController < ApplicationController
     else
       @scenario = Scenario.find_by_hashid!(params[:id]).prezi
     end
+
     authorize @scenario
   end
 
   def update
-    @result = Scenario.find_by_hashid!(params[:id])
+    @scenario = Scenario.find_by_hashid!(params[:id])
+    authorize @scenario
 
     # we are toggling, so set it to the reverse of whatever it currently is
     if params[:is_on] == 'true'
-      service.set_completed(@result)
+      service.set_completed(@scenario)
     elsif params[:is_on] == 'false'
-      service.set_live(@result)
+      service.set_live(@scenario)
     end
 
     # we need to generate sample data for the study
     if params[:walkthrough] == 'true'
-      scenario_results_service.generate_new_sample_result(@result)
+      scenario_results_service.generate_new_sample_result(@scenario)
     end
 
     render plain: 'OK'
   end
 
   def destroy
-    @result = Scenario.find_by_hashid!(params[:id])
-    service.set_deleted(@result)
+    @scenario = Scenario.find_by_hashid!(params[:id])
+    authorize @scenario
+
+    service.set_deleted(@scenario)
 
     flash[:info] = '<strong>Your study has been deleted.</strong>'
     render json: { redirect_url: results_path }

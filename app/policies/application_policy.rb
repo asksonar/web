@@ -23,7 +23,7 @@ class ApplicationPolicy
   end
 
   def update?
-    researcher.super_admin? or researcher == scenario.created_by
+    false
   end
 
   def edit?
@@ -31,7 +31,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    researcher.super_admin? or researcher == scenario.created_by
+    false
   end
 
   def scope

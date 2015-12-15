@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
 
   private
     def user_not_authorized(exception)
-      flash[:info] = "<strong>You are not authorized to perform this action.</strong>"
-      redirect_to(request.referrer || root_path)
+      raise ActionController::ForbiddenError
     end
 end

@@ -9,6 +9,7 @@ class FeedbackController < ApplicationController
 
   def show
     @scenario_result = ScenarioResult.find_by_hashid!(params[:id])
+    authorize @scenario_result
     @page = query.count_newer_than(@scenario_result, created_by: current_researcher) / PAGE_SIZE
     @scenario_results, @has_next = paged_results(@page)
 
