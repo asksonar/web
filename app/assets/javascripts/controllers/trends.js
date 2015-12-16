@@ -139,18 +139,10 @@ $(function(){
   //     return chartData;
   // }
 
-  $('.checkbox').on('click', function() {
-    var thisEl = $(this);
-    var checkbox = thisEl.find("input[type='checkbox']");
-    var field = checkbox.attr('name');
-    var value = checkbox.attr('value');
-    var checked = checkbox.prop('checked');
-    if (checked) {
-      window.location.href = URI(window.location.href).addSearch(field, value);
-    } else {
-      window.location.href = URI(window.location.href).removeSearch(field, value);
-    }
-  });
+  var graphFilters = new GraphFilters({
+    inputCheckBox: $('.checkbox'),
+    btnSelectDate: $('#select-date')
+  }, chart);
 
   $("#toggle-breakdown").bootstrapSwitch({
     labelText: 'Show breakdown',
@@ -170,10 +162,5 @@ $(function(){
         chart.hideGraph(chart.getGraphById('detractors'));
       }
     }
-  });
-
-  $('#select-date').on('change', function(){
-    var value = $(this).find("option:selected").val();
-    window.location.href = URI(window.location.href).setSearch('date', value);
   });
 });
