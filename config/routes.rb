@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   get '/comparisons', to: 'comparisons#index', as: 'comparisons'
   get '/embed/snippet', to: 'embed#index', as: 'embed_snippet'
   get '/embed/demo', to: 'demo#index', as: 'embed_demo'
+  get '/settings/upload', to: 'upload#index', as: 'settings_upload'
+  post '/settings/upload', to: 'upload#upload'
 
   ############
   # sonar v1 #

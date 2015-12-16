@@ -66,6 +66,8 @@ gem 'maxminddb'
 gem "non-stupid-digest-assets"
 # gives us local_time and local_time_ago to handle timezones via javascript
 gem 'local_time'
+# read in CSV as array of hashes instead of array of arrays
+gem 'smarter_csv'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables
@@ -104,6 +106,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-switch'
   # syntax-coloring for js snippet
   gem 'rails-assets-prism'
+  # helper library for parsing CSV in javascript
+  gem 'rails-assets-papaparse'
 end
 
 group :development, :test do
