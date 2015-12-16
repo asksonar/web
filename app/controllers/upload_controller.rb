@@ -1,9 +1,15 @@
+require 'csv'
+
 class UploadController < ApplicationController
   before_action :authenticate_researcher!
 
   def upload
-    service.batch_update_metadata(company, metadata)
-    render plain: 'OK'
+    begin
+      service.batch_update_metadata(company, metadata)
+      render plain: 'OK'
+    rescue => e
+      render status: 500, plain: e.message || 'There was an error processing your request.'
+    end
   end
 
   private

@@ -8,6 +8,10 @@ class RespondersService
   end
 
   def update_metadata(company, email, metadata)
+    if email.nil?
+      fail ArgumentError, 'Email cannot be nil'
+    end
+
     ActiveRecord::Base.transaction do
       responder = Responder.find_by(company: company, email: email)
       if responder
