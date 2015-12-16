@@ -63,11 +63,9 @@ gem 'sanitize'
 gem 'maxminddb'
 # whitelist assets so that pipeline will also create a non-digested version
 # (used for amcharts, who dynamically generates image names in javascript)
-gem "non-stupid-digest-assets"
+gem 'non-stupid-digest-assets'
 # gives us local_time and local_time_ago to handle timezones via javascript
 gem 'local_time'
-# read in CSV as array of hashes instead of array of arrays
-gem 'smarter_csv'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables
