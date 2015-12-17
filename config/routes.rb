@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   get '/trends', to: 'trends#index', as: 'trends'
   patch '/trends', to: 'trends#update'
   get '/comparisons', to: 'comparisons#index', as: 'comparisons'
+  patch '/comparisons', to: 'comparisons#update'
   get '/embed/snippet', to: 'embed#index', as: 'embed_snippet'
   get '/embed/demo', to: 'demo#index', as: 'embed_demo'
 

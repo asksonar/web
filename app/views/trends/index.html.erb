@@ -22,9 +22,9 @@
 
           <div class='sub'>DATE</div>
           <select class="selectpicker form-control" id='select-date' data-field='date'>
-            <option <%= 'selected' if params[:date] == 'past-month' %> value='past-1-month'>past 1 month</option>
-            <option <%= 'selected' if params[:date] == 'past-3-months' %> value='past-3-months'>past 3 months</option>
-            <option <%= 'selected' if params[:date] == 'past-12-months' %> value='past-12-months'>past 12 months</option>
+            <option <%= 'selected' if params[:date] == 'past-month' %> name='date' value='past-1-month'>past 1 month</option>
+            <option <%= 'selected' if params[:date] == 'past-3-months' %> name='date' value='past-3-months'>past 3 months</option>
+            <option <%= 'selected' if params[:date] == 'past-12-months' %> name='date' value='past-12-months'>past 12 months</option>
           </select>
 
           <div class='sub'>REGION</div>

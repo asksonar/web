@@ -1,6 +1,6 @@
 GraphFilters = function(config, chart) {
-  this.$inputCheckBox = config.inputCheckBox;
-  this.$btnSelectDate = config.btnSelectDate;
+  this.$inputCheckbox = config.inputCheckbox;
+  this.$btnSelect = config.btnSelect;
 
   this.chart = chart;
 
@@ -8,8 +8,8 @@ GraphFilters = function(config, chart) {
 };
 
 GraphFilters.prototype.init = function() {
-  this.$inputCheckBox.on('click', $.proxy(this.updateGraph, this));
-  this.$btnSelectDate.on('change', $.proxy(this.updateGraph, this));
+  this.$inputCheckbox.on('click', $.proxy(this.updateGraph, this));
+  this.$btnSelect.on('change', $.proxy(this.updateGraph, this));
 };
 
 GraphFilters.prototype.updateGraph = function() {
@@ -33,12 +33,16 @@ GraphFilters.prototype.updateGraph = function() {
 };
 
 GraphFilters.prototype.getFilters = function() {
-  var filters = {region: [], country: [], date: null};
+  var filters = {region: [], country: [], date: null, category: null};
 
-  var selectedDate = this.$btnSelectDate.find("option:selected").val();
-  filters.date = selectedDate;
+  var selectedFilters = this.$btnSelect.find("option:selected");
+  selectedFilters.each(function(index, selectedFilter) {
+    var field = $(selectedFilter).attr('name');
+    var value = $(selectedFilter).attr('value');
+    filters[field] = value;
+  });
 
-  var checkedboxes = this.$inputCheckBox.find("input:checked");
+  var checkedboxes = this.$inputCheckbox.find("input:checked");
   if (checkedboxes.length !== 0) {
     checkedboxes.each(function(index, checkbox){
       var field = $(checkbox).attr('name');

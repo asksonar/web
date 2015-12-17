@@ -94,7 +94,7 @@ $(function(){
       },
       "dataDateFormat": 'YYYYMMDD',
       // "categoryField": "date",
-      "categoryField": "date_yyyymmdd",
+      "categoryField": "categoryField",
       "categoryAxis": {
           "parseDates": true,
           "axisColor": "#DADADA",
@@ -140,8 +140,8 @@ $(function(){
   // }
 
   var graphFilters = new GraphFilters({
-    inputCheckBox: $('.checkbox'),
-    btnSelectDate: $('#select-date')
+    inputCheckbox: $('.checkbox'),
+    btnSelect: $('.selectpicker')
   }, chart);
 
   $("#toggle-breakdown").bootstrapSwitch({
