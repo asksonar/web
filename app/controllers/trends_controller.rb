@@ -3,11 +3,10 @@ class TrendsController < ApplicationController
 
   def index
     @prezi = prezi(query_params)
-    json = @prezi.nps_by_day_json
 
     respond_to do |format|
       format.html
-      format.json {render json: json}
+      format.json {render json: @prezi.nps_by_day_json}
     end
   end
 
