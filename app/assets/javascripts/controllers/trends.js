@@ -140,7 +140,7 @@ $(function(){
   // }
 
   var graphFilters = new GraphFilters({
-    inputCheckbox: $('.checkbox'),
+    inputCheckbox: $('.checkbox input[type="checkbox"]'),
     btnSelect: $('.selectpicker')
   }, chart);
 

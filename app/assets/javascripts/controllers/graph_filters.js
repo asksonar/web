@@ -8,7 +8,7 @@ GraphFilters = function(config, chart) {
 };
 
 GraphFilters.prototype.init = function() {
-  this.$inputCheckbox.on('click', $.proxy(this.updateGraph, this));
+  this.$inputCheckbox.on('change', $.proxy(this.updateGraph, this));
   this.$btnSelect.on('change', $.proxy(this.updateGraph, this));
 };
 
@@ -43,7 +43,7 @@ GraphFilters.prototype.getFilters = function() {
     filters[field] = value;
   });
 
-  var checkedboxes = this.$inputCheckbox.find("input:checked");
+  var checkedboxes =  $('.checkbox :checked');
   checkedboxes.each(function(index, checkbox){
     var field = $(checkbox).attr('name');
     var value = $(checkbox).attr('value');
