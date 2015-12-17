@@ -43,13 +43,11 @@ GraphFilters.prototype.getFilters = function() {
   });
 
   var checkedboxes = this.$inputCheckbox.find("input:checked");
-  if (checkedboxes.length !== 0) {
-    checkedboxes.each(function(index, checkbox){
-      var field = $(checkbox).attr('name');
-      var value = $(checkbox).attr('value');
-      filters[field].push(value);
-    });
-  }
+  checkedboxes.each(function(index, checkbox){
+    var field = $(checkbox).attr('name');
+    var value = $(checkbox).attr('value');
+    filters[field].push(value);
+  });
 
   return filters;
 };
