@@ -14,10 +14,11 @@ GraphFilters.prototype.init = function() {
 
 GraphFilters.prototype.updateGraph = function() {
   var data = this.getFilters();
-  var url = new URL(window.location.href).pathname + '.json';
+  var url = new URL(window.location.href).pathname;
 
   $.ajax({
     type: 'GET',
+    dataType: 'json',
     url: url,
     data: $.extend(data, {
       authenticity_token: AUTH_TOKEN

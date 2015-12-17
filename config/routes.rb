@@ -32,9 +32,7 @@ Rails.application.routes.draw do
   ############
 
   get '/dashboard', to: 'dashboard#index', as: 'dashboard'
-  get '/trends.json', to: 'trends_json#index'
   get '/trends', to: 'trends#index', as: 'trends'
-  get '/comparisons.json', to: 'comparisons_json#index'
   get '/comparisons', to: 'comparisons#index', as: 'comparisons'
   get '/embed/snippet', to: 'embed#index', as: 'embed_snippet'
   get '/embed/demo', to: 'demo#index', as: 'embed_demo'
