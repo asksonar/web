@@ -14,12 +14,12 @@ GraphFilters.prototype.init = function() {
 
 GraphFilters.prototype.updateGraph = function() {
   var data = this.getFilters();
+  var url = new URL(window.location.href).pathname + '.json';
 
   $.ajax({
-    type: 'POST',
-    url: new URL(window.location.href).pathname,
+    type: 'GET',
+    url: url,
     data: $.extend(data, {
-      _method: 'PATCH',
       authenticity_token: AUTH_TOKEN
     }),
     success: function(response) {

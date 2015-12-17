@@ -1,8 +1,9 @@
-class TrendsController < ApplicationController
+class TrendsJsonController < ApplicationController
   before_action :authenticate_researcher!
 
   def index
-    @prezi = prezi(query_params)
+    json = prezi(query_params).nps_by_day_json
+    render json: json
   end
 
   private

@@ -1,8 +1,9 @@
-class ComparisonsController < ApplicationController
+class ComparisonsJsonController < ApplicationController
   before_action :authenticate_researcher!
 
   def index
-    @prezi = prezi(query_params)
+    json = prezi(query_params).nps_by_category_json
+    render json: json
   end
 
   private
