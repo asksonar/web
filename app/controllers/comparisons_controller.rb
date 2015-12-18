@@ -3,6 +3,11 @@ class ComparisonsController < ApplicationController
 
   def index
     @prezi = prezi(query_params)
+
+    respond_to do |format|
+      format.html
+      format.json {render json: @prezi.nps_by_category_json}
+    end
   end
 
   private
@@ -15,13 +20,7 @@ class ComparisonsController < ApplicationController
     ComparisonsPresenter.new(current_researcher.company_id, category, params[:date], query_params)
   end
 
-  # can handle a query like
-  # # /trends?country=United+States&region=New+Jersey
-  # or
-  # /trends?country=United+States&region[]=New+Jersey&region[]=California
-  # or
-  # /trends?country[]=United+States&region[]=New+Jersey&region[]=California
   def query_params
-    params.permit(:country, :region, region: [], country: [])
+    params.permit(region: [], country: [])
   end
 end

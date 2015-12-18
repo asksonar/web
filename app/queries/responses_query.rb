@@ -37,7 +37,7 @@ class ResponsesQuery
         object[column_val] = (object[column_val] || { 1 => 0, 0 => 0, -1 => 0 }).merge(nps => count)
       end
       .map do |key, object|
-        { column =>  key,
+        { categoryField:  key,
           nps: (
             100.0 *
             (object[1] - object[-1]) /

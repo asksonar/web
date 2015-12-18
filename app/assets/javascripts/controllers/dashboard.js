@@ -48,7 +48,7 @@ $(function(){
         "zoomable": false
     },
     "dataDateFormat": 'YYYYMMDD',
-    "categoryField": "date_yyyymmdd",
+    "categoryField": "categoryField",
     "categoryAxis": {
         "parseDates": true,
         "startOnAxis": true,
