@@ -43,7 +43,7 @@ GraphFilters.prototype.getFilters = function() {
     filters[field] = value;
   });
 
-  var checkedboxes =  $('.checkbox :checked');
+  var checkedboxes =  $('.filter :checked');
   checkedboxes.each(function(index, checkbox){
     var field = $(checkbox).attr('name');
     var value = $(checkbox).attr('value');
