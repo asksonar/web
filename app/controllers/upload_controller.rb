@@ -8,7 +8,8 @@ class UploadController < ApplicationController
       service.batch_update_metadata(company, metadata)
       render plain: 'OK'
     rescue => e
-      render status: 500, plain: e.message || 'There was an error processing your request.'
+      raise e if Rails.env.development?
+      render status: 500, plain: 'There was an error processing your request' + (e.message.nil? ? '.' : ': ' + e.message)
     end
   end
 

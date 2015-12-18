@@ -66,6 +66,8 @@ gem 'maxminddb'
 gem 'non-stupid-digest-assets'
 # gives us local_time and local_time_ago to handle timezones via javascript
 gem 'local_time'
+# lets us do bulk imports via the ModelClass.import(array_of_models) function
+gem 'activerecord-import'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables
