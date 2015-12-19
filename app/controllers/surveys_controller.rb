@@ -7,8 +7,7 @@ class SurveysController < ApplicationController
   end
 
   def update
-    company = current_researcher.company
-    @survey_settings = company.survey_settings
+    @survey_settings = SurveySettings.find_by_hashid(params[:id])
     service.update(@survey_settings, survey_params)
     flash[:info] = 'Your changes have been updated.'
     redirect_to root_path
