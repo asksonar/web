@@ -10,11 +10,12 @@ $(function(){
     var totalProcessedBytes = 0;
     var totalFileBytes = file.size;
 
+    $('.progress').show();
     $('.progress-bar').width('5%');
 
     Papa.parse(file, {
       header: true,
-      // skipEmptyLines: true,
+      skipEmptyLines: true,
       chunk: function(results, parser) {
         var chunkSize = parser.streamer._config.chunkSize;
         var nextChunkStart = parser.streamer._start;
@@ -43,7 +44,7 @@ $(function(){
 
         $.ajax({
           type: 'POST',
-          url: '/settings/upload',
+          url: '/users/upload',
           data: {
             authenticity_token: AUTH_TOKEN,
             metadata: Papa.unparse(dataWithEmail)
@@ -58,7 +59,7 @@ $(function(){
 
             var isFinished = progress === 1;
             if (isFinished) {
-              $('.progress').fadeOut(1000);
+              $('.progress-bar').removeClass('progress-bar-striped');
               addStatusSuccess("<div class='bg-success'>File was processed successfully.</div>");
             }
           },
@@ -94,8 +95,9 @@ $(function(){
 
   function clearStatus() {
     $('.status').text('');
+    $('.progress').hide();
     $('.progress-bar').width(0);
-    $('.progress').show();
+    $('.progress-bar').addClass('progress-bar-striped');
   }
 
   function testBeginningOfFile(evt) {

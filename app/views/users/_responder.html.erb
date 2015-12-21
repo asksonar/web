@@ -1,0 +1,23 @@
+<tr class='user-line'>
+  <td><%= responder.email %></td>
+  <td><%= responder.first_touch && local_time(responder.first_touch) %></td>
+  <td><%= responder.last_touch && local_time_ago(responder.last_touch) %></td>
+  <td><%= responder.region %></td>
+  <td><%= responder.country %></td>
+</tr>
+<tr class='user-metadata' style='display:none'>
+  <td colspan='5'>
+    <% if responder.metadata %>
+      <% responder.metadata.each do |key, value| %>
+        <dl class="dl-horizontal">
+          <dt><%= key %></dt>
+          <dd><%= value %></dd>
+        </dl>
+      <% end %>
+    <% else %>
+      <div class='no-user-metadata'>
+        <i class='fa fa-ft fa-info-circle'></i>No custom metadata added yet.
+      </div>
+    <% end %>
+  </td>
+</tr>
