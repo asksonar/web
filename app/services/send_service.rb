@@ -1,4 +1,4 @@
-class SurveysService
+class SendService
   include Singleton
 
   def update(survey_settings, note_params)
