@@ -68,6 +68,8 @@ gem 'non-stupid-digest-assets'
 gem 'local_time'
 # lets us do bulk imports via the ModelClass.import(array_of_models) function
 gem 'activerecord-import'
+# pagination gem, with bootstrap styling
+gem 'kaminari-bootstrap'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables

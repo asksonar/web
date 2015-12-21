@@ -33,7 +33,7 @@
             <%= render partial: 'responder', collection: @prezi.users %>
           </table>
         </div>
-        <%#= render partial: 'utility/multi_pager' %>
+        <%= paginate @prezi.users %>
       </div>
     </div>
   </div>

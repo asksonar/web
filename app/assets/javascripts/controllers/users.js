@@ -4,8 +4,7 @@ $(function(){
   }
 
   $('.user-table').on('click', '.user-line', function() {
-    // $('.user-table .user-metadata').hide();
-    $(this).next('.user-metadata').toggle();
+    $(this).next('.user-metadata').fadeToggle('fast');
   });
 
 });

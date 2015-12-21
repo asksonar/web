@@ -91,6 +91,12 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
+    kaminari (0.16.3)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+    kaminari-bootstrap (3.0.1)
+      kaminari (>= 0.13.0)
+      rails
     local_time (1.0.3)
       coffee-rails
     loofah (2.0.3)
@@ -260,6 +266,7 @@ DEPENDENCIES
   devise
   hashids
   jbuilder
+  kaminari-bootstrap
   local_time
   maxminddb
   mixpanel-ruby
