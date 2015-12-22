@@ -19,10 +19,9 @@
   <ul class="nav nav-right">
     <% if researcher_signed_in? %>
       <%= navbar_dropdown "<i class='fa fa-ft fa-user'></i><span class='hidden-xs'>#{current_researcher.full_name}</span>" do %>
-        <%= navbar_item "Profile",
-          edit_researcher_registration_path %>
+        <%= navbar_item "Profile", edit_researcher_registration_path %>
         <%= navbar_item "Embed", embed_snippet_path %>
-        <%= navbar_item "Users", users_path %>
+        <%= navbar_item "Customers", customers_path %>
         <%= navbar_item "Logout", destroy_researcher_session_path %>
       <% end %>
     <% else %>

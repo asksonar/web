@@ -36,10 +36,15 @@ Rails.application.routes.draw do
   get '/comparisons', to: 'comparisons#index', as: 'comparisons'
   get '/embed/snippet', to: 'embed#index', as: 'embed_snippet'
   get '/embed/demo', to: 'demo#index', as: 'embed_demo'
-  get '/users/upload', to: 'upload#index', as: 'users_upload'
-  post '/users/upload', to: 'upload#upload'
 
-  resources :users
+  # get '/customers/upload', to: 'upload#index', as: 'users_upload'
+  # post '/customers/upload', to: 'upload#upload'
+
+  # needs to come before the resources call, to get match priority
+  namespace :customers do
+    resource :upload, controller: :upload
+  end
+  resources :customers
 
   ############
   # sonar v1 #

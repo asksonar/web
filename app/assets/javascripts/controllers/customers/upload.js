@@ -1,5 +1,5 @@
 $(function(){
-  if ($('#upload-index').length === 0) {
+  if ($('#upload-show').length === 0) {
     return;
   }
 
@@ -44,7 +44,7 @@ $(function(){
 
         $.ajax({
           type: 'POST',
-          url: '/users/upload',
+          url: window.location.href,
           data: {
             authenticity_token: AUTH_TOKEN,
             metadata: Papa.unparse(dataWithEmail)

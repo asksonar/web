@@ -1,4 +1,4 @@
-class UsersPresenter
+class CustomersPresenter
   def initialize(company_id:, page:)
     @company_id = company_id
     @page = page.to_i

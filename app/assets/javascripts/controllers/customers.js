@@ -1,5 +1,5 @@
 $(function(){
-  if (!$('#users-index').length) {
+  if (!$('#customers-index').length) {
     return;
   }
 
