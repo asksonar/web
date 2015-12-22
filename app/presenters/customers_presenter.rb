@@ -9,6 +9,6 @@ class CustomersPresenter
   end
 
   def users
-    @users ||= Responder.where(company_id: @company_id).page(@page)
+    @users ||= Responder.where(company_id: @company_id).order(email: :asc).page(@page)
   end
 end
