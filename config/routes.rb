@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
   # needs to come before the resources call, to get match priority
   namespace :customers do
-    resource :upload, controller: :upload
+    resource :upload, controller: :upload, only: [:show, :create]
   end
   resources :customers
 
