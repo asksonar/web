@@ -1,14 +1,15 @@
 module Settings
-  class SendController < ApplicationController
+  class SendsController < ApplicationController
     before_action :authenticate_researcher!
 
-    def index
+    def show
       company = current_researcher.company
       @survey_settings = company.survey_settings
     end
 
     def update
-      @survey_settings = SurveySettings.find_by_hashid(params[:id])
+      company = current_researcher.company
+      @survey_settings = company.survey_settings
       service.update(@survey_settings, survey_params)
       flash[:info] = 'Your changes have been updated.'
       redirect_to root_path
