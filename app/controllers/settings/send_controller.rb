@@ -1,5 +1,5 @@
 module Settings
-  class SendsController < ApplicationController
+  class SendController < ApplicationController
     before_action :authenticate_researcher!
 
     def show
@@ -18,7 +18,7 @@ module Settings
     private
 
     def service
-      @service ||= SendsService.instance
+      @service ||= SendService.instance
     end
 
     def survey_params

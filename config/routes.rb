@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   get '/embed/demo', to: 'demo#index', as: 'embed_demo'
 
   namespace :settings do
-    resource :send, only: [:show, :update]
+    resource :send, controller: :send, only: [:show, :update]
   end
 
   ############
