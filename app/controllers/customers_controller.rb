@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class CustomersController < ApplicationController
   before_action :authenticate_researcher!
 
   def index
@@ -6,6 +6,6 @@ class UsersController < ApplicationController
   end
 
   def prezi
-    UsersPresenter.new(company_id: current_researcher.company_id, page: params[:page])
+    CustomersPresenter.new(company_id: current_researcher.company_id, page: params[:page])
   end
 end
