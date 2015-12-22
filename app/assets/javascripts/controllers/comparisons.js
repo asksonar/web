@@ -81,12 +81,7 @@ $(function(){
       'hidden': true,
       "clustered": false
     }],
-    "chartCursor": {
-      "categoryBalloonEnabled": false,
-      "cursorAlpha": 0,
-      "zoomable": false
-    },
-    "categoryField": category,
+    "categoryField": "categoryField",
     "categoryAxis": {
       "gridPosition": "start",
       "labelRotation": 45
@@ -96,18 +91,10 @@ $(function(){
     }
   });
 
-  $('.checkbox').on('click', function() {
-    var thisEl = $(this);
-    var checkbox = thisEl.find("input[type='checkbox']");
-    var field = checkbox.attr('name');
-    var value = checkbox.attr('value');
-    var checked = checkbox.prop('checked');
-    if (checked) {
-      window.location.href = URI(window.location.href).addSearch(field, value);
-    } else {
-      window.location.href = URI(window.location.href).removeSearch(field, value);
-    }
-  });
+  var graphFilters = new GraphFilters({
+    inputCheckbox: $('.filter input[type="checkbox"]'),
+    btnSelect: $('.selectpicker')
+  }, chart);
 
   $("#toggle-breakdown").bootstrapSwitch({
     labelText: 'Show breakdown',
@@ -127,15 +114,5 @@ $(function(){
         chart.hideGraph(chart.getGraphById('detractors'));
       }
     }
-  });
-
-  $('#select-category').on('change', function(){
-    var value = $(this).find("option:selected").val();
-    window.location.href = URI(window.location.href).search('').setSearch('category', value);
-  });
-
-  $('#select-date').on('change', function(){
-    var value = $(this).find("option:selected").val();
-    window.location.href = URI(window.location.href).setSearch('date', value);
   });
 });

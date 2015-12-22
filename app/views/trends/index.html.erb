@@ -22,22 +22,22 @@
 
           <div class='sub'>DATE</div>
           <select class="selectpicker form-control" id='select-date' data-field='date'>
-            <option <%= 'selected' if params[:date] == 'past-month' %> value='past-1-month'>past 1 month</option>
-            <option <%= 'selected' if params[:date] == 'past-3-months' %> value='past-3-months'>past 3 months</option>
-            <option <%= 'selected' if params[:date] == 'past-12-months' %> value='past-12-months'>past 12 months</option>
+            <option <%= 'selected' if params[:date] == 'past-month' %> name='date' value='past-1-month'>past 1 month</option>
+            <option <%= 'selected' if params[:date] == 'past-3-months' %> name='date' value='past-3-months'>past 3 months</option>
+            <option <%= 'selected' if params[:date] == 'past-12-months' %> name='date' value='past-12-months'>past 12 months</option>
           </select>
 
           <div class='sub'>REGION</div>
           <div class='filter' data-field='region'>
             <% @prezi.regions.each do |region| %>
-              <%= f.check_box region, {name: 'region[]', checked: @prezi.checked(:region, region), label: region}, region %>
+              <%= f.check_box region, {name: 'region', checked: @prezi.checked(:region, region), label: region}, region %>
             <% end %>
           </div>
 
           <div class='sub'>COUNTRY</div>
           <div class='filter' data-field='country'>
             <% @prezi.countries.each do |country| %>
-              <%= f.check_box country, {name: 'country[]', checked: @prezi.checked(:country, country), label: country}, country %>
+              <%= f.check_box country, {name: 'country', checked: @prezi.checked(:country, country), label: country}, country %>
             <% end %>
           </div>
         <% end %>

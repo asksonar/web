@@ -1,0 +1,43 @@
+<% content_for :main_wrapper_class do %>
+  sidebar-collapsed
+<% end %>
+
+<% content_for :title do %>Settings<% end %>
+
+<section class='main-content-header'>
+  <h1>Settings</h1>
+</section>
+
+<section class='main-content'>
+
+  <div class='row'>
+    <div class='col-sm-3'>
+      <div class='panel'>
+        <ul class="nav nav-pills nav-stacked">
+          <li><a href='<%= edit_researcher_registration_path %>'>Account</a></li>
+          <li class='active'><a href='#'>Survey Settings</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class='col-sm-8'>
+
+      <div class='panel'>
+      <%= bootstrap_form_for @survey_settings, url: settings_send_path(@survey_settings), method: :patch,
+        layout: :horizontal, label_col: "col-sm-3" do |f| %>
+
+          <div class="panel-section">
+            <h2>Survey Settings</h2>
+            <%= f.text_field :survey_frequency, label: 'Survey Frequency:', control_col: "col-sm-3", append: "days" %>
+          </div>
+
+          <div class="panel-section">
+            <a href='<%= root_path %>' class='btn btn-grey'>Cancel</a>
+            <%= f.submit "Save Changes", class: 'btn btn-dark-blue' %>
+          </div>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+
+</section>
