@@ -1,11 +1,11 @@
 class HomeController < ApplicationController
   def index
-    if researcher_signed_in? && current_researcher.has_v2
+    if user_signed_in? && current_user.has_v2
       redirect_to dashboard_path
-    elsif researcher_signed_in?
+    elsif user_signed_in?
       redirect_to results_path
     else
-      redirect_to new_researcher_session_path
+      redirect_to new_user_session_path
     end
   end
 end

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def pundit_user
-    current_researcher
+    current_user
   end
 
   protected

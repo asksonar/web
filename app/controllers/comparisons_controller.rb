@@ -1,5 +1,5 @@
 class ComparisonsController < ApplicationController
-  before_action :authenticate_researcher!
+  before_action :authenticate_user!
 
   def index
     @prezi = prezi(query_params)
@@ -17,7 +17,7 @@ class ComparisonsController < ApplicationController
   end
 
   def prezi(query_params)
-    ComparisonsPresenter.new(current_researcher.company_id, category, params[:date], query_params)
+    ComparisonsPresenter.new(current_user.company_id, category, params[:date], query_params)
   end
 
   def query_params

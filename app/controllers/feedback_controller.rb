@@ -1,5 +1,5 @@
 class FeedbackController < ApplicationController
-  before_action :authenticate_researcher!
+  before_action :authenticate_user!
   PAGE_SIZE = 20
 
   def index
@@ -10,7 +10,7 @@ class FeedbackController < ApplicationController
   def show
     @scenario_result = ScenarioResult.find_by_hashid!(params[:id])
     authorize @scenario_result
-    @page = query.count_newer_than(@scenario_result, created_by: current_researcher) / PAGE_SIZE
+    @page = query.count_newer_than(@scenario_result, created_by: current_user) / PAGE_SIZE
     @scenario_results, @has_next = paged_results(@page)
 
     render :index
@@ -28,7 +28,7 @@ class FeedbackController < ApplicationController
       page,
       PAGE_SIZE,
       true,
-      created_by: current_researcher
+      created_by: current_user
     )
 
     [results[0, PAGE_SIZE], results.length > PAGE_SIZE]

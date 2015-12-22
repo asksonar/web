@@ -1,12 +1,12 @@
 class DraftsService
   include Singleton
 
-  def create(scenario_params, scenario_steps_params, researcher, publishing)
+  def create(scenario_params, scenario_steps_params, user, publishing)
     # save all the changes
     ActiveRecord::Base.transaction do
       scenario = Scenario.new(scenario_params)
-      scenario.created_by = researcher
-      scenario.company = researcher.company
+      scenario.created_by = user
+      scenario.company = user.company
 
       scenario.scenario_steps.build(
         ensure_at_least_one_step(
@@ -19,14 +19,14 @@ class DraftsService
       if scenario.valid?
         publish(scenario) if publishing
         scenario.save
-        track_study_created(researcher, scenario)
+        track_study_created(user, scenario)
       end
 
       scenario
     end
   end
 
-  def update(scenario, scenario_params, scenario_steps_params_with_hashid, researcher, publishing)
+  def update(scenario, scenario_params, scenario_steps_params_with_hashid, user, publishing)
     ActiveRecord::Base.transaction do
       scenario.assign_attributes(scenario_params)
       update_steps!(
@@ -41,7 +41,7 @@ class DraftsService
       if scenario.valid?
         publish(scenario) if publishing
         scenario.save
-        track_draft_published(researcher, scenario) if publishing
+        track_draft_published(user, scenario) if publishing
       end
 
       scenario
@@ -97,11 +97,11 @@ class DraftsService
     end
   end
 
-  def track_study_created(researcher, scenario)
-    analytics.study_created(researcher, scenario)
+  def track_study_created(user, scenario)
+    analytics.study_created(user, scenario)
   end
 
-  def track_draft_published(researcher, scenario)
-    analytics.draft_published(researcher, scenario)
+  def track_draft_published(user, scenario)
+    analytics.draft_published(user, scenario)
   end
 end

@@ -1,7 +1,7 @@
 class ScenarioResult < ActiveRecord::Base
   belongs_to :scenario
   belongs_to :panelist
-  belongs_to :created_by, class_name: 'Researcher', foreign_key: :created_by
+  belongs_to :created_by, class_name: 'User', foreign_key: :created_by
   has_many :result_steps, inverse_of: :scenario_result
   has_many :result_videos_uploaded, -> { uploaded }, inverse_of: :scenario_result, class_name: 'ResultVideo'
   has_many :result_videos_pending, -> { pending }, inverse_of: :scenario_result, class_name: 'ResultVideo'

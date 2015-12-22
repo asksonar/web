@@ -1,10 +1,10 @@
 class ResponsesController < ApplicationController
-  before_action :authenticate_researcher!, only: [:index]
+  before_action :authenticate_user!, only: [:index]
   protect_from_forgery with: :null_session, except: [:index]
 
   def index
     @scenario_results = query
-      .responses(company: current_researcher.company)
+      .responses(company: current_user.company)
       .map(&:prezi)
   end
 

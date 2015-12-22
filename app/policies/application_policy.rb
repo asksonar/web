@@ -1,8 +1,8 @@
 class ApplicationPolicy
-  attr_reader :researcher, :record
+  attr_reader :user, :record
 
-  def initialize(researcher, record)
-    @researcher = researcher
+  def initialize(user, record)
+    @user = user
     @record = record
   end
 
@@ -11,10 +11,10 @@ class ApplicationPolicy
   end
 
   def is_super_admin?
-    researcher.super_admin?
+    user.super_admin?
   end
 
   def is_owner?
-    researcher == record.prezi.created_by
+    user == record.prezi.created_by
   end
 end

@@ -1,14 +1,14 @@
 module Settings
   class SendController < ApplicationController
-    before_action :authenticate_researcher!
+    before_action :authenticate_user!
 
     def show
-      company = current_researcher.company
+      company = current_user.company
       @survey_settings = company.survey_settings
     end
 
     def update
-      company = current_researcher.company
+      company = current_user.company
       @survey_settings = company.survey_settings
       service.update(@survey_settings, survey_params)
       flash[:info] = 'Your changes have been updated.'

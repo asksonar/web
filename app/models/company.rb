@@ -1,5 +1,5 @@
 class Company < ActiveRecord::Base
-  has_many :researchers, inverse_of: :company
+  has_many :users, inverse_of: :company
   has_many :responders, inverse_of: :company
   has_one :survey_settings
 

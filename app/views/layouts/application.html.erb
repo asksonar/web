@@ -22,7 +22,7 @@
   <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/<%= Rails.configuration.properties['chrome_app_id'] %>">
 </head>
 <body>
-  <section id="main-wrapper" class="<%= 'logged-out' if not researcher_signed_in? %> <%= content_for :main_wrapper_class %>">
+  <section id="main-wrapper" class="<%= 'logged-out' if not user_signed_in? %> <%= content_for :main_wrapper_class %>">
 
     <% if content_for? :nav_left %>
       <%= content_for :nav_left %>

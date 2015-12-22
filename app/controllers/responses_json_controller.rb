@@ -1,9 +1,9 @@
 class ResponsesJsonController < ApplicationController
-  before_action :authenticate_researcher!
+  before_action :authenticate_user!
 
   def index
     responseParams = {}
-    responseParams[:company] = current_researcher.company
+    responseParams[:company] = current_user.company
     responseParams[:created_since] = Time.zone.parse(params[:startTime])
     @scenario_results = query
       .responses(responseParams)
