@@ -18,7 +18,7 @@ module Settings
     private
 
     def service
-      @service ||= SendService.instance
+      @service ||= SendsService.instance
     end
 
     def survey_params
