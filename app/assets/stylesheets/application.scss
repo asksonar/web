@@ -27,8 +27,8 @@ $icon-font-path: 'bootstrap/';
 @import 'prism';
 
 // base package
-@import 'shared/*';
+@import 'shared/**/*';
 
 // more specific overwriting packages
-@import 'video/*';
-@import 'controllers/*';
+@import 'video/**/*';
+@import 'controllers/**/*';
