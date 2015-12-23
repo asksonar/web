@@ -37,6 +37,12 @@ Rails.application.routes.draw do
   get '/embed/snippet', to: 'embed#index', as: 'embed_snippet'
   get '/embed/demo', to: 'demo#index', as: 'embed_demo'
 
+  # needs to come before the resources call, to get match priority
+  namespace :customers do
+    resource :upload, controller: :upload, only: [:show, :create]
+  end
+  resources :customers
+
   namespace :settings do
     resource :send, controller: :send, only: [:show, :update]
   end

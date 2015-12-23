@@ -11,16 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222111900) do
+ActiveRecord::Schema.define(version: 20151222194008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "uuid"
+  end
+
+  create_table "metadata_transaction_entries", force: :cascade do |t|
+    t.integer  "metadata_transaction_id"
+    t.integer  "company_id"
+    t.string   "email"
+    t.hstore   "metadata"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "metadata_transaction_entries", ["metadata_transaction_id"], name: "index_metadata_transaction_entries_on_metadata_transaction_id", using: :btree
+
+  create_table "metadata_transactions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "panelists", force: :cascade do |t|
@@ -63,7 +80,10 @@ ActiveRecord::Schema.define(version: 20151222111900) do
     t.datetime "updated_at",   null: false
     t.integer  "company_id"
     t.string   "email"
+    t.hstore   "metadata"
   end
+
+  add_index "responders", ["company_id", "email"], name: "index_responders_on_company_id_and_email", using: :btree
 
   create_table "responses", force: :cascade do |t|
     t.integer  "responder_id"

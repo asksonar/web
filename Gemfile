@@ -63,9 +63,13 @@ gem 'sanitize'
 gem 'maxminddb'
 # whitelist assets so that pipeline will also create a non-digested version
 # (used for amcharts, who dynamically generates image names in javascript)
-gem "non-stupid-digest-assets"
+gem 'non-stupid-digest-assets'
 # gives us local_time and local_time_ago to handle timezones via javascript
 gem 'local_time'
+# lets us do bulk imports via the ModelClass.import(array_of_models) function
+gem 'activerecord-import'
+# pagination gem, with bootstrap styling
+gem 'kaminari-bootstrap'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables
@@ -104,6 +108,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-switch'
   # syntax-coloring for js snippet
   gem 'rails-assets-prism'
+  # helper library for parsing CSV in javascript
+  gem 'rails-assets-papaparse'
 end
 
 group :development, :test do

@@ -31,6 +31,8 @@ GEM
       activemodel (= 4.2.5)
       activesupport (= 4.2.5)
       arel (~> 6.0)
+    activerecord-import (0.10.0)
+      activerecord (>= 3.0)
     activesupport (4.2.5)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
@@ -89,6 +91,12 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
+    kaminari (0.16.3)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+    kaminari-bootstrap (3.0.1)
+      kaminari (>= 0.13.0)
+      rails
     local_time (1.0.3)
       coffee-rails
     loofah (2.0.3)
@@ -129,14 +137,14 @@ GEM
       railties (= 4.2.5)
       sprockets-rails
     rails-assets-URIjs (1.17.0)
-    rails-assets-amcharts3 (3.17.3)
-    rails-assets-animate.css (3.4.0)
+    rails-assets-amcharts3 (3.18.3)
+    rails-assets-animate.css (3.5.0)
     rails-assets-autosize (3.0.14)
     rails-assets-bootstrap (3.3.6)
       rails-assets-jquery (>= 1.9.1, < 3)
     rails-assets-bootstrap-sass (3.3.6)
       rails-assets-jquery (>= 1.9.0)
-    rails-assets-bootstrap-select (1.8.1)
+    rails-assets-bootstrap-select (1.9.3)
       rails-assets-jquery (>= 1.8)
     rails-assets-bootstrap-switch (3.3.2)
       rails-assets-bootstrap (>= 2.3.2)
@@ -147,7 +155,8 @@ GEM
     rails-assets-jquery (2.1.4)
     rails-assets-jqueryui (1.11.4)
       rails-assets-jquery (>= 1.6)
-    rails-assets-modulejs (1.9.0)
+    rails-assets-modulejs (1.13.0)
+    rails-assets-papaparse (4.1.2)
     rails-assets-prism (1.3.0)
     rails-assets-remarkable-bootstrap-notify (3.1.3)
       rails-assets-bootstrap (>= 2.0.0)
@@ -250,12 +259,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-import
   aws-sdk
   bootstrap_form
   byebug
   devise
   hashids
   jbuilder
+  kaminari-bootstrap
   local_time
   maxminddb
   mixpanel-ruby
@@ -275,6 +286,7 @@ DEPENDENCIES
   rails-assets-history!
   rails-assets-jqueryui!
   rails-assets-modulejs!
+  rails-assets-papaparse!
   rails-assets-prism!
   rails-assets-remarkable-bootstrap-notify!
   rails-assets-videojs (~> 4)!

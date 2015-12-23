@@ -1,0 +1,49 @@
+<% content_for :main_wrapper_class do %>
+  sidebar-collapsed
+<% end %>
+
+<% content_for :title do %>Upload customer metadata<% end %>
+
+<section class='main-content-header'>
+  <h1>Upload customer metadata</h1>
+</section>
+
+<section class='main-content'>
+
+  <div class='row'>
+    <div class='col-sm-3'>
+      <div class='panel'>
+        <ul class="nav nav-pills nav-stacked">
+          <li><a href='<%=customers_path%>'>Customers</a></li>
+          <li class='active'><a href='#'>Upload</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class='col-sm-8'>
+
+      <div class='panel'>
+        <p>
+          Upload your customer metadata in a CSV file.  This will allow you to see trends and comparisons across your own custom fields.
+        </p>
+
+        <p>
+          Your CSV file must have the column <code>email</code>, which is what allows us to match up each customer.
+        </p>
+
+        <div class="well well-sm">
+          <input type="file" id="file" name="file" class='file' />
+        </div>
+
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="width: 0%">
+            <span class="sr-only">0% Complete</span>
+          </div>
+        </div>
+
+        <div class='status'></div>
+        <div class='bad-rows'></div>
+
+      </div>
+    </div>
+  </div>
+</section>
