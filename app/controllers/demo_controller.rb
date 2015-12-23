@@ -8,6 +8,6 @@ class DemoController < ApplicationController
   private
 
   def prezi
-    EmbedPresenter.new(current_user.company)
+    SetupPresenter.new(current_user.company)
   end
 end
