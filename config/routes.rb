@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'dashboard#index', as: 'dashboard'
   get '/trends', to: 'trends#index', as: 'trends'
   get '/comparisons', to: 'comparisons#index', as: 'comparisons'
+  get '/demo', to: 'demo#index', as: 'demo'
 
   # needs to come before the resources call, to get match priority
   namespace :customers do
