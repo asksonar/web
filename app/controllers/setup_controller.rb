@@ -1,4 +1,4 @@
-class EmbedController < ApplicationController
+class SetupController < ApplicationController
   before_action :authenticate_user!
 
   def embed
@@ -8,6 +8,6 @@ class EmbedController < ApplicationController
   private
 
   def prezi
-    EmbedPresenter.new(current_user.company)
+    SetupPresenter.new(current_user.company)
   end
 end
