@@ -1,4 +1,4 @@
-class Researcher < ActiveRecord::Base
+class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -6,7 +6,7 @@ class Researcher < ActiveRecord::Base
   belongs_to :company
 
   before_create :create_company
-  after_create :track_researcher_created
+  after_create :track_user_created
   after_create :welcome_email
   after_create :subscribe_mailing_list
 
@@ -46,8 +46,8 @@ class Researcher < ActiveRecord::Base
     self.company = Company.create
   end
 
-  def track_researcher_created
-    Analytics.instance.researcher_created(self)
+  def track_user_created
+    Analytics.instance.user_created(self)
   end
 
   def welcome_email

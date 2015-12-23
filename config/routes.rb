@@ -34,8 +34,6 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'dashboard#index', as: 'dashboard'
   get '/trends', to: 'trends#index', as: 'trends'
   get '/comparisons', to: 'comparisons#index', as: 'comparisons'
-  get '/embed/snippet', to: 'embed#index', as: 'embed_snippet'
-  get '/embed/demo', to: 'demo#index', as: 'embed_demo'
 
   # needs to come before the resources call, to get match priority
   namespace :customers do
@@ -45,6 +43,11 @@ Rails.application.routes.draw do
 
   namespace :settings do
     resource :send, controller: :send, only: [:show, :update]
+  end
+
+  namespace :setup do
+    get :embed
+    get :api
   end
 
   ############
@@ -78,8 +81,7 @@ Rails.application.routes.draw do
   # shared login #
   ################
 
-  devise_for :researchers,
-    path: 'accounts',
+  devise_for :user,
     path_names: { sign_in: 'login', sign_out: 'logout' },
     controllers: { registrations: 'registrations' }
 

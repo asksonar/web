@@ -1,8 +1,8 @@
 class DraftsController < ApplicationController
-  before_action :authenticate_researcher!
+  before_action :authenticate_user!
 
   def index
-    @scenarios = scenarios_query.drafts(current_researcher.id).map(&:prezi)
+    @scenarios = scenarios_query.drafts(current_user.id).map(&:prezi)
   end
 
   def new
@@ -20,7 +20,7 @@ class DraftsController < ApplicationController
     @scenario = drafts_service.create(
       scenario_params,
       scenario_steps_params,
-      current_researcher,
+      current_user,
       !params[:publish].nil?
     )
 
@@ -55,7 +55,7 @@ class DraftsController < ApplicationController
       @scenario,
       scenario_params,
       scenario_steps_params_with_hashid,
-      current_researcher,
+      current_user,
       !params[:publish].nil?
     )
 

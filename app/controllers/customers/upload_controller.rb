@@ -2,7 +2,7 @@ require 'csv'
 
 module Customers
   class UploadController < ApplicationController
-    before_action :authenticate_researcher!
+    before_action :authenticate_user!
 
     def create
       service.batch_update_metadata(company, metadata)
@@ -21,7 +21,7 @@ module Customers
     end
 
     def company
-      current_researcher.company
+      current_user.company
     end
 
     def service

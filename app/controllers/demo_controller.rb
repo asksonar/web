@@ -1,5 +1,5 @@
 class DemoController < ApplicationController
-  before_action :authenticate_researcher!
+  before_action :authenticate_user!
 
   def index
     @prezi = prezi
@@ -8,6 +8,6 @@ class DemoController < ApplicationController
   private
 
   def prezi
-    EmbedPresenter.new(current_researcher.company)
+    EmbedPresenter.new(current_user.company)
   end
 end

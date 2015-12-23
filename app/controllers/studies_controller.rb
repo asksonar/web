@@ -16,7 +16,7 @@ class StudiesController < ApplicationController
 
       @scenario_result = service.create_result_and_panelist(@scenario, params[:study][:email])
     else
-      @scenario_result = service.create_result(current_researcher)
+      @scenario_result = service.create_result(current_user)
     end
     track_launched(@scenario_result.scenario)
     render json: { hashid: @scenario_result.hashid }
@@ -46,7 +46,7 @@ class StudiesController < ApplicationController
   end
 
   def track_respondent_landed
-    return if !current_researcher.nil?
+    return if !current_user.nil?
     analytics.respondent_landed(request.remote_ip, @scenario.created_by, @scenario)
   end
 
@@ -63,7 +63,7 @@ class StudiesController < ApplicationController
   end
 
   def track_my_feedback_launched
-    analytics.my_feedback_launched(request.remote_ip, current_researcher, @scenario_result)
+    analytics.my_feedback_launched(request.remote_ip, current_user, @scenario_result)
   end
 
   def track_action(scenario)

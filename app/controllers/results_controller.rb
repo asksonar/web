@@ -1,11 +1,11 @@
 class ResultsController < ApplicationController
-  before_action :authenticate_researcher!
+  before_action :authenticate_user!
 
   PAGE_SIZE = 20
 
   def index
     @page = params[:page].to_i
-    results = query.results_paged(@page, PAGE_SIZE, true, company: current_researcher.company)
+    results = query.results_paged(@page, PAGE_SIZE, true, company: current_user.company)
     @results = results[0, PAGE_SIZE].map(&:prezi)
     @has_next = results.length > PAGE_SIZE
   end

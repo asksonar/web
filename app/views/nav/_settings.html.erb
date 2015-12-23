@@ -1,0 +1,17 @@
+<nav class='nav-page'>
+  <div class='nav-header'>Settings</div>
+  <ul class="nav nav-pills nav-stacked">
+    <%= bsh_navbar_item 'Survey settings', settings_send_path %>
+  </ul>
+
+  <div class='nav-header'>Setup</div>
+  <ul class="nav nav-pills nav-stacked">
+    <%= bsh_navbar_item 'Embed', setup_embed_path %>
+  </ul>
+
+  <div class='nav-header'>Customers</div>
+  <ul class="nav nav-pills nav-stacked">
+    <%= bsh_navbar_item 'Customers', customers_path %>
+    <%= bsh_navbar_item 'Upload', customers_upload_path %>
+  </ul>
+</nav>

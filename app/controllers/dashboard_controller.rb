@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_action :authenticate_researcher!
+  before_action :authenticate_user!
 
   def index
     @prezi = prezi
@@ -8,6 +8,6 @@ class DashboardController < ApplicationController
   private
 
   def prezi
-    DashboardPresenter.new(current_researcher.company_id)
+    DashboardPresenter.new(current_user.company_id)
   end
 end

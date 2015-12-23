@@ -3,8 +3,8 @@
 
   <nav>
     <ul class="nav nav-pills nav-stacked">
-      <% if researcher_signed_in? %>
-        <% if current_researcher.has_v1? %>
+      <% if user_signed_in? %>
+        <% if current_user.has_v1? %>
           <%= navbar_item "New Study", '/create', class: 'div-btn-create' %>
 
           <%= navbar_item "<i class='fa fa-ftl fa-bar-chart'></i>All Results", '/results' %>
@@ -12,10 +12,11 @@
           <%= navbar_item "<i class='fa fa-ftl fa-edit'></i>Drafts" + (drafts_count > 0 ? " (#{drafts_count.to_s})" : ''), '/drafts' %>
           <%= navbar_item "<i class='fa fa-ftl fa-comments-o'></i>My Feedback", '/feedback' %>
         <% end %>
-        <% if current_researcher.has_v2? %>
+        <% if current_user.has_v2? %>
           <%= navbar_item "<i class='fa fa-ftl fa-home'></i>Dashboard", '/dashboard', class: 'visible-xs' %>
           <%= navbar_item "<i class='fa fa-ftl fa-line-chart'></i>Trends", '/trends', class: 'visible-xs' %>
           <%= navbar_item "<i class='fa fa-ftl fa-bar-chart'></i>Comparisons", '/comparisons', class: 'visible-xs' %>
+          <%= navbar_item "<i class='fa fa-ftl fa-gear'></i>Settings", '/settings/send', class: 'visible-xs' %>
         <% end %>
       <% end %>
     </ul>
