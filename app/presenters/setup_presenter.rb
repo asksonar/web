@@ -1,11 +1,11 @@
-class EmbedPresenter
+class SetupPresenter
   def initialize(company)
     @company = company
   end
 
   def load_js_snippet(minify = false)
     js_snippet = ApplicationController.new.render_to_string(
-      'embed/load_js_snippet',
+      'setup/load_js_snippet',
       locals: { company_uuid: @company.uuid }
     )
 

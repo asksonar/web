@@ -1,5 +1,5 @@
 $(function(){
-  if ($('#embed-index').length === 0) {
+  if ($('#setup-embed').length === 0) {
     return;
   }
 

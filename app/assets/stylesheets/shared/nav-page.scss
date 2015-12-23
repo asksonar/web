@@ -1,0 +1,11 @@
+.nav-page {
+  .nav-header {
+    @extend .sub, .strong;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    &:not(:first-child) {
+      margin-top: 20px;
+    }
+  }
+}

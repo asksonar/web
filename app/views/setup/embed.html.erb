@@ -2,10 +2,10 @@
   sidebar-collapsed
 <% end %>
 
-<% content_for :title do %>Embed NPS widget<% end %>
+<% content_for :title do %>Embed code snippet<% end %>
 
 <section class='main-content-header'>
-  <h1>Embed NPS widget</h1>
+  <h1>Embed code snippet</h1>
 </section>
 
 <section class='main-content'>
@@ -13,10 +13,7 @@
   <div class='row'>
     <div class='col-sm-3'>
       <div class='panel'>
-        <ul class="nav nav-pills nav-stacked">
-          <li class='active'><a href='#'>Snippet</a></li>
-          <li><a href='/embed/demo'>Demo</a></li>
-        </ul>
+        <%= render 'nav/settings' %>
       </div>
     </div>
     <div class='col-sm-8'>

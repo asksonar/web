@@ -2,10 +2,10 @@
   sidebar-collapsed
 <% end %>
 
-<% content_for :title do %>Settings<% end %>
+<% content_for :title do %>Survey settings<% end %>
 
 <section class='main-content-header'>
-  <h1>Settings</h1>
+  <h1>Survey settings</h1>
 </section>
 
 <section class='main-content'>
@@ -14,8 +14,7 @@
     <div class='col-sm-3'>
       <div class='panel'>
         <ul class="nav nav-pills nav-stacked">
-          <li><a href='<%= edit_user_registration_path %>'>Account</a></li>
-          <li class='active'><a href='#'>Survey Settings</a></li>
+          <%= render 'nav/settings' %>
         </ul>
       </div>
     </div>
@@ -26,7 +25,6 @@
         layout: :horizontal, label_col: "col-sm-3" do |f| %>
 
           <div class="panel-section">
-            <h2>Survey Settings</h2>
             <%= f.text_field :survey_frequency, label: 'Survey Frequency:', control_col: "col-sm-3", append: "days" %>
           </div>
 

@@ -1,7 +1,7 @@
 class EmbedController < ApplicationController
   before_action :authenticate_user!
 
-  def index
+  def embed
     @prezi = prezi
   end
 
