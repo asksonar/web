@@ -1,0 +1,14 @@
+#view-show {
+  .form-group {
+    margin-bottom: 25px;
+  }
+
+  .btn {
+    margin-bottom: 10px;
+
+    & + & {
+      margin-left: 5px;
+    }
+  }
+
+}

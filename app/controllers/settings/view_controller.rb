@@ -1,5 +1,5 @@
 module Settings
-  class SendController < ApplicationController
+  class ViewController < ApplicationController
     before_action :authenticate_user!
 
     def show
@@ -22,8 +22,7 @@ module Settings
     end
 
     def survey_params
-      params.require(:survey_settings).permit(:survey_frequency)
+      params.require(:style_elements).permit(:company_product_name)
     end
   end
 end
-
