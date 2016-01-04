@@ -6,10 +6,11 @@ ViewSettings = function(config) {
 };
 
 ViewSettings.prototype.init = function() {
-  this.$companyProductName.off().on('keyup', $.proxy(this.updateName, this));
+  this.$companyProductName.unbind().on('keyup', $.proxy(this.updateName, this));
 };
 
 ViewSettings.prototype.updateName = function(event) {
+  event.stopPropagation();
   var thisEl = $(event.currentTarget);
   var updatedElement = thisEl.attr('data-style-elements');
   var updatedValue = thisEl.val();
