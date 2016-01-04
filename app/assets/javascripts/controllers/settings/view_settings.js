@@ -1,6 +1,6 @@
 ViewSettings = function(config) {
   this.$companyProductName = config.companyProductName;
-  this.$survey = $('.survey');
+  this.$survey = config.survey;
 
   this.init();
 };

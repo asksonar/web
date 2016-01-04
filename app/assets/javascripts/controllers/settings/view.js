@@ -4,7 +4,8 @@ $(function(){
   }
 
   var viewSettings = new ViewSettings({
-    companyProductName: $('.company-product-name')
+    companyProductName: $('.company-product-name'),
+    survey: $('.survey')
   });
 
   viewSettings.init();
