@@ -5,6 +5,7 @@ module Settings
     def show
       company = current_user.company
       @survey_settings = company.survey_settings
+      @survey_frequency = @survey_settings.survey_frequency
     end
 
     def update

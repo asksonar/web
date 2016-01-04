@@ -31,7 +31,9 @@ module Settings
     end
 
     def survey_params
-      params.require(:style_elements).permit(:company_product_name)
+      {
+        style_elements: params.require(:style_elements).permit(:company_product_name)
+      }
     end
   end
 end
