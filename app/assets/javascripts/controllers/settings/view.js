@@ -4,7 +4,7 @@ $(function(){
   }
 
   var viewSettings = new ViewSettings({
-    survey_settings: $('.edit_survey_settings')
+    survey_settings: $('#survey_settings_style_elements')
   });
 
 

@@ -10,9 +10,10 @@ ViewSettings.prototype.init = function() {
 };
 
 ViewSettings.prototype.updateView = function(event) {
-  var updatedField = $(event.target).attr('data-customize-field');
-  var updatedValue = $(event.target).val();
-  var $target = this.$survey.find('#' + updatedField);
+  var thisEl = $(event.currentTarget);
+  var updatedElement = thisEl.attr('data-style-elements');
+  var updatedValue = thisEl.val();
+  var $target = this.$survey.find('#' + updatedElement);
 
   if (updatedValue.length === 0) {
     $target.text("us");
