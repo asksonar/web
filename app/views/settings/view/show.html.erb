@@ -20,7 +20,7 @@
     </div>
     <div class='col-sm-8'>
       <div class="row panel">
-        <div class="col-sm-6 col-sm-push-5">
+        <div class="col-lg-8 col-lg-push-4">
           <div class='survey clearfix'>
             <div class='close'>X</div>
             <div class='nps'>
@@ -53,7 +53,7 @@
           </div>
         </div>
 
-        <div class='col-sm-5 col-sm-pull-6'>
+        <div class='col-lg-4 col-lg-pull-8'>
           <%= bootstrap_form_for :survey_settings, url: settings_view_path(@survey_settings), method: :patch, inline_errors: false do |f| %>
             <div>
               <%= f.text_field :style_elements, name: 'style_elements[company_product_name]', value: @company_product_name, 'data-style-elements': 'company-product-name', label: 'Company/product name', autofocus: true %>

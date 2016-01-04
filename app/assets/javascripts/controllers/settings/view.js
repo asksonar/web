@@ -7,6 +7,5 @@ $(function(){
     survey_settings: $('#survey_settings_style_elements')
   });
 
-
   viewSettings.init();
 });
