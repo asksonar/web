@@ -11,7 +11,7 @@ class ResponsesController < ApplicationController
   def create
     response_params = service.handle_touch(touch_params)
     if response_params[:uuid]
-      render json: { uuid: response_params[:uuid], response_params: response_params[:style_elements]  }
+      render json: { uuid: response_params[:uuid], style_elements: response_params[:style_elements]  }
     else
       render json: { ok: true }
     end
