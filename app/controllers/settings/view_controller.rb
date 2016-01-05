@@ -5,20 +5,20 @@ module Settings
     def show
       company = current_user.company
       @survey_settings = company.survey_settings
-
-      if !@survey_settings.style_elements.nil?
-        style_elements = JSON.parse(@survey_settings.style_elements)
-        @company_product_name = style_elements["company_product_name"]
-      else
-        @company_product_name = "us"
-      end
-
+      style_elements = service.get_style_elements(@survey_settings)
+      @company_product_name = style_elements["company_product_name"]
     end
 
     def update
       company = current_user.company
       @survey_settings = company.survey_settings
-      service.update_style_elements(@survey_settings, style_params)
+      service.update_style_elements(
+        @survey_settings,
+        filter_empty_params(
+          style_params
+        )
+      )
+
       flash[:info] = 'Your changes have been updated.'
       redirect_to root_path
     end
@@ -31,6 +31,10 @@ module Settings
 
     def style_params
       params.require(:style_elements).permit(:company_product_name)
+    end
+
+    def filter_empty_params(style_params)
+      style_params.delete_if { |key, value| value.blank? }
     end
   end
 end

@@ -6,8 +6,13 @@ class SettingsService
   end
 
   def update_style_elements(survey_settings, style_elements)
-    old_style_elements = JSON.parse(survey_settings.style_elements)
+    old_style_elements = get_style_elements(survey_settings)
     updated_style_elements = old_style_elements.merge(style_elements)
     survey_settings.update(style_elements: updated_style_elements.to_json)
+  end
+
+  def get_style_elements(survey_settings)
+    style_elements_json = survey_settings.style_elements || "{}"
+    JSON.parse(style_elements_json)
   end
 end
