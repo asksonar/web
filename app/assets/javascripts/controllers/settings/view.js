@@ -7,6 +7,4 @@ $(function(){
     companyProductName: $('.company-product-name'),
     survey: $('.survey')
   });
-
-  viewSettings.init();
 });
