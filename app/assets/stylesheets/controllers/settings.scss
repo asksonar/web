@@ -35,14 +35,11 @@
 };
 
 #view-show {
-  .survey {
-    @media (min-width: $screen-lg-min) {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    @media (max-width: $screen-lg-min) {
-      margin-bottom: 20px;
-    }
+  .survey-preview-header {
+    color: #FFF;
+    background: #1CA5C9;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
   }
 }

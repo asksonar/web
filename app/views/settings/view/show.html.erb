@@ -10,6 +10,40 @@
 
 <section class='main-content'>
 
+  <div class="survey-wrapper">
+    <h3 class="survey-preview-header">This is a preview of your NPS survey</h3>
+    <div class='survey clearfix'>
+      <div class='close'>X</div>
+      <div class='nps'>
+        <div class='text'>How likely is it that you would recommend <span id='company-product-name'><%= @company_product_name || 'us' %></span><br/>to a friend or colleague?</div>
+        <div class='likeliness'>
+          <div>0</div>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+          <div>5</div>
+          <div>6</div>
+          <div>7</div>
+          <div>8</div>
+          <div>9</div>
+          <div>10</div>
+        </div>
+        <span class='not-likely'>Not likely</span>
+        <span class='likely'>Very likely</span>
+      </div>
+      <div class='why' style='display:none'>
+        <div class='text'>Are there any particular reasons why?</div>
+        <textarea rows='3'></textarea>
+        <span class='submit'>Submit</span>
+        <span class='nope'>Nope</span>
+      </div>
+      <div class='thanks' style='display:none'>
+        <div>Thanks for your feedback.  We will use it to keep on improving the service for you.</div>
+      </div>
+    </div>
+  </div>
+
   <div class='row'>
     <div class='col-sm-3'>
       <div class='panel'>
@@ -19,44 +53,11 @@
       </div>
     </div>
     <div class='col-sm-8'>
-      <div class="row panel">
-        <div class="col-lg-8 col-lg-push-4">
-          <div class='survey clearfix'>
-            <div class='close'>X</div>
-            <div class='nps'>
-              <div class='text'>How likely is it that you would recommend <span id='company-product-name'><%= @company_product_name %></span><br/>to a friend or colleague?</div>
-              <div class='likeliness'>
-                <div>0</div>
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-                <div>4</div>
-                <div>5</div>
-                <div>6</div>
-                <div>7</div>
-                <div>8</div>
-                <div>9</div>
-                <div>10</div>
-              </div>
-              <span class='not-likely'>Not likely</span>
-              <span class='likely'>Very likely</span>
-            </div>
-            <div class='why' style='display:none'>
-              <div class='text'>Are there any particular reasons why?</div>
-              <textarea rows='3'></textarea>
-              <span class='submit'>Submit</span>
-              <span class='nope'>Nope</span>
-            </div>
-            <div class='thanks' style='display:none'>
-              <div>Thanks for your feedback.  We will use it to keep on improving the service for you.</div>
-            </div>
-          </div>
-        </div>
-
-        <div class='col-lg-4 col-lg-pull-8'>
+      <div class="panel">
+        <div>
           <%= bootstrap_form_for :survey_settings, url: settings_view_path(@survey_settings), method: :patch, inline_errors: false do |f| %>
             <div>
-              <%= f.text_field :style_elements, name: 'style_elements[company_product_name]', value: @company_product_name, class: 'company-product-name', 'data-style-elements': 'company-product-name', label: 'Company/product name', autofocus: true %>
+              <%= f.text_field :style_elements, name: 'style_elements[company_product_name]', value: @company_product_name, placeholder: 'us', class: 'company-product-name', 'data-style-elements': 'company-product-name', label: 'Company/product name', autofocus: true %>
             </div>
             <div>
               <a href='<%= root_path %>' class='btn btn-grey'>Cancel</a>
@@ -65,7 +66,6 @@
           <% end %>
         </div>
       </div>
-
     </div>
   </div>
 
