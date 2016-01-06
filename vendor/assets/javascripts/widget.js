@@ -38,12 +38,14 @@ $(function(){
     });
   };
 
-  var drawSurvey = function() {
+  var drawSurvey = function(style_elements) {
+    var company_product_name = style_elements.company_product_name || 'us';
+
     $('body').append("\
           <div class='survey clearfix'>\
             <div class='close'>X</div>\
             <div class='nps'>\
-              <div class='text'>How likely is it that you would recommend us<br/>to a friend or colleague?</div>\
+              <div class='text'>How likely is it that you would recommend " + company_product_name + "<br/>to a friend or colleague?</div>\
               <div class='likeliness'>\
                 <div>0</div>\
                 <div>1</div>\
@@ -101,7 +103,7 @@ $(function(){
       success: function(data) {
         if (data && data.uuid) {
           survey_uuid = data.uuid;
-          drawSurvey();
+          drawSurvey(data.style_elements);
         }
       }
     });

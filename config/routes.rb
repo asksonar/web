@@ -51,6 +51,10 @@ Rails.application.routes.draw do
     get :api
   end
 
+  namespace :settings do
+    resource :view, controller: :view, only: [:show, :update]
+  end
+
   ############
   # sonar v1 #
   ############
