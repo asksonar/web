@@ -32,6 +32,7 @@
 //= require prism
 //= require local_time
 //= require papaparse
+//= require spectrum
 
 // insert 3rd party packages above this line
 

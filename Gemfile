@@ -112,6 +112,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-prism'
   # helper library for parsing CSV in javascript
   gem 'rails-assets-papaparse'
+  # colorpicker for customizing survey color
+  gem 'rails-assets-spectrum'
 end
 
 group :development, :test do
