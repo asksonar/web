@@ -6,6 +6,6 @@ $(function(){
   var viewSettings = new ViewSettings({
     companyProductName: $('.company-product-name'),
     survey: $('.survey'),
-    backgroundColor: $(".background-color"),
+    backgroundColor: $('.background-color')
   });
 });

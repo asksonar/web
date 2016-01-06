@@ -13,7 +13,6 @@ ViewSettings.prototype.init = function() {
     color: this.$survey.css('background-color'),
     preferredFormat: "hex",
     showInput: true,
-    clickoutFiresChange: true,
     replacerClassName: 'color-picker-replacer',
     containerClassName: 'color-picker-container',
     move: (function(color) {
