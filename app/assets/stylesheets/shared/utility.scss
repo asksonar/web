@@ -104,3 +104,16 @@ i.feeling-delighted.white-mouth:before {
   position: relative;
   float: left;
 }
+
+.color-picker-replacer {
+  display: block;
+  max-width: 50px;
+}
+
+.color-picker-replacer,
+.color-picker-container {
+  &, &:hover, &:focus, &.sp-active {
+    border: 1px solid #ccc;
+  }
+}
+

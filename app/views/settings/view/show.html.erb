@@ -12,7 +12,7 @@
 
   <div class="survey-wrapper">
     <h4 class="survey-preview-header">NPS Survey Preview</h4>
-    <div class='survey clearfix'>
+    <div class='survey clearfix' style='background-color:<%= @background_color || '#404040' %>'>
       <div class='close'>X</div>
       <div class='nps'>
         <div class='text'>How likely is it that you would recommend <span id='company-product-name'><%= @company_product_name || 'us' %></span><br/>to a friend or colleague?</div>
@@ -58,6 +58,7 @@
           <%= bootstrap_form_for :survey_settings, url: settings_view_path(@survey_settings), method: :patch, inline_errors: false do |f| %>
             <div>
               <%= f.text_field :style_elements, name: 'style_elements[company_product_name]', value: @company_product_name, placeholder: 'us', class: 'company-product-name', 'data-style-elements': 'company-product-name', label: 'Company/product name', autofocus: true %>
+              <%= f.text_field :style_elements, name: 'style_elements[background_color]', class: 'background-color', label: 'Background color' %>
             </div>
             <div>
               <a href='<%= root_path %>' class='btn btn-grey'>Cancel</a>

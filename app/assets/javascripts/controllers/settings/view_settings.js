@@ -1,12 +1,28 @@
 ViewSettings = function(config) {
   this.$companyProductName = config.companyProductName;
   this.$survey = config.survey;
+  this.$backgroundColor = config.backgroundColor;
 
   this.init();
 };
 
 ViewSettings.prototype.init = function() {
   this.$companyProductName.on('keyup', $.proxy(this.updateName, this));
+
+  this.$backgroundColor.spectrum({
+    color: this.$survey.css('background-color'),
+    preferredFormat: "hex",
+    showInput: true,
+    clickoutFiresChange: true,
+    replacerClassName: 'color-picker-replacer',
+    containerClassName: 'color-picker-container',
+    move: (function(color) {
+      this.updateBackgroundColor(color.toHexString());
+    }).bind(this),
+    change: (function(color) {
+      this.updateBackgroundColor(color.toHexString());
+    }).bind(this)
+  });
 };
 
 ViewSettings.prototype.updateName = function(event) {
@@ -20,4 +36,8 @@ ViewSettings.prototype.updateName = function(event) {
   } else {
     $target.text(updatedValue);
   }
+};
+
+ViewSettings.prototype.updateBackgroundColor = function(color) {
+  this.$survey.css( "background-color", color);
 };

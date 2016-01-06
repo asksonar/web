@@ -5,6 +5,7 @@ $(function(){
 
   var viewSettings = new ViewSettings({
     companyProductName: $('.company-product-name'),
-    survey: $('.survey')
+    survey: $('.survey'),
+    backgroundColor: $(".background-color"),
   });
 });

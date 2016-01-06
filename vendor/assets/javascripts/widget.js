@@ -40,9 +40,10 @@ $(function(){
 
   var drawSurvey = function(style_elements) {
     var company_product_name = style_elements.company_product_name || 'us';
+    var background_color = style_elements.background_color || '#404040';
 
     $('body').append("\
-          <div class='survey clearfix'>\
+          <div class='survey clearfix' style='background-color:" + background_color + "'>\
             <div class='close'>X</div>\
             <div class='nps'>\
               <div class='text'>How likely is it that you would recommend " + company_product_name + "<br/>to a friend or colleague?</div>\
