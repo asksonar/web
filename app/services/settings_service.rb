@@ -12,7 +12,6 @@ class SettingsService
   end
 
   def get_style_elements(survey_settings)
-    style_elements_json = survey_settings.style_elements || "{}"
-    JSON.parse(style_elements_json)
+    survey_settings.style_elements.nil? ? {} : JSON.parse(survey_settings.style_elements)
   end
 end

@@ -46,10 +46,10 @@ class ResponsesService
   end
 
   def create_response_if_needed(responder, ip_address, survey_settings)
+    response_params = {}
     latest_response = find_latest_response(responder)
-    style_elements_json = survey_settings.style_elements || "{}"
-    style_elements = JSON.parse(style_elements_json)
-    response_params = { style_elements: style_elements }
+    style_elements = survey_settings.style_elements.nil? ? {} : JSON.parse(survey_settings.style_elements)
+    response_params = response_params.merge({ style_elements: style_elements })
 
     if latest_response.nil?
       response_params.merge({ uuid: create_new_empty_response(responder, ip_address).uuid })
