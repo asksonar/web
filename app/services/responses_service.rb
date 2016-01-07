@@ -49,7 +49,8 @@ class ResponsesService
     latest_response = find_latest_response(responder)
     if latest_response.nil?
       create_new_empty_response(responder, ip_address).uuid
-    elsif latest_response.unanswered?
+    elsif latest_response.unanswered? && latest_response.survey_type == 'inapp'
+      # if we just send you an email, we don't want to overload you with an inapp survey
       latest_response.uuid
     elsif latest_response.created_at.before?(survey_frequency.days.ago)
       create_new_empty_response(responder, ip_address).uuid
