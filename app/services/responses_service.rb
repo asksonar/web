@@ -64,7 +64,8 @@ class ResponsesService
     Response.create(
       responder: responder,
       uuid: SecureRandom.uuid,
-      ip_address: ip_address
+      ip_address: ip_address,
+      survey_type: 'inapp'
     )
   end
 
