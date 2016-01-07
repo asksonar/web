@@ -37,4 +37,22 @@
   .control-label {
     text-align: left;
   }
+
+  .email_followup {
+    margin-left: 20px;
+    .input-group {
+      margin-left: 20px;
+      max-width: 200px;
+    }
+  }
+
+  .email_followup.disabled {
+    color: #999;
+    input {
+      color: #999;
+    }
+    .input-group-addon {
+      color: #999;
+    }
+  }
 }
