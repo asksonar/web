@@ -1,5 +1,6 @@
 class ResponsesController < ApplicationController
   protect_from_forgery with: :null_session
+  layout 'plain'
 
   def create
     uuid = service.handle_touch(touch_params)
@@ -11,7 +12,6 @@ class ResponsesController < ApplicationController
   end
 
   def unsubscribe
-    uuid = params[:id]
     @prezi = ResponsesPresenter.new(uuid)
     service.dismiss_response(uuid)
     responders_service.unsubscribe!(@prezi.responder)
@@ -19,31 +19,35 @@ class ResponsesController < ApplicationController
   end
 
   def show
-    if params.has_key?(:unsubscribe)
-      return unsubscribe
-    end
-
-    uuid = params[:id]
-    service.update_response(uuid, update_params)
-    respond_to do |format|
-      format.html
-      format.json { render json: { ok: true } }
+    # will default to render :show unless these functions say otherwise
+    if params.key?(:unsubscribe)
+      unsubscribe
+    else
+      update
     end
   end
 
   def update
-    uuid = params[:id]
-    service.update_response(uuid, update_params)
-    render json: { ok: true }
+    @prezi = ResponsesPresenter.new(uuid)
+    if params[:button] == 'submit'
+      service.update_response(uuid, update_params)
+    end
+    respond_to do |format|
+      format.html { params.key?(:rating) ? (render :update_rating) : (render :update_success) }
+      format.json { render json: { ok: true } }
+    end
   end
 
   def destroy
-    uuid = params[:id]
     service.dismiss_response(uuid)
     render json: { ok: true }
   end
 
   private
+
+  def uuid
+    params[:id]
+  end
 
   def touch_params
     {
