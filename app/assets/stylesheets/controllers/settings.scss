@@ -33,15 +33,18 @@
     text-align: left;
   }
 
-  .email_followup {
+  .days-group .input-group {
+    max-width: 200px;
+  }
+
+  .email-followup {
     margin-left: 20px;
-    .input-group {
+    .days-group {
       margin-left: 20px;
-      max-width: 200px;
     }
   }
 
-  .email_followup.disabled {
+  .email-followup.disabled {
     color: #999;
     input {
       color: #999;

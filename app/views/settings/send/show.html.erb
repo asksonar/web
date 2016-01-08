@@ -24,21 +24,18 @@
       <%= bootstrap_form_for :survey_settings, url: settings_send_path(@survey_settings), method: :patch,
         layout: :horizontal, label_col: "col-sm-3" do |f| %>
           <div class="panel-section">
-            <%= f.text_field :survey_frequency, value: @survey_frequency, label: 'Survey Frequency:', control_col: "col-sm-3", append: "days" %>
+            <%= f.text_field :survey_frequency, value: @survey_frequency, label: 'Survey Frequency:', control_col: "col-sm-9", append: "days", wrapper_class: 'days-group' %>
           </div>
 
           <div class='panel-section'>
             <%= f.form_group :survey_type, label: { text: "Survey Type:" } do %>
               <%= f.radio_button :survey_type, 'inapp', label: "In-app" %>
-              <div class='email_followup
+              <div class='email-followup
                 <%= 'hidden' if @survey_settings.survey_type != 'inapp' %>
                 <%= 'disabled' if @survey_settings.email_followup.nil? %>
               '>
                 <%= f.check_box :email_followup_enabled, label: "Follow up with an email survey if in-app survey isn't answered in" %>
-                <div class="input-group">
-                  <input class="form-control" type="text" value="<%= @survey_settings.email_followup %>" name="survey_settings[email_followup]" id="survey_settings_email_followup" <%= 'disabled' if @survey_settings.email_followup.nil? %>>
-                  <span class="input-group-addon">days</span>
-                </div>
+                <%= f.text_field :email_followup, skip_label: true, append: "days", layout: :inline, disabled: @survey_settings.email_followup.nil?, wrapper_class: 'days-group'  %>
               </div>
               <%= f.radio_button :survey_type, 'email', label: "Email" %>
             <% end %>
