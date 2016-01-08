@@ -29,5 +29,6 @@ class Scenario < ActiveRecord::Base
     self.description = nil if self.description.blank?
     self.title = self.title.try(:strip)
     self.title = nil if self.title.blank?
+    true
   end
 end
