@@ -10,7 +10,19 @@ class ResponsesController < ApplicationController
     end
   end
 
+  def unsubscribe
+    uuid = params[:id]
+    @prezi = ResponsesPresenter.new(uuid)
+    service.dismiss_response(uuid)
+    responders_service.unsubscribe!(@prezi.responder)
+    render :unsubscribe
+  end
+
   def show
+    if params.has_key?(:unsubscribe)
+      return unsubscribe
+    end
+
     uuid = params[:id]
     service.update_response(uuid, update_params)
     respond_to do |format|
@@ -51,5 +63,13 @@ class ResponsesController < ApplicationController
 
   def service
     @service ||= ResponsesService.instance
+  end
+
+  def responders_service
+    @responders_service ||= RespondersService.instance
+  end
+
+  def responders_query
+    @responders_query ||= RespondersQuery.instance
   end
 end
