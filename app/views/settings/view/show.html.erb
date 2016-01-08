@@ -55,7 +55,7 @@
     <div class='col-sm-8'>
       <div class="panel">
         <div>
-          <%= bootstrap_form_for :survey_settings, url: settings_view_path(@survey_settings), method: :patch, inline_errors: false do |f| %>
+          <%= bootstrap_form_for :survey_settings, url: settings_view_path(@survey_settings), method: :patch, inline_errors: false, layout: :horizontal, label_col: "col-md-3", control_col: "col-md-9" do |f| %>
             <div>
               <%= f.text_field :style_elements, name: 'style_elements[company_product_name]', value: @company_product_name, placeholder: 'us', class: 'company-product-name', 'data-style-elements': 'company-product-name', label: 'Company/product name', autofocus: true %>
               <%= f.text_field :style_elements, name: 'style_elements[background_color]', class: 'background-color', label: 'Background color' %>

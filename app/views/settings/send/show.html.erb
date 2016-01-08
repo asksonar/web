@@ -23,11 +23,11 @@
       <div class='panel'>
       <%= bootstrap_form_for @survey_settings, url: settings_send_path, method: :patch, layout: :horizontal, label_col: "col-sm-3", control_col: "col-sm-9" do |f| %>
           <div class="panel-section">
-            <%= f.text_field :survey_frequency, label: 'Survey Frequency:',  append: "days", wrapper_class: 'days-group' %>
+            <%= f.text_field :survey_frequency, label: 'Survey frequency',  append: "days", wrapper_class: 'days-group' %>
           </div>
 
           <div class='panel-section'>
-            <%= f.form_group :survey_type, label: { text: "Survey Type:" } do %>
+            <%= f.form_group :survey_type, label: { text: "Survey type" } do %>
               <%= f.radio_button :survey_type, 'inapp', label: "In-app" %>
               <div class='email-followup
                 <%= 'hidden' if @survey_settings.survey_type != 'inapp' %>
