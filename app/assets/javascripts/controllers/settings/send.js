@@ -1,5 +1,5 @@
 $(function(){
-  if ($('#send-show').length === 0) {
+  if ($('#send-show').length === 0 && $('#send-update').length === 0) {
     return;
   }
 
@@ -18,6 +18,9 @@ $(function(){
       $('.email-followup').removeClass('hidden');
     } else {
       $('.email-followup').addClass('hidden');
+      $('.email-followup').addClass('disabled');
+      $('#survey_settings_email_followup_enabled').prop('checked', false);
+      $('#survey_settings_email_followup').prop('disabled', true).val('');
     }
   });
 });

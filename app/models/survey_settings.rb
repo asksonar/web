@@ -3,6 +3,9 @@ class SurveySettings < ActiveRecord::Base
 
   after_initialize :default_values, unless: :persisted?
 
+  validates :survey_frequency, numericality: { greater_than_or_equal_to: 30 }
+  validates :email_followup, numericality: { greater_than_or_equal_to: 7, allow_nil: true }
+
   enum survey_type: [:inapp, :email]
 
   HASHIDS_SALT = 'hGd?M>7`ztM.'

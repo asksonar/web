@@ -4,16 +4,21 @@ module Settings
 
     def show
       company = current_user.company
-      @survey_settings = company.survey_settings.prezi
-      @survey_frequency = @survey_settings.survey_frequency
+      survey_settings = company.survey_settings
+      @survey_settings = survey_settings.prezi
     end
 
     def update
       company = current_user.company
-      @survey_settings = company.survey_settings
-      service.update(@survey_settings, survey_params)
-      flash[:info] = 'Your changes have been updated.'
-      redirect_to action: :show
+      survey_settings = company.survey_settings
+      service.update(survey_settings, survey_params)
+      if survey_settings.valid?
+        flash[:info] = 'Your changes have been updated.'
+        redirect_to action: :show
+      else
+        @survey_settings = survey_settings.prezi
+        render :show
+      end
     end
 
     private
