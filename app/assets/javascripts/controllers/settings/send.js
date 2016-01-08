@@ -13,7 +13,7 @@ $(function(){
     }
   });
 
-  $("input[type='radio']").on('click', function() {
+  $("input[name='survey_settings[survey_type]']").on('click', function() {
     if ($(this).val() === 'inapp') {
       $('.email_followup').removeClass('hidden');
     } else {
