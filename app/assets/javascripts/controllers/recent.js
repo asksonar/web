@@ -5,7 +5,7 @@
 */
 
 $(function(){
-  if (!$('#responses-index').length) {
+  if (!$('#recent-index').length) {
     return;
   }
 
@@ -19,7 +19,7 @@ $(function(){
 
     $.ajax({
       type: 'GET',
-      url: '/responses.json/',
+      url: '/recent.json/',
       data: { startTime: startTime },
       success: function(data){
         if (!newResponses.responses.length) {

@@ -51,6 +51,8 @@ Rails.application.routes.draw do
     get :api
   end
 
+  resources :responses
+
   ############
   # sonar v1 #
   ############
@@ -61,7 +63,6 @@ Rails.application.routes.draw do
   get '/share/videos/:id', to: 'share_videos#show', as: 'share_videos'
   get '/results/:id/edit', to: 'drafts#edit'
   patch '/results/:id/edit', to: 'drafts#update'
-  get '/responses.json', to: 'responses_json#index'
   get '/feedback/videos/:id', to: 'feedback#show', as: 'feedback_videos'
 
   resources :transcripts
@@ -72,7 +73,7 @@ Rails.application.routes.draw do
     resources :video, only: [:create, :update], controller: 'studies_video'
   end
   resources :drafts
-  resources :responses
+  resources :recent, only: [:index]
   resources :results do
     resources :videos, only: [:show], controller: 'results'
   end

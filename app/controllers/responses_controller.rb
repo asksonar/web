@@ -1,12 +1,5 @@
 class ResponsesController < ApplicationController
-  before_action :authenticate_user!, only: [:index]
-  protect_from_forgery with: :null_session, except: [:index]
-
-  def index
-    @scenario_results = query
-      .responses(company: current_user.company)
-      .map(&:prezi)
-  end
+  protect_from_forgery with: :null_session
 
   def create
     uuid = service.handle_touch(touch_params)
@@ -14,6 +7,15 @@ class ResponsesController < ApplicationController
       render json: { uuid: uuid }
     else
       render json: { ok: true }
+    end
+  end
+
+  def show
+    uuid = params[:id]
+    service.update_response(uuid, update_params)
+    respond_to do |format|
+      format.html
+      format.json { render json: { ok: true } }
     end
   end
 
@@ -45,10 +47,6 @@ class ResponsesController < ApplicationController
       rating: params[:rating], # optional
       text: params[:text] # optional
     }
-  end
-
-  def query
-    @query ||= ScenarioResultsQuery.instance
   end
 
   def service
