@@ -21,11 +21,10 @@
     <div class='col-sm-8'>
 
       <div class='panel'>
-      <%= bootstrap_form_for @survey_settings, url: settings_send_path(@survey_settings), method: :patch,
+      <%= bootstrap_form_for :survey_settings, url: settings_send_path(@survey_settings), method: :patch,
         layout: :horizontal, label_col: "col-sm-3" do |f| %>
-
           <div class="panel-section">
-            <%= f.text_field :survey_frequency, label: 'Survey Frequency:', control_col: "col-sm-3", append: "days" %>
+            <%= f.text_field :survey_frequency, value: @survey_frequency, label: 'Survey Frequency:', control_col: "col-sm-3", append: "days" %>
           </div>
 
           <div class='panel-section'>
@@ -50,7 +49,6 @@
             <%= f.submit "Save Changes", class: 'btn btn-dark-blue' %>
           </div>
         <% end %>
-
       </div>
     </div>
   </div>

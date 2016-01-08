@@ -1,16 +1,19 @@
-#send-show {
-  .panel {
-    h2 {
-      padding-bottom: 5px;
-      margin-bottom: 15px;
-      border-bottom: solid 1px #E2E8E9;
-    }
-  }
-
+#send-show,
+#view-show {
   .form-group {
     margin-bottom: 25px;
   }
 
+  .btn {
+    margin-bottom: 10px;
+
+    & + & {
+      margin-left: 5px;
+    }
+  }
+}
+
+#send-show {
   .panel-section + .panel-section {
     position: relative;
     padding-top: 25px;
@@ -23,14 +26,6 @@
       left: -20px;
       right: -20px;
       position: absolute;
-    }
-  }
-
-  .btn {
-    margin-bottom: 10px;
-
-    & + & {
-      margin-left: 5px;
     }
   }
 
@@ -54,5 +49,15 @@
     .input-group-addon {
       color: #999;
     }
+  }
+}
+
+#view-show {
+  .survey-preview-header {
+    color: #404040;
+    background: #F5F5F5;
+    padding: 3px;
+    text-align: center;
+    font-weight: bold;
   }
 }

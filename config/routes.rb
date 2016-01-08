@@ -44,6 +44,7 @@ Rails.application.routes.draw do
 
   namespace :settings do
     resource :send, controller: :send, only: [:show, :update]
+    resource :view, controller: :view, only: [:show, :update]
   end
 
   namespace :setup do

@@ -3,10 +3,10 @@ class ResponsesService
 
   def handle_touch(company_uuid:, email:, date_yyyymmdd:, ip_address:)
     company = Company.find_by_uuid(company_uuid)
-    survey_frequency = company.survey_settings.survey_frequency
+    survey_settings = company.survey_settings
     responder = upsert_responder(company, email, ip_address)
     upsert_touch(responder, date_yyyymmdd)
-    create_response_if_needed(responder, ip_address, survey_frequency)
+    create_response_if_needed(responder, ip_address, survey_settings)
   end
 
   # status can overwrite dismissed status
@@ -45,15 +45,19 @@ class ResponsesService
     end
   end
 
-  def create_response_if_needed(responder, ip_address, survey_frequency)
+  def create_response_if_needed(responder, ip_address, survey_settings)
+    response_params = {}
     latest_response = find_latest_response(responder)
+    style_elements = survey_settings.style_elements.nil? ? {} : JSON.parse(survey_settings.style_elements)
+    response_params = response_params.merge({ style_elements: style_elements })
+
     if latest_response.nil?
-      create_new_empty_response(responder, ip_address).uuid
+      response_params.merge({ uuid: create_new_empty_response(responder, ip_address).uuid })
     elsif latest_response.unanswered? && latest_response.survey_type == 'inapp'
       # if we just send you an email, we don't want to overload you with an inapp survey
-      latest_response.uuid
-    elsif latest_response.created_at.before?(survey_frequency.days.ago)
-      create_new_empty_response(responder, ip_address).uuid
+      response_params.merge({ uuid: latest_response.uuid })
+    elsif latest_response.created_at.before?(survey_settings.survey_frequency.days.ago)
+      response_params.merge({ uuid: create_new_empty_response(responder, ip_address).uuid })
     end
   end
 
