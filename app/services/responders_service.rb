@@ -11,10 +11,6 @@ class RespondersService
     update_responder_metadata(transaction)
   end
 
-  def unsubscribe!(responder)
-    responder.update(unsubscribed_at: DateTime.now)
-  end
-
   private
 
   def create_metadata_transaction

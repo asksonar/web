@@ -32,6 +32,12 @@ class ResponsesService
     response.dismissed! if response.unanswered?
   end
 
+  def unsubscribe_response(uuid)
+    dismiss_response(uuid)
+    response = Response.find_by_uuid(uuid)
+    response.responder.update(unsubscribed_at: DateTime.now)
+  end
+
   private
 
   def calculate_nps(rating)

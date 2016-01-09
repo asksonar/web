@@ -12,9 +12,8 @@ class ResponsesController < ApplicationController
   end
 
   def unsubscribe
+    service.unsubscribe_response(uuid)
     @prezi = ResponsesPresenter.new(uuid)
-    service.dismiss_response(uuid)
-    responders_service.unsubscribe!(@prezi.responder)
     render :unsubscribe
   end
 
@@ -28,12 +27,18 @@ class ResponsesController < ApplicationController
   end
 
   def update
-    @prezi = ResponsesPresenter.new(uuid)
     if params[:button] == 'submit'
       service.update_response(uuid, update_params)
     end
     respond_to do |format|
-      format.html { params.key?(:rating) ? (render :update_rating) : (render :update_success) }
+      format.html do
+        @prezi = ResponsesPresenter.new(uuid)
+        if params.key?(:rating)
+          render :update_rating
+        else
+          render :update_success
+        end
+      end
       format.json { render json: { ok: true } }
     end
   end
@@ -67,13 +72,5 @@ class ResponsesController < ApplicationController
 
   def service
     @service ||= ResponsesService.instance
-  end
-
-  def responders_service
-    @responders_service ||= RespondersService.instance
-  end
-
-  def responders_query
-    @responders_query ||= RespondersQuery.instance
   end
 end
