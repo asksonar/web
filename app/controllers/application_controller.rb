@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     def configure_permitted_parameters
       devise_parameter_sanitizer.for(:sign_up) << :full_name
       devise_parameter_sanitizer.for(:account_update) << :full_name
-      devise_parameter_sanitizer.for(:invite) << :company_id
+      devise_parameter_sanitizer.for(:invite) << [:company_id, :role]
       devise_parameter_sanitizer.for(:accept_invitation) << :full_name
     end
 end
