@@ -10,7 +10,9 @@
 }
 
 #registrations-new,
-#registrations-create {
+#registrations-create,
+#invitations-edit,
+#invitations-update {
   .panel {
     max-width: 450px;
   }
@@ -23,7 +25,9 @@
 #passwords-edit,
 #passwords-update,
 #registrations-new,
-#registrations-create {
+#registrations-create,
+#invitations-edit,
+#invitations-update {
   .panel {
     margin-left: auto;
     margin-right: auto;
