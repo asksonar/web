@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :invitable
   belongs_to :company
 
   before_create :create_company
@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   end
 
   def create_company
-    self.company = Company.create
+    self.company = Company.create if company_id.nil?
   end
 
   def track_user_created

@@ -44,6 +44,8 @@ gem 'rails_bootstrap_navbar'
 gem 'hashids'
 # user login framework
 gem 'devise'
+# add invitation support for devise
+gem 'devise_invitable'
 # user authorization framework
 gem 'pundit'
 # better server than webrick
