@@ -4,6 +4,7 @@ class ResponsesService
   def handle_touch(company_uuid:, email:, date_yyyymmdd:, ip_address:)
     company = Company.find_by_uuid(company_uuid)
     survey_settings = company.survey_settings
+
     responder = upsert_responder(company, email, ip_address)
     upsert_touch(responder, date_yyyymmdd)
     create_response_if_needed(responder, ip_address, survey_settings)
@@ -52,19 +53,25 @@ class ResponsesService
   end
 
   def create_response_if_needed(responder, ip_address, survey_settings)
-    response_params = {}
-    latest_response = find_latest_response(responder)
-    style_elements = survey_settings.style_elements.nil? ? {} : JSON.parse(survey_settings.style_elements)
-    response_params = response_params.merge({ style_elements: style_elements })
+    return {} if survey_settings.survey_type != 'inapp'
 
+    response_params = {}
+
+    style_elements = survey_settings.style_elements.nil? ? {} : JSON.parse(survey_settings.style_elements)
+    response_params.merge!(style_elements: style_elements)
+
+    latest_response = find_latest_response(responder)
     if latest_response.nil?
-      response_params.merge({ uuid: create_new_empty_response(responder, ip_address).uuid })
-    elsif latest_response.unanswered? && latest_response.survey_type == 'inapp'
-      # if we just send you an email, we don't want to overload you with an inapp survey
-      response_params.merge({ uuid: latest_response.uuid })
+      new_response = create_new_empty_response(responder, ip_address)
+      response_params.merge!(uuid: new_response.uuid)
     elsif latest_response.created_at.before?(survey_settings.survey_frequency.days.ago)
-      response_params.merge({ uuid: create_new_empty_response(responder, ip_address).uuid })
+      new_response = create_new_empty_response(responder, ip_address)
+      response_params.merge!(uuid: new_response.uuid)
+    elsif latest_response.unanswered?
+      response_params.merge!(uuid: latest_response.uuid)
     end
+
+    response_params
   end
 
   # ip_address is set only on the creation of the row, not subsequent calls

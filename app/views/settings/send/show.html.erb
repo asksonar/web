@@ -19,9 +19,8 @@
       </div>
     </div>
     <div class='col-sm-8'>
-
       <div class='panel'>
-      <%= bootstrap_form_for @survey_settings, url: settings_send_path, method: :patch, layout: :horizontal, label_col: "col-md-3", control_col: "col-md-9" do |f| %>
+        <%= bootstrap_form_for @survey_settings, url: settings_send_path, method: :patch, layout: :horizontal, label_col: "col-md-3", control_col: "col-md-9" do |f| %>
           <div class="panel-section">
             <%= f.text_field :survey_frequency, label: 'Survey frequency',  append: "days", wrapper_class: 'days-group' %>
           </div>
