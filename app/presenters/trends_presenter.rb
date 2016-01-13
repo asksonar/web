@@ -30,11 +30,11 @@ class TrendsPresenter
   def date_filter
     case @date_filter
     when 'past-3-months'
-      {from: 3.months.ago}
+      { from: 3.months.ago }
     when 'past-12-months'
-      {from: 12.months.ago}
+      { from: 12.months.ago }
     else # 'past-1-month'
-      {from: 1.month.ago}
+      { from: 1.month.ago }
     end
   end
 

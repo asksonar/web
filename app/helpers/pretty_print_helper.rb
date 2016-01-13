@@ -15,5 +15,4 @@ module PrettyPrintHelper
       number.to_s + ' ' + text + 's'
     end
   end
-
 end

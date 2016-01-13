@@ -41,7 +41,6 @@ class ScenarioResultsService
       end
 
       sample_scenario_result.result_videos_uploaded.each do |result_video|
-
         new_result_video = result_video.dup
         new_result_video.scenario_result = new_scenario_result
         new_result_video.save
@@ -49,7 +48,7 @@ class ScenarioResultsService
         s3_utility = S3Utility.new
 
         s3_utility.list_video(result_video.hashid).each do |object_summary|
-          path_ending = object_summary.key.sub(result_video.hashid,'')
+          path_ending = object_summary.key.sub(result_video.hashid, '')
           s3_utility.copy_video(object_summary.key, new_result_video.hashid + path_ending)
         end
       end

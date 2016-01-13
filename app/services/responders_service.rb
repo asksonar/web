@@ -38,7 +38,6 @@ class RespondersService
     MetadataTransactionEntry.import(columns, values, validate: false)
   end
 
-
   def insert_responders(transaction)
     # insert responders that don't exist
     ActiveRecord::Base.connection_pool.with_connection do |connection|
@@ -68,9 +67,8 @@ class RespondersService
 
     ActiveRecord::Base.transaction do
       metadata_diffs.each do |diff|
-        diff.update_attribute(:metadata,
-          (diff['old_metadata'] || {}).merge(diff['new_metadata'])
-        )
+        merged_data = (diff['old_metadata'] || {}).merge(diff['new_metadata'])
+        diff.update_attribute(:metadata, merged_data)
       end
     end
   end

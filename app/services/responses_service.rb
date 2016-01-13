@@ -108,9 +108,11 @@ class ResponsesService
     responder.ip_addresses = ip_addresses.push(ip_address).uniq.join(',')
     responder.save
 
-    if most_recent_ip_address != ip_address
-      responder.region, responder.country = GeoIpUtility.instance.lookup_ip_address(ip_address)
-      responder.save
-    end
+    calculate_geoip(responder, ip_address) if most_recent_ip_address != ip_address
+  end
+
+  def calculate_geoip
+    responder.region, responder.country = GeoIpUtility.instance.lookup_ip_address(ip_address)
+    responder.save
   end
 end

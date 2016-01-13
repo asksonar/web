@@ -3,8 +3,8 @@ class RecentController < ApplicationController
 
   def index
     @scenario_results = query
-      .responses(response_params)
-      .map(&:prezi)
+                        .responses(response_params)
+                        .map(&:prezi)
 
     respond_to do |format|
       format.html

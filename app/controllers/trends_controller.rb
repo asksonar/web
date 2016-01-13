@@ -6,7 +6,7 @@ class TrendsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json {render json: @prezi.nps_by_day_json}
+      format.json { render json: @prezi.nps_by_day_json }
     end
   end
 
