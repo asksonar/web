@@ -5,6 +5,6 @@ Why did you give us that score?
 <%= bootstrap_form_tag url: response_path(@prezi.uuid), method: 'patch' do |f| %>
   <%= f.text_area :text, placeholder: 'Write your answer here...', hide_label: true %>
 
-  <%= f.button 'Submit', value: :submit %>
-  <%= f.button 'Skip', value: :skip %>
+  <%= f.button 'Submit' %>
+  <%= link_to 'Skip', response_path(@prezi.uuid) %>
 <% end %>

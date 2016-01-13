@@ -25,26 +25,32 @@ class ResponsesQuery
   end
 
   def nps_by_category(company_id, column, from: nil, to: nil, filter: {})
-    data(company_id, from, to, filter)
-      .group(column)
-      .group(:nps)
-      .order(column.to_s)
-      .pluck("#{column}, nps, count(1)")
-      .each_with_object({}) do |item, object|
-        column_val = item[0]
-        nps = item[1]
-        count = item[2]
-        object[column_val] = (object[column_val] || { 1 => 0, 0 => 0, -1 => 0 }).merge(nps => count)
-      end
-      .map do |key, object|
-        { categoryField:  key,
-          nps: (
-            100.0 *
-            (object[1] - object[-1]) /
-            (object[1] + object[0] + object[-1])
-          ).round
-        }.merge(object)
-      end
+    data = data(company_id, from, to, filter)
+           .group(column)
+           .group(:nps)
+           .order(column.to_s)
+           .pluck("#{column}, nps, count(1)")
+    map_nps_rating(aggregate_counts(data))
+  end
+
+  private def aggregate_counts(data)
+    data.each_with_object({}) do |item, object|
+      column_val = item[0]
+      nps = item[1]
+      count = item[2]
+      object[column_val] = (object[column_val] || { 1 => 0, 0 => 0, -1 => 0 }).merge(nps => count)
+    end
+  end
+
+  private def map_nps_rating(data)
+    data.map do |key, object|
+      { categoryField: key,
+        nps: (100.0 *
+              (object[1] - object[-1]) /
+              (object[1] + object[0] + object[-1])
+             ).round
+      }.merge(object)
+    end
   end
 
   private

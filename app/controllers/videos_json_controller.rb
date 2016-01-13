@@ -19,10 +19,9 @@ class VideosJsonController < ApplicationController
 
   def track_video_viewed
     analytics.video_viewed(current_user,
-      request.remote_ip,
-      @scenario_result.scenario,
-      @scenario_result,
-      true
-    )
+                           request.remote_ip,
+                           @scenario_result.scenario,
+                           @scenario_result,
+                           true)
   end
 end

@@ -1,11 +1,9 @@
 class CustomersPresenter
+  attr_reader :page
+
   def initialize(company_id:, page:)
     @company_id = company_id
     @page = page.to_i
-  end
-
-  def page
-    @page
   end
 
   def users

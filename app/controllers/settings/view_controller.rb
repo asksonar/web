@@ -7,8 +7,8 @@ module Settings
       @survey_settings = company.survey_settings
       style_elements = service.get_style_elements(@survey_settings)
 
-      @company_product_name = style_elements["company_product_name"]
-      @background_color = style_elements["background_color"]
+      @company_product_name = style_elements['company_product_name']
+      @background_color = style_elements['background_color']
     end
 
     def update
@@ -36,7 +36,7 @@ module Settings
     end
 
     def filter_empty_params(style_params)
-      style_params.delete_if { |key, value| value.blank? }
+      style_params.delete_if { |_key, value| value.blank? }
     end
   end
 end

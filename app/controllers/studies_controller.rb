@@ -93,5 +93,4 @@ class StudiesController < ApplicationController
       analytics.my_feedback_aborted(request.remote_ip, @scenario_result.created_by, @scenario_result)
     end
   end
-
 end

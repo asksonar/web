@@ -27,19 +27,19 @@ class ResponsesController < ApplicationController
   end
 
   def update
-    if params[:button] == 'submit'
-      service.update_response(uuid, update_params)
-    end
+    service.update_response(uuid, update_params)
     respond_to do |format|
-      format.html do
-        @prezi = ResponsesPresenter.new(uuid)
-        if params.key?(:rating)
-          render :update_rating
-        else
-          render :update_success
-        end
-      end
+      format.html { update_html }
       format.json { render json: { ok: true } }
+    end
+  end
+
+  private def update_html
+    @prezi = ResponsesPresenter.new(uuid)
+    if params.key?(:rating)
+      render :update_rating
+    else
+      render :update_success
     end
   end
 
