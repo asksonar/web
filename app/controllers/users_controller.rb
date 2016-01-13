@@ -8,6 +8,13 @@ class UsersController < ApplicationController
     render json: { ok: true }
   end
 
+  def destroy
+    user = User.find_by_id(params[:id])
+    user.soft_delete
+
+    render json: { userId: user.id }
+  end
+
   private
 
   def user_params

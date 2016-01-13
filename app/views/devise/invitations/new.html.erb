@@ -35,6 +35,7 @@
             <tr>
               <th>Users</th>
               <th>Admin</th>
+              <th>Actions</th>
             </tr>
 
             <% @users.each do |user| %>
@@ -43,6 +44,7 @@
                 <td>
                   <%= check_box_tag("is_admin", user.admin?, user.admin?, { class: 'user-role', 'data-user-id': user.id}) %>
                 </td>
+                <td><a data-toggle="modal" data-target="#delete_with_ajax" data-user-id=<%= user.id %>><i class="fa fa-ftl fa-trash-o"></i></a></td>
               </tr>
             <% end %>
           </table>
@@ -52,3 +54,5 @@
   </div>
 
 </section>
+
+<%= render partial: 'utility/delete_with_ajax_modal', locals: {delete_item: 'user'} %>
