@@ -55,6 +55,8 @@ Rails.application.routes.draw do
     resource :view, controller: :view, only: [:show, :update]
   end
 
+  resources :users
+
   ############
   # sonar v1 #
   ############
