@@ -4,7 +4,14 @@ class Responder < ActiveRecord::Base
   has_many :touches, inverse_of: :responder
   store_accessor :metadata
 
-  before_save { email.downcase! if try(:email) }
+  before_validation :downcase_email
 
   HASHIDS_SALT = 'd7#7^bMnc^Ue'
+
+  private
+
+  def downcase_email
+    email.downcase! if try(:email)
+    true
+  end
 end

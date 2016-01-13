@@ -5,6 +5,7 @@ class Response < ActiveRecord::Base
   delegate :country, to: :responder
 
   enum status: [:unanswered, :answered, :dismissed]
+  enum survey_type: [:inapp, :email]
 
   after_initialize :default_values, unless: :persisted?
 

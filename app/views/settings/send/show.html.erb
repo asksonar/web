@@ -19,19 +19,31 @@
       </div>
     </div>
     <div class='col-sm-8'>
-
       <div class='panel'>
-      <%= bootstrap_form_for :survey_settings, url: settings_send_path(@survey_settings), method: :patch,
-        layout: :horizontal, label_col: "col-sm-3" do |f| %>
-        <div class="panel-section">
-          <%= f.text_field :survey_frequency, value: @survey_frequency, label: 'Survey Frequency:', control_col: "col-sm-3", append: "days" %>
-        </div>
-        <div class="panel-section">
-          <a href='<%= root_path %>' class='btn btn-grey'>Cancel</a>
-          <%= f.submit "Save Changes", class: 'btn btn-dark-blue' %>
-        </div>
-      <% end %>
+        <%= bootstrap_form_for @survey_settings, url: settings_send_path, method: :patch, layout: :horizontal, label_col: "col-md-3", control_col: "col-md-9" do |f| %>
+          <div class="panel-section">
+            <%= f.text_field :survey_frequency, label: 'Survey frequency',  append: "days", wrapper_class: 'days-group' %>
+          </div>
 
+          <div class='panel-section'>
+            <%= f.form_group :survey_type, label: { text: "Survey type" } do %>
+              <%= f.radio_button :survey_type, 'inapp', label: "In-app" %>
+              <div class='email-followup
+                <%= 'hidden' if @survey_settings.survey_type != 'inapp' %>
+                <%= 'disabled' if @survey_settings.email_followup.nil? %>
+              '>
+                <%= f.check_box :email_followup_enabled, label: "Follow up with an email survey if in-app survey isn't answered in" %>
+                <%= f.text_field :email_followup, skip_label: true, append: "days", layout: :inline, disabled: @survey_settings.email_followup.nil?, wrapper_class: 'days-group' %>
+              </div>
+              <%= f.radio_button :survey_type, 'email', label: "Email" %>
+            <% end %>
+          </div>
+
+          <div class="panel-section">
+            <a href='<%= settings_send_path %>' class='btn btn-grey'>Cancel</a>
+            <%= f.submit "Save Changes", class: 'btn btn-dark-blue' %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

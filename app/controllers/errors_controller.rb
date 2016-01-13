@@ -1,4 +1,6 @@
 class ErrorsController < ApplicationController
+  layout 'error'
+
   def not_found_404
     render status: 404
   end

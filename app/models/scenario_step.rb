@@ -15,5 +15,6 @@ class ScenarioStep < ActiveRecord::Base
     self.description = nil if self.description.blank?
     self.url = self.url.try(:strip)
     self.url = nil if self.url.blank?
+    true
   end
 end
