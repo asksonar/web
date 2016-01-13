@@ -5,5 +5,4 @@ class UsersService
     user.role = user_params[:role]
     user.save(validate: false)
   end
-
 end
