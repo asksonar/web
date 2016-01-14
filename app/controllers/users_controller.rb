@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def update
     user = User.find_by_id(params[:id])
-    service.update(user, user_params)
+    service.update_role(user, params[:role])
 
     render json: { ok: true }
   end
@@ -16,12 +16,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def user_params
-    {
-      role: params[:role]
-    }
-  end
 
   def service
     @service ||= UsersService.instance
