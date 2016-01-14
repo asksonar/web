@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160108192614) do
+ActiveRecord::Schema.define(version: 20160114233948) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,22 @@ ActiveRecord::Schema.define(version: 20160108192614) do
     t.string   "uuid"
     t.string   "subdomain"
   end
+
+  create_table "customers", force: :cascade do |t|
+    t.datetime "first_touch"
+    t.datetime "last_touch"
+    t.string   "ip_addresses"
+    t.string   "region"
+    t.string   "country"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "company_id"
+    t.string   "email"
+    t.hstore   "metadata"
+    t.datetime "unsubscribed_at"
+  end
+
+  add_index "customers", ["company_id", "email"], name: "index_customers_on_company_id_and_email", using: :btree
 
   create_table "metadata_transaction_entries", force: :cascade do |t|
     t.integer  "metadata_transaction_id"
@@ -47,24 +63,8 @@ ActiveRecord::Schema.define(version: 20160108192614) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "responders", force: :cascade do |t|
-    t.datetime "first_touch"
-    t.datetime "last_touch"
-    t.string   "ip_addresses"
-    t.string   "region"
-    t.string   "country"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "company_id"
-    t.string   "email"
-    t.hstore   "metadata"
-    t.datetime "unsubscribed_at"
-  end
-
-  add_index "responders", ["company_id", "email"], name: "index_responders_on_company_id_and_email", using: :btree
-
   create_table "responses", force: :cascade do |t|
-    t.integer  "responder_id"
+    t.integer  "customer_id"
     t.integer  "rating"
     t.text     "text"
     t.datetime "created_at",    null: false
@@ -209,7 +209,7 @@ ActiveRecord::Schema.define(version: 20160108192614) do
   end
 
   create_table "touches", force: :cascade do |t|
-    t.integer  "responder_id"
+    t.integer  "customer_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "date_yyyymmdd"
