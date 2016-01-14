@@ -9,12 +9,12 @@ class ResponsesPresenter
     @response ||= Response.find_by_uuid(uuid)
   end
 
-  def responder
-    @responder ||= response.responder
+  def customer
+    @customer ||= response.customer
   end
 
   def company
-    @company ||= responder.company
+    @company ||= customer.company
   end
 
   def company_name

@@ -5,9 +5,9 @@ class ResponsesService
     company = Company.find_by_uuid(company_uuid)
     survey_settings = company.survey_settings
 
-    responder = upsert_responder(company, email, ip_address)
-    upsert_touch(responder, date_yyyymmdd)
-    create_response_if_needed(responder, ip_address, survey_settings)
+    customer = upsert_customer(company, email, ip_address)
+    upsert_touch(customer, date_yyyymmdd)
+    create_response_if_needed(customer, ip_address, survey_settings)
   end
 
   # status can overwrite dismissed status
@@ -36,7 +36,7 @@ class ResponsesService
   def unsubscribe_response(uuid)
     dismiss_response(uuid)
     response = Response.find_by_uuid(uuid)
-    response.responder.update(unsubscribed_at: DateTime.now)
+    response.customer.update(unsubscribed_at: DateTime.now)
   end
 
   private
@@ -52,7 +52,7 @@ class ResponsesService
     end
   end
 
-  def create_response_if_needed(responder, ip_address, survey_settings)
+  def create_response_if_needed(customer, ip_address, survey_settings)
     return {} if survey_settings.survey_type != 'inapp'
 
     response_params = {}
@@ -60,12 +60,12 @@ class ResponsesService
     style_elements = survey_settings.style_elements.nil? ? {} : JSON.parse(survey_settings.style_elements)
     response_params.merge!(style_elements: style_elements)
 
-    latest_response = find_latest_response(responder)
+    latest_response = find_latest_response(customer)
     if latest_response.nil?
-      new_response = create_new_empty_response(responder, ip_address)
+      new_response = create_new_empty_response(customer, ip_address)
       response_params.merge!(uuid: new_response.uuid)
     elsif latest_response.created_at.before?(survey_settings.survey_frequency.days.ago)
-      new_response = create_new_empty_response(responder, ip_address)
+      new_response = create_new_empty_response(customer, ip_address)
       response_params.merge!(uuid: new_response.uuid)
     elsif latest_response.unanswered?
       response_params.merge!(uuid: latest_response.uuid)
@@ -76,43 +76,43 @@ class ResponsesService
 
   # ip_address is set only on the creation of the row, not subsequent calls
   # we know that ip_address is correct for subsequent calls because we get passed the uuid
-  def create_new_empty_response(responder, ip_address)
-    # responder.responses.create failed sometimes with ActiveRecord::RecordNotUnique (PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "responses_pkey"
+  def create_new_empty_response(customer, ip_address)
+    # customer.responses.create failed sometimes with ActiveRecord::RecordNotUnique (PG::UniqueViolation: ERROR:  duplicate key value violates unique constraint "responses_pkey"
     # TODO: maybe this magically makes a difference? maybe something strange in scoping?
     Response.create(
-      responder: responder,
+      customer: customer,
       uuid: SecureRandom.uuid,
       ip_address: ip_address,
       survey_type: 'inapp'
     )
   end
 
-  def find_latest_response(responder)
-    responder.responses.order(created_at: :desc).first
+  def find_latest_response(customer)
+    customer.responses.order(created_at: :desc).first
   end
 
-  def upsert_touch(responder, date_yyyymmdd)
-    responder.touches.find_or_create_by(date_yyyymmdd: date_yyyymmdd.to_i)
-    responder.update(last_touch: Time.now)
+  def upsert_touch(customer, date_yyyymmdd)
+    customer.touches.find_or_create_by(date_yyyymmdd: date_yyyymmdd.to_i)
+    customer.update(last_touch: Time.now)
   end
 
-  def upsert_responder(company, email, ip_address)
-    responder = company.responders.find_or_create_by(email: email)
-    update_ip_address(responder, ip_address)
-    responder
+  def upsert_customer(company, email, ip_address)
+    customer = company.customers.find_or_create_by(email: email)
+    update_ip_address(customer, ip_address)
+    customer
   end
 
-  def update_ip_address(responder, ip_address)
-    ip_addresses = (responder.ip_addresses || '').split(',')
+  def update_ip_address(customer, ip_address)
+    ip_addresses = (customer.ip_addresses || '').split(',')
     most_recent_ip_address = ip_addresses[-1]
-    responder.ip_addresses = ip_addresses.push(ip_address).uniq.join(',')
-    responder.save
+    customer.ip_addresses = ip_addresses.push(ip_address).uniq.join(',')
+    customer.save
 
-    calculate_geoip(responder, ip_address) if most_recent_ip_address != ip_address
+    calculate_geoip(customer, ip_address) if most_recent_ip_address != ip_address
   end
 
   def calculate_geoip
-    responder.region, responder.country = GeoIpUtility.instance.lookup_ip_address(ip_address)
-    responder.save
+    customer.region, customer.country = GeoIpUtility.instance.lookup_ip_address(ip_address)
+    customer.save
   end
 end

@@ -1,8 +1,8 @@
 class Response < ActiveRecord::Base
-  belongs_to :responder
+  belongs_to :customer
 
-  delegate :region, to: :responder
-  delegate :country, to: :responder
+  delegate :region, to: :customer
+  delegate :country, to: :customer
 
   enum status: [:unanswered, :answered, :dismissed]
   enum survey_type: [:inapp, :email]
