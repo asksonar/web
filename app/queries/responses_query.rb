@@ -3,12 +3,12 @@ class ResponsesQuery
 
   # strips out nil values
   def distinct(company_id, column)
-    Responder.where(company_id: company_id).order(column).where.not(column => nil).distinct(column).pluck(column)
+    Customer.where(company_id: company_id).order(column).where.not(column => nil).distinct(column).pluck(column)
   end
 
   def responses(company_id, from: nil, to: nil, filter: {})
     data(company_id, from, to, filter)
-      .select(:rating, :text, :created_at, :region, :country, :responder_id, :nps)
+      .select(:rating, :text, :created_at, :region, :country, :customer_id, :nps)
   end
 
   def comments(company_id, from: nil, to: nil, filter: {})
@@ -56,7 +56,7 @@ class ResponsesQuery
   private
 
   def data(company_id, from, to, filter)
-    query = Response.joins(:responder).where('company_id = ?', company_id).where.not(nps: nil)
+    query = Response.joins(:customer).where('company_id = ?', company_id).where.not(nps: nil)
     query = query.where(*where_clause(filter)) if !filter.nil?
     query = query.where('responses.created_at > ?', from) if from
     query = query.where('responses.created_at < ?', to) if to

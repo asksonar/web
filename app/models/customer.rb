@@ -1,7 +1,7 @@
-class Responder < ActiveRecord::Base
+class Customer < ActiveRecord::Base
   belongs_to :company
-  has_many :responses, inverse_of: :responder
-  has_many :touches, inverse_of: :responder
+  has_many :responses, inverse_of: :customer
+  has_many :touches, inverse_of: :customer
   store_accessor :metadata
 
   before_validation :downcase_email

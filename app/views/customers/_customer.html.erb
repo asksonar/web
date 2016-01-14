@@ -1,14 +1,14 @@
 <tr class='user-line'>
-  <td><%= responder.email %></td>
-  <td><%= responder.first_touch && local_time(responder.first_touch) %></td>
-  <td><%= responder.last_touch && local_time_ago(responder.last_touch) %></td>
-  <td><%= responder.region %></td>
-  <td><%= responder.country %></td>
+  <td><%= customer.email %></td>
+  <td><%= customer.first_touch && local_time(customer.first_touch) %></td>
+  <td><%= customer.last_touch && local_time_ago(customer.last_touch) %></td>
+  <td><%= customer.region %></td>
+  <td><%= customer.country %></td>
 </tr>
 <tr class='user-metadata' style='display:none'>
   <td colspan='5'>
-    <% if responder.metadata %>
-      <% responder.metadata.each do |key, value| %>
+    <% if customer.metadata %>
+      <% customer.metadata.each do |key, value| %>
         <dl class="dl-horizontal">
           <dt><%= key %></dt>
           <dd><%= value %></dd>

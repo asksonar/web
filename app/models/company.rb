@@ -1,6 +1,6 @@
 class Company < ActiveRecord::Base
   has_many :users, inverse_of: :company
-  has_many :responders, inverse_of: :company
+  has_many :customers, inverse_of: :company
   has_one :survey_settings
 
   after_initialize :default_values, unless: :persisted?

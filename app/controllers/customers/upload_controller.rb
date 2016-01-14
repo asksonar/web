@@ -25,7 +25,7 @@ module Customers
     end
 
     def service
-      @service ||= RespondersService.instance
+      @service ||= CustomersService.instance
     end
   end
 end
