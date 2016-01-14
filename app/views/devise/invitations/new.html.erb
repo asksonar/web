@@ -42,7 +42,7 @@
               <tr class='user-line'>
                 <td><%= user.email %></td>
                 <td>
-                  <%= check_box_tag("is_admin", user.admin?, user.admin?, { class: 'user-role', 'data-user-id': user.id}) %>
+                  <%= check_box_tag("is_admin", user.is_admin?, user.is_admin?, { class: 'user-role', 'data-user-id': user.id}) %>
                 </td>
                 <td><a data-toggle="modal" data-target="#delete_with_ajax" data-user-id=<%= user.id %>><i class="fa fa-ftl fa-trash-o"></i></a></td>
               </tr>

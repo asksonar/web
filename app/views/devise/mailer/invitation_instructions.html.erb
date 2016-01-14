@@ -1,6 +1,6 @@
 <p>Hi,</p>
 
-<p><%= @resource.prezi.invitor %> has invited you to http://my.asksonar.com/, you can accept it through the link below.</p>
+<p><%= @resource.prezi.inviter %> has invited you to http://my.asksonar.com/, you can accept it through the link below.</p>
 
 <p><%= link_to 'Accept invitation', accept_invitation_url(@resource, :invitation_token => @token) %></p>
 
