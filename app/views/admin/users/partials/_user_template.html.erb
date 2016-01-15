@@ -1,0 +1,11 @@
+<script id="new-user-template" type="text/x-handlebars-template">
+  {{#each user}}
+  <tr class='user-line'>
+    <td>{{email}}</td>
+    <td>
+      <input type="checkbox" name="is_admin" id="is_admin" value={{is_admin}} class="user-role" data-user-id={{id}} {{#if is_admin}}checked{{/if}}>
+    </td>
+    <td><a data-toggle="modal" data-target="#delete_with_ajax" data-user-id={{id}}><i class="fa fa-ftl fa-trash-o"></i></a></td>
+  </tr>
+  {{/each}}
+</script>

@@ -44,6 +44,7 @@ Rails.application.routes.draw do
 
   namespace :settings do
     resource :send, controller: :send, only: [:show, :update]
+    resource :view, controller: :view, only: [:show, :update]
   end
 
   namespace :setup do
@@ -51,8 +52,8 @@ Rails.application.routes.draw do
     get :api
   end
 
-  namespace :settings do
-    resource :view, controller: :view, only: [:show, :update]
+  namespace :admin do
+    resource :users, controller: :users, only: [:show, :update, :destroy]
   end
 
   resources :users

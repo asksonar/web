@@ -25,8 +25,4 @@ class ApplicationController < ActionController::Base
     end
     super
   end
-
-  def after_invite_path_for(resource_name)
-    new_user_invitation_path
-  end
 end
