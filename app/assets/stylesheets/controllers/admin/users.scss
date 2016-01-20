@@ -1,7 +1,28 @@
 #users-show {
 
-  .table-responsive {
+  .user-list {
     margin-top: 25px;
+
+    .table {
+      margin-bottom: 0;
+    }
+
+    .table tbody > tr > td {
+      padding: 12px;
+
+      &:first-child,
+      &:nth-child(2) {
+        min-width: 180px;
+      }
+    }
+
+    h3 {
+      padding: 10px 12px;
+    }
+
+    .checkbox {
+      margin: 0;
+    }
   }
 
 }
