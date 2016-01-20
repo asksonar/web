@@ -48,7 +48,7 @@ $(function(){
   }, videoController, videoTranscript, videoLink, new VideoResultsHistory());
 
   var deleteModal = new DeleteModal({
-    modal: $('#delete_with_ajax'),
+    modal: $('#delete-with-ajax'),
     btnDeleteYes: $('#btn-delete-yes')
   });
 
