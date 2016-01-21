@@ -42,10 +42,6 @@ UsersController.prototype.inviteUser = function(event) {
         var errors = jqXHR.responseJSON.errors;
 
         $.each(errors, function(index, error) {
-          if (error === "Email has already been taken") {
-            error = "You have already added or invited this user to your organization";
-          }
-
           bsh.addError(
             this.$inputUserEmail,
             error
