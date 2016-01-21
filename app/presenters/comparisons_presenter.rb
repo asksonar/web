@@ -1,4 +1,6 @@
 class ComparisonsPresenter
+  attr_reader :category
+
   def initialize(company_id, category, date_filter, filter_hash)
     @company_id = company_id
     @category = category
@@ -24,12 +26,8 @@ class ComparisonsPresenter
 
   def nps_by_category_json
     responses_query.nps_by_category(@company_id, @category, **date_filter, filter: @filter_hash)
-      .map { |val| val[@category].nil? ? val.merge(@category => 'UNKNOWN') : val }
+      .map { |val| val[:categoryField].nil? ? val.merge(categoryField: 'UNKNOWN') : val }
       .to_json
-  end
-
-  def category
-    @category
   end
 
   def checked(field, value)
@@ -41,11 +39,11 @@ class ComparisonsPresenter
   def date_filter
     case @date_filter
     when 'past-3-months'
-      {from: 3.months.ago}
+      { from: 3.months.ago }
     when 'past-12-months'
-      {from: 12.months.ago}
+      { from: 12.months.ago }
     else # 'past-1-month'
-      {from: 1.month.ago}
+      { from: 1.month.ago }
     end
   end
 end

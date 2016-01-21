@@ -1,14 +1,14 @@
 require 'csv'
 
-class RespondersService
+class CustomersService
   include Singleton
 
   def batch_update_metadata(company, metadatas)
     transaction = create_metadata_transaction
     columns, values = build_metadata_transaction_entries(transaction, company, metadatas)
     insert_metadata_transaction_entries(columns, values)
-    insert_responders(transaction)
-    update_responder_metadata(transaction)
+    insert_customers(transaction)
+    update_customer_metadata(transaction)
   end
 
   private
@@ -38,39 +38,37 @@ class RespondersService
     MetadataTransactionEntry.import(columns, values, validate: false)
   end
 
-
-  def insert_responders(transaction)
-    # insert responders that don't exist
+  def insert_customers(transaction)
+    # insert customers that don't exist
     ActiveRecord::Base.connection_pool.with_connection do |connection|
       connection.execute "
-        INSERT into responders(email, company_id, metadata, created_at, updated_at)
+        INSERT into customers(email, company_id, metadata, created_at, updated_at)
         SELECT m.email, m.company_id, m.metadata, now(), now()
         FROM metadata_transaction_entries m
-        LEFT OUTER JOIN responders r
-        ON m.email = r.email AND m.company_id = r.company_id
-        WHERE r.email IS NULL AND m.metadata_transaction_id = #{transaction.id}
+        LEFT OUTER JOIN customers c
+        ON m.email = c.email AND m.company_id = c.company_id
+        WHERE c.email IS NULL AND m.metadata_transaction_id = #{transaction.id}
       "
     end
   end
 
-  def update_responder_metadata(transaction)
-    # update responders' metadata
-    metadata_diffs = Responder.find_by_sql "
-      SELECT r.metadata old_metadata, m.metadata new_metadata, r.id
-      FROM responders r, metadata_transaction_entries m
-      WHERE r.company_id = m.company_id
-        AND r.email = m.email
-        AND ((r.metadata <> m.metadata)
-          OR (r.metadata IS NULL AND m.metadata IS NOT NULL)
+  def update_customer_metadata(transaction)
+    # update customers' metadata
+    metadata_diffs = Customer.find_by_sql "
+      SELECT c.metadata old_metadata, m.metadata new_metadata, c.id
+      FROM customers c, metadata_transaction_entries m
+      WHERE c.company_id = m.company_id
+        AND c.email = m.email
+        AND ((c.metadata <> m.metadata)
+          OR (c.metadata IS NULL AND m.metadata IS NOT NULL)
         )
         AND m.metadata_transaction_id = #{transaction.id}
     "
 
     ActiveRecord::Base.transaction do
       metadata_diffs.each do |diff|
-        diff.update_attribute(:metadata,
-          (diff['old_metadata'] || {}).merge(diff['new_metadata'])
-        )
+        merged_data = (diff['old_metadata'] || {}).merge(diff['new_metadata'])
+        diff.update_attribute(:metadata, merged_data)
       end
     end
   end

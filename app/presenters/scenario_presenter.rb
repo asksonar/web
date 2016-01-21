@@ -37,13 +37,13 @@ class ScenarioPresenter < SimpleDelegator
       .reject(&:marked_for_destruction?)
       .sort_by(&:step_order)
       .map do |step|
-      {
-        hashid: step.hashid,
-        description: (step.description || '').strip,
-        url: (step.url || '').strip,
-        errors: step.try(:errors).try(:messages)
-      }
-    end
+        {
+          hashid: step.hashid,
+          description: (step.description || '').strip,
+          url: (step.url || '').strip,
+          errors: step.try(:errors).try(:messages)
+        }
+      end
   end
 
   def share_link

@@ -1,0 +1,17 @@
+<% content_for :main_wrapper_class do %>
+  sidebar-collapsed
+<% end %>
+
+<% content_for :main_content_wrapper_class do %>
+  errors-wrapper
+<% end %>
+
+<% content_for :nav_header do %>
+  <%= render partial: 'nav/header_no_login' %>
+<% end %>
+
+<% content_for :nav_footer do %>
+  <%= render partial: 'nav/footer_errors' %>
+<% end %>
+
+<%= render template: "layouts/application" %>

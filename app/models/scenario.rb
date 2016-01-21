@@ -25,9 +25,10 @@ class Scenario < ActiveRecord::Base
   end
 
   def trim_description_and_title
-    self.description = self.description.try(:strip)
-    self.description = nil if self.description.blank?
-    self.title = self.title.try(:strip)
-    self.title = nil if self.title.blank?
+    self.description = description.try(:strip)
+    self.description = nil if description.blank?
+    self.title = title.try(:strip)
+    self.title = nil if title.blank?
+    true
   end
 end

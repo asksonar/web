@@ -6,7 +6,7 @@ class ComparisonsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json {render json: @prezi.nps_by_category_json}
+      format.json { render json: @prezi.nps_by_category_json }
     end
   end
 

@@ -72,6 +72,8 @@ gem 'local_time'
 gem 'activerecord-import'
 # pagination gem, with bootstrap styling
 gem 'kaminari-bootstrap'
+# add scheduler tabs for resque as well
+gem 'resque-scheduler-web'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables

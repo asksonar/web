@@ -17,5 +17,4 @@ class ScenariosService
     scenario.status = :deleted
     scenario.save(validate: false)
   end
-
 end

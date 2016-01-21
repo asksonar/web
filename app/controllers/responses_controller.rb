@@ -1,12 +1,6 @@
 class ResponsesController < ApplicationController
-  before_action :authenticate_user!, only: [:index]
-  protect_from_forgery with: :null_session, except: [:index]
-
-  def index
-    @scenario_results = query
-      .responses(company: current_user.company)
-      .map(&:prezi)
-  end
+  protect_from_forgery with: :null_session
+  layout 'plain'
 
   def create
     response_params = service.handle_touch(touch_params)
@@ -17,19 +11,48 @@ class ResponsesController < ApplicationController
     end
   end
 
+  def unsubscribe
+    service.unsubscribe_response(uuid)
+    @prezi = ResponsesPresenter.new(uuid)
+    render :unsubscribe
+  end
+
+  def show
+    # will default to render :show unless these functions say otherwise
+    if params.key?(:unsubscribe)
+      unsubscribe
+    else
+      update
+    end
+  end
+
   def update
-    uuid = params[:id]
     service.update_response(uuid, update_params)
-    render json: { ok: true }
+    respond_to do |format|
+      format.html { update_html }
+      format.json { render json: { ok: true } }
+    end
+  end
+
+  private def update_html
+    @prezi = ResponsesPresenter.new(uuid)
+    if params.key?(:rating)
+      render :update_rating
+    else
+      render :update_success
+    end
   end
 
   def destroy
-    uuid = params[:id]
     service.dismiss_response(uuid)
     render json: { ok: true }
   end
 
   private
+
+  def uuid
+    params[:id]
+  end
 
   def touch_params
     {
@@ -45,10 +68,6 @@ class ResponsesController < ApplicationController
       rating: params[:rating], # optional
       text: params[:text] # optional
     }
-  end
-
-  def query
-    @query ||= ScenarioResultsQuery.instance
   end
 
   def service

@@ -5,6 +5,5 @@ module DefaultTextHelper
     else
       transcription
     end
-
   end
 end

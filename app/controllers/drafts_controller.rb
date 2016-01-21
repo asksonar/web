@@ -85,7 +85,7 @@ class DraftsController < ApplicationController
     scenarios_service.set_deleted(@scenario)
 
     flash[:info] = '<strong>Your draft has been deleted.</strong>'
-    render json: {redirect_url: drafts_path}
+    render json: { redirect_url: drafts_path }
   end
 
   private
