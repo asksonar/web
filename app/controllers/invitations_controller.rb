@@ -14,6 +14,9 @@ class InvitationsController < Devise::InvitationsController
         },
         notify: resource.full_name + " has been added back to your organization"
       }
+    elsif resource
+      resource.errors.add(:base, "You have already added or invited this user to your organization")
+      render json: { errors: resource.errors.full_messages }, :status => 400
     else
       # lines 19-27 taken from Devise::InvitationsController lines 17-25
       self.resource = invite_resource

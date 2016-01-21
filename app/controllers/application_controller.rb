@@ -20,8 +20,8 @@ class ApplicationController < ActionController::Base
 
   def authenticate_inviter!
     unless current_user.admin? || current_user.super_admin?
-      flash[:alert] = "You are not authorized to perform this action."
-      redirect_to(request.referrer || root_path)
+      render :status => :forbidden, :text => "You are not authorized to perform this action."
+      return
     end
     super
   end
