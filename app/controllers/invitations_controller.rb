@@ -1,20 +1,21 @@
 class InvitationsController < Devise::InvitationsController
   def create
-    user = User.find_by_email(params["user"]["email"])
+    self.resource = User.find_by_email(params["user"]["email"])
 
     # reactivate account if user has been marked as deleted
-    if user && !user.deleted_at.nil?
-      user.update_attribute(:deleted_at, nil)
+    if resource && !resource.deleted_at.nil?
+      resource.update_attribute(:deleted_at, nil)
       render json: {
         user: {
-          full_name: user.full_name,
-          email: user.email,
-          is_admin: user.admin?,
-          id: user.id
+          full_name: resource.full_name,
+          email: resource.email,
+          is_admin: resource.admin?,
+          id: resource.id
         },
-        notify: user.full_name + " has been added back to your organization"
+        notify: resource.full_name + " has been added back to your organization"
       }
     else
+      # lines 19-27 taken from Devise::InvitationsController lines 17-25
       self.resource = invite_resource
       resource_invited = resource.errors.empty?
 
