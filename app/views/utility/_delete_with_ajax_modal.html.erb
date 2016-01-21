@@ -1,15 +1,14 @@
-<div class="modal confirmation-modal" id='delete_with_ajax' tabindex='-1'>
+<div class="modal confirmation-modal" id='delete-with-ajax' tabindex='-1'>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="confirmation-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="confirmation-body">
-        <h4>Are you sure you want to delete your <%= delete_item %>?</h4>
+        <h4>Are you sure you want to delete this <%= delete_item %>?</h4>
         <br/>
-        <a id='btn-delete-yes' class='btn btn-green' data-dismiss="modal"><span>Yes, delete my <%= delete_item %></span></a>
-        <a class='btn btn-medium-blue' data-dismiss="modal"><span>No, return to my <%= delete_item %></span></a>
-
+        <a id='btn-delete-yes' class='btn btn-green' data-dismiss="modal"><span>Yes, delete this <%= delete_item %></span></a>
+        <a class='btn btn-medium-blue' data-dismiss="modal"><span>Cancel</span></a>
       </div><!-- /.confirmation-body -->
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

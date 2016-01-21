@@ -1,0 +1,77 @@
+<% content_for :main_wrapper_class do %>
+  sidebar-collapsed
+<% end %>
+
+<% content_for :title do %>Invite Users<% end %>
+
+<section class='main-content-header'>
+  <h1>Invite Users</h1>
+</section>
+
+<section class='main-content'>
+
+  <div class='row'>
+    <div class='col-sm-3'>
+      <div class='panel'>
+        <%= render 'nav/profile' %>
+      </div>
+    </div>
+    <div class='col-sm-8'>
+
+      <div class='panel'>
+        <%= bootstrap_form_for :user do |f| %>
+          <%= f.email_field :email, label: 'Invite a user to Sonar', placeholder: 'Email address' %>
+          <%= f.hidden_field :company_id, value: @company_id %>
+          <%= f.form_group :role do %>
+            <%= f.check_box :role, {name: 'user[role]', id: 'user-role', label: "Make this user an admin"} %>
+          <% end %>
+          <%= f.submit "Send Invite", class: 'btn btn-dark-blue btn-invite-user' %>
+
+          <div class="user-list">
+            <div class='table-responsive table-users'>
+              <h3>Users</h3>
+              <table class='table table-hover'>
+                <% @users.each do |user| %>
+                  <tr class='user-line'>
+                    <td><%= user.full_name %></td>
+                    <td><%= user.email %></td>
+                    <td>
+                      <%= f.check_box user.id, {name: "user[role]", label: "Admin", checked: user.is_admin?, class: 'user-role', 'data-user-id': user.id} %>
+                    </td>
+                    <td>
+                      <a class='btn-delete-account' data-user-id=<%= user.id %>><i class="fa fa-ftl fa-trash-o"></i>Remove</a>
+                    </td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
+
+            <div class='table-responsive table-invited-users  <%= 'hidden' if @invited_users.count === 0 %>'>
+              <h3>Invited Users</h3>
+              <table class='table table-hover'>
+                <% @invited_users.each do |user| %>
+                  <tr class='user-line'>
+                    <td>Invited <%= local_time_ago(user.created_at) %></td>
+                    <td><%= user.email %></td>
+                    <td>
+                      <%= f.check_box user.id, {name: "user[role]", label: "Admin", checked: user.is_admin?, class: 'user-role', 'data-user-id': user.id} %>
+                    </td>
+                    <td>
+                      <a class='btn-delete-account' data-user-id=<%= user.id %>><i class="fa fa-ftl fa-trash-o"></i>Remove</a>
+                    </td>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<%= render partial: 'admin/users/partials/user_template' %>
+<%= render partial: 'admin/users/partials/invited_user_template' %>
+
+

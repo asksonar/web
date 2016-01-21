@@ -52,6 +52,10 @@ Rails.application.routes.draw do
     get :api
   end
 
+  namespace :admin do
+    resource :users, controller: :users, only: [:show, :update, :destroy]
+  end
+
   resources :responses
 
   ############
@@ -86,7 +90,7 @@ Rails.application.routes.draw do
 
   devise_for :user,
     path_names: { sign_in: 'login', sign_out: 'logout' },
-    controllers: { registrations: 'registrations' }
+    controllers: { registrations: 'registrations', invitations: 'invitations' }
 
   resque_web_constraint = lambda do |request|
     current_user = request.env['warden'].user

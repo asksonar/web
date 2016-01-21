@@ -28,6 +28,7 @@
     <% if user_signed_in? %>
       <%= navbar_dropdown "<i class='fa fa-user'></i>" do %>
         <%= bsh_navbar_item "Profile", edit_user_registration_path, active: false %>
+        <%= bsh_navbar_item 'Users', admin_users_path, active: false %>
         <%= bsh_navbar_item "Logout", destroy_user_session_path, active: false %>
       <% end %>
     <% else %>

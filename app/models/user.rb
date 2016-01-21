@@ -2,13 +2,15 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :invitable
   belongs_to :company
 
   before_create :create_company
   after_create :track_user_created
-  after_create :welcome_email
-  after_create :subscribe_mailing_list
+  after_create :welcome_email, unless: :invited_user?
+  after_create :subscribe_mailing_list, unless: :invited_user?
+  after_invitation_accepted :welcome_email
+  after_invitation_accepted :subscribe_mailing_list
 
   validates_presence_of :full_name
 
@@ -43,7 +45,11 @@ class User < ActiveRecord::Base
   end
 
   def create_company
-    self.company = Company.create
+    self.company = Company.create if company_id.nil?
+  end
+
+  def invited_user?
+    !self.invited_by_id.nil?
   end
 
   def track_user_created

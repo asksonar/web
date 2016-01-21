@@ -1,0 +1,27 @@
+<% content_for :title do %>Sign Up<% end %>
+
+<section class='main-content-header'>
+  <h1>Sign up</h1>
+</section>
+<section class='main-content'>
+  <div class='panel'>
+    <%= bootstrap_form_for resource, as: resource_name, url: invitation_path(resource_name), layout: :horizontal, inline_errors: false, html: { method: :put } do |f| %>
+        <%= f.hidden_field :invitation_token %>
+
+        <%= f.text_field :full_name, autofocus: true,
+          label_col: 'col-sm-5', control_col: 'col-sm-7' %>
+
+        <% if @validatable %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+        <%= f.password_field :password, autocomplete: "off",
+          label_col: 'col-sm-5', control_col: 'col-sm-7' %>
+
+        <%= f.password_field :password_confirmation, autocomplete: "off",
+          label_col: 'col-sm-5', control_col: 'col-sm-7' %>
+
+        <%= f.submit "Sign up", class: 'btn btn-dark-blue btn-med strong' %>
+    <% end %>
+
+  </div>
+</section>

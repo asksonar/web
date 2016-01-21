@@ -1,0 +1,14 @@
+<script id="user-template" type="text/x-handlebars-template">
+  <tr class='user-line'>
+    <td>{{full_name}}</td>
+    <td>{{email}}</td>
+    <td>
+      <div class='checkbox'>
+        <label><input type="checkbox" name="is_admin" id="is_admin" value={{is_admin}} class="user-role" data-user-id={{id}} {{#if is_admin}}checked{{/if}}>Admin</label>
+      </div>
+    </td>
+    <td>
+      <a class='btn-delete-account' data-user-id={{id}}><i class="fa fa-ftl fa-trash-o"></i>Remove</a>
+    </td>
+  </tr>
+</script>

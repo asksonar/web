@@ -1,13 +1,13 @@
-<div class="modal confirmation-modal" id='delete_with_form' tabindex='-1'>
+<div class="modal confirmation-modal" id='delete-with-form' tabindex='-1'>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="confirmation-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="confirmation-body">
-        <h4>Are you sure you want to delete your <%= delete_item %>?</h4>
+        <h4>Are you sure you want to delete this <%= delete_item %>?</h4>
         <br/>
-        <%= button_to "Yes, delete my " + delete_item, path,
+        <%= button_to "Yes, delete this " + delete_item, path,
           method: :delete, :class => 'btn btn-green' %>
         <a class='btn btn-medium-blue' data-dismiss="modal"><span>Cancel</span></a>
       </div><!-- /.confirmation-body -->
