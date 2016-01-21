@@ -1,5 +1,5 @@
 function UsersView(config) {
-  this.$divUsersTableRows = config.divUsersTableRows;
+  this.$divUsersTable = config.divUsersTable;
   this.$divInvitedUsersTable = config.divInvitedUsersTable;
   this.$invitedUsersTable = config.invitedUsersTable;
   this.$invitedUserTemplate = Handlebars.compile(config.invitedUserTemplate.html());
@@ -24,7 +24,7 @@ UsersView.prototype.addUser = function(user) {
     id: user.id
   });
 
-  this.$divUsersTableRows.last().after($userTemplate);
+  this.$divUsersTable.find('tr').last().after($userTemplate);
 };
 
 UsersView.prototype.addInvitedUser = function(user) {

@@ -7,7 +7,7 @@ $(function(){
   var usersView = new UsersView({
     invitedUserTemplate: $('#invited-user-template'),
     userTemplate: $('#user-template'),
-    divUsersTableRows: $('.table-users tr'),
+    divUsersTable: $('.table-users'),
     divInvitedUsersTable: $('.table-invited-users'),
     invitedUsersTable: $('.table-invited-users table')
   });
