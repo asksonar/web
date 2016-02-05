@@ -1,3 +1,5 @@
+/* globals Papa */
+
 $(function(){
   if ($('#upload-show').length === 0) {
     return;

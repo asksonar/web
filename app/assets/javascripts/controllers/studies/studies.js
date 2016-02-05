@@ -4,15 +4,15 @@ $(function(){
     return;
   }
 
-  window.extension = new ExtensionController(sonar.chrome_app_id);
-  window.view = new StudiesView({
+  var extension = new ExtensionController(sonar.chrome_app_id);
+  var view = new StudiesView({
     'ctnInstallChrome': $('#ctn-install-chrome'),
     'ctnInstallExtension': $('#ctn-install-extension'),
     'ctnStudy': $('#ctn-study'),
     'ctnStartFeedback': $('#ctn-start-feedback'),
     'ctnRestartFeedback': $('#ctn-restart-feedback')
   });
-  window.controller = new StudiesController(extension, view, {
+  var controller = new StudiesController(extension, view, {
     'btnInstallExtension': $('#btn-install-extension'),
     'btnStartFeedback': $('#btn-start-feedback'),
     'form': $('form')

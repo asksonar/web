@@ -1,4 +1,4 @@
-HighlightTimeline = function(config) {
+function HighlightTimeline(config) {
   this.$highlightStart = config.highlightStart;
   this.$highlightFinish = config.highlightFinish;
   this.checkboxSelector = config.checkboxSelector;
@@ -85,4 +85,4 @@ HighlightTimeline = function(config) {
     visibleNotes.prop('checked', true);
   };
 
-};
+}

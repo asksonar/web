@@ -63,7 +63,7 @@ $(function(){
     resultPanelToggle: $('.result-panel-toggle')
   }, videoModal, deleteModal);
 
-  var timeSeconds = new URI(location.href).search(true).t || 0;
+  var timeSeconds = new URI(window.location.href).search(true).t || 0;
   if (sonar.scenarioResult) {
     videoModal.loaded(timeSeconds, {
       hashid: sonar.scenarioResult.hashid,

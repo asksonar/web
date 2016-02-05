@@ -45,7 +45,7 @@ $(function(){
     divTitle: $('.ctn-title')
   }, videoController, videoTranscript, videoLink, new VideoFeedbackHistory());
 
-  var timeSeconds = new URI(location.href).search(true).t || 0;
+  var timeSeconds = new URI(window.location.href).search(true).t || 0;
   if (sonar.scenarioResult) {
     videoModal.loaded(timeSeconds, {
       hashid: sonar.scenarioResult.hashid,
@@ -63,6 +63,6 @@ $(function(){
     divAllContent: $('.main-content-wrapper'),
     btnRecordFeedback: $('#btn-record-feedback'),
     resultPanelToggle: $('.result-panel-toggle')
-  }, extension, videoModal);
+  }, window.extension, videoModal);
 
 });

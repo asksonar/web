@@ -52,7 +52,7 @@ modulejs.define('NoteElement', ['TimelineElement'], function(timelineElement) {
         this.saveSuccess();
       }.bind(this),
       error: function(jqXHR) {
-        if (jqXHR.status == 403) {
+        if (jqXHR.status === 403) {
           this.saveFail("Sorry, you're not authorized to perform this action.");
         } else {
           this.saveFail(jqXHR.responseText);
@@ -83,7 +83,7 @@ modulejs.define('NoteElement', ['TimelineElement'], function(timelineElement) {
       )
       .fail(
         function(jqXHR) {
-          if (jqXHR.status == 403) {
+          if (jqXHR.status === 403) {
             this.trashFail("Sorry, you're not authorized to perform this action.");
           } else {
             this.trashFail();

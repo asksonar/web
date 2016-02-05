@@ -48,7 +48,7 @@ VideoTranscript.prototype.startFocusing = function(event) {
 };
 
 VideoTranscript.prototype.clearView = function() {
-  for(i = 0; i < this.timelineArray.length; i++) {
+  for(var i = 0; i < this.timelineArray.length; i++) {
     this.timelineArray[i].remove();
   }
   this.timelineArray = [];

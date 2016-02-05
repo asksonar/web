@@ -1,10 +1,10 @@
-ViewSettings = function(config) {
+function ViewSettings(config) {
   this.$companyProductName = config.companyProductName;
   this.$survey = config.survey;
   this.$backgroundColor = config.backgroundColor;
 
   this.init();
-};
+}
 
 ViewSettings.prototype.init = function() {
   this.$companyProductName.on('keyup', $.proxy(this.updateName, this));

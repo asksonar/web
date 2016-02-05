@@ -9,19 +9,19 @@ function StudiesView(config) {
 }
 
 StudiesView.prototype.init = function() {
-}
+};
 
 StudiesView.prototype.showInstallChrome = function() {
   this.$ctnInstallChrome.show();
   this.$ctnInstallExtension.hide();
   this.$ctnStudy.hide();
-}
+};
 
 StudiesView.prototype.showInstallExtension = function() {
   this.$ctnInstallChrome.hide();
   this.$ctnInstallExtension.show();
   this.$ctnStudy.hide();
-}
+};
 
 StudiesView.prototype.showStudy = function(animate) {
   this.$ctnInstallChrome.hide();
@@ -36,7 +36,7 @@ StudiesView.prototype.showStudy = function(animate) {
     this.$ctnInstallExtension.hide();
     this.$ctnStudy.show();
   }
-}
+};
 
 StudiesView.prototype.startStudy = function() {
   this.$ctnInstallChrome.hide();
@@ -45,5 +45,5 @@ StudiesView.prototype.startStudy = function() {
   this.$ctnStartFeedback.hide();
   this.$ctnRestartFeedback.hide().fadeIn();
   window.overlay.showNone(true);
-}
+};
 

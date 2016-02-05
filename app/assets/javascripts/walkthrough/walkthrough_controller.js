@@ -161,7 +161,7 @@ WalkthroughController.prototype.showShareCopyLink = function() {
   this.arrow.show();
 
   var linkToResults = function() {
-    location = new URL(location.href).pathname + '?walkthrough=results';
+    window.location = new URL(window.location.href).pathname + '?walkthrough=results';
   };
 
   // shouldn't trigger if zeroclipboard is available
@@ -181,7 +181,7 @@ WalkthroughController.prototype.createSampleResponse = function() {
       authenticity_token: AUTH_TOKEN
     },
     success: function() {
-      location = new URL(location.href).pathname + '?walkthrough=results';
+      window.location = new URL(window.location.href).pathname + '?walkthrough=results';
     },
     error: function(jqXHR) {
       notify.error(jqXHR.responseText, 'There was an error retrieving the sample response.');

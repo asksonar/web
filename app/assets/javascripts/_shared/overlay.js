@@ -11,10 +11,10 @@ function Overlay(config) {
 
 Overlay.prototype.init = function() {
 
-}
+};
 
 Overlay.prototype.show = function(target, dismissible) {
-  if (!target || target.length == 0) {
+  if (!target || target.length === 0) {
     return false;
   }
 
@@ -25,8 +25,8 @@ Overlay.prototype.show = function(target, dismissible) {
   var height = target.outerHeight();
   var width = target.outerWidth();
 
-  var windowHeight = $(window).height();
-  var windowWidth = $(window).width();
+  // var windowHeight = $(window).height();
+  // var windowWidth = $(window).width();
 
   this.$top.css({
     height: top - this.padding
@@ -53,7 +53,7 @@ Overlay.prototype.show = function(target, dismissible) {
       this.$left.off('click');
       this.$right.off('click');
       this.$bottom.off('click');
-    }
+    };
 
     this.$top.on('click', $.proxy(groupDismiss, this));
     this.$left.on('click', $.proxy(groupDismiss, this));
@@ -67,7 +67,7 @@ Overlay.prototype.show = function(target, dismissible) {
   }
 
   return target;
-}
+};
 
 Overlay.prototype.showNone = function(dismissible) {
   $('body').addClass('modal-open');
@@ -84,7 +84,7 @@ Overlay.prototype.showNone = function(dismissible) {
   }
 
   return true;
-}
+};
 
 Overlay.prototype.hide = function() {
   $('body').removeClass('modal-open');
@@ -95,7 +95,7 @@ Overlay.prototype.hide = function() {
   this.$bottom.hide();
 
   return true;
-}
+};
 
 $(function(){
   var overlay = new Overlay({

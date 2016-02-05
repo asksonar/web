@@ -1,0 +1,32 @@
+// http://jshint.com/docs/options/
+{
+  "curly": true,
+  "eqeqeq": true,
+  "freeze": true,
+  "futurehostile": true,
+  "latedef": true,
+  "nonbsp": true,
+  "nonew": true,
+  "shadow": "inner",
+  "undef": true,
+  "unused": "vars",
+  "laxbreak": true,
+  "predef": [
+    "$",
+    "window",
+    "sonar",
+    "notify",
+    "AUTH_TOKEN",
+    "Handlebars",
+    "URI",
+    "ZeroClipboard",
+    "setTimeout",
+    "setInterval",
+    "autosize",
+    "modulejs",
+    "chrome",
+    "screen",
+    "videojs",
+    "history"
+  ]
+}

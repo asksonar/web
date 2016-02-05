@@ -1,4 +1,4 @@
-TimeDisplay = {
+window.TimeDisplay = {
   displayTimeToSecs: function(displayTime) {
     var mins = parseInt(displayTime.split(':')[0]);
     var secs = parseInt(displayTime.split(':')[1]);

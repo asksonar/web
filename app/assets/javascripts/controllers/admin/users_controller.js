@@ -1,3 +1,5 @@
+/* globals bsh */
+
 function UsersController(config, usersView) {
   this.$divUserList = config.divUserList;
   this.$btnInviteUser = config.btnInviteUser;

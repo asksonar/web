@@ -1,4 +1,4 @@
-EditableComponent = function() {
+function EditableComponent() {
   this.editable = true;
 
   this.onInit(function() {
@@ -107,4 +107,4 @@ EditableComponent = function() {
     }
   };
 
-};
+}

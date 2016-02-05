@@ -54,7 +54,7 @@ $(function(){
   videoController.on('timeupdate', videoTranscript.onTimeupdate);
   // videoController.on('timeupdate', videoLink.onTimeupdate);
 
-  var timeSeconds = new URI(location.href).search(true).t || 0;
+  var timeSeconds = new URI(window.location.href).search(true).t || 0;
 
   videoController.src(sonar.scenarioResult.srcArray);
   // videoController.play(timeSeconds);
