@@ -29,8 +29,6 @@
   "disallowSpacesInsideArrayBrackets": {
     "allExcept": [ "[", "]" ]
   },
-  // "disallowSpacesInsideBrackets": true,
-  // "disallowSpacesInsideObjectBrackets": true,
   "disallowSpacesInsideParentheses": true,
   "disallowSpacesInsideParenthesizedExpression": true,
   "disallowTabs": true,
@@ -59,7 +57,6 @@
   "requireLineBreakAfterVariableAssignment": true,
   "requireLineFeedAtFileEnd": true,
   "requireMatchingFunctionName": true,
-  // "requireOperatorBeforeLineBreak": true,
   "requireSemicolons": true,
   "requireSpaceAfterBinaryOperators": true,
   "requireSpaceAfterComma": true,
@@ -103,12 +100,6 @@
   "requireSpacesInNamedFunctionExpression": {
     "beforeOpeningCurlyBrace": true
   },
-  // "requireSpacesInsideArrayBrackets": {
-  //   "allExcept": [ "{", "}" ]
-  // },
-  // "requireSpacesInsideBrackets": {
-  //   "allExcept": [ "{", "}" ]
-  // },
   "requireSpacesInsideObjectBrackets": "all",
   "validateIndentation": 2,
   "validateLineBreaks": "LF",
