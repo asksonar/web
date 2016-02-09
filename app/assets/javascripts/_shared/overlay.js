@@ -97,7 +97,7 @@ Overlay.prototype.hide = function() {
   return true;
 };
 
-$(function(){
+$(function() {
   var overlay = new Overlay({
     topOverlay: $('#top-overlay'),
     leftOverlay: $('#left-overlay'),

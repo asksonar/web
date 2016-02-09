@@ -20,7 +20,7 @@ modulejs.define('TimelineElement', function() {
     var mins = Math.floor(seconds / 60);
     var secs = Math.floor(seconds) % 60;
 
-    return mins + ":" + ('00' + secs).slice(-2);
+    return mins + ':' + ('00' + secs).slice(-2);
   };
 
   timelineElement.displayTime = function() {

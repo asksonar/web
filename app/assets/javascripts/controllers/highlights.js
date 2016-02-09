@@ -4,7 +4,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 */
 
-$(function(){
+$(function() {
   if (sonar.request.controller !== 'highlights') {
     return;
   }
@@ -80,7 +80,7 @@ $(function(){
     hiddenStart: $('#scenario_highlight_start_seconds'),
     hiddenFinish: $('#scenario_highlight_end_seconds'),
     scriptVideoRangeTemplate: $('#video-range-template'),
-    progressControlSelector : '.vjs-progress-control',
+    progressControlSelector: '.vjs-progress-control',
     rangeLeftMaskSelector: '.vjs-custom-range-left-mask',
     rangeRightMaskSelector: '.vjs-custom-range-right-mask',
     rangeMiddleMaskSelector: '.vjs-custom-range-middle-mask',
@@ -111,7 +111,7 @@ $(function(){
   // videoLink.updateShareLink(sonar.scenarioResult.shareLink);
 
   // $(window).load(function() {
-    // videoTranscript.focusLink(timeSeconds);
+  //   videoTranscript.focusLink(timeSeconds);
   // });
 
 });

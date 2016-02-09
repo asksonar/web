@@ -1,4 +1,4 @@
-$(function(){
+$(function() {
 
   if (!$('#studies-show').length) {
     return;

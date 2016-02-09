@@ -53,13 +53,13 @@ function EditableComponent() {
     this.$el.attr('data-timestamp', timeSeconds);
 
     var prev = this.$el.prev();
-    while(timeSeconds < parseInt(prev.attr('data-timestamp'))) {
+    while (timeSeconds < parseInt(prev.attr('data-timestamp'))) {
       this.$el.insertBefore(prev);
       prev = this.$el.prev();
     }
 
     var next = this.$el.next();
-    while(timeSeconds > parseInt(next.attr('data-timestamp'))) {
+    while (timeSeconds > parseInt(next.attr('data-timestamp'))) {
       this.$el.insertAfter(next);
       next = this.$el.next();
     }

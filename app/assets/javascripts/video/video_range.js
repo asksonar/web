@@ -35,7 +35,7 @@ VideoRange.prototype.init = function() {
   this.$rangeRightMask.on('click', $.proxy(this.jumpToFinish, this));
 
   this.$rangeLeftMarker.draggable({
-    axis:'x',
+    axis: 'x',
     containment: this.progressControlSelector,
     drag: $.proxy(this.dragStart, this),
     stop: $.proxy(function(event, ui) {
@@ -43,7 +43,7 @@ VideoRange.prototype.init = function() {
     }, this)
   });
   this.$rangeRightMarker.draggable({
-    axis:'x',
+    axis: 'x',
     containment: this.progressControlSelector,
     drag: $.proxy(this.dragFinish, this),
     stop: $.proxy(function(event, ui) {
@@ -64,7 +64,7 @@ VideoRange.prototype.init = function() {
 };
 
 VideoRange.prototype.toPercentage = function(val) {
-  return parseFloat(val) / this.$progressControl.width() * 100 + "%";
+  return parseFloat(val) / this.$progressControl.width() * 100 + '%';
 };
 
 VideoRange.prototype.onVideoTimeUpdate = function(event, currentTime) {

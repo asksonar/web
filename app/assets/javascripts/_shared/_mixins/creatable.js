@@ -8,7 +8,7 @@ Creatable = function(handler) {
 
   this.create = function() {
     var created = Object.create(this);
-    for(var i = 0; i < this.createHandlers.length; i++) {
+    for (var i = 0; i < this.createHandlers.length; i++) {
       this.createHandlers[i].apply(created, arguments);
     }
     return created;

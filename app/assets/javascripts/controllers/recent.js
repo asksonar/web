@@ -4,13 +4,13 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 */
 
-$(function(){
+$(function() {
   if (!$('#recent-index').length) {
     return;
   }
 
   var updateInterval = 30000;
-  var newResponses = newResponses || {responses:[]};
+  var newResponses = newResponses || { responses: [] };
   var newResponseTemplate = Handlebars.compile($('#new-response-template').html());
 
   var updateResponses = function() {
@@ -21,7 +21,7 @@ $(function(){
       type: 'GET',
       url: '/recent.json/',
       data: { startTime: startTime },
-      success: function(data){
+      success: function(data) {
         if (!newResponses.responses.length) {
           newResponses.responses = data;
         } else {
@@ -36,16 +36,16 @@ $(function(){
           $('.response-alert').slideDown();
         }
       },
-      error: function(jqXHR){
+      error: function(jqXHR) {
         notify.error(jqXHR.responseText);
       }
     });
   };
 
-  $('.response-alert').on('click', function(){
+  $('.response-alert').on('click', function() {
     $('.response-alert').slideUp();
     $('.response-alert').after(newResponseTemplate(newResponses));
-    newResponses = {responses:[]};
+    newResponses = { responses: [] };
   });
 
   setInterval(updateResponses, updateInterval);

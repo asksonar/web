@@ -49,7 +49,7 @@ FeedbackView.prototype.addExtension = function() {
 };
 
 FeedbackView.prototype.startFeedback = function() {
-  this.extension.startFeedback({'authenticity_token': AUTH_TOKEN}, 'expertFlow');
+  this.extension.startFeedback({ 'authenticity_token': AUTH_TOKEN }, 'expertFlow');
 };
 
 FeedbackView.prototype.loadVideoModal = function(event) {

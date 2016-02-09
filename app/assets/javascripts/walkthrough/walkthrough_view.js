@@ -7,7 +7,6 @@ function WalkthroughView(config, overlay) {
   this.$modal = config.modal;
   this.$finish = config.finish;
 
-
   this.overlay = overlay;
 
   this.init();
@@ -60,5 +59,3 @@ WalkthroughView.prototype.showFinish = function() {
   this.$finish.find('i').popover('show');
   return this.$finish;
 };
-
-

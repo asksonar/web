@@ -20,7 +20,7 @@ WalkthroughController.prototype.init = function() {
 
 WalkthroughController.prototype.show = function() {
 
-  switch(window.location.search) {
+  switch (window.location.search) {
     case '?walkthrough=start':
       this.overlay.showNone();
       $(window).on('load', $.proxy(this.showStart, this));
@@ -28,7 +28,7 @@ WalkthroughController.prototype.show = function() {
     case '?walkthrough=template':
       this.overlay.showNone();
       $(window).on('load', $.proxy(this.showTemplate, this));
-        break;
+      break;
     case '?template=sample&walkthrough=create':
       this.overlay.showNone();
       $(window).on('load', $.proxy(this.showCreate, this));
@@ -141,8 +141,8 @@ WalkthroughController.prototype.showShareHero = function() {
 
   // shouldn't trigger if zeroclipboard is available
   this.$btnCopyHero.on('click', $.proxy(this.createSampleResponse, this));
-  // shouldn't trigger is flash isn't available
-  //new ZeroClipboard(this.$btnCopyHero.get()).on("copy", $.proxy(this.createSampleResponse, this));
+  // shouldn't trigger if flash isn't available
+  // new ZeroClipboard(this.$btnCopyHero.get()).on("copy", $.proxy(this.createSampleResponse, this));
 };
 
 WalkthroughController.prototype.showShareCopyLink = function() {
@@ -166,8 +166,8 @@ WalkthroughController.prototype.showShareCopyLink = function() {
 
   // shouldn't trigger if zeroclipboard is available
   this.$btnCopyLink.on('click', linkToResults);
-  // shouldn't trigger is flash isn't available
-  //new ZeroClipboard(this.$btnCopyLink.get()).on("copy", linkToResults);
+  // shouldn't trigger if flash isn't available
+  // new ZeroClipboard(this.$btnCopyLink.get()).on("copy", linkToResults);
 
 };
 
@@ -220,7 +220,7 @@ WalkthroughController.prototype.showModal = function() {
   this.$modal.on('shown.bs.modal', $.proxy(function() {
     var target = this.$modal.find('button.close');
     this.arrow.draw(
-      popup.offset().left + popup.outerWidth() - 10, popup.offset().top + popup.outerHeight() / 2 ,
+      popup.offset().left + popup.outerWidth() - 10, popup.offset().top + popup.outerHeight() / 2,
       target.offset().left + target.outerWidth() / 2, target.offset().top - 45,
       'vertical'
     );

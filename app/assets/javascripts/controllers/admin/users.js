@@ -1,4 +1,4 @@
-$(function(){
+$(function() {
 
   if (!$('#users-show').length) {
     return;
@@ -16,7 +16,7 @@ $(function(){
     divUserList: $('.user-list'),
     btnInviteUser: $('.btn-invite-user'),
     inputUserEmail: $("input[name='user[email]']"),
-    inputUserCompanyId: $( "input[name='user[company_id]']" ),
+    inputUserCompanyId: $("input[name='user[company_id]']"),
     divUserRole: $('#user-role')
   }, usersView);
 

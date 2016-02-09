@@ -52,7 +52,7 @@ ExtensionController.prototype.installExtension = function() {
   };
 
   try {
-    chrome.webstore.install("https://chrome.google.com/webstore/detail/" + this.appId,
+    chrome.webstore.install('https://chrome.google.com/webstore/detail/' + this.appId,
       $.proxy(successCallback, this), $.proxy(failureCallback, this));
   } catch (e) {
     notify.warn('There was an error contacting the webstore.');
@@ -69,7 +69,7 @@ ExtensionController.prototype.startFeedback = function(data, flowType) {
   var launchedAppResponse = function(response) {
     if (response === true) {
       deferred.resolve();
-    } else if (typeof response === "string") {
+    } else if (typeof response === 'string') {
       notify.warn(response);
       deferred.reject();
     } else {
@@ -91,7 +91,7 @@ ExtensionController.prototype.startFeedback = function(data, flowType) {
       'flowType': flowType
     };
 
-    chrome.runtime.sendMessage(this.appId, {launchApp: launchAppParams}, $.proxy(launchedAppResponse, this));
+    chrome.runtime.sendMessage(this.appId, { launchApp: launchAppParams }, $.proxy(launchedAppResponse, this));
   };
 
   $.ajax({

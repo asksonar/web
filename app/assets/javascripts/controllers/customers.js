@@ -1,4 +1,4 @@
-$(function(){
+$(function() {
   if (!$('#customers-index').length) {
     return;
   }

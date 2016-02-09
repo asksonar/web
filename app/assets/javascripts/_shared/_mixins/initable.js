@@ -7,7 +7,7 @@ Initable = function(handler) {
 
   this.init = function() {
     this.initHandlers = this.initHandlers || [];
-    for(var i = 0; i < this.initHandlers.length; i++) {
+    for (var i = 0; i < this.initHandlers.length; i++) {
       this.initHandlers[i].call(this);
     }
   };

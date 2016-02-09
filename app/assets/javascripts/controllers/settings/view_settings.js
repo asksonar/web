@@ -11,7 +11,7 @@ ViewSettings.prototype.init = function() {
 
   this.$backgroundColor.spectrum({
     color: this.$survey.css('background-color'),
-    preferredFormat: "hex",
+    preferredFormat: 'hex',
     showInput: true,
     replacerClassName: 'color-picker-replacer',
     containerClassName: 'color-picker-container',
@@ -31,12 +31,12 @@ ViewSettings.prototype.updateName = function(event) {
   var $target = this.$survey.find('#' + updatedElement);
 
   if (updatedValue.length === 0) {
-    $target.text("us");
+    $target.text('us');
   } else {
     $target.text(updatedValue);
   }
 };
 
 ViewSettings.prototype.updateBackgroundColor = function(color) {
-  this.$survey.css( "background-color", color);
+  this.$survey.css('background-color', color);
 };

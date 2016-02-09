@@ -1,4 +1,4 @@
-$(function(){
+$(function() {
 
   if (!$('#results-show').length) {
     return;

@@ -61,7 +61,7 @@ ResultsView.prototype.toggleArchive = function() {
         this.$btnArchive.tooltip('show');
       }
     }.bind(this),
-    error: function(jqXHR){
+    error: function(jqXHR) {
       if (jqXHR.status === 403) {
         notify.warn("Sorry, you're not authorized to set the Live state.");
       } else {

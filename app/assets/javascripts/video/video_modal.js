@@ -20,7 +20,7 @@ VideoModal.prototype.init = function() {
 VideoModal.prototype.load = function(scenarioResultHashId, timeSeconds) {
 
   $.ajax({
-    url:"/videos.json",
+    url: '/videos.json',
     data: {
       scenario_result_hashid: scenarioResultHashId
     },

@@ -29,7 +29,7 @@ UsersView.prototype.addUser = function(user) {
 
 UsersView.prototype.addInvitedUser = function(user) {
   var $invitedUserTemplate = this.$invitedUserTemplate({
-    invited_on: "moments ago",
+    invited_on: 'moments ago',
     email: user.email,
     is_admin: user.is_admin,
     id: user.id });
@@ -54,14 +54,14 @@ UsersView.prototype.removeFromUserList = function(data) {
 
 UsersView.prototype.removeUser = function(user) {
   var deletedUser = $('.user-line a[data-user-id="' + user.id + '"]');
-  deletedUser.closest("tr").remove();
+  deletedUser.closest('tr').remove();
 };
 
 UsersView.prototype.removeInvitedUser = function(user) {
   var deletedUser = $('.user-line a[data-user-id="' + user.id + '"]');
-  deletedUser.closest("tr").remove();
+  deletedUser.closest('tr').remove();
 
-  if ( this.$divInvitedUsersTable.find('tr').length === 0) {
+  if (this.$divInvitedUsersTable.find('tr').length === 0) {
     this.$divInvitedUsersTable.addClass('hidden');
   }
 };

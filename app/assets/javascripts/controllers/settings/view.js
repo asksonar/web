@@ -1,4 +1,4 @@
-$(function(){
+$(function() {
   if ($('#view-show').length === 0) {
     return;
   }

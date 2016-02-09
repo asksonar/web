@@ -1,4 +1,4 @@
-$(function(){
+$(function() {
   if (!$('#walkthrough-popups').length) {
     return;
   }

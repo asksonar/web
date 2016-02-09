@@ -11,7 +11,7 @@ VideoController.prototype.init = function() {
 
   this.video.on('timeupdate', $.proxy(this.onTimeupdate, this));
   this.video.on('play', $.proxy(this.onPlay, this));
-  this.video.on("loadedmetadata", $.proxy(this.onLoadedmetadata, this));
+  this.video.on('loadedmetadata', $.proxy(this.onLoadedmetadata, this));
 };
 
 VideoController.prototype.on = function(event, callback) {
@@ -71,5 +71,3 @@ VideoController.prototype.onPlay = function() {
 VideoController.prototype.onLoadedmetadata = function() {
   this.eventBus.trigger('loaded');
 };
-
-

@@ -4,20 +4,20 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 */
 
-$(function(){
+$(function() {
   if (sonar.request.controller !== 'drafts' || sonar.request.action === 'index') {
     return;
   }
 
   var recountSteps = function() {
-    $('.ctn-count').each(function(index){
+    $('.ctn-count').each(function(index) {
       $(this).html((index + 1) + '.');
     });
     autosize($('textarea'));
   };
 
   var resetPlaceholders = function() {
-    $('.ctn-description').each(function(index){
+    $('.ctn-description').each(function(index) {
       if (index === 0) {
         return;
       } else if (index % 2 === 0) {
@@ -29,10 +29,10 @@ $(function(){
   };
 
   var addStepErrors = function() {
-    $('.ctn-step').each(function(step_index){
+    $('.ctn-step').each(function(stepIndex) {
       var thisEl = $(this);
-      var errors = sonar.scenario.steps[step_index].errors;
-      $.each(Object.keys(errors), function(key_index, key) {
+      var errors = sonar.scenario.steps[stepIndex].errors;
+      $.each(Object.keys(errors), function(keyIndex, key) {
         bsh.addError(
           thisEl.find($("[name='scenario_steps[][" + key + "]']")),
           errors[key]
@@ -46,7 +46,7 @@ $(function(){
     btnDeleteYes: $('#btn-delete-yes')
   });
 
-  var emptyStep = {steps:[{}]};
+  var emptyStep = { steps: [{}] };
   var newStepTemplate = Handlebars.compile($('#new-step-template').html());
 
   if (sonar.template) {
@@ -60,21 +60,21 @@ $(function(){
     addStepErrors();
   } else {
     $('#ctn-step-list').html(
-      newStepTemplate({steps: [{description_placeholder: 'Look here...', url_placeholder: 'www.example.com'}]}) +
-      newStepTemplate({steps: [{description_placeholder: 'Do this...', url_placeholder: 'URL (optional)'}]}) +
-      newStepTemplate({steps: [{description_placeholder: 'Do that...', url_placeholder: 'URL (optional)'}]})
+      newStepTemplate({ steps: [{ description_placeholder: 'Look here...', url_placeholder: 'www.example.com' }] })
+      + newStepTemplate({ steps: [{ description_placeholder: 'Do this...', url_placeholder: 'URL (optional)' }] })
+      + newStepTemplate({ steps: [{ description_placeholder: 'Do that...', url_placeholder: 'URL (optional)' }] })
     );
     recountSteps();
   }
 
-  $('#ctn-step-list').on('click', '.btn-add-step', function(event){
+  $('#ctn-step-list').on('click', '.btn-add-step', function(event) {
     var ctnStep = $(this).closest('.ctn-step');
-    ctnStep.after(newStepTemplate({steps: [{url_placeholder: 'URL (optional)'}]}));
+    ctnStep.after(newStepTemplate({ steps: [{ url_placeholder: 'URL (optional)' }] }));
     resetPlaceholders();
     recountSteps();
   });
 
-  $('#ctn-step-list').on('click', '.btn-remove-step', function(event){
+  $('#ctn-step-list').on('click', '.btn-remove-step', function(event) {
     var ctnStep = $(this).closest('.ctn-step');
     ctnStep.remove();
     recountSteps();

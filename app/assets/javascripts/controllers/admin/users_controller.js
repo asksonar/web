@@ -25,7 +25,7 @@ UsersController.prototype.inviteUser = function(event) {
   var email = this.$inputUserEmail.val();
   var companyId = this.$inputUserCompanyId.val();
   var role = this.$divUserRole[0].checked ? 'admin' : 'user';
-  var data = { "user": { "email": email, "company_id": companyId, "role": role } };
+  var data = { 'user': { 'email': email, 'company_id': companyId, 'role': role } };
 
   $.ajax({
     type: 'POST',
@@ -40,7 +40,7 @@ UsersController.prototype.inviteUser = function(event) {
       notify.info(data.notify);
     }.bind(this),
     error: function(jqXHR) {
-      if ( jqXHR.responseJSON ) {
+      if (jqXHR.responseJSON) {
         var errors = jqXHR.responseJSON.errors;
 
         $.each(errors, function(index, error) {
@@ -68,11 +68,11 @@ UsersController.prototype.deleteAccount = function(event) {
       id: id,
       authenticity_token: AUTH_TOKEN
     },
-    success: function(data){
+    success: function(data) {
       this.usersView.removeFromUserList(data);
       notify.info(data.notify);
     }.bind(this),
-    error: function(jqXHR){
+    error: function(jqXHR) {
       notify.error(jqXHR.responseText);
     }.bind(this)
   });

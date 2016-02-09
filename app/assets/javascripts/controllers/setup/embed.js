@@ -1,4 +1,4 @@
-$(function(){
+$(function() {
   if ($('#setup-embed').length === 0) {
     return;
   }
@@ -16,11 +16,11 @@ $(function(){
   });
 
   new ZeroClipboard($('#btn-copy-snippet').get())
-    .on("copy", function (event) {
+    .on('copy', function(event) {
       var node = $('.snippet:visible')[0];
       event.clipboardData.setData('text/plain', node.textContent || node.innerText);
     })
-    .on("aftercopy", function (event) {
+    .on('aftercopy', function(event) {
       $('#btn-copy-snippet').tooltip('show');
       setTimeout(function() {
         $('#btn-copy-snippet').tooltip('hide');

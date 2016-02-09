@@ -1,4 +1,4 @@
-$(function(){
+$(function() {
   if ($('#send-show').length === 0 && $('#send-update').length === 0) {
     return;
   }

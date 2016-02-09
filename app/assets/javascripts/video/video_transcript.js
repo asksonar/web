@@ -8,7 +8,7 @@ VideoTranscript = function(config, video) {
 
   this.videoTextTemplate = Handlebars.compile(config.scriptVideoTextTemplate.html());
   this.videoTextPartial = Handlebars.compile(config.scriptVideoTextPartial.html());
-  Handlebars.registerPartial("video-text-partial", config.scriptVideoTextPartial.html());
+  Handlebars.registerPartial('video-text-partial', config.scriptVideoTextPartial.html());
 
   this.video = video;
 
@@ -48,7 +48,7 @@ VideoTranscript.prototype.startFocusing = function(event) {
 };
 
 VideoTranscript.prototype.clearView = function() {
-  for(var i = 0; i < this.timelineArray.length; i++) {
+  for (var i = 0; i < this.timelineArray.length; i++) {
     this.timelineArray[i].remove();
   }
   this.timelineArray = [];
@@ -73,11 +73,11 @@ VideoTranscript.prototype.buildTranscript = function(scenarioResultHashId, timel
   this.clearView();
   this.timelineArray = timelineArray;
 
-  this.timelineArray.sort(function(a, b){
+  this.timelineArray.sort(function(a, b) {
     return a.timeSeconds - b.timeSeconds;
   });
 
-  for(var i = 0; i < this.timelineArray.length; i++) {
+  for (var i = 0; i < this.timelineArray.length; i++) {
     this.timelineArray[i].insertBefore(this.getTimelineEnding(), false);
   }
 };
@@ -103,8 +103,8 @@ VideoTranscript.prototype.focusLink = function(timeSeconds) {
     return;
   }
   this.scrollIntoView(link);
-  link.find('.videoTextLink').css({'background-color':'#F69526'})
-    .animate({'background-color':''}, 3000)
+  link.find('.videoTextLink').css({ 'background-color': '#F69526' })
+    .animate({ 'background-color': '' }, 3000)
     .queue(function() {
       $(this).removeAttr('style').dequeue();
     });
@@ -122,9 +122,9 @@ VideoTranscript.prototype.scrollIntoView = function(element) {
   var elementToContainerTop = elementToWindowTop + windowToContainerTop;
 
   if (elementToWindowTop < 0) {
-    this.$videoText.animate({scrollTop: elementToContainerTop});
+    this.$videoText.animate({ scrollTop: elementToContainerTop });
   } else if ((elementToWindowTop + elementHeight) > containerHeight) {
-    this.$videoText.animate({scrollTop: elementToContainerTop + elementHeight  - containerHeight});
+    this.$videoText.animate({ scrollTop: elementToContainerTop + elementHeight - containerHeight });
   }
 };
 
@@ -147,7 +147,7 @@ VideoTranscript.prototype.findTextLinkBefore = function(timeSeconds) {
   var textLinks = this.$videoText.find('.ctnVideoTextLink');
   var textLink;
 
-  textLinks.each(function(){
+  textLinks.each(function() {
     if (parseInt($(this).attr('data-timestamp')) < parseInt(timeSeconds)) {
       textLink = this;
     } else {
@@ -171,7 +171,7 @@ VideoTranscript.prototype.findTextLinkBeforeOrEqual = function(timeSeconds) {
   var textLinks = this.$videoText.find('.ctnVideoTextLink');
   var textLink;
 
-  textLinks.each(function(){
+  textLinks.each(function() {
     if (parseFloat($(this).attr('data-timestamp')) == parseFloat(timeSeconds)) {
       textLink = this;
       return false;
@@ -191,7 +191,7 @@ VideoTranscript.prototype.findTextLinkAfter = function(timeSeconds) {
   var textLinks = this.$videoText.find('.ctnVideoTextLink');
   var textLink;
 
-  textLinks.each(function(){
+  textLinks.each(function() {
     if (parseInt($(this).attr('data-timestamp')) > parseInt(timeSeconds)) {
       textLink = $(this);
       return false;

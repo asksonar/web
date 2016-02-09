@@ -1,6 +1,6 @@
 /* globals Papa */
 
-$(function(){
+$(function() {
   if ($('#upload-show').length === 0) {
     return;
   }
@@ -74,7 +74,7 @@ $(function(){
         // finished processing the whole file
       },
       error: function(error, file) {
-        addStatusError("There was an error reading your file: " + error);
+        addStatusError('There was an error reading your file: ' + error);
       }
     });
   }
@@ -92,7 +92,7 @@ $(function(){
   }
 
   function addStatus(statusClass, message) {
-    $('.status').append("<div class='alert alert-" + statusClass + "'>" + message + "</div>");
+    $('.status').append("<div class='alert alert-" + statusClass + "'>" + message + '</div>');
   }
 
   function clearStatus() {
@@ -120,11 +120,11 @@ $(function(){
         if (indexOfEmail >= 0) {
           processEntireFile(file);
         } else {
-          addStatusError("Please make sure that there is a column named <code>email</code> in the CSV. ");
+          addStatusError('Please make sure that there is a column named <code>email</code> in the CSV. ');
         }
       },
       error: function(error, file) {
-        addStatusError("There was an error reading your file: " + error);
+        addStatusError('There was an error reading your file: ' + error);
       }
     });
   }

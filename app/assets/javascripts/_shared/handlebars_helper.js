@@ -1,4 +1,4 @@
-$(function(){
+$(function() {
   Handlebars.registerHelper('pp_plural', function(number, text) {
     if (number === 1) {
       return text;

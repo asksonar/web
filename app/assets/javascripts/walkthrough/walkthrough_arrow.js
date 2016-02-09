@@ -31,10 +31,10 @@ WalkthroughArrow.prototype.resizeMarker = function(base) {
   this.$marker.get(0).setAttribute('refX', 0);
   this.$marker.get(0).setAttribute('refY', base);
 
-  var path = "M0,0"
-    + " L0," + base * 2
-    + " L" + base * 2 + "," + base
-    + " L0,0";
+  var path = 'M0,0'
+    + ' L0,' + base * 2
+    + ' L' + base * 2 + ',' + base
+    + ' L0,0';
   this.$marker.find('path').get(0).setAttribute('d', path);
 
   this.markerSize = base * 2;
@@ -72,7 +72,7 @@ WalkthroughArrow.prototype.draw = function(startX, startY, endX, endY, orientati
     height: height
   });
 
-  var path = "";
+  var path = '';
 
   if (endX > startX) {
     path += 'M' + (startX - left);

@@ -19,12 +19,12 @@ DeleteModal.prototype.deleteWithAjax = function(event) {
       _method: 'DELETE',
       authenticity_token: AUTH_TOKEN
     },
-    success: function(data){
+    success: function(data) {
       window.location.replace(data.redirect_url);
     },
-    error: function(jqXHR){
+    error: function(jqXHR) {
       if (jqXHR.status === 403) {
-        window.location.replace("/403");
+        window.location.replace('/403');
       } else {
         notify.error(jqXHR.responseText);
       }

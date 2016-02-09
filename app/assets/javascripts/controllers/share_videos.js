@@ -4,7 +4,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 */
 
-$(function(){
+$(function() {
   if (!$('#share_videos-show').length) {
     return;
   }

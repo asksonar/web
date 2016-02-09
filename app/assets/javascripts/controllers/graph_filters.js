@@ -34,17 +34,17 @@ GraphFilters.prototype.updateGraph = function() {
 };
 
 GraphFilters.prototype.getFilters = function() {
-  var filters = {region: [], country: [], date: null, category: null};
+  var filters = { region: [], country: [], date: null, category: null };
 
-  var selectedFilters = this.$btnSelect.find("option:selected");
+  var selectedFilters = this.$btnSelect.find('option:selected');
   selectedFilters.each(function(index, selectedFilter) {
     var field = $(selectedFilter).attr('name');
     var value = $(selectedFilter).attr('value');
     filters[field] = value;
   });
 
-  var checkedboxes =  $('.filter :checked');
-  checkedboxes.each(function(index, checkbox){
+  var checkedboxes = $('.filter :checked');
+  checkedboxes.each(function(index, checkbox) {
     var field = $(checkbox).attr('name');
     var value = $(checkbox).attr('value');
     filters[field].push(value);

@@ -1,4 +1,4 @@
-$(function(){
+$(function() {
 
   if (sonar.request.controller !== 'feedback') {
     return;
