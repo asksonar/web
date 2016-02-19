@@ -2,7 +2,8 @@ module BootstrapHelper
 
   def bsh_split_panel(border_panel_class)
     # expecting format like col-md-6
-    hidden_below_size = border_panel_class.split('-')
+    col, size, column = border_panel_class.split('-')
+    hidden_below_size = size
     sizes = %w(xs sm md lg)
     visible_index = sizes.find_index(hidden_below_size)
     hidden_sizes = sizes.take(visible_index).map { |size| "hidden-#{size}" }.join(' ')
