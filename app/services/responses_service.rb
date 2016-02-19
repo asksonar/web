@@ -111,7 +111,7 @@ class ResponsesService
     calculate_geoip(customer, ip_address) if most_recent_ip_address != ip_address
   end
 
-  def calculate_geoip
+  def calculate_geoip(customer, ip_address)
     customer.region, customer.country = GeoIpUtility.instance.lookup_ip_address(ip_address)
     customer.save
   end
