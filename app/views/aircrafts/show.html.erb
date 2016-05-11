@@ -1,0 +1,104 @@
+<% content_for :title do %>
+  MSN <%= @aircraft.msn %>
+<% end %>
+
+<section class='main-content-header'>
+  <h1><%= content_for :title %></h1>
+  <p class='sub'><%= @aircraft.aircraft_type %>, operated by Cape Town Airways</p>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-pills" role="tablist">
+    <li role="presentation" class="active"><a href="#summary" aria-controls="summary" role="pill" data-toggle="pill">SUMMARY</a></li>
+    <li role="presentation"><a href="#team" aria-controls="team" role="pill" data-toggle="pill">TEAM</a></li>
+    <li role="presentation"><a href="#parties" aria-controls="parties" role="pill" data-toggle="pill">PARTIES</a></li>
+    <li role="presentation"><a href="#operational" aria-controls="operational" role="pill" data-toggle="pill">OPERATIONAL</a></li>
+    <li role="presentation"><a href="#weights" aria-controls="weights" role="pill" data-toggle="pill">WEIGHTS</a></li>
+    <li role="presentation"><a href="#incidents" aria-controls="incidents" role="pill" data-toggle="pill">INCIDENTS</a></li>
+  </ul>
+</section>
+
+<section class='main-content'>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active row" id="summary">
+      <div class="panel panel-default ctn-aircraft-summary col-md-6">
+        <!-- Panel heading -->
+        <div class="panel-heading">
+          <a class="btn btn-edit pull-right" href='<%= edit_aircraft_path(@aircraft) %>'><i class='fa fa-ftl fa-pencil'></i>EDIT</a>
+          <p>AIRCRAFT SUMMARY</p>
+        </div>
+
+        <!-- List group -->
+        <ul class="list-group">
+          <li class="list-group-item row no-gutter">
+            <div class="col-sm-5 list-item-label">MANUFACTURER</div>
+            <div class="col-sm-7 list-item-content"><%= @aircraft.manufacturer %></div>
+          </li>
+          <li class="list-group-item row no-gutter">
+            <div class="col-sm-5 list-item-label">MODEL</div>
+            <div class="col-sm-7 list-item-content"><%= @aircraft.aircraft_model %></div>
+          </li>
+          <li class="list-group-item row no-gutter">
+            <div class="col-sm-5 list-item-label">SERIAL NUMBER</div>
+            <div class="col-sm-7 list-item-content"><%= @aircraft.msn %></div>
+          </li>
+          <li class="list-group-item row no-gutter">
+            <div class="col-sm-5 list-item-label">DATE OF MANUFACTURE</div>
+            <div class="col-sm-7 list-item-content"><%= ppt_date(@aircraft.manufacture_date) %></div>
+          </li>
+          <li class="list-group-item row no-gutter">
+            <div class="col-sm-5 list-item-label">ASSET OWNER</div>
+            <div class="col-sm-7 list-item-content"><%= @aircraft.asset_owner %></div>
+          </li>
+          <li class="list-group-item row no-gutter">
+            <div class="col-sm-5 list-item-label">ASSET MANAGER</div>
+            <div class="col-sm-7 list-item-content"><%= @aircraft.asset_manager %></div>
+          </li>
+          <li class="list-group-item row no-gutter">
+            <div class="col-sm-5 list-item-label">REGISTRATION</div>
+            <div class="col-sm-7 list-item-content"><%= @aircraft.registration %></div>
+          </li>
+          <li class="list-group-item row no-gutter">
+            <div class="col-sm-5 list-item-label">TOTAL FLIGHT HOURS</div>
+            <div class="col-sm-7 list-item-content"><%= @aircraft.flight_hours %></div>
+          </li>
+          <li class="list-group-item row no-gutter">
+            <div class="col-sm-5 list-item-label">TOTAL FLIGHT CYCLES</div>
+            <div class="col-sm-7 list-item-content"><%= @aircraft.flight_cycles %></div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="team">
+      <div class="panel">
+        Team
+      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="parties">
+      <div class="panel">
+        Parties
+      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="operational">
+      <div class="panel">
+        Operational
+      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="weights">
+      <div class="panel">
+        Weights
+      </div>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="incidents">
+      <div class="panel">
+        Incidents
+      </div>
+    </div>
+  </div>
+</section>

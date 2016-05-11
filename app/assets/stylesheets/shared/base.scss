@@ -3,7 +3,8 @@ $green: #31B6AE;
 $dark-blue: #05647C;
 $medium-blue: #1CA5C9;
 $light-blue: #8ED2E4;
-$grey: #999;
+$grey: #9A9AA2;
+$dark-grey: #323544;
 $orange: #F69526;
 
 body, .body {
@@ -143,6 +144,19 @@ input.form-control + span.input-group-btn .btn {
   }
 }
 
+.btn-dark-grey {
+  & {
+    background-color: $dark-grey;
+    color: $white;
+    border: 1px solid darken($dark-grey, 10);
+  }
+  &:hover, &:focus {
+    background-color: darken($dark-grey, 5);
+    color: $white;
+    border: 1px solid darken($dark-grey, 10);
+  }
+}
+
 .btn-orange {
   & {
     background-color: $orange;
@@ -230,4 +244,11 @@ input.form-control + span.input-group-btn .btn {
 
 .amcharts-chart-div a[title='JavaScript charts'] {
   display: none !important;
+}
+
+.no-gutter { /* remove bootstrap column gutters */
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 }

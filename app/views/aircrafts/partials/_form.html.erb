@@ -1,0 +1,65 @@
+<div class='panel'>
+  <div class="specs-container">
+    <h3 class="input-title">MSN:</h3>
+    <div class='ctn-spec'>
+      <%= f.number_field :msn, hide_label: true %>
+    </div>
+
+    <h3 class="input-title">Type:</h3>
+    <div class='ctn-spec'>
+      <%= f.text_field :aircraft_type, hide_label: true %>
+    </div>
+
+    <h3 class="input-title">Model:</h3>
+    <div class='ctn-spec'>
+      <%= f.text_field :aircraft_model, hide_label: true %>
+    </div>
+
+    <h3 class="input-title">Asset Owner:</h3>
+    <div class='ctn-spec'>
+      <%= f.text_field :asset_owner, hide_label: true %>
+    </div>
+
+    <h3 class="input-title">Asset Manager:</h3>
+    <div class='ctn-spec'>
+      <%= f.text_field :asset_manager, hide_label: true %>
+    </div>
+
+    <h3 class="input-title">Registration:</h3>
+    <div class='ctn-spec'>
+      <%= f.text_field :registration, hide_label: true %>
+    </div>
+
+    <h3 class="input-title">Manufacturer:</h3>
+    <div class='ctn-spec'>
+      <%= f.text_field :manufacturer, hide_label: true %>
+    </div>
+
+    <h3 class="input-title">Manufacture Date:</h3>
+    <div class='ctn-spec'>
+      <%= f.date_field :manufacture_date, hide_label: true %>
+    </div>
+
+    <h3 class="input-title">Flight Hours:</h3>
+    <div class='ctn-spec'>
+      <%= f.number_field :flight_hours, hide_label: true %>
+    </div>
+
+    <h3 class="input-title">Flight Cycles:</h3>
+    <div class='ctn-spec'>
+      <%= f.number_field :flight_cycles, hide_label: true %>
+    </div>
+  </div>
+
+  <div class='clearfix buttons-container'>
+    <div class="pull-right">
+      <% if @aircraft.persisted? %>
+        <a href='<%= aircraft_path(@aircraft) %>' class='btn btn-grey btn-med strong'>Cancel</a>
+        <%= f.submit 'Update', name: 'update', class: 'btn btn-medium-blue btn-med strong' %>
+      <% else %>
+        <a href='<%= aircrafts_path %>' class='btn btn-grey btn-med strong'>Cancel</a>
+        <%= f.submit 'Add', name: 'add', class: 'btn btn-medium-blue btn-med strong' %>
+      <% end %>
+    </div>
+  </div>
+</div>
