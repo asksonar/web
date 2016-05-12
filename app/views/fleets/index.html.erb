@@ -7,6 +7,22 @@
 </section>
 
 <section class='main-content'>
+  <div class='panel filters'>
+    <h3>Add a filter</h3>
+
+    <select class='selectpicker' id='select-main-filters' title='Select'>
+      <% @prezi.main_filters.each do |filter| %>
+        <option><%= filter %></option>
+      <% end %>
+    </select>
+
+    <span>is</span>
+
+    <select class='selectpicker' id='select-sub-filters' title='Select'>
+    </select>
+
+    <a id="btn-add-filter" class="btn btn-dark-blue">Add Filter</a>
+  </div>
   <div class='panel'>
     <div class='table-responsive'>
       <table class='table table-hover'>
