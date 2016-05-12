@@ -1,0 +1,24 @@
+<% content_for :title do %>
+  Fleet Database
+<% end %>
+
+<section class='main-content-header'>
+  <h1><%= content_for :title %></h1>
+</section>
+
+<section class='main-content'>
+  <div class='panel'>
+    <div class='table-responsive'>
+      <table class='table table-hover'>
+        <tr>
+          <th>Aircraft Status</th>
+          <th>Aircraft Type</th>
+          <th>Serial Number</th>
+          <th>Build Year</th>
+          <th>Operator</th>
+        </tr>
+        <%= render partial: 'fleet', collection: @prezi.fleets %>
+      </table>
+    </div>
+  </div>
+</section>

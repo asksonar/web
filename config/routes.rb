@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   resources :aircrafts
   resources :components
+  resources :fleets
 
   ############
   # sonar v2 #

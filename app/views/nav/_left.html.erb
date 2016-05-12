@@ -18,8 +18,8 @@
           <%= navbar_item "<i class='fa fa-ftl fa-gear'></i>Settings", '/settings/send', class: 'visible-xs' %>
         <% end %>
         <% if current_user.has_v3? %>
-          <%= navbar_item "<i class='fa fa-ftl fa-plane'></i>ASSETS", '/aircrafts' %>
-          <%= navbar_item "<i class='fa fa-ftl fa-gears'></i>COMPONENTS", '/' %>
+          <%= navbar_item "<i class='fa fa-ftl fa-plane'></i>AIRCRAFTS", '/aircrafts' %>
+          <%= navbar_item "<i class='fa fa-ftl fa-database'></i>FLEET DATABASE", '/fleets' %>
         <% end %>
       <% end %>
     </ul>
