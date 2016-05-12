@@ -6,7 +6,12 @@ class FleetsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @prezi.sub_filters }
+      format.json {
+        render json: {
+          sub_filters: @prezi.sub_filters,
+          fleets: @prezi.fleets
+        }.to_json
+      }
     end
   end
 

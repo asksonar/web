@@ -11,7 +11,7 @@ class FleetsPresenter
   end
 
   def fleets
-    @fleets ||= Fleet.where(aircraft_status: "Order").first(@display_count)
+    @fleets ||= fleets_query.fleets(@display_count, filters: @filter_hash)
   end
 
   def main_filters
@@ -19,6 +19,6 @@ class FleetsPresenter
   end
 
   def sub_filters
-    fleets_query.sub_filters(filters: @filter_hash).to_json
+    fleets_query.sub_filters(filters: @filter_hash)
   end
 end

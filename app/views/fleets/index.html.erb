@@ -25,7 +25,7 @@
   </div>
   <div class='panel'>
     <div class='table-responsive'>
-      <table class='table table-hover'>
+      <table class='table table-hover fleet-table'>
         <tr>
           <th>Aircraft Status</th>
           <th>Aircraft Type</th>
@@ -33,7 +33,16 @@
           <th>Build Year</th>
           <th>Operator</th>
         </tr>
-        <%= render partial: 'fleet', collection: @prezi.fleets %>
+        <% @prezi.fleets.each do |fleet| %>
+          <tr class='fleet-line'>
+            <td><%= fleet.aircraft_status %></td>
+            <td><%= fleet.aircraft_type %></td>
+            <td><%= fleet.serial_number %></td>
+            <td><%= fleet.build_year %></td>
+            <td><%= fleet.operator %></td>
+          </tr>
+        <% end %>
+        <%= render partial: 'fleets/partials/fleet_template' %>
       </table>
     </div>
   </div>

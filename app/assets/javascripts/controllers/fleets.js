@@ -7,7 +7,9 @@ $(function(){
     btnSelect: $('.selectpicker'),
     btnSelectSubFilters: $('#select-sub-filters'),
     btnSelectMainFilters: $('#select-main-filters'),
-    btnAddFilter: $('#btn-add-filter')
+    btnAddFilter: $('#btn-add-filter'),
+    newFleetTemplate: $('#new-fleet-template'),
+    fleetTable: $('.fleet-table tbody')
   });
 
 });
