@@ -1,9 +1,9 @@
 class FleetsPresenter
   attr_reader :display_count
 
-  def initialize(display_count, filter_hash)
+  def initialize(display_count, query_params)
     @display_count = display_count.nil? ? 25 : display_count.to_i
-    @filter_hash = filter_hash
+    @query_params = query_params
   end
 
   def fleets_query
@@ -11,7 +11,11 @@ class FleetsPresenter
   end
 
   def fleets
-    @fleets ||= fleets_query.fleets(@display_count, filters: @filter_hash)
+    @fleets ||= fleets_query.fleets(@display_count, filters: @query_params)
+  end
+
+  def fleet
+    @fleet ||= fleets_query.fleet(@query_params["id"])
   end
 
   def main_filters
@@ -19,6 +23,6 @@ class FleetsPresenter
   end
 
   def sub_filters
-    fleets_query.sub_filters(filters: @filter_hash)
+    fleets_query.sub_filters(@query_params["main_filter"])
   end
 end

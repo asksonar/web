@@ -5,13 +5,13 @@ class FleetsQuery
     Fleet.column_names
   end
 
-  def sub_filters(filters: {})
-    if !filters["main_filter"].nil?
+  def sub_filters(main_filter)
+    if !main_filter.nil?
       Fleet
-        .select(filters["main_filter"])
-        .group(filters["main_filter"])
-        .order(filters["main_filter"])
-        .pluck(filters["main_filter"])
+        .select(main_filter)
+        .group(main_filter)
+        .order(main_filter)
+        .pluck(main_filter)
     else
       []
     end
@@ -23,18 +23,26 @@ class FleetsQuery
     elsif !filters["main_filter"].nil?
       {}
     else
-      Fleet
-        .where(*where_clause(filters))
-        .select(:aircraft_status, :aircraft_type, :serial_number, :build_year, :operator)
-        .first(display_count)
-    end
+      fleets = Fleet
+                .where(*where_clause(filters))
+                .select(:id, :aircraft_status, :aircraft_type, :serial_number, :build_year, :operator)
+                .first(display_count)
 
+      # hashid needed by handlebar to generate the correct fleet page href
+      fleets = fleets.map do |fleet|
+        { hashid: fleet.hashid }.merge(fleet.attributes)
+      end
+    end
+  end
+
+  def fleet(id)
+    Fleet.find_by_hashid!(id)
   end
 
   private
 
   def where_clause(filter_hash)
-    # filter_hash = {"aircraft_status"=>["Order", "Storage"], {"aircraft_manufacturer"=>["Airbus"]}
+    # exmaple filter_hash = {"aircraft_status"=>["Order", "Storage"], {"aircraft_manufacturer"=>["Airbus"]}
     where_keys = (filter_hash.map do |key, value|
       or_length = value.nil? ? 1 : [*value].length
       '(' + Array.new(or_length).fill("#{key} = ?").join(' OR ') + ')'
