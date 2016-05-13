@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160510181022) do
+ActiveRecord::Schema.define(version: 20160513155703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,42 @@ ActiveRecord::Schema.define(version: 20160510181022) do
   end
 
   add_index "customers", ["company_id", "email"], name: "index_customers_on_company_id_and_email", using: :btree
+
+  create_table "fleets_backup", force: :cascade do |t|
+    t.text    "aircraft_status"
+    t.text    "aircraft_manufacturer"
+    t.text    "aircraft_type"
+    t.text    "aircraft_series"
+    t.text    "aircraft_variant"
+    t.text    "registration"
+    t.text    "serial_number"
+    t.text    "line_number"
+    t.integer "build_year"
+    t.text    "operator"
+    t.text    "owner"
+    t.text    "owner_type"
+    t.text    "engine_type"
+    t.text    "engine_variant"
+    t.text    "seat_total"
+    t.text    "mtow"
+    t.text    "hours_cumulative"
+    t.text    "cycles_cumulative"
+    t.text    "effective_date"
+    t.text    "aircraft_age"
+    t.text    "original_operator"
+    t.text    "operated_for"
+    t.text    "aircraft_usage"
+    t.text    "aircraft_usage2"
+    t.text    "minor_variant"
+    t.text    "operator_area"
+    t.text    "operator_country"
+    t.text    "operator_state"
+    t.text    "current_market_value"
+    t.text    "current_market_lease_rate"
+    t.text    "financier1"
+    t.text    "noise_category"
+    t.text    "manager"
+  end
 
   create_table "metadata_transaction_entries", force: :cascade do |t|
     t.integer  "metadata_transaction_id"
