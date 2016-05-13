@@ -4,6 +4,7 @@ DatabaseFilters = function(config) {
   this.$btnSelectMainFilters = config.btnSelectMainFilters;
   this.$btnAddFilter = config.btnAddFilter;
   this.$fleetTable = config.fleetTable;
+  this.$filterItemsContainer = config.filterItemsContainer;
   this.$newFleetTemplate = Handlebars.compile(config.newFleetTemplate.html());
 
   this.init();
@@ -11,7 +12,8 @@ DatabaseFilters = function(config) {
 
 DatabaseFilters.prototype.init = function() {
   this.$btnSelectMainFilters.on('change', $.proxy(this.updateSubFilters, this));
-  this.$btnAddFilter.on('click', $.proxy(this.updateList, this));
+  this.$btnAddFilter.on('click', $.proxy(this.addFilter, this));
+  this.$filterItemsContainer.on('click', '.filter-item', $.proxy(this.removeFilter, this));
 };
 
 DatabaseFilters.prototype.updateSubFilters = function() {
@@ -21,7 +23,7 @@ DatabaseFilters.prototype.updateSubFilters = function() {
     this.$btnSelect.selectpicker('refresh');
   }
 
-  var data = this.getSelected();
+  var data = { main_filter: this.$btnSelectMainFilters.val() };
   var url = new URL(window.location.href).pathname;
 
   $.ajax({
@@ -33,6 +35,7 @@ DatabaseFilters.prototype.updateSubFilters = function() {
     }),
     success: function(response) {
       var filters = response.sub_filters;
+
       $.each(filters, function(index) {
         this.$btnSelectSubFilters.append('<option class="sub-filter">' + filters[index] + '</option>');
       }.bind(this));
@@ -45,8 +48,39 @@ DatabaseFilters.prototype.updateSubFilters = function() {
   });
 };
 
+DatabaseFilters.prototype.addFilter = function(){
+  var main_filter = this.$btnSelectMainFilters.val();
+  var sub_filter = this.$btnSelectSubFilters.val();
+
+  if ( this.$filterItemsContainer.children().length === 0 ) {
+    this.$filterItemsContainer.append(
+      '<h3>Filtered by:</h3>'
+    )
+  }
+
+  // only add filter item if it hasn't already been added
+  if ( $('a[data-sub-filter="' + sub_filter + '"]').length === 0 ) {
+    this.$filterItemsContainer.append(
+      '<a class="btn btn-light-blue filter-item" data-main-filter="' + main_filter + '"data-sub-filter="' + sub_filter + '">' + sub_filter + '<span class="close">&times;</span></a>'
+    )
+  }
+
+  this.updateList();
+};
+
+DatabaseFilters.prototype.removeFilter = function(event){
+  var thisEl = event.currentTarget;
+
+  if ( this.$filterItemsContainer.children().length === 2 ) {
+    $('.filter-items-container h3').remove();
+  }
+
+  thisEl.remove();
+  this.updateList();
+};
+
 DatabaseFilters.prototype.updateList = function() {
-  var data = this.getSelected();
+  var filters = this.getFilters();
   var url = new URL(window.location.href).pathname;
   var newFleets = newFleets || {fleets:[]};
 
@@ -54,7 +88,7 @@ DatabaseFilters.prototype.updateList = function() {
     type: 'GET',
     dataType: 'json',
     url: url,
-    data: $.extend(data, {
+    data: $.extend(filters, {
       authenticity_token: AUTH_TOKEN
     }),
     success: function(response) {
@@ -68,11 +102,19 @@ DatabaseFilters.prototype.updateList = function() {
   });
 };
 
-DatabaseFilters.prototype.getSelected = function() {
-  var filters = {
-    main_filter: this.$btnSelectMainFilters.val(),
-    sub_filter: this.$btnSelectSubFilters.val()
-  };
+DatabaseFilters.prototype.getFilters = function() {
+  var filters = {};
+
+  $('.filter-item').each(function(index, item) {
+    var main_filter =  $(item).attr('data-main-filter');
+    var sub_filter =  $(item).attr('data-sub-filter');
+
+    if ( filters[main_filter] ) {
+      filters[main_filter].push(sub_filter)
+    } else {
+      filters[main_filter] = [sub_filter]
+    }
+  })
 
   return filters;
 };

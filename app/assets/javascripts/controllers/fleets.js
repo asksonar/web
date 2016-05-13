@@ -9,7 +9,8 @@ $(function(){
     btnSelectMainFilters: $('#select-main-filters'),
     btnAddFilter: $('#btn-add-filter'),
     newFleetTemplate: $('#new-fleet-template'),
-    fleetTable: $('.fleet-table tbody')
+    fleetTable: $('.fleet-table tbody'),
+    filterItemsContainer: $('.filter-items-container')
   });
 
 });

@@ -2,7 +2,7 @@ class FleetsPresenter
   attr_reader :display_count
 
   def initialize(display_count, filter_hash)
-    @display_count = display_count.to_i
+    @display_count = display_count.nil? ? 25 : display_count.to_i
     @filter_hash = filter_hash
   end
 
