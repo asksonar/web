@@ -6,7 +6,6 @@
       <% if user_signed_in? %>
         <% if current_user.has_v1? %>
           <%= navbar_item "New Study", '/create', class: 'div-btn-create' %>
-
           <%= navbar_item "<i class='fa fa-ftl fa-bar-chart'></i>All Results", '/results' %>
           <%= navbar_item "<i class='fa fa-ftl fa-bullhorn'></i>Recent Responses", '/recent' %>
           <%= navbar_item "<i class='fa fa-ftl fa-edit'></i>Drafts" + (drafts_count > 0 ? " (#{drafts_count.to_s})" : ''), '/drafts' %>
@@ -17,6 +16,10 @@
           <%= navbar_item "<i class='fa fa-ftl fa-line-chart'></i>Trends", '/trends', class: 'visible-xs' %>
           <%= navbar_item "<i class='fa fa-ftl fa-bar-chart'></i>Comparisons", '/comparisons', class: 'visible-xs' %>
           <%= navbar_item "<i class='fa fa-ftl fa-gear'></i>Settings", '/settings/send', class: 'visible-xs' %>
+        <% end %>
+        <% if current_user.has_v3? %>
+          <%= navbar_item "<i class='fa fa-ftl fa-plane'></i>AIRCRAFTS", '/aircrafts' %>
+          <%= navbar_item "<i class='fa fa-ftl fa-database'></i>FLEET DATABASE", '/fleets' %>
         <% end %>
       <% end %>
     </ul>

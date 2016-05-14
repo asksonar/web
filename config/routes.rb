@@ -28,6 +28,14 @@ Rails.application.routes.draw do
   #   resources :products
 
   ############
+  # sonar v3 #
+  ############
+
+  resources :aircrafts
+  resources :components
+  resources :fleets
+
+  ############
   # sonar v2 #
   ############
 

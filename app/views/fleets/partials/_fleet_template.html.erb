@@ -1,0 +1,11 @@
+<script id="new-fleet-template" type="text/x-handlebars-template">
+  {{#each fleets}}
+  <tr class='fleet-line'>
+    <td><a href='/fleets/{{hashid}}'>{{serial_number}}</a></td>
+    <td>{{aircraft_status}}</td>
+    <td>{{aircraft_type}}</td>
+    <td>{{build_year}}</td>
+    <td>{{operator}}</td>
+  </tr>
+  {{/each}}
+</script>

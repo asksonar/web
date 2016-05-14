@@ -11,11 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160114233948) do
+ActiveRecord::Schema.define(version: 20160513155703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "aircrafts", force: :cascade do |t|
+    t.integer  "msn"
+    t.string   "aircraft_type"
+    t.string   "aircraft_model"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "company_id"
+    t.string   "asset_owner"
+    t.string   "asset_manager"
+    t.string   "registration"
+    t.string   "manufacturer"
+    t.datetime "manufacture_date"
+    t.integer  "flight_hours"
+    t.integer  "flight_cycles"
+  end
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -23,6 +39,16 @@ ActiveRecord::Schema.define(version: 20160114233948) do
     t.datetime "updated_at", null: false
     t.string   "uuid"
     t.string   "subdomain"
+  end
+
+  create_table "components", force: :cascade do |t|
+    t.integer  "type"
+    t.string   "serial_number"
+    t.string   "part_number"
+    t.string   "name"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "aircraft_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -40,6 +66,42 @@ ActiveRecord::Schema.define(version: 20160114233948) do
   end
 
   add_index "customers", ["company_id", "email"], name: "index_customers_on_company_id_and_email", using: :btree
+
+  create_table "fleets_backup", force: :cascade do |t|
+    t.text    "aircraft_status"
+    t.text    "aircraft_manufacturer"
+    t.text    "aircraft_type"
+    t.text    "aircraft_series"
+    t.text    "aircraft_variant"
+    t.text    "registration"
+    t.text    "serial_number"
+    t.text    "line_number"
+    t.integer "build_year"
+    t.text    "operator"
+    t.text    "owner"
+    t.text    "owner_type"
+    t.text    "engine_type"
+    t.text    "engine_variant"
+    t.text    "seat_total"
+    t.text    "mtow"
+    t.text    "hours_cumulative"
+    t.text    "cycles_cumulative"
+    t.text    "effective_date"
+    t.text    "aircraft_age"
+    t.text    "original_operator"
+    t.text    "operated_for"
+    t.text    "aircraft_usage"
+    t.text    "aircraft_usage2"
+    t.text    "minor_variant"
+    t.text    "operator_area"
+    t.text    "operator_country"
+    t.text    "operator_state"
+    t.text    "current_market_value"
+    t.text    "current_market_lease_rate"
+    t.text    "financier1"
+    t.text    "noise_category"
+    t.text    "manager"
+  end
 
   create_table "metadata_transaction_entries", force: :cascade do |t|
     t.integer  "metadata_transaction_id"
@@ -241,6 +303,7 @@ ActiveRecord::Schema.define(version: 20160114233948) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
+    t.boolean  "has_v3"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
