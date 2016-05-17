@@ -25,4 +25,16 @@ class FleetsPresenter
   def sub_filters
     fleets_query.sub_filters(@query_params["main_filter"])
   end
+
+  def orders_by_year
+    orders_by_year ||= fleets_query.orders_by_year
+
+    orders_by_year.rows.map.with_index do |row, row_index|
+      row.data.map.with_index do |row_data, row_data_index|
+        orders_by_year.rows[row_index].data[row_data_index] = row_data.nil? ? {"order_count": 0} : row_data
+      end
+    end
+
+    orders_by_year
+  end
 end

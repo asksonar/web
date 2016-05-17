@@ -8,7 +8,6 @@
 
 <section class='main-content'>
   <div class='panel filters-container'>
-
     <div class='filter-select-container'>
       <h3>Add a filter:</h3>
 
@@ -26,31 +25,64 @@
       <a id='btn-add-filter' class='btn btn-dark-blue'>Add Filter</a>
     </div>
 
-    <div class='filter-items-container'>
+    <div class='filter-items-container'></div>
+  </div>
+
+  <div class='filter-results-containter'>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#list" aria-controls="list" role="tab" data-toggle="tab">List</a></li>
+      <li role="presentation"><a href="#analyze" aria-controls="analyze" role="tab" data-toggle="tab">Analyze</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active panel" id="list">
+        <div class='table-responsive'>
+          <table class='table table-hover fleet-table'>
+            <tr>
+              <th>Serial Number</th>
+              <th>Aircraft Status</th>
+              <th>Aircraft Type</th>
+              <th>Build Year</th>
+              <th>Operator</th>
+            </tr>
+            <% @prezi.fleets.each do |fleet| %>
+              <tr class='fleet-line'>
+                <td><a href='/fleets/<%= fleet.hashid %>'><%= fleet.serial_number %></a></td>
+                <td><%= fleet.aircraft_status %></td>
+                <td><%= fleet.aircraft_type %></td>
+                <td><%= fleet.build_year %></td>
+                <td><%= fleet.operator %></td>
+              </tr>
+            <% end %>
+            <%= render partial: 'fleets/partials/fleet_template' %>
+          </table>
+        </div>
+      </div>
+
+      <div role="tabpanel" class="tab-pane panel" id="analyze">
+        <div class='table-responsive'>
+          <table class='table table-hover analyze-table'>
+            <tr>
+              <th>Upcoming Orders</th>
+              <% @prezi.orders_by_year.column_headers.each do |column| %>
+                <th><%= column %></th>
+              <% end %>
+            </tr>
+            <% @prezi.orders_by_year.rows.each do |row| %>
+              <tr>
+                <td><%= row.header %></td>
+                <% row.data.each do |data| %>
+                  <td><%= data[:order_count] %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
     </div>
 
   </div>
-  <div class='panel'>
-    <div class='table-responsive'>
-      <table class='table table-hover fleet-table'>
-        <tr>
-          <th>Serial Number</th>
-          <th>Aircraft Status</th>
-          <th>Aircraft Type</th>
-          <th>Build Year</th>
-          <th>Operator</th>
-        </tr>
-        <% @prezi.fleets.each do |fleet| %>
-          <tr class='fleet-line'>
-            <td><a href='/fleets/<%= fleet.hashid %>'><%= fleet.serial_number %></a></td>
-            <td><%= fleet.aircraft_status %></td>
-            <td><%= fleet.aircraft_type %></td>
-            <td><%= fleet.build_year %></td>
-            <td><%= fleet.operator %></td>
-          </tr>
-        <% end %>
-        <%= render partial: 'fleets/partials/fleet_template' %>
-      </table>
-    </div>
-  </div>
+
 </section>

@@ -18,7 +18,19 @@
         opacity: 1;
       }
     }
+  }
 
+  .filter-results-containter {
+    .nav-tabs > li > a {
+      border: none;
+    }
+  }
+
+  .filter-results-containter {
+    .nav-tabs > li.active > a {
+      background-color: #FAFAFA;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+    }
   }
 }
 

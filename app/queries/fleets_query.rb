@@ -6,23 +6,23 @@ class FleetsQuery
   end
 
   def sub_filters(main_filter)
-    if !main_filter.nil?
+    if !main_filter.nil? # on selecting main_filter
       Fleet
         .select(main_filter)
         .group(main_filter)
         .order(main_filter)
         .pluck(main_filter)
-    else
+    else # when querying for filtered fleets
       []
     end
   end
 
   def fleets(display_count, filters: {})
-    if filters.blank?
+    if filters.blank? # initial load
       Fleet.first(display_count)
-    elsif !filters["main_filter"].nil?
+    elsif !filters["main_filter"].nil? # when querying for sub_filters
       {}
-    else
+    else # on adding filters
       fleets = Fleet
                 .where(*where_clause(filters))
                 .select(:id, :aircraft_status, :aircraft_type, :serial_number, :build_year, :operator)
@@ -39,15 +39,39 @@ class FleetsQuery
     Fleet.find_by_hashid!(id)
   end
 
+  def orders_by_year
+    # build_years = column_list(:build_year, "build_year > ?", 2016)
+
+    data = Fleet
+      .select(:operator, :build_year, 'COUNT(*) AS order_count')
+      .where('build_year > ?', 2016)
+      .where('build_year < ?', 2030)
+      .group(:operator, :build_year)
+
+    g = PivotTable::Grid.new do |g|
+      g.source_data  = data
+      g.column_name  = :build_year
+      g.row_name     = :operator
+      g.value_name   = :order_count
+    end
+
+    g.build
+  end
+
   private
 
   def where_clause(filter_hash)
-    # exmaple filter_hash = {"aircraft_status"=>["Order", "Storage"], {"aircraft_manufacturer"=>["Airbus"]}
+    # filter_hash = {"aircraft_status"=>["Order", "Storage"], {"aircraft_manufacturer"=>["Airbus"]}
+    # => ["(aircraft_status = ? OR aircraft_status = ?) AND (aircraft_type = ?)", "In Service", "Order", "A320"]
     where_keys = (filter_hash.map do |key, value|
       or_length = value.nil? ? 1 : [*value].length
       '(' + Array.new(or_length).fill("#{key} = ?").join(' OR ') + ')'
     end).join(' AND ')
     where_values = filter_hash.values
     [where_keys, *where_values.flatten]
+  end
+
+  def column_list(column, filter_key, filter_value)
+    Fleet.distinct(column).where(filter_key, filter_value).pluck(column)
   end
 end
