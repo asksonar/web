@@ -11,7 +11,14 @@ class FleetsPresenter
   end
 
   def fleets
-    @fleets ||= fleets_query.fleets(@display_count, filters: @query_params)
+    @fleets ||= fleets_query.fleets(@display_count)
+  end
+
+  def fleets_json
+    @fleets ||= fleets_query
+      .fleets(@display_count, filters: @query_params)
+      .map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
+      .to_json
   end
 
   def fleet
@@ -23,7 +30,7 @@ class FleetsPresenter
   end
 
   def sub_filters
-    fleets_query.sub_filters(@query_params["main_filter"])
+    fleets_query.sub_filters(@query_params["main_filter"]).to_json
   end
 
   def orders_by_year

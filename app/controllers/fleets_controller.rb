@@ -6,17 +6,17 @@ class FleetsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json {
-        render json: {
-          sub_filters: @prezi.sub_filters,
-          fleets: @prezi.fleets
-        }.to_json
-      }
+      format.json { render json: @prezi.fleets_json }
     end
   end
 
   def show
     @prezi = prezi(query_params)
+  end
+
+  def sub_filters
+    @prezi = prezi(query_params)
+    render json: @prezi.sub_filters
   end
 
   private

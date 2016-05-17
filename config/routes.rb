@@ -33,7 +33,13 @@ Rails.application.routes.draw do
 
   resources :aircrafts
   resources :components
-  resources :fleets
+
+  resources :fleets do
+    collection do
+      get 'sub_filters'
+    end
+  end
+
 
   ############
   # sonar v2 #

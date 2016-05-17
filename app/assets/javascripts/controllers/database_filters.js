@@ -24,7 +24,7 @@ DatabaseFilters.prototype.updateSubFilters = function() {
   }
 
   var data = { main_filter: this.$btnSelectMainFilters.val() };
-  var url = new URL(window.location.href).pathname;
+  var url = new URL(window.location.href).pathname + '/sub_filters';
 
   $.ajax({
     type: 'GET',
@@ -33,9 +33,7 @@ DatabaseFilters.prototype.updateSubFilters = function() {
     data: $.extend(data, {
       authenticity_token: AUTH_TOKEN
     }),
-    success: function(response) {
-      var filters = response.sub_filters;
-
+    success: function(filters) {
       $.each(filters, function(index) {
         this.$btnSelectSubFilters.append('<option class="sub-filter">' + filters[index] + '</option>');
       }.bind(this));
@@ -91,9 +89,9 @@ DatabaseFilters.prototype.updateList = function() {
     data: $.extend(filters, {
       authenticity_token: AUTH_TOKEN
     }),
-    success: function(response) {
+    success: function(fleets) {
       $('.fleet-line').remove();
-      newFleets.fleets = response.fleets
+      newFleets.fleets = fleets
       this.$fleetTable.append(this.$newFleetTemplate(newFleets))
     }.bind(this),
     error: function(jqXHR) {
