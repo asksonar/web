@@ -13,6 +13,7 @@ DatabaseFilters = function(config) {
 DatabaseFilters.prototype.init = function() {
   this.$btnSelectMainFilters.on('change', $.proxy(this.updateSubFilters, this));
   this.$btnAddFilter.on('click', $.proxy(this.addFilter, this));
+  this.$fleetTable.on('click', 'td', $.proxy(this.addFilter, this));
   this.$filterItemsContainer.on('click', '.filter-item', $.proxy(this.removeFilter, this));
 };
 
@@ -46,9 +47,17 @@ DatabaseFilters.prototype.updateSubFilters = function() {
   });
 };
 
-DatabaseFilters.prototype.addFilter = function(){
-  var main_filter = this.$btnSelectMainFilters.val();
-  var sub_filter = this.$btnSelectSubFilters.val();
+DatabaseFilters.prototype.addFilter = function(event){
+  var thisEl = $(event.currentTarget);
+  var main_filter, sub_filter;
+
+  if ( thisEl.attr('data-type') ) {
+    main_filter = thisEl.attr('data-type');
+    sub_filter = thisEl.html();
+  } else {
+    main_filter = this.$btnSelectMainFilters.val();
+    sub_filter = this.$btnSelectSubFilters.val();
+  }
 
   if ( this.$filterItemsContainer.children().length === 0 ) {
     this.$filterItemsContainer.append(
@@ -67,7 +76,7 @@ DatabaseFilters.prototype.addFilter = function(){
 };
 
 DatabaseFilters.prototype.removeFilter = function(event){
-  var thisEl = event.currentTarget;
+  var thisEl = $(event.currentTarget);
 
   if ( this.$filterItemsContainer.children().length === 2 ) {
     $('.filter-items-container h3').remove();

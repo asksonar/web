@@ -13,7 +13,7 @@
 
       <select class='selectpicker' id='select-main-filters' title='Select'>
         <% @prezi.main_filters.each do |filter| %>
-        <option><%= filter %></option>
+          <option><%= filter %></option>
         <% end %>
       </select>
 
@@ -28,7 +28,7 @@
     <div class='filter-items-container'></div>
   </div>
 
-  <div class='filter-results-containter'>
+  <div class='results-containter'>
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#list" aria-controls="list" role="tab" data-toggle="tab">List</a></li>
@@ -50,10 +50,10 @@
             <% @prezi.fleets.each do |fleet| %>
               <tr class='fleet-line'>
                 <td><a href='/fleets/<%= fleet.hashid %>'><%= fleet.serial_number %></a></td>
-                <td><%= fleet.aircraft_status %></td>
-                <td><%= fleet.aircraft_type %></td>
-                <td><%= fleet.build_year %></td>
-                <td><%= fleet.operator %></td>
+                <td data-type='aircraft_status'><%= fleet.aircraft_status %></td>
+                <td data-type='aircraft_type'><%= fleet.aircraft_type %></td>
+                <td data-type='build_year'><%= fleet.build_year %></td>
+                <td data-type='operator'><%= fleet.operator %></td>
               </tr>
             <% end %>
             <%= render partial: 'fleets/partials/fleet_template' %>
