@@ -10,18 +10,13 @@
   <div class='panel filters-container'>
     <div class='filter-select-container'>
       <h3>Add a filter:</h3>
-
       <select class='selectpicker' id='select-main-filters' title='Select'>
         <% @prezi.main_filters.each do |filter| %>
           <option><%= filter %></option>
         <% end %>
       </select>
-
       <span>is</span>
-
-      <select class='selectpicker' id='select-sub-filters' title='Select'>
-      </select>
-
+      <select class='selectpicker' id='select-sub-filters' title='Select'></select>
       <a id='btn-add-filter' class='btn btn-dark-blue'>Add Filter</a>
     </div>
 
@@ -38,6 +33,9 @@
     <!-- Tab panes -->
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active panel" id="list">
+        <p class="container-export">
+          <a class="btn btn-dark-blue btn-export-csv pull-right">Export to CSV</a>
+        </p>
         <div class='table-responsive'>
           <table class='table table-hover fleet-table'>
             <tr>

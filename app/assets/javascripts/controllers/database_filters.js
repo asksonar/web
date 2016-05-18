@@ -5,6 +5,7 @@ DatabaseFilters = function(config) {
   this.$btnAddFilter = config.btnAddFilter;
   this.$fleetTable = config.fleetTable;
   this.$filterItemsContainer = config.filterItemsContainer;
+  this.$btnExportCsv = config.btnExportCsv;
   this.$newFleetTemplate = Handlebars.compile(config.newFleetTemplate.html());
 
   this.init();
@@ -15,6 +16,7 @@ DatabaseFilters.prototype.init = function() {
   this.$btnAddFilter.on('click', $.proxy(this.addFilter, this));
   this.$fleetTable.on('click', 'td', $.proxy(this.addFilter, this));
   this.$filterItemsContainer.on('click', '.filter-item', $.proxy(this.removeFilter, this));
+  this.$btnExportCsv.on('click', $.proxy(this.exportToCsv, this));
 };
 
 DatabaseFilters.prototype.updateSubFilters = function() {
@@ -68,7 +70,7 @@ DatabaseFilters.prototype.addFilter = function(event){
   // only add filter item if it hasn't already been added
   if ( $('a[data-sub-filter="' + sub_filter + '"]').length === 0 ) {
     this.$filterItemsContainer.append(
-      '<a class="btn btn-light-blue filter-item" data-main-filter="' + main_filter + '"data-sub-filter="' + sub_filter + '">' + sub_filter + '<span class="close">&times;</span></a>'
+      '<a class="btn btn-light-blue filter-item" data-main-filter="' + main_filter + '[]"data-sub-filter="' + sub_filter + '">' + sub_filter + '<span class="close">&times;</span></a>'
     )
   }
 
@@ -84,6 +86,11 @@ DatabaseFilters.prototype.removeFilter = function(event){
 
   thisEl.remove();
   this.updateList();
+};
+
+DatabaseFilters.prototype.exportToCsv = function() {
+  var filters = this.getFilters();
+  window.location.href = new URI("/export.csv").addSearch(filters);
 };
 
 DatabaseFilters.prototype.updateList = function() {

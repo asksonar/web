@@ -19,6 +19,15 @@ class FleetsController < ApplicationController
     render json: @prezi.sub_filters
   end
 
+  def export
+    @prezi = prezi(query_params)
+
+    respond_to do |format|
+      format.html { redirect_to fleets_path }
+      format.csv { send_data Fleet.to_csv(@prezi.fleets) }
+    end
+  end
+
   private
 
   def prezi(query_params)

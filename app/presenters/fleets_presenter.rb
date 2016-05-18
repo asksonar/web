@@ -11,7 +11,7 @@ class FleetsPresenter
   end
 
   def fleets
-    @fleets ||= fleets_query.fleets(@display_count)
+    @fleets ||= fleets_query.fleets(@display_count, filters: @query_params)
   end
 
   def fleets_json

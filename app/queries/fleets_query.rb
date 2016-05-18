@@ -29,7 +29,7 @@ class FleetsQuery
 
     data = Fleet
       .select(:operator, :build_year, 'COUNT(*) AS order_count')
-      .where(:build_year => current_year + 1..current_year + 15)
+      .where(:build_year => current_year + 1..current_year + 12)
       .group(:operator, :build_year)
 
     g = PivotTable::Grid.new do |g|
