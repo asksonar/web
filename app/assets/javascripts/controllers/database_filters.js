@@ -90,7 +90,7 @@ DatabaseFilters.prototype.removeFilter = function(event){
 
 DatabaseFilters.prototype.exportToCsv = function() {
   var filters = this.getFilters();
-  window.location.href = new URI("/export.csv").addSearch(filters);
+  window.location.href = new URI(window.location.href + "/export.csv").addSearch(filters);
 };
 
 DatabaseFilters.prototype.updateList = function() {

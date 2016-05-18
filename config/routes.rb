@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   # sonar v3 #
   ############
 
-  get '/export', to: 'fleets#export'
+  get '/fleets/export', to: 'fleets#export'
 
   resources :aircrafts
   resources :components
