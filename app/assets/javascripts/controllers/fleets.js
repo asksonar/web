@@ -12,7 +12,8 @@ $(function(){
     fleetTable: $('.fleet-table tbody'),
     filterItemsContainer: $('.filter-items-container'),
     btnExportCsv: $('#btn-export-csv'),
-    resultCount: $('#result-count')
+    resultCount: $('#result-count'),
+    selectDisplayCount: $('#select-display-count')
   });
 
 });

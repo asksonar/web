@@ -8,6 +8,7 @@
 
 <section class='main-content'>
   <div class='panel filters-container'>
+
     <div class='filter-select-container'>
       <h3>Add a filter:</h3>
       <select class='selectpicker' id='select-main-filters' title='Select'>
@@ -22,9 +23,7 @@
 
     <div class='filter-items-container'></div>
 
-    <div>
-      (<span id='result-count'><%= @prezi.result_count %></span> results found)
-    </div>
+    <div>(<span id='result-count'><%= @prezi.result_count %></span> results found)</div>
   </div>
 
   <div class='results-containter'>
@@ -38,6 +37,14 @@
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active panel" id="list">
         <p class="container-export">
+          Show
+          <select class="selectpicker" id="select-display-count">
+            <option>25</option>
+            <option>50</option>
+            <option>100</option>
+            <option>All</option>
+          </select>
+
           <a class="btn btn-dark-blue pull-right" id="btn-export-csv">Export to CSV</a>
         </p>
         <div class='table-responsive'>

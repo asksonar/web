@@ -7,6 +7,7 @@ DatabaseFilters = function(config) {
   this.$filterItemsContainer = config.filterItemsContainer;
   this.$btnExportCsv = config.btnExportCsv;
   this.$resultCount = config.resultCount;
+  this.$selectDisplayCount = config.selectDisplayCount;
   this.$newFleetTemplate = Handlebars.compile(config.newFleetTemplate.html());
 
   this.init();
@@ -18,6 +19,7 @@ DatabaseFilters.prototype.init = function() {
   this.$fleetTable.on('click', 'td', $.proxy(this.addFilter, this));
   this.$filterItemsContainer.on('click', '.filter-item', $.proxy(this.removeFilter, this));
   this.$btnExportCsv.on('click', $.proxy(this.exportToCsv, this));
+  this.$selectDisplayCount.on('change', $.proxy(this.updateList, this));
 };
 
 DatabaseFilters.prototype.updateSubFilters = function() {
@@ -80,22 +82,19 @@ DatabaseFilters.prototype.addFilter = function(event){
 
 DatabaseFilters.prototype.removeFilter = function(event){
   var thisEl = $(event.currentTarget);
+  thisEl.remove();
 
-  if ( this.$filterItemsContainer.children().length === 2 ) {
+  // remove header if there're no filters
+  if ( $('.filter-items-container a').length === 0 ) {
     $('.filter-items-container h3').remove();
   }
 
-  thisEl.remove();
   this.updateList();
-};
-
-DatabaseFilters.prototype.exportToCsv = function() {
-  var filters = this.getFilters();
-  window.location.href = new URI(window.location.href + "/export.csv").addSearch(filters);
 };
 
 DatabaseFilters.prototype.updateList = function() {
   var filters = this.getFilters();
+  var displayCount = this.getDisplayCount();
   var url = new URL(window.location.href).pathname;
   var newFleets = newFleets || {fleets:[]};
 
@@ -103,7 +102,7 @@ DatabaseFilters.prototype.updateList = function() {
     type: 'GET',
     dataType: 'json',
     url: url,
-    data: $.extend(filters, {
+    data: $.extend(filters, displayCount, {
       authenticity_token: AUTH_TOKEN
     }),
     success: function(response) {
@@ -117,6 +116,10 @@ DatabaseFilters.prototype.updateList = function() {
     }.bind(this)
   });
 };
+
+DatabaseFilters.prototype.getDisplayCount = function() {
+  return { "display_count": this.$selectDisplayCount.val() };
+}
 
 DatabaseFilters.prototype.getFilters = function() {
   var filters = {};
@@ -133,4 +136,9 @@ DatabaseFilters.prototype.getFilters = function() {
   })
 
   return filters;
+};
+
+DatabaseFilters.prototype.exportToCsv = function() {
+  var filters = this.getFilters();
+  window.location.href = new URI(window.location.href + "/export.csv").addSearch(filters);
 };
