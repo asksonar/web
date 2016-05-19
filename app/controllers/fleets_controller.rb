@@ -3,10 +3,15 @@ class FleetsController < ApplicationController
 
   def index
     @prezi = prezi(query_params)
-
+    
     respond_to do |format|
       format.html
-      format.json { render json: @prezi.fleets_json }
+      format.json {
+        render json: {
+          fleets: @prezi.fleets_json,
+          result_count: @prezi.result_count
+        }
+      }
     end
   end
 
@@ -31,7 +36,11 @@ class FleetsController < ApplicationController
   private
 
   def prezi(query_params)
-    FleetsPresenter.new(params[:display_count], query_params)
+    FleetsPresenter.new(display_count, query_params)
+  end
+
+  def display_count
+    params[:display_count] || 25
   end
 
   def query_params

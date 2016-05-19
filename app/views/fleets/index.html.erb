@@ -21,6 +21,10 @@
     </div>
 
     <div class='filter-items-container'></div>
+
+    <div>
+      (<span id='result-count'><%= @prezi.result_count %></span> results found)
+    </div>
   </div>
 
   <div class='results-containter'>
@@ -34,7 +38,7 @@
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active panel" id="list">
         <p class="container-export">
-          <a class="btn btn-dark-blue btn-export-csv pull-right">Export to CSV</a>
+          <a class="btn btn-dark-blue pull-right" id="btn-export-csv">Export to CSV</a>
         </p>
         <div class='table-responsive'>
           <table class='table table-hover fleet-table'>

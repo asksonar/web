@@ -2,7 +2,7 @@ class FleetsPresenter
   attr_reader :display_count
 
   def initialize(display_count, query_params)
-    @display_count = display_count.nil? ? 25 : display_count.to_i
+    @display_count = display_count
     @query_params = query_params
   end
 
@@ -11,14 +11,18 @@ class FleetsPresenter
   end
 
   def fleets
-    @fleets ||= fleets_query.fleets(@display_count, filters: @query_params)
+    fleets_query.fleets(filters: @query_params).first(@display_count)
+  end
+
+  def result_count
+    fleets_query.fleets(filters: @query_params).size
   end
 
   def fleets_json
-    @fleets ||= fleets_query
-      .fleets(@display_count, filters: @query_params)
+    fleets_query
+      .fleets(filters: @query_params)
+      .first(@display_count)
       .map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
-      .to_json
   end
 
   def fleet

@@ -1,11 +1,9 @@
 class FleetsQuery
   include Singleton
 
-  def fleets(display_count, filters: {})
-    Fleet
-      .where(*where_clause(filters))
+  def fleets(filters: {})
+    data(filters)
       .select(:id, :aircraft_status, :aircraft_type, :serial_number, :build_year, :operator)
-      .first(display_count)
   end
 
   def fleet(id)
@@ -17,20 +15,12 @@ class FleetsQuery
   end
 
   def sub_filters(main_filter)
-    Fleet
-      .select(main_filter)
-      .group(main_filter)
-      .order(main_filter)
-      .pluck(main_filter)
+    Fleet.distinct(main_filter).pluck(main_filter)
   end
 
   def orders_by_year
     current_year = Date.today.year
-
-    data = Fleet
-      .select(:operator, :build_year, 'COUNT(*) AS order_count')
-      .where(:build_year => current_year + 1..current_year + 12)
-      .group(:operator, :build_year)
+    data = pivot_by_count(:operator, :build_year).where('build_year > ?', current_year)
 
     g = PivotTable::Grid.new do |g|
       g.source_data  = data
@@ -42,7 +32,18 @@ class FleetsQuery
     g.build
   end
 
+  def pivot_by_count(column, row, filters: {})
+    data(filters)
+      .group(column)
+      .group(row)
+      .select("#{column}, #{row}, count(*) AS order_count")
+  end
+
   private
+
+  def data(filters)
+    query = Fleet.where(*where_clause(filters))
+  end
 
   def where_clause(filter_hash)
     # filter_hash = {"aircraft_status"=>["Order", "Storage"], {"aircraft_manufacturer"=>["Airbus"]}

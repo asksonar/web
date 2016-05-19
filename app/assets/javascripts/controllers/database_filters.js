@@ -6,6 +6,7 @@ DatabaseFilters = function(config) {
   this.$fleetTable = config.fleetTable;
   this.$filterItemsContainer = config.filterItemsContainer;
   this.$btnExportCsv = config.btnExportCsv;
+  this.$resultCount = config.resultCount;
   this.$newFleetTemplate = Handlebars.compile(config.newFleetTemplate.html());
 
   this.init();
@@ -105,10 +106,11 @@ DatabaseFilters.prototype.updateList = function() {
     data: $.extend(filters, {
       authenticity_token: AUTH_TOKEN
     }),
-    success: function(fleets) {
+    success: function(response) {
       $('.fleet-line').remove();
-      newFleets.fleets = fleets
+      newFleets.fleets = response.fleets
       this.$fleetTable.append(this.$newFleetTemplate(newFleets))
+      this.$resultCount.html(response.result_count);
     }.bind(this),
     error: function(jqXHR) {
       notify.error(jqXHR.responseText);
