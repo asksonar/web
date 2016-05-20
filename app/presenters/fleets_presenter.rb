@@ -19,10 +19,10 @@ class FleetsPresenter
   end
 
   def fleets_json
-    fleets_query
-      .fleets(filters: @query_params)
-      .first(@display_count)
-      .map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
+    query = fleets_query.fleets(filters: @query_params)
+    query = query.first(@display_count) if @display_count != 'All'
+    query = query.map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
+    query
   end
 
   def fleet
