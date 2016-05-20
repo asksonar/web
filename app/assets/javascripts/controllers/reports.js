@@ -8,4 +8,11 @@ $(function(){
     var filters = { "aircraft_type": [sub_filter] };
     window.location.href = new URI(window.location.href).addSearch(filters);
   })
+
+  if (aircraft_by_location) {
+    var mapController = new MapController({
+      map: $('#map'),
+    }, aircraft_by_location);
+  }
+
 });

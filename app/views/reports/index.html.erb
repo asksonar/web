@@ -2,6 +2,12 @@
     Aircraft Report <% if !@prezi.query_params.empty? %> - <%= @prezi.query_params["aircraft_type"] %><% end %>
 <% end %>
 
+<% if !@prezi.query_params.empty? %>
+  <script type="text/javascript">
+    var aircraft_by_location = <%= raw @prezi.aircraft_by_location_json %>;
+  </script>
+<% end %>
+
 <section class='main-content-header'>
   <h1><%= content_for :title %></h1>
 </section>
@@ -71,6 +77,16 @@
             <% end %>
           </table>
         </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default ctn-aircraft-location">
+      <div class="panel-heading">
+        <p class="panel-title">Current Location</p>
+      </div>
+
+      <div class='panel-body'>
+        <div id="map"></div>
       </div>
     </div>
   <% end %>

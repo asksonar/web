@@ -47,9 +47,16 @@ class FleetsQuery
 
   def pivot_by_count(row, column, filters: {})
     data(filters)
-    .group(row)
-    .group(column)
-    .select("#{row}, #{column}, count(*) AS item_count")
+      .group(row)
+      .group(column)
+      .select("#{row}, #{column}, count(*) AS item_count")
+  end
+
+  def aircraft_by_location(filters: {})
+    data(filters)
+      .where.not(operator_country: nil)
+      .group(:operator_country)
+      .pluck(:operator_country, "count(*) as item_count")
   end
 
   def aircraft_age_by_operator(filters: {})

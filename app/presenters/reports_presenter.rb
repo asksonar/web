@@ -46,4 +46,8 @@ class ReportsPresenter
 
     status_by_build_year
   end
+
+  def aircraft_by_location_json
+    fleets_query.aircraft_by_location(filters: @query_params).to_json
+  end
 end
