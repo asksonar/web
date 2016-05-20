@@ -75,15 +75,15 @@
           <table class='table table-hover analyze-table'>
             <tr>
               <th>Upcoming Orders</th>
-              <% @prezi.orders_by_year.column_headers.each do |column| %>
+              <% @prezi.orders_by_operator.column_headers.each do |column| %>
                 <th><%= column %></th>
               <% end %>
             </tr>
-            <% @prezi.orders_by_year.rows.each do |row| %>
+            <% @prezi.orders_by_operator.rows.each do |row| %>
               <tr>
                 <td><%= row.header %></td>
                 <% row.data.each do |data| %>
-                  <td><%= data[:order_count] %></td>
+                  <td><%= data[:item_count] %></td>
                 <% end %>
               </tr>
             <% end %>

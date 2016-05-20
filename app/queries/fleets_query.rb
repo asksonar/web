@@ -18,25 +18,65 @@ class FleetsQuery
     Fleet.distinct(main_filter).pluck(main_filter)
   end
 
-  def orders_by_year
+  def orders_by_operator
     current_year = Date.today.year
-    data = pivot_by_count(:operator, :build_year).where('build_year > ?', current_year)
+    source_data = pivot_by_count(:operator, :build_year).where('build_year > ?', current_year)
 
     g = PivotTable::Grid.new do |g|
-      g.source_data  = data
+      g.source_data  = source_data
       g.column_name  = :build_year
       g.row_name     = :operator
-      g.value_name   = :order_count
+      g.value_name   = :item_count
     end
 
     g.build
   end
 
-  def pivot_by_count(column, row, filters: {})
+  def status_by_build_year(filters: {})
+    source_data = pivot_by_count(:build_year, :aircraft_status)
+
+    g = PivotTable::Grid.new do |g|
+      g.source_data  = source_data
+      g.column_name  = :aircraft_status
+      g.row_name     = :build_year
+      g.value_name   = :item_count
+    end
+
+    g.build
+  end
+
+  def pivot_by_count(row, column, filters: {})
     data(filters)
-      .group(column)
-      .group(row)
-      .select("#{column}, #{row}, count(*) AS order_count")
+    .group(row)
+    .group(column)
+    .select("#{row}, #{column}, count(*) AS item_count")
+  end
+
+  def aircraft_age_by_operator(filters: {})
+    current_year = Date.today.year
+
+    source_data =
+      data(filters)
+        .select(
+          :operator,
+          "(CASE WHEN build_year>=#{current_year-3} THEN 0
+          WHEN build_year<#{current_year-3} AND build_year>=#{current_year-10} THEN 1
+          WHEN build_year<#{current_year-10} THEN 2
+          END) AS age",
+          "count(*) AS item_count"
+        )
+        .group(:operator)
+        .group(:age)
+        .order(:operator)
+
+    g = PivotTable::Grid.new do |g|
+      g.source_data  = source_data
+      g.column_name  = :age
+      g.row_name     = :operator
+      g.value_name   = :item_count
+    end
+
+    g.build
   end
 
   private
