@@ -1,6 +1,6 @@
-MapController = function(config, aircraft_by_location) {
+MapController = function(config, locations) {
   this.$map = config.map;
-  this.$locations = aircraft_by_location;
+  this.$locations = locations;
 
   this.getLocation();
 };
@@ -11,7 +11,7 @@ MapController.prototype.getLocation = function() {
   $.map( this.$locations, function( location, index ) {
     var locationName = location[0];
     var locationCount = location[1];
-    var geolocation = this.getGeolocation(locationName);
+    var geolocation = this.getCountryGeolocation(locationName);
 
     locationMap[locationName] = {
       center: geolocation,
@@ -22,9 +22,9 @@ MapController.prototype.getLocation = function() {
   this.initMap(locationMap);
 }
 
-MapController.prototype.getGeolocation = function(location) {
-  var url = 'https://maps.googleapis.com/maps/api/geocode/json?components=country:' + location + '&key=AIzaSyBU24uUE9_X9b7i3RQGtNgNzPTfs31Pla8';
+MapController.prototype.getCountryGeolocation = function(country) {
   var geolocation = {};
+  var url = 'https://maps.googleapis.com/maps/api/geocode/json?components=country:' + country + '&key=' + sonar.google_api_key;
 
   $.ajax({
     type: 'GET',
@@ -49,6 +49,9 @@ MapController.prototype.initMap = function(locationMap) {
     mapTypeId: google.maps.MapTypeId.TERRAIN
   });
 
+  $("a[href='#location']").on('shown.bs.tab', function(){
+    google.maps.event.trigger(map, 'resize');
+  });
 
   for (var location in locationMap) {
     var countryCircle = new google.maps.Circle({
