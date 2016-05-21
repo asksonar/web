@@ -15,7 +15,7 @@ class FleetsQuery
   end
 
   def sub_filters(main_filter)
-    Fleet.distinct(main_filter).pluck(main_filter)
+    Fleet.distinct(main_filter).order(main_filter).pluck(main_filter)
   end
 
   def orders_by_operator
