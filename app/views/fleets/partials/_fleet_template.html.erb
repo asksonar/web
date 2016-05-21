@@ -2,10 +2,10 @@
   {{#each fleets}}
   <tr class='fleet-line'>
     <td><a href='/fleets/{{hashid}}'>{{serial_number}}</a></td>
-    <td>{{aircraft_status}}</td>
-    <td>{{aircraft_type}}</td>
-    <td>{{build_year}}</td>
-    <td>{{operator}}</td>
+    <td data-type='aircraft_status'>{{aircraft_status}}</td>
+    <td data-type='aircraft_type'>{{aircraft_type}}</td>
+    <td data-type='build_year'>{{build_year}}</td>
+    <td data-type='operator'>{{operator}}</td>
   </tr>
   {{/each}}
 </script>

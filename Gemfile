@@ -74,6 +74,8 @@ gem 'activerecord-import'
 gem 'kaminari-bootstrap'
 # add scheduler tabs for resque as well
 gem 'resque-scheduler-web'
+# transform a dataset into a spreadsheet-style pivot table
+gem 'pivot_table'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables

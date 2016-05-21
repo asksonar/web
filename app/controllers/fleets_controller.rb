@@ -3,14 +3,14 @@ class FleetsController < ApplicationController
 
   def index
     @prezi = prezi(query_params)
-
+    
     respond_to do |format|
       format.html
       format.json {
         render json: {
-          sub_filters: @prezi.sub_filters,
-          fleets: @prezi.fleets
-        }.to_json
+          fleets: @prezi.fleets_json,
+          result_count: @prezi.result_count
+        }
       }
     end
   end
@@ -19,10 +19,28 @@ class FleetsController < ApplicationController
     @prezi = prezi(query_params)
   end
 
+  def sub_filters
+    @prezi = prezi(query_params)
+    render json: @prezi.sub_filters
+  end
+
+  def export
+    @prezi = prezi(query_params)
+
+    respond_to do |format|
+      format.html { redirect_to fleets_path }
+      format.csv { send_data Fleet.to_csv(@prezi.fleets) }
+    end
+  end
+
   private
 
   def prezi(query_params)
-    FleetsPresenter.new(params[:display_count], query_params)
+    FleetsPresenter.new(display_count, query_params)
+  end
+
+  def display_count
+    params[:display_count] || 25
   end
 
   def query_params

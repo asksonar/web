@@ -10,7 +10,10 @@ $(function(){
     btnAddFilter: $('#btn-add-filter'),
     newFleetTemplate: $('#new-fleet-template'),
     fleetTable: $('.fleet-table tbody'),
-    filterItemsContainer: $('.filter-items-container')
+    filterItemsContainer: $('.filter-items-container'),
+    btnExportCsv: $('#btn-export-csv'),
+    resultCount: $('#result-count'),
+    selectDisplayCount: $('#select-display-count')
   });
 
 });

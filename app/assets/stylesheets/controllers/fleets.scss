@@ -4,8 +4,9 @@
       margin-bottom: 15px;
     }
 
-    .filter-select-container{
-      margin-bottom: 20px;
+    .filter-select-container,
+    .filter-items-container {
+      margin-bottom: 15px;
     }
 
     .filter-item {
@@ -18,7 +19,32 @@
         opacity: 1;
       }
     }
+  }
 
+  .results-containter {
+    .nav-tabs > li > a {
+      border: none;
+      background-color: #eeeeee;
+      color: black;
+    }
+
+    .nav-tabs > li.active > a {
+      background-color: #FAFAFA;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+    }
+
+    .container-export {
+      margin-bottom: 20px;
+      min-height: 33px;
+    }
+
+    .fleet-table td {
+      @extend a;
+    }
+
+    .analyze-table {
+      white-space: nowrap;
+    }
   }
 }
 

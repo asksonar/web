@@ -5,6 +5,9 @@ DatabaseFilters = function(config) {
   this.$btnAddFilter = config.btnAddFilter;
   this.$fleetTable = config.fleetTable;
   this.$filterItemsContainer = config.filterItemsContainer;
+  this.$btnExportCsv = config.btnExportCsv;
+  this.$resultCount = config.resultCount;
+  this.$selectDisplayCount = config.selectDisplayCount;
   this.$newFleetTemplate = Handlebars.compile(config.newFleetTemplate.html());
 
   this.init();
@@ -13,7 +16,10 @@ DatabaseFilters = function(config) {
 DatabaseFilters.prototype.init = function() {
   this.$btnSelectMainFilters.on('change', $.proxy(this.updateSubFilters, this));
   this.$btnAddFilter.on('click', $.proxy(this.addFilter, this));
+  this.$fleetTable.on('click', 'td', $.proxy(this.addFilter, this));
   this.$filterItemsContainer.on('click', '.filter-item', $.proxy(this.removeFilter, this));
+  this.$btnExportCsv.on('click', $.proxy(this.exportToCsv, this));
+  this.$selectDisplayCount.on('change', $.proxy(this.updateList, this));
 };
 
 DatabaseFilters.prototype.updateSubFilters = function() {
@@ -24,7 +30,7 @@ DatabaseFilters.prototype.updateSubFilters = function() {
   }
 
   var data = { main_filter: this.$btnSelectMainFilters.val() };
-  var url = new URL(window.location.href).pathname;
+  var url = new URL(window.location.href).pathname + '/sub_filters';
 
   $.ajax({
     type: 'GET',
@@ -33,9 +39,7 @@ DatabaseFilters.prototype.updateSubFilters = function() {
     data: $.extend(data, {
       authenticity_token: AUTH_TOKEN
     }),
-    success: function(response) {
-      var filters = response.sub_filters;
-
+    success: function(filters) {
       $.each(filters, function(index) {
         this.$btnSelectSubFilters.append('<option class="sub-filter">' + filters[index] + '</option>');
       }.bind(this));
@@ -48,9 +52,17 @@ DatabaseFilters.prototype.updateSubFilters = function() {
   });
 };
 
-DatabaseFilters.prototype.addFilter = function(){
-  var main_filter = this.$btnSelectMainFilters.val();
-  var sub_filter = this.$btnSelectSubFilters.val();
+DatabaseFilters.prototype.addFilter = function(event){
+  var thisEl = $(event.currentTarget);
+  var main_filter, sub_filter;
+
+  if ( thisEl.attr('data-type') ) {
+    main_filter = thisEl.attr('data-type');
+    sub_filter = thisEl.html();
+  } else {
+    main_filter = this.$btnSelectMainFilters.val();
+    sub_filter = this.$btnSelectSubFilters.val();
+  }
 
   if ( this.$filterItemsContainer.children().length === 0 ) {
     this.$filterItemsContainer.append(
@@ -61,7 +73,7 @@ DatabaseFilters.prototype.addFilter = function(){
   // only add filter item if it hasn't already been added
   if ( $('a[data-sub-filter="' + sub_filter + '"]').length === 0 ) {
     this.$filterItemsContainer.append(
-      '<a class="btn btn-light-blue filter-item" data-main-filter="' + main_filter + '"data-sub-filter="' + sub_filter + '">' + sub_filter + '<span class="close">&times;</span></a>'
+      '<a class="btn btn-light-blue filter-item" data-main-filter="' + main_filter + '[]"data-sub-filter="' + sub_filter + '">' + sub_filter + '<span class="close">&times;</span></a>'
     )
   }
 
@@ -69,18 +81,20 @@ DatabaseFilters.prototype.addFilter = function(){
 };
 
 DatabaseFilters.prototype.removeFilter = function(event){
-  var thisEl = event.currentTarget;
+  var thisEl = $(event.currentTarget);
+  thisEl.remove();
 
-  if ( this.$filterItemsContainer.children().length === 2 ) {
+  // remove header if there're no filters
+  if ( $('.filter-items-container a').length === 0 ) {
     $('.filter-items-container h3').remove();
   }
 
-  thisEl.remove();
   this.updateList();
 };
 
 DatabaseFilters.prototype.updateList = function() {
   var filters = this.getFilters();
+  var displayCount = this.getDisplayCount();
   var url = new URL(window.location.href).pathname;
   var newFleets = newFleets || {fleets:[]};
 
@@ -88,19 +102,24 @@ DatabaseFilters.prototype.updateList = function() {
     type: 'GET',
     dataType: 'json',
     url: url,
-    data: $.extend(filters, {
+    data: $.extend(filters, displayCount, {
       authenticity_token: AUTH_TOKEN
     }),
     success: function(response) {
       $('.fleet-line').remove();
       newFleets.fleets = response.fleets
       this.$fleetTable.append(this.$newFleetTemplate(newFleets))
+      this.$resultCount.html(response.result_count);
     }.bind(this),
     error: function(jqXHR) {
       notify.error(jqXHR.responseText);
     }.bind(this)
   });
 };
+
+DatabaseFilters.prototype.getDisplayCount = function() {
+  return { "display_count": this.$selectDisplayCount.val() };
+}
 
 DatabaseFilters.prototype.getFilters = function() {
   var filters = {};
@@ -117,4 +136,9 @@ DatabaseFilters.prototype.getFilters = function() {
   })
 
   return filters;
+};
+
+DatabaseFilters.prototype.exportToCsv = function() {
+  var filters = this.getFilters();
+  window.location.href = new URI(window.location.href + "/export.csv").addSearch(filters);
 };

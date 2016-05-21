@@ -31,9 +31,17 @@ Rails.application.routes.draw do
   # sonar v3 #
   ############
 
+  get '/reports', to: 'reports#index', as: 'reports'
+
   resources :aircrafts
   resources :components
-  resources :fleets
+
+  resources :fleets do
+    collection do
+      get 'sub_filters'
+      get 'export'
+    end
+  end
 
   ############
   # sonar v2 #

@@ -1,0 +1,90 @@
+<% content_for :title do %>
+    Aircraft Report <% if !@prezi.query_params.empty? %> - <%= @prezi.query_params["aircraft_type"] %><% end %>
+<% end %>
+
+<script type="text/javascript">
+  var aircraft_by_location = <% if !@prezi.query_params.empty? %><%= raw @prezi.aircraft_by_location_json %><% else %>null<% end %>
+</script>
+
+<section class="main-content-header">
+  <h1><%= content_for :title %></h1>
+</section>
+
+<section class="main-content">
+  <div class="panel filters-container">
+    <div class="filter-select-container">
+      <h3>Select aircraft type:</h3>
+      <select class="selectpicker" id="select-aircraft-type" title="Select">
+        <% @prezi.aircraft_type.each do |type| %>
+          <option><%= type %></option>
+        <% end %>
+      </select>
+      <a id="btn-add-filter" class="btn btn-dark-blue">Select</a>
+    </div>
+  </div>
+
+  <% if !@prezi.query_params.empty? %>
+    <div class="results-containter">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#age" aria-controls="age" role="tab" data-toggle="tab">Aircraft Age</a></li>
+        <li role="presentation"><a href="#status" aria-controls="status" role="tab" data-toggle="tab">Aircraft Status</a></li>
+        <li role="presentation"><a href="#location" aria-controls="location" role="tab" data-toggle="tab">Current Location</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active panel ctn-aircraft-age" id="age">
+          <h3 class="text-center">Aircraft Age by Airline</h3>
+          <div class="table-responsive aircraft-age-table">
+            <table class="table table-hover table-bordered">
+              <tr>
+                <th>Airline</th>
+                <% @prezi.aircraft_age_by_operator.column_headers.each do |column| %>
+                  <th class="text-center"><%= column %></th>
+                <% end %>
+              </tr>
+              <% @prezi.aircraft_age_by_operator.rows.each do |row| %>
+                <tr>
+                  <td><%= row.header %></td>
+                  <% row.data.each do |data| %>
+                    <td class="text-center"><%= data[:item_count] %></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane panel ctn-aircraft-status" id="status">
+          <h3 class="text-center">Status by Build Year</h3>
+          <div class="table-responsive aircraft-status-table">
+            <table class="table table-hover table-bordered">
+              <tr>
+                <th class="text-center">Build Year</th>
+                <% @prezi.status_by_build_year.column_headers.each do |column| %>
+                  <th class="text-center"><%= column %></th>
+                <% end %>
+              </tr>
+              <% @prezi.status_by_build_year.rows.each do |row| %>
+                <tr>
+                  <td class="text-center"><%= row.header %></td>
+                  <% row.data.each do |data| %>
+                    <td class="text-center"><%= data[:item_count] %></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </table>
+          </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane panel ctn-aircraft-location" id="location">
+          <h3 class="text-center">Current Location</h3>
+          <div id="map"></div>
+        </div>
+      </div>
+
+    </div>
+  <% end %>
+
+</section>

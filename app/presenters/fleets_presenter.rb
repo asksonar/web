@@ -2,7 +2,7 @@ class FleetsPresenter
   attr_reader :display_count
 
   def initialize(display_count, query_params)
-    @display_count = display_count.nil? ? 25 : display_count.to_i
+    @display_count = display_count
     @query_params = query_params
   end
 
@@ -11,7 +11,18 @@ class FleetsPresenter
   end
 
   def fleets
-    @fleets ||= fleets_query.fleets(@display_count, filters: @query_params)
+    fleets_query.fleets(filters: @query_params).first(@display_count)
+  end
+
+  def result_count
+    fleets_query.fleets(filters: @query_params).size
+  end
+
+  def fleets_json
+    query = fleets_query.fleets(filters: @query_params)
+    query = query.first(@display_count) if @display_count != 'All'
+    query = query.map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
+    query
   end
 
   def fleet
@@ -23,6 +34,18 @@ class FleetsPresenter
   end
 
   def sub_filters
-    fleets_query.sub_filters(@query_params["main_filter"])
+    fleets_query.sub_filters(@query_params["main_filter"]).to_json
+  end
+
+  def orders_by_operator
+    orders_by_operator ||= fleets_query.orders_by_operator
+
+    orders_by_operator.rows.map.with_index do |row, row_index|
+      row.data.map.with_index do |row_data, row_data_index|
+        orders_by_operator.rows[row_index].data[row_data_index] = row_data || {"item_count": 0}
+      end
+    end
+
+    orders_by_operator
   end
 end
