@@ -121,7 +121,6 @@ GEM
       sprockets (>= 2.0)
     orm_adapter (0.5.0)
     pg (0.18.2)
-    pivot_table (1.0.0)
     pundit (1.0.1)
       activesupport (>= 3.0.0)
     rack (1.6.4)
@@ -288,7 +287,6 @@ DEPENDENCIES
   mixpanel-ruby
   non-stupid-digest-assets
   pg
-  pivot_table
   pundit
   rails
   rails-assets-URIjs!
