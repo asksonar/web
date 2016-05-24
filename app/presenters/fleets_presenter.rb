@@ -39,13 +39,5 @@ class FleetsPresenter
 
   def orders_by_operator
     orders_by_operator ||= fleets_query.orders_by_operator
-
-    orders_by_operator.rows.map.with_index do |row, row_index|
-      row.data.map.with_index do |row_data, row_data_index|
-        orders_by_operator.rows[row_index].data[row_data_index] = row_data || {"item_count": 0}
-      end
-    end
-
-    orders_by_operator
   end
 end

@@ -40,15 +40,15 @@
             <table class="table table-hover table-bordered">
               <tr>
                 <th>Airline</th>
-                <% @prezi.aircraft_age_by_operator.column_headers.each do |column| %>
+                <% @prezi.aircraft_age_by_operator["columns"].each do |column| %>
                   <th class="text-center"><%= column %></th>
                 <% end %>
               </tr>
-              <% @prezi.aircraft_age_by_operator.rows.each do |row| %>
+              <% @prezi.aircraft_age_by_operator["rows"].each do |row| %>
                 <tr>
-                  <td><%= row.header %></td>
-                  <% row.data.each do |data| %>
-                    <td class="text-center"><%= data[:item_count] %></td>
+                  <td><%= row["header"] %></td>
+                  <% row["data"].each do |data| %>
+                    <td class="text-center"><%= data %></td>
                   <% end %>
                 </tr>
               <% end %>
@@ -62,15 +62,15 @@
             <table class="table table-hover table-bordered">
               <tr>
                 <th class="text-center">Build Year</th>
-                <% @prezi.status_by_build_year.column_headers.each do |column| %>
+                <% @prezi.status_by_build_year["columns"].each do |column| %>
                   <th class="text-center"><%= column %></th>
                 <% end %>
               </tr>
-              <% @prezi.status_by_build_year.rows.each do |row| %>
+              <% @prezi.status_by_build_year["rows"].each do |row| %>
                 <tr>
-                  <td class="text-center"><%= row.header %></td>
-                  <% row.data.each do |data| %>
-                    <td class="text-center"><%= data[:item_count] %></td>
+                  <td class="text-center"><%= row["header"] %></td>
+                  <% row["data"].each do |data| %>
+                    <td class="text-center"><%= data %></td>
                   <% end %>
                 </tr>
               <% end %>
