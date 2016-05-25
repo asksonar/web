@@ -18,9 +18,15 @@
           <%= navbar_item "<i class='fa fa-ftl fa-gear'></i>Settings", '/settings/send', class: 'visible-xs' %>
         <% end %>
         <% if current_user.has_v3? %>
-          <%= navbar_item "<i class='fa fa-ftl fa-plane'></i>AIRCRAFT CMS", '/aircrafts' %>
           <%= navbar_item "<i class='fa fa-ftl fa-database'></i>FLEET DATABASE", '/fleets' %>
-          <%= navbar_item "<i class='fa fa-ftl fa-database'></i>AIRCRAFT REPORTS", '/reports' %>
+          <li data-toggle="collapse" href="#analysis">
+            <a class="nav-sub-container"><i class='fa fa-ftl fa-bar-chart'></i>ANALYSIS<span class="caret arrow"></span></a>
+          </li>
+          <ul class="nav nav-pills nav-stacked collapse" id="analysis">
+            <%= navbar_item "<i class='fa fa-ftl fa-file'></i>AIRCRAFT REPORTS", '/analysis/reports' %>
+            <%= navbar_item "<i class='fa fa-ftl fa-calendar'></i>FORECASTING", '/analysis/forecasts' %>
+          </ul>
+          <%= navbar_item "<i class='fa fa-ftl fa-plane'></i>AIRCRAFT CMS", '/aircrafts' %>
         <% end %>
       <% end %>
     </ul>
