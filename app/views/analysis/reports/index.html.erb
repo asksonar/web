@@ -14,7 +14,7 @@
   <div class="panel filters-container">
     <div class="filter-select-container">
       <h3>Select aircraft type:</h3>
-      <select class="selectpicker" id="select-aircraft-type" title="Select">
+      <select class="selectpicker" data-live-search="true" id="select-aircraft-type" title="Select">
         <% @prezi.aircraft_type.each do |type| %>
           <option><%= type %></option>
         <% end %>
