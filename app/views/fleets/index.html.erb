@@ -51,17 +51,17 @@
           <table class='table fleet-table sortable-theme-bootstrap' data-sortable>
             <thead>
               <tr>
-                <th>Serial Number</th>
-                <th>Aircraft Status</th>
-                <th>Aircraft Type</th>
-                <th>Build Year</th>
-                <th>Operator</th>
+                <th class='col-md-2'>Serial Number</th>
+                <th class='col-md-2'>Aircraft Status</th>
+                <th class='col-md-2'>Aircraft Type</th>
+                <th class='col-md-2'>Build Year</th>
+                <th class='col-md-3'>Operator</th>
               </tr>
             </thead>
             <tbody>
               <% @prezi.fleets.each do |fleet| %>
                 <tr class='fleet-line'>
-                  <td><a href='/fleets/<%= fleet.hashid %>'><%= fleet.serial_number %></a></td>
+                  <td data-type='aircraft_status'><a href='/fleets/<%= fleet.hashid %>'><%= fleet.serial_number %></a></td>
                   <td data-type='aircraft_status'><%= fleet.aircraft_status %></td>
                   <td data-type='aircraft_type'><%= fleet.aircraft_type %></td>
                   <td data-type='build_year'><%= fleet.build_year %></td>
