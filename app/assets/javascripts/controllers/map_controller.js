@@ -24,7 +24,7 @@ MapController.prototype.getLocation = function() {
 
 MapController.prototype.getCountryGeolocation = function(country) {
   var geolocation = {};
-  var url = 'https://maps.googleapis.com/maps/api/geocode/json?components=country:' + country + '&key=' + sonar.google_api_key;
+  var url = 'https://maps.googleapis.com/maps/api/geocode/json?components=country:' + country + '&key=' + sonar.google_server_key;
 
   $.ajax({
     type: 'GET',
