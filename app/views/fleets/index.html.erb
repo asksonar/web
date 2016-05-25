@@ -48,23 +48,27 @@
           <a class="btn btn-dark-blue pull-right" id="btn-export-csv">Export to CSV</a>
         </p>
         <div class='table-responsive'>
-          <table class='table table-hover fleet-table'>
-            <tr>
-              <th>Serial Number</th>
-              <th>Aircraft Status</th>
-              <th>Aircraft Type</th>
-              <th>Build Year</th>
-              <th>Operator</th>
-            </tr>
-            <% @prezi.fleets.each do |fleet| %>
-              <tr class='fleet-line'>
-                <td><a href='/fleets/<%= fleet.hashid %>'><%= fleet.serial_number %></a></td>
-                <td data-type='aircraft_status'><%= fleet.aircraft_status %></td>
-                <td data-type='aircraft_type'><%= fleet.aircraft_type %></td>
-                <td data-type='build_year'><%= fleet.build_year %></td>
-                <td data-type='operator'><%= fleet.operator %></td>
+          <table class='table fleet-table sortable-theme-bootstrap' data-sortable>
+            <thead>
+              <tr>
+                <th>Serial Number</th>
+                <th>Aircraft Status</th>
+                <th>Aircraft Type</th>
+                <th>Build Year</th>
+                <th>Operator</th>
               </tr>
-            <% end %>
+            </thead>
+            <tbody>
+              <% @prezi.fleets.each do |fleet| %>
+                <tr class='fleet-line'>
+                  <td><a href='/fleets/<%= fleet.hashid %>'><%= fleet.serial_number %></a></td>
+                  <td data-type='aircraft_status'><%= fleet.aircraft_status %></td>
+                  <td data-type='aircraft_type'><%= fleet.aircraft_type %></td>
+                  <td data-type='build_year'><%= fleet.build_year %></td>
+                  <td data-type='operator'><%= fleet.operator %></td>
+                </tr>
+              <% end %>
+            </tbody>
             <%= render partial: 'fleets/partials/fleet_template' %>
           </table>
         </div>

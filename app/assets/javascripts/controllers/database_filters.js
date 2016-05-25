@@ -110,12 +110,17 @@ DatabaseFilters.prototype.updateList = function() {
       newFleets.fleets = response.fleets
       this.$fleetTable.append(this.$newFleetTemplate(newFleets))
       this.$resultCount.html(response.result_count);
+      this.resetSort();
     }.bind(this),
     error: function(jqXHR) {
       notify.error(jqXHR.responseText);
     }.bind(this)
   });
 };
+
+DatabaseFilters.prototype.resetSort = function() {
+  $('th[data-sorted=true]').attr('data-sorted', false);
+}
 
 DatabaseFilters.prototype.getDisplayCount = function() {
   return { "display_count": this.$selectDisplayCount.val() };
