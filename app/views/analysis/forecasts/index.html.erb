@@ -1,0 +1,33 @@
+<% content_for :title do %>
+  Forecasting
+<% end %>
+
+<section class="main-content-header">
+  <h1><%= content_for :title %></h1>
+</section>
+
+<section class="main-content">
+  <div class="results-containter">
+    <div class="panel">
+      <h3 class="text-center">Upcoming Orders</h3>
+      <div class='table-responsive upcoming-orders-table'>
+        <table class='table table-hover'>
+          <tr>
+            <th>Airline</th>
+            <% @prezi.orders_by_operator["columns"].each do |column| %>
+              <th><%= column %></th>
+            <% end %>
+          </tr>
+          <% @prezi.orders_by_operator["rows"].each do |row| %>
+            <tr>
+              <td><%= row["header"] %></td>
+              <% row["data"].each do |data| %>
+                <td><%= data %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

@@ -36,8 +36,4 @@ class FleetsPresenter
   def sub_filters
     fleets_query.sub_filters(@query_params["main_filter"]).to_json
   end
-
-  def orders_by_operator
-    orders_by_operator ||= fleets_query.orders_by_operator
-  end
 end

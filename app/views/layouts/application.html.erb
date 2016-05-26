@@ -17,7 +17,7 @@
 
   <%= render partial: 'utility/metadata' %>
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.configuration.properties['google_api_key'] %>" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.configuration.properties['google_browser_key'] %>" async defer></script>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/<%= Rails.configuration.properties['chrome_app_id'] %>">

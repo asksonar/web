@@ -31,7 +31,10 @@ Rails.application.routes.draw do
   # sonar v3 #
   ############
 
-  get '/reports', to: 'reports#index', as: 'reports'
+  namespace :analysis do
+    resources :reports, controller: :reports, only: [:index]
+    resources :forecasts, controller: :forecasts, only: [:index]
+  end
 
   resources :aircrafts
   resources :components

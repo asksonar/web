@@ -18,4 +18,5 @@ mixpanel_token: 7350e097bc4c5b596332f1d10e35aec5
 mandrill_username: jonathan@asksonar.com
 mandrill_api_key: 2u5GYOHCZC47GmQprLDVxA
 
-google_api_key: AIzaSyBU24uUE9_X9b7i3RQGtNgNzPTfs31Pla8
+google_browser_key: AIzaSyBU24uUE9_X9b7i3RQGtNgNzPTfs31Pla8
+google_server_key: AIzaSyBzGgBahCZEkbyB_mpaS-WnLyyJdOUgrNw
