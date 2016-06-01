@@ -31,7 +31,7 @@ DatabaseFilters.prototype.updateSubFilters = function() {
     this.$btnSelect.selectpicker('refresh');
   }
 
-  var data = { main_filter: this.$btnSelectMainFilters.val() };
+  var data = { main_filter: $('.selectpicker option:selected').attr('data-type') };
   var url = new URL(window.location.href).pathname + '/sub_filters';
 
   $.ajax({
@@ -62,7 +62,7 @@ DatabaseFilters.prototype.addFilter = function(event){
     main_filter = thisEl.attr('data-type');
     sub_filter = thisEl.html();
   } else {
-    main_filter = this.$btnSelectMainFilters.val();
+    main_filter = $('.selectpicker option:selected').attr('data-type');
     sub_filter = this.$btnSelectSubFilters.val();
   }
 

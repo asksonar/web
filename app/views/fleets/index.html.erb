@@ -13,7 +13,7 @@
       <h3>Add a filter:</h3>
       <select class='selectpicker' data-live-search="true" id='select-main-filters' title='Select'>
         <% @prezi.main_filters.each do |filter| %>
-          <option><%= filter %></option>
+          <option data-type="<%= filter %>"><%= filter.titleize %></option>
         <% end %>
       </select>
       <span>is</span>
