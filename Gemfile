@@ -116,8 +116,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-papaparse'
   # colorpicker for customizing survey color
   gem 'rails-assets-spectrum'
-  # add sorting functionality to tables
-  gem 'rails-assets-sortable'
 end
 
 group :development, :test do

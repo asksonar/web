@@ -4,6 +4,7 @@ DatabaseFilters = function(config) {
   this.$btnSelectMainFilters = config.btnSelectMainFilters;
   this.$btnAddFilter = config.btnAddFilter;
   this.$fleetTable = config.fleetTable;
+  this.$fleetTableBody = config.fleetTableBody;
   this.$filterItemsContainer = config.filterItemsContainer;
   this.$btnExportCsv = config.btnExportCsv;
   this.$resultCount = config.resultCount;
@@ -17,6 +18,7 @@ DatabaseFilters.prototype.init = function() {
   this.$btnSelectMainFilters.on('change', $.proxy(this.updateSubFilters, this));
   this.$btnAddFilter.on('click', $.proxy(this.addFilter, this));
   this.$fleetTable.on('click', 'td', $.proxy(this.addFilter, this));
+  this.$fleetTable.on('click', 'th', $.proxy(this.setSort, this));
   this.$filterItemsContainer.on('click', '.filter-item', $.proxy(this.removeFilter, this));
   this.$btnExportCsv.on('click', $.proxy(this.exportToCsv, this));
   this.$selectDisplayCount.on('change', $.proxy(this.updateList, this));
@@ -95,6 +97,7 @@ DatabaseFilters.prototype.removeFilter = function(event){
 DatabaseFilters.prototype.updateList = function() {
   var filters = this.getFilters();
   var displayCount = this.getDisplayCount();
+  var sort = this.getSort();
   var url = new URL(window.location.href).pathname;
   var newFleets = newFleets || {fleets:[]};
 
@@ -102,15 +105,14 @@ DatabaseFilters.prototype.updateList = function() {
     type: 'GET',
     dataType: 'json',
     url: url,
-    data: $.extend(filters, displayCount, {
+    data: $.extend(filters, displayCount, sort, {
       authenticity_token: AUTH_TOKEN
     }),
     success: function(response) {
       $('.fleet-line').remove();
       newFleets.fleets = response.fleets
-      this.$fleetTable.append(this.$newFleetTemplate(newFleets))
+      this.$fleetTableBody.append(this.$newFleetTemplate(newFleets))
       this.$resultCount.html(response.result_count);
-      this.resetSort();
     }.bind(this),
     error: function(jqXHR) {
       notify.error(jqXHR.responseText);
@@ -118,8 +120,23 @@ DatabaseFilters.prototype.updateList = function() {
   });
 };
 
-DatabaseFilters.prototype.resetSort = function() {
-  $('th[data-sorted=true]').attr('data-sorted', false);
+DatabaseFilters.prototype.setSort = function(event) {
+  var thisEl = $(event.currentTarget);
+  var sorted = thisEl.attr('data-sorted') === "true";
+  var direction = sorted && thisEl.attr('data-sorted-direction') === "asc" ? "desc" : "asc";
+
+  $('th[data-sorted=true]').attr('data-sorted', false)
+  $('th[data-sorted-direction]').removeAttr('data-sorted-direction');
+  thisEl.attr('data-sorted', true);
+  thisEl.attr('data-sorted-direction', direction);
+
+  this.updateList();
+}
+
+DatabaseFilters.prototype.getSort = function() {
+  var sort = $('th[data-sorted=true]').attr('data-type');
+  var direction = $('th[data-sorted=true]').attr('data-sorted-direction');
+  return { "sort": sort, "direction": direction }
 }
 
 DatabaseFilters.prototype.getDisplayCount = function() {
