@@ -45,7 +45,6 @@ DatabaseFilters.prototype.updateSubFilters = function() {
       $.each(filters, function(index) {
         this.$btnSelectSubFilters.append('<option class="sub-filter">' + filters[index] + '</option>');
       }.bind(this));
-
       this.$btnSelect.selectpicker('refresh');
     }.bind(this),
     error: function(jqXHR) {
@@ -66,10 +65,9 @@ DatabaseFilters.prototype.addFilter = function(event){
     sub_filter = this.$btnSelectSubFilters.val();
   }
 
-  if ( this.$filterItemsContainer.children().length === 0 ) {
-    this.$filterItemsContainer.append(
-      '<h3>Filtered by:</h3>'
-    )
+  // unhide filter items container
+  if ( $('.filter-items-container a').length === 0  ) {
+    this.$filterItemsContainer.toggleClass('hide');
   }
 
   // only add filter item if it hasn't already been added
@@ -86,9 +84,9 @@ DatabaseFilters.prototype.removeFilter = function(event){
   var thisEl = $(event.currentTarget);
   thisEl.remove();
 
-  // remove header if there're no filters
+  // hide filter items container if there're no filters
   if ( $('.filter-items-container a').length === 0 ) {
-    $('.filter-items-container h3').remove();
+    this.$filterItemsContainer.toggleClass('hide');
   }
 
   this.updateList();
@@ -162,5 +160,7 @@ DatabaseFilters.prototype.getFilters = function() {
 
 DatabaseFilters.prototype.exportToCsv = function() {
   var filters = this.getFilters();
-  window.location.href = new URI(window.location.href + "/export.csv").addSearch(filters);
+  var displayCount = this.getDisplayCount();
+  var sort = this.getSort();
+  window.location.href = new URI(window.location.href + "/export.csv").addSearch(filters).addSearch(displayCount).addSearch(sort);
 };

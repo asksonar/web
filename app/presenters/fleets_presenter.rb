@@ -13,7 +13,9 @@ class FleetsPresenter
   end
 
   def fleets
-    fleets_query.fleets(filters: @query_params).order(@sort_column + " " + @sort_direction).first(@display_count)
+    query = fleets_query.fleets(filters: @query_params).order(@sort_column + " " + @sort_direction)
+    query = query.first(@display_count) if @display_count != 'All'
+    query
   end
 
   def result_count
