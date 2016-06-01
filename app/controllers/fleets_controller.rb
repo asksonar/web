@@ -3,7 +3,7 @@ class FleetsController < ApplicationController
 
   def index
     @prezi = prezi(query_params)
-    
+
     respond_to do |format|
       format.html
       format.json {
@@ -36,11 +36,19 @@ class FleetsController < ApplicationController
   private
 
   def prezi(query_params)
-    FleetsPresenter.new(display_count, query_params)
+    FleetsPresenter.new(display_count, sort_column, sort_direction, query_params)
   end
 
   def display_count
     params[:display_count] || 25
+  end
+
+  def sort_column
+    Fleet.column_names.include?(params[:sort]) ? params[:sort] : "serial_number"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   def query_params

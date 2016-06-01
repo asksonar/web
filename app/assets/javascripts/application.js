@@ -33,7 +33,6 @@
 //= require local_time
 //= require papaparse
 //= require spectrum
-//= require sortable
 
 // insert 3rd party packages above this line
 
