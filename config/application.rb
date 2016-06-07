@@ -52,11 +52,11 @@ module Cero
     config.action_mailer.default_url_options = { host: 'my.asksonar.com' }
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
-      address:              'smtp.mandrillapp.com',
+      address:              'smtp.sparkpostmail.com',
       port:                 587,
       domain:               'my.asksonar.com',
-      user_name:            config.properties['mandrill_username'],
-      password:             config.properties['mandrill_api_key'],
+      user_name:            config.properties['sparkpost_username'],
+      password:             config.properties['sparkpost_api_key'],
       authentication:       'plain'
     }
   end

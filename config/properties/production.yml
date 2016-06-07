@@ -15,8 +15,8 @@ s3_backup_bucket: backup.asksonar.com
 
 mixpanel_token: 32a9d9b381fa35fd2fdd8ad9c715656b
 
-mandrill_username: jonathan@asksonar.com
-mandrill_api_key: dLlB-4ejRCHpwjoTWY01eg
+sparkpost_username: SMTP_Injection
+sparkpost_api_key: 8b6b5872adcfdda8f84e0792e1b8573bc401c79f
 
 google_browser_key: AIzaSyBU24uUE9_X9b7i3RQGtNgNzPTfs31Pla8
 google_server_key: AIzaSyBzGgBahCZEkbyB_mpaS-WnLyyJdOUgrNw
