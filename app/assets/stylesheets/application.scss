@@ -26,6 +26,8 @@ $icon-font-path: 'bootstrap/';
 @import 'bootstrap-switch';
 @import 'prism';
 @import 'spectrum';
+@import 'codebase/webix/webix';
+@import 'codebase/pivot';
 
 // base package
 @import 'shared/**/*';

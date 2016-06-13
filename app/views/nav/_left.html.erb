@@ -19,6 +19,7 @@
         <% end %>
         <% if current_user.has_v3? %>
           <%= navbar_item "<i class='fa fa-ftl fa-database'></i>FLEET DATABASE", '/fleets' %>
+          <%= navbar_item "<i class='fa fa-ftl fa-table'></i>EXPLORE", '/explore' %>
           <li data-toggle="collapse" href="#analysis">
             <a class="nav-sub-container"><i class='fa fa-ftl fa-bar-chart'></i>ANALYSIS<span class="caret arrow"></span></a>
           </li>
