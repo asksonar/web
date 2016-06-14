@@ -33,6 +33,9 @@
 //= require local_time
 //= require papaparse
 //= require spectrum
+//= require pivottable
+//= require pivottable/gchart_renderers
+//= require pivottable/export_renderers
 
 // insert 3rd party packages above this line
 
