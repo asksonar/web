@@ -41,7 +41,8 @@ class User < ActiveRecord::Base
 
   def default_values
     self.has_v1 = false if has_v1.nil?
-    self.has_v2 = true if has_v2.nil?
+    self.has_v2 = false if has_v2.nil?
+    self.has_v3 = true if has_v3.nil?
   end
 
   def create_company
