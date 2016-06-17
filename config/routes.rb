@@ -31,7 +31,8 @@ Rails.application.routes.draw do
   # sonar v3 #
   ############
 
-  get '/explore', to: 'explore#index', as: 'explore'
+  get '/analysis/wb', to: 'analysis#wb', as: 'analysis/wb'
+  get '/analysis/pv', to: 'analysis#pv', as: 'analysis/pv'
 
   resources :fleets do
     collection do
@@ -40,7 +41,7 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :analysis do
+  namespace :reports do
     resources :reports, controller: :reports, only: [:index]
     resources :forecasts, controller: :forecasts, only: [:index]
   end

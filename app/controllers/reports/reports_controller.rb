@@ -1,4 +1,4 @@
-module Analysis
+module Reports
   class ReportsController < ApplicationController
     before_action :authenticate_user!
 

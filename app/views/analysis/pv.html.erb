@@ -1,0 +1,19 @@
+<% content_for :title do %>
+  Analysis
+<% end %>
+
+<script type="text/javascript">
+  var input = <%= raw @prezi.fleets_json_pv %>;
+</script>
+
+<section class='main-content-header'>
+  <h1><%= content_for :title %></h1>
+</section>
+
+<section class='main-content'>
+
+  <div class="panel">
+    <div id="pivotHolder"></div>
+  </div>
+
+</section>

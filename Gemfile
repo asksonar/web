@@ -116,6 +116,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-papaparse'
   # colorpicker for customizing survey color
   gem 'rails-assets-spectrum'
+  # pivot table implementation
+  gem 'rails-assets-pivottable'
 end
 
 group :development, :test do

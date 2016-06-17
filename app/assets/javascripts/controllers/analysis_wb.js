@@ -1,5 +1,5 @@
 $(function(){
-  if ($('#explore-index').length === 0) {
+  if ($('#analysis-wb').length === 0) {
     return;
   }
 
