@@ -10,6 +10,19 @@
   </ul>
 
   <ul class="nav nav-pills nav-left hidden-xs">
+    <% if user_signed_in? && current_user.has_v3? %>
+      <%= navbar_item "<i class='fa fa-ft fa-database'></i>Fleet Database", '/fleets' %>
+      <!-- <%= navbar_item "<i class='fa fa-ftl fa-bar-chart'></i>Analysis - v1", '/analysis/wb' %>
+      <%= navbar_item "<i class='fa fa-ftl fa-bar-chart'></i>Analysis - v2", '/analysis/pv' %> -->
+      <%= navbar_dropdown "<i class='fa fa-bar-chart'></i>Analysis" do %>
+        <%= bsh_navbar_item "V1", analysis_wb_path, active: false %>
+        <%= bsh_navbar_item 'V2', analysis_pv_path, active: false %>
+      <% end %>
+      <%= navbar_dropdown "<i class='fa fa-file'></i>Reports" do %>
+        <%= bsh_navbar_item "Aircraft Reports", reports_reports_path, active: false %>
+        <%= bsh_navbar_item 'Forecasting', reports_forecasts_path, active: false %>
+      <% end %>
+    <% end %>
     <% if user_signed_in? && current_user.has_v2? %>
       <%= navbar_item "<i class='fa fa-ft fa-home'></i>Dashboard", '/dashboard' %>
       <%= navbar_item "<i class='fa fa-ft fa-line-chart'></i>Trends", '/trends' %>
@@ -37,12 +50,5 @@
       </li>
     <% end %>
   </ul>
-
-  <% if user_signed_in? %>
-    <div class="nav-right nav-search hidden-xs hidden-sm">
-      <input type="text" class="form-control input-search" placeholder="Search"></input>
-      <a class='btn-search'><i class="fa fa-search"></i></a>
-    </div>
-  <% end %>
 
  </header>

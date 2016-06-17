@@ -42,13 +42,17 @@
       >i {
         font-size: 18px;
       }
+      >.caret {
+        margin-left: 10px;
+      }
     }
     >li>a:focus,
-    >li>a:hover,
     >li>a:active,
     >li.active>a {
-      color: $dark-blue;
-      background-color: #eeeeee;
+      background-color: inherit;
+    }
+    >li>a:hover {
+      background-color: #22B4D9;
     }
   }
 
@@ -59,6 +63,12 @@
     @media (max-width: $screen-xs-max) {
       position: absolute;
       left: 0;
+    }
+    >li>a {
+      padding: 0px 30px;
+      >i {
+        margin-right: 10px;
+      }
     }
   }
 
