@@ -17,7 +17,7 @@
   <div class='row'>
     <div class='col-sm-3'>
       <div class='panel comparison'>
-        <h3>Category</h3>
+        <h3>Category:</h3>
         <select class="selectpicker form-control" id='select-category'>
           <option <%= 'selected' if @prezi.category == 'region' %> name='category' value='region'>Region</option>
           <option <%= 'selected' if @prezi.category == 'country' %> name='category' value='country'>Country</option>
@@ -25,7 +25,7 @@
       </div>
       <div class='panel filters'>
         <%= bootstrap_form_for :filters do |f| %>
-          <h3>Filters</h3>
+          <h3>Filters:</h3>
 
           <div class='sub'>DATE</div>
           <select class="selectpicker form-control" id='select-date' data-field='date'>

@@ -28,6 +28,8 @@ $icon-font-path: 'bootstrap/';
 @import 'spectrum';
 @import 'pivottable';
 @import 'pivottable_extensions/nrecopivottableext';
+@import 'codebase/webix/webix';
+@import 'codebase/pivot';
 
 // base package
 @import 'shared/**/*';

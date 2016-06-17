@@ -37,6 +37,8 @@
 //= require pivottable/gchart_renderers
 //= require pivottable/export_renderers
 //= require pivottable_extensions/nrecopivottableext
+//= require codebase/webix/webix
+//= require codebase/pivot
 
 // insert 3rd party packages above this line
 

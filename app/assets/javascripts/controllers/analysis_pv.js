@@ -1,5 +1,5 @@
 $(function(){
-  if ($('#explore-pv').length === 0) {
+  if ($('#analysis-pv').length === 0) {
     return;
   }
 
