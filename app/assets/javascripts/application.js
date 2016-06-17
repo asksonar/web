@@ -36,6 +36,7 @@
 //= require pivottable
 //= require pivottable/gchart_renderers
 //= require pivottable/export_renderers
+//= require pivottable_extensions/nrecopivottableext
 
 // insert 3rd party packages above this line
 

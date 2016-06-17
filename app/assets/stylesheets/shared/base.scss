@@ -246,6 +246,11 @@ input.form-control + span.input-group-btn .btn {
   display: none !important;
 }
 
+.google-visualization-charteditor-dialog {
+  height: 570px;
+  width: 992px;
+}
+
 .no-gutter { /* remove bootstrap column gutters */
   [class*="col-"] {
     padding-left: 0 !important;

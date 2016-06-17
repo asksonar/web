@@ -1,0 +1,55 @@
+#explore-pv {
+  #pivotHolder {
+    overflow: scroll;
+  }
+
+  table.pvtTable tr th, table.pvtTable tr th {
+    border: 1px solid #E0E0E0;
+    color: #9A9AA2;
+  }
+
+  .pvtRendererContainer, .pvtAxisContainer, .pvtVals, .pvtRendererArea {
+    border: 1px solid #E0E0E0;
+    background: #FFF;
+    padding: 10px;
+    min-width: 130px;
+  }
+
+  .pvtAxisContainer li span.pvtAttr {
+    background: #2AC1E6;
+    color: #FFF;
+    border: none;
+    padding: 6px 8px;
+  }
+
+  .pvtRows li span.pvtAttr {
+    width: 100%;
+    display: block;
+  }
+
+  .pvtFilterBox {
+    button {
+      @extend .btn;
+      @extend .btn-default;
+      border-radius: 4px;
+    }
+
+    button + button {
+      margin-left: 10px;
+    }
+
+    input[type="text"] {
+      @extend .form-control;
+      margin-top: 10px;
+    }
+  }
+
+  #pivotHolder select.pvtAggregator:not(.form-control), #pivotHolder select.pvtRenderer:not(.form-control) {
+    @extend .form-control;
+    @extend .input-sm;
+  }
+
+  #pivotHolder>table:not(.table) {
+    @extend .table;
+  }
+}

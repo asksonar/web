@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   ############
 
   get '/explore', to: 'explore#index', as: 'explore'
+  get '/explore/pv', to: 'explore#pv', as: 'explore/pv'
 
   resources :fleets do
     collection do

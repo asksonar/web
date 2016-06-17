@@ -1,9 +1,9 @@
 <% content_for :title do %>
-  Explore
+  Analysis
 <% end %>
 
 <script type="text/javascript">
-  var input = <%= raw @prezi.fleets_json %>;
+  var input = <%= raw @prezi.fleets_json_pv %>;
 </script>
 
 <section class='main-content-header'>
@@ -13,7 +13,7 @@
 <section class='main-content'>
 
   <div class="panel">
-    <div id="output"></div>
+    <div id="pivotHolder"></div>
   </div>
 
 </section>

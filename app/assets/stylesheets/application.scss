@@ -27,6 +27,7 @@ $icon-font-path: 'bootstrap/';
 @import 'prism';
 @import 'spectrum';
 @import 'pivottable';
+@import 'pivottable_extensions/nrecopivottableext';
 
 // base package
 @import 'shared/**/*';

@@ -4,4 +4,8 @@ class ExploreController < ApplicationController
   def index
     @prezi = ExplorePresenter.new()
   end
+
+  def pv
+    @prezi = ExplorePresenter.new()
+  end
 end
