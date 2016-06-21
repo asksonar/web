@@ -19,10 +19,10 @@ class FleetsController < ApplicationController
     @prezi = prezi(query_params)
   end
 
-  def sub_filters
-    @prezi = prezi(query_params)
-    render json: @prezi.sub_filters
-  end
+  # def sub_filters
+  #   @prezi = prezi(query_params)
+  #   render json: @prezi.sub_filters
+  # end
 
   def export
     @prezi = prezi(query_params)

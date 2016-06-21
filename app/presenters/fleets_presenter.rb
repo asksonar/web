@@ -38,7 +38,11 @@ class FleetsPresenter
     fleets_query.main_filters
   end
 
-  def sub_filters
-    fleets_query.sub_filters(@query_params["main_filter"]).to_json
+  # def sub_filters
+  #   fleets_query.sub_filters(@query_params["main_filter"]).to_json
+  # end
+
+  def filters(field)
+    fleets_query.sub_filters(field)
   end
 end

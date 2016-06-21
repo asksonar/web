@@ -3,11 +3,14 @@
 <% end %>
 
 <section class='main-content-header'>
-  <h1><%= content_for :title %></h1>
+  <h1>
+    <button class="btn hide" id="btn-expand-sidebar"><i class="fa fa-bars"></i>Add Filter</button>
+    <%= content_for :title %>
+  </h1>
 </section>
 
 <section class='main-content'>
-  <div class='panel filters-container'>
+  <!-- <div class='panel filters-container'>
 
     <div class='filter-select-container'>
       <h3>Add a filter:</h3>
@@ -24,7 +27,7 @@
     <div class='filter-items-container hide'><h3>Filtered by:</h3></div>
 
     <div>(<span id='result-count'><%= @prezi.result_count %></span> results found)</div>
-  </div>
+  </div> -->
 
   <div class='results-containter'>
     <div class="tab-pane active panel" id="list">
