@@ -22,7 +22,8 @@ body {
   width: 300px;
   height: 100%;
   position: fixed;
-  left: -300px;
+  left: 0px;
+  z-index: 1030;
   margin-top: 44px;
   background: #2D3C43;
   overflow: scroll;
@@ -54,16 +55,11 @@ body {
 }
 
 .sidebar-collapsed .sidebar {
-  @media (min-width: $screen-sm-min) {
-    left: -240px;
-  }
+  left: -300px;
 }
 
 .sidebar-opened .sidebar {
-  @media (max-width: $screen-xs-max) {
-    left: 0;
-    z-index: 1030;
-  }
+  left: 0;
 }
 
 .main-content-wrapper {
@@ -136,9 +132,6 @@ body {
   .sidebar-collapsed .main-content-wrapper {
     margin-left: 0px;
     margin-right: 0px;
-  }
-  .sidebar {
-    left: 0;
   }
 }
 
