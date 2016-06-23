@@ -20,9 +20,9 @@
         <% if current_user.has_v3? %>
           <div class='div-collapse-sidebar'>Filters<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
           <li data-toggle="collapse" href="#aircraft_status">
-            <a class="nav-sub-container"><span class="glyphicon glyphicon-chevron-down"></span>AIRCRAFT STATUS</a>
+            <a class="nav-sub-container"><span class="glyphicon glyphicon-chevron-right"></span>AIRCRAFT STATUS</a>
           </li>
-          <ul class="nav nav-pills nav-stacked collapse in" id="aircraft_status">
+          <ul class="nav nav-pills nav-stacked collapse" id="aircraft_status">
             <%= bootstrap_form_for :filters do |f| %>
               <div class='filter' data-field='status'>
                 <% @prezi.filters("aircraft_status").each do |status| %>
@@ -33,9 +33,9 @@
           </ul>
 
           <li data-toggle="collapse" href="#aircraft">
-            <a class="nav-sub-container"><span class="glyphicon glyphicon-chevron-down"></span>AIRCRAFT</a>
+            <a class="nav-sub-container"><span class="glyphicon glyphicon-chevron-right"></span>AIRCRAFT</a>
           </li>
-          <ul class="nav nav-pills nav-stacked collapse in" id="aircraft">
+          <ul class="nav nav-pills nav-stacked collapse" id="aircraft">
             <%= bootstrap_form_for :filters do |f| %>
               <div class="filter-header">Manufacturer</div>
               <select class='selectpicker' name="aircraft_manufacturer" data-live-search="true" multiple title='Select' data-dropup-auto="false">
@@ -75,9 +75,9 @@
           </ul>
 
           <li data-toggle="collapse" href="#companies">
-            <a class="nav-sub-container"><span class="glyphicon glyphicon-chevron-down"></span>COMPANIES</a>
+            <a class="nav-sub-container"><span class="glyphicon glyphicon-chevron-right"></span>COMPANIES</a>
           </li>
-          <ul class="nav nav-pills nav-stacked collapse in" id="companies">
+          <ul class="nav nav-pills nav-stacked collapse" id="companies">
             <%= bootstrap_form_for :filters do |f| %>
               <div class="filter-header">Lessor</div>
               <select class='selectpicker' name="manager" data-live-search="true" multiple title='Select' data-dropup-auto="false">
@@ -103,9 +103,9 @@
           </ul>
 
           <li data-toggle="collapse" href="#misc">
-            <a class="nav-sub-container"><span class="glyphicon glyphicon-chevron-down"></span>MISC</a>
+            <a class="nav-sub-container"><span class="glyphicon glyphicon-chevron-right"></span>MISC</a>
           </li>
-          <ul class="nav nav-pills nav-stacked collapse in" id="misc">
+          <ul class="nav nav-pills nav-stacked collapse" id="misc">
             <%= bootstrap_form_for :filters do |f| %>
               <div class="filter-header">Country</div>
               <select class='selectpicker' name="operator_country" data-live-search="true" multiple title='Select' data-dropup-auto="false">
