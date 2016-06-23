@@ -3,19 +3,15 @@ class FleetsQuery
 
   def fleets(filters: {})
     data(filters: filters)
-      .select(:id, :aircraft_status, :aircraft_type, :serial_number, :build_year, :operator)
+      .select(:id, :aircraft_status, :aircraft_type, :serial_number, :aircraft_manufacturer, :operator)
   end
 
   def fleet(id)
     Fleet.find_by_hashid!(id)
   end
 
-  def main_filters
-    Fleet.column_names
-  end
-
-  def sub_filters(main_filter)
-    Fleet.distinct(main_filter).order(main_filter).pluck(main_filter)
+  def filters(field)
+    Fleet.distinct(field).order(field).pluck(field)
   end
 
   def aircraft_by_location(filters: {})

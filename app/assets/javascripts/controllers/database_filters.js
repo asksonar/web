@@ -1,11 +1,7 @@
 DatabaseFilters = function(config) {
-  this.$btnSelect = config.btnSelect;
-  // this.$btnSelectSubFilters = config.btnSelectSubFilters;
-  // this.$btnSelectMainFilters = config.btnSelectMainFilters;
-  this.$btnAddFilter = config.btnAddFilter;
   this.$fleetTable = config.fleetTable;
   this.$fleetTableBody = config.fleetTableBody;
-  this.$filterItemsContainer = config.filterItemsContainer;
+  this.$filterContainer = config.filterContainer;
   this.$btnExportCsv = config.btnExportCsv;
   this.$resultCount = config.resultCount;
   this.$displayCountSelect = config.displayCountSelect;
@@ -18,80 +14,73 @@ DatabaseFilters = function(config) {
 };
 
 DatabaseFilters.prototype.init = function() {
-  // this.$btnSelectMainFilters.on('change', $.proxy(this.updateSubFilters, this));
-  this.$btnAddFilter.on('click', $.proxy(this.addFilter, this));
-  this.$fleetTable.on('click', 'td', $.proxy(this.addFilter, this));
   this.$fleetTable.on('click', 'th', $.proxy(this.setSort, this));
-  this.$filterItemsContainer.on('click', '.filter-item', $.proxy(this.removeFilter, this));
+  this.$filterContainer.on('click', '.filter-item', $.proxy(this.removeFilter, this));
   this.$btnExportCsv.on('click', $.proxy(this.exportToCsv, this));
   this.$displayCountSelect.on('change', $.proxy(this.updateList, this));
-  this.$inputCheckbox.on('change', $.proxy(this.updateList, this));
-  this.$filtersSelect.on('change', $.proxy(this.updateList, this));
+  this.$fleetTable.on('click', 'td', $.proxy(this.addToFilter, this));
+  this.$inputCheckbox.on('change', $.proxy(this.addFilter, this));
+  this.$filtersSelect.on('change', $.proxy(this.addFilter, this));
 };
 
-// DatabaseFilters.prototype.updateSubFilters = function() {
-//   // remove previous filters on re-selecting
-//   if ( $('option.sub-filter').length > 0 ) {
-//     $('option.sub-filter').remove();
-//     this.$btnSelect.selectpicker('refresh');
-//   }
-//
-//   var data = { main_filter: $('.selectpicker option:selected').attr('data-type') };
-//   var url = new URL(window.location.href).pathname + '/sub_filters';
-//
-//   $.ajax({
-//     type: 'GET',
-//     dataType: 'json',
-//     url: url,
-//     data: $.extend(data, {
-//       authenticity_token: AUTH_TOKEN
-//     }),
-//     success: function(filters) {
-//       $.each(filters, function(index) {
-//         this.$btnSelectSubFilters.append('<option class="sub-filter">' + filters[index] + '</option>');
-//       }.bind(this));
-//       this.$btnSelect.selectpicker('refresh');
-//     }.bind(this),
-//     error: function(jqXHR) {
-//       notify.error(jqXHR.responseText);
-//     }.bind(this)
-//   });
-// };
-
 DatabaseFilters.prototype.addFilter = function(event){
-  var thisEl = $(event.currentTarget);
-  var main_filter, sub_filter;
+  var fieldMap = {
+    "aircraft_status": "Aircraft Status",
+    "aircraft_manufacturer": "Manufacturer",
+    "aircraft_type": "Aircraft Type",
+    "aircraft_series": "Aircraft Series",
+    "engine_type": "Engine Type",
+    "engine_variant": "Engine Variant",
+    "manager": "Lessor",
+    "operator": "Operator",
+    "owner": "Owner",
+    "operator_country": "Country"
+  };
 
-  if ( thisEl.attr('data-type') ) {
-    main_filter = thisEl.attr('data-type');
-    sub_filter = thisEl.html();
-  } else {
-    main_filter = $('.selectpicker option:selected').attr('data-type');
-    sub_filter = this.$btnSelectSubFilters.val();
-  }
+  var fields = $("nav .selectpicker option:selected").add($('.filter :checked'));
+  this.$filterContainer.html("");
 
-  // unhide filter items container
-  if ( $('.filter-items-container a').length === 0  ) {
-    this.$filterItemsContainer.toggleClass('hide');
-  }
+  fields.each(function(index, element){
+    var field = $(this).attr('name');
+    var value = $(this).attr('value');
+    var filterHeader = fieldMap[field];
 
-  // only add filter item if it hasn't already been added
-  if ( $('a[data-sub-filter="' + sub_filter + '"]').length === 0 ) {
-    this.$filterItemsContainer.append(
-      '<a class="btn btn-light-blue filter-item" data-main-filter="' + main_filter + '[]"data-sub-filter="' + sub_filter + '">' + sub_filter + '<span class="close">&times;</span></a>'
+    $('.filter-container').append(
+      '<a class="filter-item" name="' + field + '"value="' + value + '">'
+        + '<span class="close">&times;</span>'
+        + filterHeader + ": " + '<span class="strong">' + value + '</span></a>'
     )
-  }
+  });
 
   this.updateList();
 };
 
+DatabaseFilters.prototype.addToFilter = function(event){
+  var thisEl = $(event.currentTarget);
+  var field = thisEl.attr('name');
+  var value = thisEl.attr('value');
+
+  if (field === "aircraft_status") {
+    $('input[name="' + field + '"][value="' + value + '"]').prop("checked", true);
+  } else {
+    $('option[name="' + field + '"][value="' + value + '"]').prop("selected", true);
+    this.$filtersSelect.selectpicker("refresh");
+  }
+
+  this.addFilter();
+};
+
 DatabaseFilters.prototype.removeFilter = function(event){
   var thisEl = $(event.currentTarget);
+  var field = thisEl.attr('name');
+  var value = thisEl.attr('value');
   thisEl.remove();
 
-  // hide filter items container if there're no filters
-  if ( $('.filter-items-container a').length === 0 ) {
-    this.$filterItemsContainer.toggleClass('hide');
+  if (field === "aircraft_status") {
+    $('input[name="' + field + '"][value="' + value + '"]').prop("checked", false);
+  } else {
+    $('option[name="' + field + '"][value="' + value + '"]').prop("selected", false);
+    this.$filtersSelect.selectpicker("refresh");
   }
 
   this.updateList();
@@ -112,7 +101,7 @@ DatabaseFilters.prototype.getFilters = function() {
   checkedboxes.each(function(index, checkbox){
     var field = $(checkbox).attr('name');
     var value = $(checkbox).attr('value');
-    filters[field] = filters[field] ? filters[field].push(value) : [value]
+    filters[field] = filters[field] ? filters[field].push(value) : [value];
   });
 
   return filters;

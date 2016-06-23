@@ -4,14 +4,10 @@ $(function(){
   }
 
   var databaseFilters = new DatabaseFilters({
-    btnSelect: $('.selectpicker'),
-    // btnSelectSubFilters: $('#select-sub-filters'),
-    // btnSelectMainFilters: $('#select-main-filters'),
-    btnAddFilter: $('#btn-add-filter'),
     newFleetTemplate: $('#new-fleet-template'),
     fleetTable: $('.fleet-table'),
     fleetTableBody: $('.fleet-table tbody'),
-    filterItemsContainer: $('.filter-items-container'),
+    filterContainer: $('.filter-container'),
     btnExportCsv: $('#btn-export-csv'),
     resultCount: $('#result-count'),
     displayCountSelect: $('#select-display-count'),

@@ -10,24 +10,10 @@
 </section>
 
 <section class='main-content'>
-  <!-- <div class='panel filters-container'>
-
-    <div class='filter-select-container'>
-      <h3>Add a filter:</h3>
-      <select class='selectpicker' data-live-search="true" id='select-main-filters' title='Select'>
-        <% @prezi.main_filters.each do |filter| %>
-          <option data-type="<%= filter %>"><%= filter.titleize %></option>
-        <% end %>
-      </select>
-      <span>is</span>
-      <select class='selectpicker' data-live-search="true" id='select-sub-filters' title='Select'></select>
-      <a id='btn-add-filter' class='btn btn-dark-blue'>Add Filter</a>
-    </div>
-
-    <div class='filter-items-container hide'><h3>Filtered by:</h3></div>
-
-    <div>(<span id='result-count'><%= @prezi.result_count %></span> results found)</div>
-  </div> -->
+  <!-- <div class='panel filters-container'> -->
+    <div class='filter-container'></div>
+    <!-- <div>(<span id='result-count'><%= @prezi.result_count %></span> results found)</div> -->
+  <!-- </div> -->
 
   <div class='results-containter'>
     <div class="tab-pane active panel" id="list">
@@ -49,18 +35,18 @@
               <th class='col-md-2' data-type="serial_number" data-sorted="false">Serial Number</th>
               <th class='col-md-2' data-type="aircraft_status" data-sorted="false">Aircraft Status</th>
               <th class='col-md-2' data-type="aircraft_type" data-sorted="false">Aircraft Type</th>
-              <th class='col-md-2' data-type="build_year" data-sorted="false">Build Year</th>
+              <th class='col-md-2' data-type="aircraft_manufacturer" data-sorted="false">Manufacturer</th>
               <th class='col-md-3' data-type="operator" data-sorted="false">Operator</th>
             </tr>
           </thead>
           <tbody>
             <% @prezi.fleets.each do |fleet| %>
               <tr class='fleet-line'>
-                <td data-type='aircraft_status'><a href='/fleets/<%= fleet.hashid %>'><%= fleet.serial_number %></a></td>
-                <td data-type='aircraft_status'><%= fleet.aircraft_status %></td>
-                <td data-type='aircraft_type'><%= fleet.aircraft_type %></td>
-                <td data-type='build_year'><%= fleet.build_year %></td>
-                <td data-type='operator'><%= fleet.operator %></td>
+                <td name='serial_number' value='<%= fleet.serial_number %>'><a href='/fleets/<%= fleet.hashid %>'><%= fleet.serial_number %></a></td>
+                <td name='aircraft_status' value='<%= fleet.aircraft_status %>'><%= fleet.aircraft_status %></td>
+                <td name='aircraft_type' value='<%= fleet.aircraft_type %>'><%= fleet.aircraft_type %></td>
+                <td name='aircraft_manufacturer' value='<%= fleet.aircraft_manufacturer %>'><%= fleet.aircraft_manufacturer %></td>
+                <td name='operator' value='<%= fleet.operator %>'><%= fleet.operator %></td>
               </tr>
             <% end %>
           </tbody>
