@@ -5,6 +5,7 @@
       color: #FFF;
       border-radius: 0px 20px 20px 0px;
       height: 46px;
+      margin-right: 10px;
     }
   }
 
@@ -35,12 +36,17 @@
     }
 
     .fleet-table {
+      .column-header,
       .btn-table-settings {
         position: relative;
 
         button {
           background-color: inherit;
           border: none;
+        }
+
+        .btn-edit-column {
+          padding: 0;
         }
 
         .dropdown-menu {
@@ -74,7 +80,7 @@
         }
 
         .dropdown-submenu .dropdown-menu {
-          margin-top: -15px;
+          margin-top: -57px;
         }
       }
 
@@ -89,12 +95,12 @@
         white-space: nowrap;
         cursor: pointer;
 
-        i {
+        span > i {
           margin-left: 8px;
         }
 
         &:last-child {
-          padding: 7px 0;
+          padding: 7px;
         }
       }
 
@@ -109,6 +115,7 @@
           word-wrap: break-word;
           white-space: nowrap;
           overflow: scroll;
+          border-top: 1px solid #F0F0F0;
 
           a {
             color: #2D3C43;

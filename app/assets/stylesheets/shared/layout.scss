@@ -99,12 +99,6 @@ body {
       padding: 10px 10px;
     }
 
-    .sidebar-collapsed & {
-      @media (min-width: $screen-lg-min) {
-        padding: 20px 100px;
-      }
-    }
-
     .panel {
       margin-bottom: 10px;
 

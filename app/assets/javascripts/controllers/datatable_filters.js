@@ -1,4 +1,4 @@
-DatabaseFilters = function(config) {
+DatatableFilters = function(config) {
   this.$fleetTable = config.fleetTable;
   this.$fleetTableBody = config.fleetTableBody;
   this.$filterContainer = config.filterContainer;
@@ -14,8 +14,8 @@ DatabaseFilters = function(config) {
   this.init();
 };
 
-DatabaseFilters.prototype.init = function() {
-  this.$fleetTable.on('click', 'th:not(:last-child)', $.proxy(this.setSort, this));
+DatatableFilters.prototype.init = function() {
+  this.$fleetTable.on('click', 'th:not(:last-child) .column-name', $.proxy(this.setSort, this));
   this.$filterContainer.on('click', '.filter-item', $.proxy(this.removeFilter, this));
   this.$btnExportCsv.on('click', $.proxy(this.exportToCsv, this));
   this.$displayCountSelect.on('click', $.proxy(this.setDisplayCount, this));
@@ -24,7 +24,7 @@ DatabaseFilters.prototype.init = function() {
   this.$filtersSelect.on('change', $.proxy(this.addFilter, this));
 };
 
-DatabaseFilters.prototype.addFilter = function(event){
+DatatableFilters.prototype.addFilter = function(event){
   var fieldMap = {
     "aircraft_status": "Aircraft Status",
     "aircraft_manufacturer": "Manufacturer",
@@ -56,7 +56,7 @@ DatabaseFilters.prototype.addFilter = function(event){
   this.updateList();
 };
 
-DatabaseFilters.prototype.addToFilter = function(event){
+DatatableFilters.prototype.addToFilter = function(event){
   var thisEl = $(event.currentTarget);
   var field = thisEl.attr('name');
   var value = thisEl.attr('value');
@@ -71,7 +71,7 @@ DatabaseFilters.prototype.addToFilter = function(event){
   this.addFilter();
 };
 
-DatabaseFilters.prototype.removeFilter = function(event){
+DatatableFilters.prototype.removeFilter = function(event){
   var thisEl = $(event.currentTarget);
   var field = thisEl.attr('name');
   var value = thisEl.attr('value');
@@ -87,7 +87,7 @@ DatabaseFilters.prototype.removeFilter = function(event){
   this.updateList();
 };
 
-DatabaseFilters.prototype.getFilters = function() {
+DatatableFilters.prototype.getFilters = function() {
   var filters = {};
 
   var selectedFilters = this.$filtersSelect.find("option:selected");
@@ -107,7 +107,7 @@ DatabaseFilters.prototype.getFilters = function() {
   return filters;
 };
 
-DatabaseFilters.prototype.setDisplayCount = function(event) {
+DatatableFilters.prototype.setDisplayCount = function(event) {
   var thisEl = $(event.currentTarget);
   this.$ctnDisplayCountSelect.find('a[selected=selected]').removeAttr("selected");
   thisEl.attr("selected", true);
@@ -116,11 +116,11 @@ DatabaseFilters.prototype.setDisplayCount = function(event) {
 };
 
 
-DatabaseFilters.prototype.getDisplayCount = function(event) {
+DatatableFilters.prototype.getDisplayCount = function(event) {
   return { "display_count": this.$ctnDisplayCountSelect.find('a[selected=selected]').text() };
 };
 
-DatabaseFilters.prototype.updateList = function() {
+DatatableFilters.prototype.updateList = function() {
   var filters = this.getFilters();
   var displayCount = this.getDisplayCount();
   var sort = this.getSort();
@@ -146,8 +146,8 @@ DatabaseFilters.prototype.updateList = function() {
   });
 };
 
-DatabaseFilters.prototype.setSort = function(event) {
-  var thisEl = $(event.currentTarget);
+DatatableFilters.prototype.setSort = function(event) {
+  var thisEl = $(event.currentTarget).parent();
   var sorted = thisEl.attr('data-sorted') === "true";
   var direction = sorted && thisEl.attr('data-sorted-direction') === "asc" ? "desc" : "asc";
   var icon = thisEl.find('i');
@@ -166,13 +166,13 @@ DatabaseFilters.prototype.setSort = function(event) {
   this.updateList();
 };
 
-DatabaseFilters.prototype.getSort = function() {
+DatatableFilters.prototype.getSort = function() {
   var sort = $('th[data-sorted=true]').attr('data-type');
   var direction = $('th[data-sorted=true]').attr('data-sorted-direction');
   return { "sort": sort, "direction": direction }
 };
 
-DatabaseFilters.prototype.exportToCsv = function() {
+DatatableFilters.prototype.exportToCsv = function() {
   var filters = this.getFilters();
   var displayCount = this.getDisplayCount();
   var sort = this.getSort();
