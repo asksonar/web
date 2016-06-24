@@ -19,6 +19,7 @@
     width: 230px;
     text-align: left;
     vertical-align: top;
+    text-decoration: none;
 
     .close {
       color: #FFF;
@@ -34,37 +35,97 @@
     }
 
     .fleet-table {
-      th:after {
-        content: "";
-        visibility: hidden;
-        display: inline-block;
-        vertical-align: inherit;
-        height: 0;
-        width: 0;
-        border-width: 5px;
-        border-style: solid;
-        border-color: transparent;
-        margin-right: 1px;
-        margin-left: 10px;
-        float: right;
+      .btn-table-settings {
+        position: relative;
+
+        button {
+          background-color: inherit;
+          border: none;
+        }
+
+        .dropdown-menu {
+          background-color: #67747F;
+          border-radius: 0;
+          padding: 9px 0;
+          position: absolute;
+          top: 47px; // height of th
+
+          >li>a {
+            color: #FFF;
+            font-size: 12px;
+
+            i {
+              margin-right: 10px;
+            }
+          }
+          >li>a:focus,
+          >li>a:active,
+          >li.active>a {
+            background-color: inherit;
+            outline: none;
+          }
+          >li>a:hover {
+            background-color: inherit;
+          }
+
+          .divider {
+            opacity: 0.5;
+          }
+        }
+
+        .dropdown-submenu .dropdown-menu {
+          margin-top: -15px;
+        }
       }
 
-      th[data-sorted="true"]:after {
-        visibility: visible;
+      thead > tr > th {
+        vertical-align: top;
+        padding: 14px 22px;
+        max-width: 160px;
+        color: #9CA8B4;
+        background-color: #FFF;
+        border: none;
+        word-wrap: break-word;
+        white-space: nowrap;
+        cursor: pointer;
+
+        i {
+          margin-left: 8px;
+        }
+
+        &:last-child {
+          padding: 7px 0;
+        }
       }
 
-      th[data-sorted-direction="desc"]:after {
-        border-top-color: #05647C;
-        margin-top: 8px;
-      }
+      tbody > tr {
+        > td {
+          vertical-align: middle;
+          padding: 14px 22px;
+          max-width: 160px;
+          color: #2D3C43;
+          font-weight: bold;
+          cursor: pointer;
+          word-wrap: break-word;
+          white-space: nowrap;
+          overflow: scroll;
 
-      th[data-sorted-direction="asc"]:after {
-        border-bottom-color: #05647C;
-        margin-top: 3px;
-      }
+          a {
+            color: #2D3C43;
+          }
 
-      th, td {
-        @extend a;
+          &:last-child {
+            padding: 7px 0;
+          }
+        }
+
+        &:nth-child(odd) > td {
+          background-color: #F5F5F5;
+        }
+
+        &:nth-child(even) > td {
+          background-color: #FFF;
+        }
       }
     }
   }

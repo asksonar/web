@@ -32,11 +32,6 @@
     // }
   }
 
-  .collapse.in,
-  .collapsing {
-    background-color: #1CA5C9;
-  }
-
   .navbar-nav + .navbar-nav {
     @media (max-width: $screen-sm-min) {
       margin-top: -7.5px; // remove 7.5px margin between top & right navs when stacked

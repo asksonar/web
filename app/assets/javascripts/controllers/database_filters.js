@@ -4,6 +4,7 @@ DatabaseFilters = function(config) {
   this.$filterContainer = config.filterContainer;
   this.$btnExportCsv = config.btnExportCsv;
   this.$resultCount = config.resultCount;
+  this.$ctnDisplayCountSelect = config.ctnDisplayCountSelect;
   this.$displayCountSelect = config.displayCountSelect;
   this.$inputCheckbox = config.inputCheckbox;
   this.$filtersSelect = config.filtersSelect;
@@ -14,10 +15,10 @@ DatabaseFilters = function(config) {
 };
 
 DatabaseFilters.prototype.init = function() {
-  this.$fleetTable.on('click', 'th', $.proxy(this.setSort, this));
+  this.$fleetTable.on('click', 'th:not(:last-child)', $.proxy(this.setSort, this));
   this.$filterContainer.on('click', '.filter-item', $.proxy(this.removeFilter, this));
   this.$btnExportCsv.on('click', $.proxy(this.exportToCsv, this));
-  this.$displayCountSelect.on('change', $.proxy(this.updateList, this));
+  this.$displayCountSelect.on('click', $.proxy(this.setDisplayCount, this));
   this.$fleetTable.on('click', 'td', $.proxy(this.addToFilter, this));
   this.$inputCheckbox.on('change', $.proxy(this.addFilter, this));
   this.$filtersSelect.on('change', $.proxy(this.addFilter, this));
@@ -94,7 +95,6 @@ DatabaseFilters.prototype.getFilters = function() {
     var field = $(selectedFilter).attr('name');
     var value = $(selectedFilter).attr('value');
     filters[field] = filters[field] ? filters[field].push(value) : [value];
-
   });
 
   var checkedboxes =  $('.filter :checked');
@@ -107,8 +107,17 @@ DatabaseFilters.prototype.getFilters = function() {
   return filters;
 };
 
-DatabaseFilters.prototype.getDisplayCount = function() {
-  return { "display_count": this.$displayCountSelect.val() };
+DatabaseFilters.prototype.setDisplayCount = function(event) {
+  var thisEl = $(event.currentTarget);
+  this.$ctnDisplayCountSelect.find('a[selected=selected]').removeAttr("selected");
+  thisEl.attr("selected", true);
+
+  this.updateList();
+};
+
+
+DatabaseFilters.prototype.getDisplayCount = function(event) {
+  return { "display_count": this.$ctnDisplayCountSelect.find('a[selected=selected]').text() };
 };
 
 DatabaseFilters.prototype.updateList = function() {
@@ -141,6 +150,13 @@ DatabaseFilters.prototype.setSort = function(event) {
   var thisEl = $(event.currentTarget);
   var sorted = thisEl.attr('data-sorted') === "true";
   var direction = sorted && thisEl.attr('data-sorted-direction') === "asc" ? "desc" : "asc";
+  var icon = thisEl.find('i');
+
+  if ( icon.hasClass('fa-caret-down') ) {
+    icon.removeClass("fa-caret-down").addClass("fa-caret-up");
+  } else {
+    icon.removeClass("fa-caret-up").addClass("fa-caret-down");
+  }
 
   $('th[data-sorted=true]').attr('data-sorted', false)
   $('th[data-sorted-direction]').removeAttr('data-sorted-direction');

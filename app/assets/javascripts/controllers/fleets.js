@@ -3,6 +3,8 @@ $(function(){
     return;
   }
 
+  $('[data-submenu]').submenupicker();
+
   var databaseFilters = new DatabaseFilters({
     newFleetTemplate: $('#new-fleet-template'),
     fleetTable: $('.fleet-table'),
@@ -10,7 +12,8 @@ $(function(){
     filterContainer: $('.filter-container'),
     btnExportCsv: $('#btn-export-csv'),
     resultCount: $('#result-count'),
-    displayCountSelect: $('#select-display-count'),
+    ctnDisplayCountSelect: $('#select-display-count'),
+    displayCountSelect: $('#select-display-count a'),
     inputCheckbox: $('.filter input[type="checkbox"]'),
     filtersSelect: $('nav .selectpicker')
   });

@@ -3,7 +3,7 @@ class FleetsQuery
 
   def fleets(filters: {})
     data(filters: filters)
-      .select(:id, :aircraft_status, :aircraft_type, :serial_number, :aircraft_manufacturer, :operator)
+      .select(:id, :serial_number, :aircraft_status, :aircraft_manufacturer, :aircraft_type, :engine_type, :manager, :operator, :owner, :operator_country)
   end
 
   def fleet(id)
