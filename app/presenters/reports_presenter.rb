@@ -6,7 +6,7 @@ class ReportsPresenter
   end
 
   def aircraft_type
-    fleets_query.sub_filters(:aircraft_type)
+    fleets_query.filters(:aircraft_type)
   end
 
   def fleets_query

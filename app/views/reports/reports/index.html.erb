@@ -1,3 +1,7 @@
+<% content_for :main_wrapper_class do %>
+  sidebar-collapsed
+<% end %>
+
 <% content_for :title do %>
   Aircraft Report <% if !@prezi.query_params.empty? %> - <%= @prezi.query_params["aircraft_type"] %><% end %>
 <% end %>
