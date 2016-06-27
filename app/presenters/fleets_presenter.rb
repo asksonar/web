@@ -34,11 +34,7 @@ class FleetsPresenter
     @fleet ||= fleets_query.fleet(@query_params["id"])
   end
 
-  def main_filters
-    fleets_query.main_filters
-  end
-
-  def sub_filters
-    fleets_query.sub_filters(@query_params["main_filter"]).to_json
+  def filters(field)
+    fleets_query.filters(field)
   end
 end

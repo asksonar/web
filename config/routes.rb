@@ -36,7 +36,6 @@ Rails.application.routes.draw do
 
   resources :fleets do
     collection do
-      get 'sub_filters'
       get 'export'
     end
   end

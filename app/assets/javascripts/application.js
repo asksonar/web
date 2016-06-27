@@ -39,6 +39,7 @@
 //= require pivottable_extensions/nrecopivottableext
 //= require codebase/webix/webix
 //= require codebase/pivot
+//= require bootstrap-submenu
 
 // insert 3rd party packages above this line
 

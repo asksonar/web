@@ -2,68 +2,177 @@
   Fleet Database
 <% end %>
 
+<% content_for :nav_left do %>
+  <%= render 'nav/filters' %>
+<% end %>
+
 <section class='main-content-header'>
-  <h1><%= content_for :title %></h1>
+  <h1>
+    <button class="btn hide" id="btn-expand-sidebar"><i class="fa fa-filter"></i>Add Filter</button>
+    <%= content_for :title %>
+  </h1>
 </section>
 
 <section class='main-content'>
-  <div class='panel filters-container'>
-
-    <div class='filter-select-container'>
-      <h3>Add a filter:</h3>
-      <select class='selectpicker' data-live-search="true" id='select-main-filters' title='Select'>
-        <% @prezi.main_filters.each do |filter| %>
-          <option data-type="<%= filter %>"><%= filter.titleize %></option>
-        <% end %>
-      </select>
-      <span>is</span>
-      <select class='selectpicker' data-live-search="true" id='select-sub-filters' title='Select'></select>
-      <a id='btn-add-filter' class='btn btn-dark-blue'>Add Filter</a>
-    </div>
-
-    <div class='filter-items-container hide'><h3>Filtered by:</h3></div>
-
-    <div>(<span id='result-count'><%= @prezi.result_count %></span> results found)</div>
-  </div>
+  <div class='filter-container'></div>
+  <!-- <div>(<span id='result-count'><%= @prezi.result_count %></span> results found)</div> -->
 
   <div class='results-containter'>
-    <div class="tab-pane active panel" id="list">
-      <p class="container-export">
-        Show
-        <select class="selectpicker" id="select-display-count">
-          <option>25</option>
-          <option>50</option>
-          <option>100</option>
-          <option>All</option>
-        </select>
-        <a class="btn btn-dark-blue pull-right" id="btn-export-csv">Export to CSV</a>
-      </p>
+    <div class='table-responsive fleet-table'>
+      <table class='table table-hover'>
+        <thead>
+          <tr>
+            <th class="column-header" data-type="serial_number" data-sorted="false">
+              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
+                <i class="fa fa-cog"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
+              </ul>
+              <span class="column-name">MSN<i class="fa fa-caret-down"></i></span>
+            </th>
 
-      <div class='table-responsive'>
-        <table class='table fleet-table'>
-          <thead>
-            <tr>
-              <th class='col-md-2' data-type="serial_number" data-sorted="false">Serial Number</th>
-              <th class='col-md-2' data-type="aircraft_status" data-sorted="false">Aircraft Status</th>
-              <th class='col-md-2' data-type="aircraft_type" data-sorted="false">Aircraft Type</th>
-              <th class='col-md-2' data-type="build_year" data-sorted="false">Build Year</th>
-              <th class='col-md-3' data-type="operator" data-sorted="false">Operator</th>
+            <th class="column-header" data-type="aircraft_status" data-sorted="false">
+              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
+                <i class="fa fa-cog"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
+              </ul>
+              <span class="column-name">Aircraft Status<i class="fa fa-caret-down"></i></span>
+            </th>
+
+            <th class="column-header" data-type="aircraft_manufacturer" data-sorted="false">
+              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
+                <i class="fa fa-cog"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
+              </ul>
+              <span class="column-name">Manufacturer<i class="fa fa-caret-down"></i></span>
+            </th>
+
+            <th class="column-header" data-type="aircraft_type" data-sorted="false">
+              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
+                <i class="fa fa-cog"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
+              </ul>
+              <span class="column-name">Aircraft Type<i class="fa fa-caret-down"></i></span>
+            </th>
+
+            <th class="column-header" data-type="engine_type" data-sorted="false">
+              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
+                <i class="fa fa-cog"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
+              </ul>
+              <span class="column-name">Engine Type<i class="fa fa-caret-down"></i></span>
+            </th>
+
+            <th class="column-header" data-type="manager" data-sorted="false">
+              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
+                <i class="fa fa-cog"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
+              </ul>
+              <span class="column-name">Manager<i class="fa fa-caret-down"></i></span>
+            </th>
+
+            <th class="column-header" data-type="operator" data-sorted="false">
+              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
+                <i class="fa fa-cog"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
+              </ul>
+              <span class="column-name">Operator<i class="fa fa-caret-down"></i></span>
+            </th>
+
+            <th class="column-header" data-type="owner" data-sorted="false">
+              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
+                <i class="fa fa-cog"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
+              </ul>
+              <span class="column-name">Owner<i class="fa fa-caret-down"></i></span>
+            </th>
+
+            <th class="column-header" data-type="operator_country" data-sorted="false">
+              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
+                <i class="fa fa-cog"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
+              </ul>
+              <span class="column-name">Country<i class="fa fa-caret-down"></i></span>
+            </th>
+
+            <th class="btn-table-settings">
+              <button type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
+                <i class="fa fa-cog fa-2x"></i>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li><a tabindex="0" id="btn-export-csv"><i class="fa fa-long-arrow-down"></i>Download CSV</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-submenu">
+                  <a tabindex="0"><i class="fa fa-bars"></i>Show results</a>
+                  <ul class="dropdown-menu" id="select-display-count">
+                    <li><a tabindex="0">15</a></li>
+                    <li class="divider"></li>
+                    <li><a tabindex="0" selected="selected">25</a></li>
+                    <li class="divider"></li>
+                    <li><a tabindex="0">50</a></li>
+                    <li class="divider"></li>
+                    <li><a tabindex="0">All</a></li>
+                  </ul>
+                </li>
+                <li class="divider"></li>
+                <li><a tabindex="0" id="btn-edit-mode"><i class="fa fa-pencil-square-o"></i>Edit mode</a></a></li>
+              </ul>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @prezi.fleets.each do |fleet| %>
+            <tr class='fleet-line'>
+              <td name='serial_number' value='<%= fleet.serial_number %>'><a href='/fleets/<%= fleet.hashid %>'><%= fleet.serial_number %></a></td>
+              <td name='aircraft_status' value='<%= fleet.aircraft_status %>'><%= fleet.aircraft_status %></td>
+              <td name='aircraft_manufacturer' value='<%= fleet.aircraft_manufacturer %>'><%= fleet.aircraft_manufacturer %></td>
+              <td name='aircraft_type' value='<%= fleet.aircraft_type %>'><%= fleet.aircraft_type %></td>
+              <td name='engine_type' value='<%= fleet.engine_type %>'><%= fleet.engine_type %></td>
+              <td name='manager' value='<%= fleet.manager %>'><%= fleet.manager %></td>
+              <td name='operator' value='<%= fleet.operator %>'><%= fleet.operator %></td>
+              <td name='owner' value='<%= fleet.owner %>'><%= fleet.owner %></td>
+              <td name='operator_country' value='<%= fleet.operator_country %>'><%= fleet.operator_country %></td>
+              <td></td>
             </tr>
-          </thead>
-          <tbody>
-            <% @prezi.fleets.each do |fleet| %>
-              <tr class='fleet-line'>
-                <td data-type='aircraft_status'><a href='/fleets/<%= fleet.hashid %>'><%= fleet.serial_number %></a></td>
-                <td data-type='aircraft_status'><%= fleet.aircraft_status %></td>
-                <td data-type='aircraft_type'><%= fleet.aircraft_type %></td>
-                <td data-type='build_year'><%= fleet.build_year %></td>
-                <td data-type='operator'><%= fleet.operator %></td>
-              </tr>
-            <% end %>
-          </tbody>
-          <%= render partial: 'fleets/partials/fleet_template' %>
-        </table>
-      </div>
+          <% end %>
+        </tbody>
+        <%= render partial: 'fleets/partials/fleet_template' %>
+      </table>
     </div>
   </div>
 

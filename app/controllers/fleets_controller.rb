@@ -19,11 +19,6 @@ class FleetsController < ApplicationController
     @prezi = prezi(query_params)
   end
 
-  def sub_filters
-    @prezi = prezi(query_params)
-    render json: @prezi.sub_filters
-  end
-
   def export
     @prezi = prezi(query_params)
 
@@ -52,6 +47,6 @@ class FleetsController < ApplicationController
   end
 
   def query_params
-    params.permit(:id, :main_filter, aircraft_status: [], aircraft_manufacturer: [], aircraft_type: [], aircraft_series: [], aircraft_variant: [], registration: [], serial_number: [], line_number: [], build_year: [], operator: [], owner: [], owner_type: [], engine_type: [], engine_variant: [], seat_total: [], mtow: [], hours_cumulative: [], cycles_cumulative: [], effective_date: [], aircraft_age: [], original_operator: [], operated_for: [], aircraft_usage: [], aircraft_usage2: [], minor_variant: [], operator_area: [], operator_country: [], operator_state: [], current_market_value: [], current_market_lease_rate: [], financier1: [], noise_category: [], manager: [])
+    params.permit(:id, aircraft_status: [], aircraft_manufacturer: [], aircraft_type: [], aircraft_series: [], aircraft_variant: [], registration: [], serial_number: [], line_number: [], build_year: [], operator: [], owner: [], owner_type: [], engine_type: [], engine_variant: [], seat_total: [], mtow: [], hours_cumulative: [], cycles_cumulative: [], effective_date: [], aircraft_age: [], original_operator: [], operated_for: [], aircraft_usage: [], aircraft_usage2: [], minor_variant: [], operator_area: [], operator_country: [], operator_state: [], current_market_value: [], current_market_lease_rate: [], financier1: [], noise_category: [], manager: [])
   end
 end

@@ -19,12 +19,14 @@ body {
 }
 
 .sidebar {
-  width: 240px;
+  width: 300px;
   height: 100%;
   position: fixed;
-  left: -240px;
+  left: 0px;
+  z-index: 1030;
   margin-top: 44px;
-  background: #323544;
+  background: #2D3C43;
+  overflow: scroll;
 
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
@@ -53,16 +55,11 @@ body {
 }
 
 .sidebar-collapsed .sidebar {
-  @media (min-width: $screen-sm-min) {
-    left: -240px;
-  }
+  left: -300px;
 }
 
 .sidebar-opened .sidebar {
-  @media (max-width: $screen-xs-max) {
-    left: 0;
-    z-index: 1030;
-  }
+  left: 0;
 }
 
 .main-content-wrapper {
@@ -99,13 +96,7 @@ body {
     padding: 10px 0px;
 
     @media (min-width: $screen-sm-min) {
-      padding: 20px 20px;
-    }
-
-    .sidebar-collapsed & {
-      @media (min-width: $screen-lg-min) {
-        padding: 20px 100px;
-      }
+      padding: 10px 10px;
     }
 
     .panel {
@@ -130,14 +121,11 @@ body {
 
 @media (min-width: $screen-sm-min) {
   .main-content-wrapper {
-    margin-left: 240px;
+    margin-left: 300px;
   }
   .sidebar-collapsed .main-content-wrapper {
     margin-left: 0px;
     margin-right: 0px;
-  }
-  .sidebar {
-    left: 0;
   }
 }
 

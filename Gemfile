@@ -118,6 +118,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-spectrum'
   # pivot table implementation
   gem 'rails-assets-pivottable'
+  # Bootstrap Sub-Menus
+  gem 'rails-assets-bootstrap-submenu'
 end
 
 group :development, :test do
