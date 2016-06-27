@@ -28,15 +28,15 @@ $(function(){
 
   $('.collapse').on('hide.bs.collapse', function(){
     var id = $(this).attr('id');
-    $('li[href="#' + id + '"]').find(".glyphicon-chevron-down")
-      .removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-right");
+    $('li[href="#' + id + '"]').find(".fa-chevron-down")
+      .removeClass("fa-chevron-down").addClass("fa-chevron-right");
   }).on('show.bs.collapse', function(){
     var id = $(this).attr('id');
-    $('li[href="#' + id + '"]').find(".glyphicon-chevron-right")
-      .removeClass("glyphicon-chevron-right").addClass("glyphicon-chevron-down");
+    $('li[href="#' + id + '"]').find(".fa-chevron-right")
+      .removeClass("fa-chevron-right").addClass("fa-chevron-down");
   })
 
-  $('.div-collapse-sidebar .glyphicon').on('click', function() {
+  $('.div-collapse-sidebar i').on('click', function() {
     $('#main-wrapper').toggleClass('sidebar-collapsed');
     $('#btn-expand-sidebar').toggleClass('hide');
     $('.main-content-header').css("padding-left", "0px");
