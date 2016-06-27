@@ -1,9 +1,9 @@
 <aside class="sidebar">
   <nav>
     <ul class="nav nav-pills nav-stacked">
-      <div class='div-collapse-sidebar'>Filters<span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
+      <div class='div-collapse-sidebar'>Filters<i class="fa fa-close"></i></div>
       <li data-toggle="collapse" href="#aircraft_status">
-        <a class="nav-sub-container"><span class="glyphicon glyphicon-chevron-right"></span>AIRCRAFT STATUS</a>
+        <a class="nav-sub-container"><i class="fa fa-chevron-right"></i>AIRCRAFT STATUS</a>
       </li>
       <ul class="nav nav-pills nav-stacked collapse" id="aircraft_status">
         <%= bootstrap_form_for :filters do |f| %>
@@ -16,7 +16,7 @@
       </ul>
 
       <li data-toggle="collapse" href="#aircraft">
-        <a class="nav-sub-container"><span class="glyphicon glyphicon-chevron-right"></span>AIRCRAFT</a>
+        <a class="nav-sub-container"><i class="fa fa-chevron-right"></i>AIRCRAFT</a>
       </li>
       <ul class="nav nav-pills nav-stacked collapse" id="aircraft">
         <%= bootstrap_form_for :filters do |f| %>
@@ -58,7 +58,7 @@
       </ul>
 
       <li data-toggle="collapse" href="#companies">
-        <a class="nav-sub-container"><span class="glyphicon glyphicon-chevron-right"></span>COMPANIES</a>
+        <a class="nav-sub-container"><i class="fa fa-chevron-right"></i>COMPANIES</a>
       </li>
       <ul class="nav nav-pills nav-stacked collapse" id="companies">
         <%= bootstrap_form_for :filters do |f| %>
@@ -86,7 +86,7 @@
       </ul>
 
       <li data-toggle="collapse" href="#misc">
-        <a class="nav-sub-container"><span class="glyphicon glyphicon-chevron-right"></span>MISC</a>
+        <a class="nav-sub-container"><i class="fa fa-chevron-right"></i>MISC</a>
       </li>
       <ul class="nav nav-pills nav-stacked collapse" id="misc">
         <%= bootstrap_form_for :filters do |f| %>
