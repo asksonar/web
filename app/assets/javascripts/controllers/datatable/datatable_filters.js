@@ -3,7 +3,6 @@ DatatableFilters = function(config) {
   this.$fleetTableBody = config.fleetTableBody;
   this.$filterContainer = config.filterContainer;
   this.$btnExportCsv = config.btnExportCsv;
-  this.$resultCount = config.resultCount;
   this.$ctnDisplayCountSelect = config.ctnDisplayCountSelect;
   this.$displayCountSelect = config.displayCountSelect;
   this.$inputCheckbox = config.inputCheckbox;
@@ -15,7 +14,7 @@ DatatableFilters = function(config) {
 };
 
 DatatableFilters.prototype.init = function() {
-  this.$fleetTable.on('click', 'th:not(:last-child) .column-name', $.proxy(this.setSort, this));
+  this.$fleetTable.on('click', '.column-name', $.proxy(this.setSort, this));
   this.$filterContainer.on('click', '.filter-item', $.proxy(this.removeFilter, this));
   this.$btnExportCsv.on('click', $.proxy(this.exportToCsv, this));
   this.$displayCountSelect.on('click', $.proxy(this.setDisplayCount, this));
@@ -94,16 +93,16 @@ DatatableFilters.prototype.getFilters = function() {
   selectedFilters.each(function(index, selectedFilter) {
     var field = $(selectedFilter).attr('name');
     var value = $(selectedFilter).attr('value');
-    filters[field] = filters[field] ? filters[field].push(value) : [value];
+    filters[field] ? filters[field].push(value) : filters[field] = [value];
   });
 
   var checkedboxes =  $('.filter :checked');
   checkedboxes.each(function(index, checkbox){
     var field = $(checkbox).attr('name');
     var value = $(checkbox).attr('value');
-    filters[field] = filters[field] ? filters[field].push(value) : [value];
+    filters[field] ? filters[field].push(value) : filters[field] = [value];
   });
-
+  
   return filters;
 };
 
@@ -125,7 +124,7 @@ DatatableFilters.prototype.updateList = function() {
   var displayCount = this.getDisplayCount();
   var sort = this.getSort();
   var url = new URL(window.location.href).pathname;
-  var newFleets = newFleets || { fleets:[] };
+  var newFleets = newFleets || { column_names: [], fleets: [] };
 
   $.ajax({
     type: 'GET',
@@ -136,9 +135,9 @@ DatatableFilters.prototype.updateList = function() {
     }),
     success: function(response) {
       $('.fleet-line').remove();
-      newFleets.fleets = response.fleets
-      this.$fleetTableBody.append(this.$newFleetTemplate(newFleets))
-      this.$resultCount.html(response.result_count);
+      newFleets.column_names = response.column_names;
+      newFleets.fleets = response.fleets;
+      this.$fleetTableBody.append(this.$newFleetTemplate(newFleets));
     }.bind(this),
     error: function(jqXHR) {
       notify.error(jqXHR.responseText);

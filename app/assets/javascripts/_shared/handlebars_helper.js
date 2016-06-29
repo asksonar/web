@@ -14,4 +14,8 @@ $(function(){
       return new Handlebars.SafeString(number + ' ' + text + 's');
     }
   });
+
+  Handlebars.registerHelper('get_object_value_with_key', function(object, key) {
+    return object[key];
+  });
 });

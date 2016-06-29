@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   resources :fleets do
     collection do
       get 'export'
+      post 'settings'
     end
   end
 

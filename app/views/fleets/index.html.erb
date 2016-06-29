@@ -15,119 +15,28 @@
 
 <section class='main-content'>
   <div class='filter-container'></div>
-  <!-- <div>(<span id='result-count'><%= @prezi.result_count %></span> results found)</div> -->
 
   <div class='results-containter'>
     <div class='table-responsive fleet-table'>
       <table class='table table-hover'>
         <thead>
           <tr>
-            <th class="column-header" data-type="serial_number" data-sorted="false">
-              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
-                <i class="fa fa-cog"></i>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
-                <li class="divider"></li>
-                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
-              </ul>
-              <span class="column-name">MSN<i class="fa fa-caret-down"></i></span>
-            </th>
+            <% @prezi.columns_selected.each do |column| %>
+              <th class="column-header" data-type="<%= column %>" data-sorted="false">
+                <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
+                  <i class="fa fa-cog"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
+                  <li class="divider"></li>
+                  <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
+                </ul>
+                <span class="column-name"><%= column.titleize %><i class="fa fa-caret-down"></i></span>
+              </th>
+            <% end %>
 
-            <th class="column-header" data-type="aircraft_status" data-sorted="false">
-              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
-                <i class="fa fa-cog"></i>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
-                <li class="divider"></li>
-                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
-              </ul>
-              <span class="column-name">Aircraft Status<i class="fa fa-caret-down"></i></span>
-            </th>
-
-            <th class="column-header" data-type="aircraft_manufacturer" data-sorted="false">
-              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
-                <i class="fa fa-cog"></i>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
-                <li class="divider"></li>
-                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
-              </ul>
-              <span class="column-name">Manufacturer<i class="fa fa-caret-down"></i></span>
-            </th>
-
-            <th class="column-header" data-type="aircraft_type" data-sorted="false">
-              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
-                <i class="fa fa-cog"></i>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
-                <li class="divider"></li>
-                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
-              </ul>
-              <span class="column-name">Aircraft Type<i class="fa fa-caret-down"></i></span>
-            </th>
-
-            <th class="column-header" data-type="engine_type" data-sorted="false">
-              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
-                <i class="fa fa-cog"></i>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
-                <li class="divider"></li>
-                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
-              </ul>
-              <span class="column-name">Engine Type<i class="fa fa-caret-down"></i></span>
-            </th>
-
-            <th class="column-header" data-type="manager" data-sorted="false">
-              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
-                <i class="fa fa-cog"></i>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
-                <li class="divider"></li>
-                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
-              </ul>
-              <span class="column-name">Manager<i class="fa fa-caret-down"></i></span>
-            </th>
-
-            <th class="column-header" data-type="operator" data-sorted="false">
-              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
-                <i class="fa fa-cog"></i>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
-                <li class="divider"></li>
-                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
-              </ul>
-              <span class="column-name">Operator<i class="fa fa-caret-down"></i></span>
-            </th>
-
-            <th class="column-header" data-type="owner" data-sorted="false">
-              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
-                <i class="fa fa-cog"></i>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
-                <li class="divider"></li>
-                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
-              </ul>
-              <span class="column-name">Owner<i class="fa fa-caret-down"></i></span>
-            </th>
-
-            <th class="column-header" data-type="operator_country" data-sorted="false">
-              <button class="hide btn-edit-column" type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
-                <i class="fa fa-cog"></i>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a tabindex="0" class="btn-move-left"><i class="fa fa-long-arrow-left"></i>Move left</a></li>
-                <li class="divider"></li>
-                <li><a tabindex="0" class="btn-move-right"><i class="fa fa-long-arrow-right"></i>Move right</a></a></li>
-              </ul>
-              <span class="column-name">Country<i class="fa fa-caret-down"></i></span>
+            <th class="btn-datatable-settings">
+              <button type="button" data-toggle="modal" data-target="#datatable_settings_container"><span>+</span></button>
             </th>
 
             <th class="btn-table-settings">
@@ -158,15 +67,10 @@
         <tbody>
           <% @prezi.fleets.each do |fleet| %>
             <tr class='fleet-line'>
-              <td name='serial_number' value='<%= fleet.serial_number %>'><a href='/fleets/<%= fleet.hashid %>'><%= fleet.serial_number %></a></td>
-              <td name='aircraft_status' value='<%= fleet.aircraft_status %>'><%= fleet.aircraft_status %></td>
-              <td name='aircraft_manufacturer' value='<%= fleet.aircraft_manufacturer %>'><%= fleet.aircraft_manufacturer %></td>
-              <td name='aircraft_type' value='<%= fleet.aircraft_type %>'><%= fleet.aircraft_type %></td>
-              <td name='engine_type' value='<%= fleet.engine_type %>'><%= fleet.engine_type %></td>
-              <td name='manager' value='<%= fleet.manager %>'><%= fleet.manager %></td>
-              <td name='operator' value='<%= fleet.operator %>'><%= fleet.operator %></td>
-              <td name='owner' value='<%= fleet.owner %>'><%= fleet.owner %></td>
-              <td name='operator_country' value='<%= fleet.operator_country %>'><%= fleet.operator_country %></td>
+              <% @prezi.columns_selected.each do |column| %>
+                <td name='<%= column %>' value='<%= fleet[column] %>'><%= fleet[column] %></td>
+              <% end %>
+              <td></td>
               <td></td>
             </tr>
           <% end %>
@@ -175,5 +79,6 @@
       </table>
     </div>
   </div>
-
 </section>
+
+<%= render partial: 'fleets/partials/datatable_settings' %>

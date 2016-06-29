@@ -7,6 +7,10 @@
       height: 46px;
       margin-right: 10px;
     }
+
+    .sidebar-collapsed & {
+      padding: 11px 40px 11px 0px;
+    }
   }
 
   .filter-item {
@@ -43,6 +47,7 @@
         button {
           background-color: inherit;
           border: none;
+          padding: 3px 6px;
         }
 
         .btn-edit-column {
@@ -82,6 +87,25 @@
         .dropdown-submenu .dropdown-menu {
           margin-top: -57px;
         }
+      }
+
+      .btn-datatable-settings {
+        padding: 10px;
+
+        button {
+          background-color: #EBF3F5;
+          border-width: 1px;
+          border-color: #D9E5E8;
+          border-style: solid;
+          width: 36px;
+
+          span {
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 0.9;
+          }
+        }
+
       }
 
       thead > tr > th {
@@ -133,6 +157,51 @@
         &:nth-child(even) > td {
           background-color: #FFF;
         }
+      }
+    }
+  }
+
+  #datatable_settings_container {
+    .modal-dialog {
+      padding: 0;
+    }
+
+    .ctn-modal-header {
+      margin-bottom: 15px;
+    }
+
+    .ctn-sortable-columns {
+      ul {
+        list-style: none;
+        padding: 0;
+        min-height: 300px;
+      }
+
+      li {
+        background: #1CA5C9;
+        color: #FFF;
+        margin: 1px;
+        padding: 10px 15px;
+        cursor: move;
+        border-radius: 5px;
+        margin-bottom: 3px;
+      }
+
+      .title {
+        color: #44585F;
+        padding: 10px 10px 0;
+        font-weight: bold;
+      }
+
+      .sortable-ghost {
+        opacity: .3;
+        background: #f60;
+      }
+    }
+
+    .buttons-container {
+      .btn + .btn {
+        margin-left: 5px;
       }
     }
   }

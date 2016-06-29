@@ -120,6 +120,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-pivottable'
   # Bootstrap Sub-Menus
   gem 'rails-assets-bootstrap-submenu'
+  # Reorderable drag-and-drop lists
+  gem 'rails-assets-Sortable'
 end
 
 group :development, :test do

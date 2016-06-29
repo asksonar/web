@@ -1,9 +1,8 @@
 class FleetsQuery
   include Singleton
 
-  def fleets(filters: {})
-    data(filters: filters)
-      .select(:id, :serial_number, :aircraft_status, :aircraft_manufacturer, :aircraft_type, :engine_type, :manager, :operator, :owner, :operator_country)
+  def fleets(filters: {}, columns:)
+    data(filters: filters).select(*columns)
   end
 
   def fleet(id)

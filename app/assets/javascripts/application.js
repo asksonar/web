@@ -40,6 +40,7 @@
 //= require codebase/webix/webix
 //= require codebase/pivot
 //= require bootstrap-submenu
+//= require Sortable
 
 // insert 3rd party packages above this line
 

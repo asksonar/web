@@ -11,11 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513155703) do
+ActiveRecord::Schema.define(version: 20160628113919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+  enable_extension "tablefunc"
 
   create_table "aircrafts", force: :cascade do |t|
     t.integer  "msn"
@@ -67,7 +68,16 @@ ActiveRecord::Schema.define(version: 20160513155703) do
 
   add_index "customers", ["company_id", "email"], name: "index_customers_on_company_id_and_email", using: :btree
 
-  create_table "fleets_backup", force: :cascade do |t|
+  create_table "datatable_views", force: :cascade do |t|
+    t.text     "datatable_columns"
+    t.integer  "company_id"
+    t.string   "name"
+    t.boolean  "default_view"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "fleets", force: :cascade do |t|
     t.text    "aircraft_status"
     t.text    "aircraft_manufacturer"
     t.text    "aircraft_type"
