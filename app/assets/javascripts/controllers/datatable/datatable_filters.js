@@ -102,7 +102,7 @@ DatatableFilters.prototype.getFilters = function() {
     var value = $(checkbox).attr('value');
     filters[field] ? filters[field].push(value) : filters[field] = [value];
   });
-  
+
   return filters;
 };
 
@@ -146,7 +146,7 @@ DatatableFilters.prototype.updateList = function() {
 };
 
 DatatableFilters.prototype.setSort = function(event) {
-  var thisEl = $(event.currentTarget).parent();
+  var thisEl = $(event.currentTarget);
   var sorted = thisEl.attr('data-sorted') === "true";
   var direction = sorted && thisEl.attr('data-sorted-direction') === "asc" ? "desc" : "asc";
   var icon = thisEl.find('i');

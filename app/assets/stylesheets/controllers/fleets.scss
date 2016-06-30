@@ -40,7 +40,6 @@
     }
 
     .fleet-table {
-      .column-header,
       .btn-table-settings {
         position: relative;
 
@@ -48,10 +47,6 @@
           background-color: inherit;
           border: none;
           padding: 3px 6px;
-        }
-
-        .btn-edit-column {
-          padding: 0;
         }
 
         .dropdown-menu {
@@ -89,29 +84,9 @@
         }
       }
 
-      .btn-datatable-settings {
-        padding: 10px;
-
-        button {
-          background-color: #EBF3F5;
-          border-width: 1px;
-          border-color: #D9E5E8;
-          border-style: solid;
-          width: 36px;
-
-          span {
-            font-weight: bold;
-            font-size: 24px;
-            line-height: 0.9;
-          }
-        }
-
-      }
-
       thead > tr > th {
         vertical-align: top;
         padding: 14px 22px;
-        max-width: 160px;
         color: #9CA8B4;
         background-color: #FFF;
         border: none;
@@ -119,7 +94,7 @@
         white-space: nowrap;
         cursor: pointer;
 
-        span > i {
+        i {
           margin-left: 8px;
         }
 

@@ -22,11 +22,6 @@ $(function(){
   });
 
   var datatableController = new DatatableController({
-    btnEditMode: $('#btn-edit-mode'),
-    btnEditColumn: $('.btn-edit-column'),
-    btnMoveLeft: $('.btn-move-left'),
-    btnMoveRight: $('.btn-move-right'),
-    columnHeader: $('.column-header'),
     navSubContainer: $('.nav-sub-container'),
     btnCollapseSidebar: $('.btn-collapse-sidebar i'),
     btnExpandSidebar: $('#btn-expand-sidebar'),
