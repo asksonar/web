@@ -149,7 +149,10 @@
       ul {
         list-style: none;
         padding: 0;
-        min-height: 300px;
+
+        @media (min-width: $screen-sm-min) {
+          min-height: 300px;
+        }
       }
 
       li {
@@ -158,19 +161,23 @@
         margin: 1px;
         padding: 10px 15px;
         cursor: move;
-        border-radius: 5px;
+        border-radius: 4px;
         margin-bottom: 3px;
+
+        i {
+          margin-top: 3px;
+        }
       }
 
       .title {
-        color: #44585F;
-        padding: 10px 10px 0;
+        padding-left: 2px;
         font-weight: bold;
       }
 
       .sortable-ghost {
-        opacity: .3;
-        background: #f60;
+        opacity: 0.3;
+        background: #FFF;
+        border: dotted 2px #44585F;
       }
     }
 

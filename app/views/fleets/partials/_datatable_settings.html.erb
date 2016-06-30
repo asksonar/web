@@ -11,7 +11,7 @@
           <div class="title">Available Columns</div>
           <ul id="available">
             <% @prezi.columns_available.each do |column| %>
-              <li data-id="<%= column %>"><%= column.titleize %></li>
+              <li data-id="<%= column %>"><%= column.titleize %><i class="fa fa-bars pull-right"></i></li>
             <% end %>
           </ul>
         </div>
@@ -20,7 +20,7 @@
           <div class="title">Selected Columns</div>
           <ul id="selected">
             <% @prezi.columns_selected.each do |column| %>
-              <li data-id="<%= column %>"><%= column.titleize %></li>
+              <li data-id="<%= column %>"><%= column.titleize %><i class="fa fa-bars pull-right"></i></li>
             <% end %>
           </ul>
         </div>

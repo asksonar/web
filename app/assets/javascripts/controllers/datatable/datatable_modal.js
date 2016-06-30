@@ -15,7 +15,7 @@ DatatableModal.prototype.saveChanges = function() {
   var columnsAvailable = this.$columnsAvailable.toArray();
   var datatable_columns = { "selected": columnsSelected, "available": columnsAvailable };
   var url = new URL(window.location.href).pathname + '/settings';
-  
+
   $.ajax({
     type: 'POST',
     dataType: 'json',
