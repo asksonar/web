@@ -5,10 +5,6 @@ $(function(){
 
   $('[data-submenu]').submenupicker();
 
-  var datatableModal = new DatatableModal({
-    btnSaveChanges: $('#btn-save-changes')
-  });
-
   var datatableFilters = new DatatableFilters({
     newFleetTemplate: $('#new-fleet-template'),
     fleetTable: $('.fleet-table'),
@@ -20,6 +16,13 @@ $(function(){
     inputCheckbox: $('.filter input[type="checkbox"]'),
     filtersSelect: $('nav .selectpicker')
   });
+
+  var datatableView = new DatatableView({
+    btnSaveChanges: $('#btn-save-changes'),
+    btnSaveView: $('#btn-save-view'),
+    inputSaveView: $('#input-save-view'),
+    divSavedViews: $('.saved-views')
+  }, datatableFilters);
 
   var datatableController = new DatatableController({
     navSubContainer: $('.nav-sub-container'),

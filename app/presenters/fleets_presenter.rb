@@ -1,55 +1,82 @@
 class FleetsPresenter
   attr_reader :display_count
 
-  def initialize(company, display_count, sort_column, sort_direction, query_params: {}, column_params: {})
+  def initialize(company, display_count, sort_column, sort_direction, query_params: {})
     @company = company
     @display_count = display_count
     @sort_column = sort_column
     @sort_direction = sort_direction
     @query_params = query_params
-    @column_params = column_params
+    @current_datatable_view = current_datatable_view
     @columns_selected ||= columns_selected
     @columns_available ||= columns_available
+    @datatable_filters ||= datatable_filters
+  end
+
+  def saved_views
+    datatable_views_service.get_saved_views(@company)
+  end
+
+  def current_datatable_view
+    @company.datatable_views.where(default_view: true).first()
   end
 
   def columns_selected
-    @datatable_view = @company.datatable_views.find_by(default_view: true)
-    datatable_columns = fleets_service.get_datatable_columns(@datatable_view)
+    datatable_columns = datatable_views_service.get_datatable_columns(@current_datatable_view)
     datatable_columns['selected'] || []
   end
 
   def columns_available
-    @datatable_view = @company.datatable_views.find_by(default_view: true)
-    datatable_columns = fleets_service.get_datatable_columns(@datatable_view)
+    datatable_columns = datatable_views_service.get_datatable_columns(@current_datatable_view)
     datatable_columns['available'] || []
   end
 
-  def update_datatable_columns
-    @datatable_view = @company.datatable_views.find_by(default_view: true)
-    fleets_service.update_datatable_columns(@datatable_view, @column_params)
+  def datatable_filters
+    datatable_views_service.get_datatable_filters(@current_datatable_view)
+  end
+
+  def datatable_filters_list
+    # {"aircraft_status":["In Service", "Order"],"aircraft_manufacturer":["Boeing"]}
+    # [{"aircraft_status": "In Service"}, {"aircraft_status": "Order"}, {"aircraft_manufacturer": "Boeing"}]
+    # [{:field=>"aircraft_status", :value=>"In Service"}, {:field=>"aircraft_status", :value=>"Order"}, {:field=>"aircraft_manufacturer", :value=>"Boeing"}]
+
+    datatable_filters_list = []
+
+    @datatable_filters.each do |key, values|
+      values.each do |value|
+        datatable_filters_list.push({
+          "field": key,
+          "value": value
+        })
+      end
+    end
+
+    datatable_filters_list
+  end
+
+  def checked(field, value)
+    [*(@datatable_filters[field])].include?(value)
+  end
+
+  def selected(field, value)
+    [*(@datatable_filters[field])].include?(value)
   end
 
   def fleets
-    if @columns_selected.empty?
-      {}
-    else
-      query = fleets_query.fleets(filters: @query_params, columns: @columns_selected)
-      query = query.order(@sort_column + " " + @sort_direction)
-      query = query.first(@display_count) if @display_count != 'All'
-      query
-    end
+    return {} if @columns_selected.nil?
+    query = fleets_query.fleets(filters: @query_params, columns: @columns_selected)
+    query = query.order(@sort_column + " " + @sort_direction)
+    query = query.first(@display_count) if @display_count != 'All'
+    query
   end
 
   def fleets_json
-    if @columns_selected.empty?
-      {}
-    else
-      query = fleets_query.fleets(filters: @query_params, columns: @columns_selected)
-      query = query.order(@sort_column + " " + @sort_direction)
-      query = query.first(@display_count) if @display_count != 'All'
-      query = query.map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
-      query
-    end
+    return {} if @columns_selected.nil?
+    query = fleets_query.fleets(filters: @query_params, columns: @columns_selected)
+    query = query.order(@sort_column + " " + @sort_direction)
+    query = query.first(@display_count) if @display_count != 'All'
+    query = query.map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
+    query
   end
 
   def fleet
@@ -66,7 +93,7 @@ class FleetsPresenter
     @fleets_query ||= FleetsQuery.instance
   end
 
-  def fleets_service
-    @fleets_service ||= FleetsService.instance
+  def datatable_views_service
+    @datatable_views_service ||= DatatableViewsService.instance
   end
 end

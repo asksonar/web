@@ -33,11 +33,13 @@ Rails.application.routes.draw do
 
   get '/analysis/wb', to: 'analysis#wb', as: 'analysis/wb'
   get '/analysis/pv', to: 'analysis#pv', as: 'analysis/pv'
+  post '/fleets/datatable_views', to: 'datatable_views#create'
+  get '/fleets/datatable_views/:id/', to: 'datatable_views#show', as: 'datatable_view'
+  post '/fleets/datatable_views/:id/edit', to: 'datatable_views#update'
 
   resources :fleets do
     collection do
       get 'export'
-      post 'settings'
     end
   end
 

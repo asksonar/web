@@ -26,15 +26,15 @@ DatatableFilters.prototype.init = function() {
 DatatableFilters.prototype.addFilter = function(event){
   var fieldMap = {
     "aircraft_status": "Aircraft Status",
-    "aircraft_manufacturer": "Manufacturer",
+    "aircraft_manufacturer": "Aircraft Manufacturer",
     "aircraft_type": "Aircraft Type",
     "aircraft_series": "Aircraft Series",
     "engine_type": "Engine Type",
     "engine_variant": "Engine Variant",
-    "manager": "Lessor",
+    "manager": "Manager",
     "operator": "Operator",
     "owner": "Owner",
-    "operator_country": "Country"
+    "operator_country": "Operator Country"
   };
 
   var fields = $("nav .selectpicker option:selected").add($('.filter :checked'));

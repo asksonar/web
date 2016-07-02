@@ -10,11 +10,78 @@
   <h1>
     <button class="btn hide" id="btn-expand-sidebar"><i class="fa fa-filter"></i>Add Filter</button>
     <%= content_for :title %>
+
+    <div class="btn-table-settings dropdown pull-right">
+      <button type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
+        <i class="fa fa-cog"></i><span>Settings</span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-right">
+        <div class="arrow-up"></div>
+        <li><a tabindex="0" id="btn-export-csv"><i class="fa fa-long-arrow-down"></i>Download CSV</a></li>
+        <li class="divider"></li>
+        <li class="dropdown-submenu">
+          <a tabindex="0"><i class="fa fa-bars"></i>Show results</a>
+          <ul class="dropdown-menu" id="select-display-count">
+            <li><a tabindex="0">15</a></li>
+            <li class="divider"></li>
+            <li><a tabindex="0" selected="selected">25</a></li>
+            <li class="divider"></li>
+            <li><a tabindex="0">50</a></li>
+            <li class="divider"></li>
+            <li><a tabindex="0">All</a></li>
+          </ul>
+        </li>
+        <li class="divider"></li>
+        <li>
+          <a tabindex="0" data-toggle="modal" data-target="#datatable_settings_container">
+            <i class="fa fa-pencil-square-o"></i>Settings
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="btn-save-view dropdown pull-right">
+      <button type="button" data-toggle="dropdown" aria-expanded="true">
+        <i class="fa fa-floppy-o"></i><span>Save view</span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-right">
+        <div class="arrow-up"></div>
+        <li class="input-group">
+          <input type="text" id='input-save-view' class="form-control" placeholder="Save new view as ...">
+          <span class='input-group-btn'>
+            <a class="btn btn-green" id='btn-save-view'>Save</a>
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="btn-saved-views dropdown pull-right">
+      <button type="button" data-toggle="dropdown" aria-expanded="true">
+        <i class="fa fa-file"></i><span>My views</span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-right saved-views">
+        <div class="arrow-up"></div>
+        <% @prezi.saved_views.each_with_index do |view, index| %>
+          <% if index == 0 %>
+            <li><a href='<%= datatable_view_path(view.hashid) %>'><%= view["name"] %></a></li>
+          <% else %>
+            <li class="divider"></li>
+            <li><a href='<%= datatable_view_path(view.hashid) %>'><%= view["name"] %></a></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
   </h1>
 </section>
 
 <section class='main-content'>
-  <div class='filter-container'></div>
+  <div class='filter-container'>
+    <% @prezi.datatable_filters_list.each do |filter| %>
+      <a class="filter-item" name="<%= filter[:field].titleize %>" value="<%= filter[:value] %>">
+        <span class="close">&times;</span><%= filter[:field].titleize %>: <span class="strong"><%= filter[:value] %></span>
+      </a>
+    <% end %>
+  </div>
 
   <div class='results-containter'>
     <div class='table-responsive fleet-table'>
@@ -26,34 +93,6 @@
                 <%= column.titleize %><i class="fa fa-caret-down"></i>
               </th>
             <% end %>
-
-            <th class="btn-table-settings">
-              <button type="button" data-toggle="dropdown" data-submenu="" aria-expanded="true">
-                <i class="fa fa-cog fa-2x"></i>
-              </button>
-              <ul class="dropdown-menu dropdown-menu-right">
-                <li><a tabindex="0" id="btn-export-csv"><i class="fa fa-long-arrow-down"></i>Download CSV</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-submenu">
-                  <a tabindex="0"><i class="fa fa-bars"></i>Show results</a>
-                  <ul class="dropdown-menu" id="select-display-count">
-                    <li><a tabindex="0">15</a></li>
-                    <li class="divider"></li>
-                    <li><a tabindex="0" selected="selected">25</a></li>
-                    <li class="divider"></li>
-                    <li><a tabindex="0">50</a></li>
-                    <li class="divider"></li>
-                    <li><a tabindex="0">All</a></li>
-                  </ul>
-                </li>
-                <li class="divider"></li>
-                <li>
-                  <a tabindex="0" data-toggle="modal" data-target="#datatable_settings_container">
-                    <i class="fa fa-pencil-square-o"></i>Settings
-                  </a>
-                </li>
-              </ul>
-            </th>
           </tr>
         </thead>
         <tbody>
@@ -62,7 +101,6 @@
               <% @prezi.columns_selected.each do |column| %>
                 <td name='<%= column %>' value='<%= fleet[column] %>'><%= fleet[column] %></td>
               <% end %>
-              <td></td>
             </tr>
           <% end %>
         </tbody>

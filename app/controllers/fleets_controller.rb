@@ -19,12 +19,6 @@ class FleetsController < ApplicationController
     @prezi = prezi(query_params: query_params)
   end
 
-  def settings
-    @prezi = prezi(column_params: column_params)
-    @prezi.update_datatable_columns
-    render json: { ok: true }
-  end
-
   def export
     @prezi = prezi(query_params: query_params)
 
@@ -36,8 +30,8 @@ class FleetsController < ApplicationController
 
   private
 
-  def prezi(query_params: {}, column_params: {})
-    FleetsPresenter.new(current_user.company, display_count, sort_column, sort_direction, query_params: query_params, column_params: column_params)
+  def prezi(query_params: {})
+    FleetsPresenter.new(current_user.company, display_count, sort_column, sort_direction, query_params: query_params)
   end
 
   def display_count
@@ -54,9 +48,5 @@ class FleetsController < ApplicationController
 
   def query_params
     params.permit(:id, aircraft_status: [], aircraft_manufacturer: [], aircraft_type: [], aircraft_series: [], aircraft_variant: [], registration: [], serial_number: [], line_number: [], build_year: [], operator: [], owner: [], owner_type: [], engine_type: [], engine_variant: [], seat_total: [], mtow: [], hours_cumulative: [], cycles_cumulative: [], effective_date: [], aircraft_age: [], original_operator: [], operated_for: [], aircraft_usage: [], aircraft_usage2: [], minor_variant: [], operator_area: [], operator_country: [], operator_state: [], current_market_value: [], current_market_lease_rate: [], financier1: [], noise_category: [], manager: [])
-  end
-
-  def column_params
-    params.require(:datatable_columns).permit(:selected => [], :available => [])
   end
 end
