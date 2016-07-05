@@ -8,6 +8,7 @@ class DatatableView < ActiveRecord::Base
   def default_values
     self.default_view = true if default_view.nil?
     self.name = 'My saved view' if name.nil?
+    self.datatable_filters = {} if datatable_filters.nil?
     self.datatable_columns = {
       "selected": ["serial_number", "aircraft_status", "aircraft_manufacturer", "aircraft_type", "operator"],
       "available": ["engine_type", "manager", "owner", "operator_country"]
