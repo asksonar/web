@@ -21,6 +21,7 @@ DatatableView.prototype.saveView = function() {
   var filters = this.datatableFilers.getFilters();
   var datatable_columns = this.getColumns();
   var url = '/fleets/datatable_views/';
+  this.$inputSaveView.val('');
 
   $.ajax({
     type: 'POST',
