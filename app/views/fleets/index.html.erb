@@ -77,7 +77,7 @@
 <section class='main-content'>
   <div class='filter-container'>
     <% @prezi.datatable_filters_list.each do |filter| %>
-      <a class="filter-item" name="<%= filter[:field].titleize %>" value="<%= filter[:value] %>">
+      <a class="filter-item" name="<%= filter[:field] %>" value="<%= filter[:value] %>">
         <span class="close">&times;</span><%= filter[:field].titleize %>: <span class="strong"><%= filter[:value] %></span>
       </a>
     <% end %>
