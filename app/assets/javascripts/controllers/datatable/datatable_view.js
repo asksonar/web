@@ -18,7 +18,7 @@ DatatableView.prototype.init = function() {
 
 DatatableView.prototype.saveView = function() {
   var name = this.$inputSaveView.val();
-  var filters = this.datatableFilers.getFilters();
+  var datatable_filters = this.datatableFilers.getFilters();
   var datatable_columns = this.getColumns();
   var url = '/fleets/datatable_views/';
   this.$inputSaveView.val('');
@@ -29,7 +29,7 @@ DatatableView.prototype.saveView = function() {
     url: url,
     data: {
       name: name,
-      filters: filters,
+      datatable_filters: datatable_filters,
       datatable_columns: datatable_columns,
       authenticity_token: AUTH_TOKEN
     },

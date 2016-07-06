@@ -63,7 +63,7 @@ class FleetsPresenter
   end
 
   def fleets
-    return {} if @columns_selected.nil?
+    return {} if @columns_selected.empty?
     query = fleets_query.fleets(filters: @query_params, columns: @columns_selected)
     query = query.order(@sort_column + " " + @sort_direction)
     query = query.first(@display_count) if @display_count != 'All'
@@ -71,7 +71,7 @@ class FleetsPresenter
   end
 
   def fleets_json
-    return {} if @columns_selected.nil?
+    return {} if @columns_selected.empty?
     query = fleets_query.fleets(filters: @query_params, columns: @columns_selected)
     query = query.order(@sort_column + " " + @sort_direction)
     query = query.first(@display_count) if @display_count != 'All'
