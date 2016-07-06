@@ -1,12 +1,16 @@
 class FleetsPresenter
   attr_reader :display_count
+  attr_reader :column_params
+  attr_reader :sort_column
+  attr_reader :sort_direction
 
-  def initialize(company, display_count, sort_column, sort_direction, query_params: {})
+  def initialize(company, display_count, sort_column, sort_direction, query_params: {}, column_params: column_params)
     @company = company
     @display_count = display_count
     @sort_column = sort_column
     @sort_direction = sort_direction
     @query_params = query_params
+    @column_params = column_params
     @current_datatable_view = current_datatable_view
     @columns_selected ||= columns_selected
     @columns_available ||= columns_available
@@ -36,10 +40,6 @@ class FleetsPresenter
   end
 
   def datatable_filters_list
-    # {"aircraft_status":["In Service", "Order"],"aircraft_manufacturer":["Boeing"]}
-    # [{"aircraft_status": "In Service"}, {"aircraft_status": "Order"}, {"aircraft_manufacturer": "Boeing"}]
-    # [{:field=>"aircraft_status", :value=>"In Service"}, {:field=>"aircraft_status", :value=>"Order"}, {:field=>"aircraft_manufacturer", :value=>"Boeing"}]
-
     datatable_filters_list = []
 
     @datatable_filters.each do |key, values|
@@ -71,11 +71,11 @@ class FleetsPresenter
   end
 
   def fleets_json
-    return {} if @columns_selected.empty?
-    query = fleets_query.fleets(filters: @query_params, columns: @columns_selected)
+    return {} if @column_params["selected"].nil?
+    query = fleets_query.fleets(filters: @query_params, columns: @column_params["selected"])
     query = query.order(@sort_column + " " + @sort_direction)
     query = query.first(@display_count) if @display_count != 'All'
-    query = query.map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
+    # query = query.map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
     query
   end
 

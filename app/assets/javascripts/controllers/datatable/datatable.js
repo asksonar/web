@@ -8,17 +8,17 @@ $(function(){
   var datatableFilters = new DatatableFilters({
     newFleetTemplate: $('#new-fleet-template'),
     fleetTable: $('.fleet-table'),
-    fleetTableBody: $('.fleet-table tbody'),
+    tablefleetTable: $('.fleet-table table'),
     filterContainer: $('.filter-container'),
     btnExportCsv: $('#btn-export-csv'),
     ctnDisplayCountSelect: $('#select-display-count'),
     displayCountSelect: $('#select-display-count a'),
     inputCheckbox: $('.filter input[type="checkbox"]'),
-    filtersSelect: $('nav .selectpicker')
+    filtersSelect: $('nav .selectpicker'),
+    btnSaveChanges: $('#btn-save-changes')
   });
 
   var datatableView = new DatatableView({
-    btnSaveChanges: $('#btn-save-changes'),
     btnSaveView: $('#btn-save-view'),
     inputSaveView: $('#input-save-view'),
     divSavedViews: $('.saved-views')

@@ -1,12 +1,16 @@
 DatatableFilters = function(config) {
   this.$fleetTable = config.fleetTable;
-  this.$fleetTableBody = config.fleetTableBody;
+  this.$tablefleetTable = config.tablefleetTable;
   this.$filterContainer = config.filterContainer;
   this.$btnExportCsv = config.btnExportCsv;
   this.$ctnDisplayCountSelect = config.ctnDisplayCountSelect;
   this.$displayCountSelect = config.displayCountSelect;
   this.$inputCheckbox = config.inputCheckbox;
   this.$filtersSelect = config.filtersSelect;
+  this.$btnSaveChanges = config.btnSaveChanges;
+
+  this.$columnsSelected = Sortable.create(selected, { group: { name: 'columns', pull: true, put: true }, animation: 200 });
+  this.$columnsAvailable = Sortable.create(available, { group: { name: 'columns', pull: true, put: true }, animation: 200 });
 
   this.$newFleetTemplate = Handlebars.compile(config.newFleetTemplate.html());
 
@@ -21,6 +25,7 @@ DatatableFilters.prototype.init = function() {
   this.$fleetTable.on('click', 'td', $.proxy(this.addToFilter, this));
   this.$inputCheckbox.on('change', $.proxy(this.addFilter, this));
   this.$filtersSelect.on('change', $.proxy(this.addFilter, this));
+  this.$btnSaveChanges.on('click', $.proxy(this.updateList, this));
 };
 
 DatatableFilters.prototype.addFilter = function(event){
@@ -119,25 +124,33 @@ DatatableFilters.prototype.getDisplayCount = function(event) {
   return { "display_count": this.$ctnDisplayCountSelect.find('a[selected=selected]').text() };
 };
 
+DatatableFilters.prototype.getColumns = function() {
+  var columnsSelected = this.$columnsSelected.toArray();
+  var columnsAvailable = this.$columnsAvailable.toArray();
+  return { "selected": columnsSelected, "available": columnsAvailable };
+}
+
 DatatableFilters.prototype.updateList = function() {
   var filters = this.getFilters();
   var displayCount = this.getDisplayCount();
   var sort = this.getSort();
+  var datatable_columns = this.getColumns();
   var url = new URL(window.location.href).pathname;
-  var newFleets = newFleets || { column_names: [], fleets: [] };
+  var newFleets = newFleets || { column_names: [], sort_column: '', sort_direction: '', fleets: [] };
 
   $.ajax({
     type: 'GET',
     dataType: 'json',
     url: url,
-    data: $.extend(filters, displayCount, sort, {
+    data: $.extend(filters, displayCount, sort, datatable_columns, {
       authenticity_token: AUTH_TOKEN
     }),
     success: function(response) {
-      $('.fleet-line').remove();
       newFleets.column_names = response.column_names;
       newFleets.fleets = response.fleets;
-      this.$fleetTableBody.append(this.$newFleetTemplate(newFleets));
+      newFleets.sort_column = response.sort_column;
+      newFleets.sort_direction = response.sort_direction;
+      this.$tablefleetTable.html(this.$newFleetTemplate(newFleets));
     }.bind(this),
     error: function(jqXHR) {
       notify.error(jqXHR.responseText);
@@ -168,7 +181,7 @@ DatatableFilters.prototype.setSort = function(event) {
 DatatableFilters.prototype.getSort = function() {
   var sort = $('th[data-sorted=true]').attr('data-type');
   var direction = $('th[data-sorted=true]').attr('data-sorted-direction');
-  return { "sort": sort, "direction": direction }
+  return { "sort_column": sort, "sort_direction": direction }
 };
 
 DatatableFilters.prototype.exportToCsv = function() {

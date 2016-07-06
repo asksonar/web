@@ -1,9 +1,26 @@
 <script id="new-fleet-template" type="text/x-handlebars-template">
-  {{#each fleets as |fleet fleet_id|}}
-    <tr class='fleet-line'>
-      {{#each ../column_names as |column_name column_name_Id|}}
-        <td name="{{column_name}}" value="{{get_object_value_with_key fleet column_name}}">{{get_object_value_with_key fleet column_name}}</td>
+  <thead>
+    <tr>
+      {{#each column_names}}
+        {{#if_equal ../sort_column this}}
+          <th class="column-name" data-type="{{this}}" data-sorted="true" data-sorted-direction="{{../../sort_direction}}">
+           {{titleize this}}<i class="fa fa-caret-down"></i>
+          </th>
+        {{else}}
+          <th class="column-name" data-type="{{this}}" data-sorted="false">
+            {{titleize this}}<i class="fa fa-caret-down"></i>
+          </th>
+        {{/if_equal}}
       {{/each}}
     </tr>
-  {{/each}}
+  </thead>
+  <tbody>
+    {{#each fleets as |fleet fleet_id|}}
+      <tr class='fleet-line'>
+        {{#each ../column_names as |column_name column_name_Id|}}
+          <td name="{{column_name}}" value="{{get_object_value_with_key fleet column_name}}">{{get_object_value_with_key fleet column_name}}</td>
+        {{/each}}
+      </tr>
+    {{/each}}
+  </tbody>
 </script>

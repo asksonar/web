@@ -34,7 +34,7 @@
         <li class="divider"></li>
         <li>
           <a tabindex="0" data-toggle="modal" data-target="#datatable_settings_container">
-            <i class="fa fa-pencil-square-o"></i>Settings
+            <i class="fa fa-pencil-square-o"></i>Display Settings
           </a>
         </li>
       </ul>
@@ -104,10 +104,10 @@
             </tr>
           <% end %>
         </tbody>
-        <%= render partial: 'fleets/partials/fleet_template' %>
       </table>
     </div>
   </div>
 </section>
 
+<%= render partial: 'fleets/partials/fleet_template' %>
 <%= render partial: 'fleets/partials/datatable_settings' %>

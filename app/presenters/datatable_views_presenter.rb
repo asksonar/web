@@ -15,11 +15,6 @@ class DatatableViewsPresenter
     datatable_views_service.update_default_view(old_datatable_view, new_datatable_view)
   end
 
-  def update_datatable_columns(hashid)
-    @datatable_view = DatatableView.find_by_hashid(hashid)
-    datatable_views_service.update_datatable_columns(@datatable_view, @column_params)
-  end
-
   private
 
   def datatable_views_service

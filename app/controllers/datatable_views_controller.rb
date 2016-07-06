@@ -17,12 +17,6 @@ class DatatableViewsController < ApplicationController
     redirect_to fleets_path
   end
 
-  def update
-    @prezi = prezi(column_params: column_params)
-    @prezi.update_datatable_columns(params[:id])
-    render json: { ok: true }
-  end
-
   private
 
   def prezi(query_params: {}, column_params: {})
