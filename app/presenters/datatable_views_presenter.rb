@@ -1,8 +1,8 @@
 class DatatableViewsPresenter
-  def initialize(company, query_params: {}, column_params: {})
+  def initialize(company, query_params, column_params)
     @company = company
-    @query_params = query_params
-    @column_params = column_params
+    @query_params = query_params || {}
+    @column_params = column_params || { "selected": [], "available": [] }
   end
 
   def create_datatable_view(name)

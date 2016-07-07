@@ -93,6 +93,12 @@
   .btn-saved-views {
     li {
       position: relative;
+      width: 200px;
+
+      a {
+        width: 164px; // li width - span width - span right
+        overflow: hidden;
+      }
     }
 
     .close {

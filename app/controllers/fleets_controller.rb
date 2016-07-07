@@ -33,7 +33,7 @@ class FleetsController < ApplicationController
   private
 
   def prezi(query_params: {}, column_params: {})
-    FleetsPresenter.new(current_user.company, display_count, sort_column, sort_direction, query_params: query_params, column_params: column_params)
+    FleetsPresenter.new(current_user.company, display_count, sort_column, sort_direction, query_params, column_params)
   end
 
   def display_count

@@ -4,17 +4,17 @@ class FleetsPresenter
   attr_reader :sort_column
   attr_reader :sort_direction
 
-  def initialize(company, display_count, sort_column, sort_direction, query_params: {}, column_params: column_params)
+  def initialize(company, display_count, sort_column, sort_direction, query_params, column_params)
     @company = company
     @display_count = display_count
     @sort_column = sort_column
     @sort_direction = sort_direction
-    @query_params = query_params
-    @column_params = column_params
+    @query_params = query_params || {}
+    @column_params = column_params || { "selected": [], "available": [] }
     @current_datatable_view = current_datatable_view
-    @columns_selected ||= columns_selected
-    @columns_available ||= columns_available
-    @datatable_filters ||= datatable_filters
+    @columns_selected = columns_selected
+    @columns_available = columns_available
+    @datatable_filters = datatable_filters
   end
 
   def saved_views

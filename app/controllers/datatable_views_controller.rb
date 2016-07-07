@@ -28,7 +28,7 @@ class DatatableViewsController < ApplicationController
   private
 
   def prezi(query_params: {}, column_params: {})
-    DatatableViewsPresenter.new(current_user.company, query_params: query_params, column_params: column_params)
+    DatatableViewsPresenter.new(current_user.company, query_params, column_params)
   end
 
   def query_params
