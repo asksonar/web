@@ -63,10 +63,20 @@
         <div class="arrow-up"></div>
         <% @prezi.saved_views.each_with_index do |view, index| %>
           <% if index == 0 %>
-            <li><a href='<%= datatable_view_path(view.hashid) %>'><%= view["name"] %></a><span class="close" data-datatable-view-hashid="<%= view.hashid %>" data-toggle="modal" data-target="#delete-with-ajax">×</span></li>
+            <li>
+              <a href='<%= datatable_view_path(view.hashid) %>'><%= view["name"] %></a>
+              <span class="close" data-datatable-view-hashid="<%= view.hashid %>" data-toggle="modal" data-target="#delete-with-ajax">
+                <i class="fa fa-times-circle-o"></i>
+              </span>
+            </li>
           <% else %>
             <li class="divider"></li>
-            <li><a href='<%= datatable_view_path(view.hashid) %>'><%= view["name"] %></a><span class="close" data-datatable-view-hashid="<%= view.hashid %>" data-toggle="modal" data-target="#delete-with-ajax">×</span></li>
+            <li>
+              <a href='<%= datatable_view_path(view.hashid) %>'><%= view["name"] %></a>
+              <span class="close" data-datatable-view-hashid="<%= view.hashid %>" data-toggle="modal" data-target="#delete-with-ajax">
+                <i class="fa fa-times-circle-o"></i>
+              </span>
+            </li>
           <% end %>
         <% end %>
       </ul>

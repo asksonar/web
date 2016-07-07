@@ -40,9 +40,16 @@ DatatableView.prototype.saveView = function() {
     },
     success: function(data) {
       notify.info("Your view has been saved.");
-      var newView = "<li class='divider'></li><li><a href='/fleets/datatable_views/" + data.hashid + "'>" + data.name + "</a>\
-                    <span class='close' data-datatable-view-hashid=" + data.hashid + " data-toggle='modal' data-target='#delete-with-ajax'>×</span></li>";
-      this.$divSavedViews.append(newView);
+      var divider = "<li class='divider'></li>";
+      var newView = "<li><a href='/fleets/datatable_views/" + data.hashid + "'>" + data.name + "</a>\
+                    <span class='close' data-datatable-view-hashid=" + data.hashid + " data-toggle='modal' \
+                    data-target='#delete-with-ajax'>\<i class='fa fa-times-circle-o'></i></span></li>";
+      
+      if ($('.saved-views li').length > 0) {
+        this.$divSavedViews.append(divider + newView);
+      } else {
+        this.$divSavedViews.append(newView);
+      }
     }.bind(this),
     error: function(jqXHR) {
       notify.error(jqXHR.responseText);
