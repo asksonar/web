@@ -21,7 +21,9 @@ $(function(){
   var datatableView = new DatatableView({
     btnSaveView: $('#btn-save-view'),
     inputSaveView: $('#input-save-view'),
-    divSavedViews: $('.saved-views')
+    divSavedViews: $('.saved-views'),
+    deleteModal: $('#delete-with-ajax'),
+    btnDeleteYes: $('#btn-delete-yes')
   }, datatableFilters);
 
   var datatableController = new DatatableController({

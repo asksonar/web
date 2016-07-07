@@ -15,6 +15,11 @@ class DatatableViewsPresenter
     datatable_views_service.update_default_view(old_datatable_view, new_datatable_view)
   end
 
+  def delete_datatable_view(hashid)
+    @datatable_view = DatatableView.find_by_hashid(hashid)
+    datatable_views_service.delete_datatable_view(@company, @datatable_view)
+  end
+
   private
 
   def datatable_views_service

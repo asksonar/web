@@ -73,7 +73,7 @@
         opacity: 0.5;
       }
     }
-    
+
     .btn-save-view {
       .dropdown-menu {
         padding: 9px;
@@ -87,6 +87,18 @@
     .dropdown-submenu .dropdown-menu {
       top: -3px;
       right: 160px;
+    }
+  }
+
+  .btn-saved-views {
+    li {
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      right: 15px;
+      top: 1px;
     }
   }
 

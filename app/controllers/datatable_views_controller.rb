@@ -17,6 +17,14 @@ class DatatableViewsController < ApplicationController
     redirect_to fleets_path
   end
 
+  def destroy
+    @prezi = prezi()
+    @prezi.delete_datatable_view(params[:id])
+
+    flash[:info] = '<strong>Your view has been deleted.</strong>'
+    render json: { redirect_url: fleets_path }
+  end
+
   private
 
   def prezi(query_params: {}, column_params: {})

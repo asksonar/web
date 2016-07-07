@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   post '/fleets/datatable_views', to: 'datatable_views#create'
   get '/fleets/datatable_views/:id/', to: 'datatable_views#show', as: 'datatable_view'
   post '/fleets/datatable_views/:id/edit', to: 'datatable_views#update'
+  post '/fleets/datatable_views/:id/delete', to: 'datatable_views#destroy'
 
   resources :fleets do
     collection do
