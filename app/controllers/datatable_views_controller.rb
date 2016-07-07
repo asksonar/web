@@ -13,7 +13,7 @@ class DatatableViewsController < ApplicationController
 
   def show
     @prezi = prezi()
-    @prezi.update_default_view(params[:id])
+    @prezi.update_current_view(params[:id])
     redirect_to fleets_path
   end
 

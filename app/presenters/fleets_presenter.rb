@@ -22,7 +22,7 @@ class FleetsPresenter
   end
 
   def current_datatable_view
-    @company.datatable_views.where(default_view: true).first()
+    @company.datatable_views.where(current_view: true).first()
   end
 
   def columns_selected
