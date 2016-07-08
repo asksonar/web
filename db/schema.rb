@@ -11,28 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706183115) do
+ActiveRecord::Schema.define(version: 20160707172851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
   enable_extension "tablefunc"
-
-  create_table "aircrafts", force: :cascade do |t|
-    t.integer  "msn"
-    t.string   "aircraft_type"
-    t.string   "aircraft_model"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "company_id"
-    t.string   "asset_owner"
-    t.string   "asset_manager"
-    t.string   "registration"
-    t.string   "manufacturer"
-    t.datetime "manufacture_date"
-    t.integer  "flight_hours"
-    t.integer  "flight_cycles"
-  end
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -40,16 +24,6 @@ ActiveRecord::Schema.define(version: 20160706183115) do
     t.datetime "updated_at", null: false
     t.string   "uuid"
     t.string   "subdomain"
-  end
-
-  create_table "components", force: :cascade do |t|
-    t.integer  "type"
-    t.string   "serial_number"
-    t.string   "part_number"
-    t.string   "name"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "aircraft_id"
   end
 
   create_table "customers", force: :cascade do |t|

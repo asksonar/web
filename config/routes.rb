@@ -49,9 +49,6 @@ Rails.application.routes.draw do
 
   resources :analysis, only: [:index]
 
-  resources :aircrafts
-  resources :components
-
   ############
   # sonar v2 #
   ############
