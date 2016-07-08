@@ -1,22 +1,28 @@
-#analysis-wb {
-
-}
-
-#analysis-pv {
+#analysis-index {
   #pivotHolder {
     overflow: scroll;
   }
 
-  table.pvtTable tr th, table.pvtTable tr th {
-    border: 1px solid #E0E0E0;
-    color: #9A9AA2;
+  select.pvtAggregator:not(.form-control), select.pvtRenderer:not(.form-control) {
+    @extend .form-control;
+    @extend .input-sm;
   }
 
-  .pvtRendererContainer, .pvtAxisContainer, .pvtVals, .pvtRendererArea {
+  table:not(.table) {
+    @extend .table;
+  }
+
+  table.pvtUi > tbody > tr > td {
     border: 1px solid #E0E0E0;
     background: #FFF;
     padding: 10px;
     min-width: 130px;
+  }
+
+  table.pvtTable tr th, table.pvtTable tr th {
+    border: 1px solid #E0E0E0;
+    color: #9A9AA2 !important;
+    background-color: #F9F9F9 !important;
   }
 
   .pvtAxisContainer li span.pvtAttr {
@@ -46,14 +52,5 @@
       @extend .form-control;
       margin-top: 10px;
     }
-  }
-
-  #pivotHolder select.pvtAggregator:not(.form-control), #pivotHolder select.pvtRenderer:not(.form-control) {
-    @extend .form-control;
-    @extend .input-sm;
-  }
-
-  #pivotHolder>table:not(.table) {
-    @extend .table;
   }
 }

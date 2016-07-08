@@ -1,5 +1,5 @@
 $(function(){
-  if ($('#analysis-pv').length === 0) {
+  if ($('#analysis-index').length === 0) {
     return;
   }
 
@@ -8,7 +8,7 @@ $(function(){
   var nrecoPivotExt = new NRecoPivotTableExtensions({
     wrapWith: '<div class="pvtTableRendererHolder"></div>',
     drillDownHandler: function(attrFilter) {
-      console.log(dataFilter);
+      console.log(attrFilter);
     },
     onSortHandler: function() {
       console.log('Sort changed!');
@@ -42,7 +42,6 @@ $(function(){
       cols: ["Aircraft Status"],
       menuLimit: 2000,
       onRefresh: function (pivotUIOptions) {
-        $('table.pvtUi>tr:first-child>td:first-child').addClass('pvtRendererContainer');
         // apply fixed headers
         nrecoPivotExt.initFixedHeaders($('#pivotHolder table.pvtTable'));
     	},

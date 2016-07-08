@@ -17,7 +17,6 @@
 // dependency packages
 $icon-font-path: 'bootstrap/';
 @import 'bootstrap-sass';
-@import 'codebase/webix/webix';
 @import 'fontawesome';
 @import 'videojs';
 @import 'videojs-markers/dist/videojs.markers';
@@ -29,7 +28,6 @@ $icon-font-path: 'bootstrap/';
 @import 'spectrum';
 @import 'pivottable';
 @import 'pivottable_extensions/nrecopivottableext';
-@import 'codebase/pivot';
 @import 'bootstrap-submenu';
 
 // base package
