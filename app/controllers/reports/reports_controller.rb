@@ -13,7 +13,7 @@ module Reports
     end
 
     def query_params
-      params.permit(:aircraft_type)
+      params.permit(:aircraft_model)
     end
   end
 end

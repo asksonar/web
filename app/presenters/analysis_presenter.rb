@@ -1,18 +1,18 @@
 class AnalysisPresenter
-  def fleets_query
-    @fleets_query ||= FleetsQuery.instance
-  end
-
   def fleets_json
-    Fleet.select(
-      :id, :aircraft_status, :aircraft_type, :serial_number, :build_year,
-      :operator, :aircraft_series, :aircraft_manufacturer, :aircraft_age
-    ).to_json
-  end
+    attributes = [
+      "MSN", "Aircraft Status", "Aircraft Manufacturer", "Aircraft Model",
+      "Aircraft Version", "Registration", "Engine Model", "Engine Version",
+      "Airline", "Owner", "Airline Country", "Build Year", "Aircraft Age",
+      "Seats", "MTOW", "Hours Cumulative", "Cycles Cumulative"
+    ]
 
-  def fleets_json_pv
-    attributes = ["Aircraft Status", "Aircraft Type", "Build Year", "Operator", "Operator Country", "Owner", "Manager", "Engine Type", "Aircraft Series", "Aircraft Manufacturer"]
-    input = Fleet.pluck(:aircraft_status, :aircraft_type, :build_year, :operator, :operator_country, :owner, :manager, :engine_type, :aircraft_series, :aircraft_manufacturer)
+    input = Fleet.pluck(
+      :msn, :aircraft_status, :aircraft_manufacturer, :aircraft_model, :aircraft_version,
+      :registration, :engine_model, :engine_version, :airline, :owner, :airline_country,
+      :build_year, :aircraft_age, :seats, :mtow, :hours_cumulative, :cycles_cumulative
+    )
+
     input.unshift(attributes)
   end
 end

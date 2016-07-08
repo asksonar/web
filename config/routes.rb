@@ -31,8 +31,10 @@ Rails.application.routes.draw do
   # sonar v3 #
   ############
 
-  get '/analysis/wb', to: 'analysis#wb', as: 'analysis/wb'
-  get '/analysis/pv', to: 'analysis#pv', as: 'analysis/pv'
+  post '/fleets/datatable_views', to: 'datatable_views#create'
+  get '/fleets/datatable_views/:id/', to: 'datatable_views#show', as: 'datatable_view'
+  post '/fleets/datatable_views/:id/edit', to: 'datatable_views#update'
+  post '/fleets/datatable_views/:id/delete', to: 'datatable_views#destroy'
 
   resources :fleets do
     collection do
@@ -45,8 +47,7 @@ Rails.application.routes.draw do
     resources :forecasts, controller: :forecasts, only: [:index]
   end
 
-  resources :aircrafts
-  resources :components
+  resources :analysis, only: [:index]
 
   ############
   # sonar v2 #

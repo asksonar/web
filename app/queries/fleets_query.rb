@@ -1,9 +1,8 @@
 class FleetsQuery
   include Singleton
 
-  def fleets(filters: {})
-    data(filters: filters)
-      .select(:id, :serial_number, :aircraft_status, :aircraft_manufacturer, :aircraft_type, :engine_type, :manager, :operator, :owner, :operator_country)
+  def fleets(filters: {}, columns:)
+    data(filters: filters).select(*columns)
   end
 
   def fleet(id)
@@ -16,9 +15,9 @@ class FleetsQuery
 
   def aircraft_by_location(filters: {})
     data(filters: filters)
-      .where.not(operator_country: nil)
-      .group(:operator_country)
-      .pluck(:operator_country, "count(*) as item_count")
+      .where.not(airline_country: nil)
+      .group(:airline_country)
+      .pluck(:airline_country, "count(*) as item_count")
   end
 
   def column_headers(data)
@@ -54,9 +53,9 @@ class FleetsQuery
     { "columns" => columns, "rows" => data }
   end
 
-  def orders_by_operator
+  def orders_by_airline
     current_year = Date.today.year
-    data = pivot_by_count(:operator, :build_year, options: "build_year > #{current_year}")
+    data = pivot_by_count(:airline, :build_year, options: "build_year > #{current_year}")
     columns = column_headers(data)
     data = sort_counts(fill_empty_fields(group_by_rows(data)))
     data = format_pivot_table(data, columns)
@@ -69,15 +68,15 @@ class FleetsQuery
     data = format_pivot_table(data, columns)
   end
 
-  def aircraft_age_by_operator(filters: {})
+  def aircraft_age_by_airline(filters: {})
     current_year = Date.today.year
 
     data = data(filters: filters)
-            .group(:operator)
+            .group(:airline)
             .group(:age)
-            .order(:operator)
+            .order(:airline)
             .pluck(
-              :operator,
+              :airline,
               "(CASE WHEN build_year>#{current_year-3} THEN 0
               WHEN build_year<=#{current_year-3} AND build_year>#{current_year-10} THEN 1
               WHEN build_year<=#{current_year-10} THEN 2
@@ -99,7 +98,7 @@ class FleetsQuery
 
   def where_clause(filter_hash)
     # {"aircraft_status"=>["Order", "Storage"], {"aircraft_manufacturer"=>["Airbus"]}
-    # => ["(aircraft_status = ? OR aircraft_status = ?) AND (aircraft_type = ?)", "In Service", "Order", "A320"]
+    # => ["(aircraft_status = ? OR aircraft_status = ?) AND (aircraft_model = ?)", "In Service", "Order", "A320"]
     where_keys = (filter_hash.map do |key, value|
       or_length = value.nil? ? 1 : [*value].length
       '(' + Array.new(or_length).fill("#{key} = ?").join(' OR ') + ')'

@@ -11,27 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160513155703) do
+ActiveRecord::Schema.define(version: 20170707183238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
-
-  create_table "aircrafts", force: :cascade do |t|
-    t.integer  "msn"
-    t.string   "aircraft_type"
-    t.string   "aircraft_model"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "company_id"
-    t.string   "asset_owner"
-    t.string   "asset_manager"
-    t.string   "registration"
-    t.string   "manufacturer"
-    t.datetime "manufacture_date"
-    t.integer  "flight_hours"
-    t.integer  "flight_cycles"
-  end
+  enable_extension "tablefunc"
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -39,16 +24,6 @@ ActiveRecord::Schema.define(version: 20160513155703) do
     t.datetime "updated_at", null: false
     t.string   "uuid"
     t.string   "subdomain"
-  end
-
-  create_table "components", force: :cascade do |t|
-    t.integer  "type"
-    t.string   "serial_number"
-    t.string   "part_number"
-    t.string   "name"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.integer  "aircraft_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -66,6 +41,37 @@ ActiveRecord::Schema.define(version: 20160513155703) do
   end
 
   add_index "customers", ["company_id", "email"], name: "index_customers_on_company_id_and_email", using: :btree
+
+  create_table "datatable_views", force: :cascade do |t|
+    t.text     "datatable_columns"
+    t.integer  "company_id"
+    t.string   "name"
+    t.boolean  "default_view"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.text     "datatable_filters"
+    t.boolean  "current_view"
+  end
+
+  create_table "fleets", force: :cascade do |t|
+    t.string  "msn"
+    t.string  "aircraft_status"
+    t.string  "aircraft_manufacturer"
+    t.string  "aircraft_model"
+    t.string  "aircraft_version"
+    t.string  "registration"
+    t.string  "engine_model"
+    t.string  "engine_version"
+    t.string  "airline"
+    t.string  "owner"
+    t.string  "airline_country"
+    t.integer "build_year"
+    t.integer "aircraft_age"
+    t.integer "seats"
+    t.integer "mtow"
+    t.integer "hours_cumulative"
+    t.integer "cycles_cumulative"
+  end
 
   create_table "fleets_backup", force: :cascade do |t|
     t.text    "aircraft_status"

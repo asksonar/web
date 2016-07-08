@@ -1,0 +1,38 @@
+<div class="modal" id='datatable_settings_container' tabindex='-1'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class='ctn-modal-header'>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2 class='ctn-title'>Display Settings</h2>
+      </div>
+
+      <div class="ctn-sortable-columns row">
+        <div class="col-sm-6">
+          <div class="title">Available Columns</div>
+          <ul id="available">
+            <% @prezi.columns_available.each do |column| %>
+              <li data-id="<%= column %>"><%= column.titleize %><i class="fa fa-bars pull-right"></i></li>
+            <% end %>
+          </ul>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="title">Selected Columns</div>
+          <ul id="selected">
+            <% @prezi.columns_selected.each do |column| %>
+              <li data-id="<%= column %>"><%= column.titleize %><i class="fa fa-bars pull-right"></i></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+
+      <div class='clearfix buttons-container'>
+        <div class="pull-right">
+          <a class='btn btn-medium-blue' data-dismiss="modal"><span>Cancel</span></a>
+          <a id='btn-save-changes' datatable-view-hashid='<%= @prezi.current_datatable_view.hashid %>' class='btn btn-green' data-dismiss="modal"><span>Ok</span></a>
+        </div>
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

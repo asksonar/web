@@ -71,9 +71,9 @@ h4, .h4 {
   margin-bottom: 0px;
 }
 
-.btn {
-  border-radius: 0px;
-}
+// .btn {
+//   border-radius: 0px;
+// }
 
 input.form-control + span.input-group-btn .btn {
   padding-top: 7px; // the default 6px is 1px too short
@@ -83,12 +83,12 @@ input.form-control + span.input-group-btn .btn {
   & {
     background-color: $green;
     color: $white;
-    border: 1px solid darken($green, 10);
+    // border: 1px solid darken($green, 10);
   }
   &:hover, &:focus {
     background-color: darken($green, 5);
     color: $white;
-    border: 1px solid darken($green, 10);
+    // border: 1px solid darken($green, 10);
   }
 }
 
@@ -96,12 +96,12 @@ input.form-control + span.input-group-btn .btn {
   & {
     background-color: $dark-blue;
     color: $white;
-    border: 1px solid darken($dark-blue, 10);
+    // border: 1px solid darken($dark-blue, 10);
   }
   &:hover, &:focus {
     background-color: darken($dark-blue, 5);
     color: $white;
-    border: 1px solid darken($dark-blue, 10);
+    // border: 1px solid darken($dark-blue, 10);
   }
 }
 
@@ -109,12 +109,12 @@ input.form-control + span.input-group-btn .btn {
   & {
     background-color: $medium-blue;
     color: $white;
-    border: 1px solid darken($medium-blue, 10);
+    // border: 1px solid darken($medium-blue, 10);
   }
   &:hover, &:focus {
     background-color: darken($medium-blue, 5);
     color: $white;
-    border: 1px solid darken($medium-blue, 10);
+    // border: 1px solid darken($medium-blue, 10);
   }
 }
 
@@ -122,12 +122,12 @@ input.form-control + span.input-group-btn .btn {
   & {
     background-color: $light-blue;
     color: $white;
-    border: 1px solid darken($light-blue, 10);
+    // border: 1px solid darken($light-blue, 10);
   }
   &:hover, &:focus {
     background-color: darken($light-blue, 5);
     color: $white;
-    border: 1px solid darken($light-blue, 10);
+    // border: 1px solid darken($light-blue, 10);
   }
 }
 
@@ -135,12 +135,12 @@ input.form-control + span.input-group-btn .btn {
   & {
     background-color: $grey;
     color: $white;
-    border: 1px solid darken($grey, 10);
+    // border: 1px solid darken($grey, 10);
   }
   &:hover, &:focus {
     background-color: darken($grey, 5);
     color: $white;
-    border: 1px solid darken($grey, 10);
+    // border: 1px solid darken($grey, 10);
   }
 }
 
@@ -148,12 +148,12 @@ input.form-control + span.input-group-btn .btn {
   & {
     background-color: $dark-grey;
     color: $white;
-    border: 1px solid darken($dark-grey, 10);
+    // border: 1px solid darken($dark-grey, 10);
   }
   &:hover, &:focus {
     background-color: darken($dark-grey, 5);
     color: $white;
-    border: 1px solid darken($dark-grey, 10);
+    // border: 1px solid darken($dark-grey, 10);
   }
 }
 
@@ -161,12 +161,12 @@ input.form-control + span.input-group-btn .btn {
   & {
     background-color: $orange;
     color: $white;
-    border: 1px solid darken($orange, 10);
+    // border: 1px solid darken($orange, 10);
   }
   &:hover, &:focus {
     background-color: darken($orange, 5);
     color: $white;
-    border: 1px solid darken($orange, 10);
+    // border: 1px solid darken($orange, 10);
   }
 }
 

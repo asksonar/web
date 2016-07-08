@@ -1,11 +1,7 @@
 class AnalysisController < ApplicationController
   before_action :authenticate_user!
 
-  def wb
-    @prezi = AnalysisPresenter.new()
-  end
-
-  def pv
+  def index
     @prezi = AnalysisPresenter.new()
   end
 end

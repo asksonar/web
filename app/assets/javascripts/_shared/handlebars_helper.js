@@ -14,4 +14,24 @@ $(function(){
       return new Handlebars.SafeString(number + ' ' + text + 's');
     }
   });
+
+  Handlebars.registerHelper('get_object_value_with_key', function(object, key) {
+    return object[key];
+  });
+
+  Handlebars.registerHelper('if_equal', function(val1, val2, options) {
+    if ( val1 === val2 ) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
+  });
+
+  Handlebars.registerHelper('titleize', function(str) {
+    var strArray = str.split('_');
+    strArray = strArray.map(function(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    })
+    return strArray.join(' ');
+  });
 });
