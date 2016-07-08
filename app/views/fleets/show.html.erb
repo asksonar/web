@@ -1,10 +1,10 @@
 <% content_for :title do %>
-  MSN <%= @prezi.fleet.serial_number %>
+  MSN <%= @prezi.fleet.msn %>
 <% end %>
 
 <section class='main-content-header'>
   <h1><%= content_for :title %></h1>
-  <p class='sub'><%= @prezi.fleet.aircraft_type %>, operated by <%= @prezi.fleet.operator %></p>
+  <p class='sub'><%= @prezi.fleet.aircraft_model %>, operated by <%= @prezi.fleet.airline %></p>
 
   <!-- Nav tabs -->
   <ul class="nav nav-pills" role="tablist">
@@ -30,8 +30,8 @@
         <!-- List group -->
         <ul class="list-group">
           <li class="list-group-item row no-gutter">
-            <div class="col-sm-5 list-item-label">SERIAL NUMBER</div>
-            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.serial_number %></div>
+            <div class="col-sm-5 list-item-label">MSN</div>
+            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.msn %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-5 list-item-label">REGISTRATION</div>
@@ -43,35 +43,27 @@
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-5 list-item-label">MODEL</div>
-            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.aircraft_type %></div>
+            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.aircraft_model %></div>
           </li>
           <li class="list-group-item row no-gutter">
-            <div class="col-sm-5 list-item-label">SERIES</div>
-            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.aircraft_series %></div>
+            <div class="col-sm-5 list-item-label">VERSION</div>
+            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.aircraft_version %></div>
           </li>
           <li class="list-group-item row no-gutter">
-            <div class="col-sm-5 list-item-label">VARIANT</div>
-            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.aircraft_variant %></div>
+            <div class="col-sm-5 list-item-label">ENGINE MODEL</div>
+            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.engine_model %></div>
           </li>
           <li class="list-group-item row no-gutter">
-            <div class="col-sm-5 list-item-label">ENGINE TYPE</div>
-            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.engine_type %></div>
+            <div class="col-sm-5 list-item-label">ENGINE VERSION</div>
+            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.engine_version %></div>
           </li>
           <li class="list-group-item row no-gutter">
-            <div class="col-sm-5 list-item-label">ENGINE VARIANT</div>
-            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.engine_variant %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-5 list-item-label">SEAT TOTAL</div>
-            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.seat_total %></div>
+            <div class="col-sm-5 list-item-label">SEATS</div>
+            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.seats %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-5 list-item-label">MTOW</div>
             <div class="col-sm-7 list-item-content"><%= @prezi.fleet.mtow %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-5 list-item-label">AIRCRAFT USAGE</div>
-            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.aircraft_usage %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-5 list-item-label">TOTAL FLIGHT HOURS</div>
@@ -82,24 +74,16 @@
             <div class="col-sm-7 list-item-content"><%= @prezi.fleet.cycles_cumulative %></div>
           </li>
           <li class="list-group-item row no-gutter">
-            <div class="col-sm-5 list-item-label">OPERATOR</div>
-            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.operator %></div>
+            <div class="col-sm-5 list-item-label">AIRLINE</div>
+            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.airline %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-5 list-item-label">OWNER</div>
             <div class="col-sm-7 list-item-content"><%= @prezi.fleet.owner %></div>
           </li>
           <li class="list-group-item row no-gutter">
-            <div class="col-sm-5 list-item-label">OWNER TYPE</div>
-            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.owner_type %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-5 list-item-label">OPERATOR AREA</div>
-            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.operator_area %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-5 list-item-label">OPERATOR COUNTRY</div>
-            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.operator_country %></div>
+            <div class="col-sm-5 list-item-label">AIRLINE COUNTRY</div>
+            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.airline_country %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-5 list-item-label">BUILD YEAR</div>
@@ -108,14 +92,6 @@
           <li class="list-group-item row no-gutter">
             <div class="col-sm-5 list-item-label">AIRCRAFT STATUS</div>
             <div class="col-sm-7 list-item-content"><%= @prezi.fleet.aircraft_status %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-5 list-item-label">CURRENT MARKET VALUE ($M)</div>
-            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.current_market_value %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-5 list-item-label">CURRENT MARKET LEASE RATE ($M)</div>
-            <div class="col-sm-7 list-item-content"><%= @prezi.fleet.current_market_lease_rate %></div>
           </li>
         </ul>
 

@@ -3,7 +3,7 @@
 <% end %>
 
 <% content_for :title do %>
-  Aircraft Report <% if !@prezi.query_params.empty? %> - <%= @prezi.query_params["aircraft_type"] %><% end %>
+  Aircraft Report <% if !@prezi.query_params.empty? %> - <%= @prezi.query_params["aircraft_model"] %><% end %>
 <% end %>
 
 <script type="text/javascript">
@@ -19,7 +19,7 @@
     <div class="filter-select-container">
       <h3>Select aircraft type:</h3>
       <select class="selectpicker" data-live-search="true" id="select-aircraft-type" title="Select">
-        <% @prezi.aircraft_type.each do |type| %>
+        <% @prezi.aircraft_model.each do |type| %>
           <option><%= type %></option>
         <% end %>
       </select>
@@ -44,11 +44,11 @@
             <table class="table table-hover table-bordered">
               <tr>
                 <th class='text-center col-md-3'>Airline</th>
-                <% @prezi.aircraft_age_by_operator["columns"].each do |column| %>
+                <% @prezi.aircraft_age_by_airline["columns"].each do |column| %>
                   <th class="text-center col-md-3"><%= column %></th>
                 <% end %>
               </tr>
-              <% @prezi.aircraft_age_by_operator["rows"].each do |row| %>
+              <% @prezi.aircraft_age_by_airline["rows"].each do |row| %>
                 <tr>
                   <td><%= row["header"] %></td>
                   <% row["data"].each do |data| %>

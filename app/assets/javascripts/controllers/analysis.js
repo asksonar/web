@@ -38,18 +38,14 @@ $(function(){
     input, {
       renderers: allPivotRenderers,
       rendererOptions: {},
-      rows: ["Aircraft Type", "Aircraft Series"],
+      rows: ["Aircraft Model", "Aircraft Version"],
       cols: ["Aircraft Status"],
       menuLimit: 2000,
-      onRefresh: function (pivotUIOptions) {
-        // apply fixed headers
-        nrecoPivotExt.initFixedHeaders($('#pivotHolder table.pvtTable'));
-    	},
       unusedAttrsVertical: false,
       rendererOptions : {
         gchart: chartAreaSize
       },
-      // hiddenAttributes: ["Age", "Owner", "Aircraft Manufacturer", "Manager", "Enginer Type", "Operator", "Operator Country"],
+      hiddenAttributes: ["MSN", "Registration", "Hours Cumulative", "Cycles Cumulative", "Age", "MTOW", "Engine Model", "Engine Verison"],
       derivedAttributes: {
         "Age": function(record) {
           if (record["Build Year"] > 2013) {

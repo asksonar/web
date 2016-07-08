@@ -2,7 +2,7 @@ class Fleet < ActiveRecord::Base
   HASHIDS_SALT = 'dloYZQtiO2yy'
 
   def self.to_csv(all_fleets)
-    attributes = %w{serial_number aircraft_status aircraft_type build_year operator}
+    attributes = %w{msn aircraft_status aircraft_model build_year airline}
 
     CSV.generate(headers: true) do |csv|
       csv << attributes

@@ -11,8 +11,11 @@ class DatatableView < ActiveRecord::Base
     self.current_view = true if current_view.nil?
     self.datatable_filters = {} if datatable_filters.nil?
     self.datatable_columns = {
-      "selected": ["serial_number", "aircraft_status", "aircraft_manufacturer", "aircraft_type", "operator"],
-      "available": ["engine_type", "manager", "owner", "operator_country"]
+      "selected": ["msn", "aircraft_status", "aircraft_manufacturer", "aircraft_model", "airline"],
+      "available": [
+        "aircraft_version", "registration", "engine_model", "engine_version", "owner", "airline_country",
+        "build_year", "aircraft_age", "seats", "mtow", "hours_cumulative", "cycles_cumulative"
+      ]
     }.to_json if datatable_columns.nil?
   end
 end

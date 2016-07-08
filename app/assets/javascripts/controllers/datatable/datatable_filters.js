@@ -30,16 +30,23 @@ DatatableFilters.prototype.init = function() {
 
 DatatableFilters.prototype.addFilter = function(event){
   var fieldMap = {
+    "msn": "MSN",
     "aircraft_status": "Aircraft Status",
     "aircraft_manufacturer": "Aircraft Manufacturer",
-    "aircraft_type": "Aircraft Type",
-    "aircraft_series": "Aircraft Series",
-    "engine_type": "Engine Type",
-    "engine_variant": "Engine Variant",
-    "manager": "Manager",
-    "operator": "Operator",
+    "aircraft_model": "Aircraft Model",
+    "aircraft_version": "Aircraft Version",
+    "registration": "Registration",
+    "engine_model": "Engine Model",
+    "engine_version": "Engine Version",
+    "airline": "Airline",
     "owner": "Owner",
-    "operator_country": "Operator Country"
+    "airline_country": "Airline Country",
+    "build_year": "Build Year",
+    "aircraft_age": "Aircraft Age",
+    "seats": "Seats",
+    "mtow": "MTOW",
+    "hours_cumulative": "Hours Cumulative",
+    "cycles_cumulative": "Cycles Cumulative"
   };
 
   var fields = $("nav .selectpicker option:selected").add($('.filter :checked'));

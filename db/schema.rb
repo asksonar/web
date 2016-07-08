@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160707172851) do
+ActiveRecord::Schema.define(version: 20170707183238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,26 @@ ActiveRecord::Schema.define(version: 20160707172851) do
   end
 
   create_table "fleets", force: :cascade do |t|
+    t.string  "msn"
+    t.string  "aircraft_status"
+    t.string  "aircraft_manufacturer"
+    t.string  "aircraft_model"
+    t.string  "aircraft_version"
+    t.string  "registration"
+    t.string  "engine_model"
+    t.string  "engine_version"
+    t.string  "airline"
+    t.string  "owner"
+    t.string  "airline_country"
+    t.integer "build_year"
+    t.integer "aircraft_age"
+    t.integer "seats"
+    t.integer "mtow"
+    t.integer "hours_cumulative"
+    t.integer "cycles_cumulative"
+  end
+
+  create_table "fleets_backup", force: :cascade do |t|
     t.text    "aircraft_status"
     t.text    "aircraft_manufacturer"
     t.text    "aircraft_type"
