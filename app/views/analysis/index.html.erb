@@ -1,13 +1,13 @@
-<% content_for :main_wrapper_class do %>
-  sidebar-collapsed
-<% end %>
-
 <% content_for :title do %>
   Analysis
 <% end %>
 
+<% content_for :nav_left do %>
+  <%= render 'nav/analysis' %>
+<% end %>
+
 <script type="text/javascript">
-  var input = <%= raw @prezi.fleets_json %>;
+  var data = <%= raw @prezi.fleets_json %>;
 </script>
 
 <section class='main-content-header'>
@@ -15,9 +15,25 @@
 </section>
 
 <section class='main-content'>
+  <div class="ctn-selected-attributes row">
+    <div class="col-sm-6">
+      <div class="row-attributes strong">ROWS</div>
+      <ul id="rows">
+        <li data-id="Aircraft Model">Aircraft Model<i class="fa fa-bars pull-right"></i></li>
+        <li data-id="Aircraft Version">Aircraft Version<i class="fa fa-bars pull-right"></i></li>
+      </ul>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="column-attribtues strong">COLUMNS</div>
+      <ul id="columns">
+        <li data-id="Aircraft Status">Aircraft Status<i class="fa fa-bars pull-right"></i></li>
+      </ul>
+    </div>
+  </div>
 
   <div class="panel">
-    <div id="pivotHolder"></div>
+    <div id="pivot-container"></div>
   </div>
 
 </section>

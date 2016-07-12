@@ -1,0 +1,71 @@
+.analysis-sidebar .nav {
+  li + li {
+    margin-top: 0;
+  }
+
+  li a {
+    border-radius: 0;
+    color: #FFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 20px 12px 6px;
+
+    i {
+      margin-right: 10px;
+    }
+
+    &:focus, &:hover {
+      background: #1E202C;
+      color: #FFF;
+    }
+  }
+
+  li.active a {
+    &, &:focus, &:hover {
+      background: #1E202C;
+      color: #FFF;
+    }
+  }
+
+  ul.nav:last-child {
+    margin-bottom: 45px; // leave space for last dropdown-menu
+  }
+
+  .renderers,
+  .aggregators {
+    color: #FFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0 32px;
+  }
+
+  .ctn-available-attributes {
+    padding: 0 32px;
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: #1CA5C9;
+      color: #FFF;
+      margin: 1px;
+      padding: 8px 15px;
+      cursor: move;
+      border-radius: 4px;
+      margin-bottom: 8px;
+
+      i {
+        margin-top: 3px;
+        color: #0C92B3;
+      }
+    }
+
+    .sortable-ghost {
+      opacity: 0.3;
+      background: #FFF;
+      border: dotted 2px #44585F;
+    }
+  }
+}

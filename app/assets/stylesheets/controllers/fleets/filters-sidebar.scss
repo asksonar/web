@@ -1,4 +1,4 @@
-.sidebar .nav {
+.filters-sidebar .nav {
   li + li {
     margin-top: 0;
   }
@@ -24,16 +24,6 @@
     &, &:focus, &:hover {
       background: #1E202C;
       color: #FFF;
-    }
-  }
-
-  li.div-btn-create, li.div-btn-create.active {
-    margin-bottom: 20px;
-
-    a, a:focus, a:hover {
-      @extend .btn-orange;
-      width: 200px;
-      text-align: center;
     }
   }
 

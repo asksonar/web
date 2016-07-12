@@ -3,6 +3,37 @@
     overflow: scroll;
   }
 
+  .ctn-selected-attributes {
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: #1CA5C9;
+      color: #FFF;
+      margin: 1px;
+      padding: 8px 15px;
+      cursor: move;
+      border-radius: 4px;
+      margin-bottom: 3px;
+      margin-right: 5px;
+      display: inline-block;
+
+      i {
+        margin-top: 3px;
+        margin-left: 15px;
+        color: #0C92B3;
+      }
+    }
+
+    .sortable-ghost {
+      opacity: 0.3;
+      background: #FFF;
+      border: dotted 2px #44585F;
+    }
+  }
+
   select.pvtAggregator:not(.form-control), select.pvtRenderer:not(.form-control) {
     @extend .form-control;
     @extend .input-sm;
