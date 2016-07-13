@@ -1,51 +1,83 @@
-PivotTable = function(config, rowArrays, colArrays) {
+PivotTable = function(config, rowArray, colArray) {
   this.$pivotContainer = config.pivotContainer;
-  this.rowArrays = rowArrays;
-  this.colArrays = colArrays;
 
-  this.chartAreaSize = {};
-
-  this.utils = $.pivotUtilities;
-  this.renderers = this.utils.renderers;
-  this.gchartRenderers = this.utils.gchart_renderers;
-  this.aggregators = this.utils.aggregators;
-
-  this.table =  this.renderers["Table"];
-  this.tableBarChart =  this.renderers["Table Barchart"];
-  this.heatmap =  this.renderers["Heatmap"];
-  this.colHeatmap =  this.renderers["Col Heatmap"];
-  this.rowHeatMap =  this.renderers["Row Heatmap"];
-  this.areaChart =  this.gchartRenderers["Area Chart"];
-  this.barChart =  this.gchartRenderers["Bar Chart"];
-  this.lineChart =  this.gchartRenderers["Line Chart"];
-  this.scatterChart =  this.gchartRenderers["Scatter Chart"];
-  this.stackedBarChart =  this.gchartRenderers["Stacked Bar Chart"];
-
-  this.count =  this.aggregators["Count"];
-  this.countUnique =  this.aggregators["Count Unique Values"];
-  this.listUnique =  this.aggregators["List Unique Values"];
-  this.sum =  this.aggregators["Sum"];
-  this.intergerSum =  this.aggregators["Integer Sum"];
-  this.average =  this.aggregators["Average"];
-  this.mini =  this.aggregators["Minimum"];
-  this.max =  this.aggregators["Maximum"];
-
+  this.rowArray = rowArray;
+  this.colArray = colArray;
+  
   this.init();
 };
 
 PivotTable.prototype.init = function() {
-  this.$pivotContainer.pivot(
-    data, {
-      rows: this.rowArrays,
-      cols: this.colArrays,
-      renderer: this.table
-    }
-  );
+  var defaultParams = {
+    rowArray: this.rowArray,
+    colArray: this.colArray,
+    renderer: "table",
+    aggregator:  { name: "count", params: [] }
+  };
 
-  this.refreshChartAreaSize();
+  this.load(defaultParams.rowArray, defaultParams.colArray, defaultParams.renderer, defaultParams.aggregator);
 };
 
-PivotTable.prototype.refreshChartAreaSize = function() {
-  this.chartAreaSize.width = $('#pivotHolder .pvtRendererArea').width() - 50;
-  this.chartAreaSize.height = $('#pivotHolder .pvtRendererArea').width() / 2;
+PivotTable.prototype.getRenderer = function(name) {
+  var defaultRenderers = $.pivotUtilities.renderers;
+  var gchartRenderers = $.pivotUtilities.gchart_renderers;
+
+  var renderers = {
+    table: defaultRenderers["Table"],
+    tableBarChart: defaultRenderers["Table Barchart"],
+    heatmap: defaultRenderers["Heatmap"],
+    colHeatmap: defaultRenderers["Col Heatmap"],
+    rowHeatMap: defaultRenderers["Row Heatmap"],
+    areaChart: gchartRenderers["Area Chart"],
+    barChart: gchartRenderers["Bar Chart"],
+    lineChart: gchartRenderers["Line Chart"],
+    scatterChart: gchartRenderers["Scatter Chart"],
+    stackedBarChart: gchartRenderers["Stacked Bar Chart"]
+  };
+
+  return renderers[name];
+};
+
+PivotTable.prototype.getAggregator = function(name) {
+  var aggregatorTemplates = $.pivotUtilities.aggregatorTemplates;
+  var numberFormat = $.pivotUtilities.numberFormat;
+  var usFmt = numberFormat();
+
+  var usFmtInt = numberFormat({
+    digitsAfterDecimal: 0
+  });
+
+  var usFmtPct = numberFormat({
+    digitsAfterDecimal: 1,
+    scaler: 100,
+    suffix: "%"
+  });
+
+  var aggregators = {
+    count: aggregatorTemplates.count(usFmtInt),
+    countUnique: aggregatorTemplates.countUnique(usFmtInt),
+    listUnique: aggregatorTemplates.listUnique(", "),
+    sum: aggregatorTemplates.sum(usFmt),
+    intergerSum: aggregatorTemplates.sum(usFmtInt),
+    average: aggregatorTemplates.average(usFmt),
+    min: aggregatorTemplates.min(usFmt),
+    max: aggregatorTemplates.max(usFmt)
+  };
+
+  return aggregators[name];
+};
+
+PivotTable.prototype.load = function(rowArray, colArray, renderer, aggregator) {
+  var average = $.pivotUtilities.aggregatorTemplates.average;
+  var numberFormat = $.pivotUtilities.numberFormat;
+  var intFormat = numberFormat({digitsAfterDecimal: 0});
+
+  this.$pivotContainer.pivot(
+    data, {
+      rows: rowArray,
+      cols: colArray,
+      renderer: this.getRenderer(renderer),
+      aggregator: this.getAggregator(aggregator.name)(aggregator.params)
+    }
+  );
 };

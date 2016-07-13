@@ -39,6 +39,29 @@
     padding: 0 32px;
   }
 
+  .dropdown-menu {
+    li a {
+      color: #2D3C43;
+      padding: 3px 20px;
+      margin: 6px 0;
+
+      &:focus, &:hover {
+        color: #FFF;
+      }
+    }
+
+    li.active a {
+      &, &:focus, &:hover {
+        background: #1E202C;
+        color: #FFF;
+      }
+    }
+  }
+
+  .dropdown-toggle {
+    margin: 10px 0;
+  }
+
   .ctn-available-attributes {
     padding: 0 32px;
 

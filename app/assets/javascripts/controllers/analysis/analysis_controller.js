@@ -1,15 +1,93 @@
-AnalysisController = function(config) {
+AnalysisController = function(config, pivotTable) {
   this.$navSubContainer = config.navSubContainer;
+  this.$renderersInputRadio = config.renderersInputRadio;
+  this.$aggregatorsInputRadio = config.aggregatorsInputRadio;
+  this.$aggregatorSelect = config.aggregatorSelect;
+
+  this.pivotTable = pivotTable;
 
   this.init();
-}
+};
 
 AnalysisController.prototype.init = function() {
   this.$navSubContainer.on('click', $.proxy(this.toggleNav, this));
-  this.$rowAttributes = Sortable.create(rows, { group: { name: 'columns', pull: true, put: true }, animation: 200 });
-  this.$columnAttributes = Sortable.create(columns, { group: { name: 'columns', pull: true, put: true }, animation: 200 });
-  this.$availableAttributes = Sortable.create(available, { group: { name: 'columns', pull: true, put: true }, animation: 200 });
-}
+  this.$renderersInputRadio.on('change', $.proxy(this.updatePivot, this));
+  this.$aggregatorsInputRadio.on('change', $.proxy(this.selectAggregatorAttr, this));
+  this.$aggregatorSelect.on('change', $.proxy(this.updatePivot, this));
+
+  // row attributes
+  Sortable.create(rows, {
+    group: { name: 'columns', pull: true, put: true },
+    animation: 200,
+    onAdd: $.proxy(this.updatePivot, this),
+    onUpdate: $.proxy(this.updatePivot, this)
+  });
+
+  // column attributes
+  Sortable.create(columns, {
+    group: { name: 'columns', pull: true, put: true },
+    animation: 200,
+    onAdd: $.proxy(this.updatePivot, this),
+    onUpdate: $.proxy(this.updatePivot, this)
+  });
+
+  // available attributes
+  Sortable.create(available, {
+    group: { name: 'columns', pull: true, put: true },
+    animation: 200,
+    onAdd: $.proxy(this.updatePivot, this),
+    onUpdate: $.proxy(this.updatePivot, this)
+  });
+};
+
+AnalysisController.prototype.getRows = function() {
+  var rowArray = $('.ctn-selected-attributes #rows')
+    .children()
+    .map(function(index, elem) { return $(elem).attr('data-id'); })
+    .toArray();
+
+  return rowArray;
+};
+
+AnalysisController.prototype.getColumns = function() {
+  var colArray = $('.ctn-selected-attributes #columns')
+    .children()
+    .map(function(index, elem) { return $(elem).attr('data-id'); })
+    .toArray();
+
+  return colArray;
+};
+
+AnalysisController.prototype.getRenderer = function() {
+  return $('.renderers :checked').val();
+};
+
+AnalysisController.prototype.selectAggregatorAttr = function() {
+  var aggregator = $('.aggregators input:checked').val();
+  if ( aggregator === "count" ) {
+    this.updatePivot();
+  } else {
+    $('option:selected[name="aggregator"]').prop("selected", false); // unselect all selected item
+    $('.bootstrap-select').not(".hidden").addClass("hidden"); // hide currently displayed dropdown
+    $('nav .selectpicker[name="' + aggregator + '"]').parent().removeClass("hidden");
+  }
+};
+
+AnalysisController.prototype.getAggregator = function() {
+  var aggregator = { name: "", params: [] };
+  aggregator.name = $('.aggregators input:checked').val();
+  aggregator.params.push($('option:selected[name="aggregator"]').val());
+  return aggregator;
+};
+
+AnalysisController.prototype.updatePivot = function(event) {
+  var rowArray = this.getRows();
+  var colArray = this.getColumns();
+  var renderer = this.getRenderer();
+  var aggregator = this.getAggregator();
+
+  this.pivotTable.load(rowArray, colArray, renderer, aggregator);
+};
 
 AnalysisController.prototype.toggleNav = function(event) {
   var thisEl = $(event.currentTarget);
@@ -20,4 +98,4 @@ AnalysisController.prototype.toggleNav = function(event) {
   } else {
     icon.removeClass("fa-chevron-right").addClass("fa-chevron-down");
   }
-}
+};

@@ -25,15 +25,18 @@ $(function(){
   var mini =  utils.aggregators["Minimum"];
   var max =  utils.aggregators["Maximum"];
 
-  var rowArrays = ["Aircraft Model", "Aircraft Version"];
-  var colArrays = ["Aircraft Status"];
+  var rowArray = ["Aircraft Model", "Aircraft Version"];
+  var colArray = ["Aircraft Status"];
 
   var pivotTable = new PivotTable({
     pivotContainer: $("#pivot-container")
-  }, rowArrays, colArrays);
+  }, rowArray, colArray);
 
   var analysisController = new AnalysisController({
-    navSubContainer: $('.nav-sub-container')
-  });
+    navSubContainer: $('.nav-sub-container'),
+    renderersInputRadio: $('.renderers input[type="radio"]'),
+    aggregatorsInputRadio: $('.aggregators input[type="radio"]'),
+    aggregatorSelect: $('nav .selectpicker'),
+  }, pivotTable);
 
 });

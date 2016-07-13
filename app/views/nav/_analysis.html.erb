@@ -7,16 +7,16 @@
       </li>
       <ul class="nav nav-pills nav-stacked collapse" id="renderers">
         <div class='renderers'>
-          <div class="checkbox"><label><input type="checkbox" value="table">Table</label></div>
-          <div class="checkbox"><label><input type="checkbox" value="tableBarChart">Table Barchart</label></div>
-          <div class="checkbox"><label><input type="checkbox" value="heatmap">Heatmap</label></div>
-          <div class="checkbox"><label><input type="checkbox" value="colHeatmap">Col Heatmap</label></div>
-          <div class="checkbox"><label><input type="checkbox" value="rowHeatMap">Row Heatmap</label></div>
-          <div class="checkbox"><label><input type="checkbox" value="areaChart">Area Chart</label></div>
-          <div class="checkbox"><label><input type="checkbox" value="barChart">Bar Chart</label></div>
-          <div class="checkbox"><label><input type="checkbox" value="lineChart">Line Chart</label></div>
-          <div class="checkbox"><label><input type="checkbox" value="scatterChart">Scatter Chart</label></div>
-          <div class="checkbox"><label><input type="checkbox" value="stackedBarChart">Stacked Bar Chart</label></div>
+          <div class="radio"><label><input type="radio" name="renderer" value="table" checked="checked">Table</label></div>
+          <div class="radio"><label><input type="radio" name="renderer" value="tableBarChart">Table Barchart</label></div>
+          <div class="radio"><label><input type="radio" name="renderer" value="heatmap">Heatmap</label></div>
+          <div class="radio"><label><input type="radio" name="renderer" value="colHeatmap">Col Heatmap</label></div>
+          <div class="radio"><label><input type="radio" name="renderer" value="rowHeatMap">Row Heatmap</label></div>
+          <div class="radio"><label><input type="radio" name="renderer" value="areaChart">Area Chart</label></div>
+          <div class="radio"><label><input type="radio" name="renderer" value="barChart">Bar Chart</label></div>
+          <div class="radio"><label><input type="radio" name="renderer" value="lineChart">Line Chart</label></div>
+          <div class="radio"><label><input type="radio" name="renderer" value="scatterChart">Scatter Chart</label></div>
+          <div class="radio"><label><input type="radio" name="renderer" value="stackedBarChart">Stacked Bar Chart</label></div>
         </div>
       </ul>
 
@@ -25,14 +25,63 @@
       </li>
       <ul class="nav nav-pills nav-stacked collapse" id="aggregators">
         <div class='aggregators'>
-          <div class="checkbox"><label><input type="checkbox" value="count">Count</label></div>
-          <div class="checkbox"><label><input type="checkbox" value="countUnique">Count Unique Values</label></div>
-          <div class="checkbox"><label><input type="checkbox" value="listUnique">List Unique Values</label></div>
-          <div class="checkbox"><label><input type="checkbox" value="sum">Sum</label></div>
-          <div class="checkbox"><label><input type="checkbox" value="intergerSum">Integer Sum</label></div>
-          <div class="checkbox"><label><input type="checkbox" value="average">Average</label></div>
-          <div class="checkbox"><label><input type="checkbox" value="mini">Minimum</label></div>
-          <div class="checkbox"><label><input type="checkbox" value="max">Maximum</label></div>
+          <div class="radio"><label><input type="radio" name="aggregator" value="count" checked="checked">Count</label></div>
+          <div class="radio">
+            <label><input type="radio" name="aggregator" value="countUnique">Count Unique Values</label>
+            <select class='selectpicker hidden' name="countUnique" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" title='Select' data-dropup-auto="false">
+              <% @prezi.attributes.each do |attribute| %>
+                <option name="aggregator" value="<%= attribute %>"><%= attribute %></option>
+              <% end %>
+            </select>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="aggregator" value="listUnique">List Unique Values</label>
+            <select class='selectpicker hidden' name="listUnique" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" title='Select' data-dropup-auto="false">
+              <% @prezi.attributes.each do |attribute| %>
+                <option name="aggregator" value="<%= attribute %>"><%= attribute %></option>
+              <% end %>
+            </select>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="aggregator" value="sum">Sum</label>
+            <select class='selectpicker hidden' name="sum" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" title='Select' data-dropup-auto="false">
+              <% @prezi.attributes.each do |attribute| %>
+                <option name="aggregator" value="<%= attribute %>"><%= attribute %></option>
+              <% end %>
+            </select>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="aggregator" value="intergerSum">Integer Sum</label>
+            <select class='selectpicker hidden' name="intergerSum" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" title='Select' data-dropup-auto="false">
+              <% @prezi.attributes.each do |attribute| %>
+                <option name="aggregator" value="<%= attribute %>"><%= attribute %></option>
+              <% end %>
+            </select>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="aggregator" value="average">Average</label>
+            <select class='selectpicker hidden' name="average" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" title='Select' data-dropup-auto="false">
+              <% @prezi.attributes.each do |attribute| %>
+                <option name="aggregator" value="<%= attribute %>"><%= attribute %></option>
+              <% end %>
+            </select>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="aggregator" value="min">Minimum</label>
+            <select class='selectpicker hidden' name="min" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" title='Select' data-dropup-auto="false">
+              <% @prezi.attributes.each do |attribute| %>
+                <option name="aggregator" value="<%= attribute %>"><%= attribute %></option>
+              <% end %>
+            </select>
+          </div>
+          <div class="radio">
+            <label><input type="radio" name="aggregator" value="max">Maximum</label>
+            <select class='selectpicker hidden' name="max" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" title='Select' data-dropup-auto="false">
+              <% @prezi.attributes.each do |attribute| %>
+                <option name="aggregator" value="<%= attribute %>"><%= attribute %></option>
+              <% end %>
+            </select>
+          </div>
         </div>
       </ul>
 
