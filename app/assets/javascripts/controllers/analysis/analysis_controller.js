@@ -59,16 +59,18 @@ AnalysisController.prototype.getColumns = function() {
 };
 
 AnalysisController.prototype.getRenderer = function() {
-  return $('.renderers :checked').val();
+  var renderer = $('.renderers :checked');
+  return { name: renderer.val(), type: renderer.attr('data-renderer-type') };
 };
 
 AnalysisController.prototype.selectAggregatorAttr = function() {
   var aggregator = $('.aggregators input:checked').val();
+  $('option:selected[name="aggregator"]').prop("selected", false); // unselect all selected item
+  $('.bootstrap-select').not(".hidden").addClass("hidden"); // hide currently displayed dropdown
+
   if ( aggregator === "count" ) {
     this.updatePivot();
   } else {
-    $('option:selected[name="aggregator"]').prop("selected", false); // unselect all selected item
-    $('.bootstrap-select').not(".hidden").addClass("hidden"); // hide currently displayed dropdown
     $('nav .selectpicker[name="' + aggregator + '"]').parent().removeClass("hidden");
   }
 };

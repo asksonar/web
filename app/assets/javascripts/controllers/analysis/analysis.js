@@ -29,7 +29,8 @@ $(function(){
   var colArray = ["Aircraft Status"];
 
   var pivotTable = new PivotTable({
-    pivotContainer: $("#pivot-container")
+    pivotContainer: $("#pivot-container"),
+    btnSaveImg: $('#btn-save-img')
   }, rowArray, colArray);
 
   var analysisController = new AnalysisController({
