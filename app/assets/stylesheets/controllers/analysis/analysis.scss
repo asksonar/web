@@ -21,6 +21,21 @@
       color: #9CA8B4 !important;
       font-size: 12px;
     }
+
+    textarea {
+      border: 1px solid #E0E0E0;
+      color: #9CA8B4 !important;
+      padding: 10px;
+      width: 100% !important;
+      resize: none;
+    }
+
+    .btns-bar {
+      border: 1px solid #ccc;
+      height: 33px;
+      background-color: #f5f2f0;
+      margin-bottom: 20px;
+    }
   }
 
   .ctn-selected-attributes {

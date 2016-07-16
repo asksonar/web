@@ -24,6 +24,7 @@ PivotTable.prototype.init = function() {
 PivotTable.prototype.getRenderer = function(name) {
   var defaultRenderers = $.pivotUtilities.renderers;
   var gchartRenderers = $.pivotUtilities.gchart_renderers;
+  var exportRenderers = $.pivotUtilities.export_renderers;
 
   var renderers = {
     table: defaultRenderers["Table"],
@@ -35,7 +36,8 @@ PivotTable.prototype.getRenderer = function(name) {
     barChart: gchartRenderers["Bar Chart"],
     lineChart: gchartRenderers["Line Chart"],
     scatterChart: gchartRenderers["Scatter Chart"],
-    stackedBarChart: gchartRenderers["Stacked Bar Chart"]
+    stackedBarChart: gchartRenderers["Stacked Bar Chart"],
+    tsvExport: exportRenderers["TSV Export"]
   };
 
   return renderers[name];
@@ -76,12 +78,30 @@ PivotTable.prototype.load = function(rowArray, colArray, renderer, aggregator) {
     }
   );
 
-  if ( renderer.type === "text" ) {
+  if ( renderer.type === "svg" ) {
+    this.$btnSaveImg.removeClass('hidden');
+  } else {
     this.$btnSaveImg.addClass('hidden');
   }
 
-  if ( renderer.type === "svg" ) {
-    this.$btnSaveImg.removeClass('hidden');
+  if ( renderer.name === "tsvExport" ) {
+    $("#pivot-container textarea").after(
+      "<a class='btn btn-dark-blue pull-right' id='btn-tsv-export' \
+        data-placement='top' title='Copied!' data-toggle='tooltip' data-trigger='manual'>Copy</a>"
+    )
+
+    new ZeroClipboard($('#btn-tsv-export').get())
+      .on("copy", $.proxy(function (event) {
+        event.clipboardData.setData("text/plain", $('textarea').val());
+        var el = $('textarea').get(0);
+        el.setSelectionRange(0, el.value.length);
+      }, this))
+      .on("aftercopy", function (event) {
+        $('#btn-tsv-export').tooltip('show');
+        setTimeout(function() {
+          $('#btn-tsv-export').tooltip('hide');
+        }, 1000);
+      });
   }
 };
 
