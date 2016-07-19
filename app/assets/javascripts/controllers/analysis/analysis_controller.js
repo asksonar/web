@@ -1,8 +1,7 @@
 AnalysisController = function(config, pivotTable) {
-  this.$navSubContainer = config.navSubContainer;
-  this.$renderersInputRadio = config.renderersInputRadio;
-  this.$aggregatorsInputRadio = config.aggregatorsInputRadio;
-  this.$aggregatorSelect = config.aggregatorSelect;
+  this.$renderersSelect = config.renderersSelect;
+  this.$aggregatorsSelect = config.aggregatorsSelect;
+  this.$attributesSelect = config.attributesSelect;
 
   this.pivotTable = pivotTable;
 
@@ -10,10 +9,9 @@ AnalysisController = function(config, pivotTable) {
 };
 
 AnalysisController.prototype.init = function() {
-  this.$navSubContainer.on('click', $.proxy(this.toggleNav, this));
-  this.$renderersInputRadio.on('change', $.proxy(this.updatePivot, this));
-  this.$aggregatorsInputRadio.on('change', $.proxy(this.selectAggregatorAttr, this));
-  this.$aggregatorSelect.on('change', $.proxy(this.updatePivot, this));
+  this.$aggregatorsSelect.on('change', $.proxy(this.toggleAttributesSelect, this));
+  this.$renderersSelect.on('change', $.proxy(this.updatePivot, this));
+  this.$attributesSelect.on('change', $.proxy(this.updatePivot, this));
 
   // row attributes
   Sortable.create(rows, {
@@ -59,27 +57,34 @@ AnalysisController.prototype.getColumns = function() {
 };
 
 AnalysisController.prototype.getRenderer = function() {
-  var renderer = $('.renderers :checked');
+  var renderer = $('option:selected[name="renderer"]');
   return { name: renderer.val(), type: renderer.attr('data-renderer-type') };
 };
 
-AnalysisController.prototype.selectAggregatorAttr = function() {
-  var aggregator = $('.aggregators input:checked').val();
-  $('option:selected[name="aggregator"]').prop("selected", false); // unselect all selected item
-  $('.bootstrap-select').not(".hidden").addClass("hidden"); // hide currently displayed dropdown
+AnalysisController.prototype.toggleAttributesSelect = function() {
+  var aggregator = $('option:selected[name="aggregator"]').val();
 
-  if ( aggregator === "count" ) {
+  if (aggregator === "count") {
+    $('option:selected[name="attribute"]').prop("selected", false);
+    this.$attributesSelect.prop('disabled', true);
+    this.$attributesSelect.selectpicker('refresh');
     this.updatePivot();
   } else {
-    $('nav .selectpicker[name="' + aggregator + '"]').parent().removeClass("hidden");
+    this.$attributesSelect.prop('disabled', false);
+    this.$attributesSelect.selectpicker('refresh');
   }
 };
 
 AnalysisController.prototype.getAggregator = function() {
   var aggregator = { name: "", params: [] };
-  aggregator.name = $('.aggregators input:checked').val();
-  aggregator.params.push($('option:selected[name="aggregator"]').val());
-  return aggregator;
+  aggregator.name = $('option:selected[name="aggregator"]').val();
+
+  var attribute = $('option:selected[name="attribute"]').val();
+  if (attribute) {
+    aggregator.params.push(attribute);
+  }
+
+  return aggregator
 };
 
 AnalysisController.prototype.updatePivot = function(event) {
@@ -89,15 +94,4 @@ AnalysisController.prototype.updatePivot = function(event) {
   var aggregator = this.getAggregator();
 
   this.pivotTable.load(rowArray, colArray, renderer, aggregator);
-};
-
-AnalysisController.prototype.toggleNav = function(event) {
-  var thisEl = $(event.currentTarget);
-  var icon = thisEl.find('i');
-
-  if ( icon.hasClass('fa-chevron-down') ) {
-    icon.removeClass("fa-chevron-down").addClass("fa-chevron-right");
-  } else {
-    icon.removeClass("fa-chevron-right").addClass("fa-chevron-down");
-  }
 };
