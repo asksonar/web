@@ -12,70 +12,33 @@ PivotTable.prototype.init = function() {
   var defaultParams = {
     rowArray: this.rowArray,
     colArray: this.colArray,
+    exclusions: {},
     renderer: { name: "table", type: "text" },
-    aggregator:  { name: "count", params: [] }
+    aggregator:  { name: "Count", params: [] }
   };
 
-  this.load(defaultParams.rowArray, defaultParams.colArray, defaultParams.renderer, defaultParams.aggregator);
+  this.load(defaultParams.rowArray, defaultParams.colArray, defaultParams.exclusions, defaultParams.renderer, defaultParams.aggregator);
 
   this.$btnSaveImg.on('click', $.proxy(this.saveAsImg, this));
 };
 
-PivotTable.prototype.getRenderer = function(name) {
-  var defaultRenderers = $.pivotUtilities.renderers;
-  var gchartRenderers = $.pivotUtilities.gchart_renderers;
-  var exportRenderers = $.pivotUtilities.export_renderers;
+PivotTable.prototype.load = function(rowArray, colArray, filters, renderer, aggregator) {
+  var renderers = $.extend(
+    $.pivotUtilities.renderers,
+    $.pivotUtilities.gchart_renderers,
+    $.pivotUtilities.export_renderers
+  );
 
-  var renderers = {
-    table: defaultRenderers["Table"],
-    tableBarChart: defaultRenderers["Table Barchart"],
-    heatmap: defaultRenderers["Heatmap"],
-    colHeatmap: defaultRenderers["Col Heatmap"],
-    rowHeatMap: defaultRenderers["Row Heatmap"],
-    areaChart: gchartRenderers["Area Chart"],
-    barChart: gchartRenderers["Bar Chart"],
-    lineChart: gchartRenderers["Line Chart"],
-    scatterChart: gchartRenderers["Scatter Chart"],
-    stackedBarChart: gchartRenderers["Stacked Bar Chart"],
-    tsvExport: exportRenderers["TSV Export"]
-  };
-
-  return renderers[name];
-};
-
-PivotTable.prototype.getAggregator = function(name) {
-  var aggregatorTemplates = $.pivotUtilities.aggregatorTemplates;
-  var numberFormat = $.pivotUtilities.numberFormat;
-  var usFmt = numberFormat();
-  var usFmtInt = numberFormat({ digitsAfterDecimal: 0 });
-  var usFmtPct = numberFormat({
-    digitsAfterDecimal: 1,
-    scaler: 100,
-    suffix: "%"
-  });
-
-  var aggregators = {
-    count: aggregatorTemplates.count(usFmtInt),
-    countUnique: aggregatorTemplates.countUnique(usFmtInt),
-    listUnique: aggregatorTemplates.listUnique(", "),
-    sum: aggregatorTemplates.sum(usFmt),
-    intergerSum: aggregatorTemplates.sum(usFmtInt),
-    average: aggregatorTemplates.average(usFmt),
-    min: aggregatorTemplates.min(usFmt),
-    max: aggregatorTemplates.max(usFmt)
-  };
-
-  return aggregators[name];
-};
-
-PivotTable.prototype.load = function(rowArray, colArray, renderer, aggregator) {
-  this.$pivotContainer.pivot(
+  this.$pivotContainer.pivotUI(
     data, {
+      renderers: renderers,
       rows: rowArray,
       cols: colArray,
-      renderer: this.getRenderer(renderer.name),
-      aggregator: this.getAggregator(aggregator.name)(aggregator.params)
-    }
+      exclusions: filters,
+      rendererName: renderer.name,
+      aggregatorName: aggregator.name,
+      vals: aggregator.params
+    }, true
   );
 
   if ( renderer.type === "svg" ) {

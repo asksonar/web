@@ -1,116 +1,60 @@
 <aside class="sidebar analysis-sidebar">
-  <nav>
-    <ul class="nav nav-pills nav-stacked">
+  <div class="renderers-container">
+    <div class="title">TABLE VIEW</div>
+    <select class='selectpicker renderers' name="renderers">
+      <option name="renderer" data-renderer-type="text" value="table">Table</option>
+      <option name="renderer" data-renderer-type="text" value="tableBarChart">Table Barchart</option>
+      <option name="renderer" data-renderer-type="text" value="heatmap">Heatmap</option>
+      <option name="renderer" data-renderer-type="text" value="colHeatmap">Col Heatmap</option>
+      <option name="renderer" data-renderer-type="text" value="rowHeatMap">Row Heatmap</option>
+      <option name="renderer" data-renderer-type="svg" value="areaChart">Area Chart</option>
+      <option name="renderer" data-renderer-type="svg" value="barChart">Bar Chart</option>
+      <option name="renderer" data-renderer-type="svg" value="lineChart">Line Chart</option>
+      <option name="renderer" data-renderer-type="svg" value="scatterChart">Scatter Chart</option>
+      <option name="renderer" data-renderer-type="svg" value="stackedBarChart">Stacked Bar Chart</option>
+      <option name="renderer" data-renderer-type="text" value="tsvExport">TSV Export</option>
+    </select>
+  </div>
 
-      <li data-toggle="collapse" href="#renderers">
-        <a class="nav-sub-container"><i class="fa fa-chevron-right"></i>TABLE VIEW</a>
-      </li>
-      <ul class="nav nav-pills nav-stacked collapse" id="renderers">
-        <div class='renderers'>
-          <div class="radio"><label><input type="radio" name="renderer" data-renderer-type="text" value="table" checked="checked">Table</label></div>
-          <div class="radio"><label><input type="radio" name="renderer" data-renderer-type="text" value="tableBarChart">Table Barchart</label></div>
-          <div class="radio"><label><input type="radio" name="renderer" data-renderer-type="text" value="heatmap">Heatmap</label></div>
-          <div class="radio"><label><input type="radio" name="renderer" data-renderer-type="text" value="colHeatmap">Col Heatmap</label></div>
-          <div class="radio"><label><input type="radio" name="renderer" data-renderer-type="text" value="rowHeatMap">Row Heatmap</label></div>
-          <div class="radio"><label><input type="radio" name="renderer" data-renderer-type="svg" value="areaChart">Area Chart</label></div>
-          <div class="radio"><label><input type="radio" name="renderer" data-renderer-type="svg" value="barChart">Bar Chart</label></div>
-          <div class="radio"><label><input type="radio" name="renderer" data-renderer-type="svg" value="lineChart">Line Chart</label></div>
-          <div class="radio"><label><input type="radio" name="renderer" data-renderer-type="svg" value="scatterChart">Scatter Chart</label></div>
-          <div class="radio"><label><input type="radio" name="renderer" data-renderer-type="svg" value="stackedBarChart">Stacked Bar Chart</label></div>
-          <div class="radio"><label><input type="radio" name="renderer" data-renderer-type="text" value="tsvExport">TSV Export</label></div>
-        </div>
+  <div class="aggregators-container">
+    <div class="title">VALUES</div>
+    <select class="selectpicker aggregators" name="aggegators">
+      <option name="aggregator" value="count">Count</option>
+      <option name="aggregator" value="countUnique">Count Unique Values</option>
+      <option name="aggregator" value="listUnique">List Unique Values</option>
+      <option name="aggregator" value="sum">Sum</option>
+      <option name="aggregator" value="intergerSum">Integer Sum</option>
+      <option name="aggregator" value="average">Average</option>
+      <option name="aggregator" value="min">Minimum</option>
+      <option name="aggregator" value="max">Maximum</option>
+    </select>
+    <select class="selectpicker attributes" data-live-search="true" title="Select" data-dropup-auto="false" disabled>
+      <% @prezi.attribute_names.each do |attribute| %>
+        <option name="attribute" value="<%= attribute %>"><%= attribute %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <div class="attributes-container">
+    <div class="title">AVAILABLE ATTRIBUTES</div>
+    <div class="ctn-available-attributes">
+      <ul id="available">
+        <li data-id="MSN">MSN<i class="fa fa-bars pull-right"></i></li>
+        <li data-id="Aircraft Manufacturer">Aircraft Manufacturer<i class="fa fa-bars pull-right"></i></li>
+        <li data-id="Registration">Registration<i class="fa fa-bars pull-right"></i></li>
+        <li data-id="Engine Model">Engine Model<i class="fa fa-bars pull-right"></i></li>
+        <li data-id="Engine Version">Engine Version<i class="fa fa-bars pull-right"></i></li>
+        <li data-id="Airline">Airline<i class="fa fa-bars pull-right"></i></li>
+        <li data-id="Owner">Owner<i class="fa fa-bars pull-right"></i></li>
+        <li data-id="Airline Country">Airline Country<i class="fa fa-bars pull-right"></i></li>
+        <li data-id="Build Year">Build Year<i class="fa fa-bars pull-right"></i></li>
+        <li data-id="Aircraft Age">Aircraft Age<i class="fa fa-bars pull-right"></i></li>
+        <li data-id="Seats">Seats<i class="fa fa-bars pull-right"></i></li>
+        <li data-id="MTOW">MTOW<i class="fa fa-bars pull-right"></i></li>
+        <li data-id="Hours Cumulative">Hours Cumulative<i class="fa fa-bars pull-right"></i></li>
+        <li data-id="Cycles Cumulative">Cycles Cumulative<i class="fa fa-bars pull-right"></i></li>
       </ul>
-
-      <li data-toggle="collapse" href="#aggregators">
-        <a class="nav-sub-container"><i class="fa fa-chevron-right"></i>VALUES</a>
-      </li>
-      <ul class="nav nav-pills nav-stacked collapse" id="aggregators">
-        <div class='aggregators'>
-          <div class="radio"><label><input type="radio" name="aggregator" value="count" checked="checked">Count</label></div>
-          <div class="radio">
-            <label><input type="radio" name="aggregator" value="countUnique">Count Unique Values</label>
-            <select class='selectpicker hidden' name="countUnique" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" title='Select' data-dropup-auto="false">
-              <% @prezi.attributes.each do |attribute| %>
-                <option name="aggregator" value="<%= attribute %>"><%= attribute %></option>
-              <% end %>
-            </select>
-          </div>
-          <div class="radio">
-            <label><input type="radio" name="aggregator" value="listUnique">List Unique Values</label>
-            <select class='selectpicker hidden' name="listUnique" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" title='Select' data-dropup-auto="false">
-              <% @prezi.attributes.each do |attribute| %>
-                <option name="aggregator" value="<%= attribute %>"><%= attribute %></option>
-              <% end %>
-            </select>
-          </div>
-          <div class="radio">
-            <label><input type="radio" name="aggregator" value="sum">Sum</label>
-            <select class='selectpicker hidden' name="sum" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" title='Select' data-dropup-auto="false">
-              <% @prezi.attributes.each do |attribute| %>
-                <option name="aggregator" value="<%= attribute %>"><%= attribute %></option>
-              <% end %>
-            </select>
-          </div>
-          <div class="radio">
-            <label><input type="radio" name="aggregator" value="intergerSum">Integer Sum</label>
-            <select class='selectpicker hidden' name="intergerSum" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" title='Select' data-dropup-auto="false">
-              <% @prezi.attributes.each do |attribute| %>
-                <option name="aggregator" value="<%= attribute %>"><%= attribute %></option>
-              <% end %>
-            </select>
-          </div>
-          <div class="radio">
-            <label><input type="radio" name="aggregator" value="average">Average</label>
-            <select class='selectpicker hidden' name="average" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" title='Select' data-dropup-auto="false">
-              <% @prezi.attributes.each do |attribute| %>
-                <option name="aggregator" value="<%= attribute %>"><%= attribute %></option>
-              <% end %>
-            </select>
-          </div>
-          <div class="radio">
-            <label><input type="radio" name="aggregator" value="min">Minimum</label>
-            <select class='selectpicker hidden' name="min" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" title='Select' data-dropup-auto="false">
-              <% @prezi.attributes.each do |attribute| %>
-                <option name="aggregator" value="<%= attribute %>"><%= attribute %></option>
-              <% end %>
-            </select>
-          </div>
-          <div class="radio">
-            <label><input type="radio" name="aggregator" value="max">Maximum</label>
-            <select class='selectpicker hidden' name="max" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" title='Select' data-dropup-auto="false">
-              <% @prezi.attributes.each do |attribute| %>
-                <option name="aggregator" value="<%= attribute %>"><%= attribute %></option>
-              <% end %>
-            </select>
-          </div>
-        </div>
-      </ul>
-
-      <li data-toggle="collapse" href="#available-attributes">
-        <a class="nav-sub-container"><i class="fa fa-chevron-down"></i>AVAILABLE ATTRIBUTES</a>
-      </li>
-      <ul class="nav nav-pills nav-stacked collapse in" id="available-attributes">
-        <div class="ctn-available-attributes">
-          <ul id="available">
-            <li data-id="MSN">MSN<i class="fa fa-bars pull-right"></i></li>
-            <li data-id="Aircraft Manufacturer">Aircraft Manufacturer<i class="fa fa-bars pull-right"></i></li>
-            <li data-id="Registration">Registration<i class="fa fa-bars pull-right"></i></li>
-            <li data-id="Engine Model">Engine Model<i class="fa fa-bars pull-right"></i></li>
-            <li data-id="Engine Version">Engine Version<i class="fa fa-bars pull-right"></i></li>
-            <li data-id="Airline">Airline<i class="fa fa-bars pull-right"></i></li>
-            <li data-id="Owner">Owner<i class="fa fa-bars pull-right"></i></li>
-            <li data-id="Airline Country">Airline Country<i class="fa fa-bars pull-right"></i></li>
-            <li data-id="Build Year">Build Year<i class="fa fa-bars pull-right"></i></li>
-            <li data-id="Aircraft Age">Aircraft Age<i class="fa fa-bars pull-right"></i></li>
-            <li data-id="Seats">Seats<i class="fa fa-bars pull-right"></i></li>
-            <li data-id="MTOW">MTOW<i class="fa fa-bars pull-right"></i></li>
-            <li data-id="Hours Cumulative">Hours Cumulative<i class="fa fa-bars pull-right"></i></li>
-            <li data-id="Cycles Cumulative">Cycles Cumulative<i class="fa fa-bars pull-right"></i></li>
-          </ul>
-        </div>
-      </ul>
-
-    </ul>
-  </nav>
+    </div>
+  </div>
   <div class='sidebar-shadow'></div>
 </aside>

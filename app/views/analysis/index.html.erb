@@ -8,6 +8,7 @@
 
 <script type="text/javascript">
   var data = <%= raw @prezi.fleets_json %>;
+  var filters_hash = <%= raw @prezi.filters_hash.to_json %>;
 </script>
 
 <section class='main-content-header'>
@@ -18,18 +19,22 @@
 
 <section class='main-content'>
   <div class="ctn-selected-attributes row">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
+      <div class="filter-attributes strong">FILTERS</div>
+      <ul id="filters"></ul>
+    </div>
+    <div class="col-sm-4">
       <div class="row-attributes strong">ROWS</div>
       <ul id="rows">
-        <li data-id="Aircraft Model">Aircraft Model<i class="fa fa-bars pull-right"></i></li>
-        <li data-id="Aircraft Version">Aircraft Version<i class="fa fa-bars pull-right"></i></li>
+        <li data-id="Aircraft Model">Aircraft Model<i class="fa fa-caret-down pull-right"></i></li>
+        <li data-id="Aircraft Version">Aircraft Version<i class="fa fa-caret-down pull-right"></i></li>
       </ul>
     </div>
 
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <div class="column-attribtues strong">COLUMNS</div>
       <ul id="columns">
-        <li data-id="Aircraft Status">Aircraft Status<i class="fa fa-bars pull-right"></i></li>
+        <li data-id="Aircraft Status">Aircraft Status<i class="fa fa-caret-down pull-right"></i></li>
       </ul>
     </div>
   </div>
@@ -37,3 +42,26 @@
   <div class="panel" id="pivot-container"></div>
 
 </section>
+
+<% @prezi.filters_hash.each do |attribute, values| %>
+  <div class="pvtFilterBox" data-attribute="<%= attribute %>" style="display: none;">
+    <h4><%= attribute %> (<%= values.count %>)</h4>
+    <p>
+      <button class="btn btn-medium-blue btn-select-all" type="button">Select All</button>
+      <button class="btn btn-medium-blue btn-select-none" type="button">Select None</button>
+    </p>
+    <div class="pvtCheckContainer">
+      <% values.each do |value| %>
+        <p>
+          <label>
+            <input type="checkbox" class="pvtFilter" data-attribute="<%= attribute %>" checked="checked" />
+            <span><%= value %></span>
+          </label>
+        </p>
+      <% end %>
+    </div>
+    <p>
+      <button class="btn btn-medium-blue btn-update-filter" type="button">OK</button>
+    </p>
+  </div>
+<% end %>

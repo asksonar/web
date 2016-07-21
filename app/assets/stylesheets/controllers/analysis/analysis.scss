@@ -30,6 +30,14 @@
       resize: none;
     }
 
+    .pvtAxisContainer, .pvtUi > tbody > tr:first-child {
+      display: none;
+    }
+
+    .pvtRendererArea {
+      border: none !important;
+    }
+
     .btns-bar {
       border: 1px solid #ccc;
       height: 33px;
@@ -61,6 +69,7 @@
         margin-top: 3px;
         margin-left: 15px;
         color: #0C92B3;
+        cursor: pointer;
       }
     }
 
