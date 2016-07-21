@@ -14,7 +14,11 @@ $(function(){
   var analysisController = new AnalysisController({
     renderersSelect: $('.selectpicker.renderers'),
     aggregatorsSelect: $('.selectpicker.aggregators'),
-    attributesSelect: $('.selectpicker.attributes')
+    attributesSelect: $('.selectpicker.attributes'),
+    ctnSelectedAttributes: $('.ctn-selected-attributes'),
+    btnUpdateFilter: $('.btn-update-filter'),
+    btnSelectAll: $('.btn-select-all'),
+    btnSelectNone: $('.btn-select-none')
   }, pivotTable);
 
 });

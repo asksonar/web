@@ -29,7 +29,7 @@
       <option name="aggregator" value="max">Maximum</option>
     </select>
     <select class="selectpicker attributes" data-live-search="true" title="Select" data-dropup-auto="false" disabled>
-      <% @prezi.attributes.each do |attribute| %>
+      <% @prezi.attribute_names.each do |attribute| %>
         <option name="attribute" value="<%= attribute %>"><%= attribute %></option>
       <% end %>
     </select>
