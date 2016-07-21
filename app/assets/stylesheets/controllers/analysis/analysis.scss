@@ -4,6 +4,7 @@
 
     table:not(.table) {
       @extend .table;
+      margin-bottom: 0 !important;
     }
 
     // table renderer th
@@ -28,6 +29,10 @@
       padding: 10px;
       width: 100% !important;
       resize: none;
+    }
+
+    #btn-tsv-export {
+      margin-right: 8px;
     }
 
     .pvtAxisContainer, .pvtUi > tbody > tr:first-child {
