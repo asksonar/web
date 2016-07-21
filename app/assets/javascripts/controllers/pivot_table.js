@@ -46,9 +46,9 @@ PivotTable.prototype.load = function(rowArray, colArray, filters, renderer, aggr
   } else {
     this.$btnSaveImg.addClass('hidden');
   }
-
-  if ( renderer.name === "tsvExport" ) {
-    $("#pivot-container textarea").after(
+  
+  if ( renderer.name === "TSV Export" ) {
+    $("#pivot-container .pvtUi").after(
       "<a class='btn btn-dark-blue pull-right' id='btn-tsv-export' \
         data-placement='top' title='Copied!' data-toggle='tooltip' data-trigger='manual'>Copy</a>"
     )
