@@ -50,9 +50,10 @@ class FleetsController < ApplicationController
 
   def query_params
     params.permit(
-      :msn => [], :aircraft_status => [], :aircraft_manufacturer => [], :aircraft_model => [], :aircraft_version => [],
-      :registration => [], :engine_model => [], :engine_version => [], :airline => [], :owner => [], :airline_country => [],
-      :build_year => [], :aircraft_age => [], :seats => [], :mtow => [], :hours_cumulative => [], :cycles_cumulative => []
+      :msn => [], :aircraft_status => [], :aircraft_manufacturer => [], :aircraft_model => [], :aircraft_type => [],
+      :registration => [], :engine_model => [], :engine_variant => [], :operator => [], :operator_country => [],
+      :build_year => [], :aircraft_age => [], :seats_configuration => [], :line_number => [], :aircraft_series => [],
+      :last_delivery_date => [], :operator_region => []
     )
   end
 

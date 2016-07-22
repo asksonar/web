@@ -13,20 +13,20 @@ class ReportsPresenter
     @fleets_query ||= FleetsQuery.instance
   end
 
-  def aircraft_age_by_airline
-    aircraft_age_by_airline ||= fleets_query.aircraft_age_by_airline(filters: @query_params)
+  def aircraft_age_by_operator
+    aircraft_age_by_operator ||= fleets_query.aircraft_age_by_operator(filters: @query_params)
 
-    aircraft_age_by_airline["columns"].each_with_index do |header, index|
+    aircraft_age_by_operator["columns"].each_with_index do |header, index|
       if header == 0
-        aircraft_age_by_airline["columns"][index] = "Under 3 years"
+        aircraft_age_by_operator["columns"][index] = "Under 3 years"
       elsif header == 1
-        aircraft_age_by_airline["columns"][index] = "3-10 years"
+        aircraft_age_by_operator["columns"][index] = "3-10 years"
       else
-        aircraft_age_by_airline["columns"][index] = "10 years+"
+        aircraft_age_by_operator["columns"][index] = "10 years+"
       end
     end
 
-    aircraft_age_by_airline
+    aircraft_age_by_operator
   end
 
   def status_by_build_year

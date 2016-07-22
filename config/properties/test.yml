@@ -1,0 +1,22 @@
+web_base_url: https://my-local.asksonar.com
+video_base_url: https://s3-us-west-1.amazonaws.com/videos.dev.engsonar.com
+sign_up_url: https://www.asksonar.com/sign-up
+external_url: https://www.asksonar.com/
+assets_url: https://s3-us-west-1.amazonaws.com/assets.dev.engsonar.com/
+sample_scenario_result_id: 1
+#chrome_app_id: <add to development_override.yml>
+
+s3_access_key:
+s3_secret_key:
+s3_region: us-west-1
+s3_upload_bucket: upload.dev.engsonar.com
+s3_videos_bucket: videos.dev.engsonar.com
+s3_backup_bucket: backup.dev.engsonar.com
+
+mixpanel_token:
+
+sparkpost_username: SMTP_Injection
+sparkpost_api_key:
+
+google_browser_key:
+google_server_key:
