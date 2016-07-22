@@ -137,6 +137,7 @@ group :development, :test do
 
   gem 'require_reloader'
 
+  gem 'rspec-rails'
   # be more clever about reloading code to speed up refreshes
   #gem 'rails-dev-tweaks', '~> 1.1'
 end

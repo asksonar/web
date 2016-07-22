@@ -76,6 +76,7 @@ GEM
     devise_invitable (1.5.5)
       actionmailer (>= 3.2.6, < 5)
       devise (>= 3.2.0)
+    diff-lcs (1.2.5)
     erubis (2.7.0)
     eventmachine (1.0.7)
     execjs (2.5.2)
@@ -220,6 +221,23 @@ GEM
       resque
       sass-rails
       twitter-bootstrap-rails
+    rspec-core (3.5.1)
+      rspec-support (~> 3.5.0)
+    rspec-expectations (3.5.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.5.0)
+    rspec-mocks (3.5.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.5.0)
+    rspec-rails (3.5.1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.5.0)
+      rspec-expectations (~> 3.5.0)
+      rspec-mocks (~> 3.5.0)
+      rspec-support (~> 3.5.0)
+    rspec-support (3.5.0)
     rufus-scheduler (3.1.10)
     sanitize (4.0.0)
       crass (~> 1.0.2)
@@ -322,6 +340,7 @@ DEPENDENCIES
   resque (~> 1)
   resque-scheduler-web
   resque-web
+  rspec-rails
   sanitize
   sass-rails
   sdoc
