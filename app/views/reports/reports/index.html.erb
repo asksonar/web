@@ -39,16 +39,16 @@
       <!-- Tab panes -->
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active panel ctn-aircraft-age" id="age">
-          <h3 class="text-center">Aircraft Age by Airline</h3>
+          <h3 class="text-center">Aircraft Age by Operator</h3>
           <div class="table-responsive aircraft-age-table">
             <table class="table table-hover table-bordered">
               <tr>
-                <th class='text-center col-md-3'>Airline</th>
-                <% @prezi.aircraft_age_by_airline["columns"].each do |column| %>
+                <th class='text-center col-md-3'>Operator</th>
+                <% @prezi.aircraft_age_by_operator["columns"].each do |column| %>
                   <th class="text-center col-md-3"><%= column %></th>
                 <% end %>
               </tr>
-              <% @prezi.aircraft_age_by_airline["rows"].each do |row| %>
+              <% @prezi.aircraft_age_by_operator["rows"].each do |row| %>
                 <tr>
                   <td><%= row["header"] %></td>
                   <% row["data"].each do |data| %>

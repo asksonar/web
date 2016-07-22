@@ -10,14 +10,14 @@ class FleetsQuery
   end
 
   def filters(field)
-    Fleet.distinct(field).order(field).pluck(field)
+    Fleet.distinct(field).where("#{field} <> ''").where.not(field => "").order(field).pluck(field)
   end
 
   def aircraft_by_location(filters: {})
     data(filters: filters)
-      .where.not(airline_country: nil)
-      .group(:airline_country)
-      .pluck(:airline_country, "count(*) as item_count")
+      .where.not(operator_country: nil)
+      .group(:operator_country)
+      .pluck(:operator_country, "count(*) as item_count")
   end
 
   def column_headers(data)
@@ -53,9 +53,9 @@ class FleetsQuery
     { "columns" => columns, "rows" => data }
   end
 
-  def orders_by_airline
+  def orders_by_operator
     current_year = Date.today.year
-    data = pivot_by_count(:airline, :build_year, options: "build_year > #{current_year}")
+    data = pivot_by_count(:operator, :build_year, options: "build_year > #{current_year}")
     columns = column_headers(data)
     data = sort_counts(fill_empty_fields(group_by_rows(data)))
     data = format_pivot_table(data, columns)
@@ -68,15 +68,15 @@ class FleetsQuery
     data = format_pivot_table(data, columns)
   end
 
-  def aircraft_age_by_airline(filters: {})
+  def aircraft_age_by_operator(filters: {})
     current_year = Date.today.year
 
     data = data(filters: filters)
-            .group(:airline)
+            .group(:operator)
             .group(:age)
-            .order(:airline)
+            .order(:operator)
             .pluck(
-              :airline,
+              :operator,
               "(CASE WHEN build_year>#{current_year-3} THEN 0
               WHEN build_year<=#{current_year-3} AND build_year>#{current_year-10} THEN 1
               WHEN build_year<=#{current_year-10} THEN 2

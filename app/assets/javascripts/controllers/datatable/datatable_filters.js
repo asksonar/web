@@ -34,19 +34,19 @@ DatatableFilters.prototype.addFilter = function(event){
     "aircraft_status": "Aircraft Status",
     "aircraft_manufacturer": "Aircraft Manufacturer",
     "aircraft_model": "Aircraft Model",
-    "aircraft_version": "Aircraft Version",
+    "aircraft_type": "Aircraft Type",
+    "aircraft_series": "Aircraft Series",
     "registration": "Registration",
+    "line_number": "Line Number",
     "engine_model": "Engine Model",
-    "engine_version": "Engine Version",
-    "airline": "Airline",
-    "owner": "Owner",
-    "airline_country": "Airline Country",
+    "engine_variant": "Engine Variant",
+    "operator": "Operator",
+    "operator_country": "Operator Country",
+    "operator_region": "Operator Region",
     "build_year": "Build Year",
     "aircraft_age": "Aircraft Age",
-    "seats": "Seats",
-    "mtow": "MTOW",
-    "hours_cumulative": "Hours Cumulative",
-    "cycles_cumulative": "Cycles Cumulative"
+    "seats_configuration": "Seats Configuration",
+    "last_delivery_date": "Last Delivery Date"
   };
 
   var fields = $("nav .selectpicker option:selected").add($('.filter :checked'));
