@@ -16,8 +16,8 @@ describe FleetsController do
           "display_count"=>"25",
           "sort_column"=>"msn",
           "sort_direction"=>"asc",
-          "selected"=>["msn", "aircraft_status", "aircraft_manufacturer", "aircraft_model", "airline"],
-          "available"=>["aircraft_version", "registration", "engine_model", "engine_version", "owner", "airline_country", "build_year", "aircraft_age", "seats", "mtow", "hours_cumulative", "cycles_cumulative"]
+          "selected"=>["msn", "aircraft_status", "aircraft_manufacturer", "aircraft_model", "operator"],
+          "available"=>["aircraft_type", "registration", "engine_model", "engine_variant", "operator_country", "build_year", "aircraft_age", "seats_configuration"]
         } }
 
         it "works" do
@@ -26,7 +26,7 @@ describe FleetsController do
           expect(response.status).to eq(200)
           response_json = JSON.parse(response.body)
 
-          expect(response_json["column_names"]).to eq(["msn", "aircraft_status", "aircraft_manufacturer", "aircraft_model", "airline"])
+          expect(response_json["column_names"]).to eq(["msn", "aircraft_status", "aircraft_manufacturer", "aircraft_model", "operator"])
           expect(response_json["sort_column"]).to eq("msn")
           expect(response_json["sort_direction"]).to eq("asc")
           expect(response_json["fleets"]).to be
