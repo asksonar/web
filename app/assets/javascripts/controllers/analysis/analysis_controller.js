@@ -24,9 +24,7 @@ AnalysisController.prototype.init = function() {
   // filter attribtues
   Sortable.create(filters, {
     group: { name: 'analysis', pull: true, put: true },
-    animation: 200,
-    onAdd: $.proxy(this.updatePivot, this),
-    onUpdate: $.proxy(this.updatePivot, this)
+    animation: 200
   });
 
   // row attributes
@@ -50,8 +48,7 @@ AnalysisController.prototype.init = function() {
     group: { name: 'analysis', pull: true, put: true },
     animation: 200,
     onAdd: $.proxy(this.toggleAttributeCaret, this),
-    onRemove: $.proxy(this.toggleAttributeCaret, this),
-    onUpdate: $.proxy(this.updatePivot, this)
+    onRemove: $.proxy(this.toggleAttributeCaret, this)
   });
 };
 
@@ -140,29 +137,31 @@ AnalysisController.prototype.getFilters = function() {
 
 AnalysisController.prototype.getRenderer = function() {
   var renderer = $('option:selected[name="renderer"]');
-  return { name: renderer.text(), type: renderer.attr('data-renderer-type') };
+  return { name: renderer.val(), type: renderer.attr('data-renderer-type') };
 };
 
 AnalysisController.prototype.toggleAttributesSelect = function() {
   var aggregator = $('option:selected[name="aggregator"]').val();
+  var attribute = $('option:selected[name="attribute"]');
 
   if (aggregator === "count") {
-    $('option:selected[name="attribute"]').prop("selected", false);
+    attribute.prop("selected", false);
     this.$attributesSelect.prop('disabled', true);
     this.$attributesSelect.selectpicker('refresh');
     this.updatePivot();
-  } else {
+  } else if (attribute.length === 0) {
     this.$attributesSelect.prop('disabled', false);
     this.$attributesSelect.selectpicker('refresh');
+  } else {
     this.updatePivot();
   }
 };
 
 AnalysisController.prototype.getAggregator = function() {
   var aggregator = { name: "", params: [] };
-  aggregator.name = $('option:selected[name="aggregator"]').text();
+  aggregator.name = $('option:selected[name="aggregator"]').val();
 
-  var attribute = $('option:selected[name="attribute"]').text();
+  var attribute = $('option:selected[name="attribute"]').val();
   if (attribute) {
     aggregator.params.push(attribute);
   }

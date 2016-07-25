@@ -3,7 +3,7 @@ $(function(){
     return;
   }
 
-  var rowArray = ["Aircraft Model", "Aircraft Version"];
+  var rowArray = ["Aircraft Model"];
   var colArray = ["Aircraft Status"];
 
   var pivotTable = new PivotTable({
