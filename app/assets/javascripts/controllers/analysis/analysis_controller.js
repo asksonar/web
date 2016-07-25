@@ -68,7 +68,10 @@ AnalysisController.prototype.selectNone = function(event) {
 
 AnalysisController.prototype.toggleAttributeCaret = function(event) {
   var attribute = $(event.item);
+  var attributeName = attribute.attr('data-id');
   var from = $(event.from).attr('id');
+
+  $('.pvtFilter[data-attribute="' + attributeName + '"]').prop('checked', true);
 
   if (from === "available") {
     attribute.find('i').removeClass('fa-bars').addClass('fa-caret-down');
