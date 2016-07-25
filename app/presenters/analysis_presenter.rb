@@ -1,10 +1,9 @@
 class AnalysisPresenter
   def attributes
     [
-      :msn, :aircraft_status, :aircraft_manufacturer, :aircraft_model, :aircraft_type,
-      :registration, :engine_model, :engine_variant, :operator, :operator_country,
-      :build_year, :aircraft_age, :seats_configuration, :line_number, :aircraft_series,
-      :operator_region, :last_delivery_date
+      :aircraft_age, :aircraft_manufacturer, :aircraft_model, :aircraft_series,
+      :aircraft_status, :aircraft_type, :build_year, :engine_model, :engine_variant,
+      :operator, :operator_country, :operator_region, :seats_configuration
     ]
   end
 
