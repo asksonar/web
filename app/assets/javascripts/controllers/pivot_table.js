@@ -9,7 +9,7 @@ PivotTable = function(config, rowArray, colArray) {
 };
 
 PivotTable.prototype.init = function() {
-  var defaultParams = {
+  var defaults = {
     rowArray: this.rowArray,
     colArray: this.colArray,
     filters: {},
@@ -17,7 +17,7 @@ PivotTable.prototype.init = function() {
     aggregator:  { name: "count", params: [] }
   };
 
-  this.load(defaultParams.rowArray, defaultParams.colArray, defaultParams.filters, defaultParams.renderer, defaultParams.aggregator);
+  this.load(defaults.rowArray, defaults.colArray, defaults.filters, defaults.renderer, defaults.aggregator);
   this.$btnSaveImg.on('click', $.proxy(this.saveAsImg, this));
 };
 

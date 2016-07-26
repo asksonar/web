@@ -4,11 +4,11 @@
       {{#each column_names}}
         {{#if_equal ../sort_column this}}
           <th class="column-name" data-type="{{this}}" data-sorted="true" data-sorted-direction="{{../../sort_direction}}">
-           {{titleize this}}<i class="fa fa-caret-down"></i>
+           {{human_attribute_name this}}<i class="fa fa-caret-down"></i>
           </th>
         {{else}}
           <th class="column-name" data-type="{{this}}" data-sorted="false">
-            {{titleize this}}<i class="fa fa-caret-down"></i>
+            {{human_attribute_name this}}<i class="fa fa-caret-down"></i>
           </th>
         {{/if_equal}}
       {{/each}}

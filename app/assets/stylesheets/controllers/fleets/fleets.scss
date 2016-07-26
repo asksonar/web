@@ -131,13 +131,14 @@
   .fleet-table {
     thead > tr > th {
       vertical-align: top;
-      padding: 14px 22px;
+      padding: 8px 12px;
       color: #9CA8B4;
       background-color: #FFF;
       border: none;
       word-wrap: break-word;
       white-space: nowrap;
       cursor: pointer;
+      font-size: 11px;
 
       i {
         margin-left: 8px;
@@ -147,15 +148,17 @@
     tbody > tr {
       > td {
         vertical-align: middle;
-        padding: 14px 22px;
-        max-width: 160px;
+        padding: 8px 12px;
+        max-width: 120px;
         color: #2D3C43;
         font-weight: bold;
         cursor: pointer;
         word-wrap: break-word;
         white-space: nowrap;
-        overflow: scroll;
+        overflow: hidden;
         border-top: 1px solid #F0F0F0;
+        font-size: 11px;
+        text-overflow: ellipsis;
 
         a {
           color: #2D3C43;

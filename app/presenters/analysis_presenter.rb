@@ -9,11 +9,7 @@ class AnalysisPresenter
 
   def attribute_names
     attributes.map do |attribute|
-      if attribute == :msn
-        "MSN"
-      else
-        attribute.to_s.titleize
-      end
+      attribute.to_s.titleize
     end
   end
 
@@ -25,11 +21,7 @@ class AnalysisPresenter
   def filters_hash
     filters_hash = {}
     attributes.each do |attribute|
-      if attribute == :msn
-        filters_hash["MSN"] = fleets_query.filters(attribute)
-      else
-        filters_hash[attribute.to_s.titleize] = fleets_query.filters(attribute)
-      end
+      filters_hash[attribute.to_s.titleize] = fleets_query.filters(attribute)
     end
     filters_hash
   end

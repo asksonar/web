@@ -26,3 +26,8 @@ en:
       last: "&raquo;" #"Last &raquo;"
       previous: "&lsaquo;" #"&lsaquo; Prev"
       next: "&rsaquo;" #"Next &rsaquo;"
+  activerecord:
+    attributes:
+      fleet:
+        msn: "MSN"
+        aircraft_manufacturer: "Manufacturer"
