@@ -34,4 +34,18 @@ $(function(){
     })
     return strArray.join(' ');
   });
+
+  Handlebars.registerHelper('human_attribute_name', function(attribute) {
+    var defaults = {
+      "msn": "MSN",
+      "aircraft_manufacturer": "Manufacturer"
+    };
+
+    if (defaults[attribute]) {
+      return defaults[attribute];
+    } else {
+      var str = attribute.split('_').join(' ');
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+  });
 });
