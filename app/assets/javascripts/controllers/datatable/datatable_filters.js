@@ -195,5 +195,15 @@ DatatableFilters.prototype.exportToCsv = function() {
   var filters = this.getFilters();
   var displayCount = this.getDisplayCount();
   var sort = this.getSort();
-  window.location.href = new URI(window.location.href + "/export.csv").addSearch(filters).addSearch(displayCount).addSearch(sort);
+  var datatable_columns = this.getColumns();
+
+  var href = new URI(window.location.href + "/export.csv")
+    .addSearch(displayCount).addSearch(sort)
+    .addSearch('selected[]', datatable_columns["selected"]);
+
+  $.each(filters, function(key, value) {
+    href.addSearch(key + '[]', value);
+  });
+
+  window.location.href = href;
 };
