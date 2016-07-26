@@ -54,7 +54,7 @@
               <option name="engine_model" value="<%= filter %>" <%= 'selected' if @prezi.selected("engine_model", filter) %>><%= filter.titleize %></option>
             <% end %>
           </select>
-<!-- 
+<!--
           <div class="filter-header">Engine Variant</div>
           <select class='selectpicker' name="engine_variant" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" multiple title='Select' data-dropup-auto="false">
             <% @prezi.filters("engine_variant").each do |filter| %>
@@ -66,13 +66,6 @@
           <select class='selectpicker' name="build_year" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" multiple title='Select' data-dropup-auto="false">
             <% @prezi.filters("build_year").each do |filter| %>
               <option name="build_year" value="<%= filter %>" <%= 'selected' if @prezi.selected("build_year", filter) %>><%= filter.titleize %></option>
-            <% end %>
-          </select>
-
-          <div class="filter-header">Aircraft Age</div>
-          <select class='selectpicker' name="aircraft_age" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" multiple title='Select' data-dropup-auto="false">
-            <% @prezi.filters("aircraft_age").each do |filter| %>
-              <option name="aircraft_age" value="<%= filter %>" <%= 'selected' if @prezi.selected("aircraft_age", filter) %>><%= filter.titleize %></option>
             <% end %>
           </select>
 
