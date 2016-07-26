@@ -22,11 +22,11 @@ class FleetsController < ApplicationController
   end
 
   def export
-    @prezi = prezi(query_params: query_params)
+    @prezi = prezi(query_params: query_params, column_params: column_params)
 
     respond_to do |format|
       format.html { redirect_to fleets_path }
-      format.csv { send_data Fleet.to_csv(@prezi.fleets) }
+      format.csv { send_data Fleet.to_csv(@prezi.fleets_json, @prezi.column_params["selected"]) }
     end
   end
 

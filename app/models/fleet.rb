@@ -1,11 +1,13 @@
 class Fleet < ActiveRecord::Base
   HASHIDS_SALT = 'dloYZQtiO2yy'
 
-  def self.to_csv(all_fleets)
-    attributes = %w{msn aircraft_status aircraft_model build_year operator}
+  def self.to_csv(all_fleets, attributes)
+    attribute_names = attributes.map do |column|
+      Fleet.human_attribute_name(column)
+    end
 
     CSV.generate(headers: true) do |csv|
-      csv << attributes
+      csv << attribute_names
       all_fleets.each do |fleet|
         csv << fleet.attributes.values_at(*attributes)
       end
