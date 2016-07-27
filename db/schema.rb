@@ -11,12 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170726114738) do
+ActiveRecord::Schema.define(version: 20170726180538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
   enable_extension "tablefunc"
+
+  create_table "aircraft", force: :cascade do |t|
+    t.string "msn"
+    t.string "aircraft_status"
+    t.string "aircraft_manufacturer"
+    t.string "aircraft_model"
+    t.string "aircraft_type"
+    t.string "registration"
+    t.string "engine_model"
+    t.string "engine_variant"
+    t.string "operator"
+    t.string "operator_country"
+    t.text   "build_year"
+    t.text   "aircraft_age"
+    t.text   "seats_configuration"
+    t.text   "line_number"
+    t.text   "aircraft_series"
+    t.text   "last_delivery_date"
+    t.text   "operator_region"
+  end
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -51,26 +71,6 @@ ActiveRecord::Schema.define(version: 20170726114738) do
     t.datetime "updated_at",        null: false
     t.text     "datatable_filters"
     t.boolean  "current_view"
-  end
-
-  create_table "fleets", force: :cascade do |t|
-    t.string "msn"
-    t.string "aircraft_status"
-    t.string "aircraft_manufacturer"
-    t.string "aircraft_model"
-    t.string "aircraft_type"
-    t.string "registration"
-    t.string "engine_model"
-    t.string "engine_variant"
-    t.string "operator"
-    t.string "operator_country"
-    t.text   "build_year"
-    t.text   "aircraft_age"
-    t.text   "seats_configuration"
-    t.text   "line_number"
-    t.text   "aircraft_series"
-    t.text   "last_delivery_date"
-    t.text   "operator_region"
   end
 
   create_table "fleets_backup", force: :cascade do |t|

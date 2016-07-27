@@ -26,7 +26,7 @@ class FleetsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to fleets_path }
-      format.csv { send_data Fleet.to_csv(@prezi.fleets_json, @prezi.column_params["selected"]) }
+      format.csv { send_data Aircraft.to_csv(@prezi.fleets_json, @prezi.column_params["selected"]) }
     end
   end
 
@@ -41,7 +41,7 @@ class FleetsController < ApplicationController
   end
 
   def sort_column
-    Fleet.column_names.include?(params[:sort_column]) ? params[:sort_column] : "msn"
+    Aircraft.column_names.include?(params[:sort_column]) ? params[:sort_column] : "msn"
   end
 
   def sort_direction

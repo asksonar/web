@@ -28,6 +28,6 @@ en:
       next: "&rsaquo;" #"Next &rsaquo;"
   activerecord:
     attributes:
-      fleet:
+      aircraft:
         msn: "MSN"
         aircraft_manufacturer: "Manufacturer"
