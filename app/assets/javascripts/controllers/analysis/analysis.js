@@ -16,9 +16,13 @@ $(function(){
     aggregatorsSelect: $('.selectpicker.aggregators'),
     attributesSelect: $('.selectpicker.attributes'),
     ctnSelectedAttributes: $('.ctn-selected-attributes'),
+    rowAttributes: $('.ctn-selected-attributes #rows'),
+    columnAttributes: $('.ctn-selected-attributes #columns'),
     btnUpdateFilter: $('.btn-update-filter'),
     btnSelectAll: $('.btn-select-all'),
-    btnSelectNone: $('.btn-select-none')
+    btnSelectNone: $('.btn-select-none'),
+    inputFilter: $('.pvtSearch'),
+    filterAttributes: $('.pvtCheckContainer p')
   }, pivotTable);
 
 });

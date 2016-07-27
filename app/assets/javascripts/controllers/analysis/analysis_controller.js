@@ -3,9 +3,13 @@ AnalysisController = function(config, pivotTable) {
   this.$aggregatorsSelect = config.aggregatorsSelect;
   this.$attributesSelect = config.attributesSelect;
   this.$ctnSelectedAttributes = config.ctnSelectedAttributes;
+  this.$rowAttributes = config.rowAttributes;
+  this.$columnAttributes = config.columnAttributes;
   this.$btnUpdateFilter = config.btnUpdateFilter;
   this.$btnSelectAll = config.btnSelectAll;
   this.$btnSelectNone = config.btnSelectNone;
+  this.$inputFilter = config.inputFilter;
+  this.$filterAttributes = config.filterAttributes;
 
   this.pivotTable = pivotTable;
 
@@ -20,8 +24,9 @@ AnalysisController.prototype.init = function() {
   this.$btnUpdateFilter.on('click', $.proxy(this.updateFilters, this));
   this.$btnSelectAll.on('click', $.proxy(this.selectAll, this));
   this.$btnSelectNone.on('click', $.proxy(this.selectNone, this));
+  this.$inputFilter.on('keyup', $.proxy(this.filterResults));
 
-  // filter attribtues
+  // filter attributes
   Sortable.create(filters, {
     group: { name: 'analysis', pull: true, put: true },
     animation: 200
@@ -52,6 +57,22 @@ AnalysisController.prototype.init = function() {
   });
 };
 
+AnalysisController.prototype.showFilterBox = function(event) {
+  var thisEl = $(event.currentTarget);
+  var attribute = thisEl.parent().attr('data-id');
+  var filterBox = $('.pvtFilterBox[data-attribute="' + attribute + '"]');
+  var position = thisEl.offset();
+  var clickLeft = position.left;
+  var clickTop = position.top;
+  this.$inputFilter.val('');
+  this.$filterAttributes.show();
+
+  filterBox.css({
+    left: clickLeft + 10 - 300, // 300 sidebar width
+    top: clickTop + 10
+  }).show();
+};
+
 AnalysisController.prototype.selectAll = function(event) {
   var thisEl = $(event.currentTarget);
   var checkContainer = thisEl.parent().siblings('.pvtCheckContainer');
@@ -66,33 +87,19 @@ AnalysisController.prototype.selectNone = function(event) {
   filters.prop('checked', false);
 };
 
-AnalysisController.prototype.toggleAttributeCaret = function(event) {
-  var attribute = $(event.item);
-  var attributeName = attribute.attr('data-id');
-  var from = $(event.from).attr('id');
+AnalysisController.prototype.filterResults = function(event) {
+  var input = $(this).val().toLowerCase();
+  var checkContainer = $(this).parent().siblings('.pvtCheckContainer');
+  var filters = checkContainer.children();
 
-  $('.pvtFilter[data-attribute="' + attributeName + '"]').prop('checked', true);
-
-  if (from === "available") {
-    attribute.find('i').removeClass('fa-bars').addClass('fa-caret-down');
-  } else {
-    attribute.find('i').removeClass('fa-caret-down').addClass('fa-bars');
-  }
-  this.updatePivot();
-}
-
-AnalysisController.prototype.showFilterBox = function(event) {
-  var thisEl = $(event.currentTarget);
-  var attribute = thisEl.parent().attr('data-id');
-  var filterBox = $('.pvtFilterBox[data-attribute="' + attribute + '"]');
-  var position = thisEl.offset();
-  var clickLeft = position.left;
-  var clickTop = position.top;
-
-  filterBox.css({
-    left: clickLeft + 10 - 300, // 300 sidebar width
-    top: clickTop + 10
-  }).show();
+  filters.each(function(key, value) {
+    var filterIndex = $(value).text().trim().toLowerCase().indexOf(input);
+    if (filterIndex === -1) {
+      $(this).hide();
+    } else {
+      $(this).show();
+    }
+  });
 };
 
 AnalysisController.prototype.updateFilters = function(event) {
@@ -102,8 +109,24 @@ AnalysisController.prototype.updateFilters = function(event) {
   this.updatePivot();
 };
 
+AnalysisController.prototype.toggleAttributeCaret = function(event) {
+  var attribute = $(event.item);
+  var attributeName = attribute.attr('data-id');
+  var origin = $(event.from).attr('id');
+
+  $('.pvtFilter[data-attribute="' + attributeName + '"]').prop('checked', true);
+
+  if (origin === "available") {
+    attribute.find('i').removeClass('fa-bars').addClass('fa-caret-down');
+  } else {
+    attribute.find('i').removeClass('fa-caret-down').addClass('fa-bars');
+  }
+
+  this.updatePivot();
+};
+
 AnalysisController.prototype.getRows = function() {
-  var rowArray = $('.ctn-selected-attributes #rows')
+  var rowArray = this.$rowAttributes
     .children()
     .map(function(index, elem) { return $(elem).attr('data-id'); })
     .toArray();
@@ -112,7 +135,7 @@ AnalysisController.prototype.getRows = function() {
 };
 
 AnalysisController.prototype.getColumns = function() {
-  var colArray = $('.ctn-selected-attributes #columns')
+  var colArray = this.$columnAttributes
     .children()
     .map(function(index, elem) { return $(elem).attr('data-id'); })
     .toArray();
@@ -121,20 +144,20 @@ AnalysisController.prototype.getColumns = function() {
 };
 
 AnalysisController.prototype.getFilters = function() {
-  var unchecked = $("input:checkbox:not(:checked)");
+  var unchecked = $(".pvtFilter:checkbox:not(:checked)");
   var filters = {};
+
   $.each(unchecked, function(key, filter) {
     var filterAttribute = $(filter).attr('data-attribute');
     var filterName = $(filter).siblings('span').text();
-    if ($('.ctn-selected-attributes li[data-id="' + filterAttribute+ '"]').length === 0) {
-      return;
-    }
+
     if (filters[filterAttribute]) {
       filters[filterAttribute].push(filterName);
     } else {
       filters[filterAttribute] = [filterName];
     }
   });
+
   return filters;
 };
 
@@ -162,9 +185,9 @@ AnalysisController.prototype.toggleAttributesSelect = function() {
 
 AnalysisController.prototype.getAggregator = function() {
   var aggregator = { name: "", params: [] };
+  var attribute = $('option:selected[name="attribute"]').val();
   aggregator.name = $('option:selected[name="aggregator"]').val();
 
-  var attribute = $('option:selected[name="attribute"]').val();
   if (attribute) {
     aggregator.params.push(attribute);
   }

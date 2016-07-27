@@ -80,4 +80,14 @@
       border: dotted 2px #44585F;
     }
   }
+
+  .pvtFilterBox {
+    .pvtFilterBtn {
+      width: 117px; // container width of 238px / 2 - 1px border on each side
+    }
+
+    .pvtSearch {
+      margin-top: 5px;
+    }
+  }
 }
