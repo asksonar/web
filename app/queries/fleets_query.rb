@@ -6,11 +6,11 @@ class FleetsQuery
   end
 
   def fleet(id)
-    Fleet.find_by_hashid!(id)
+    Aircraft.find_by_hashid!(id)
   end
 
   def filters(field)
-    Fleet.distinct(field).where("#{field} <> ''").where.not(field => "").order(field).pluck(field)
+    Aircraft.distinct(field).where("#{field} <> ''").where.not(field => "").order(field).pluck(field)
   end
 
   def aircraft_by_location(filters: {})
@@ -91,7 +91,7 @@ class FleetsQuery
   private
 
   def data(filters: {}, options: nil)
-    query = Fleet.where(*where_clause(filters))
+    query = Aircraft.where(*where_clause(filters))
     query = query.where(options) if !options.nil?
     query
   end

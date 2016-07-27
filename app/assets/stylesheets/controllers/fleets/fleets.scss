@@ -96,6 +96,7 @@
       a {
         width: 164px; // li width - span width - span right
         overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
 

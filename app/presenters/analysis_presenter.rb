@@ -14,7 +14,7 @@ class AnalysisPresenter
   end
 
   def fleets_json
-    input = Fleet.pluck(*attributes)
+    input = Aircraft.pluck(*attributes)
     input.unshift(attribute_names)
   end
 
