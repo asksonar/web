@@ -45,8 +45,9 @@
   <div class="pvtFilterBox" data-attribute="<%= attribute %>" style="display: none;">
     <h4><%= attribute %> (<%= values.count %>)</h4>
     <p>
-      <button class="btn btn-medium-blue btn-select-all" type="button">Select All</button>
-      <button class="btn btn-medium-blue btn-select-none" type="button">Select None</button>
+      <button class="btn btn-medium-blue btn-select-all pvtFilterBtn" type="button">Select All</button>
+      <button class="btn btn-medium-blue btn-select-none pvtFilterBtn" type="button">Select None</button>
+      <input type="text" class="form-control pvtSearch" placeholder="Filter results">
     </p>
     <div class="pvtCheckContainer">
       <% values.each do |value| %>
