@@ -19,7 +19,7 @@ DatatableFilters = function(config) {
 
 DatatableFilters.prototype.init = function() {
   this.$fleetTable.on('click', '.column-name', $.proxy(this.setSort, this));
-  this.$filterContainer.on('click', '.filter-item', $.proxy(this.removeFilter, this));
+  this.$filterContainer.on('click', '.filter-item .close', $.proxy(this.removeFilter, this));
   this.$btnExportCsv.on('click', $.proxy(this.exportToCsv, this));
   this.$displayCountSelect.on('click', $.proxy(this.setDisplayCount, this));
   this.$fleetTable.on('click', 'td', $.proxy(this.addToFilter, this));
@@ -84,9 +84,10 @@ DatatableFilters.prototype.addToFilter = function(event){
 
 DatatableFilters.prototype.removeFilter = function(event){
   var thisEl = $(event.currentTarget);
-  var field = thisEl.attr('name');
-  var value = thisEl.attr('value');
-  thisEl.remove();
+  var filterItem = thisEl.closest('.filter-item');
+  var field = filterItem.attr('name');
+  var value = filterItem.attr('value');
+  filterItem.remove();
 
   if (field === "aircraft_status") {
     $('input[name="' + field + '"][value="' + value + '"]').prop("checked", false);
