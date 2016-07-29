@@ -44,7 +44,7 @@ DatatableView.prototype.saveView = function() {
       var newView = "<li><a href='/fleets/datatable_views/" + data.hashid + "'>" + data.name + "</a>\
                     <span class='close' data-datatable-view-hashid=" + data.hashid + " data-toggle='modal' \
                     data-target='#delete-with-ajax'>\<i class='fa fa-times-circle-o'></i></span></li>";
-      
+
       if ($('.saved-views li').length > 0) {
         this.$divSavedViews.append(divider + newView);
       } else {
@@ -59,13 +59,13 @@ DatatableView.prototype.saveView = function() {
 
 DatatableView.prototype.deleteView = function(event) {
   var hashid = this.$modalTrigger.attr('data-datatable-view-hashid');
-  var url = '/fleets/datatable_views/' + hashid + '/delete';
+  var url = '/fleets/datatable_views/' + hashid;
 
   $.ajax({
     type: 'POST',
     url: url,
     data: {
-      // _method: 'DELETE',
+      _method: 'DELETE',
       authenticity_token: AUTH_TOKEN
     },
     success: function(data){
