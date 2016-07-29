@@ -32,15 +32,15 @@ class DatatableViewsController < ApplicationController
   end
 
   def query_params
-    params.permit(:datatable_filters => {
+    params.fetch(:datatable_filters, {}).permit(
       :msn => [], :aircraft_status => [], :aircraft_manufacturer => [], :aircraft_model => [], :aircraft_type => [],
       :registration => [], :engine_model => [], :engine_variant => [], :operator => [], :operator_country => [],
       :build_year => [], :aircraft_age => [], :seats_configuration => [], :line_number => [], :aircraft_series => [],
       :last_delivery_date => [], :operator_region => []
-    })["datatable_filters"]
+    )
   end
 
   def column_params
-    params.permit(:datatable_columns => { :selected => [], :available => [] })["datatable_columns"]
+    params.fetch(:datatable_columns, {}).permit(:selected => [], :available => [])
   end
 end

@@ -119,6 +119,7 @@
     text-align: left;
     vertical-align: top;
     text-decoration: none;
+    cursor: default;
 
     .close {
       color: #FFF;
@@ -194,6 +195,7 @@
       ul {
         list-style: none;
         padding: 0;
+        min-height: 390px;
       }
 
       li {

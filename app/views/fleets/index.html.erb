@@ -98,7 +98,7 @@
       <table class='table table-hover'>
         <thead>
           <tr>
-            <% @prezi.columns_selected.each do |column| %>
+            <% @prezi.datatable_columns_selected.each do |column| %>
               <th class="column-name" data-type="<%= column %>" data-sorted="false">
                 <%= Aircraft.human_attribute_name(column) %><i class="fa fa-caret-down"></i>
               </th>
@@ -108,7 +108,7 @@
         <tbody>
           <% @prezi.fleets.each do |fleet| %>
             <tr class='fleet-line'>
-              <% @prezi.columns_selected.each do |column| %>
+              <% @prezi.datatable_columns_selected.each do |column| %>
                 <td name='<%= column %>' value='<%= fleet[column] %>'><%= fleet[column] %></td>
               <% end %>
             </tr>
