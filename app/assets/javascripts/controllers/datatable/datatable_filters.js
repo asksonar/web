@@ -49,18 +49,20 @@ DatatableFilters.prototype.getSort = function() {
 };
 
 DatatableFilters.prototype.exportToCsv = function() {
-  var filters = this.getFilters();
   var displayCount = this.getDisplayCount();
-  var sort = this.getSort();
-  var datatable_columns = this.getColumns();
+  var sortParams = this.getSort();
+  var datatableFilters = this.getFilters();
+  var datatableColumns = this.getColumns();
 
   var href = new URI(window.location.href + "/export.csv")
-    .addSearch(displayCount)
-    .addSearch(sort)
-    .addSearch('selected[]', datatable_columns["selected"]);
+    .addSearch("display_count", displayCount)
+    .addSearch("sort_params[sort_column]", sortParams["sort_column"])
+    .addSearch("sort_params[sort_direction]", sortParams["sort_direction"])
+    .addSearch("datatable_columns[selected][]", datatableColumns["selected"])
+    .addSearch("datatable_columns[available][]", datatableColumns["available"])
 
-  $.each(filters, function(key, value) {
-    href.addSearch(key + '[]', value);
+  $.each(datatableFilters, function(key, value) {
+    href.addSearch("datatable_filters[" + key + '][]', value);
   });
 
   window.location.href = href;
@@ -177,7 +179,7 @@ DatatableFilters.prototype.getColumns = function() {
 }
 
 DatatableFilters.prototype.updateList = function() {
-  var sort = this.getSort();
+  var sortParams = this.getSort();
   var displayCount = this.getDisplayCount();
   var datatableFilters = this.getFilters();
   var datatableColumns = this.getColumns();
@@ -190,7 +192,7 @@ DatatableFilters.prototype.updateList = function() {
     url: url,
     data: {
       display_count: displayCount,
-      sort_params: sort,
+      sort_params: sortParams,
       datatable_filters: datatableFilters,
       datatable_columns: datatableColumns,
       authenticity_token: AUTH_TOKEN
