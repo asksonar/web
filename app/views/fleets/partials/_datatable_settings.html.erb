@@ -10,7 +10,7 @@
         <div class="col-sm-6">
           <div class="title">Available Columns</div>
           <ul id="available">
-            <% @prezi.columns_available.each do |column| %>
+            <% @prezi.datatable_columns_available.each do |column| %>
               <li data-id="<%= column %>"><%= Aircraft.human_attribute_name(column) %><i class="fa fa-bars pull-right"></i></li>
             <% end %>
           </ul>
@@ -19,7 +19,7 @@
         <div class="col-sm-6">
           <div class="title">Selected Columns</div>
           <ul id="selected">
-            <% @prezi.columns_selected.each do |column| %>
+            <% @prezi.datatable_columns_selected.each do |column| %>
               <li data-id="<%= column %>"><%= Aircraft.human_attribute_name(column) %><i class="fa fa-bars pull-right"></i></li>
             <% end %>
           </ul>
@@ -29,7 +29,7 @@
       <div class='clearfix buttons-container'>
         <div class="pull-right">
           <a class='btn btn-medium-blue' data-dismiss="modal"><span>Cancel</span></a>
-          <a id='btn-save-changes' datatable-view-hashid='<%= @prezi.current_datatable_view.hashid %>' class='btn btn-green' data-dismiss="modal"><span>Ok</span></a>
+          <a id='btn-save-changes' datatable-view-hashid='<%= @prezi.current_view.hashid %>' class='btn btn-green' data-dismiss="modal"><span>Ok</span></a>
         </div>
       </div>
 

@@ -31,23 +31,20 @@ Rails.application.routes.draw do
   # sonar v3 #
   ############
 
-  post '/fleets/datatable_views', to: 'datatable_views#create'
-  get '/fleets/datatable_views/:id/', to: 'datatable_views#show', as: 'datatable_view'
-  post '/fleets/datatable_views/:id/edit', to: 'datatable_views#update'
-  post '/fleets/datatable_views/:id/delete', to: 'datatable_views#destroy'
-
   resources :fleets do
-    collection do
-      get 'export'
-    end
+    get 'export', on: :collection
   end
+
+  scope '/fleets' do
+    resources :datatable_views, only: [:create, :show, :destroy]
+  end
+
+  resources :analysis, only: [:index]
 
   namespace :reports do
     resources :reports, controller: :reports, only: [:index]
     resources :forecasts, controller: :forecasts, only: [:index]
   end
-
-  resources :analysis, only: [:index]
 
   ############
   # sonar v2 #

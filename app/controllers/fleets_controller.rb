@@ -8,7 +8,7 @@ class FleetsController < ApplicationController
       format.html
       format.json {
         render json: {
-          column_names: @prezi.column_params["selected"],
+          column_names: @prezi.column_params_selected,
           sort_column: @prezi.sort_column,
           sort_direction: @prezi.sort_direction,
           fleets: @prezi.fleets_json
@@ -26,7 +26,7 @@ class FleetsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to fleets_path }
-      format.csv { send_data Aircraft.to_csv(@prezi.fleets_json, @prezi.column_params["selected"]) }
+      format.csv { send_data Aircraft.to_csv(@prezi.fleets_json, @prezi.column_params_selected) }
     end
   end
 
@@ -41,15 +41,18 @@ class FleetsController < ApplicationController
   end
 
   def sort_column
-    Aircraft.column_names.include?(params[:sort_column]) ? params[:sort_column] : "msn"
+    sort_column = params.fetch(:sort_params, {}).permit(:sort_column).fetch(:sort_column, {})
+    Aircraft.column_names.include?(sort_column) ? sort_column : "msn"
   end
 
   def sort_direction
-    %w[asc desc].include?(params[:sort_direction]) ? params[:sort_direction] : "asc"
+    sort_direction = params.fetch(:sort_params, {}).permit(:sort_direction).fetch(:sort_direction, {})
+    %w[asc desc].include?(sort_direction) ? sort_direction : "asc"
   end
 
   def query_params
-    params.permit(
+    # use `fetch` in place of `require` to supply a default when :datatable_filters is not present
+    params.fetch(:datatable_filters, {}).permit(
       :msn => [], :aircraft_status => [], :aircraft_manufacturer => [], :aircraft_model => [], :aircraft_type => [],
       :registration => [], :engine_model => [], :engine_variant => [], :operator => [], :operator_country => [],
       :build_year => [], :aircraft_age => [], :seats_configuration => [], :line_number => [], :aircraft_series => [],
@@ -58,6 +61,7 @@ class FleetsController < ApplicationController
   end
 
   def column_params
-    params.permit(:selected => [], :available => [])
+    # use `fetch` in place of `require` to supply a default when :datatable_columns is not present
+    params.fetch(:datatable_columns, {}).permit(:selected => [], :available => [])
   end
 end

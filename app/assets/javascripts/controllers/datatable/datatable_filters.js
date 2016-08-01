@@ -19,20 +19,73 @@ DatatableFilters = function(config) {
 
 DatatableFilters.prototype.init = function() {
   this.$fleetTable.on('click', '.column-name', $.proxy(this.setSort, this));
-  this.$filterContainer.on('click', '.filter-item', $.proxy(this.removeFilter, this));
   this.$btnExportCsv.on('click', $.proxy(this.exportToCsv, this));
   this.$displayCountSelect.on('click', $.proxy(this.setDisplayCount, this));
   this.$fleetTable.on('click', 'td', $.proxy(this.addToFilter, this));
   this.$inputCheckbox.on('change', $.proxy(this.addFilter, this));
   this.$filtersSelect.on('change', $.proxy(this.addFilter, this));
+  this.$filterContainer.on('click', '.filter-item .close', $.proxy(this.removeFilter, this));
   this.$btnSaveChanges.on('click', $.proxy(this.updateList, this));
+};
+
+DatatableFilters.prototype.setSort = function(event) {
+  var thisEl = $(event.currentTarget);
+  var sorted = thisEl.attr('data-sorted') === "true";
+  var direction = sorted && thisEl.attr('data-sorted-direction') === "asc" ? "desc" : "asc";
+  var icon = thisEl.find('i');
+
+  $('th[data-sorted=true]').attr('data-sorted', false)
+  $('th[data-sorted-direction]').removeAttr('data-sorted-direction');
+  thisEl.attr('data-sorted', true);
+  thisEl.attr('data-sorted-direction', direction);
+
+  this.updateList();
+};
+
+DatatableFilters.prototype.getSort = function() {
+  var sort = $('th[data-sorted=true]').attr('data-type');
+  var direction = $('th[data-sorted=true]').attr('data-sorted-direction');
+  return { "sort_column": sort, "sort_direction": direction }
+};
+
+DatatableFilters.prototype.exportToCsv = function() {
+  var displayCount = this.getDisplayCount();
+  var sortParams = this.getSort();
+  var datatableFilters = this.getFilters();
+  var datatableColumns = this.getColumns();
+
+  var href = new URI(window.location.href + "/export.csv")
+    .addSearch("display_count", displayCount)
+    .addSearch("sort_params[sort_column]", sortParams["sort_column"])
+    .addSearch("sort_params[sort_direction]", sortParams["sort_direction"])
+    .addSearch("datatable_columns[selected][]", datatableColumns["selected"])
+    .addSearch("datatable_columns[available][]", datatableColumns["available"])
+
+  $.each(datatableFilters, function(key, value) {
+    href.addSearch("datatable_filters[" + key + '][]', value);
+  });
+
+  window.location.href = href;
+};
+
+DatatableFilters.prototype.setDisplayCount = function(event) {
+  var thisEl = $(event.currentTarget);
+  this.$ctnDisplayCountSelect.find('a[selected=selected]').removeAttr("selected");
+  thisEl.attr("selected", true);
+
+  this.updateList();
+};
+
+
+DatatableFilters.prototype.getDisplayCount = function(event) {
+  return this.$ctnDisplayCountSelect.find('a[selected=selected]').text();
 };
 
 DatatableFilters.prototype.addFilter = function(event){
   var fieldMap = {
     "msn": "MSN",
     "aircraft_status": "Aircraft Status",
-    "aircraft_manufacturer": "Aircraft Manufacturer",
+    "aircraft_manufacturer": "Manufacturer",
     "aircraft_model": "Aircraft Model",
     "aircraft_type": "Aircraft Type",
     "aircraft_series": "Aircraft Series",
@@ -84,9 +137,10 @@ DatatableFilters.prototype.addToFilter = function(event){
 
 DatatableFilters.prototype.removeFilter = function(event){
   var thisEl = $(event.currentTarget);
-  var field = thisEl.attr('name');
-  var value = thisEl.attr('value');
-  thisEl.remove();
+  var filterItem = thisEl.closest('.filter-item');
+  var field = filterItem.attr('name');
+  var value = filterItem.attr('value');
+  filterItem.remove();
 
   if (field === "aircraft_status") {
     $('input[name="' + field + '"][value="' + value + '"]').prop("checked", false);
@@ -118,19 +172,6 @@ DatatableFilters.prototype.getFilters = function() {
   return filters;
 };
 
-DatatableFilters.prototype.setDisplayCount = function(event) {
-  var thisEl = $(event.currentTarget);
-  this.$ctnDisplayCountSelect.find('a[selected=selected]').removeAttr("selected");
-  thisEl.attr("selected", true);
-
-  this.updateList();
-};
-
-
-DatatableFilters.prototype.getDisplayCount = function(event) {
-  return { "display_count": this.$ctnDisplayCountSelect.find('a[selected=selected]').text() };
-};
-
 DatatableFilters.prototype.getColumns = function() {
   var columnsSelected = this.$columnsSelected.toArray();
   var columnsAvailable = this.$columnsAvailable.toArray();
@@ -138,10 +179,10 @@ DatatableFilters.prototype.getColumns = function() {
 }
 
 DatatableFilters.prototype.updateList = function() {
-  var filters = this.getFilters();
+  var sortParams = this.getSort();
   var displayCount = this.getDisplayCount();
-  var sort = this.getSort();
-  var datatable_columns = this.getColumns();
+  var datatableFilters = this.getFilters();
+  var datatableColumns = this.getColumns();
   var url = new URL(window.location.href).pathname;
   var newFleets = newFleets || { column_names: [], sort_column: '', sort_direction: '', fleets: [] };
 
@@ -149,9 +190,13 @@ DatatableFilters.prototype.updateList = function() {
     type: 'GET',
     dataType: 'json',
     url: url,
-    data: $.extend(filters, displayCount, sort, datatable_columns, {
+    data: {
+      display_count: displayCount,
+      sort_params: sortParams,
+      datatable_filters: datatableFilters,
+      datatable_columns: datatableColumns,
       authenticity_token: AUTH_TOKEN
-    }),
+    },
     success: function(response) {
       newFleets.column_names = response.column_names;
       newFleets.fleets = response.fleets;
@@ -163,47 +208,4 @@ DatatableFilters.prototype.updateList = function() {
       notify.error(jqXHR.responseText);
     }.bind(this)
   });
-};
-
-DatatableFilters.prototype.setSort = function(event) {
-  var thisEl = $(event.currentTarget);
-  var sorted = thisEl.attr('data-sorted') === "true";
-  var direction = sorted && thisEl.attr('data-sorted-direction') === "asc" ? "desc" : "asc";
-  var icon = thisEl.find('i');
-
-  if ( icon.hasClass('fa-caret-down') ) {
-    icon.removeClass("fa-caret-down").addClass("fa-caret-up");
-  } else {
-    icon.removeClass("fa-caret-up").addClass("fa-caret-down");
-  }
-
-  $('th[data-sorted=true]').attr('data-sorted', false)
-  $('th[data-sorted-direction]').removeAttr('data-sorted-direction');
-  thisEl.attr('data-sorted', true);
-  thisEl.attr('data-sorted-direction', direction);
-
-  this.updateList();
-};
-
-DatatableFilters.prototype.getSort = function() {
-  var sort = $('th[data-sorted=true]').attr('data-type');
-  var direction = $('th[data-sorted=true]').attr('data-sorted-direction');
-  return { "sort_column": sort, "sort_direction": direction }
-};
-
-DatatableFilters.prototype.exportToCsv = function() {
-  var filters = this.getFilters();
-  var displayCount = this.getDisplayCount();
-  var sort = this.getSort();
-  var datatable_columns = this.getColumns();
-
-  var href = new URI(window.location.href + "/export.csv")
-    .addSearch(displayCount).addSearch(sort)
-    .addSearch('selected[]', datatable_columns["selected"]);
-
-  $.each(filters, function(key, value) {
-    href.addSearch(key + '[]', value);
-  });
-
-  window.location.href = href;
 };
