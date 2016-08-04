@@ -2,11 +2,7 @@
   padding-bottom: 350px;
 
   .nav {
-    li + li {
-      margin-top: 0;
-    }
-
-    li a {
+    .nav-sub-container {
       border-radius: 0;
       color: #FFF;
       font-size: 12px;
@@ -23,11 +19,11 @@
       }
     }
 
-    li.active a {
-      &, &:focus, &:hover {
-        background: #1E202C;
-        color: #FFF;
-      }
+    .title {
+      color: #FFF;
+      font-size: 12px;
+      font-weight: bold;
+      margin: 6px 0;
     }
 
     ul form {
@@ -40,10 +36,6 @@
         border-radius: 4px;
       }
 
-      .filter-header {
-        margin: 6px 0;
-      }
-
       .dropdown-menu {
         max-width: 100%;
         border: none;
@@ -54,6 +46,7 @@
           margin: 6px 0;
 
           &:focus, &:hover {
+            background: #1E202C;
             color: #FFF;
           }
         }
