@@ -1,6 +1,6 @@
 <p>Hi <%= @resource.full_name %>,</p>
 
-<p>Your Sonar account has been created! Sonar gives you video, audio, and transcripts of your users' feedback.</p>
+<p>Your Sonar account has been created! Sonar is an advanced analytics platform for the aircraft leasing industry. Our fleet database is designed to help you find actionable insights as quickly and effectively as possible.</p>
 
 <p>Username: <%= @resource.email %> (<a href='<%= Rails.configuration.properties['web_base_url'] + new_user_session_path + '?email=' + url_encode(@resource.email) %>'>Log In</a>)</p>
 
