@@ -3,13 +3,15 @@ $(function(){
     return;
   }
 
-  var rowArray = ["Aircraft Model"];
-  var colArray = ["Aircraft Status"];
+  var defaults = {
+    rowArray: ["Aircraft Model"],
+    colArray: ["Aircraft Status"]
+  }
 
   var pivotTable = new PivotTable({
     pivotContainer: $("#pivot-container"),
     btnSaveImg: $('#btn-save-img')
-  }, rowArray, colArray);
+  }, defaults);
 
   var analysisController = new AnalysisController({
     renderersSelect: $('.selectpicker.renderers'),
@@ -21,8 +23,7 @@ $(function(){
     btnUpdateFilter: $('.btn-update-filter'),
     btnSelectAll: $('.btn-select-all'),
     btnSelectNone: $('.btn-select-none'),
-    inputFilter: $('.pvtSearch'),
-    filterAttributes: $('.pvtCheckContainer p')
+    inputFilter: $('.pvtSearch')
   }, pivotTable);
 
 });

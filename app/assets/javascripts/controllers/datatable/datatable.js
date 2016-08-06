@@ -14,7 +14,7 @@ $(function(){
     ctnDisplayCountSelect: $('#select-display-count'),
     displayCountSelect: $('#select-display-count a'),
     inputCheckbox: $('.filter input[type="checkbox"]'),
-    filtersSelect: $('nav .selectpicker'),
+    filtersSelect: $('.selectpicker'),
     btnSaveChanges: $('#btn-save-changes')
   });
 
@@ -27,7 +27,7 @@ $(function(){
   }, datatableFilters);
 
   var datatableController = new DatatableController({
-    navSubContainer: $('.nav-sub-container'),
+    filterCategory: $('.filter-category'),
     btnCollapseSidebar: $('.btn-collapse-sidebar i'),
     btnExpandSidebar: $('#btn-expand-sidebar'),
     mainWrapper: $('#main-wrapper'),

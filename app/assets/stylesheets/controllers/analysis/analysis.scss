@@ -1,13 +1,13 @@
 #analysis-index {
   #pivot-container {
-    overflow: scroll;
+    padding: 20px 20px 40px;
+    background: #FFF;
 
     table:not(.table) {
       @extend .table;
       margin-bottom: 0 !important;
     }
 
-    // table renderer th
     table.pvtTable tr {
       th {
         border: 1px solid #E0E0E0;
@@ -15,12 +15,11 @@
         background-color: #FFF !important;
         font-size: 12px;
       }
-    }
 
-    // table renderer td
-    table.pvtTable tr td {
-      color: #9CA8B4 !important;
-      font-size: 12px;
+      td {
+        color: #9CA8B4 !important;
+        font-size: 12px;
+      }
     }
 
     textarea {
@@ -29,21 +28,6 @@
       padding: 10px;
       width: 100% !important;
       resize: none;
-    }
-
-    .pvtAxisContainer, .pvtUi > tbody > tr:first-child {
-      display: none;
-    }
-
-    .pvtRendererArea {
-      border: none !important;
-    }
-
-    .btns-bar {
-      border: 1px solid #ccc;
-      height: 33px;
-      background-color: #f5f2f0;
-      margin-bottom: 20px;
     }
   }
 
@@ -58,7 +42,6 @@
     li {
       background: #1CA5C9;
       color: #FFF;
-      margin: 1px;
       padding: 8px 15px;
       cursor: move;
       border-radius: 4px;
@@ -82,8 +65,14 @@
   }
 
   .pvtFilterBox {
+    border: 1px solid #9CA8B4;
+
+    div {
+      margin-top: 14px;
+    }
+
     .pvtFilterBtn {
-      width: 117px; // container width of 238px / 2 - 1px border on each side
+      width: 117px;
     }
 
     .pvtSearch {

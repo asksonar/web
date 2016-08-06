@@ -9,7 +9,6 @@ AnalysisController = function(config, pivotTable) {
   this.$btnSelectAll = config.btnSelectAll;
   this.$btnSelectNone = config.btnSelectNone;
   this.$inputFilter = config.inputFilter;
-  this.$filterAttributes = config.filterAttributes;
 
   this.pivotTable = pivotTable;
 
@@ -65,7 +64,6 @@ AnalysisController.prototype.showFilterBox = function(event) {
   var clickLeft = position.left;
   var clickTop = position.top;
   this.$inputFilter.val('');
-  this.$filterAttributes.show();
 
   filterBox.css({
     left: clickLeft + 10 - 300, // 300 sidebar width
@@ -125,6 +123,23 @@ AnalysisController.prototype.toggleAttributeCaret = function(event) {
   this.updatePivot();
 };
 
+AnalysisController.prototype.toggleAttributesSelect = function() {
+  var aggregator = $('option:selected[name="aggregator"]').val();
+  var attribute = $('option:selected[name="attribute"]');
+
+  if (aggregator === "count") {
+    attribute.prop("selected", false);
+    this.$attributesSelect.prop('disabled', true);
+    this.$attributesSelect.selectpicker('refresh');
+    this.updatePivot();
+  } else if (attribute.length === 0) {
+    this.$attributesSelect.prop('disabled', false);
+    this.$attributesSelect.selectpicker('refresh');
+  } else {
+    this.updatePivot();
+  }
+};
+
 AnalysisController.prototype.getRows = function() {
   var rowArray = this.$rowAttributes
     .children()
@@ -150,12 +165,8 @@ AnalysisController.prototype.getFilters = function() {
   $.each(unchecked, function(key, filter) {
     var filterAttribute = $(filter).attr('data-attribute');
     var filterName = $(filter).siblings('span').text();
-
-    if (filters[filterAttribute]) {
-      filters[filterAttribute].push(filterName);
-    } else {
-      filters[filterAttribute] = [filterName];
-    }
+    filters[filterAttribute] = filters[filterAttribute] || [];
+    filters[filterAttribute].push(filterName);
   });
 
   return filters;
@@ -166,31 +177,12 @@ AnalysisController.prototype.getRenderer = function() {
   return { name: renderer.val(), type: renderer.attr('data-renderer-type') };
 };
 
-AnalysisController.prototype.toggleAttributesSelect = function() {
-  var aggregator = $('option:selected[name="aggregator"]').val();
-  var attribute = $('option:selected[name="attribute"]');
-
-  if (aggregator === "count") {
-    attribute.prop("selected", false);
-    this.$attributesSelect.prop('disabled', true);
-    this.$attributesSelect.selectpicker('refresh');
-    this.updatePivot();
-  } else if (attribute.length === 0) {
-    this.$attributesSelect.prop('disabled', false);
-    this.$attributesSelect.selectpicker('refresh');
-  } else {
-    this.updatePivot();
-  }
-};
-
 AnalysisController.prototype.getAggregator = function() {
-  var aggregator = { name: "", params: [] };
+  var aggregator = {};
   var attribute = $('option:selected[name="attribute"]').val();
-  aggregator.name = $('option:selected[name="aggregator"]').val();
 
-  if (attribute) {
-    aggregator.params.push(attribute);
-  }
+  aggregator.name = $('option:selected[name="aggregator"]').val() || "";
+  aggregator.params = attribute ? [attribute] : [];
 
   return aggregator
 };

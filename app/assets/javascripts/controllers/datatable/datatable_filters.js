@@ -102,7 +102,7 @@ DatatableFilters.prototype.addFilter = function(event){
     "last_delivery_date": "Last Delivery Date"
   };
 
-  var fields = $("nav .selectpicker option:selected").add($('.filter :checked'));
+  var fields = $(".selectpicker option:selected").add($('.filter :checked'));
   this.$filterContainer.html("");
 
   fields.each(function(index, element){
