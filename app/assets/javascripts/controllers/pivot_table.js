@@ -1,24 +1,51 @@
-PivotTable = function(config, rowArray, colArray) {
+PivotTable = function(config, defaults) {
   this.$pivotContainer = config.pivotContainer;
   this.$btnSaveImg = config.btnSaveImg;
 
-  this.rowArray = rowArray;
-  this.colArray = colArray;
+  this.defaults = {
+    rowArray: defaults.rowArray || [],
+    colArray: defaults.colArray || [],
+    filters: defaults.filters || {},
+    renderer: defaults.renderer || { name: "table", type: "text" },
+    aggregator:  defaults.aggregator || { name: "count", params: [] }
+  };
 
   this.init();
 };
 
 PivotTable.prototype.init = function() {
-  var defaults = {
-    rowArray: this.rowArray,
-    colArray: this.colArray,
-    filters: {},
-    renderer: { name: "table", type: "text" },
-    aggregator:  { name: "count", params: [] }
-  };
-
+  var defaults = this.defaults;
   this.load(defaults.rowArray, defaults.colArray, defaults.filters, defaults.renderer, defaults.aggregator);
   this.$btnSaveImg.on('click', $.proxy(this.saveAsImg, this));
+};
+
+PivotTable.prototype.load = function(rowArray, colArray, filters, renderer, aggregator) {
+  this.$pivotContainer.pivot(
+    data, {
+      rows: rowArray,
+      cols: colArray,
+      renderer: this.getRenderer(renderer.name),
+      aggregator: this.getAggregator(aggregator.name)(aggregator.params),
+      filter: this.pivotFilter.bind(this, filters)
+    }
+  );
+
+  if ( renderer.name === "tsvExport" ) {
+    this.addBtnExportTsv();
+  }
+
+  this.toggleBtnSaveImg(renderer);
+};
+
+PivotTable.prototype.pivotFilter = function(filters, record) {
+  var excludedItems;
+  for (var key in filters) {
+    excludedItems = filters[key];
+    if (record[key].length === 0 || excludedItems.indexOf(record[key]) >= 0) {
+      return false;
+    }
+  }
+  return true;
 };
 
 PivotTable.prototype.getRenderer = function(name) {
@@ -61,85 +88,71 @@ PivotTable.prototype.getAggregator = function(name) {
     listUnique: aggregatorTemplates.listUnique(", "),
     sum: aggregatorTemplates.sum(usFmt),
     intergerSum: aggregatorTemplates.sum(usFmtInt),
-    average: aggregatorTemplates.average(usFmt),
-    min: aggregatorTemplates.min(usFmt),
-    max: aggregatorTemplates.max(usFmt)
+    average: aggregatorTemplates.average(usFmtInt),
+    min: aggregatorTemplates.min(usFmtInt),
+    max: aggregatorTemplates.max(usFmtInt)
   };
 
   return aggregators[name];
 };
 
-PivotTable.prototype.load = function(rowArray, colArray, filters, renderer, aggregator) {
-  this.$pivotContainer.pivot(
-    data, {
-      renderer: this.getRenderer(renderer.name),
-      aggregator: this.getAggregator(aggregator.name)(aggregator.params),
-      rows: rowArray,
-      cols: colArray,
-      filter: function(record) {
-        var excludedItems;
-        for (var key in filters) {
-          excludedItems = filters[key];
-          if (record[key].length === 0 || excludedItems.indexOf(record[key]) >= 0) {
-            return false;
-          }
-        }
-        return true;
-      }
-    }
+PivotTable.prototype.addBtnExportTsv = function() {
+  $("#pivot-container textarea").after(
+    "<a class='btn btn-dark-blue pull-right' id='btn-tsv-export' data-placement='top' \
+      title='Copied!' data-toggle='tooltip' data-trigger='manual'>Copy</a>"
   );
 
+  new ZeroClipboard($('#btn-tsv-export').get())
+    .on("copy", $.proxy(function (event) {
+      event.clipboardData.setData("text/plain", $('textarea').val());
+      var el = $('textarea').get(0);
+      el.setSelectionRange(0, el.value.length);
+    }, this))
+    .on("aftercopy", function (event) {
+      $('#btn-tsv-export').tooltip('show');
+      setTimeout(function() {
+        $('#btn-tsv-export').tooltip('hide');
+      }, 1000);
+    });
+};
+
+PivotTable.prototype.toggleBtnSaveImg = function(renderer) {
   if ( renderer.type === "svg" ) {
     this.$btnSaveImg.removeClass('hidden');
   } else {
     this.$btnSaveImg.addClass('hidden');
   }
-
-  if ( renderer.name === "tsvExport" ) {
-    $("#pivot-container textarea").after(
-      "<a class='btn btn-dark-blue pull-right' id='btn-tsv-export' \
-        data-placement='top' title='Copied!' data-toggle='tooltip' data-trigger='manual'>Copy</a>"
-    )
-
-    new ZeroClipboard($('#btn-tsv-export').get())
-      .on("copy", $.proxy(function (event) {
-        event.clipboardData.setData("text/plain", $('textarea').val());
-        var el = $('textarea').get(0);
-        el.setSelectionRange(0, el.value.length);
-      }, this))
-      .on("aftercopy", function (event) {
-        $('#btn-tsv-export').tooltip('show');
-        setTimeout(function() {
-          $('#btn-tsv-export').tooltip('hide');
-        }, 1000);
-      });
-  }
 };
 
 PivotTable.prototype.getImgData = function() {
-  var chartContainer = document.getElementById('pivot-container');
-  var chartArea = chartContainer.getElementsByTagName('svg')[0].parentNode;
-  var svg = '<svg>' + chartContainer.getElementsByTagName('svg')[0].innerHTML + '</svg>'
-  var doc = chartContainer.ownerDocument;
-  var canvas = doc.createElement('canvas');
-  canvas.setAttribute('width', chartArea.offsetWidth);
-  canvas.setAttribute('height', chartArea.offsetHeight);
-  canvas.setAttribute(
-      'style',
-      'position: absolute; ' +
-      'top: ' + (-chartArea.offsetHeight * 2) + 'px;' +
-      'left: ' + (-chartArea.offsetWidth * 2) + 'px;');
-  doc.body.appendChild(canvas);
+  // extract svg code for google chart
+  var chartContainer = this.$pivotContainer;
+  var chartArea = chartContainer.find('svg').parent();
+  var svg = '<svg>' + chartContainer.find('svg').html() + '</svg>';
 
-  // parses the svg and renders the result on a Canvas element
-  canvg(canvas, svg);
-  var imgData = canvas.toDataURL("image/png");
-  canvas.parentNode.removeChild(canvas);
+  // create a canvas element and position it offscreen
+  var canvas = $('<canvas></canvas>');
+  canvas.attr('width', chartArea.width());
+  canvas.attr('height', chartArea.height());
+  canvas.css({
+    'position': 'absolute',
+    'top': -chartArea.height() * 2,
+    'left': -chartArea.width() * 2
+  });
+  $('body').append(canvas);
+
+  // parses the svg and renders the result on the canvas element
+  canvg(canvas[0], svg);
+
+  // extract the image data as a base64 encoded string
+  var imgData = canvas[0].toDataURL("image/png");
+
+  canvas.remove()
   return imgData;
 };
 
-PivotTable.prototype.saveAsImg = function(chartContainer) {
-  var imgData = this.getImgData(chartContainer);
+PivotTable.prototype.saveAsImg = function() {
+  var imgData = this.getImgData();
 
   // Replacing the mime-type will force the browser to trigger a download
   // rather than displaying the image in the browser window.

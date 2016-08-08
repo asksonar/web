@@ -9,10 +9,6 @@
     font-weight: bold;
   }
 
-  .bootstrap-select + .bootstrap-select {
-    margin-top: 10px;
-  }
-
   .bootstrap-select {
     width: 250px !important;
 
@@ -20,7 +16,6 @@
       border: none;
 
       li a {
-        color: #2D3C43;
         margin: 6px 0;
 
         &:hover {
@@ -31,7 +26,11 @@
     }
   }
 
-  .attributes-container {
+  .bootstrap-select + .bootstrap-select {
+    margin-top: 10px;
+  }
+
+  .ctn-available-attributes {
     height: 100%;
 
     ul {

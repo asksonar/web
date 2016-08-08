@@ -1,118 +1,117 @@
-<aside class="sidebar filters-sidebar">
-  <nav>
-    <ul class="nav nav-pills nav-stacked">
-      <div class='btn-collapse-sidebar'>Filters<i class="fa fa-close"></i></div>
-      <li data-toggle="collapse" href="#aircraft_status">
-        <a class="nav-sub-container"><i class="fa fa-chevron-right"></i>AIRCRAFT STATUS</a>
-      </li>
-      <ul class="nav nav-pills nav-stacked collapse" id="aircraft_status">
-        <%= bootstrap_form_for :filters do |f| %>
-          <div class='filter' data-field='status'>
-            <% @prezi.filters("aircraft_status").each do |status| %>
-              <%= f.check_box status, {name: 'aircraft_status', label: status, checked: @prezi.checked("aircraft_status", status)}, status %>
-            <% end %>
-          </div>
-        <% end %>
-      </ul>
+<aside class='sidebar filters-sidebar'>
+  <div class='btn-collapse-sidebar'>Filters<i class='fa fa-close'></i></div>
 
-      <li data-toggle="collapse" href="#aircraft">
-        <a class="nav-sub-container"><i class="fa fa-chevron-right"></i>AIRCRAFT</a>
-      </li>
-      <ul class="nav nav-pills nav-stacked collapse" id="aircraft">
-        <%= bootstrap_form_for :filters do |f| %>
-          <div class="title">Aircraft Manufacturer</div>
-          <select class='selectpicker' name="aircraft_manufacturer" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" multiple title='Select' data-dropup-auto="false">
-            <% @prezi.filters("aircraft_manufacturer").each do |filter| %>
-              <option name="aircraft_manufacturer" value="<%= filter %>" <%= 'selected' if @prezi.selected("aircraft_manufacturer", filter) %> <%= 'selected' if @prezi.selected("aircraft_manufacturer", filter) %>><%= filter.titleize %></option>
-            <% end %>
-          </select>
-
-          <div class="title">Aircraft Model</div>
-          <select class='selectpicker' name="aircraft_model" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" multiple title='Select' data-dropup-auto="false">
-            <% @prezi.filters("aircraft_model").each do |filter| %>
-              <option name="aircraft_model" value="<%= filter %>" <%= 'selected' if @prezi.selected("aircraft_model", filter) %>><%= filter.titleize %></option>
-            <% end %>
-          </select>
-
-          <div class="title">Aircraft Type</div>
-          <select class='selectpicker' name="aircraft_type" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" multiple title='Select' data-dropup-auto="false">
-            <% @prezi.filters("aircraft_type").each do |filter| %>
-              <option name="aircraft_type" value="<%= filter %>" <%= 'selected' if @prezi.selected("aircraft_type", filter) %>><%= filter.titleize %></option>
-            <% end %>
-          </select>
-
-          <div class="title">Aircraft Series</div>
-          <select class='selectpicker' name="aircraft_series" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" multiple title='Select' data-dropup-auto="false">
-            <% @prezi.filters("aircraft_series").each do |filter| %>
-              <option name="aircraft_series" value="<%= filter %>" <%= 'selected' if @prezi.selected("aircraft_series", filter) %>><%= filter.titleize %></option>
-            <% end %>
-          </select>
-
-          <div class="title">Engine Model</div>
-          <select class='selectpicker' name="engine_model" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" multiple title='Select' data-dropup-auto="false">
-            <% @prezi.filters("engine_model").each do |filter| %>
-              <option name="engine_model" value="<%= filter %>" <%= 'selected' if @prezi.selected("engine_model", filter) %>><%= filter.titleize %></option>
-            <% end %>
-          </select>
-<!--
-          <div class="title">Engine Variant</div>
-          <select class='selectpicker' name="engine_variant" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" multiple title='Select' data-dropup-auto="false">
-            <% @prezi.filters("engine_variant").each do |filter| %>
-              <option name="engine_variant" value="<%= filter %>" <%= 'selected' if @prezi.selected("engine_variant", filter) %>><%= filter.titleize %></option>
-            <% end %>
-          </select> -->
-
-          <div class="title">Build Year</div>
-          <select class='selectpicker' name="build_year" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" multiple title='Select' data-dropup-auto="false">
-            <% @prezi.filters("build_year").each do |filter| %>
-              <option name="build_year" value="<%= filter %>" <%= 'selected' if @prezi.selected("build_year", filter) %>><%= filter.titleize %></option>
-            <% end %>
-          </select>
-
-          <div class="title">Seats Configuration</div>
-          <select class='selectpicker' name="seats_configuration" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" multiple title='Select' data-dropup-auto="false">
-            <% @prezi.filters("seats_configuration").each do |filter| %>
-              <option name="seats_configuration" value="<%= filter %>" <%= 'selected' if @prezi.selected("seats_configuration", filter) %>><%= filter.titleize %></option>
-            <% end %>
-          </select>
-        <% end %>
-      </ul>
-
-      <li data-toggle="collapse" href="#companies">
-        <a class="nav-sub-container"><i class="fa fa-chevron-right"></i>COMPANIES</a>
-      </li>
-      <ul class="nav nav-pills nav-stacked collapse" id="companies">
-        <%= bootstrap_form_for :filters do |f| %>
-          <div class="title">Operator</div>
-          <select class='selectpicker' name="operator" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" multiple title='Select' data-dropup-auto="false">
-            <% @prezi.filters("operator").each do |filter| %>
-              <option name="operator" value="<%= filter %>" <%= 'selected' if @prezi.selected("operator", filter) %>><%= filter.titleize %></option>
-            <% end %>
-          </select>
-        <% end %>
-      </ul>
-
-      <li data-toggle="collapse" href="#misc">
-        <a class="nav-sub-container"><i class="fa fa-chevron-right"></i>MISC</a>
-      </li>
-      <ul class="nav nav-pills nav-stacked collapse" id="misc">
-        <%= bootstrap_form_for :filters do |f| %>
-          <div class="title">Operator Country</div>
-          <select class='selectpicker' name="operator_country" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" multiple title='Select' data-dropup-auto="false">
-            <% @prezi.filters("operator_country").each do |filter| %>
-              <option name="operator_country" value="<%= filter %>" <%= 'selected' if @prezi.selected("operator_country", filter) %>><%= filter.titleize %></option>
-            <% end %>
-          </select>
-
-          <div class="title">Operator Region</div>
-          <select class='selectpicker' name="operator_region" data-live-search="true" data-icon-base="fa" data-tick-icon="fa-check" multiple title='Select' data-dropup-auto="false">
-            <% @prezi.filters("operator_region").each do |filter| %>
-              <option name="operator_region" value="<%= filter %>" <%= 'selected' if @prezi.selected("operator_region", filter) %>><%= filter.titleize %></option>
-            <% end %>
-          </select>
-        <% end %>
-      </ul>
+  <ul class='nav nav-pills nav-stacked'>
+    <li data-toggle='collapse' href='#aircraft_status'>
+      <a class='filter-category'><i class='fa fa-chevron-right'></i>AIRCRAFT STATUS</a>
+    </li>
+    <ul class='nav nav-pills nav-stacked collapse' id='aircraft_status'>
+      <%= bootstrap_form_for :filters, html: {class: 'filter-content'} do |f| %>
+        <div class='filter' data-field='status'>
+          <% @prezi.filters('aircraft_status').each do |status| %>
+            <%= f.check_box status, {name: 'aircraft_status', label: status, checked: @prezi.checked('aircraft_status', status)}, status %>
+          <% end %>
+        </div>
+      <% end %>
     </ul>
-  </nav>
+
+    <li data-toggle='collapse' href='#aircraft'>
+      <a class='filter-category'><i class='fa fa-chevron-right'></i>AIRCRAFT</a>
+    </li>
+    <ul class='nav nav-pills nav-stacked collapse' id='aircraft'>
+      <%= bootstrap_form_for :filters, html: {class: 'filter-content'} do |f| %>
+        <div class='filter-name'>Aircraft Manufacturer</div>
+        <select class='selectpicker' name='aircraft_manufacturer' data-live-search='true' data-icon-base='fa' data-tick-icon='fa-check' multiple title='Select' data-dropup-auto='false'>
+          <% @prezi.filters('aircraft_manufacturer').each do |filter| %>
+            <option name='aircraft_manufacturer' value='<%= filter %>' <%= 'selected' if @prezi.selected('aircraft_manufacturer', filter) %> <%= 'selected' if @prezi.selected('aircraft_manufacturer', filter) %>><%= filter.titleize %></option>
+          <% end %>
+        </select>
+
+        <div class='filter-name'>Aircraft Model</div>
+        <select class='selectpicker' name='aircraft_model' data-live-search='true' data-icon-base='fa' data-tick-icon='fa-check' multiple title='Select' data-dropup-auto='false'>
+          <% @prezi.filters('aircraft_model').each do |filter| %>
+            <option name='aircraft_model' value='<%= filter %>' <%= 'selected' if @prezi.selected('aircraft_model', filter) %>><%= filter.titleize %></option>
+          <% end %>
+        </select>
+
+        <div class='filter-name'>Aircraft Type</div>
+        <select class='selectpicker' name='aircraft_type' data-live-search='true' data-icon-base='fa' data-tick-icon='fa-check' multiple title='Select' data-dropup-auto='false'>
+          <% @prezi.filters('aircraft_type').each do |filter| %>
+            <option name='aircraft_type' value='<%= filter %>' <%= 'selected' if @prezi.selected('aircraft_type', filter) %>><%= filter.titleize %></option>
+          <% end %>
+        </select>
+
+        <div class='filter-name'>Aircraft Series</div>
+        <select class='selectpicker' name='aircraft_series' data-live-search='true' data-icon-base='fa' data-tick-icon='fa-check' multiple title='Select' data-dropup-auto='false'>
+          <% @prezi.filters('aircraft_series').each do |filter| %>
+            <option name='aircraft_series' value='<%= filter %>' <%= 'selected' if @prezi.selected('aircraft_series', filter) %>><%= filter.titleize %></option>
+          <% end %>
+        </select>
+
+        <div class='filter-name'>Engine Model</div>
+        <select class='selectpicker' name='engine_model' data-live-search='true' data-icon-base='fa' data-tick-icon='fa-check' multiple title='Select' data-dropup-auto='false'>
+          <% @prezi.filters('engine_model').each do |filter| %>
+            <option name='engine_model' value='<%= filter %>' <%= 'selected' if @prezi.selected('engine_model', filter) %>><%= filter.titleize %></option>
+          <% end %>
+        </select>
+<!--
+        <div class='filter-name'>Engine Variant</div>
+        <select class='selectpicker' name='engine_variant' data-live-search='true' data-icon-base='fa' data-tick-icon='fa-check' multiple title='Select' data-dropup-auto='false'>
+          <% @prezi.filters('engine_variant').each do |filter| %>
+            <option name='engine_variant' value='<%= filter %>' <%= 'selected' if @prezi.selected('engine_variant', filter) %>><%= filter.titleize %></option>
+          <% end %>
+        </select> -->
+
+        <div class='filter-name'>Build Year</div>
+        <select class='selectpicker' name='build_year' data-live-search='true' data-icon-base='fa' data-tick-icon='fa-check' multiple title='Select' data-dropup-auto='false'>
+          <% @prezi.filters('build_year').each do |filter| %>
+            <option name='build_year' value='<%= filter %>' <%= 'selected' if @prezi.selected('build_year', filter) %>><%= filter.titleize %></option>
+          <% end %>
+        </select>
+
+        <div class='filter-name'>Seats Configuration</div>
+        <select class='selectpicker' name='seats_configuration' data-live-search='true' data-icon-base='fa' data-tick-icon='fa-check' multiple title='Select' data-dropup-auto='false'>
+          <% @prezi.filters('seats_configuration').each do |filter| %>
+            <option name='seats_configuration' value='<%= filter %>' <%= 'selected' if @prezi.selected('seats_configuration', filter) %>><%= filter.titleize %></option>
+          <% end %>
+        </select>
+      <% end %>
+    </ul>
+
+    <li data-toggle='collapse' href='#companies'>
+      <a class='filter-category'><i class='fa fa-chevron-right'></i>COMPANIES</a>
+    </li>
+    <ul class='nav nav-pills nav-stacked collapse' id='companies'>
+      <%= bootstrap_form_for :filters, html: {class: 'filter-content'} do |f| %>
+        <div class='filter-name'>Operator</div>
+        <select class='selectpicker' name='operator' data-live-search='true' data-icon-base='fa' data-tick-icon='fa-check' multiple title='Select' data-dropup-auto='false'>
+          <% @prezi.filters('operator').each do |filter| %>
+            <option name='operator' value='<%= filter %>' <%= 'selected' if @prezi.selected('operator', filter) %>><%= filter.titleize %></option>
+          <% end %>
+        </select>
+      <% end %>
+    </ul>
+
+    <li data-toggle='collapse' href='#misc'>
+      <a class='filter-category'><i class='fa fa-chevron-right'></i>MISC</a>
+    </li>
+    <ul class='nav nav-pills nav-stacked collapse' id='misc'>
+      <%= bootstrap_form_for :filters, html: {class: 'filter-content'} do |f| %>
+        <div class='filter-name'>Operator Country</div>
+        <select class='selectpicker' name='operator_country' data-live-search='true' data-icon-base='fa' data-tick-icon='fa-check' multiple title='Select' data-dropup-auto='false'>
+          <% @prezi.filters('operator_country').each do |filter| %>
+            <option name='operator_country' value='<%= filter %>' <%= 'selected' if @prezi.selected('operator_country', filter) %>><%= filter.titleize %></option>
+          <% end %>
+        </select>
+
+        <div class='filter-name'>Operator Region</div>
+        <select class='selectpicker' name='operator_region' data-live-search='true' data-icon-base='fa' data-tick-icon='fa-check' multiple title='Select' data-dropup-auto='false'>
+          <% @prezi.filters('operator_region').each do |filter| %>
+            <option name='operator_region' value='<%= filter %>' <%= 'selected' if @prezi.selected('operator_region', filter) %>><%= filter.titleize %></option>
+          <% end %>
+        </select>
+      <% end %>
+    </ul>
+  </ul>
   <div class='sidebar-shadow'></div>
 </aside>

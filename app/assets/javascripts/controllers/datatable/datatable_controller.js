@@ -1,5 +1,5 @@
 DatatableController = function(config) {
-  this.$navSubContainer = config.navSubContainer;
+  this.$filterCategory = config.filterCategory;
   this.$btnCollapseSidebar = config.btnCollapseSidebar;
   this.$btnExpandSidebar = config.btnExpandSidebar;
   this.$mainWrapper = config.mainWrapper;
@@ -9,7 +9,7 @@ DatatableController = function(config) {
 };
 
 DatatableController.prototype.init = function() {
-  this.$navSubContainer.on('click', $.proxy(this.toggleNav, this));
+  this.$filterCategory.on('click', $.proxy(this.toggleNav, this));
   this.$btnExpandSidebar.on('click', $.proxy(this.toggleSidebar, this));
   this.$btnCollapseSidebar.on('click', $.proxy(this.toggleSidebar, this));
 };

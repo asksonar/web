@@ -1,74 +1,52 @@
 .filters-sidebar {
+  color: #FFF;
+  font-size: 12px;
+  font-weight: bold;
   padding-bottom: 350px;
 
-  .nav {
-    .nav-sub-container {
-      border-radius: 0;
-      color: #FFF;
-      font-size: 12px;
-      font-weight: bold;
-      padding: 20px 12px 6px;
+  .btn-collapse-sidebar {
+    background-color: #44585F;
+    font-size: 20px;
+    padding: 24px 32px;
 
-      i {
-        margin-right: 7px;
-      }
+    i {
+      float: right;
+      cursor: pointer;
+    }
+  }
 
-      &:focus, &:hover {
-        background: #1E202C;
-        color: #FFF;
-      }
+  .filter-category {
+    color: #FFF;
+    padding: 6px 12px;
+    margin-top: 12px;
+
+    i {
+      margin-right: 7px;
     }
 
-    .title {
-      color: #FFF;
-      font-size: 12px;
-      font-weight: bold;
-      margin: 6px 0;
+    &:focus, &:hover {
+      background: #2D3C43;
     }
+  }
 
-    ul form {
-      color: #FFF;
-      font-size: 12px;
-      font-weight: bold;
-      padding: 0 32px;
+  .filter-name {
+    padding: 6px 0;
+  }
 
-      .btn {
-        border-radius: 4px;
-      }
+  .filter-content {
+    padding: 0 32px;
 
-      .dropdown-menu {
-        max-width: 100%;
-        border: none;
+    .dropdown-menu {
+      border: none;
+      max-width: 100%;
 
-        li a {
-          color: #2D3C43;
-          padding: 3px 20px;
-          margin: 6px 0;
+      li a {
+        margin: 6px 0;
 
-          &:focus, &:hover {
-            background: #1E202C;
-            color: #FFF;
-          }
+        &:focus, &:hover {
+          background: #1E202C;
+          color: #FFF;
         }
-
-        li.active a {
-          &, &:focus, &:hover {
-            background: #1E202C;
-            color: #FFF;
-          }
-        }
-      }
-    }
-
-    .btn-collapse-sidebar {
-      background-color: #44585F;
-      color: #FFF;
-      font-size: 20px;
-      padding: 24px 32px;
-
-      i {
-        float: right;
-        cursor: pointer;
       }
     }
   }

@@ -5,6 +5,10 @@ class FleetsQuery
     data(filters: filters).select(*columns)
   end
 
+  def fleets_array(*attributes)
+    Aircraft.pluck(*attributes)
+  end
+
   def fleet(id)
     Aircraft.find_by_hashid!(id)
   end
