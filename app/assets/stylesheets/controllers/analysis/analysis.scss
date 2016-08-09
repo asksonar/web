@@ -1,82 +1,88 @@
 #analysis-index {
-  #pivot-container {
-    padding: 20px 20px 40px;
-    background: #FFF;
-
-    table:not(.table) {
-      @extend .table;
-      margin-bottom: 0 !important;
+  .main-content {
+    @media (min-width: $screen-lg-min) {
+      padding: 10px 20px;
     }
 
-    table.pvtTable tr {
-      th {
+    #pivot-container {
+      padding: 20px 20px 40px;
+      background: #FFF;
+
+      table:not(.table) {
+        @extend .table;
+        margin-bottom: 0 !important;
+      }
+
+      table.pvtTable tr {
+        th {
+          border: 1px solid #E0E0E0;
+          color: #9CA8B4 !important;
+          background-color: #FFF !important;
+          font-size: 12px;
+        }
+
+        td {
+          color: #9CA8B4 !important;
+          font-size: 12px;
+        }
+      }
+
+      textarea {
         border: 1px solid #E0E0E0;
         color: #9CA8B4 !important;
-        background-color: #FFF !important;
-        font-size: 12px;
-      }
-
-      td {
-        color: #9CA8B4 !important;
-        font-size: 12px;
+        padding: 10px;
+        width: 100% !important;
+        resize: none;
       }
     }
 
-    textarea {
-      border: 1px solid #E0E0E0;
-      color: #9CA8B4 !important;
-      padding: 10px;
-      width: 100% !important;
-      resize: none;
-    }
-  }
+    .ctn-selected-attributes {
+      ul {
+        list-style: none;
+        padding: 0;
+        min-width: 158;
+        min-height: 40px;
+      }
 
-  .ctn-selected-attributes {
-    ul {
-      list-style: none;
-      padding: 0;
-      min-width: 158;
-      min-height: 40px;
-    }
+      li {
+        background: #1CA5C9;
+        color: #FFF;
+        padding: 8px 15px;
+        cursor: move;
+        border-radius: 4px;
+        margin-bottom: 3px;
+        margin-right: 5px;
+        display: inline-block;
 
-    li {
-      background: #1CA5C9;
-      color: #FFF;
-      padding: 8px 15px;
-      cursor: move;
-      border-radius: 4px;
-      margin-bottom: 3px;
-      margin-right: 5px;
-      display: inline-block;
+        i {
+          margin-top: 3px;
+          margin-left: 15px;
+          color: #0C92B3;
+          cursor: pointer;
+        }
+      }
 
-      i {
-        margin-top: 3px;
-        margin-left: 15px;
-        color: #0C92B3;
-        cursor: pointer;
+      .sortable-ghost {
+        opacity: 0.3;
+        background: #FFF;
+        border: dotted 2px #44585F;
       }
     }
 
-    .sortable-ghost {
-      opacity: 0.3;
-      background: #FFF;
-      border: dotted 2px #44585F;
-    }
-  }
+    .pvtFilterBox {
+      border: 1px solid #9CA8B4;
 
-  .pvtFilterBox {
-    border: 1px solid #9CA8B4;
+      div {
+        margin-top: 14px;
+      }
 
-    div {
-      margin-top: 14px;
-    }
+      .pvtFilterBtn {
+        width: 117px;
+      }
 
-    .pvtFilterBtn {
-      width: 117px;
-    }
-
-    .pvtSearch {
-      margin-top: 5px;
+      .pvtSearch {
+        margin-top: 5px;
+      }
     }
   }
 }

@@ -112,7 +112,11 @@
           <% @prezi.fleets.each do |fleet| %>
             <tr class='fleet-line'>
               <% @prezi.datatable_columns_selected.each do |column| %>
-                <td name='<%= column %>' value='<%= fleet[column] %>'><%= fleet[column] %></td>
+                <% if column == 'msn' %>
+                  <td><a name='<%= column %>' value='<%= fleet[column] %>' href='<%= fleet_path(fleet["hashid"]) %>'><%= fleet[column] %></a></td>
+                <% else %>
+                  <td name='<%= column %>' value='<%= fleet[column] %>'><%= fleet[column] %></td>
+                <% end %>
               <% end %>
             </tr>
           <% end %>

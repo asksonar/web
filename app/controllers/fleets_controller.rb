@@ -18,7 +18,7 @@ class FleetsController < ApplicationController
   end
 
   def show
-    @prezi = prezi(query_params: query_params)
+    @prezi = prezi(id: params[:id])
   end
 
   def export
@@ -32,8 +32,8 @@ class FleetsController < ApplicationController
 
   private
 
-  def prezi(query_params: {}, column_params: {})
-    FleetsPresenter.new(current_user.company, display_count, sort_column, sort_direction, query_params, column_params)
+  def prezi(query_params: {}, column_params: {}, id: nil)
+    FleetsPresenter.new(current_user.company, display_count, sort_column, sort_direction, query_params, column_params, id)
   end
 
   def display_count

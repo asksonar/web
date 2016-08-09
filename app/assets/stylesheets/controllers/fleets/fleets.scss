@@ -1,28 +1,30 @@
 #fleets-index {
   .main-content-header {
     @media (max-width: $screen-sm-min) {
-      padding: 20px 20px;
-
       .pull-right {
         float: none !important;
       }
     }
 
     .sidebar-collapsed & {
-      padding: 11px 40px 11px 0;
+      padding: 10px 20px 10px 0;
     }
 
     #btn-expand-sidebar {
       background-color: #303341;
       color: #FFF;
       border-radius: 0px 20px 20px 0px;
-      height: 46px;
+      height: 48px;
       margin-right: 10px;
     }
 
     .ctn-header-btns {
       .sidebar-collapsed & {
-        margin-top: 6.5px;
+        margin-top: 10px; // 20px padding - 10px padding when sidebar-collapsed
+
+        @media (max-width: $screen-sm-min) {
+          margin-top: 0;
+        }
       }
 
       > div {
@@ -133,6 +135,10 @@
   }
 
   .main-content {
+    @media (min-width: $screen-lg-min) {
+      padding: 10px 20px;
+    }
+
     .filter-item {
       display: inline-block;
       border-radius: 3px;
@@ -262,6 +268,10 @@
       border-radius: 0;
       font-weight: bold;
       padding: 5px 0;
+
+      &:hover {
+        background-color: inherit;
+      }
     }
 
     .nav-pills > li.active > a {
@@ -276,9 +286,7 @@
   }
 
   .main-content {
-    padding: 20px 40px;
-
-    .ctn-fleet-summary {
+    .ctn-aircraft-details {
       padding: 0;
       font-weight: bold;
 

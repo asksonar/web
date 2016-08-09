@@ -76,7 +76,6 @@ body {
 
   .main-content-header {
     background: #F5F5F5;
-    // match .panel's 20px padding
     padding: 20px 20px;
 
     .sidebar-collapsed & {
@@ -88,11 +87,10 @@ body {
 
   .main-content {
     background: #E3E3E3;
-    // .panel has its own 20px padding
-    padding: 10px 0px;
+    padding: 10px 20px;
 
-    @media (min-width: $screen-sm-min) {
-      padding: 10px 20px;
+    @media (min-width: $screen-lg-min) {
+      padding: 10px 100px;
     }
 
     .panel {

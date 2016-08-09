@@ -4,8 +4,9 @@ class FleetsPresenter
   attr_reader :sort_column
   attr_reader :sort_direction
 
-  def initialize(company, display_count, sort_column, sort_direction, query_params, column_params)
+  def initialize(company, display_count, sort_column, sort_direction, query_params, column_params, id)
     @company = company
+    @id = id
     @display_count = display_count
     @sort_column = sort_column
     @sort_direction = sort_direction
@@ -60,7 +61,7 @@ class FleetsPresenter
   end
 
   def fleet
-    @fleet ||= fleets_query.fleet(@query_params["id"])
+    @fleet ||= fleets_query.fleet(@id)
   end
 
   def fleets
@@ -68,6 +69,7 @@ class FleetsPresenter
     query = fleets_query.fleets(filters: @datatable_filters, columns: @datatable_columns_selected)
     query = query.order(@sort_column + " " + @sort_direction)
     query = query.first(@display_count) if @display_count != "All"
+    query = query.map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
     query
   end
 
@@ -76,7 +78,7 @@ class FleetsPresenter
     query = fleets_query.fleets(filters: @query_params, columns: @column_params_selected)
     query = query.order(@sort_column + " " + @sort_direction)
     query = query.first(@display_count) if @display_count != "All"
-    # query = query.map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
+    query = query.map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
     query
   end
 
