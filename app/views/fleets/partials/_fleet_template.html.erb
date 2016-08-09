@@ -22,7 +22,15 @@
     {{#each fleets as |fleet fleet_id|}}
       <tr class='fleet-line'>
         {{#each ../column_names as |column_name column_name_Id|}}
-          <td name="{{column_name}}" value="{{get_object_value_with_key fleet column_name}}">{{get_object_value_with_key fleet column_name}}</td>
+          {{#if_equal column_name 'msn'}}
+            <td>
+              <a name="{{column_name}}" value="{{get_object_value_with_key fleet column_name}}" href="/fleets/{{get_object_value_with_key fleet 'hashid'}}">
+                {{get_object_value_with_key fleet column_name}}
+              </a>
+            </td>
+          {{else}}
+            <td name="{{column_name}}" value="{{get_object_value_with_key fleet column_name}}">{{get_object_value_with_key fleet column_name}}</td>
+          {{/if_equal}}
         {{/each}}
       </tr>
     {{/each}}
