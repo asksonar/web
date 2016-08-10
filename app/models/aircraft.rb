@@ -9,7 +9,7 @@ class Aircraft < ActiveRecord::Base
     CSV.generate(headers: true) do |csv|
       csv << attribute_names
       all_fleets.each do |fleet|
-        csv << fleet.attributes.values_at(*attributes)
+        csv << fleet.values_at(*attributes)
       end
     end
   end
