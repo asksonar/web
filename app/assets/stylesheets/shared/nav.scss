@@ -32,30 +32,18 @@
     }
   }
 
-  .collapse.in,
-  .collapsing {
+  .navbar-collapse {
     background-color: #1CA5C9;
-  }
-
-  .navbar-nav + .navbar-nav {
-    @media (max-width: $screen-sm-min) {
-      margin-top: -7.5px; // remove 7.5px margin between top & right navs when stacked
-    }
   }
 
   .nav {
     >li>a {
-      border-radius: 0px;
       padding: 0px 12px;
-      height: 44px;
       line-height: 44px;
       color: #FFF;
       >i {
         font-size: 18px;
         margin-right: 6px;
-      }
-      >.caret {
-        margin-left: 10px;
       }
     }
     >li>a:focus,
@@ -83,10 +71,6 @@
   }
 
   .nav-right {
-    >li>a>.caret {
-      margin-left: 0;
-    }
-
     @media (min-width: $screen-sm-min) {
       float: right !important;
       margin-right: -15px;
@@ -97,9 +81,17 @@
     }
   }
 
+  .navbar-nav {
+    @media (max-width: $screen-sm-min) {
+      margin: 0 -15px;
+    }
+  }
+
   .dropdown-menu,
   .open .dropdown-menu {
     background-color: #1CA5C9;
+    border: none;
+    padding: 0;
 
     >li>a {
       padding: 10px 38px;
