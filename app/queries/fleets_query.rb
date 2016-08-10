@@ -3,7 +3,7 @@ class FleetsQuery
 
   def fleets(filters: {}, columns:)
     # always add id column to be able to query for hashid
-    columns.push("id")
+    columns = columns + ["id"]
     data(filters: filters).select(*columns)
   end
 

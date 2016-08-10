@@ -84,6 +84,7 @@ DatatableFilters.prototype.getDisplayCount = function(event) {
 DatatableFilters.prototype.addFilter = function(event){
   var fieldMap = {
     "msn": "MSN",
+    "registration": "Registration",
     "aircraft_status": "Aircraft Status",
     "aircraft_manufacturer": "Manufacturer",
     "aircraft_model": "Aircraft Model",
