@@ -71,10 +71,6 @@ h4, .h4 {
   margin-bottom: 0px;
 }
 
-// .btn {
-//   border-radius: 0px;
-// }
-
 input.form-control + span.input-group-btn .btn {
   padding-top: 7px; // the default 6px is 1px too short
 }
@@ -198,6 +194,10 @@ input.form-control + span.input-group-btn .btn {
   border-radius: 0px;
   padding: 20px;
   background-color: #FAFAFA;
+}
+
+.modal-dialog {
+  padding: 0px;
 }
 
 @media (min-width: $screen-sm-min) {

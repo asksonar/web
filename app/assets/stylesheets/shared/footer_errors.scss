@@ -1,85 +1,85 @@
 .footer-errors {
-    height: 150px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: #14647b;
-  }
+  height: 150px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #14647b;
+}
 
-  .light-waves {
-    background: image-url('waves_sm_ltblue.png') repeat-x;
-    display: block;
-    position: absolute;
-    height: 100px;
-    width: 110%;
-    left: -10%;
-    top: -100px;
-    z-index: 96;
-  }
+.light-waves {
+  background: image-url('waves_sm_ltblue.png') repeat-x;
+  display: block;
+  position: absolute;
+  height: 100px;
+  width: 110%;
+  left: -10%;
+  top: -100px;
+  z-index: 96;
+}
 
-  .dark-waves {
-    background: image-url('waves_dkblue.png') repeat-x;
-    display: block;
-    position: absolute;
-    height: 100px;
-    width: 100%;
-    left: 0;
-    top: -100px;
-    margin-top: 1px;
-    z-index: 99;
-  }
+.dark-waves {
+  background: image-url('waves_dkblue.png') repeat-x;
+  display: block;
+  position: absolute;
+  height: 100px;
+  width: 100%;
+  left: 0;
+  top: -100px;
+  margin-top: 1px;
+  z-index: 99;
+}
 
-  .sun {
-    display: block;
-    position: absolute;
-    background: image-url('footer_sun@2x.png') no-repeat left bottom;
-    background-size: 100%;
-    height: 400px;
-    width: 400px;
-    max-width: 80%;
-    left: 15%;
-    z-index: 95;
-    top: -465px;
-  }
+.sun {
+  display: block;
+  position: absolute;
+  background: image-url('footer_sun@2x.png') no-repeat left bottom;
+  background-size: 100%;
+  height: 400px;
+  width: 400px;
+  max-width: 80%;
+  left: 15%;
+  z-index: 95;
+  top: -465px;
+}
 
-  .boat {
-    display: block;
-    position: absolute;
-    background: image-url('footer_boat@2x.png') no-repeat left top;
-    background-size: 100%;
-    height: 171px;
-    width: 132px;
-    z-index: 98;
-    left: 15%;
-    margin-left: 90px;
-    top: -215px;
-  }
+.boat {
+  display: block;
+  position: absolute;
+  background: image-url('footer_boat@2x.png') no-repeat left top;
+  background-size: 100%;
+  height: 171px;
+  width: 132px;
+  z-index: 98;
+  left: 15%;
+  margin-left: 90px;
+  top: -215px;
+}
 
-  .beeps {
-    display: block;
-    position: absolute;
-    background: image-url('bfooter_beeps@2x.png') no-repeat left top;
-    background-size: 100%;
-    height: 150px;
-    width: 200px;
-    max-width: 80%;
-    left: 15%;
-    margin-left: 40px;
-    top: -50px;
-    z-index: 99;
-  }
+.beeps {
+  display: block;
+  position: absolute;
+  background: image-url('bfooter_beeps@2x.png') no-repeat left top;
+  background-size: 100%;
+  height: 150px;
+  width: 200px;
+  max-width: 80%;
+  left: 15%;
+  margin-left: 40px;
+  top: -50px;
+  z-index: 99;
+}
 
-  .rocks {
-    display: block;
-    position: absolute;
-    background: image-url('rocks2@2x.png') no-repeat left bottom;
-    background-size: 100%;
-    height: 120px;
-    width: 400px;
-    max-width: 70%;
-    left: 15%;
-    margin-left: 50px;
-    z-index: 98;
-    bottom: 0px;
-  }
+.rocks {
+  display: block;
+  position: absolute;
+  background: image-url('rocks2@2x.png') no-repeat left bottom;
+  background-size: 100%;
+  height: 120px;
+  width: 400px;
+  max-width: 70%;
+  left: 15%;
+  margin-left: 50px;
+  z-index: 98;
+  bottom: 0px;
+}

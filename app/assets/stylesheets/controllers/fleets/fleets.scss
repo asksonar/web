@@ -182,7 +182,7 @@
           max-width: 120px;
           color: #2D3C43;
           font-weight: bold;
-          cursor: pointer;
+          // cursor: pointer;
           word-wrap: break-word;
           white-space: nowrap;
           overflow: hidden;
@@ -207,10 +207,6 @@
   }
 
   #datatable_settings_container {
-    .modal-dialog {
-      padding: 0;
-    }
-
     .modal-content > div + div {
       margin-top: 15px;
     }
