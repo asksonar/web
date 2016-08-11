@@ -27,6 +27,26 @@ $(function(){
     }
   });
 
+  Handlebars.registerHelper('if_one_equal', function() {
+    var found = false;
+    var args = [].slice.apply(arguments);
+    var val = args.shift();
+    var ops = args.pop();
+
+    for (var i = 0; i < args.length; i++) {
+      if (val === args[i]) {
+        found = true;
+        break;
+      }
+    }
+
+    if ( found ) {
+      return ops.fn(this);
+    } else {
+      return ops.inverse(this);
+    }
+  });
+
   Handlebars.registerHelper('titleize', function(str) {
     var strArray = str.split('_');
     strArray = strArray.map(function(str) {
