@@ -21,7 +21,7 @@ DatatableFilters.prototype.init = function() {
   this.$fleetTable.on('click', '.column-name', $.proxy(this.setSort, this));
   this.$btnExportCsv.on('click', $.proxy(this.exportToCsv, this));
   this.$displayCountSelect.on('click', $.proxy(this.setDisplayCount, this));
-  this.$fleetTable.on('click', 'td:not(:has(>a))', $.proxy(this.addToFilter, this));
+  // this.$fleetTable.on('click', 'td:not(:has(>a))', $.proxy(this.addToFilter, this));
   this.$inputCheckbox.on('change', $.proxy(this.addFilter, this));
   this.$filtersSelect.on('change', $.proxy(this.addFilter, this));
   this.$filterContainer.on('click', '.filter-item .close', $.proxy(this.removeFilter, this));
