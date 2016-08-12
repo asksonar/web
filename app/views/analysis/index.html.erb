@@ -9,11 +9,63 @@
 <script type='text/javascript'>
   var data = <%= raw @prezi.fleets_json %>;
   var filters_hash = <%= raw @prezi.filters_hash.to_json %>;
+  var pivot_params = <%= raw @prezi.current_view.pivot_params.to_json %>;
 </script>
 
 <section class='main-content-header'>
-  <h1><%= content_for :title %>
-    <a class='btn btn-dark-blue pull-right hidden' id='btn-save-img'>Save as PNG</a>
+  <h1>
+    <%= content_for :title %>
+
+    <div class='ctn-header-btns pull-right'>
+      <div class='btn-save-img pull-right'>
+        <button type='button' id='btn-save-img'>
+          <i class='fa fa-file-image-o'></i><span>Save as PNG</span>
+        </button>
+      </div>
+
+      <div class='btn-save-view dropdown pull-right'>
+        <button type='button' data-toggle='dropdown' aria-expanded='true'>
+          <i class='fa fa-floppy-o'></i><span>Save view</span>
+        </button>
+        <ul class='dropdown-menu dropdown-menu-right'>
+          <div class='arrow-up'></div>
+          <li class='input-group'>
+            <input type='text' id='input-save-view' class='form-control' placeholder='Save new view as ...'>
+            <span class='input-group-btn'>
+              <a class='btn btn-green' id='btn-save-view'>Save</a>
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class='btn-saved-views dropdown pull-right'>
+        <button type='button' data-toggle='dropdown' aria-expanded='true'>
+          <i class='fa fa-file'></i><span>My views</span>
+        </button>
+        <ul class='dropdown-menu dropdown-menu-right saved-views'>
+          <div class='arrow-up'></div>
+          <% @prezi.saved_views.each_with_index do |view, index| %>
+            <% if index == 0 %>
+              <li>
+                <a href='<%= analysis_view_path(view.hashid) %>'><%= view['name'] %></a>
+                <span class='close' data-analysis-view-hashid='<%= view.hashid %>' data-toggle='modal' data-target='#delete-with-ajax'>
+                  <i class='fa fa-times-circle-o'></i>
+                </span>
+              </li>
+            <% else %>
+              <li class='divider'></li>
+              <li>
+                <a href='<%= analysis_view_path(view.hashid) %>'><%= view['name'] %></a>
+                <span class='close' data-analysis-view-hashid='<%= view.hashid %>' data-toggle='modal' data-target='#delete-with-ajax'>
+                  <i class='fa fa-times-circle-o'></i>
+                </span>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
   </h1>
 </section>
 
@@ -62,3 +114,5 @@
     <div><button class='btn btn-medium-blue btn-update-filter' type='button'>OK</button></div>
   </div>
 <% end %>
+
+<%= render partial: 'utility/delete_with_ajax_modal', locals: {delete_item: 'view'} %>

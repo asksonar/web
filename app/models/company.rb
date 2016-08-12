@@ -2,11 +2,13 @@ class Company < ActiveRecord::Base
   has_many :users, inverse_of: :company
   has_many :customers, inverse_of: :company
   has_many :datatable_views, inverse_of: :company
+  has_many :analysis_views, inverse_of: :company
   has_one :survey_settings
 
   after_initialize :default_values, unless: :persisted?
   after_create :create_survey_settings
   after_create :create_datatable_view
+  after_create :create_analysis_view
 
   HASHIDS_SALT = '&8cCkHr#gHYk'
 
@@ -20,5 +22,9 @@ class Company < ActiveRecord::Base
 
   def create_datatable_view
     DatatableView.create(company_id: self.id)
+  end
+
+  def create_analysis_view
+    AnalysisView.create(company_id: self.id)
   end
 end
