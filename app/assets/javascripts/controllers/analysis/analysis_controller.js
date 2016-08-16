@@ -60,11 +60,14 @@ AnalysisController.prototype.showFilterBox = function(event) {
   var thisEl = $(event.currentTarget);
   var attribute = thisEl.parent().attr('data-id');
   var filterBox = $('.pvtFilterBox[data-attribute="' + attribute + '"]');
+  var checkContainer = filterBox.find('.pvtCheckContainer');
+  var filters = checkContainer.children();
   var position = thisEl.offset();
   var clickLeft = position.left;
   var clickTop = position.top;
-  this.$inputFilter.val('');
 
+  this.$inputFilter.val('');
+  filters.show();
   filterBox.css({
     left: clickLeft + 10 - 300, // 300 sidebar width
     top: clickTop + 10
