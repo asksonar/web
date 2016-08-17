@@ -2,35 +2,35 @@
   <div class='renderers-container'>
     <div class='title'>TABLE VIEW</div>
     <select class='selectpicker renderers' name='renderers'>
-      <option name='renderer' data-renderer-type='text' value='table'>Table</option>
-      <option name='renderer' data-renderer-type='text' value='tableBarChart'>Table Barchart</option>
-      <option name='renderer' data-renderer-type='text' value='heatmap'>Heatmap</option>
-      <option name='renderer' data-renderer-type='text' value='colHeatmap'>Col Heatmap</option>
-      <option name='renderer' data-renderer-type='text' value='rowHeatMap'>Row Heatmap</option>
-      <option name='renderer' data-renderer-type='svg' value='areaChart'>Area Chart</option>
-      <option name='renderer' data-renderer-type='svg' value='barChart'>Bar Chart</option>
-      <option name='renderer' data-renderer-type='svg' value='lineChart'>Line Chart</option>
-      <option name='renderer' data-renderer-type='svg' value='scatterChart'>Scatter Chart</option>
-      <option name='renderer' data-renderer-type='svg' value='stackedBarChart'>Stacked Bar Chart</option>
-      <option name='renderer' data-renderer-type='text' value='tsvExport'>TSV Export</option>
+      <option name='renderer' data-renderer-type='text' value='table' <%= 'selected' if @prezi.selected('renderer', 'name', 'table') %>>Table</option>
+      <option name='renderer' data-renderer-type='text' value='tableBarChart' <%= 'selected' if @prezi.selected('renderer', 'name', 'tableBarChart') %>>Table Barchart</option>
+      <option name='renderer' data-renderer-type='text' value='heatmap' <%= 'selected' if @prezi.selected('renderer', 'name', 'heatmap') %>>Heatmap</option>
+      <option name='renderer' data-renderer-type='text' value='colHeatmap' <%= 'selected' if @prezi.selected('renderer', 'name', 'colHeatmap') %>>Col Heatmap</option>
+      <option name='renderer' data-renderer-type='text' value='rowHeatMap' <%= 'selected' if @prezi.selected('renderer', 'name', 'rowHeatMap') %>>Row Heatmap</option>
+      <option name='renderer' data-renderer-type='svg' value='areaChart' <%= 'selected' if @prezi.selected('renderer', 'name', 'areaChart') %>>Area Chart</option>
+      <option name='renderer' data-renderer-type='svg' value='barChart' <%= 'selected' if @prezi.selected('renderer', 'name', 'barChart') %>>Bar Chart</option>
+      <option name='renderer' data-renderer-type='svg' value='lineChart' <%= 'selected' if @prezi.selected('renderer', 'name', 'lineChart') %>>Line Chart</option>
+      <option name='renderer' data-renderer-type='svg' value='scatterChart' <%= 'selected' if @prezi.selected('renderer', 'name', 'scatterChart') %>>Scatter Chart</option>
+      <option name='renderer' data-renderer-type='svg' value='stackedBarChart' <%= 'selected' if @prezi.selected('renderer', 'name', 'stackedBarChart') %>>Stacked Bar Chart</option>
+      <option name='renderer' data-renderer-type='text' value='tsvExport' <%= 'selected' if @prezi.selected('renderer', 'name', 'tsvExport') %>>TSV Export</option>
     </select>
   </div>
 
   <div class='aggregators-container'>
     <div class='title'>VALUES</div>
     <select class='selectpicker aggregators' name='aggegators'>
-      <option name='aggregator' value='count'>Count</option>
-      <option name='aggregator' value='countUnique'>Count Unique Values</option>
-      <option name='aggregator' value='listUnique'>List Unique Values</option>
-      <option name='aggregator' value='sum'>Sum</option>
-      <option name='aggregator' value='intergerSum'>Integer Sum</option>
-      <option name='aggregator' value='average'>Average</option>
-      <option name='aggregator' value='min'>Minimum</option>
-      <option name='aggregator' value='max'>Maximum</option>
+      <option name='aggregator' value='count' <%= 'selected' if @prezi.selected('aggregator', 'name', 'count') %>>Count</option>
+      <option name='aggregator' value='countUnique' <%= 'selected' if @prezi.selected('aggregator', 'name', 'countUnique') %>>Count Unique Values</option>
+      <option name='aggregator' value='listUnique' <%= 'selected' if @prezi.selected('aggregator', 'name', 'listUnique') %>>List Unique Values</option>
+      <option name='aggregator' value='sum' <%= 'selected' if @prezi.selected('aggregator', 'name', 'sum') %>>Sum</option>
+      <option name='aggregator' value='intergerSum' <%= 'selected' if @prezi.selected('aggregator', 'name', 'intergerSum') %>>Integer Sum</option>
+      <option name='aggregator' value='average' <%= 'selected' if @prezi.selected('aggregator', 'name', 'average') %>>Average</option>
+      <option name='aggregator' value='min' <%= 'selected' if @prezi.selected('aggregator', 'name', 'min') %>>Minimum</option>
+      <option name='aggregator' value='max' <%= 'selected' if @prezi.selected('aggregator', 'name', 'max') %>>Maximum</option>
     </select>
-    <select class='selectpicker attributes' data-live-search='true' title='Select' data-dropup-auto='false' disabled>
+    <select class='selectpicker attributes' data-live-search='true' title='Select' data-dropup-auto='false' <%= 'disabled' if @prezi.selected('aggregator', 'name', 'count').present? %>>
       <% @prezi.attribute_names.each do |attribute| %>
-        <option name='attribute' value='<%= attribute %>'><%= attribute %></option>
+        <option name='attribute' value='<%= attribute %>' <%= 'selected' if @prezi.selected('aggregator', 'params', attribute) %>><%= attribute %></option>
       <% end %>
     </select>
   </div>
@@ -39,17 +39,9 @@
     <div class='title'>AVAILABLE ATTRIBUTES</div>
     <div class='ctn-available-attributes'>
       <ul id='available'>
-        <li data-id='Aircraft Age'>Aircraft Age<i class='fa fa-bars pull-right'></i></li>
-        <li data-id='Aircraft Manufacturer'>Aircraft Manufacturer<i class='fa fa-bars pull-right'></i></li>
-        <li data-id='Aircraft Series'>Aircraft Series<i class='fa fa-bars pull-right'></i></li>
-        <li data-id='Aircraft Type'>Aircraft Type<i class='fa fa-bars pull-right'></i></li>
-        <li data-id='Build Year'>Build Year<i class='fa fa-bars pull-right'></i></li>
-        <li data-id='Engine Model'>Engine Model<i class='fa fa-bars pull-right'></i></li>
-        <li data-id='Engine Variant'>Engine Variant<i class='fa fa-bars pull-right'></i></li>
-        <li data-id='Operator'>Operator<i class='fa fa-bars pull-right'></i></li>
-        <li data-id='Operator Country'>Operator Country<i class='fa fa-bars pull-right'></i></li>
-        <li data-id='Operator Region'>Operator Region<i class='fa fa-bars pull-right'></i></li>
-        <li data-id='Seats Configuration'>Seats Configuration<i class='fa fa-bars pull-right'></i></li>
+        <% @prezi.attrArray.each do |attribute| %>
+          <li data-id='<%= attribute %>'><%= attribute %><i class='fa fa-caret-down pull-right'></i></li>
+        <% end %>
       </ul>
     </div>
   </div>

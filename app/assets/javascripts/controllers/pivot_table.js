@@ -1,21 +1,26 @@
-PivotTable = function(config, defaults) {
+PivotTable = function(config, pivotParams) {
   this.$pivotContainer = config.pivotContainer;
   this.$btnSaveImg = config.btnSaveImg;
 
-  this.defaults = {
-    rowArray: defaults.rowArray || [],
-    colArray: defaults.colArray || [],
-    filters: defaults.filters || {},
-    renderer: defaults.renderer || { name: "table", type: "text" },
-    aggregator:  defaults.aggregator || { name: "count", params: [] }
+  this.pivotParams = {
+    rowArray: pivotParams.rowArray || [],
+    colArray: pivotParams.colArray || [],
+    filters: pivotParams.filters || {},
+    renderer: pivotParams.renderer || { name: "table", type: "text" },
+    aggregator:  pivotParams.aggregator || { name: "count", params: [] }
   };
 
   this.init();
 };
 
 PivotTable.prototype.init = function() {
-  var defaults = this.defaults;
-  this.load(defaults.rowArray, defaults.colArray, defaults.filters, defaults.renderer, defaults.aggregator);
+  this.load(
+    this.pivotParams.rowArray,
+    this.pivotParams.colArray,
+    this.pivotParams.filters,
+    this.pivotParams.renderer,
+    this.pivotParams.aggregator
+  );
   this.$btnSaveImg.on('click', $.proxy(this.saveAsImg, this));
 };
 

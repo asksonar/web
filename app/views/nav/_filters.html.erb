@@ -23,7 +23,7 @@
         <div class='filter-name'>Aircraft Manufacturer</div>
         <select class='selectpicker' name='aircraft_manufacturer' data-live-search='true' data-icon-base='fa' data-tick-icon='fa-check' multiple title='Select' data-dropup-auto='false'>
           <% @prezi.filters('aircraft_manufacturer').each do |filter| %>
-            <option name='aircraft_manufacturer' value='<%= filter %>' <%= 'selected' if @prezi.selected('aircraft_manufacturer', filter) %> <%= 'selected' if @prezi.selected('aircraft_manufacturer', filter) %>><%= filter.titleize %></option>
+            <option name='aircraft_manufacturer' value='<%= filter %>' <%= 'selected' if @prezi.selected('aircraft_manufacturer', filter) %>><%= filter.titleize %></option>
           <% end %>
         </select>
 

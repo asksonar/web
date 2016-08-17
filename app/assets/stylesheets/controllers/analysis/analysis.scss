@@ -1,4 +1,115 @@
 #analysis-index {
+  .main-content-header {
+    @media (max-width: $screen-sm-min) {
+      .pull-right {
+        float: none !important;
+      }
+    }
+
+    .ctn-header-btns {
+      > div {
+        @media (min-width: $screen-sm-min) {
+          margin-left: 20px;
+        }
+
+        @media (max-width: $screen-sm-min) {
+          padding: 9px 0;
+        }
+      }
+
+      button {
+        background-color: inherit;
+        border: none;
+        padding: 0;
+        color: #9CA8B4;
+        outline: none;
+
+        span {
+          font-size: 12px;
+          font-weight: bold;
+        }
+      }
+
+      .dropdown-menu {
+        padding: 9px 0;
+        top: 40px;
+        background-color: #67747F;
+        border-radius: 0;
+        position: absolute;
+        border: none;
+
+        @media (max-width: $screen-sm-min) {
+          top: 100%;
+          left: auto;
+          right: auto;
+        }
+
+        >li>a {
+          font-size: 12px;
+          color: #FFF;
+
+          i {
+            margin-right: 10px;
+          }
+        }
+        >li>a:focus,
+        >li>a:active,
+        >li>a:hover,
+        >li.active>a {
+          background-color: inherit;
+          outline: none;
+        }
+
+        .divider {
+          opacity: 0.5;
+        }
+      }
+
+      .btn-save-view {
+        .arrow-up {
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          border-bottom: 8px solid #67747F;
+          position: absolute;
+          top: -7px;
+          right: 10px;
+
+          @media (max-width: $screen-sm-min) {
+            right: auto;
+            left: 10px;
+          }
+        }
+
+        .dropdown-menu {
+          padding: 9px;
+        }
+
+        #input-save-view {
+          min-width: 160px;
+        }
+      }
+
+      .btn-saved-views {
+        li {
+          position: relative;
+          width: 200px;
+
+          a {
+            width: 164px; // li width - span width - span right
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+
+        .close {
+          position: absolute;
+          right: 15px;
+          top: 1px;
+        }
+      }
+    }
+  }
+
   .main-content {
     @media (min-width: $screen-lg-min) {
       padding: 10px 20px;
