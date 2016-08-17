@@ -15,7 +15,7 @@ class AnalysisViewsPresenter
   end
 
   def delete_analysis_view(hashid)
-  @analysis_view = AnalysisView.find_by_hashid(hashid)
+    @analysis_view = AnalysisView.find_by_hashid(hashid)
     analysis_views_service.delete_analysis_view(@company, @analysis_view)
   end
 

@@ -25,25 +25,28 @@ AnalysisView.prototype.saveView = function() {
   var name = this.$inputSaveView.val();
 
   var pivot_params = {
+    "filtersArray": this.$analysisController.getFiltersArray(),
     "rowArray": this.$analysisController.getRows(),
     "colArray": this.$analysisController.getColumns(),
+    "attrArray": this.$analysisController.getAttributes(),
     "filters": this.$analysisController.getFilters(),
     "renderer": this.$analysisController.getRenderer(),
     "aggregator": this.$analysisController.getAggregator()
   };
-
+  
   var url = '/analysis/views/';
   this.$inputSaveView.val('');
 
   $.ajax({
     type: 'POST',
     dataType: 'json',
+    contentType: 'application/json',
     url: url,
-    data: {
+    data: JSON.stringify({
       name: name,
       pivot_params: pivot_params,
       authenticity_token: AUTH_TOKEN
-    },
+    }),
     success: function(data) {
       notify.info("Your view has been saved.");
       var divider = "<li class='divider'></li>";

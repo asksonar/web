@@ -73,19 +73,27 @@
   <div class='ctn-selected-attributes row'>
     <div class='col-sm-4'>
       <div class='filter-attributes strong'>FILTERS</div>
-      <ul id='filters'></ul>
+      <ul id='filters'>
+        <% @prezi.filtersArray.each do |filter| %>
+          <li data-id='<%= filter %>'><%= filter %><i class='fa fa-caret-down pull-right'></i></li>
+        <% end %>
+      </ul>
     </div>
     <div class='col-sm-4'>
       <div class='row-attributes strong'>ROWS</div>
       <ul id='rows'>
-        <li data-id='Aircraft Model'>Aircraft Model<i class='fa fa-caret-down pull-right'></i></li>
+        <% @prezi.rowArray.each do |row| %>
+          <li data-id='<%= row %>'><%= row %><i class='fa fa-caret-down pull-right'></i></li>
+        <% end %>
       </ul>
     </div>
 
     <div class='col-sm-4'>
       <div class='column-attribtues strong'>COLUMNS</div>
       <ul id='columns'>
-        <li data-id='Aircraft Status'>Aircraft Status<i class='fa fa-caret-down pull-right'></i></li>
+        <% @prezi.colArray.each do |column| %>
+          <li data-id='<%= column %>'><%= column %><i class='fa fa-caret-down pull-right'></i></li>
+        <% end %>
       </ul>
     </div>
   </div>
@@ -105,7 +113,7 @@
       <% values.each do |value| %>
         <p>
           <label>
-            <input type='checkbox' class='pvtFilter' data-attribute='<%= attribute %>' checked='checked' />
+            <input type='checkbox' class='pvtFilter' data-attribute='<%= attribute %>' <%= 'checked' if @prezi.checked_filters(attribute, value) %> />
             <span><%= value %></span>
           </label>
         </p>

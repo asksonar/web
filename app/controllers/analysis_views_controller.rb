@@ -1,5 +1,6 @@
 class AnalysisViewsController < ApplicationController
   before_action :authenticate_user!
+  before_filter :fix_json_params, only: [:create]
 
   def create
     @prezi = prezi(pivot_params: pivot_params)
@@ -31,10 +32,24 @@ class AnalysisViewsController < ApplicationController
     AnalysisViewsPresenter.new(current_user.company, pivot_params)
   end
 
+  def fix_json_params
+    if request.format.json?
+      body = request.body.read
+      request.body.rewind
+      unless body == ""
+        unmunged_body = ActiveSupport::JSON.decode(body)
+        params.merge!(unmunged_body)
+        params[_wrapper_options[:name]].merge!(unmunged_body)
+      end
+    end
+  end
+
   def pivot_params
     params.fetch(:pivot_params, {}).permit(
+      :filtersArray => [],
       :rowArray => [],
       :colArray => [],
+      :attrArray => [],
       :filters => [
         "Aircraft Age": [],
         "Aircraft Series": [],
