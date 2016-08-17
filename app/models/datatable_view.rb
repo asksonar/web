@@ -6,8 +6,8 @@ class DatatableView < ActiveRecord::Base
   HASHIDS_SALT = 'ZCcyKObjvuEl'
 
   def default_values
-    self.default_view = true if default_view.nil?
     self.name = 'Default view' if name.nil?
+    self.default_view = true if default_view.nil?
     self.current_view = true if current_view.nil?
     self.datatable_filters = {} if datatable_filters.nil?
     self.datatable_columns = {

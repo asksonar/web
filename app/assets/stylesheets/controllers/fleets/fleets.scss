@@ -62,20 +62,6 @@
           right: auto;
         }
 
-        .arrow-up {
-          border-left: 8px solid transparent;
-          border-right: 8px solid transparent;
-          border-bottom: 8px solid #67747F;
-          position: absolute;
-          top: -7px;
-          right: 10px;
-
-          @media (max-width: $screen-sm-min) {
-            right: auto;
-            left: 10px;
-          }
-        }
-
         >li>a {
           font-size: 12px;
           color: #FFF;
@@ -104,6 +90,20 @@
       }
 
       .btn-save-view {
+        .arrow-up {
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          border-bottom: 8px solid #67747F;
+          position: absolute;
+          top: -7px;
+          right: 10px;
+
+          @media (max-width: $screen-sm-min) {
+            right: auto;
+            left: 10px;
+          }
+        }
+
         .dropdown-menu {
           padding: 9px;
         }

@@ -9,11 +9,63 @@
 <script type='text/javascript'>
   var data = <%= raw @prezi.fleets_json %>;
   var filters_hash = <%= raw @prezi.filters_hash.to_json %>;
+  var pivot_params = <%= raw @prezi.current_view.pivot_params.to_json %>;
 </script>
 
 <section class='main-content-header'>
-  <h1><%= content_for :title %>
-    <a class='btn btn-dark-blue pull-right hidden' id='btn-save-img'>Save as PNG</a>
+  <h1>
+    <%= content_for :title %>
+
+    <div class='ctn-header-btns pull-right'>
+      <div class='btn-save-img pull-right'>
+        <button type='button' id='btn-save-img'>
+          <i class='fa fa-file-image-o'></i><span>Save as PNG</span>
+        </button>
+      </div>
+
+      <div class='btn-save-view dropdown pull-right'>
+        <button type='button' data-toggle='dropdown' aria-expanded='true'>
+          <i class='fa fa-floppy-o'></i><span>Save view</span>
+        </button>
+        <ul class='dropdown-menu dropdown-menu-right'>
+          <div class='arrow-up'></div>
+          <li class='input-group'>
+            <input type='text' id='input-save-view' class='form-control' placeholder='Save new view as ...'>
+            <span class='input-group-btn'>
+              <a class='btn btn-green' id='btn-save-view'>Save</a>
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div class='btn-saved-views dropdown pull-right'>
+        <button type='button' data-toggle='dropdown' aria-expanded='true'>
+          <i class='fa fa-file'></i><span>My views</span>
+        </button>
+        <ul class='dropdown-menu dropdown-menu-right saved-views'>
+          <div class='arrow-up'></div>
+          <% @prezi.saved_views.each_with_index do |view, index| %>
+            <% if index == 0 %>
+              <li>
+                <a href='<%= analysis_view_path(view.hashid) %>'><%= view['name'] %></a>
+                <span class='close' data-analysis-view-hashid='<%= view.hashid %>' data-toggle='modal' data-target='#delete-with-ajax'>
+                  <i class='fa fa-times-circle-o'></i>
+                </span>
+              </li>
+            <% else %>
+              <li class='divider'></li>
+              <li>
+                <a href='<%= analysis_view_path(view.hashid) %>'><%= view['name'] %></a>
+                <span class='close' data-analysis-view-hashid='<%= view.hashid %>' data-toggle='modal' data-target='#delete-with-ajax'>
+                  <i class='fa fa-times-circle-o'></i>
+                </span>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
   </h1>
 </section>
 
@@ -21,19 +73,27 @@
   <div class='ctn-selected-attributes row'>
     <div class='col-sm-4'>
       <div class='filter-attributes strong'>FILTERS</div>
-      <ul id='filters'></ul>
+      <ul id='filters'>
+        <% @prezi.filtersArray.each do |filter| %>
+          <li data-id='<%= filter %>'><%= filter %><i class='fa fa-caret-down pull-right'></i></li>
+        <% end %>
+      </ul>
     </div>
     <div class='col-sm-4'>
       <div class='row-attributes strong'>ROWS</div>
       <ul id='rows'>
-        <li data-id='Aircraft Model'>Aircraft Model<i class='fa fa-caret-down pull-right'></i></li>
+        <% @prezi.rowArray.each do |row| %>
+          <li data-id='<%= row %>'><%= row %><i class='fa fa-caret-down pull-right'></i></li>
+        <% end %>
       </ul>
     </div>
 
     <div class='col-sm-4'>
       <div class='column-attribtues strong'>COLUMNS</div>
       <ul id='columns'>
-        <li data-id='Aircraft Status'>Aircraft Status<i class='fa fa-caret-down pull-right'></i></li>
+        <% @prezi.colArray.each do |column| %>
+          <li data-id='<%= column %>'><%= column %><i class='fa fa-caret-down pull-right'></i></li>
+        <% end %>
       </ul>
     </div>
   </div>
@@ -53,7 +113,7 @@
       <% values.each do |value| %>
         <p>
           <label>
-            <input type='checkbox' class='pvtFilter' data-attribute='<%= attribute %>' checked='checked' />
+            <input type='checkbox' class='pvtFilter' data-attribute='<%= attribute %>' <%= 'checked' if @prezi.checked_filters(attribute, value) %> />
             <span><%= value %></span>
           </label>
         </p>
@@ -62,3 +122,5 @@
     <div><button class='btn btn-medium-blue btn-update-filter' type='button'>OK</button></div>
   </div>
 <% end %>
+
+<%= render partial: 'utility/delete_with_ajax_modal', locals: {delete_item: 'view'} %>

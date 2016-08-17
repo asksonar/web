@@ -3,8 +3,10 @@ AnalysisController = function(config, pivotTable) {
   this.$aggregatorsSelect = config.aggregatorsSelect;
   this.$attributesSelect = config.attributesSelect;
   this.$ctnSelectedAttributes = config.ctnSelectedAttributes;
+  this.$filterAttributes = config.filterAttributes;
   this.$rowAttributes = config.rowAttributes;
   this.$columnAttributes = config.columnAttributes;
+  this.$availableAttributes = config.availableAttributes;
   this.$btnUpdateFilter = config.btnUpdateFilter;
   this.$btnSelectAll = config.btnSelectAll;
   this.$btnSelectNone = config.btnSelectNone;
@@ -60,11 +62,14 @@ AnalysisController.prototype.showFilterBox = function(event) {
   var thisEl = $(event.currentTarget);
   var attribute = thisEl.parent().attr('data-id');
   var filterBox = $('.pvtFilterBox[data-attribute="' + attribute + '"]');
+  var checkContainer = filterBox.find('.pvtCheckContainer');
+  var filters = checkContainer.children();
   var position = thisEl.offset();
   var clickLeft = position.left;
   var clickTop = position.top;
-  this.$inputFilter.val('');
 
+  this.$inputFilter.val('');
+  filters.show();
   filterBox.css({
     left: clickLeft + 10 - 300, // 300 sidebar width
     top: clickTop + 10
@@ -140,6 +145,15 @@ AnalysisController.prototype.toggleAttributesSelect = function() {
   }
 };
 
+AnalysisController.prototype.getFiltersArray = function() {
+  var filtersArray = this.$filterAttributes
+    .children()
+    .map(function(index, elem) { return $(elem).attr('data-id'); })
+    .toArray();
+
+  return filtersArray;
+};
+
 AnalysisController.prototype.getRows = function() {
   var rowArray = this.$rowAttributes
     .children()
@@ -156,6 +170,15 @@ AnalysisController.prototype.getColumns = function() {
     .toArray();
 
   return colArray;
+};
+
+AnalysisController.prototype.getAttributes = function() {
+  var attrArray = this.$availableAttributes
+    .children()
+    .map(function(index, elem) { return $(elem).attr('data-id'); })
+    .toArray();
+
+  return attrArray;
 };
 
 AnalysisController.prototype.getFilters = function() {

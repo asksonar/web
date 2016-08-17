@@ -36,10 +36,14 @@ Rails.application.routes.draw do
   end
 
   scope '/fleets' do
-    resources :datatable_views, only: [:create, :show, :destroy]
+    resources :views, only: [:create, :show, :destroy], controller: 'datatable_views', as: 'datatable_views'
   end
 
   resources :analysis, only: [:index]
+
+  scope '/analysis' do
+    resources :views, only: [:create, :show, :destroy], controller: 'analysis_views', as: 'analysis_views'
+  end
 
   namespace :reports do
     resources :reports, controller: :reports, only: [:index]

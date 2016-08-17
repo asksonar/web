@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170726180538) do
+ActiveRecord::Schema.define(version: 20170812145219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,37 @@ ActiveRecord::Schema.define(version: 20170726180538) do
     t.text   "aircraft_series"
     t.text   "last_delivery_date"
     t.text   "operator_region"
+  end
+
+  create_table "aircrafts", id: false, force: :cascade do |t|
+    t.integer "id"
+    t.string  "msn"
+    t.string  "aircraft_status"
+    t.string  "aircraft_manufacturer"
+    t.string  "aircraft_model"
+    t.string  "aircraft_type"
+    t.string  "registration"
+    t.string  "engine_model"
+    t.string  "engine_variant"
+    t.string  "operator"
+    t.string  "operator_country"
+    t.text    "build_year"
+    t.text    "aircraft_age"
+    t.text    "seats_configuration"
+    t.text    "line_number"
+    t.text    "aircraft_series"
+    t.text    "last_delivery_date"
+    t.text    "operator_region"
+  end
+
+  create_table "analysis_views", force: :cascade do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.boolean  "default_view"
+    t.boolean  "current_view"
+    t.text     "pivot_params"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "companies", force: :cascade do |t|
