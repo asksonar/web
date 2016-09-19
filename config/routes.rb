@@ -33,6 +33,12 @@ Rails.application.routes.draw do
 
   resources :fleets do
     get 'export', on: :collection
+    resources :history, controller: 'aircraft_history'
+  end
+
+  resources :studies do
+    resources :step, only: [:create], controller: 'studies_step'
+    resources :video, only: [:create, :update], controller: 'studies_video'
   end
 
   scope '/fleets' do

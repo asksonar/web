@@ -1,3 +1,5 @@
+require 'airsonar'
+
 class FleetsController < ApplicationController
   before_action :authenticate_user!
 
@@ -19,6 +21,19 @@ class FleetsController < ApplicationController
 
   def show
     @prezi = prezi(id: params[:id])
+  end
+
+  def update
+    airsonar = Airsonar.new()
+    options = Hash.new { |h,k| h[k] = Hash.new(&h.default_proc) }
+    options[:user] = current_user.email
+    options[:aircraft][:build_year] = "2014"
+    options[:aircraft][:aircraft_age] = "14"
+    options[:aircraft][:line_number] = "2014"
+
+    airsonar.update_aircraft("27173", "747", options)
+    flash[:info] = '<strong>Your correction has been submitted.</strong>'
+    redirect_to fleet_path(params[:id])
   end
 
   def export
