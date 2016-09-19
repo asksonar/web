@@ -74,6 +74,8 @@ gem 'activerecord-import'
 gem 'kaminari-bootstrap'
 # add scheduler tabs for resque as well
 gem 'resque-scheduler-web'
+# consume restful web services
+gem 'httparty'
 
 source 'https://rails-assets.org' do
   # bootstrap with sass variables
