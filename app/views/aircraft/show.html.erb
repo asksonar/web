@@ -26,22 +26,22 @@
         <div class="panel-heading">
           <p>AIRCRAFT DETAILS</p>
 
-          <%= bootstrap_form_for :fleet, url: fleet_path(@prezi.fleet.hashid), method: :patch do |f| %>
+          <%= bootstrap_form_for :fleet, url: aircraft_path(@prezi.fleet.hashid), method: :patch do |f| %>
             <%= f.hidden_field :update_type, value: 'aircraft' %>
             <%= f.submit "Submit Aircraft Correction", class: 'btn btn-dark-blue' %>
           <% end %>
 
-          <%= bootstrap_form_for :aircraft_history, url: fleet_history_path(@prezi.fleet.hashid, 1), method: :patch do |f| %>
+          <%= bootstrap_form_for :aircraft_history, url: aircraft_history_path(@prezi.fleet.hashid, 1), method: :patch do |f| %>
             <%= f.hidden_field :update_type, value: 'aircraft_history' %>
             <%= f.submit "Submit Aircraft History Correction", class: 'btn btn-dark-blue' %>
           <% end %>
 
-          <%= bootstrap_form_for :aircraft_history, url: fleet_history_index_path(@prezi.fleet.hashid) do |f| %>
+          <%= bootstrap_form_for :aircraft_history, url: aircraft_history_index_path(@prezi.fleet.hashid) do |f| %>
             <%= f.hidden_field :update_type, value: 'aircraft_history' %>
             <%= f.submit "Create Aircraft History", class: 'btn btn-dark-blue' %>
           <% end %>
 
-          <%= bootstrap_form_for :aircraft_history, url: fleet_history_path(@prezi.fleet.hashid, 1), method: :delete do |f| %>
+          <%= bootstrap_form_for :aircraft_history, url: aircraft_history_path(@prezi.fleet.hashid, 1), method: :delete do |f| %>
             <%= f.hidden_field :update_type, value: 'aircraft_history' %>
             <%= f.submit "Delete Aircraft History Correction", class: 'btn btn-dark-blue' %>
           <% end %>

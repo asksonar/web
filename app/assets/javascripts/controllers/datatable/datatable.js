@@ -1,14 +1,14 @@
 $(function(){
-  if ($('#fleets-index').length === 0) {
+  if ($('#aircraft-index').length === 0) {
     return;
   }
 
   $('[data-submenu]').submenupicker();
 
   var datatableFilters = new DatatableFilters({
-    newFleetTemplate: $('#new-fleet-template'),
-    fleetTable: $('.fleet-table'),
-    tablefleetTable: $('.fleet-table table'),
+    newAircraftTemplate: $('#new-aircraft-template'),
+    aircraftTable: $('.aircraft-table'),
+    tableAircraftTable: $('.aircraft-table table'),
     filterContainer: $('.filter-container'),
     btnExportCsv: $('#btn-export-csv'),
     ctnDisplayCountSelect: $('#select-display-count'),

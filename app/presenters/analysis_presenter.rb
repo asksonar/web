@@ -20,14 +20,14 @@ class AnalysisPresenter
   end
 
   def fleets_json
-    input = fleets_query.fleets_array(*attributes)
+    input = aircraft_query.fleets_array(*attributes)
     input.unshift(attribute_names)
   end
 
   def filters_hash
     filters_hash = {}
     attributes.each do |attribute|
-      filters_hash[attribute.to_s.titleize] = fleets_query.filters(attribute)
+      filters_hash[attribute.to_s.titleize] = aircraft_query.filters(attribute)
     end
     filters_hash
   end
@@ -70,8 +70,8 @@ class AnalysisPresenter
 
   private
 
-  def fleets_query
-    @fleets_query ||= FleetsQuery.instance
+  def aircraft_query
+    @aircraft_query ||= AircraftQuery.instance
   end
 
   def analysis_views_service

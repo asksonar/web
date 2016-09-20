@@ -1,6 +1,6 @@
 DatatableFilters = function(config) {
-  this.$fleetTable = config.fleetTable;
-  this.$tablefleetTable = config.tablefleetTable;
+  this.$aircraftTable = config.aircraftTable;
+  this.$tableAircraftTable = config.tableAircraftTable;
   this.$filterContainer = config.filterContainer;
   this.$btnExportCsv = config.btnExportCsv;
   this.$ctnDisplayCountSelect = config.ctnDisplayCountSelect;
@@ -12,16 +12,16 @@ DatatableFilters = function(config) {
   this.$columnsSelected = Sortable.create(selected, { group: { name: 'columns', pull: true, put: true }, animation: 200 });
   this.$columnsAvailable = Sortable.create(available, { group: { name: 'columns', pull: true, put: true }, animation: 200 });
 
-  this.$newFleetTemplate = Handlebars.compile(config.newFleetTemplate.html());
+  this.$newAircraftTemplate = Handlebars.compile(config.newAircraftTemplate.html());
 
   this.init();
 };
 
 DatatableFilters.prototype.init = function() {
-  this.$fleetTable.on('click', '.column-name', $.proxy(this.setSort, this));
+  this.$aircraftTable.on('click', '.column-name', $.proxy(this.setSort, this));
   this.$btnExportCsv.on('click', $.proxy(this.exportToCsv, this));
   this.$displayCountSelect.on('click', $.proxy(this.setDisplayCount, this));
-  // this.$fleetTable.on('click', 'td:not(:has(>a))', $.proxy(this.addToFilter, this));
+  // this.$aircraftTable.on('click', 'td:not(:has(>a))', $.proxy(this.addToFilter, this));
   this.$inputCheckbox.on('change', $.proxy(this.addFilter, this));
   this.$filtersSelect.on('change', $.proxy(this.addFilter, this));
   this.$filterContainer.on('click', '.filter-item .close', $.proxy(this.removeFilter, this));
@@ -203,7 +203,7 @@ DatatableFilters.prototype.updateList = function() {
       newFleets.fleets = response.fleets;
       newFleets.sort_column = response.sort_column;
       newFleets.sort_direction = response.sort_direction;
-      this.$tablefleetTable.html(this.$newFleetTemplate(newFleets));
+      this.$tableAircraftTable.html(this.$newAircraftTemplate(newFleets));
     }.bind(this),
     error: function(jqXHR) {
       notify.error(jqXHR.responseText);

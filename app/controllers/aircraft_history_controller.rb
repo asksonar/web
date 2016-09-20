@@ -17,7 +17,7 @@ class AircraftHistoryController < ApplicationController
 
     airsonar.create_aircraft_history("27173", "747", options)
     flash[:info] = '<strong>Your suggestion has been submitted.</strong>'
-    redirect_to fleet_path(params[:fleet_id])
+    redirect_to aircraft_path(params[:aircraft_id])
   end
 
   def update
@@ -30,7 +30,7 @@ class AircraftHistoryController < ApplicationController
 
     airsonar.update_aircraft_history("27173", "747", "2016-06-02", options)
     flash[:info] = '<strong>Your correction has been submitted.</strong>'
-    redirect_to fleet_path(params[:fleet_id])
+    redirect_to aircraft_path(params[:aircraft_id])
   end
 
   def destroy
@@ -41,6 +41,6 @@ class AircraftHistoryController < ApplicationController
 
     airsonar.delete_aircraft_history("26561", "747", "2014-09-05", options)
     flash[:info] = '<strong>Your suggestion has been submitted.</strong>'
-    redirect_to fleet_path(params[:fleet_id])
+    redirect_to aircraft_path(params[:aircraft_id])
   end
 end

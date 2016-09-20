@@ -1,6 +1,6 @@
 require 'airsonar'
 
-class FleetsController < ApplicationController
+class AircraftController < ApplicationController
   before_action :authenticate_user!
 
   def index
@@ -33,7 +33,7 @@ class FleetsController < ApplicationController
 
     airsonar.update_aircraft("27173", "747", options)
     flash[:info] = '<strong>Your correction has been submitted.</strong>'
-    redirect_to fleet_path(params[:id])
+    redirect_to aircraft_path(params[:id])
   end
 
   def export
@@ -48,7 +48,7 @@ class FleetsController < ApplicationController
   private
 
   def prezi(query_params: {}, column_params: {}, id: nil)
-    FleetsPresenter.new(current_user.company, display_count, sort_column, sort_direction, query_params, column_params, id)
+    AircraftPresenter.new(current_user.company, display_count, sort_column, sort_direction, query_params, column_params, id)
   end
 
   def display_count

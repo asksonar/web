@@ -1,4 +1,4 @@
-class FleetsPresenter
+class AircraftPresenter
   attr_reader :display_count
   attr_reader :column_params
   attr_reader :sort_column
@@ -61,12 +61,12 @@ class FleetsPresenter
   end
 
   def fleet
-    @fleet ||= fleets_query.fleet(@id)
+    @fleet ||= aircraft_query.fleet(@id)
   end
 
   def fleets
     return {} if @datatable_columns_selected.empty?
-    query = fleets_query.fleets(filters: @datatable_filters, columns: @datatable_columns_selected)
+    query = aircraft_query.fleets(filters: @datatable_filters, columns: @datatable_columns_selected)
     query = query.order(@sort_column + " " + @sort_direction)
     query = query.first(@display_count) if @display_count != "All"
     query = query.map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
@@ -75,7 +75,7 @@ class FleetsPresenter
 
   def fleets_json
     return {} if @column_params_selected.empty?
-    query = fleets_query.fleets(filters: @query_params, columns: @column_params_selected)
+    query = aircraft_query.fleets(filters: @query_params, columns: @column_params_selected)
     query = query.order(@sort_column + " " + @sort_direction)
     query = query.first(@display_count) if @display_count != "All"
     query = query.map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
@@ -91,13 +91,13 @@ class FleetsPresenter
   end
 
   def filters(field)
-    fleets_query.filters(field)
+    aircraft_query.filters(field)
   end
 
   private
 
-  def fleets_query
-    @fleets_query ||= FleetsQuery.instance
+  def aircraft_query
+    @aircraft_query ||= AircraftQuery.instance
   end
 
   def datatable_views_service

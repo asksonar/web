@@ -1,4 +1,4 @@
-class FleetsQuery
+class AircraftQuery
   include Singleton
 
   def fleets(filters: {}, columns:)

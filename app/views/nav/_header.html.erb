@@ -9,7 +9,7 @@
   <div class="collapse navbar-collapse" id="toggle-navbar">
     <ul class="nav navbar-nav">
       <% if user_signed_in? && current_user.has_v3? %>
-        <%= navbar_item "<i class='fa fa-ft fa-database'></i>Fleet Database", '/fleets' %>
+        <%= navbar_item "<i class='fa fa-ft fa-database'></i>Fleet Database", '/aircraft' %>
         <%= navbar_item "<i class='fa fa-ftl fa-bar-chart'></i>Analysis", '/analysis' %>
         <!-- <%= navbar_dropdown "<i class='fa fa-file'></i>Reports" do %>
           <%= bsh_navbar_item "Aircraft Reports", reports_reports_path, active: false %>

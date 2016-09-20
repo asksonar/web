@@ -31,17 +31,12 @@ Rails.application.routes.draw do
   # sonar v3 #
   ############
 
-  resources :fleets do
+  resources :aircraft do
     get 'export', on: :collection
     resources :history, controller: 'aircraft_history'
   end
 
-  resources :studies do
-    resources :step, only: [:create], controller: 'studies_step'
-    resources :video, only: [:create, :update], controller: 'studies_video'
-  end
-
-  scope '/fleets' do
+  scope '/aircraft' do
     resources :views, only: [:create, :show, :destroy], controller: 'datatable_views', as: 'datatable_views'
   end
 
