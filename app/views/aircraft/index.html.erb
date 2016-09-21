@@ -109,13 +109,13 @@
           </tr>
         </thead>
         <tbody>
-          <% @prezi.fleets.each do |fleet| %>
-            <tr class='fleet-line'>
+          <% @prezi.aircraft_fleet.each do |aircraft| %>
+            <tr class='aircraft-row'>
               <% @prezi.datatable_columns_selected.each do |column| %>
                 <% if column == 'msn' || column == 'registration' || column == 'line_number'%>
-                  <td><a name='<%= column %>' value='<%= fleet[column] %>' href='<%= aircraft_path(fleet["hashid"]) %>'><%= fleet[column] %></a></td>
+                  <td><a name='<%= column %>' value='<%= aircraft[column] %>' href='<%= aircraft_path(aircraft["hashid"]) %>'><%= aircraft[column] %></a></td>
                 <% else %>
-                  <td name='<%= column %>' value='<%= fleet[column] %>'><%= fleet[column] %></td>
+                  <td name='<%= column %>' value='<%= aircraft[column] %>'><%= aircraft[column] %></td>
                 <% end %>
               <% end %>
             </tr>

@@ -13,7 +13,7 @@ class AircraftController < ApplicationController
           column_names: @prezi.column_params_selected,
           sort_column: @prezi.sort_column,
           sort_direction: @prezi.sort_direction,
-          fleets: @prezi.fleets_json
+          aircraft_fleet: @prezi.aircraft_fleet_json
         }
       }
     end
@@ -40,8 +40,8 @@ class AircraftController < ApplicationController
     @prezi = prezi(query_params: query_params, column_params: column_params)
 
     respond_to do |format|
-      format.html { redirect_to fleets_path }
-      format.csv { send_data Aircraft.to_csv(@prezi.fleets_json, @prezi.column_params_selected) }
+      format.html { redirect_to aircraft_index_path }
+      format.csv { send_data Aircraft.to_csv(@prezi.aircraft_fleet_json, @prezi.column_params_selected) }
     end
   end
 

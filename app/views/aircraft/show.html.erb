@@ -1,5 +1,5 @@
 <% content_for :title do %>
-  MSN <%= @prezi.fleet.msn %>
+  MSN <%= @prezi.aircraft.msn %>
 <% end %>
 
 <% content_for :main_wrapper_class do %>
@@ -8,7 +8,7 @@
 
 <section class='main-content-header'>
   <h1><%= content_for :title %></h1>
-  <p class='sub'><%= @prezi.fleet.aircraft_manufacturer %> <%= @prezi.fleet.aircraft_model %>, operated by <%= @prezi.fleet.operator %></p>
+  <p class='sub'><%= @prezi.aircraft.aircraft_manufacturer %> <%= @prezi.aircraft.aircraft_model %>, operated by <%= @prezi.aircraft.operator %></p>
 
   <!-- Nav tabs -->
   <ul class="nav nav-pills" role="tablist">
@@ -26,22 +26,22 @@
         <div class="panel-heading">
           <p>AIRCRAFT DETAILS</p>
 
-          <%= bootstrap_form_for :fleet, url: aircraft_path(@prezi.fleet.hashid), method: :patch do |f| %>
+          <%= bootstrap_form_for :aircraft, url: aircraft_path(@prezi.aircraft.hashid), method: :patch do |f| %>
             <%= f.hidden_field :update_type, value: 'aircraft' %>
             <%= f.submit "Submit Aircraft Correction", class: 'btn btn-dark-blue' %>
           <% end %>
 
-          <%= bootstrap_form_for :aircraft_history, url: aircraft_history_path(@prezi.fleet.hashid, 1), method: :patch do |f| %>
+          <%= bootstrap_form_for :aircraft_history, url: aircraft_history_path(@prezi.aircraft.hashid, 1), method: :patch do |f| %>
             <%= f.hidden_field :update_type, value: 'aircraft_history' %>
             <%= f.submit "Submit Aircraft History Correction", class: 'btn btn-dark-blue' %>
           <% end %>
 
-          <%= bootstrap_form_for :aircraft_history, url: aircraft_history_index_path(@prezi.fleet.hashid) do |f| %>
+          <%= bootstrap_form_for :aircraft_history, url: aircraft_history_index_path(@prezi.aircraft.hashid) do |f| %>
             <%= f.hidden_field :update_type, value: 'aircraft_history' %>
             <%= f.submit "Create Aircraft History", class: 'btn btn-dark-blue' %>
           <% end %>
 
-          <%= bootstrap_form_for :aircraft_history, url: aircraft_history_path(@prezi.fleet.hashid, 1), method: :delete do |f| %>
+          <%= bootstrap_form_for :aircraft_history, url: aircraft_history_path(@prezi.aircraft.hashid, 1), method: :delete do |f| %>
             <%= f.hidden_field :update_type, value: 'aircraft_history' %>
             <%= f.submit "Delete Aircraft History Correction", class: 'btn btn-dark-blue' %>
           <% end %>
@@ -52,67 +52,67 @@
         <ul class="list-group">
           <li class="list-group-item row no-gutter">
             <div class="col-sm-2 list-item-label">MSN</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.fleet.msn %></div>
+            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.msn %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-2 list-item-label">REGISTRATION</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.fleet.registration %></div>
+            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.registration %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-2 list-item-label">LINE NUMBER</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.fleet.line_number %></div>
+            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.line_number %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-2 list-item-label">AIRCRAFT STATUS</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.fleet.aircraft_status %></div>
+            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.aircraft_status %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-2 list-item-label">BUILD YEAR</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.fleet.build_year %></div>
+            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.build_year %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-2 list-item-label">AIRCRAFT AGE</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.fleet.aircraft_age %></div>
+            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.aircraft_age %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-2 list-item-label">MANUFACTURER</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.fleet.aircraft_manufacturer %></div>
+            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.aircraft_manufacturer %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-2 list-item-label">MODEL</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.fleet.aircraft_model %></div>
+            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.aircraft_model %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-2 list-item-label">TYPE</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.fleet.aircraft_type %></div>
+            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.aircraft_type %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-2 list-item-label">SERIES</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.fleet.aircraft_series %></div>
+            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.aircraft_series %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-2 list-item-label">ENGINE MODEL</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.fleet.engine_model %></div>
+            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.engine_model %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-2 list-item-label">ENGINE VARIANT</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.fleet.engine_variant %></div>
+            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.engine_variant %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-2 list-item-label">SEATS CONFIGURATION</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.fleet.seats_configuration %></div>
+            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.seats_configuration %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-2 list-item-label">OPERATOR</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.fleet.operator %></div>
+            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.operator %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-2 list-item-label">OPERATOR COUNTRY</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.fleet.operator_country %></div>
+            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.operator_country %></div>
           </li>
           <li class="list-group-item row no-gutter">
             <div class="col-sm-2 list-item-label">OPERATOR REGION</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.fleet.operator_region %></div>
+            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.operator_region %></div>
           </li>
         </ul>
 

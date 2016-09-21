@@ -19,8 +19,8 @@ class AnalysisPresenter
     end
   end
 
-  def fleets_json
-    input = aircraft_query.fleets_array(*attributes)
+  def aircraft_fleet_json
+    input = aircraft_query.aircraft_fleet_array(*attributes)
     input.unshift(attribute_names)
   end
 

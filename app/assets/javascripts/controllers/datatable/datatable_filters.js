@@ -185,7 +185,7 @@ DatatableFilters.prototype.updateList = function() {
   var datatableFilters = this.getFilters();
   var datatableColumns = this.getColumns();
   var url = new URL(window.location.href).pathname;
-  var newFleets = newFleets || { column_names: [], sort_column: '', sort_direction: '', fleets: [] };
+  var newAircraftFleet = newAircraftFleet || { column_names: [], sort_column: '', sort_direction: '', aircraft_fleet: [] };
 
   $.ajax({
     type: 'GET',
@@ -199,11 +199,11 @@ DatatableFilters.prototype.updateList = function() {
       authenticity_token: AUTH_TOKEN
     },
     success: function(response) {
-      newFleets.column_names = response.column_names;
-      newFleets.fleets = response.fleets;
-      newFleets.sort_column = response.sort_column;
-      newFleets.sort_direction = response.sort_direction;
-      this.$tableAircraftTable.html(this.$newAircraftTemplate(newFleets));
+      newAircraftFleet.column_names = response.column_names;
+      newAircraftFleet.aircraft_fleet = response.aircraft_fleet;
+      newAircraftFleet.sort_column = response.sort_column;
+      newAircraftFleet.sort_direction = response.sort_direction;
+      this.$tableAircraftTable.html(this.$newAircraftTemplate(newAircraftFleet));
     }.bind(this),
     error: function(jqXHR) {
       notify.error(jqXHR.responseText);

@@ -19,17 +19,17 @@
     </tr>
   </thead>
   <tbody>
-    {{#each fleets as |fleet fleet_id|}}
-      <tr class='fleet-line'>
+    {{#each aircraft_fleet as |aircraft aircraft_id|}}
+      <tr class='aircraft-row'>
         {{#each ../column_names as |column_name column_name_Id|}}
           {{#if_one_equal column_name 'msn' 'registration' 'line_number'}}
             <td>
-              <a name="{{column_name}}" value="{{get_object_value_with_key fleet column_name}}" href="/fleets/{{get_object_value_with_key fleet 'hashid'}}">
-                {{get_object_value_with_key fleet column_name}}
+              <a name="{{column_name}}" value="{{get_object_value_with_key aircraft column_name}}" href="/aircraft/{{get_object_value_with_key aircraft 'hashid'}}">
+                {{get_object_value_with_key aircraft column_name}}
               </a>
             </td>
           {{else}}
-            <td name="{{column_name}}" value="{{get_object_value_with_key fleet column_name}}">{{get_object_value_with_key fleet column_name}}</td>
+            <td name="{{column_name}}" value="{{get_object_value_with_key aircraft column_name}}">{{get_object_value_with_key aircraft column_name}}</td>
           {{/if_one_equal}}
         {{/each}}
       </tr>

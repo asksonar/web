@@ -60,25 +60,25 @@ class AircraftPresenter
     datatable_filters_list
   end
 
-  def fleet
-    @fleet ||= aircraft_query.fleet(@id)
+  def aircraft
+    @aircraft ||= aircraft_query.aircraft(@id)
   end
 
-  def fleets
+  def aircraft_fleet
     return {} if @datatable_columns_selected.empty?
-    query = aircraft_query.fleets(filters: @datatable_filters, columns: @datatable_columns_selected)
+    query = aircraft_query.aircraft_fleet(filters: @datatable_filters, columns: @datatable_columns_selected)
     query = query.order(@sort_column + " " + @sort_direction)
     query = query.first(@display_count) if @display_count != "All"
-    query = query.map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
+    query = query.map { |aircraft| { "hashid" => aircraft.hashid }.merge(aircraft.attributes) }
     query
   end
 
-  def fleets_json
+  def aircraft_fleet_json
     return {} if @column_params_selected.empty?
-    query = aircraft_query.fleets(filters: @query_params, columns: @column_params_selected)
+    query = aircraft_query.aircraft_fleet(filters: @query_params, columns: @column_params_selected)
     query = query.order(@sort_column + " " + @sort_direction)
     query = query.first(@display_count) if @display_count != "All"
-    query = query.map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
+    query = query.map { |aircraft| { "hashid" => aircraft.hashid }.merge(aircraft.attributes) }
     query
   end
 

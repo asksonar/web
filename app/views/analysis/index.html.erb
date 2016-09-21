@@ -7,7 +7,7 @@
 <% end %>
 
 <script type='text/javascript'>
-  var data = <%= raw @prezi.fleets_json %>;
+  var data = <%= raw @prezi.aircraft_fleet_json %>;
   var filters_hash = <%= raw @prezi.filters_hash.to_json %>;
   var pivot_params = <%= raw @prezi.current_view.pivot_params.to_json %>;
 </script>
