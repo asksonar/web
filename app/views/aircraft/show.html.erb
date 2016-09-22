@@ -18,17 +18,17 @@
     <table class='table'>
       <thead>
         <tr>
+          <th>MSN</th>
           <th>Registration</th>
           <th>Manufacturer</th>
-          <th>Model</th>
           <th>Status</th>
         </tr>
       </thead>
       <tbody>
         <tr>
+          <td><%= @prezi.aircraft.msn %></td>
           <td><%= @prezi.aircraft.registration %></td>
           <td><%= @prezi.aircraft.aircraft_manufacturer %></td>
-          <td><%= @prezi.aircraft.aircraft_model %></td>
           <td><%= @prezi.aircraft.aircraft_status %></td>
         </tr>
       </tbody>
@@ -42,12 +42,7 @@
           <thead>
             <tr>
               <th>Aircraft Details</th>
-              <th>
-                <%= bootstrap_form_for :aircraft, url: aircraft_path(@prezi.aircraft.hashid), html: {class: 'form-submit-changes' }, method: :patch do |f| %>
-                  <%= f.hidden_field :update_type, value: 'aircraft' %>
-                  <%= f.submit "Submit changes", class: 'btn btn-submit-changes' %>
-                <% end %>
-              </th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -56,8 +51,28 @@
               <td><%= @prezi.aircraft.msn %></td>
             </tr>
             <tr>
+              <td>Aircraft Status</td>
+              <td><%= @prezi.aircraft.aircraft_status %></td>
+            </tr>
+            <tr>
+              <td>Registration</td>
+              <td><%= @prezi.aircraft.registration %></td>
+            </tr>
+            <tr>
               <td>Line Number</td>
-              <td><%= @prezi.aircraft.msn %></td>
+              <td><%= @prezi.aircraft.line_number %></td>
+            </tr>
+            <tr>
+              <td>Aircraft Model</td>
+              <td><%= @prezi.aircraft.aircraft_model %></td>
+            </tr>
+            <tr>
+              <td>Aircraft Type</td>
+              <td><%= @prezi.aircraft.aircraft_type %></td>
+            </tr>
+            <tr>
+              <td>Aircraft Series</td>
+              <td><%= @prezi.aircraft.aircraft_series %></td>
             </tr>
             <tr>
               <td>Build Year</td>
@@ -67,28 +82,9 @@
               <td>Aircraft Age</td>
               <td><%= @prezi.aircraft.aircraft_age %></td>
             </tr>
-            <tr>
-              <td>Type</td>
-              <td><%= @prezi.aircraft.aircraft_type %></td>
-            </tr>
-            <tr>
-              <td>Series</td>
-              <td><%= @prezi.aircraft.aircraft_series %></td>
-            </tr>
-            <tr>
-              <td>Engine Model</td>
-              <td><%= @prezi.aircraft.engine_model %></td>
-            </tr>
-            <tr>
-              <td>Engine Variant</td>
-              <td><%= @prezi.aircraft.engine_variant %></td>
-            </tr>
-            <tr>
-              <td>Seats Configuration</td>
-              <td><%= @prezi.aircraft.seats_configuration %></td>
-            </tr>
           </tbody>
         </table>
+        <button class='btn btn-submit-changes pull-right' data-toggle='modal' data-target='#aircraft-update-container'>Submit Changes</button>
       </div>
     </div>
 
@@ -98,12 +94,7 @@
           <thead>
             <tr>
               <th>Operator Details</th>
-              <th>
-                <%= bootstrap_form_for :aircraft, url: aircraft_path(@prezi.aircraft.hashid), html: {class: 'form-submit-changes' }, method: :patch do |f| %>
-                  <%= f.hidden_field :update_type, value: 'aircraft' %>
-                  <%= f.submit "Submit changes", class: 'btn btn-submit-changes' %>
-                <% end %>
-              </th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -124,6 +115,17 @@
       </div>
     </div>
   </div>
-
-
 </section>
+
+<div class="modal" id='aircraft-update-container' tabindex='-1'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class='ctn-modal-header'>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2 class='ctn-title'></h2>
+      </div>
+      <%= render partial: 'aircraft/partials/aircraft_update_form' %>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

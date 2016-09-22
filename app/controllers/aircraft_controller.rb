@@ -27,11 +27,12 @@ class AircraftController < ApplicationController
     airsonar = Airsonar.new()
     options = Hash.new { |h,k| h[k] = Hash.new(&h.default_proc) }
     options[:user] = current_user.email
-    options[:aircraft][:build_year] = "2014"
-    options[:aircraft][:aircraft_age] = "14"
-    options[:aircraft][:line_number] = "2014"
 
-    airsonar.update_aircraft("27173", "747", options)
+    update_params.each do |key, value|
+      options[:aircraft][key] = value
+    end
+
+    airsonar.update_aircraft(params[:aircraft][:msn], params[:aircraft][:aircraft_model], options)
     flash[:info] = '<strong>Your correction has been submitted.</strong>'
     redirect_to aircraft_path(params[:id])
   end
@@ -78,5 +79,9 @@ class AircraftController < ApplicationController
   def column_params
     # use `fetch` in place of `require` to supply a default when :datatable_columns is not present
     params.fetch(:datatable_columns, {}).permit(:selected => [], :available => [])
+  end
+
+  def update_params
+    params.fetch(:aircraft, {}).permit(:build_year, :line_number)
   end
 end

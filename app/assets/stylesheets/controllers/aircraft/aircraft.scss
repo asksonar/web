@@ -278,12 +278,13 @@
 
   .main-content {
     .aircraft-summary-container {
+      margin-bottom: 15px;
       background-color: #444546;
-      padding: 15px 0;
-      margin-bottom: 20px;
+      padding: 13px 0;
 
       .table {
         margin: 0;
+        table-layout:fixed;
 
         thead > tr > {
           th {
@@ -291,6 +292,7 @@
             color: #9CA8B4;
             font-size: 12px;
             border: none;
+            overflow: hidden;
           }
 
           th:not(:first-child) {
@@ -304,6 +306,7 @@
             color: #FFF;
             font-size: 20px;
             border: none;
+            overflow: hidden;
           }
 
           td:not(:first-child) {
@@ -314,23 +317,41 @@
     }
 
     .aircraft-details-container {
+      .btn-submit-changes {
+        position: relative;
+        color: #9CA8B4;
+        right: 20px;
+        bottom: 443px;
+        background-color: #FFF;
+        border: solid 1px #9CA8B4;
+        border-radius: 20px;
+        font-weight: bold;
+        z-index: 99;
+        outline: none;
+        font-size: 12px;
+      }
+
       .table {
         position: relative;
 
         thead > tr > th {
-          padding: 15px 20px;
+          padding: 14px 20px;
           color: #9CA8B4;
           background-color: #FFF;
           border-bottom: 8px solid #E0E0E0;
           white-space: nowrap;
+          overflow: hidden;
+          font-size: 12px;
         }
 
         tbody > tr {
           > td {
             font-weight: bold;
-            padding: 15px 20px;
+            padding: 12px 20px;
             max-width: 120px;
             white-space: nowrap;
+            overflow: hidden;
+            font-size: 12px;
           }
 
           &:nth-child(odd) > td {
@@ -342,19 +363,45 @@
           }
         }
       }
+    }
+  }
 
-      .form-submit-changes {
-        position: absolute;
-        right: 20px;
-        top: 8px;
+  #aircraft-update-container {
+    .modal-dialog {
+      width: 400px;
+    }
 
-        .btn-submit-changes {
-          background-color: #FFF;
-          border: solid 1px #9CA8B4;
-          border-radius: 20px;
-          font-weight: bold;
+    .form-horizontal {
+      .form-description {
+        margin-bottom: 15px;
+      }
+
+      .control-label{
+        text-align: left;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .btn + .btn {
+        margin-right: 5px;
+      }
+
+      textarea,
+      input[type="text"] {
+        border-radius: 5px;
+      }
+
+      .comment-input {
+        padding: 0 15px;
+
+        textarea {
+          resize: vertical;
+          min-height: 200px;
         }
       }
+
     }
   }
 }
