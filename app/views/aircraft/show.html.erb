@@ -1,5 +1,5 @@
 <% content_for :title do %>
-  MSN <%= @prezi.aircraft.msn %>
+  Aircraft
 <% end %>
 
 <% content_for :main_wrapper_class do %>
@@ -7,122 +7,123 @@
 <% end %>
 
 <section class='main-content-header'>
-  <h1><%= content_for :title %></h1>
-  <p class='sub'><%= @prezi.aircraft.aircraft_manufacturer %> <%= @prezi.aircraft.aircraft_model %>, operated by <%= @prezi.aircraft.operator %></p>
-
-  <!-- Nav tabs -->
-  <ul class="nav nav-pills" role="tablist">
-    <li role="presentation" class="active"><a href="#aircraft-details" aria-controls="aircraft-details" role="pill" data-toggle="pill">AIRCRAFT DEATAILS</a></li>
-    <li role="presentation"><a href="#operator-history" aria-controls="operator-history" role="pill" data-toggle="pill">OPERATOR HISTORY</a></li>
-  </ul>
+  <h1>
+    <a class='btn' id='btn-return-to-index' href='<%= request.referrer %>'><span><i class='fa fa-arrow-left'></i>Back</span></a>
+    <p><%= content_for :title %></p>
+  </h1>
 </section>
 
 <section class='main-content'>
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="aircraft-details">
-      <div class="panel panel-default ctn-aircraft-details">
-        <!-- Panel heading -->
-        <div class="panel-heading">
-          <p>AIRCRAFT DETAILS</p>
+  <div class="aircraft-summary-container">
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>Registration</th>
+          <th>Manufacturer</th>
+          <th>Model</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @prezi.aircraft.registration %></td>
+          <td><%= @prezi.aircraft.aircraft_manufacturer %></td>
+          <td><%= @prezi.aircraft.aircraft_model %></td>
+          <td><%= @prezi.aircraft.aircraft_status %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-          <%= bootstrap_form_for :aircraft, url: aircraft_path(@prezi.aircraft.hashid), method: :patch do |f| %>
-            <%= f.hidden_field :update_type, value: 'aircraft' %>
-            <%= f.submit "Submit Aircraft Correction", class: 'btn btn-dark-blue' %>
-          <% end %>
-
-          <%= bootstrap_form_for :aircraft_history, url: aircraft_history_path(@prezi.aircraft.hashid, 1), method: :patch do |f| %>
-            <%= f.hidden_field :update_type, value: 'aircraft_history' %>
-            <%= f.submit "Submit Aircraft History Correction", class: 'btn btn-dark-blue' %>
-          <% end %>
-
-          <%= bootstrap_form_for :aircraft_history, url: aircraft_history_index_path(@prezi.aircraft.hashid) do |f| %>
-            <%= f.hidden_field :update_type, value: 'aircraft_history' %>
-            <%= f.submit "Create Aircraft History", class: 'btn btn-dark-blue' %>
-          <% end %>
-
-          <%= bootstrap_form_for :aircraft_history, url: aircraft_history_path(@prezi.aircraft.hashid, 1), method: :delete do |f| %>
-            <%= f.hidden_field :update_type, value: 'aircraft_history' %>
-            <%= f.submit "Delete Aircraft History Correction", class: 'btn btn-dark-blue' %>
-          <% end %>
-
-        </div>
-
-        <!-- List group -->
-        <ul class="list-group">
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-2 list-item-label">MSN</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.msn %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-2 list-item-label">REGISTRATION</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.registration %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-2 list-item-label">LINE NUMBER</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.line_number %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-2 list-item-label">AIRCRAFT STATUS</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.aircraft_status %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-2 list-item-label">BUILD YEAR</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.build_year %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-2 list-item-label">AIRCRAFT AGE</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.aircraft_age %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-2 list-item-label">MANUFACTURER</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.aircraft_manufacturer %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-2 list-item-label">MODEL</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.aircraft_model %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-2 list-item-label">TYPE</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.aircraft_type %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-2 list-item-label">SERIES</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.aircraft_series %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-2 list-item-label">ENGINE MODEL</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.engine_model %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-2 list-item-label">ENGINE VARIANT</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.engine_variant %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-2 list-item-label">SEATS CONFIGURATION</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.seats_configuration %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-2 list-item-label">OPERATOR</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.operator %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-2 list-item-label">OPERATOR COUNTRY</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.operator_country %></div>
-          </li>
-          <li class="list-group-item row no-gutter">
-            <div class="col-sm-2 list-item-label">OPERATOR REGION</div>
-            <div class="col-sm-10 list-item-content"><%= @prezi.aircraft.operator_region %></div>
-          </li>
-        </ul>
-
+  <div class='row'>
+    <div class="col-sm-6">
+      <div class="aircraft-details-container">
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>Aircraft Details</th>
+              <th>
+                <%= bootstrap_form_for :aircraft, url: aircraft_path(@prezi.aircraft.hashid), html: {class: 'form-submit-changes' }, method: :patch do |f| %>
+                  <%= f.hidden_field :update_type, value: 'aircraft' %>
+                  <%= f.submit "Submit changes", class: 'btn btn-submit-changes' %>
+                <% end %>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MSN</td>
+              <td><%= @prezi.aircraft.msn %></td>
+            </tr>
+            <tr>
+              <td>Line Number</td>
+              <td><%= @prezi.aircraft.msn %></td>
+            </tr>
+            <tr>
+              <td>Build Year</td>
+              <td><%= @prezi.aircraft.build_year %></td>
+            </tr>
+            <tr>
+              <td>Aircraft Age</td>
+              <td><%= @prezi.aircraft.aircraft_age %></td>
+            </tr>
+            <tr>
+              <td>Type</td>
+              <td><%= @prezi.aircraft.aircraft_type %></td>
+            </tr>
+            <tr>
+              <td>Series</td>
+              <td><%= @prezi.aircraft.aircraft_series %></td>
+            </tr>
+            <tr>
+              <td>Engine Model</td>
+              <td><%= @prezi.aircraft.engine_model %></td>
+            </tr>
+            <tr>
+              <td>Engine Variant</td>
+              <td><%= @prezi.aircraft.engine_variant %></td>
+            </tr>
+            <tr>
+              <td>Seats Configuration</td>
+              <td><%= @prezi.aircraft.seats_configuration %></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
-    <div role="tabpanel" class="tab-pane" id="operator-history">
-      <div class="panel">
-        Operator History
+    <div class="col-sm-6">
+      <div class="aircraft-details-container">
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>Operator Details</th>
+              <th>
+                <%= bootstrap_form_for :aircraft, url: aircraft_path(@prezi.aircraft.hashid), html: {class: 'form-submit-changes' }, method: :patch do |f| %>
+                  <%= f.hidden_field :update_type, value: 'aircraft' %>
+                  <%= f.submit "Submit changes", class: 'btn btn-submit-changes' %>
+                <% end %>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Name</td>
+              <td><%= @prezi.aircraft.operator %></td>
+            </tr>
+            <tr>
+              <td>Country</td>
+              <td><%= @prezi.aircraft.operator_country %></td>
+            </tr>
+            <tr>
+              <td>Region</td>
+              <td><%= @prezi.aircraft.operator_region %></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
+
+
 </section>
