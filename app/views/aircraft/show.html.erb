@@ -35,84 +35,81 @@
     </table>
   </div>
 
-  <div class='row'>
+  <div class='aircraft-details-container row'>
     <div class="col-sm-6">
-      <div class="aircraft-details-container">
-        <table class='table'>
-          <thead>
-            <tr>
-              <th>Aircraft Details</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>MSN</td>
-              <td><%= @prezi.aircraft.msn %></td>
-            </tr>
-            <tr>
-              <td>Aircraft Status</td>
-              <td><%= @prezi.aircraft.aircraft_status %></td>
-            </tr>
-            <tr>
-              <td>Registration</td>
-              <td><%= @prezi.aircraft.registration %></td>
-            </tr>
-            <tr>
-              <td>Line Number</td>
-              <td><%= @prezi.aircraft.line_number %></td>
-            </tr>
-            <tr>
-              <td>Aircraft Model</td>
-              <td><%= @prezi.aircraft.aircraft_model %></td>
-            </tr>
-            <tr>
-              <td>Aircraft Type</td>
-              <td><%= @prezi.aircraft.aircraft_type %></td>
-            </tr>
-            <tr>
-              <td>Aircraft Series</td>
-              <td><%= @prezi.aircraft.aircraft_series %></td>
-            </tr>
-            <tr>
-              <td>Build Year</td>
-              <td><%= @prezi.aircraft.build_year %></td>
-            </tr>
-            <tr>
-              <td>Aircraft Age</td>
-              <td><%= @prezi.aircraft.aircraft_age %></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="container-header">
+        <span class="header-title">Aircraft Details</span>
         <button class='btn btn-submit-changes pull-right' data-toggle='modal' data-target='#aircraft-update-container'>Submit Changes</button>
       </div>
+      <table class='table'>
+        <tbody>
+          <tr>
+            <td>MSN</td>
+            <td><%= @prezi.aircraft.msn %></td>
+          </tr>
+          <tr>
+            <td>Aircraft Status</td>
+            <td><%= @prezi.aircraft.aircraft_status %></td>
+          </tr>
+          <tr>
+            <td>Registration</td>
+            <td><%= @prezi.aircraft.registration %></td>
+          </tr>
+          <tr>
+            <td>Line Number</td>
+            <td><%= @prezi.aircraft.line_number %></td>
+          </tr>
+          <tr>
+            <td>Aircraft Model</td>
+            <td><%= @prezi.aircraft.aircraft_model %></td>
+          </tr>
+          <tr>
+            <td>Aircraft Type</td>
+            <td><%= @prezi.aircraft.aircraft_type %></td>
+          </tr>
+          <tr>
+            <td>Aircraft Series</td>
+            <td><%= @prezi.aircraft.aircraft_series %></td>
+          </tr>
+          <tr>
+            <td>Build Year</td>
+            <td><%= @prezi.aircraft.build_year %></td>
+          </tr>
+          <tr>
+            <td>Aircraft Age</td>
+            <td><%= @prezi.aircraft.aircraft_age %></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <div class="col-sm-6">
-      <div class="aircraft-details-container">
-        <table class='table'>
-          <thead>
-            <tr>
-              <th>Operator Details</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Name</td>
-              <td><%= @prezi.aircraft.operator %></td>
-            </tr>
-            <tr>
-              <td>Country</td>
-              <td><%= @prezi.aircraft.operator_country %></td>
-            </tr>
-            <tr>
-              <td>Region</td>
-              <td><%= @prezi.aircraft.operator_region %></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="container-header">
+        <span class="header-title">Operator Details</span>
       </div>
+      <table class='table'>
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td><%= @prezi.aircraft.operator %></td>
+          </tr>
+          <tr>
+            <td>Country</td>
+            <td><%= @prezi.aircraft.operator_country %></td>
+          </tr>
+          <tr>
+            <td>Region</td>
+            <td><%= @prezi.aircraft.operator_region %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="aircraft-history-container">
+    <div class="container-header">
+      <span class="header-title">Aircraft History</span>
+      <button class='btn btn-submit-changes pull-right' data-toggle='modal' data-target='#aircraft-update-container'>Submit Changes</button>
     </div>
   </div>
 </section>

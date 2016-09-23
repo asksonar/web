@@ -316,12 +316,27 @@
       }
     }
 
-    .aircraft-details-container {
-      .btn-submit-changes {
-        position: relative;
+    .aircraft-details-container,
+    .aircraft-history-container {
+      .container-header {
+        padding: 10px 20px;
         color: #9CA8B4;
-        right: 20px;
-        bottom: 443px;
+        background-color: #FFF;
+        border-bottom: 8px solid #E0E0E0;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 12px;
+        font-weight: bold;
+        height: 59px;
+
+        .header-title {
+          display: inline-block;
+          margin-top: 5.5px;
+        }
+      }
+
+      .btn-submit-changes {
+        color: #9CA8B4;
         background-color: #FFF;
         border: solid 1px #9CA8B4;
         border-radius: 20px;
@@ -332,18 +347,6 @@
       }
 
       .table {
-        position: relative;
-
-        thead > tr > th {
-          padding: 14px 20px;
-          color: #9CA8B4;
-          background-color: #FFF;
-          border-bottom: 8px solid #E0E0E0;
-          white-space: nowrap;
-          overflow: hidden;
-          font-size: 12px;
-        }
-
         tbody > tr {
           > td {
             font-weight: bold;
@@ -401,7 +404,6 @@
           min-height: 200px;
         }
       }
-
     }
   }
 }
