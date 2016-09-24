@@ -64,6 +64,10 @@ class AircraftPresenter
     @aircraft ||= aircraft_query.aircraft(@id)
   end
 
+  def aircraft_histories
+    @aircraft_histories ||= aircraft_histories_query.aircraft_histories(@id)
+  end
+
   def aircraft_fleet
     return {} if @datatable_columns_selected.empty?
     query = aircraft_query.aircraft_fleet(filters: @datatable_filters, columns: @datatable_columns_selected)
@@ -98,6 +102,10 @@ class AircraftPresenter
 
   def aircraft_query
     @aircraft_query ||= AircraftQuery.instance
+  end
+
+  def aircraft_histories_query
+    @aircraft_histories_query ||= AircraftHistoriesQuery.instance
   end
 
   def datatable_views_service

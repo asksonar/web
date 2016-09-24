@@ -111,6 +111,32 @@
       <span class="header-title">Aircraft History</span>
       <button class='btn btn-submit-changes pull-right' data-toggle='modal' data-target='#aircraft-update-container'>Submit Changes</button>
     </div>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>Delivery Date</th>
+          <th>Registration</th>
+          <th>Operator Name</th>
+          <th>Seats Configuration</th>
+          <th>Engine Model</th>
+          <th>Engine Variant</th>
+          <th>Aircraft Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @prezi.aircraft_histories.each  do |aircraft_history| %>
+          <tr>
+            <td><%= ppt_date(aircraft_history.delivery_date) %></td>
+            <td><%= aircraft_history.registration %></td>
+            <td><%= aircraft_history.operator_name %></td>
+            <td><%= aircraft_history.seats_configuration %></td>
+            <td><%= aircraft_history.engine_model %></td>
+            <td><%= aircraft_history.engine_variant %></td>
+            <td><%= aircraft_history.aircraft_status %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </section>
 

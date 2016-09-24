@@ -347,6 +347,15 @@
       }
 
       .table {
+        thead > tr > th {
+          padding: 12px 20px;
+          color: #9CA8B4;
+          background-color: #FFF;
+          border: none;
+          white-space: nowrap;
+          font-size: 12px;
+        }
+
         tbody > tr {
           > td {
             font-weight: bold;
