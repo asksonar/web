@@ -1,0 +1,70 @@
+<div class="form-horizontal">
+  <div class="form-description">
+    <h2>Aircraft History Details</h2>
+    <p class="sub">Existing merge data</p>
+  </div>
+
+  <div class="details-container"></div>
+
+  <div class="comments-container">
+    <div class="comment-input"><div class="form-group"><label class="control-label" for="aircraft_history_user_comment">Please describe what's wrong</label><textarea class="form-control" name="aircraft_history[user_comment]" id="aircraft__history_user_comment"></textarea></div></div>
+  </div>
+
+  <div class="clearfix buttons-container">
+    <input type="submit" name="submit" value="Submit Changes" id="btn-save-changes" class="btn btn-dark-blue pull-right">
+    <input type="submit" name="submit" value="Delete History" id="btn-delete-history" class="btn btn-green pull-right">
+    <a class="btn btn-grey pull-right" data-dismiss="modal">Cancel</a>
+  </div>
+</div>
+
+<script id='aircraft-history-details-template' type='text/x-handlebars-template'>
+  <form class='form-horizontal'>
+    <input value='{{aircraft.msn}}' type="hidden" name="msn">
+    <input value='{{aircraft.aircraft_model}}' type="hidden" name="aircraft_model">
+    <input value='{{aircraft.id}}' type="hidden" name="aircraft_id">
+    <input value='{{aircraft_history.delivery_date}}' type="hidden" name="delivery_date">
+    <input value='{{aircraft_history.id}}' type="hidden" name="aircraft_history_id">
+    <div class='form-group'>
+      <label class='control-label col-sm-4' for='aircraft_delivery_date'>Delivery Date</label>
+      <div class='col-sm-8'>
+        <input placeholder='{{aircraft_history.delivery_date}}' class='form-control' type='text' name='delivery_date'>
+      </div>
+    </div>
+    <div class='form-group'>
+      <label class='control-label col-sm-4' for='aircraft_registration'>Registration</label>
+      <div class='col-sm-8'>
+        <input placeholder='{{aircraft_history.registration}}' class='form-control' type='text' name='registration'>
+      </div>
+    </div>
+    <div class='form-group'>
+      <label class='control-label col-sm-4' for='aircraft_operator_name'>Operator Name</label>
+      <div class='col-sm-8'>
+        <input placeholder='{{aircraft_history.operator_name}}' class='form-control' type='text' name='operator'>
+      </div>
+    </div>
+    <div class='form-group'>
+      <label class='control-label col-sm-4' for='aircraft_seats_configuration'>Seats Configuration</label>
+      <div class='col-sm-8'>
+        <input placeholder='{{aircraft_history.seats_configuration}}' class='form-control' type='text' name='seats_configuration'>
+      </div>
+    </div>
+    <div class='form-group'>
+      <label class='control-label col-sm-4' for='aircraft_engine_model'>Engine Model</label>
+      <div class='col-sm-8'>
+        <input placeholder='{{aircraft_history.engine_model}}' class='form-control' type='text' name='engine_model'>
+      </div>
+    </div>
+    <div class='form-group'>
+      <label class='control-label col-sm-4' for='aircraft_engine_variant'>Engine Variant</label>
+      <div class='col-sm-8'>
+        <input placeholder='{{aircraft_history.engine_variant}}' class='form-control' type='text' name='engine_variant'>
+      </div>
+    </div>
+    <div class='form-group'>
+      <label class='control-label col-sm-4' for='aircraft_aircraft_status'>Aircraft Status</label>
+      <div class='col-sm-8'>
+        <input placeholder='{{aircraft_history.aircraft_status}}' class='form-control' type='text' name='aircraft_status'>
+      </div>
+    </div>
+  </form>
+</script>

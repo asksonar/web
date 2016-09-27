@@ -346,6 +346,10 @@
         font-size: 12px;
       }
 
+      .link-submit-changes {
+        color: #9CA8B4;
+      }
+
       .table {
         thead > tr > th {
           padding: 12px 20px;
@@ -378,9 +382,10 @@
     }
   }
 
-  #aircraft-update-container {
+  #aircraft-update-container,
+  #aircraft-history-update-container {
     .modal-dialog {
-      width: 400px;
+      width: 550px;
     }
 
     .form-horizontal {

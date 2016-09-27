@@ -109,7 +109,7 @@
   <div class="aircraft-history-container">
     <div class="container-header">
       <span class="header-title">Aircraft History</span>
-      <button class='btn btn-submit-changes pull-right' data-toggle='modal' data-target='#aircraft-update-container'>Submit Changes</button>
+      <button class='btn btn-submit-changes pull-right' data-toggle='modal' data-target='#aircraft-update-container'>Suggest New History</button>
     </div>
     <table class='table'>
       <thead>
@@ -121,18 +121,20 @@
           <th>Engine Model</th>
           <th>Engine Variant</th>
           <th>Aircraft Status</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        <% @prezi.aircraft_histories.each  do |aircraft_history| %>
+        <% @prezi.aircraft_histories.each do |aircraft_history| %>
           <tr>
-            <td><%= ppt_date(aircraft_history.delivery_date) %></td>
+            <td><%= aircraft_history.delivery_date %></td>
             <td><%= aircraft_history.registration %></td>
             <td><%= aircraft_history.operator_name %></td>
             <td><%= aircraft_history.seats_configuration %></td>
             <td><%= aircraft_history.engine_model %></td>
             <td><%= aircraft_history.engine_variant %></td>
             <td><%= aircraft_history.aircraft_status %></td>
+            <td><a class="link-submit-changes" data-aircraft-hashid='<%= @prezi.aircraft.hashid %>' data-aircraft-history-hashid='<%= aircraft_history.hashid %>'>Submit Changes</a></td>
           </tr>
         <% end %>
       </tbody>
@@ -148,6 +150,19 @@
         <h2 class='ctn-title'></h2>
       </div>
       <%= render partial: 'aircraft/partials/aircraft_update_form' %>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal" id='aircraft-history-update-container' tabindex='-1'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class='ctn-modal-header'>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2 class='ctn-title'></h2>
+      </div>
+      <%= render partial: 'aircraft/partials/aircraft_history_update_form' %>
 
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

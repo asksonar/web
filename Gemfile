@@ -124,6 +124,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-submenu'
   # Reorderable drag-and-drop lists
   gem 'rails-assets-Sortable'
+  # Parse, validate, manipulate, and display dates
+  gem 'rails-assets-moment'
 end
 
 group :development, :test do

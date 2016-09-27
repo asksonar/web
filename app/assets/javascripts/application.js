@@ -39,6 +39,7 @@
 //= require pivottable_extensions/nrecopivottableext
 //= require bootstrap-submenu
 //= require Sortable
+//= require moment
 
 // insert 3rd party packages above this line
 
