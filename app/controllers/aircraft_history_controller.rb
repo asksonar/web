@@ -8,14 +8,17 @@ class AircraftHistoryController < ApplicationController
 
     options = Hash.new { |h,k| h[k] = Hash.new(&h.default_proc) }
     options[:user] = current_user.email
-    options[:aircraft_history][:delivery_date] = "2016-09-19"
-    options[:aircraft_history][:aircraft_status] = "Active"
-    options[:aircraft_history][:aircraft_type] = "121"
-    options[:aircraft_history][:engine_model] = "GE CF34-8E"
-    options[:aircraft_history][:operator] = "EVA Airways"
-    options[:aircraft_history][:registration] = "A-BCDE"
 
-    airsonar.create_aircraft_history("27173", "747", options)
+    update_params.each do |key, value|
+      options[:aircraft_history][key] = value
+    end
+
+    airsonar.create_aircraft_history(
+      params[:aircraft_history][:msn],
+      params[:aircraft_history][:aircraft_model],
+      options
+    )
+
     flash[:info] = '<strong>Your suggestion has been submitted.</strong>'
     redirect_to aircraft_path(params[:aircraft_id])
   end
@@ -69,7 +72,7 @@ class AircraftHistoryController < ApplicationController
   private
 
   def update_params
-    params.fetch(:aircraft_histories, {}).permit(
+    params.fetch(:aircraft_history, {}).permit(
       :delivery_date, :registration, :operator, :seats_configuration,
       :engine_model, :engine_variant, :aircraft_status
     )

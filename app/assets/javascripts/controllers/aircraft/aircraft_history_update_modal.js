@@ -56,12 +56,12 @@ AircraftHistoryUpdateModal.prototype.saveChanges = function() {
 
   var url = '/aircraft/' + aircraftId + '/history/' + aircraftHistoryId;
 
-  var aircraft_histories = {};
+  var aircraft_history = {};
   var updates = updateCtn.find('input[type=text]').filter(function(){ return this.value.length > 0;})
   updates.each(function(index, update) {
     var key = $(update).attr('name');
     var value = $(update).val();
-    aircraft_histories[key] = value;
+    aircraft_history[key] = value;
   });
 
   $.ajax({
@@ -73,7 +73,7 @@ AircraftHistoryUpdateModal.prototype.saveChanges = function() {
       msn: msn,
       delivery_date: deliveryDate,
       aircraft_model: aircraftModel,
-      aircraft_histories: aircraft_histories
+      aircraft_history: aircraft_history
     },
     dataType: 'json',
     success: function() {
@@ -105,7 +105,9 @@ AircraftHistoryUpdateModal.prototype.deleteHistory = function(event) {
     data: {
       _method: 'DELETE',
       authenticity_token: AUTH_TOKEN,
-
+      msn: msn,
+      delivery_date: deliveryDate,
+      aircraft_model: aircraftModel
     },
     dataType: 'json',
     success: function() {

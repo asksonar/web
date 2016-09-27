@@ -33,7 +33,7 @@ class AircraftController < ApplicationController
     end
 
     airsonar.update_aircraft(params[:aircraft][:msn], params[:aircraft][:aircraft_model], options)
-    flash[:info] = '<strong>Your correction has been submitted.</strong>'
+    flash[:info] = '<strong>Your suggestion has been submitted.</strong>'
     redirect_to aircraft_path(params[:id])
   end
 
