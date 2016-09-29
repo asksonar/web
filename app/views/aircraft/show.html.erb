@@ -127,7 +127,7 @@
       <tbody>
         <% @prezi.aircraft_histories.each do |aircraft_history| %>
           <tr>
-            <td><%= aircraft_history.delivery_date %></td>
+            <td><%= ppt_time_utc(aircraft_history.delivery_date) if !aircraft_history.delivery_date.nil? %></td>
             <td><%= aircraft_history.registration %></td>
             <td><%= aircraft_history.operator_name %></td>
             <td><%= aircraft_history.seats_configuration %></td>

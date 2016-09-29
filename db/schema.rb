@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170927104738) do
+ActiveRecord::Schema.define(version: 20170928145338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,20 +41,20 @@ ActiveRecord::Schema.define(version: 20170927104738) do
   end
 
   create_table "aircraft_histories", force: :cascade do |t|
-    t.integer "aircraft_id"
-    t.string  "aircraft_model"
-    t.string  "aircraft_type"
-    t.string  "registration"
-    t.string  "delivery_date"
-    t.string  "operator_name"
-    t.integer "engine_count"
-    t.string  "engine_manufacturer"
-    t.string  "engine_model"
-    t.string  "engine_variant"
-    t.string  "seats_configuration"
-    t.string  "aircraft_status"
-    t.text    "remarks"
-    t.string  "engine_name"
+    t.integer  "aircraft_id"
+    t.string   "aircraft_model"
+    t.string   "aircraft_type"
+    t.string   "registration"
+    t.string   "operator_name"
+    t.integer  "engine_count"
+    t.string   "engine_manufacturer"
+    t.string   "engine_model"
+    t.string   "engine_variant"
+    t.string   "seats_configuration"
+    t.string   "aircraft_status"
+    t.text     "remarks"
+    t.string   "engine_name"
+    t.datetime "delivery_date"
   end
 
   create_table "analysis_views", force: :cascade do |t|

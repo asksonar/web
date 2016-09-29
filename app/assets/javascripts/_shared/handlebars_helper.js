@@ -15,6 +15,14 @@ $(function(){
     }
   });
 
+  Handlebars.registerHelper('formatDate', function(datetime) {
+    if (moment) {
+      return moment(datetime).utc().format('LL'); // Ex. September 26, 2016
+    } else {
+      return datetime;
+    }
+  });
+
   Handlebars.registerHelper('get_object_value_with_key', function(object, key) {
     return object[key];
   });
