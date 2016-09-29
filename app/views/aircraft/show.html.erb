@@ -8,7 +8,7 @@
 
 <section class='main-content-header'>
   <h1>
-    <a class='btn' id='btn-return-to-index' href='<%= request.referrer %>'><span><i class='fa fa-arrow-left'></i>Back</span></a>
+    <a class='btn' id='btn-return-to-index' href='<%= aircraft_index_path %>'><span><i class='fa fa-arrow-left'></i>Back</span></a>
     <p><%= content_for :title %></p>
   </h1>
 </section>
@@ -111,34 +111,34 @@
       <span class="header-title">Aircraft History</span>
       <button class='btn btn-submit-changes pull-right' data-toggle='modal' data-target='#new-aircraft-history-container'>Suggest New History</button>
     </div>
-    <table class='table'>
-      <thead>
-        <tr>
-          <th>Delivery Date</th>
-          <th>Registration</th>
-          <th>Operator Name</th>
-          <th>Seats Configuration</th>
-          <th>Engine Model</th>
-          <th>Engine Variant</th>
-          <th>Aircraft Status</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @prezi.aircraft_histories.each do |aircraft_history| %>
+    <div class="table-responsive">
+      <table class='table'>
+        <thead>
+          <tr>
+            <th>Delivery Date</th>
+            <th>Registration</th>
+            <th>Operator Name</th>
+            <th>Seats Configuration</th>
+            <th>Engine Name</th>
+            <th>Aircraft Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @prezi.aircraft_histories.each do |aircraft_history| %>
           <tr>
             <td><%= ppt_time_utc(aircraft_history.delivery_date) if !aircraft_history.delivery_date.nil? %></td>
             <td><%= aircraft_history.registration %></td>
             <td><%= aircraft_history.operator_name %></td>
             <td><%= aircraft_history.seats_configuration %></td>
-            <td><%= aircraft_history.engine_model %></td>
-            <td><%= aircraft_history.engine_variant %></td>
+            <td><%= aircraft_history.engine_name %></td>
             <td><%= aircraft_history.aircraft_status %></td>
             <td><a class="link-submit-changes" data-aircraft-hashid='<%= @prezi.aircraft.hashid %>' data-aircraft-history-hashid='<%= aircraft_history.hashid %>'>Submit Changes</a></td>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 

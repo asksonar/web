@@ -8,6 +8,7 @@ class AircraftHistoryController < ApplicationController
 
     options = Hash.new { |h,k| h[k] = Hash.new(&h.default_proc) }
     options[:user] = current_user.email
+    options[:user_comment] = params[:aircraft_history][:user_comment]
 
     update_params.each do |key, value|
       options[:aircraft_history][key] = value
@@ -38,6 +39,7 @@ class AircraftHistoryController < ApplicationController
 
     options = Hash.new { |h,k| h[k] = Hash.new(&h.default_proc) }
     options[:user] = current_user.email
+    options[:user_comment] = user_comment
 
     update_params.each do |key, value|
       options[:aircraft_history][key] = value
@@ -58,6 +60,7 @@ class AircraftHistoryController < ApplicationController
 
     options = Hash.new { |h,k| h[k] = Hash.new(&h.default_proc) }
     options[:user] = current_user.email
+    options[:user_comment] = user_comment
 
     airsonar.delete_aircraft_history(
       params[:msn],
@@ -71,10 +74,18 @@ class AircraftHistoryController < ApplicationController
 
   private
 
+  def user_comment
+    if params[:aircraft_history].present? && params[:aircraft_history][:user_comment].present?
+      params[:aircraft_history][:user_comment]
+    else
+      ''
+    end
+  end
+
   def update_params
     params.fetch(:aircraft_history, {}).permit(
-      :delivery_date, :registration, :operator, :seats_configuration,
-      :engine_model, :engine_variant, :aircraft_status
+      :delivery_date, :registration, :operator_name, :seats_configuration,
+      :engine_name, :aircraft_status
     )
   end
 end

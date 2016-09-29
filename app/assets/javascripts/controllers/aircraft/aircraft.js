@@ -9,7 +9,8 @@ $(function(){
     divAircraftHistorydetails: $('#aircraft-history-update-container .details-container'),
     aircraftHistoryDetailsTemplate: $('#aircraft-history-details-template'),
     btnSaveChanges: $('#btn-save-changes'),
-    btnDeleteHistory: $('#btn-delete-history')
+    btnDeleteHistory: $('#btn-delete-history'),
+    inputUserComment: $('textarea#user_comment')
   });
 
   window.view = new AircraftView({

@@ -2,6 +2,7 @@ AircraftHistoryUpdateModal = function(config) {
   this.$divAircraftHistorydetails = config.divAircraftHistorydetails;
   this.$btnSaveChanges = config.btnSaveChanges;
   this.$btnDeleteHistory = config.btnDeleteHistory;
+  this.$inputUserComment = config.inputUserComment;
   this.$modal = config.modal;
 
   this.$aircraftHistoryDetailsTemplate = Handlebars.compile(config.aircraftHistoryDetailsTemplate.html());
@@ -49,7 +50,7 @@ AircraftHistoryUpdateModal.prototype.saveChanges = function() {
 
   var msn = updateCtn.find('input[name=msn]').val();
   var deliveryDateStr = updateCtn.find('input[name=delivery_date]').val();
-  var deliveryDate = moment(deliveryDateStr).format('YYYY-MM-DD');
+  var deliveryDate = moment(deliveryDateStr).utc().format('YYYY-MM-DD');
   var aircraftModel = updateCtn.find('input[name=aircraft_model]').val();
   var aircraftId = updateCtn.find('input[name=aircraft_id]').val();
   var aircraftHistoryId = updateCtn.find('input[name=aircraft_history_id]').val();
@@ -58,6 +59,12 @@ AircraftHistoryUpdateModal.prototype.saveChanges = function() {
 
   var aircraft_history = {};
   var updates = updateCtn.find('input[type=text]').filter(function(){ return this.value.length > 0;})
+  var userComment = this.$inputUserComment.val();
+
+  if (userComment) {
+    aircraft_history['user_comment'] = userComment;
+  };
+
   updates.each(function(index, update) {
     var key = $(update).attr('name');
     var value = $(update).val();
@@ -78,6 +85,8 @@ AircraftHistoryUpdateModal.prototype.saveChanges = function() {
     dataType: 'json',
     success: function() {
       notify.info("Your suggestion has been submitted.");
+      this.$inputUserComment.val('');
+      $('input[type=text]').val('');
       this.hide();
     }.bind(this),
     error: function(jqXHR) {
@@ -92,12 +101,19 @@ AircraftHistoryUpdateModal.prototype.deleteHistory = function(event) {
 
   var msn = updateCtn.find('input[name=msn]').val();
   var deliveryDateStr = updateCtn.find('input[name=delivery_date]').val();
-  var deliveryDate = moment(deliveryDateStr).format('YYYY-MM-DD');
+  var deliveryDate = moment(deliveryDateStr).utc().format('YYYY-MM-DD');
   var aircraftModel = updateCtn.find('input[name=aircraft_model]').val();
   var aircraftId = updateCtn.find('input[name=aircraft_id]').val();
   var aircraftHistoryId = updateCtn.find('input[name=aircraft_history_id]').val();
 
   var url = '/aircraft/' + aircraftId + '/history/' + aircraftHistoryId;
+
+  var aircraft_history = {};
+  var userComment = this.$inputUserComment.val();
+
+  if (userComment) {
+    aircraft_history['user_comment'] = userComment;
+  };
 
   $.ajax({
     type: 'POST',
@@ -107,11 +123,14 @@ AircraftHistoryUpdateModal.prototype.deleteHistory = function(event) {
       authenticity_token: AUTH_TOKEN,
       msn: msn,
       delivery_date: deliveryDate,
-      aircraft_model: aircraftModel
+      aircraft_model: aircraftModel,
+      aircraft_history: aircraft_history
     },
     dataType: 'json',
     success: function() {
       notify.info("Your suggestion has been submitted.");
+      this.$inputUserComment.val('');
+      $('input[type=text]').val('');
       this.hide();
     }.bind(this),
     error: function(jqXHR) {

@@ -27,6 +27,7 @@ class AircraftController < ApplicationController
     airsonar = Airsonar.new()
     options = Hash.new { |h,k| h[k] = Hash.new(&h.default_proc) }
     options[:user] = current_user.email
+    options[:user_comment] = params[:aircraft][:user_comment]
 
     update_params.each do |key, value|
       options[:aircraft][key] = value
