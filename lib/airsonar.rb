@@ -6,7 +6,8 @@ class Airsonar
   def initialize()
     @options = {
       headers: {
-        "Content-Type" => "application/json"
+        "Content-Type" => "application/json",
+        "Authorization" => Rails.application.secrets.airsonar_api_key
       }
     }
   end
