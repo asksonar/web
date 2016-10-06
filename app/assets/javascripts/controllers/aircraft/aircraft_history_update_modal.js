@@ -25,7 +25,7 @@ AircraftHistoryUpdateModal.prototype.hide = function() {
 
 AircraftHistoryUpdateModal.prototype.load = function(aircraftHashId, aircraftHistoryHashId) {
   $.ajax({
-    url:"/aircraft_history.json",
+    url:'/aircraft_history.json',
     data: {
       authenticity_token: AUTH_TOKEN,
       aircraftHashId: aircraftHashId,
@@ -50,13 +50,12 @@ AircraftHistoryUpdateModal.prototype.saveChanges = function() {
 
   var msn = updateCtn.find('input[name=msn]').val();
   var deliveryDateStr = updateCtn.find('input[name=delivery_date]').val();
-  var deliveryDate = moment(deliveryDateStr).utc().format('YYYY-MM-DD');
+  var deliveryDate = moment(deliveryDateStr).utc().format('YYYY-MM-DD')
   var aircraftModel = updateCtn.find('input[name=aircraft_model]').val();
   var aircraftId = updateCtn.find('input[name=aircraft_id]').val();
   var aircraftHistoryId = updateCtn.find('input[name=aircraft_history_id]').val();
 
   var url = '/aircraft/' + aircraftId + '/history/' + aircraftHistoryId;
-
   var aircraft_history = {};
   var updates = updateCtn.find('input[type=text]').filter(function(){ return this.value.length > 0;})
   var userComment = this.$inputUserComment.val();
@@ -78,13 +77,13 @@ AircraftHistoryUpdateModal.prototype.saveChanges = function() {
       _method: 'PATCH',
       authenticity_token: AUTH_TOKEN,
       msn: msn,
-      delivery_date: deliveryDate,
+      delivery_date: deliveryDate === 'Invalid date' ?  '' : deliveryDate,
       aircraft_model: aircraftModel,
       aircraft_history: aircraft_history
     },
     dataType: 'json',
     success: function() {
-      notify.info("Your suggestion has been submitted.");
+      notify.info('Your suggestion has been submitted.');
       this.$inputUserComment.val('');
       $('input[type=text]').val('');
       this.hide();
@@ -128,7 +127,7 @@ AircraftHistoryUpdateModal.prototype.deleteHistory = function(event) {
     },
     dataType: 'json',
     success: function() {
-      notify.info("Your suggestion has been submitted.");
+      notify.info('Your suggestion has been submitted.');
       this.$inputUserComment.val('');
       $('input[type=text]').val('');
       this.hide();

@@ -10,7 +10,7 @@ $(function(){
     aircraftHistoryDetailsTemplate: $('#aircraft-history-details-template'),
     btnSaveChanges: $('#btn-save-changes'),
     btnDeleteHistory: $('#btn-delete-history'),
-    inputUserComment: $('textarea#user_comment')
+    inputUserComment: $('textarea#user-comment')
   });
 
   window.view = new AircraftView({
