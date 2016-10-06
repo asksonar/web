@@ -1,5 +1,3 @@
-require 'airsonar'
-
 class AircraftController < ApplicationController
   before_action :authenticate_user!
 
@@ -24,16 +22,15 @@ class AircraftController < ApplicationController
   end
 
   def update
-    airsonar = Airsonar.new()
     options = Hash.new { |h,k| h[k] = Hash.new(&h.default_proc) }
     options[:user] = current_user.email
-    options[:user_comment] = params[:aircraft][:user_comment]
+    options[:user_comment] = aircraft_params[:user_comment]
 
     update_params.each do |key, value|
       options[:aircraft][key] = value
     end
 
-    airsonar.update_aircraft(params[:aircraft][:msn], params[:aircraft][:aircraft_model], options)
+    api.update_aircraft(aircraft_params[:msn], aircraft_params[:aircraft_model], options)
     flash[:info] = '<strong>Your suggestion has been submitted.</strong>'
     redirect_to aircraft_path(params[:id])
   end
@@ -67,8 +64,11 @@ class AircraftController < ApplicationController
     %w[asc desc].include?(sort_direction) ? sort_direction : "asc"
   end
 
+  def aircraft_params
+    params[:aircraft]
+  end
+
   def query_params
-    # use `fetch` in place of `require` to supply a default when :datatable_filters is not present
     params.fetch(:datatable_filters, {}).permit(
       :msn => [], :aircraft_status => [], :aircraft_manufacturer => [], :aircraft_model => [], :aircraft_type => [],
       :registration => [], :engine_model => [], :engine_variant => [], :operator => [], :operator_country => [],
@@ -78,11 +78,14 @@ class AircraftController < ApplicationController
   end
 
   def column_params
-    # use `fetch` in place of `require` to supply a default when :datatable_columns is not present
     params.fetch(:datatable_columns, {}).permit(:selected => [], :available => [])
   end
 
   def update_params
     params.fetch(:aircraft, {}).permit(:build_year, :line_number)
+  end
+
+  def api
+    @api ||= ResolutionsService.instance
   end
 end
