@@ -1,4 +1,4 @@
-class FleetsPresenter
+class AircraftPresenter
   attr_reader :display_count
   attr_reader :column_params
   attr_reader :sort_column
@@ -60,25 +60,29 @@ class FleetsPresenter
     datatable_filters_list
   end
 
-  def fleet
-    @fleet ||= fleets_query.fleet(@id)
+  def aircraft
+    @aircraft ||= aircraft_query.aircraft(@id)
   end
 
-  def fleets
+  def aircraft_histories
+    @aircraft_histories ||= aircraft_histories_query.aircraft_histories(@id)
+  end
+
+  def aircraft_fleet
     return {} if @datatable_columns_selected.empty?
-    query = fleets_query.fleets(filters: @datatable_filters, columns: @datatable_columns_selected)
+    query = aircraft_query.aircraft_fleet(filters: @datatable_filters, columns: @datatable_columns_selected)
     query = query.order(@sort_column + " " + @sort_direction)
     query = query.first(@display_count) if @display_count != "All"
-    query = query.map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
+    query = query.map { |aircraft| { "hashid" => aircraft.hashid }.merge(aircraft.attributes) }
     query
   end
 
-  def fleets_json
+  def aircraft_fleet_json
     return {} if @column_params_selected.empty?
-    query = fleets_query.fleets(filters: @query_params, columns: @column_params_selected)
+    query = aircraft_query.aircraft_fleet(filters: @query_params, columns: @column_params_selected)
     query = query.order(@sort_column + " " + @sort_direction)
     query = query.first(@display_count) if @display_count != "All"
-    query = query.map { |fleet| { "hashid" => fleet.hashid }.merge(fleet.attributes) }
+    query = query.map { |aircraft| { "hashid" => aircraft.hashid }.merge(aircraft.attributes) }
     query
   end
 
@@ -91,13 +95,17 @@ class FleetsPresenter
   end
 
   def filters(field)
-    fleets_query.filters(field)
+    aircraft_query.filters(field)
   end
 
   private
 
-  def fleets_query
-    @fleets_query ||= FleetsQuery.instance
+  def aircraft_query
+    @aircraft_query ||= AircraftQuery.instance
+  end
+
+  def aircraft_histories_query
+    @aircraft_histories_query ||= AircraftHistoriesQuery.instance
   end
 
   def datatable_views_service

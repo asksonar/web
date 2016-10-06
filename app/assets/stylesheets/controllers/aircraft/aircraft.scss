@@ -1,4 +1,4 @@
-#fleets-index {
+#aircraft-index {
   .main-content-header {
     @media (max-width: $screen-sm-min) {
       .pull-right {
@@ -158,7 +158,7 @@
       }
     }
 
-    .fleet-table {
+    .aircraft-table {
       thead > tr > th {
         vertical-align: top;
         padding: 8px 12px;
@@ -252,58 +252,171 @@
   }
 }
 
-#fleets-show {
+#aircraft-show {
   .main-content-header {
-    padding-bottom: 0;
+    padding: 10px 20px 10px 0;
 
-    p.sub {
-      margin: 5px 0 20px 0;
-    }
+    #btn-return-to-index {
+      background-color: #303341;
+      color: #FFF;
+      border-radius: 0px 20px 20px 0px;
+      height: 48px;
+      margin-right: 31.5px;
+      border: none;
 
-    .nav-pills > li > a {
-      color: #9A9AA2;
-      border-radius: 0;
-      font-weight: bold;
-      padding: 5px 0;
-
-      &:hover {
-        background-color: inherit;
+      >span {
+        line-height: 36px;
       }
     }
 
-    .nav-pills > li.active > a {
-      color: #323544;
-      background-color: inherit;
-      border-bottom: 5px solid #1CA3C7;
-    }
-
-    li {
-      margin-right: 30px;
+    p {
+      display: inline-block;
+      line-height: 36px;
+      padding: 6px 0;
     }
   }
 
   .main-content {
-    .ctn-aircraft-details {
-      padding: 0;
-      font-weight: bold;
+    .aircraft-summary-container {
+      margin-bottom: 15px;
+      background-color: #444546;
+      padding: 13px 0;
 
-      .panel-heading {
-        padding: 20px;
-        background-color: #6F7E95;
-        color: #FFF;
-      }
+      .table {
+        margin: 0;
+        table-layout:fixed;
 
-      .list-group {
-        padding: 0 20px;
-        color: #6F7E95;
-        background-color: #FFF;
+        thead > tr > {
+          th {
+            padding: 0 20px;
+            color: #9CA8B4;
+            font-size: 12px;
+            border: none;
+            overflow: hidden;
+          }
 
-        .row {
-          margin: 0;
+          th:not(:first-child) {
+            border-left: solid 1px #9CA8B4
+          }
         }
 
-        .list-group-item {
-          padding: 20px 0;
+        tbody > tr > {
+          td {
+            padding: 0 20px;
+            color: #FFF;
+            font-size: 20px;
+            border: none;
+            overflow: hidden;
+          }
+
+          td:not(:first-child) {
+            border-left: solid 1px #9CA8B4
+          }
+        }
+      }
+    }
+
+    .aircraft-details-container,
+    .aircraft-history-container {
+      .container-header {
+        padding: 10px 20px;
+        color: #9CA8B4;
+        background-color: #FFF;
+        border-bottom: 8px solid #E0E0E0;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 12px;
+        font-weight: bold;
+        height: 59px;
+
+        .header-title {
+          display: inline-block;
+          margin-top: 5.5px;
+        }
+      }
+
+      .btn-submit-changes {
+        color: #9CA8B4;
+        background-color: #FFF;
+        border: solid 1px #9CA8B4;
+        border-radius: 20px;
+        font-weight: bold;
+        z-index: 99;
+        outline: none;
+        font-size: 12px;
+      }
+
+      .link-submit-changes {
+        color: #9CA8B4;
+      }
+
+      .table {
+        thead > tr > th {
+          padding: 12px 20px;
+          color: #9CA8B4;
+          background-color: #FFF;
+          border: none;
+          white-space: nowrap;
+          font-size: 12px;
+        }
+
+        tbody > tr {
+          > td {
+            font-weight: bold;
+            padding: 12px 20px;
+            max-width: 120px;
+            white-space: nowrap;
+            overflow: hidden;
+            font-size: 12px;
+          }
+
+          &:nth-child(odd) > td {
+            background-color: #F5F5F5;
+          }
+
+          &:nth-child(even) > td {
+            background-color: #FFF;
+          }
+        }
+      }
+    }
+  }
+
+  #aircraft-update-container,
+  #new-aircraft-history-container,
+  #aircraft-history-update-container {
+    .modal-dialog {
+      width: 550px;
+    }
+
+    .form-horizontal {
+      .form-description {
+        margin-bottom: 15px;
+      }
+
+      .control-label{
+        text-align: left;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .btn + .btn {
+        margin-right: 5px;
+      }
+
+      textarea,
+      input[type="text"] {
+        border-radius: 5px;
+      }
+
+      .comment-input {
+        padding: 0 15px;
+
+        textarea {
+          resize: vertical;
+          min-height: 200px;
         }
       }
     }

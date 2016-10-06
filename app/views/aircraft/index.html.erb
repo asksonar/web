@@ -97,7 +97,7 @@
   </div>
 
   <div class='results-containter'>
-    <div class='table-responsive fleet-table'>
+    <div class='table-responsive aircraft-table'>
       <table class='table table-hover'>
         <thead>
           <tr>
@@ -109,13 +109,13 @@
           </tr>
         </thead>
         <tbody>
-          <% @prezi.fleets.each do |fleet| %>
-            <tr class='fleet-line'>
+          <% @prezi.aircraft_fleet.each do |aircraft| %>
+            <tr class='aircraft-row'>
               <% @prezi.datatable_columns_selected.each do |column| %>
                 <% if column == 'msn' || column == 'registration' || column == 'line_number'%>
-                  <td><a name='<%= column %>' value='<%= fleet[column] %>' href='<%= fleet_path(fleet["hashid"]) %>'><%= fleet[column] %></a></td>
+                  <td><a name='<%= column %>' value='<%= aircraft[column] %>' href='<%= aircraft_path(aircraft["hashid"]) %>'><%= aircraft[column] %></a></td>
                 <% else %>
-                  <td name='<%= column %>' value='<%= fleet[column] %>'><%= fleet[column] %></td>
+                  <td name='<%= column %>' value='<%= aircraft[column] %>'><%= aircraft[column] %></td>
                 <% end %>
               <% end %>
             </tr>
@@ -126,6 +126,6 @@
   </div>
 </section>
 
-<%= render partial: 'fleets/partials/fleet_template' %>
-<%= render partial: 'fleets/partials/datatable_settings' %>
+<%= render partial: 'aircraft/partials/aircraft_template' %>
+<%= render partial: 'aircraft/partials/datatable_settings' %>
 <%= render partial: 'utility/delete_with_ajax_modal', locals: {delete_item: 'view'} %>

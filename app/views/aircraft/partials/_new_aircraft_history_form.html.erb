@@ -1,0 +1,27 @@
+<%= bootstrap_form_for :aircraft_history, url: aircraft_history_index_path(@prezi.aircraft.hashid),
+  layout: :horizontal, label_col: "col-sm-4", control_col: "col-sm-8" do |f| %>
+
+  <div class="form-description">
+    <h2>New Aircraft History</h2>
+  </div>
+
+  <div class="details-container">
+    <%= f.hidden_field :msn, value: @prezi.aircraft.msn %>
+    <%= f.hidden_field :aircraft_model, value: @prezi.aircraft.aircraft_model %>
+    <%= f.text_field :delivery_date, label: 'Delivery Date' %>
+    <%= f.text_field :registration, label: 'Registration' %>
+    <%= f.text_field :operator_name, label: 'Operator Name' %>
+    <%= f.text_field :seats_configuration, label: 'Seats Configuration' %>
+    <%= f.text_field :engine_name, label: 'Engine Name' %>
+    <%= f.text_field :aircraft_status, label: 'Aircraft Status' %>
+  </div>
+
+  <div class="comments-container">
+    <div class="comment-input"><%= f.text_area :user_comment, layout: :inline, label: "Comments" %></div>
+  </div>
+
+  <div class='clearfix buttons-container'>
+    <%= f.submit "Create Aircraft History", name: 'submit', class: 'btn btn-dark-blue pull-right' %>
+    <a class='btn btn-grey pull-right' data-dismiss="modal">Cancel</a>
+  </div>
+<% end %>

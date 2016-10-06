@@ -25,4 +25,8 @@ module PrettyPrintTimeHelper
   def ppt_date_abbr(date)
     local_time(date, '%b %d')
   end
+
+  def ppt_time_utc(date)
+    date.strftime('%B %d, %Y')
+  end
 end

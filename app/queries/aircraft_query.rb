@@ -1,17 +1,17 @@
-class FleetsQuery
+class AircraftQuery
   include Singleton
 
-  def fleets(filters: {}, columns:)
+  def aircraft_fleet(filters: {}, columns:)
     # always add id column to be able to query for hashid
     columns = columns + ["id"]
     data(filters: filters).select(*columns)
   end
 
-  def fleets_array(*attributes)
+  def aircraft_fleet_array(*attributes)
     Aircraft.pluck(*attributes)
   end
 
-  def fleet(hashid)
+  def aircraft(hashid)
     Aircraft.find_by_hashid!(hashid)
   end
 

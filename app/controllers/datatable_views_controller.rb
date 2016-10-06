@@ -14,7 +14,7 @@ class DatatableViewsController < ApplicationController
   def show
     @prezi = prezi()
     @prezi.update_current_view(params[:id])
-    redirect_to fleets_path
+    redirect_to aircraft_index_path
   end
 
   def destroy
@@ -22,7 +22,7 @@ class DatatableViewsController < ApplicationController
     @prezi.delete_datatable_view(params[:id])
 
     flash[:info] = '<strong>Your view has been deleted.</strong>'
-    render json: { redirect_url: fleets_path }
+    render json: { redirect_url: aircraft_index_path }
   end
 
   private

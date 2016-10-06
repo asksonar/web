@@ -25,7 +25,7 @@ DatatableView.prototype.saveView = function() {
   var name = this.$inputSaveView.val();
   var datatable_filters = this.datatableFilers.getFilters();
   var datatable_columns = this.datatableFilers.getColumns();
-  var url = '/fleets/views/';
+  var url = '/aircraft/views/';
   this.$inputSaveView.val('');
 
   $.ajax({
@@ -41,7 +41,7 @@ DatatableView.prototype.saveView = function() {
     success: function(data) {
       notify.info("Your view has been saved.");
       var divider = "<li class='divider'></li>";
-      var newView = "<li><a href='/fleets/views/" + data.hashid + "'>" + data.name + "</a>\
+      var newView = "<li><a href='/aircraft/views/" + data.hashid + "'>" + data.name + "</a>\
                     <span class='close' data-datatable-view-hashid=" + data.hashid + " data-toggle='modal' \
                     data-target='#delete-with-ajax'>\<i class='fa fa-times-circle-o'></i></span></li>";
 
@@ -59,7 +59,7 @@ DatatableView.prototype.saveView = function() {
 
 DatatableView.prototype.deleteView = function(event) {
   var hashid = this.$modalTrigger.attr('data-datatable-view-hashid');
-  var url = '/fleets/views/' + hashid;
+  var url = '/aircraft/views/' + hashid;
 
   $.ajax({
     type: 'POST',
