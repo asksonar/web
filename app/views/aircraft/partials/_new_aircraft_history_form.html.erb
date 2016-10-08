@@ -8,7 +8,7 @@
   <div class="details-container">
     <%= f.hidden_field :msn, value: @prezi.aircraft.msn %>
     <%= f.hidden_field :aircraft_model, value: @prezi.aircraft.aircraft_model %>
-    <%= f.text_field :delivery_date, label: 'Delivery Date' %>
+    <%= f.date_field :delivery_date, label: 'Delivery Date' %>
     <%= f.text_field :registration, label: 'Registration' %>
     <%= f.text_field :operator_name, label: 'Operator Name' %>
     <%= f.text_field :seats_configuration, label: 'Seats Configuration' %>
