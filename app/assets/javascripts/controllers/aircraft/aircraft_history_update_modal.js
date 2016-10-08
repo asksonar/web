@@ -47,7 +47,7 @@ AircraftHistoryUpdateModal.prototype.loaded = function(data) {
 AircraftHistoryUpdateModal.prototype.saveChanges = function() {
   var thisEl = $(event.currentTarget)
   var updateCtn = thisEl.closest('#aircraft-history-update-container').find('.details-container');
-
+  
   var msn = updateCtn.find('input[name=msn]').val();
   var deliveryDateStr = updateCtn.find('input[name=delivery_date]').val();
   var deliveryDate = moment(deliveryDateStr).utc().format('YYYY-MM-DD')
@@ -57,7 +57,7 @@ AircraftHistoryUpdateModal.prototype.saveChanges = function() {
 
   var url = '/aircraft/' + aircraftId + '/history/' + aircraftHistoryId;
   var aircraft_history = {};
-  var updates = updateCtn.find('input[type=text]').filter(function(){ return this.value.length > 0;})
+  var updates = updateCtn.find('input[type=text], input[type=date]').filter(function(){ return this.value.length > 0;})
   var userComment = this.$inputUserComment.val();
 
   if (userComment) {
