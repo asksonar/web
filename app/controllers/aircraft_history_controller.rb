@@ -29,7 +29,7 @@ class AircraftHistoryController < ApplicationController
     options = Hash.new { |h,k| h[k] = Hash.new(&h.default_proc) }
     options[:user] = current_user.email
     options[:user_comment] = user_comment
-    
+
     update_params.each do |key, value|
       options[:aircraft_history][key] = value
     end

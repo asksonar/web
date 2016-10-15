@@ -24,8 +24,10 @@ AircraftHistoryUpdateModal.prototype.hide = function() {
 };
 
 AircraftHistoryUpdateModal.prototype.load = function(aircraftHashId, aircraftHistoryHashId) {
+  var url = '/aircraft/' + aircraftHashId + '/history/' + aircraftHashId;
+
   $.ajax({
-    url:'/aircraft_history.json',
+    url: url,
     data: {
       authenticity_token: AUTH_TOKEN,
       aircraftHashId: aircraftHashId,
@@ -47,7 +49,7 @@ AircraftHistoryUpdateModal.prototype.loaded = function(data) {
 AircraftHistoryUpdateModal.prototype.saveChanges = function() {
   var thisEl = $(event.currentTarget)
   var updateCtn = thisEl.closest('#aircraft-history-update-container').find('.details-container');
-  
+
   var msn = updateCtn.find('input[name=msn]').val();
   var deliveryDateStr = updateCtn.find('input[name=delivery_date]').val();
   var deliveryDate = moment(deliveryDateStr).utc().format('YYYY-MM-DD')

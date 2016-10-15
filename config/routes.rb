@@ -31,8 +31,6 @@ Rails.application.routes.draw do
   # sonar v3 #
   ############
 
-  get '/aircraft_history.json', to: 'aircraft_history#show'
-
   resources :aircraft do
     get 'export', on: :collection
     resources :history, controller: 'aircraft_history'
