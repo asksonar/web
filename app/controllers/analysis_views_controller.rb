@@ -3,8 +3,11 @@ class AnalysisViewsController < ApplicationController
   before_filter :fix_json_params, only: [:create]
 
   def create
-    @prezi = prezi(pivot_params: pivot_params)
-    analysis_view = @prezi.create_analysis_view(params[:name])
+    analysis_view = analysis_views_service.create_analysis_view(
+      current_user.company,
+      params[:name],
+      pivot_params
+    )
 
     render json: {
       name: analysis_view.name,
@@ -13,14 +16,16 @@ class AnalysisViewsController < ApplicationController
   end
 
   def show
-    @prezi = prezi()
-    @prezi.update_current_view(params[:id])
+    old_analysis_view = current_user.company.analysis_views.where(current_view: true).first()
+    new_analysis_view = AnalysisView.find_by_hashid(params[:id])
+    analysis_views_service.update_current_view(old_analysis_view, new_analysis_view)
+
     redirect_to analysis_index_path
   end
 
   def destroy
-    @prezi = prezi()
-    @prezi.delete_analysis_view(params[:id])
+    analysis_view = AnalysisView.find_by_hashid(params[:id])
+    analysis_views_service.delete_analysis_view(current_user.company, analysis_view)
 
     flash[:info] = '<strong>Your view has been deleted.</strong>'
     render json: { redirect_url: analysis_index_path }
@@ -28,8 +33,8 @@ class AnalysisViewsController < ApplicationController
 
   private
 
-  def prezi(pivot_params: {})
-    AnalysisViewsPresenter.new(current_user.company, pivot_params)
+  def analysis_views_service
+    @analysis_views_service ||= AnalysisViewsService.instance
   end
 
   def fix_json_params

@@ -4,9 +4,9 @@ class AircraftPresenter
   attr_reader :sort_column
   attr_reader :sort_direction
 
-  def initialize(company, display_count, sort_column, sort_direction, query_params, column_params, id)
-    @company = company
+  def initialize(id, company, display_count, sort_column, sort_direction, query_params, column_params)
     @id = id
+    @company = company
     @display_count = display_count
     @sort_column = sort_column
     @sort_direction = sort_direction
@@ -20,7 +20,7 @@ class AircraftPresenter
   end
 
   def saved_views
-    datatable_views_service.get_saved_views(@company)
+    @company.datatable_views.where.not(default_view: true)
   end
 
   def current_view
@@ -32,17 +32,17 @@ class AircraftPresenter
   end
 
   def datatable_columns_selected
-    datatable_columns = datatable_views_service.get_datatable_columns(@current_view)
+    datatable_columns = JSON.parse(@current_view.datatable_columns)
     datatable_columns["selected"] || []
   end
 
   def datatable_columns_available
-    datatable_columns = datatable_views_service.get_datatable_columns(@current_view)
+    datatable_columns = JSON.parse(@current_view.datatable_columns)
     datatable_columns["available"] || []
   end
 
   def datatable_filters
-    datatable_views_service.get_datatable_filters(@current_view)
+    JSON.parse(@current_view.datatable_filters)
   end
 
   def datatable_filters_list

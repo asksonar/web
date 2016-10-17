@@ -5,6 +5,14 @@ class AnalysisPresenter
     @pivot_params = pivot_params
   end
 
+  def current_view
+    @company.analysis_views.where(current_view: true).first()
+  end
+
+  def saved_views
+    @company.analysis_views.where.not(default_view: true)
+  end
+
   def attributes
     [
       :aircraft_age, :aircraft_manufacturer, :aircraft_model, :aircraft_series,
@@ -32,16 +40,8 @@ class AnalysisPresenter
     filters_hash
   end
 
-  def saved_views
-    analysis_views_service.get_saved_views(@company)
-  end
-
-  def current_view
-    @company.analysis_views.where(current_view: true).first()
-  end
-
   def pivot_params
-    analysis_views_service.get_pivot_params(@current_view)
+    JSON.parse(@current_view.pivot_params)
   end
 
   def checked_filters(field, value)

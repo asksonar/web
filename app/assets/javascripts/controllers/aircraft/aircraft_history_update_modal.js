@@ -48,29 +48,28 @@ AircraftHistoryUpdateModal.prototype.loaded = function(data) {
 
 AircraftHistoryUpdateModal.prototype.saveChanges = function() {
   var thisEl = $(event.currentTarget)
+  var aircraft_history = {};
   var updateCtn = thisEl.closest('#aircraft-history-update-container').find('.details-container');
 
-  var msn = updateCtn.find('input[name=msn]').val();
-  var deliveryDateStr = updateCtn.find('input[name=delivery_date]').val();
-  var deliveryDate = moment(deliveryDateStr).utc().format('YYYY-MM-DD')
-  var aircraftModel = updateCtn.find('input[name=aircraft_model]').val();
   var aircraftId = updateCtn.find('input[name=aircraft_id]').val();
   var aircraftHistoryId = updateCtn.find('input[name=aircraft_history_id]').val();
-
   var url = '/aircraft/' + aircraftId + '/history/' + aircraftHistoryId;
-  var aircraft_history = {};
+
+  aircraft_history['msn'] = updateCtn.find('input[name=msn]').val();
+  aircraft_history['aircraft_model'] = updateCtn.find('input[name=aircraft_model]').val();
+
   var updates = updateCtn.find('input[type=text], input[type=date]').filter(function(){ return this.value.length > 0;})
-  var userComment = this.$inputUserComment.val();
-
-  if (userComment) {
-    aircraft_history['user_comment'] = userComment;
-  };
-
   updates.each(function(index, update) {
     var key = $(update).attr('name');
     var value = $(update).val();
     aircraft_history[key] = value;
   });
+
+  var userComment = this.$inputUserComment.val();
+  aircraft_history['user_comment'] = userComment ? userComment : '';
+
+  var deliveryDateStr = updateCtn.find('input[name=delivery_date]').val();
+  var deliveryDate = moment(deliveryDateStr).utc().format('YYYY-MM-DD');
 
   $.ajax({
     type: 'POST',
@@ -78,9 +77,7 @@ AircraftHistoryUpdateModal.prototype.saveChanges = function() {
     data: {
       _method: 'PATCH',
       authenticity_token: AUTH_TOKEN,
-      msn: msn,
       delivery_date: deliveryDate === 'Invalid date' ?  '' : deliveryDate,
-      aircraft_model: aircraftModel,
       aircraft_history: aircraft_history
     },
     dataType: 'json',
@@ -98,23 +95,21 @@ AircraftHistoryUpdateModal.prototype.saveChanges = function() {
 
 AircraftHistoryUpdateModal.prototype.deleteHistory = function(event) {
   var thisEl = $(event.currentTarget)
+  var aircraft_history = {};
   var updateCtn = thisEl.closest('#aircraft-history-update-container').find('.details-container');
 
-  var msn = updateCtn.find('input[name=msn]').val();
-  var deliveryDateStr = updateCtn.find('input[name=delivery_date]').val();
-  var deliveryDate = moment(deliveryDateStr).utc().format('YYYY-MM-DD');
-  var aircraftModel = updateCtn.find('input[name=aircraft_model]').val();
   var aircraftId = updateCtn.find('input[name=aircraft_id]').val();
   var aircraftHistoryId = updateCtn.find('input[name=aircraft_history_id]').val();
-
   var url = '/aircraft/' + aircraftId + '/history/' + aircraftHistoryId;
 
-  var aircraft_history = {};
-  var userComment = this.$inputUserComment.val();
+  aircraft_history['msn'] = updateCtn.find('input[name=msn]').val();
+  aircraft_history['aircraft_model'] = updateCtn.find('input[name=aircraft_model]').val();
 
-  if (userComment) {
-    aircraft_history['user_comment'] = userComment;
-  };
+  var userComment = this.$inputUserComment.val();
+  aircraft_history['user_comment'] = userComment ? userComment : '';
+
+  var deliveryDateStr = updateCtn.find('input[name=delivery_date]').val();
+  var deliveryDate = moment(deliveryDateStr).utc().format('YYYY-MM-DD');
 
   $.ajax({
     type: 'POST',
@@ -122,9 +117,7 @@ AircraftHistoryUpdateModal.prototype.deleteHistory = function(event) {
     data: {
       _method: 'DELETE',
       authenticity_token: AUTH_TOKEN,
-      msn: msn,
-      delivery_date: deliveryDate,
-      aircraft_model: aircraftModel,
+      delivery_date: deliveryDate === 'Invalid date' ?  '' : deliveryDate,
       aircraft_history: aircraft_history
     },
     dataType: 'json',
