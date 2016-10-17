@@ -46,8 +46,8 @@ class AircraftController < ApplicationController
 
   private
 
-  def prezi(query_params: {}, column_params: {}, id: nil)
-    AircraftPresenter.new(current_user.company, display_count, sort_column, sort_direction, query_params, column_params, id)
+  def prezi(id: nil, query_params: {}, column_params: {})
+    AircraftPresenter.new(id, current_user.company, display_count, sort_column, sort_direction, query_params, column_params)
   end
 
   def display_count
@@ -64,10 +64,6 @@ class AircraftController < ApplicationController
     %w[asc desc].include?(sort_direction) ? sort_direction : "asc"
   end
 
-  def aircraft_params
-    params[:aircraft]
-  end
-
   def query_params
     params.fetch(:datatable_filters, {}).permit(
       :msn => [], :aircraft_status => [], :aircraft_manufacturer => [], :aircraft_model => [], :aircraft_type => [],
@@ -79,6 +75,10 @@ class AircraftController < ApplicationController
 
   def column_params
     params.fetch(:datatable_columns, {}).permit(:selected => [], :available => [])
+  end
+
+  def aircraft_params
+    params[:aircraft]
   end
 
   def update_params
