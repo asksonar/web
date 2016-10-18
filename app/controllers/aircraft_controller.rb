@@ -87,5 +87,5 @@ class AircraftController < ApplicationController
 
   def api
     @api ||= ResolutionsService.instance
-  end #note
+  end
 end
