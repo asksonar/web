@@ -66,11 +66,6 @@ Rails.application.routes.draw do
     resource :view, controller: :view, only: [:show, :update]
   end
 
-  namespace :setup do
-    get :embed
-    get :api
-  end
-
   namespace :admin do
     resource :users, controller: :users, only: [:show, :update, :destroy]
   end
