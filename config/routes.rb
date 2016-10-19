@@ -55,7 +55,6 @@ Rails.application.routes.draw do
   # sonar v2 #
   ############
 
-  get '/trends', to: 'trends#index', as: 'trends'
   get '/comparisons', to: 'comparisons#index', as: 'comparisons'
   get '/demo', to: 'demo#index', as: 'demo'
 
