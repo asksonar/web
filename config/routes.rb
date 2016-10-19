@@ -55,8 +55,6 @@ Rails.application.routes.draw do
   # sonar v2 #
   ############
 
-  get '/demo', to: 'demo#index', as: 'demo'
-
   # needs to come before the resources call, to get match priority
   namespace :customers do
     resource :upload, controller: :upload, only: [:show, :create]
