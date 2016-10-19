@@ -16,8 +16,6 @@ class User < ActiveRecord::Base
 
   enum role: [:user, :admin, :super_admin]
 
-  after_initialize :default_values, unless: :persisted?
-
   HASHIDS_SALT = 'M7k&59nN$XjZ'
 
   attr_accessor :current_password
@@ -38,12 +36,6 @@ class User < ActiveRecord::Base
   end
 
   private
-
-  def default_values
-    self.has_v1 = false if has_v1.nil?
-    self.has_v2 = false if has_v2.nil?
-    self.has_v3 = true if has_v3.nil?
-  end
 
   def create_company
     self.company = Company.create if company_id.nil?
