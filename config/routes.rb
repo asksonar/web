@@ -51,15 +51,6 @@ Rails.application.routes.draw do
     resources :forecasts, controller: :forecasts, only: [:index]
   end
 
-  ############
-  # sonar v2 #
-  ############
-
-  namespace :settings do
-    resource :send, controller: :send, only: [:show, :update]
-    resource :view, controller: :view, only: [:show, :update]
-  end
-
   namespace :admin do
     resource :users, controller: :users, only: [:show, :update, :destroy]
   end
