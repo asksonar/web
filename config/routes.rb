@@ -55,7 +55,6 @@ Rails.application.routes.draw do
   # sonar v2 #
   ############
 
-  get '/comparisons', to: 'comparisons#index', as: 'comparisons'
   get '/demo', to: 'demo#index', as: 'demo'
 
   # needs to come before the resources call, to get match priority
