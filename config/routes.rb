@@ -55,12 +55,6 @@ Rails.application.routes.draw do
   # sonar v2 #
   ############
 
-  # needs to come before the resources call, to get match priority
-  namespace :customers do
-    resource :upload, controller: :upload, only: [:show, :create]
-  end
-  resources :customers
-
   namespace :settings do
     resource :send, controller: :send, only: [:show, :update]
     resource :view, controller: :view, only: [:show, :update]
@@ -69,8 +63,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resource :users, controller: :users, only: [:show, :update, :destroy]
   end
-
-  resources :responses
 
   ############
   # sonar v1 #
