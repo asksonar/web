@@ -21,7 +21,7 @@
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script type="text/javascript" src="https://canvg.github.io/canvg/rgbcolor.js"></script>
   <script type="text/javascript" src="https://canvg.github.io/canvg/StackBlur.js"></script>
-  <script type="text/javascript" src="https://canvg.github.io/canvg/canvg.js"></script>  
+  <script type="text/javascript" src="https://canvg.github.io/canvg/canvg.js"></script>
   <script type="text/javascript">
     google.load("visualization", "1", {packages:["corechart", "charteditor"]});
   </script>
@@ -29,7 +29,6 @@
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
-  <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/<%= Rails.configuration.properties['chrome_app_id'] %>">
 </head>
 <body>
   <section id="main-wrapper" class="<%= 'logged-out' if not user_signed_in? %> <%= content_for :main_wrapper_class %>">
@@ -56,9 +55,6 @@
   </section>
 
   <%= render partial: 'utility/flash' %>
-  <%= render partial: 'utility/overlay' %>
-
-  <%= render partial: 'utility/walkthrough' if params[:walkthrough] %>
 
 </body>
 </html>

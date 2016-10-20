@@ -51,30 +51,6 @@ Rails.application.routes.draw do
     resource :users, controller: :users, only: [:show, :update, :destroy]
   end
 
-  ############
-  # sonar v1 #
-  ############
-
-  get '/videos.json', to: 'videos_json#show'
-  get '/create', to: 'drafts#new' # so it doesn't highlight the left nav
-  post '/create', to: 'drafts#create'
-  get '/share/videos/:id', to: 'share_videos#show', as: 'share_videos'
-  get '/results/:id/edit', to: 'drafts#edit'
-  patch '/results/:id/edit', to: 'drafts#update'
-
-  resources :transcripts
-  resources :notes
-  resources :highlights
-  resources :studies do
-    resources :step, only: [:create], controller: 'studies_step'
-    resources :video, only: [:create, :update], controller: 'studies_video'
-  end
-  resources :drafts
-  resources :recent, only: [:index]
-  resources :results do
-    resources :videos, only: [:show], controller: 'results'
-  end
-
   ################
   # shared login #
   ################

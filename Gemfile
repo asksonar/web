@@ -61,11 +61,6 @@ gem 'mixpanel-ruby'
 gem 'user_agent_parser'
 # sanitizer for non-markup
 gem 'sanitize'
-# accessor for MaxMind geoip local database
-gem 'maxminddb'
-# whitelist assets so that pipeline will also create a non-digested version
-# (used for amcharts, who dynamically generates image names in javascript)
-gem 'non-stupid-digest-assets'
 # gives us local_time and local_time_ago to handle timezones via javascript
 gem 'local_time'
 # lets us do bulk imports via the ModelClass.import(array_of_models) function
@@ -82,17 +77,9 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-sass'
   # more icon elements than bootstrap has
   gem 'rails-assets-fontawesome', '4.3.0' # verison 4.4.0 uses /fonts instead of /assets, which breaks
-  # amcharts chart library
+  # handlebars javascript templating library
   gem 'rails-assets-handlebars'
   # makes our textarea elements dynamically resize as people type
-  gem 'rails-assets-amcharts3'
-  # videojs html5 video library
-  gem 'rails-assets-videojs', '~> 4' # version 5 is too new, can't load the js/css files correctly
-  # videojs plugin for markers
-  gem 'rails-assets-videojs-markers', '0.4.0' # version 0.5.0 added some bug with marker times
-  # videojs plugin for keeping the bar progress bar always visible
-  gem 'rails-assets-videojs-youtube-progress'
-  # handlebars javascript templating library
   gem 'rails-assets-autosize'
   # lets us copy to clipboard
   gem 'rails-assets-zeroclipboard'
@@ -110,14 +97,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-modulejs'
   # much nicer looking selects by turning them into button dropdowns
   gem 'rails-assets-bootstrap-select'
-  # nicer looking switches
-  gem 'rails-assets-bootstrap-switch'
-  # syntax-coloring for js snippet
-  gem 'rails-assets-prism'
-  # helper library for parsing CSV in javascript
-  gem 'rails-assets-papaparse'
-  # colorpicker for customizing survey color
-  gem 'rails-assets-spectrum'
   # pivot table implementation
   gem 'rails-assets-pivottable'
   # Bootstrap Sub-Menus

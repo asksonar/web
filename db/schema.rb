@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171019144851) do
+ActiveRecord::Schema.define(version: 20171020141051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,139 +86,6 @@ ActiveRecord::Schema.define(version: 20171019144851) do
     t.boolean  "current_view"
   end
 
-  create_table "fleets_backup", force: :cascade do |t|
-    t.text    "aircraft_status"
-    t.text    "aircraft_manufacturer"
-    t.text    "aircraft_type"
-    t.text    "aircraft_series"
-    t.text    "aircraft_variant"
-    t.text    "registration"
-    t.text    "serial_number"
-    t.text    "line_number"
-    t.integer "build_year"
-    t.text    "operator"
-    t.text    "owner"
-    t.text    "owner_type"
-    t.text    "engine_type"
-    t.text    "engine_variant"
-    t.text    "seat_total"
-    t.text    "mtow"
-    t.text    "hours_cumulative"
-    t.text    "cycles_cumulative"
-    t.text    "effective_date"
-    t.text    "aircraft_age"
-    t.text    "original_operator"
-    t.text    "operated_for"
-    t.text    "aircraft_usage"
-    t.text    "aircraft_usage2"
-    t.text    "minor_variant"
-    t.text    "operator_area"
-    t.text    "operator_country"
-    t.text    "operator_state"
-    t.text    "current_market_value"
-    t.text    "current_market_lease_rate"
-    t.text    "financier1"
-    t.text    "noise_category"
-    t.text    "manager"
-  end
-
-  create_table "panelists", force: :cascade do |t|
-    t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "result_notes", force: :cascade do |t|
-    t.integer  "result_step_id_backup"
-    t.float    "offset_seconds"
-    t.text     "text"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.integer  "scenario_result_id"
-    t.float    "offset_seconds_backup"
-  end
-
-  create_table "result_steps", force: :cascade do |t|
-    t.integer  "scenario_step_id"
-    t.datetime "started_at"
-    t.datetime "completed_at"
-    t.float    "completed_seconds"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.integer  "scenario_result_id"
-    t.integer  "status_backup"
-    t.text     "first_transcription_backup"
-    t.integer  "total_delighted_backup"
-    t.integer  "total_confused_backup"
-    t.float    "offset_seconds"
-  end
-
-  create_table "result_transcriptions", force: :cascade do |t|
-    t.float    "offset_seconds"
-    t.text     "text"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.integer  "result_step_id_backup"
-    t.text     "original_text"
-    t.integer  "scenario_result_id"
-    t.float    "offset_seconds_backup"
-  end
-
-  create_table "result_videos", force: :cascade do |t|
-    t.integer  "scenario_step_id_backup"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "scenario_result_id"
-    t.string   "uuid"
-    t.float    "offset_seconds"
-    t.float    "length_seconds"
-    t.integer  "result_step_id_backup"
-    t.integer  "status"
-  end
-
-  create_table "scenario_highlights", force: :cascade do |t|
-    t.string   "title"
-    t.integer  "result_step_id_backup"
-    t.float    "start_seconds"
-    t.float    "end_seconds"
-    t.text     "timeline_elements"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.integer  "scenario_id_backup"
-    t.integer  "scenario_result_id"
-  end
-
-  create_table "scenario_results", force: :cascade do |t|
-    t.integer  "panelist_id"
-    t.integer  "scenario_id"
-    t.integer  "status"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "created_by"
-    t.string   "title"
-  end
-
-  create_table "scenario_steps", force: :cascade do |t|
-    t.integer  "scenario_id"
-    t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "step_order"
-    t.string   "url"
-  end
-
-  create_table "scenarios", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "company_id"
-    t.integer  "created_by"
-    t.integer  "status",       default: 0
-    t.datetime "published_at"
-    t.datetime "completed_at"
-  end
-
   create_table "step_highlights", force: :cascade do |t|
     t.integer  "scenario_step_id"
     t.integer  "scenario_result_id"
@@ -228,25 +95,6 @@ ActiveRecord::Schema.define(version: 20171019144851) do
     t.text     "context_transcription"
     t.integer  "result_step_id"
     t.text     "text"
-  end
-
-  create_table "template_steps", force: :cascade do |t|
-    t.integer  "template_id"
-    t.text     "step_description"
-    t.integer  "step_order"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.string   "step_url"
-  end
-
-  create_table "templates", force: :cascade do |t|
-    t.string   "display"
-    t.string   "value"
-    t.string   "scenario_title"
-    t.text     "scenario_description"
-    t.integer  "category"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
   end
 
   create_table "users", force: :cascade do |t|
