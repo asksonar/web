@@ -27,7 +27,6 @@
 //= require pivottable
 //= require pivottable/gchart_renderers
 //= require pivottable/export_renderers
-//= require pivottable_extensions/nrecopivottableext
 //= require bootstrap-submenu
 //= require Sortable
 //= require moment
