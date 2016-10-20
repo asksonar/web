@@ -8,7 +8,8 @@ class AircraftQuery
   end
 
   def aircraft_fleet_array(*attributes)
-    Aircraft.pluck(*attributes)
+    where_keys = (attributes.map {|attribute| "#{attribute} IS NOT NULL"}).join(' AND ')
+    Aircraft.where(where_keys).pluck(*attributes)
   end
 
   def aircraft(hashid)
@@ -16,7 +17,7 @@ class AircraftQuery
   end
 
   def filters(field)
-    Aircraft.distinct(field).where("#{field} <> ''").where.not(field => "").order(field).pluck(field)
+    Aircraft.distinct(field).where("#{field} IS NOT NULL").order(field).pluck(field)
   end
 
   def aircraft_by_location(filters: {})
