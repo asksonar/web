@@ -27,10 +27,6 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  ############
-  # sonar v3 #
-  ############
-
   resources :aircraft do
     get 'export', on: :collection
     resources :history, controller: 'aircraft_history'
@@ -65,7 +61,6 @@ Rails.application.routes.draw do
   get '/share/videos/:id', to: 'share_videos#show', as: 'share_videos'
   get '/results/:id/edit', to: 'drafts#edit'
   patch '/results/:id/edit', to: 'drafts#update'
-  get '/feedback/videos/:id', to: 'feedback#show', as: 'feedback_videos'
 
   resources :transcripts
   resources :notes
@@ -79,7 +74,6 @@ Rails.application.routes.draw do
   resources :results do
     resources :videos, only: [:show], controller: 'results'
   end
-  resources :feedback, controller: 'feedback'
 
   ################
   # shared login #
