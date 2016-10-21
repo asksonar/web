@@ -43,7 +43,7 @@ Rails.application.routes.draw do
   end
 
   namespace :reports do
-    resources :reports, controller: :reports, only: [:index]
+    resources :aircraft_reports, controller: :aircraft_reports, only: [:index]
     resources :forecasts, controller: :forecasts, only: [:index]
   end
 

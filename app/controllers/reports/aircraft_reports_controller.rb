@@ -1,5 +1,5 @@
 module Reports
-  class ReportsController < ApplicationController
+  class AircraftReportsController < ApplicationController
     before_action :authenticate_user!
 
     def index
@@ -9,7 +9,7 @@ module Reports
     private
 
     def prezi(query_params)
-      ReportsPresenter.new(query_params)
+      AircraftReportsPresenter.new(query_params)
     end
 
     def query_params

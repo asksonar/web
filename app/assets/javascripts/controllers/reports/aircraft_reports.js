@@ -1,5 +1,5 @@
 $(function(){
-  if ($('#reports-index').length === 0) {
+  if ($('#aircraft_reports-index').length === 0) {
     return;
   }
 

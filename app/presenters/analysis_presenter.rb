@@ -28,8 +28,9 @@ class AnalysisPresenter
   end
 
   def aircraft_fleet_json
-    input = aircraft_query.aircraft_fleet_array(*attributes)
-    input.unshift(attribute_names)
+    aircraft_fleet = aircraft_query.aircraft_fleet_array(*attributes)
+    aircraft_fleet = strip_nil_values(aircraft_fleet)
+    aircraft_fleet.unshift(attribute_names)
   end
 
   def filters_hash
@@ -76,5 +77,13 @@ class AnalysisPresenter
 
   def analysis_views_service
     @analysis_views_service ||= AnalysisViewsService.instance
+  end
+
+  def strip_nil_values(nested_array)
+    nested_array.map do |array|
+      array.map do |value|
+        value.nil? ? '' : value
+      end
+    end
   end
 end

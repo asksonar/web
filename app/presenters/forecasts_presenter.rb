@@ -1,9 +1,11 @@
 class ForecastsPresenter
-  def aircraft_query
-    @aircraft_query ||= AircraftQuery.instance
+  def orders_by_operator
+    orders_by_operator ||= reports_query.orders_by_operator
   end
 
-  def orders_by_operator
-    orders_by_operator ||= aircraft_query.orders_by_operator
+  private
+
+  def reports_query
+    @reports_query ||= ReportsQuery.instance
   end
 end
