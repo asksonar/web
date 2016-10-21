@@ -105,6 +105,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-Sortable'
   # Parse, validate, manipulate, and display dates
   gem 'rails-assets-moment'
+  # Javascript SVG parser and renderer on Canvas
+  gem 'rails-assets-canvg'
 end
 
 group :development, :test do

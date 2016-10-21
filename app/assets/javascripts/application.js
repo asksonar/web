@@ -30,6 +30,7 @@
 //= require bootstrap-submenu
 //= require Sortable
 //= require moment
+//= require canvg
 
 // insert 3rd party packages above this line
 
