@@ -14,11 +14,6 @@
 //= require jqueryui
 // bootstrap.tooltip needs to override jqueryui.tooltip, so comes after
 //= require bootstrap
-//= require amcharts3
-//= require amcharts3/serial
-//= require amcharts3/themes/light
-//= require videojs
-//= require videojs-markers
 //= require handlebars
 //= require autosize
 //= require zeroclipboard
@@ -28,18 +23,14 @@
 //= require URIjs
 //= require modulejs
 //= require bootstrap-select
-//= require bootstrap-switch
-//= require prism
 //= require local_time
-//= require papaparse
-//= require spectrum
 //= require pivottable
 //= require pivottable/gchart_renderers
 //= require pivottable/export_renderers
-//= require pivottable_extensions/nrecopivottableext
 //= require bootstrap-submenu
 //= require Sortable
 //= require moment
+//= require canvg
 
 // insert 3rd party packages above this line
 

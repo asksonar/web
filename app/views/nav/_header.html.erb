@@ -8,29 +8,17 @@
 
   <div class="collapse navbar-collapse" id="toggle-navbar">
     <ul class="nav navbar-nav">
-      <% if user_signed_in? && current_user.has_v3? %>
+      <% if user_signed_in? %>
         <%= navbar_item "<i class='fa fa-ft fa-database'></i>Fleet Database", '/aircraft' %>
         <%= navbar_item "<i class='fa fa-ftl fa-bar-chart'></i>Analysis", '/analysis' %>
         <!-- <%= navbar_dropdown "<i class='fa fa-file'></i>Reports" do %>
-          <%= bsh_navbar_item "Aircraft Reports", reports_reports_path, active: false %>
+          <%= bsh_navbar_item "Aircraft Reports", reports_aircraft_reports_path, active: false %>
           <%= bsh_navbar_item 'Forecasting', reports_forecasts_path, active: false %>
         <% end %> -->
-      <% end %>
-      <% if user_signed_in? && current_user.has_v2? %>
-        <%= navbar_item "<i class='fa fa-ft fa-home'></i>Dashboard", '/dashboard' %>
-        <%= navbar_item "<i class='fa fa-ft fa-line-chart'></i>Trends", '/trends' %>
-        <%= navbar_item "<i class='fa fa-ft fa-bar-chart'></i>Comparisons", '/comparisons' %>
       <% end %>
     </ul>
 
     <ul class="nav navbar-nav nav-right">
-      <% if user_signed_in? && current_user.has_v2? %>
-        <%= navbar_dropdown "<i class='fa fa-gear'></i>", class: 'hidden-xs' do %>
-          <%= bsh_navbar_item "Survey", settings_send_path, active: false %>
-          <%= bsh_navbar_item "Setup", setup_embed_path, active: false %>
-          <%= bsh_navbar_item "Customers", customers_path, active: false %>
-        <% end %>
-      <% end %>
       <% if user_signed_in? %>
         <%= navbar_dropdown "<i class='fa fa-user'></i>" do %>
           <%= bsh_navbar_item "Profile", edit_user_registration_path, active: false %>

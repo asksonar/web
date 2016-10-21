@@ -54,18 +54,11 @@
             <option name='engine_model' value='<%= filter %>' <%= 'selected' if @prezi.selected('engine_model', filter) %>><%= filter.titleize %></option>
           <% end %>
         </select>
-<!--
-        <div class='filter-name'>Engine Variant</div>
-        <select class='selectpicker' name='engine_variant' data-live-search='true' data-icon-base='fa' data-tick-icon='fa-check' multiple title='Select' data-dropup-auto='false'>
-          <% @prezi.filters('engine_variant').each do |filter| %>
-            <option name='engine_variant' value='<%= filter %>' <%= 'selected' if @prezi.selected('engine_variant', filter) %>><%= filter.titleize %></option>
-          <% end %>
-        </select> -->
 
         <div class='filter-name'>Build Year</div>
         <select class='selectpicker' name='build_year' data-live-search='true' data-icon-base='fa' data-tick-icon='fa-check' multiple title='Select' data-dropup-auto='false'>
           <% @prezi.filters('build_year').each do |filter| %>
-            <option name='build_year' value='<%= filter %>' <%= 'selected' if @prezi.selected('build_year', filter) %>><%= filter.titleize %></option>
+            <option name='build_year' value='<%= filter %>' <%= 'selected' if @prezi.selected('build_year', filter) %>><%= filter %></option>
           <% end %>
         </select>
 

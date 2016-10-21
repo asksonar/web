@@ -44,58 +44,6 @@
   }
 }
 
-i.feeling-delighted,
-i.feeling-confused,
-i.feeling-empty {
-  width: 18px;
-  height: 18px;
-  display: inline-block;
-}
-
-i.feeling-delighted:before,
-i.feeling-confused:before {
-  content: '';
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 100%;
-  display: inline-block;
-  border-radius: inherit;
-}
-
-i.feeling-confused:before {
-  background-image: image-url('face_bummer.svg');
-}
-
-i.feeling-delighted:before {
-  background-image: image-url('face_delight.svg');
-}
-
-i.feeling-confused.white-mouth:before {
-  background-image: image-url('face_bummer_white_mouth.svg');
-}
-
-i.feeling-delighted.white-mouth:before {
-  background-image: image-url('face_delight_white_mouth.svg');
-}
-
-// if you need to fill in some padding
-.background-delighted {
-  background: #1CC67D !important; // made important so it can be used with videojs-markers
-}
-
-.background-confused {
-  background: #F57340 !important; // made important so it can be used with videojs-markers
-}
-
-.color-highlighted {
-  color: #FFDC00 !important; // made important so it can be used with videojs-markers
-}
-
-.background-highlighted{
-  background: #FFDC00 !important; // made important so it can be used with videojs-markers
-}
-
 .btn-wrapper-tooltip {
   display: inline-block;
 }
@@ -104,16 +52,3 @@ i.feeling-delighted.white-mouth:before {
   position: relative;
   float: left;
 }
-
-.color-picker-replacer {
-  display: block;
-  max-width: 50px;
-}
-
-.color-picker-replacer,
-.color-picker-container {
-  &, &:hover, &:focus, &.sp-active {
-    border: 1px solid #ccc;
-  }
-}
-

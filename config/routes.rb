@@ -27,10 +27,6 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  ############
-  # sonar v3 #
-  ############
-
   resources :aircraft do
     get 'export', on: :collection
     resources :history, controller: 'aircraft_history'
@@ -47,66 +43,13 @@ Rails.application.routes.draw do
   end
 
   namespace :reports do
-    resources :reports, controller: :reports, only: [:index]
+    resources :aircraft_reports, controller: :aircraft_reports, only: [:index]
     resources :forecasts, controller: :forecasts, only: [:index]
-  end
-
-  ############
-  # sonar v2 #
-  ############
-
-  get '/dashboard', to: 'dashboard#index', as: 'dashboard'
-  get '/trends', to: 'trends#index', as: 'trends'
-  get '/comparisons', to: 'comparisons#index', as: 'comparisons'
-  get '/demo', to: 'demo#index', as: 'demo'
-
-  # needs to come before the resources call, to get match priority
-  namespace :customers do
-    resource :upload, controller: :upload, only: [:show, :create]
-  end
-  resources :customers
-
-  namespace :settings do
-    resource :send, controller: :send, only: [:show, :update]
-    resource :view, controller: :view, only: [:show, :update]
-  end
-
-  namespace :setup do
-    get :embed
-    get :api
   end
 
   namespace :admin do
     resource :users, controller: :users, only: [:show, :update, :destroy]
   end
-
-  resources :responses
-
-  ############
-  # sonar v1 #
-  ############
-
-  get '/videos.json', to: 'videos_json#show'
-  get '/create', to: 'drafts#new' # so it doesn't highlight the left nav
-  post '/create', to: 'drafts#create'
-  get '/share/videos/:id', to: 'share_videos#show', as: 'share_videos'
-  get '/results/:id/edit', to: 'drafts#edit'
-  patch '/results/:id/edit', to: 'drafts#update'
-  get '/feedback/videos/:id', to: 'feedback#show', as: 'feedback_videos'
-
-  resources :transcripts
-  resources :notes
-  resources :highlights
-  resources :studies do
-    resources :step, only: [:create], controller: 'studies_step'
-    resources :video, only: [:create, :update], controller: 'studies_video'
-  end
-  resources :drafts
-  resources :recent, only: [:index]
-  resources :results do
-    resources :videos, only: [:show], controller: 'results'
-  end
-  resources :feedback, controller: 'feedback'
 
   ################
   # shared login #

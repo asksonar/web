@@ -242,10 +242,6 @@ input.form-control + span.input-group-btn .btn {
   @extend .fa-fl;
 }
 
-.amcharts-chart-div a[title='JavaScript charts'] {
-  display: none !important;
-}
-
 .google-visualization-charteditor-dialog {
   height: 570px;
   width: 992px;
